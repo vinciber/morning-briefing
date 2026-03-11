@@ -10,7 +10,9 @@ jobs:
   briefing:
     runs-on: ubuntu-latest
     permissions:
-      contents: write          # Per pushare su GitHub Pages
+      contents: write
+      pages: write
+      id-token: write
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -62,10 +64,25 @@ jobs:
       - name: STEP 3e — Archive Data
         run: python src/archiver.py
 
-      - name: STEP 4 — Commit GitHub Pages
+      - name: STEP 4 — Commit & Push changes
         run: |
           git config --global user.name 'MorningBriefingBot'
           git config --global user.email 'bot@briefing.local'
           git add docs/
-          git diff --staged --quiet || git commit -m "briefing: $(date +%Y-%m-%d)"
-          git push
+          git diff --staged --quiet || (git commit -m "briefing: $(date +%Y-%m-%d)" && git push)
+
+      - name: STEP 5 — Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './docs'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: briefing
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
