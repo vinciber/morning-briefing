@@ -107,16 +107,20 @@ def generate_index(briefing: dict, env: Environment, base_url: str):
     logger.info(f'✅ Homepage generata: {output_path}')
 
 
-def generate_rss(briefing: dict, base_url: str, max_items: int = 30):
-    """Genera feed RSS: docs/feed.xml"""
+def generate_rss(briefing: dict, base_url: str, max_items: int = 30, lang: str = 'it'):
+    """Genera feed RSS: docs/feed.xml e docs/feed_en.xml"""
     date = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
     now_rfc822 = format_datetime(datetime.now(timezone.utc))
 
     items_xml = []
     for section in briefing.get('sections', []):
         for item in section.get('items', []):
-            title = item.get('title_it', item.get('title_en', ''))
-            summary = item.get('summary_it', item.get('summary_en', ''))
+            if lang == 'it':
+                title = item.get('title_it', item.get('title_en', ''))
+                summary = item.get('summary_it', item.get('summary_en', ''))
+            else:
+                title = item.get('title_en', item.get('title_it', ''))
+                summary = item.get('summary_en', item.get('summary_it', ''))
             source_url = item.get('source_url', f'{base_url}/{date}')
 
             items_xml.append(f'''    <item>
@@ -128,20 +132,24 @@ def generate_rss(briefing: dict, base_url: str, max_items: int = 30):
       <category>{section.get("name", "")}</category>
     </item>''')
 
+    title_suffix = " (EN)" if lang == 'en' else ""
+    desc_lang = "en-US" if lang == 'en' else "it-IT"
+    filename = "feed_en.xml" if lang == 'en' else "feed.xml"
+
     rss = f'''<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Morning Briefing — Finance &amp; Geopolitics</title>
+    <title>Morning Briefing — Finance &amp; Geopolitics{title_suffix}</title>
     <link>{base_url}</link>
     <description>Daily AI-curated financial &amp; geopolitical briefing</description>
-    <language>it-IT</language>
+    <language>{desc_lang}</language>
     <lastBuildDate>{now_rfc822}</lastBuildDate>
-    <atom:link href="{base_url}/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="{base_url}/{filename}" rel="self" type="application/rss+xml"/>
 {chr(10).join(items_xml[:max_items])}
   </channel>
 </rss>'''
 
-    output_path = DOCS_DIR / 'feed.xml'
+    output_path = DOCS_DIR / filename
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(rss)
     logger.info(f'✅ RSS generato: {output_path}')
@@ -231,7 +239,8 @@ def run():
     logger.info('🌐 Generazione sito...')
     generate_daily_page(briefing, env, base_url)
     generate_index(briefing, env, base_url)
-    generate_rss(briefing, base_url, max_feed_items)
+    generate_rss(briefing, base_url, max_feed_items, lang='it')
+    generate_rss(briefing, base_url, max_feed_items, lang='en')
     generate_api_json(briefing)
     generate_archive(briefing)
 

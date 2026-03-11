@@ -141,6 +141,7 @@
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ base_url }}/favicon.png">
 </head>
 <body>
     <header>
@@ -163,9 +164,13 @@
         {% if market_data.eur_usd %}<div class="market-item"><span>EUR/USD</span><strong>{{ market_data.eur_usd }}</strong></div>{% endif %}
         {% if market_data.vix %}<div class="market-item"><span>VIX</span><strong>{{ market_data.vix }}</strong></div>{% endif %}
         {% if market_data.btp_10y %}<div class="market-item"><span>BTP 10Y</span><strong>{{ market_data.btp_10y }}</strong></div>{% endif %}
+        {% if market_data.us_10y %}<div class="market-item"><span>US 10Y</span><strong>{{ market_data.us_10y }}</strong></div>{% endif %}
         {% if market_data.gold %}<div class="market-item"><span>GOLD</span><strong>{{ market_data.gold }}</strong></div>{% endif %}
         {% if market_data.oil_brent %}<div class="market-item"><span>BRENT</span><strong>{{ market_data.oil_brent }}</strong></div>{% endif %}
         {% if market_data.sp500_futures %}<div class="market-item"><span>S&P 500</span><strong>{{ market_data.sp500_futures }}</strong></div>{% endif %}
+        {% if market_data.stoxx_600 %}<div class="market-item"><span>STOXX 600</span><strong>{{ market_data.stoxx_600 }}</strong></div>{% endif %}
+        {% if market_data.nikkei %}<div class="market-item"><span>NIKKEI</span><strong>{{ market_data.nikkei }}</strong></div>{% endif %}
+        {% if market_data.shanghai %}<div class="market-item"><span>SHANGHAI</span><strong>{{ market_data.shanghai }}</strong></div>{% endif %}
     </div>
     {% endif %}
 

@@ -71,13 +71,22 @@ def briefing_to_html(briefing: dict) -> str:
             'eur_usd': '💶 EUR/USD',
             'vix': '📈 VIX',
             'btp_10y': '🇮🇹 BTP 10Y',
+            'us_10y': '🇺🇸 US 10Y',
             'gold': '🥇 Gold',
             'oil_brent': '🛢 Brent',
             'sp500_futures': '🇺🇸 S&P 500',
+            'stoxx_600': '🇪🇺 STOXX 600',
+            'nikkei': '🇯🇵 Nikkei',
+            'shanghai': '🇨🇳 Shanghai',
         }
         for key, label in labels.items():
             val = market.get(key, '')
             if val:
+                # Append $/oz to gold if missing
+                if key == 'gold':
+                    str_val = str(val).strip()
+                    if not str_val.endswith('$/oz') and not str_val.endswith('$') and not 'oz' in str_val.lower():
+                        val = f"{str_val} $/oz"
                 lines.append(f'  {label}: <code>{escape_html(str(val))}</code>')
         lines.append('')
 
