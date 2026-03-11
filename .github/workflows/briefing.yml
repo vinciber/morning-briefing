@@ -57,6 +57,9 @@ jobs:
       - name: STEP 3d — Update GitHub Pages
         run: python src/site_generator.py
 
+      - name: STEP 3e — Archive Data
+        run: python src/archiver.py
+
       - name: STEP 4 — Commit GitHub Pages
         run: |
           git config --global user.name 'MorningBriefingBot'
