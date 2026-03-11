@@ -154,7 +154,7 @@ async def generate_chunk_audio(text: str, voice: str, output_path: str):
 
 
 async def generate_audio(text: str, voice: str, output_path: Path):
-    """Genera l'audio completo con chunking e merge."""
+    """Genera l'audio completo con chunking e merge binario."""
     chunks = split_text(text)
 
     if len(chunks) == 1:
@@ -170,17 +170,11 @@ async def generate_audio(text: str, voice: str, output_path: Path):
         tmp_files.append(tmp_path)
         logger.info(f'   Chunk {i+1}/{len(chunks)} generato')
 
-    # Merge con pydub
-    silence = AudioSegment.silent(duration=SILENCE_BETWEEN_SECTIONS_MS)
-    combined = AudioSegment.empty()
-
-    for i, tmp_file in enumerate(tmp_files):
-        segment = AudioSegment.from_mp3(str(tmp_file))
-        combined += segment
-        if i < len(tmp_files) - 1:
-            combined += silence
-
-    combined.export(str(output_path), format='mp3')
+    # Merge binario mp3 (evita dipendenza da pydub e ffmpeg)
+    with open(output_path, 'wb') as outfile:
+        for tmp_file in tmp_files:
+            with open(tmp_file, 'rb') as infile:
+                outfile.write(infile.read())
 
     # Cleanup temporanei
     for tmp_file in tmp_files:
