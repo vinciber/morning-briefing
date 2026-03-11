@@ -1,0 +1,130 @@
+# MORNING BRIEFING AGENT — Configurazione
+# Repository: https://github.com/vinciber/morning-briefing
+
+schedule:
+  morning: '0 5 * * 1-5'      # Lun-Ven ore 6:00 CET (5:00 UTC)
+
+output:
+  email:
+    languages: ['it', 'en']
+    format: 'html'
+  audio:
+    language: 'it'
+    voice_it: 'it-IT-DiegoNeural'
+    voice_en: 'en-US-GuyNeural'
+    speed: '+0%'
+  site:
+    base_url: 'https://vinciber.github.io/morning-briefing'
+    languages: ['it', 'en']
+    max_items_feed: 30
+
+briefing:
+  sections:
+    - name: 'mercati'
+      max_items: 5
+    - name: 'geopolitica'
+      max_items: 6
+    - name: 'macro_economia'
+      max_items: 4
+    - name: 'energia'
+      max_items: 3
+  market_data:
+    - EUR_USD
+    - VIX
+    - BTP_10Y
+    - GOLD
+    - OIL_BRENT
+    - SP500_FUTURES
+  depth: 'medium'
+
+sources:
+  # TIER 1 — Fonti Primarie Ufficiali
+  tier1:
+    - url: 'https://www.federalreserve.gov/feeds/press_all.xml'
+      name: 'Federal Reserve'
+      category: 'banche_centrali'
+    - url: 'https://www.ecb.europa.eu/rss/press.rss'
+      name: 'BCE'
+      category: 'banche_centrali'
+    - url: 'https://www.bancaditalia.it/pubblicazioni/feed.xml'
+      name: 'Banca d Italia'
+      category: 'banche_centrali'
+    - url: 'https://www.bis.org/rss/index.htm'
+      name: 'BIS'
+      category: 'banche_centrali'
+    - url: 'https://www.imf.org/en/News/rss'
+      name: 'IMF'
+      category: 'macro_economia'
+    - url: 'https://feeds.reuters.com/reuters/worldNews'
+      name: 'Reuters World'
+      category: 'geopolitica'
+
+  # TIER 2 — Think Tank di Riferimento
+  tier2:
+    - url: 'https://www.ispionline.it/en/feed'
+      name: 'ISPI'
+      category: 'geopolitica'
+    - url: 'https://www.chathamhouse.org/rss-feeds'
+      name: 'Chatham House'
+      category: 'geopolitica'
+    - url: 'https://www.crisisgroup.org/rss'
+      name: 'International Crisis Group'
+      category: 'geopolitica'
+    - url: 'https://www.rand.org/topics/international-affairs.xml'
+      name: 'RAND Corporation'
+      category: 'geopolitica'
+    - url: 'https://warontherocks.com/feed'
+      name: 'War on the Rocks'
+      category: 'geopolitica'
+    - url: 'https://www.bruegel.org/feed'
+      name: 'Bruegel'
+      category: 'macro_economia'
+    - url: 'https://www.project-syndicate.org/rss'
+      name: 'Project Syndicate'
+      category: 'macro_economia'
+    - url: 'https://limesonline.com/feed'
+      name: 'Limes'
+      category: 'geopolitica'
+      note: 'Solo rubrica Il mondo oggi — bilanciare con ISPI'
+
+  # TIER 3 — Analisi Finanziaria (web_fetch periodico)
+  tier3_webfetch:
+    - url: 'https://pimco.com/en-us/insights/rss'
+      name: 'PIMCO Blog'
+      type: 'rss'
+      category: 'finanza'
+      frequency: 'daily'
+    - url: 'https://www.blackrock.com/corporate/insights/blackrock-investment-institute'
+      name: 'BlackRock Investment Institute'
+      type: 'webfetch'
+      category: 'finanza'
+      frequency: 'weekly'
+    - url: 'https://www.goldmansachs.com/insights'
+      name: 'Goldman Sachs Insights'
+      type: 'webfetch'
+      category: 'finanza'
+      frequency: 'weekly'
+
+  # TIER 4 — News Quotidiane
+  tier4:
+    - url: 'https://finance.yahoo.com/rss/topstories'
+      name: 'Yahoo Finance'
+      category: 'finanza'
+    - url: 'https://www.theguardian.com/business/economics/rss'
+      name: 'Guardian Economics'
+      category: 'macro_economia'
+    - url: 'https://oilprice.com/rss/main'
+      name: 'OilPrice'
+      category: 'energia'
+    - url: 'https://www.ansa.it/sito/notizie/economia/economia.rss'
+      name: 'ANSA Economia'
+      category: 'finanza'
+    - url: 'https://www.corriere.it/rss/economia.xml'
+      name: 'Corriere Economia'
+      category: 'finanza'
+    - url: 'https://www.fsb.org/feed'
+      name: 'Financial Stability Board'
+      category: 'finanza'
+
+  # FONTI CUSTOM (aggiungere qui le fonti personali)
+  custom: []

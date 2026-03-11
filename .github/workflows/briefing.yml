@@ -1,0 +1,66 @@
+# .github/workflows/briefing.yml
+name: Morning Briefing
+
+on:
+  schedule:
+    - cron: '0 5 * * 1-5'    # Lun-Ven ore 6:00 CET (5:00 UTC)
+  workflow_dispatch:          # Esecuzione manuale da GitHub UI
+
+jobs:
+  briefing:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write          # Per pushare su GitHub Pages
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install ffmpeg (for pydub)
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: STEP 1 — Fetch sources
+        run: python src/fetcher.py
+
+      - name: STEP 2 — AI Summarize
+        run: python src/summarizer.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: STEP 3a — Generate Audio
+        run: python src/tts.py
+        continue-on-error: true
+
+      - name: STEP 3b — Send Email
+        run: python src/email_sender.py
+        continue-on-error: true
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+
+      - name: STEP 3c — Telegram
+        run: python src/telegram_bot.py
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+      - name: STEP 3d — Update GitHub Pages
+        run: python src/site_generator.py
+
+      - name: STEP 4 — Commit GitHub Pages
+        run: |
+          git config --global user.name 'MorningBriefingBot'
+          git config --global user.email 'bot@briefing.local'
+          git add docs/
+          git diff --staged --quiet || git commit -m "briefing: $(date +%Y-%m-%d)"
+          git push

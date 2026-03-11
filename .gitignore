@@ -1,0 +1,9 @@
+# Temporary files
+data/*.json
+*.pyc
+__pycache__/
+.env
+*.mp3
+
+# OS
+.DS_Store

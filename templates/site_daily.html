@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morning Briefing — {{ date }}</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --card: #334155;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --border: #475569;
+            --risk-on: #22c55e;
+            --risk-off: #ef4444;
+            --neutral: #eab308;
+        }
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #f8fafc;
+                --surface: #ffffff;
+                --card: #f1f5f9;
+                --text: #1e293b;
+                --text-muted: #64748b;
+                --border: #e2e8f0;
+            }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+        h1 { font-size: 1.5rem; margin-bottom: .5rem; }
+        .date { color: var(--text-muted); font-size: .9rem; }
+        .sentiment-badge {
+            display: inline-block;
+            padding: .35rem 1rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: .85rem;
+            margin: .75rem 0;
+            color: #fff;
+        }
+        .sentiment-reason { font-style: italic; color: var(--text-muted); font-size: .85rem; }
+        .market-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            padding: 1rem;
+            background: var(--surface);
+            border-radius: .75rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+        .market-item {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            padding: .5rem;
+        }
+        .market-item strong { display: block; font-size: 1.1rem; color: var(--accent); }
+        .market-item span { font-size: .75rem; color: var(--text-muted); text-transform: uppercase; }
+        .section-title {
+            font-size: 1.15rem;
+            margin: 1.5rem 0 .75rem;
+            padding-bottom: .35rem;
+            border-bottom: 2px solid var(--accent);
+        }
+        .card {
+            background: var(--surface);
+            border-radius: .75rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: .75rem;
+            border: 1px solid var(--border);
+        }
+        .card h3 { font-size: .95rem; margin-bottom: .35rem; }
+        .card p { font-size: .85rem; color: var(--text-muted); margin-bottom: .5rem; }
+        .card .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: .75rem;
+            color: var(--text-muted);
+        }
+        .card .meta a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .card .meta a:hover { text-decoration: underline; }
+        .category-tag {
+            display: inline-block;
+            padding: .15rem .5rem;
+            border-radius: .25rem;
+            font-size: .7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: var(--card);
+        }
+        .importance { color: var(--neutral); letter-spacing: -2px; }
+        .lang-toggle {
+            display: flex;
+            gap: .5rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .lang-toggle button {
+            padding: .4rem 1rem;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            border-radius: .35rem;
+            cursor: pointer;
+            font-size: .85rem;
+        }
+        .lang-toggle button.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-muted);
+            font-size: .75rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+        footer a { color: var(--accent); text-decoration: none; }
+        .back-link { display: block; text-align: center; margin-top: 1rem; }
+        .back-link a { color: var(--accent); text-decoration: none; font-size: .85rem; }
+        [data-lang="en"] { display: none; }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>📰 Morning Briefing</h1>
+        <p class="date">{{ date }}</p>
+        <div class="sentiment-badge" style="background: {{ sentiment_color }};">
+            {% if sentiment.label == 'risk_on' %}🟢 RISK ON{% elif sentiment.label == 'risk_off' %}🔴 RISK OFF{% else %}🟡 NEUTRAL{% endif %}
+        </div>
+        <p class="sentiment-reason" data-lang="it">{{ sentiment.reason_it | default('') }}</p>
+        <p class="sentiment-reason" data-lang="en">{{ sentiment.reason_en | default('') }}</p>
+    </header>
+
+    <div class="lang-toggle">
+        <button class="active" onclick="setLang('it')">🇮🇹 Italiano</button>
+        <button onclick="setLang('en')">🇬🇧 English</button>
+    </div>
+
+    {% if market_data %}
+    <div class="market-strip">
+        {% if market_data.eur_usd %}<div class="market-item"><span>EUR/USD</span><strong>{{ market_data.eur_usd }}</strong></div>{% endif %}
+        {% if market_data.vix %}<div class="market-item"><span>VIX</span><strong>{{ market_data.vix }}</strong></div>{% endif %}
+        {% if market_data.btp_10y %}<div class="market-item"><span>BTP 10Y</span><strong>{{ market_data.btp_10y }}</strong></div>{% endif %}
+        {% if market_data.gold %}<div class="market-item"><span>GOLD</span><strong>{{ market_data.gold }}</strong></div>{% endif %}
+        {% if market_data.oil_brent %}<div class="market-item"><span>BRENT</span><strong>{{ market_data.oil_brent }}</strong></div>{% endif %}
+        {% if market_data.sp500_futures %}<div class="market-item"><span>S&P 500</span><strong>{{ market_data.sp500_futures }}</strong></div>{% endif %}
+    </div>
+    {% endif %}
+
+    {% set section_emojis = {'mercati': '💹', 'geopolitica': '🌍', 'macro_economia': '🏛', 'energia': '⚡'} %}
+    {% set section_names_it = {'mercati': 'Mercati', 'geopolitica': 'Geopolitica', 'macro_economia': 'Macroeconomia', 'energia': 'Energia'} %}
+    {% set section_names_en = {'mercati': 'Markets', 'geopolitica': 'Geopolitics', 'macro_economia': 'Macroeconomics', 'energia': 'Energy'} %}
+
+    {% for section in briefing.sections %}
+    <h2 class="section-title">
+        {{ section_emojis.get(section.name, '📌') }}
+        <span data-lang="it">{{ section_names_it.get(section.name, section.name) }}</span>
+        <span data-lang="en">{{ section_names_en.get(section.name, section.name) }}</span>
+    </h2>
+
+    {% for item in section['items'] %}
+    <div class="card">
+        <h3>
+            <span data-lang="it">{{ item.title_it | default('') }}</span>
+            <span data-lang="en">{{ item.title_en | default('') }}</span>
+        </h3>
+        <p data-lang="it">{{ item.summary_it | default('') }}</p>
+        <p data-lang="en">{{ item.summary_en | default('') }}</p>
+        <div class="meta">
+            <div>
+                <span class="category-tag">{{ section.name }}</span>
+                <span class="importance">{% for i in range(item.importance | default(3)) %}⭐{% endfor %}</span>
+            </div>
+            {% if item.source_url %}
+            <a href="{{ item.source_url }}" target="_blank" rel="noopener">{{ item.source_name | default('Fonte') }} →</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    {% endfor %}
+
+    <div class="back-link">
+        <a href="{{ base_url }}">← Torna alla homepage</a>
+    </div>
+
+    <footer>
+        <p>Morning Briefing Agent — <a href="https://github.com/vinciber/morning-briefing">GitHub</a></p>
+        <p><a href="{{ base_url }}/feed.xml">RSS Feed</a></p>
+    </footer>
+
+    <script>
+        function setLang(lang) {
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                el.style.display = el.dataset.lang === lang ? '' : 'none';
+            });
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.includes(lang === 'it' ? 'Italiano' : 'English'));
+            });
+        }
+        setLang('it');
+    </script>
+</body>
+</html>
