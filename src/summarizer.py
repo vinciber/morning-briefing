@@ -39,14 +39,15 @@ REGOLE ASSOLUTE:
 3. Produci testo in ENTRAMBE le lingue: 'summary_it' e 'summary_en', 'title_it' e 'title_en'
 4. Aggiungi sentiment: risk_on / risk_off / neutral con motivazione in entrambe le lingue
 5. Rispondi SOLO con JSON valido, nessun testo extra (no backticks, no markdown)
-6. In 'market_data' riporta gli ultimi valori noti per: EUR/USD, VIX, BTP 10Y Yield, Gold, Brent, S&P 500 Futures
+6. In 'market_data' riporta gli ultimi valori noti per: EUR/USD, VIX, BTP 10Y Yield, Gold, Brent, S&P 500 Futures. INCLUDI SEMPRE la variazione percentuale (es. "+0.5%", "-1.2%").
 7. Ordina le notizie per importanza (5 = massima, 1 = minima)
 8. Il campo 'importance' è un intero da 1 a 5
 9. Le sezioni devono essere: mercati, geopolitica, macro_economia, energia
 10. Per ogni item includi: title_it, title_en, summary_it, summary_en, source_name, source_url, importance
-11. I summary devono essere di 2-3 frasi, concisi ma informativi
+11. I summary devono essere concisi ma informativi
 12. Se fonti contrastanti dicono cose diverse, segnalalo nel summary
-13. MASSIMO 15 ARTICOLI TOTALI: Seleziona SOLO le notizie più importanti in assoluto. Scarta tutto il resto per assicurarti che il JSON generato sia completo e non venga troncato.
+13. FILTRO QUALITÁ: Escludi comunicati puramente burocratici o amministrativi delle banche centrali (es. cessazione azioni esecutive, nomine, aggiornamenti procedurali). Includi solo decisioni di policy, discorsi su tassi/inflazione/crescita, e pubblicazioni di ricerca macro.
+14. MASSIMO 15 ARTICOLI TOTALI: Seleziona SOLO le notizie più importanti in assoluto. Scarta tutto il resto per assicurarti che il JSON generato sia completo e non venga troncato.
 
 FORMATO OUTPUT ATTESO:
 {

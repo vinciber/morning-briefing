@@ -111,12 +111,16 @@ def briefing_to_html(briefing: dict) -> str:
 
             lines.append(f'  {stars} <b>{escape_html(title)}</b>')
             if summary:
+                # Truncate to ~120 chars to keep the message short
+                if len(summary) > 120:
+                    cut = summary[:117]
+                    summary = f"{cut.rsplit(' ', 1)[0]}..." if ' ' in cut else f"{cut}..."
                 lines.append(f'  {escape_html(summary)}')
             if source and url:
                 lines.append(f'  📎 <a href="{url}">{escape_html(source)}</a>')
             lines.append('')
 
-    lines.append('🌐 <a href="https://vinciber.github.io/morning-briefing">Web App</a>')
+    lines.append(f'🌐 <a href="https://vinciber.github.io/morning-briefing/{date}.html">Leggi tutto →</a>')
     return '\n'.join(lines)
 
 

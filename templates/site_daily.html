@@ -6,26 +6,16 @@
     <title>Morning Briefing — {{ date }}</title>
     <style>
         :root {
-            --bg: #0f172a;
-            --surface: #1e293b;
-            --card: #334155;
-            --text: #e2e8f0;
-            --text-muted: #94a3b8;
-            --accent: #3b82f6;
-            --border: #475569;
-            --risk-on: #22c55e;
-            --risk-off: #ef4444;
-            --neutral: #eab308;
-        }
-        @media (prefers-color-scheme: light) {
-            :root {
-                --bg: #f8fafc;
-                --surface: #ffffff;
-                --card: #f1f5f9;
-                --text: #1e293b;
-                --text-muted: #64748b;
-                --border: #e2e8f0;
-            }
+            --bg: #1A1A2E;
+            --surface: #16213E;
+            --card: #16213E;
+            --text: #E2E8F0;
+            --text-muted: #94A3B8;
+            --accent: #E94560;
+            --border: rgba(255, 255, 255, 0.1);
+            --risk-on: #22C55E;
+            --risk-off: #EF4444;
+            --neutral: #F59E0B;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -71,7 +61,7 @@
             text-align: center;
             padding: .5rem;
         }
-        .market-item strong { display: block; font-size: 1.1rem; color: var(--accent); }
+        .market-item strong { display: block; font-size: 1.1rem; color: var(--text); font-weight: 700; margin-top: .25rem; }
         .market-item span { font-size: .75rem; color: var(--text-muted); text-transform: uppercase; }
         .section-title {
             font-size: 1.15rem;
@@ -102,13 +92,19 @@
         .card .meta a:hover { text-decoration: underline; }
         .category-tag {
             display: inline-block;
-            padding: .15rem .5rem;
+            padding: .2rem .6rem;
             border-radius: .25rem;
-            font-size: .7rem;
-            font-weight: 600;
+            font-size: .65rem;
+            font-weight: 700;
             text-transform: uppercase;
+            color: #fff;
             background: var(--card);
+            letter-spacing: 0.5px;
         }
+        .category-tag[data-cat="mercati"] { background: #3B82F6; }
+        .category-tag[data-cat="geopolitica"] { background: #8B5CF6; }
+        .category-tag[data-cat="macro_economia"] { background: #10B981; }
+        .category-tag[data-cat="energia"] { background: #F59E0B; }
         .importance { color: var(--neutral); letter-spacing: -2px; }
         .lang-toggle {
             display: flex;
@@ -194,7 +190,7 @@
         <p data-lang="en">{{ item.summary_en | default('') }}</p>
         <div class="meta">
             <div>
-                <span class="category-tag">{{ section.name }}</span>
+                <span class="category-tag" data-cat="{{ section.name }}">{{ section.name }}</span>
                 <span class="importance">{% for i in range(item.importance | default(3)) %}⭐{% endfor %}</span>
             </div>
             {% if item.source_url %}
@@ -224,6 +220,16 @@
             });
         }
         setLang('it');
+
+        // Colorize market data values based on +/- prefix
+        document.querySelectorAll('.market-item strong').forEach(el => {
+            let text = el.innerText;
+            if (text.includes('+')) {
+                el.innerHTML = text.replace(/(\+[^%\s]+%?)/, '<span style="color: var(--risk-on);">$1</span>');
+            } else if (text.includes('-')) {
+                el.innerHTML = text.replace(/(-[^%\s]+%?)/, '<span style="color: var(--risk-off);">$1</span>');
+            }
+        });
     </script>
 </body>
 </html>
