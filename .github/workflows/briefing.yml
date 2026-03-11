@@ -71,7 +71,7 @@ jobs:
           git config --global user.name 'MorningBriefingBot'
           git config --global user.email 'bot@briefing.local'
           git add docs/
-          git diff --staged --quiet || (git commit -m "briefing: $(date +%Y-%m-%d)" && git push)
+          git diff --staged --quiet || (git commit -m "briefing: $(date +%Y-%m-%d)" && git pull --rebase origin main && git push)
 
       - name: STEP 5 — Upload artifact
         uses: actions/upload-pages-artifact@v3
