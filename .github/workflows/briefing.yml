@@ -6,15 +6,17 @@ on:
     - cron: '0 5 * * 1-5'    # Lun-Ven ore 6:00 CET (5:00 UTC)
   workflow_dispatch:          # Esecuzione manuale da GitHub UI
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   briefing:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout
