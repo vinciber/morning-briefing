@@ -4,6 +4,7 @@ data/*.json
 __pycache__/
 .env
 *.mp3
+!docs/audio/*.mp3
 
 # OS
 .DS_Store
