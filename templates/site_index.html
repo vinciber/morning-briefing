@@ -59,8 +59,8 @@
     </header>
 
     <div class="lang-toggle">
-        <a href="{{ base_url }}/index.html" class="{% if lang == 'it' %}active{% endif %}">🇮🇹 IT</a>
-        <a href="{{ base_url }}/en/index.html" class="{% if lang == 'en' %}active{% endif %}">🇬🇧 EN</a>
+        <a href="{% if lang == 'en' %}../{% endif %}index.html" class="{% if lang == 'it' %}active{% endif %}">🇮🇹 IT</a>
+        <a href="{% if lang == 'it' %}en/{% endif %}index.html" class="{% if lang == 'en' %}active{% endif %}">🇬🇧 EN</a>
     </div>
 
     <div class="today-banner">

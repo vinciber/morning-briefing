@@ -141,7 +141,7 @@
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="{{ base_url }}/favicon.png">
+    <link rel="icon" type="image/png" href="{{ favicon_url }}">
 </head>
 <body>
     <header>
@@ -154,8 +154,8 @@
     </header>
 
     <div class="lang-toggle">
-        <a href="{{ base_url }}/{{ date }}.html" class="{% if lang == 'it' %}active{% endif %}">🇮🇹 Italiano</a>
-        <a href="{{ base_url }}/en/{{ date }}.html" class="{% if lang == 'en' %}active{% endif %}">🇬🇧 English</a>
+        <a href="{% if lang == 'en' %}../{% endif %}{{ date }}.html" class="{% if lang == 'it' %}active{% endif %}">🇮🇹 Italiano</a>
+        <a href="{% if lang == 'it' %}en/{% endif %}{{ date }}.html" class="{% if lang == 'en' %}active{% endif %}">🇬🇧 English</a>
     </div>
 
     {% if market_data %}
@@ -203,12 +203,12 @@
     {% endfor %}
 
     <div class="back-link">
-        <a href="{{ base_url }}{% if lang == 'en' %}/en{% endif %}">← {% if lang == 'it' %}Torna alla homepage{% else %}Back to home{% endif %}</a>
+        <a href="{% if lang == 'en' %}../{% endif %}index.html">← {% if lang == 'it' %}Torna alla homepage{% else %}Back to home{% endif %}</a>
     </div>
 
     <footer>
         <p>Morning Briefing Agent — <a href="https://github.com/vinciber/morning-briefing">GitHub</a></p>
-        <p><a href="{{ base_url }}/{% if lang == 'it' %}feed.xml{% else %}feed_en.xml{% endif %}">RSS Feed</a></p>
+        <p><a href="{% if lang == 'en' %}../{% endif %}{% if lang == 'it' %}feed.xml{% else %}feed_en.xml{% endif %}">RSS Feed</a></p>
     </footer>
 
     <script>
