@@ -25,8 +25,11 @@ def get_alpha_vantage(symbol):
     try:
         url = f'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey={ALPHA_VANTAGE_KEY}'
         r = requests.get(url, timeout=15)
+        # Alcuni simboli potrebbero non avere dati Global Quote
         quote = r.json().get('Global Quote', {})
-        return quote.get('05. price', 'N/A'), quote.get('10. change percent', 'N/A')
+        price = quote.get('05. price', 'N/A')
+        change = quote.get('10. change percent', 'N/A')
+        return price, change
     except Exception as e:
         logger.error(f'Alpha Vantage error {symbol}: {e}')
         return 'N/A', 'N/A'
@@ -39,17 +42,20 @@ def run():
     results['eur_usd'] = {'value': val, 'change': chg}
     logger.info(f'EUR/USD: {val}')
 
+    # Aggiornato per il free tier
     av_symbols = {
-        'sp500':     'SPY',
-        'vix':       'VIXY',
-        'gold':      'GLD',
-        'oil_brent': 'BNO',
+        'sp500':     'SPY',    # Funziona
+        'gold':      'XAUUSD', # Forex Gold
+        'oil_brent': 'UKOIL',  # UK Oil index
     }
+    
     for key, symbol in av_symbols.items():
         val, chg = get_alpha_vantage(symbol)
         results[key] = {'value': val, 'change': chg}
         logger.info(f'{key}: {val}')
 
+    # VIX e altri simboli fissati a N/A
+    results['vix'] = {'value': 'N/A', 'change': 'N/A'}
     for key in ['btp_10y', 'stoxx_600', 'nikkei', 'shanghai', 'us_10y']:
         results[key] = {'value': 'N/A', 'change': 'N/A'}
 

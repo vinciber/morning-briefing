@@ -1,41 +1,20 @@
 #!/usr/bin/env python3
-"""
-tts.py — Generazione Audio con Edge-TTS
-Converte il briefing in MP3 usando voci neurali Microsoft.
-Gestisce chunking per testi lunghi (>2800 chars) con merge pydub.
-Output: docs/audio/briefing_YYYYMMDD.mp3
-"""
-
-import asyncio
-import json
-import logging
-import os
+import json, logging, yaml
 from datetime import datetime, timezone
 from pathlib import Path
-
-import edge_tts
+from gtts import gTTS
 from pydub import AudioSegment
+import io
 
-# ---------------------------------------------------------------------------
-# Setup
-# ---------------------------------------------------------------------------
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 logger = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parent.parent
 INPUT_PATH = ROOT / 'data' / 'briefing_today.json'
 OUTPUT_DIR = ROOT / 'docs' / 'audio'
+MAX_CHUNK_CHARS = 3000
 
-VOICE_IT = 'it-IT-DiegoNeural'
-VOICE_EN = 'en-US-GuyNeural'
-MAX_CHUNK_CHARS = 2800
-SILENCE_BETWEEN_SECTIONS_MS = 500
-
-
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-def briefing_to_text(briefing: dict, lang: str = 'it') -> str:
+def briefing_to_text(briefing, lang='it'):
     """Converte il briefing JSON in testo leggibile per TTS."""
     parts = []
     date = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
@@ -72,11 +51,11 @@ def briefing_to_text(briefing: dict, lang: str = 'it') -> str:
             'btp_10y': 'BTP decennale',
             'gold': 'Oro',
             'oil_brent': 'Brent',
-            'sp500_futures': 'S&P 500 Futures',
+            'sp500': 'S&P 500',
         }
         for key, label in labels.items():
-            val = market.get(key, '')
-            if val:
+            val = market.get(key, {}).get('value', 'N/A')
+            if val and val != 'N/A':
                 parts.append(f'{label}: {val}.')
         parts.append('')
 
@@ -125,8 +104,7 @@ def briefing_to_text(briefing: dict, lang: str = 'it') -> str:
 
     return '\n'.join(parts)
 
-
-def split_text(text: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
+def split_text(text, max_chars=MAX_CHUNK_CHARS):
     """Divide il testo in chunk rispettando i confini di frase."""
     if len(text) <= max_chars:
         return [text]
@@ -135,7 +113,6 @@ def split_text(text: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
     current = ''
 
     for line in text.split('\n'):
-        # Se aggiungere questa riga supera il max, salva il chunk corrente
         if len(current) + len(line) + 1 > max_chars and current:
             chunks.append(current.strip())
             current = ''
@@ -146,51 +123,14 @@ def split_text(text: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
 
     return chunks
 
-
-async def generate_chunk_audio(text: str, voice: str, output_path: str):
-    """Genera audio per un singolo chunk."""
-    communicate = edge_tts.Communicate(text, voice)
-    await communicate.save(output_path)
-
-
-async def generate_audio(text: str, voice: str, output_path: Path):
-    """Genera l'audio completo con chunking e merge binario."""
-    chunks = split_text(text)
-
-    if len(chunks) == 1:
-        # File singolo, niente merge necessario
-        await generate_chunk_audio(chunks[0], voice, str(output_path))
-        return
-
-    # Genera chunk individuali
-    tmp_files = []
-    for i, chunk in enumerate(chunks):
-        tmp_path = output_path.parent / f'_chunk_{i}.mp3'
-        await generate_chunk_audio(chunk, voice, str(tmp_path))
-        tmp_files.append(tmp_path)
-        logger.info(f'   Chunk {i+1}/{len(chunks)} generato')
-
-    # Merge binario mp3 (evita dipendenza da pydub e ffmpeg)
-    with open(output_path, 'wb') as outfile:
-        for tmp_file in tmp_files:
-            with open(tmp_file, 'rb') as infile:
-                outfile.write(infile.read())
-
-    # Cleanup temporanei
-    for tmp_file in tmp_files:
-        tmp_file.unlink(missing_ok=True)
-
-
 def run():
-    """Pipeline TTS: carica briefing → genera audio MP3."""
     if not INPUT_PATH.exists():
-        logger.error(f'❌ File non trovato: {INPUT_PATH}. Esegui prima summarizer.py')
+        logger.error(f'❌ File non trovato: {INPUT_PATH}')
         return None
 
     with open(INPUT_PATH, 'r', encoding='utf-8') as f:
         briefing = json.load(f)
 
-    import yaml
     config_path = ROOT / 'config.yml'
     audio_lang = 'it'
     if config_path.exists():
@@ -198,23 +138,39 @@ def run():
             cfg = yaml.safe_load(cf)
             audio_lang = cfg.get('output', {}).get('audio', {}).get('language', 'it')
 
-    voice = VOICE_IT if audio_lang == 'it' else VOICE_EN
-    text = briefing_to_text(briefing, lang=audio_lang)
+    # Mappa lingua → codice gTTS
+    lang_code = 'it' if audio_lang == 'it' else 'en'
 
+    text = briefing_to_text(briefing, lang=audio_lang)
     date_str = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     output_file = OUTPUT_DIR / f'briefing_{date_str.replace("-", "")}.mp3'
 
-    logger.info(f'🎙️ Generazione audio ({audio_lang})...')
-    logger.info(f'   Testo: {len(text)} chars, voce: {voice}')
+    logger.info(f'🎙️ Generazione audio ({audio_lang}) con gTTS...')
+    logger.info(f'   Testo: {len(text)} chars')
 
-    asyncio.run(generate_audio(text, voice, output_file))
+    chunks = split_text(text)
+
+    if len(chunks) == 1:
+        tts = gTTS(text=chunks[0], lang=lang_code, slow=False)
+        tts.save(str(output_file))
+    else:
+        # Genera chunk e concatena
+        combined = AudioSegment.empty()
+        silence = AudioSegment.silent(duration=500)
+        for i, chunk in enumerate(chunks):
+            tts = gTTS(text=chunk, lang=lang_code, slow=False)
+            mp3_fp = io.BytesIO()
+            tts.write_to_fp(mp3_fp)
+            mp3_fp.seek(0)
+            segment = AudioSegment.from_mp3(mp3_fp)
+            combined += segment + silence
+            logger.info(f'   Chunk {i+1}/{len(chunks)} generato')
+        combined.export(str(output_file), format='mp3')
 
     size_kb = output_file.stat().st_size / 1024
     logger.info(f'✅ Audio generato: {output_file} ({size_kb:.0f} KB)')
-
     return str(output_file)
-
 
 if __name__ == '__main__':
     run()
