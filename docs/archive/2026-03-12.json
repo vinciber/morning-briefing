@@ -6,7 +6,7 @@
     "reason_en": "The sentiment is 'risk_off' due to the escalating Middle East conflict, which has led to oil supply disruptions, rising energy prices, and inflation concerns."
   },
   "market_data": {
-    "eur_usd": "1.0850",
+    "eur_usd": "1.1581",
     "vix": "18.5",
     "btp_10y": "3.65%",
     "gold": "2150",
@@ -39,6 +39,15 @@
           "source_name": "International Crisis Group",
           "source_url": "https://www.crisisgroup.org/cmt/middle-east-north-africa/iran-israelpalestine-united-states/sprawling-middle-east-war-explodes",
           "importance": 5
+        },
+        {
+          "title_it": "Conflitto Iran-Israele: escalation",
+          "title_en": "Iran-Israel conflict: escalation",
+          "summary_it": "L'attacco iraniano a Israele ha portato a un' escalation del conflitto, con ripercussioni sui mercati globali.",
+          "summary_en": "The Iranian attack on Israel led to an escalation of the conflict, with repercussions on global markets.",
+          "source_name": "War on the Rocks",
+          "source_url": "https://warontherocks.com/2026/03/the-blank-check-how-an-unconditional-alliance-took-america-to-war-in-iran/",
+          "importance": 4
         }
       ]
     },
@@ -53,6 +62,15 @@
           "source_name": "Guardian Economics",
           "source_url": "https://www.theguardian.com/business/2026/mar/10/uk-inflation-could-rise-1-because-of-middle-east-crisis-says-obr",
           "importance": 5
+        },
+        {
+          "title_it": "Preoccupazioni inflazionistiche",
+          "title_en": "Inflation concerns",
+          "summary_it": "L'aumento dei prezzi dell'energia potrebbe portare a preoccupazioni inflazionistiche a livello globale.",
+          "summary_en": "The rise in energy prices could lead to inflation concerns globally.",
+          "source_name": "Project Syndicate",
+          "source_url": "https://www.project-syndicate.org/commentary/iran-war-oil-crisis-historical-lessons-by-jim-o-neill-2026-03",
+          "importance": 4
         }
       ]
     },
@@ -67,6 +85,15 @@
           "source_name": "OilPrice",
           "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html",
           "importance": 5
+        },
+        {
+          "title_it": "Aumento dei prezzi del petrolio",
+          "title_en": "Rise in oil prices",
+          "summary_it": "I prezzi del petrolio sono aumentati a causa dell'escalation del conflitto in Medio Oriente.",
+          "summary_en": "Oil prices have risen due to the escalation of the conflict in the Middle East.",
+          "source_name": "OilPrice",
+          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Surge-Despite-Record-Breaking-Strategic-Reserve-Release.html",
+          "importance": 4
         }
       ]
     }
