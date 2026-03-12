@@ -25,13 +25,16 @@ logger = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parent.parent
 INPUT_PATH = ROOT / 'data' / 'fetched_articles.json'
+MARKET_DATA_PATH = ROOT / 'data' / 'market_data.json'
+HISTORY_PATH = ROOT / 'docs' / 'api' / 'today.json'
 OUTPUT_PATH = ROOT / 'data' / 'briefing_today.json'
 
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
 
 SYSTEM_PROMPT = '''
 Sei un analista finanziario e geopolitico senior. Ricevi una lista di
-articoli in JSON. Produci un briefing strutturato in formato JSON.
+articoli in JSON e opzionalmente un briefing del giorno precedente per evitare ripetizioni.
+Produci un briefing strutturato in formato JSON.
 
 REGOLE ASSOLUTE:
 1. Mantieni SEMPRE il campo 'source_url' per ogni notizia citata — è obbligatorio
@@ -39,23 +42,22 @@ REGOLE ASSOLUTE:
 3. Produci testo in ENTRAMBE le lingue: 'summary_it' e 'summary_en', 'title_it' e 'title_en'
 4. Aggiungi sentiment: risk_on / risk_off / neutral con motivazione in entrambe le lingue
 5. Rispondi SOLO con JSON valido, nessun testo extra (no backticks, no markdown)
-6. In 'market_data' riporta gli ultimi valori noti per: EUR/USD, VIX, BTP 10Y Yield, Gold, Brent, S&P 500 Futures. INCLUDI SEMPRE la variazione percentuale (es. "+0.5%", "-1.2%").
+6. Usa i dati di mercato forniti nel prompt se presenti. Se mancano, usa "N/A".
 7. Ordina le notizie per importanza (5 = massima, 1 = minima)
 8. Il campo 'importance' è un intero da 1 a 5
 9. Le sezioni devono essere: mercati, geopolitica, macro_economia, energia
 10. Per ogni item includi: title_it, title_en, summary_it, summary_en, source_name, source_url, importance
-11. I summary devono essere concisi ma informativi
-12. Se fonti contrastanti dicono cose diverse, segnalalo nel summary
-13. FILTRO QUALITÁ: Escludi comunicati puramente burocratici o amministrativi delle banche centrali (es. cessazione azioni esecutive, nomine, aggiornamenti procedurali). Includi solo decisioni di policy, discorsi su tassi/inflazione/crescita, e pubblicazioni di ricerca macro.
-14. MASSIMO 15 ARTICOLI TOTALI: Seleziona SOLO le notizie più importanti in assoluto. Scarta tutto il resto per assicurarti che il JSON generato sia completo e non venga troncato.
+11. **FRESHNESS RULE**: Non ripetere notizie che erano già presenti nel briefing di ieri (fornito come history). Se una notizia è un aggiornamento importante di una vecchia storia, focalizzati solo sulle NOVITÀ.
+12. MASSIMO 15 ARTICOLI TOTALI: Seleziona SOLO le notizie più importanti in assoluto.
+13. FILTRO QUALITÁ: Escludi comunicati burocratici o amministrativi. Includi solo decisioni di policy, discorsi su tassi/inflazione/crescita, e pubblicazioni di ricerca macro.
 
 FORMATO OUTPUT ATTESO:
 {
   "date": "YYYY-MM-DD",
   "sentiment": {
     "label": "risk_off",
-    "reason_it": "motivazione in italiano",
-    "reason_en": "reasoning in english"
+    "reason_it": "...",
+    "reason_en": "..."
   },
   "market_data": {
     "eur_usd": "1.0850",
@@ -65,35 +67,20 @@ FORMATO OUTPUT ATTESO:
     "oil_brent": "82.30",
     "sp500_futures": "5,230"
   },
-  "sections": [
-    {
-      "name": "mercati",
-      "items": [
-        {
-          "title_it": "...",
-          "title_en": "...",
-          "summary_it": "...",
-          "summary_en": "...",
-          "source_name": "...",
-          "source_url": "https://...",
-          "importance": 5
-        }
-      ]
-    }
-  ]
+  "sections": [ ... ]
 }
 '''
 
 
 def run():
-    """Pipeline principale: carica articoli → Gemini → salva briefing JSON."""
+    """Pipeline principale: carica articoli + market + history → Gemini → salva briefing JSON."""
     if not GEMINI_API_KEY:
-        logger.error('❌ GEMINI_API_KEY non configurata! Imposta la variabile d\'ambiente.')
+        logger.error('❌ GEMINI_API_KEY non configurata!')
         return None
 
-    # Carica articoli pre-filtrati
+    # Carica articoli
     if not INPUT_PATH.exists():
-        logger.error(f'❌ File non trovato: {INPUT_PATH}. Esegui prima fetcher.py')
+        logger.error(f'❌ File non trovato: {INPUT_PATH}')
         return None
 
     with open(INPUT_PATH, 'r', encoding='utf-8') as f:
@@ -103,80 +90,74 @@ def run():
         logger.warning('⚠️ Nessun articolo da processare')
         return None
 
-    logger.info(f'📰 Caricati {len(articles)} articoli per il briefing')
+    # Carica dati di mercato reali
+    market_data = {}
+    if MARKET_DATA_PATH.exists():
+        with open(MARKET_DATA_PATH, 'r', encoding='utf-8') as f:
+            market_raw = json.load(f)
+            # Formattiamo per Gemini
+            market_data = {
+                "eur_usd": market_raw.get("eur_usd", {}).get("value", "N/A"),
+                "vix": market_raw.get("vix", {}).get("value", "N/A"),
+                "btp_10y": market_raw.get("btp_10y", {}).get("value", "N/A"),
+                "gold": market_raw.get("gold", {}).get("value", "N/A"),
+                "oil_brent": market_raw.get("oil_brent", {}).get("value", "N/A"),
+                "sp500_futures": market_raw.get("sp500", {}).get("value", "N/A"),
+                "stoxx_600": market_raw.get("stoxx_600", {}).get("value", "N/A"),
+                "nikkei": market_raw.get("nikkei", {}).get("value", "N/A"),
+                "shanghai": market_raw.get("shanghai", {}).get("value", "N/A"),
+                "us_10y": market_raw.get("us_10y", {}).get("value", "N/A")
+            }
+
+    # Carica history (briefing di ieri)
+    history = {}
+    if HISTORY_PATH.exists():
+        try:
+            with open(HISTORY_PATH, 'r', encoding='utf-8') as f:
+                history = json.load(f)
+        except Exception:
+            pass
+
+    logger.info(f'📰 Caricati {len(articles)} articoli e {len(history.get("sections", []))} sezioni di history')
 
     # Configura Gemini
     genai.configure(api_key=GEMINI_API_KEY)
-
     model = genai.GenerativeModel(
-        model_name='gemini-2.5-flash',
+        model_name='gemini-2.0-flash', # Upgrade a 2.0 per migliori prestazioni
         generation_config=genai.GenerationConfig(
-            temperature=0.3,
+            temperature=0.2,
             max_output_tokens=8000,
             response_mime_type='application/json',
         ),
     )
 
-    # Prepara il prompt con gli articoli
-    articles_json = json.dumps(articles, ensure_ascii=False, indent=1)
-    user_prompt = f'''Ecco {len(articles)} articoli aggregati da fonti finanziarie e geopolitiche.
-Data di oggi: {datetime.now(timezone.utc).strftime('%Y-%m-%d')}
+    # Prepara prompt
+    user_prompt = f'''Ecco gli articoli di oggi ({datetime.now(timezone.utc).strftime('%Y-%m-%d')}):
+{json.dumps(articles, ensure_ascii=False, indent=1)}
 
-Produci il briefing strutturato seguendo ESATTAMENTE il formato JSON specificato.
+DATI DI MERCATO REALI (USA QUESTI):
+{json.dumps(market_data, indent=1)}
 
-ARTICOLI:
-{articles_json}'''
+HISTORY (NON RIPETERE QUESTE NOTIZIE):
+{json.dumps(history, ensure_ascii=False, indent=1) if history else "Nessuna history disponibile."}
+'''
 
-    # Chiamata Gemini
-    logger.info('🤖 Chiamata a Gemini 1.5 Flash...')
+    logger.info('🤖 Chiamata a Gemini...')
     try:
-        response = model.generate_content(
-            [SYSTEM_PROMPT, user_prompt],
-        )
-
+        response = model.generate_content([SYSTEM_PROMPT, user_prompt])
         raw_text = response.text.strip()
-
-        # Pulizia: rimuovi eventiali backtick markdown
-        if raw_text.startswith('```'):
-            raw_text = raw_text.split('\n', 1)[1]
-        if raw_text.endswith('```'):
-            raw_text = raw_text.rsplit('```', 1)[0]
-
         briefing = json.loads(raw_text)
 
-        # Validazione base
-        if 'sections' not in briefing:
-            logger.error('❌ Output Gemini mancante di "sections"')
-            return None
-        if 'sentiment' not in briefing:
-            logger.warning('⚠️ Sentiment mancante, aggiungo default')
-            briefing['sentiment'] = {
-                'label': 'neutral',
-                'reason_it': 'Dati insufficienti per determinare sentiment',
-                'reason_en': 'Insufficient data to determine sentiment',
-            }
-
         # Assicura che la data sia presente
-        if 'date' not in briefing:
-            briefing['date'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
-
-        # Conta notizie
-        total_items = sum(len(s.get('items', [])) for s in briefing.get('sections', []))
-        logger.info(f'✅ Briefing generato: {total_items} notizie in {len(briefing["sections"])} sezioni')
-        logger.info(f'   Sentiment: {briefing["sentiment"]["label"]}')
+        briefing['date'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+        briefing['market_data_raw'] = market_data # Salviamo i dati raw per debugging
 
         # Salva output
         OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
         with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
             json.dump(briefing, f, ensure_ascii=False, indent=2)
 
-        logger.info(f'💾 Salvato: {OUTPUT_PATH}')
         return briefing
-
-    except json.JSONDecodeError as e:
-        logger.error(f'❌ Gemini ha restituito JSON non valido: {e}')
-        logger.error(f'   Raw response: {raw_text[:500]}...')
-        return None
     except Exception as e:
         logger.error(f'❌ Errore Gemini: {e}')
         return None

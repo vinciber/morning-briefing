@@ -2,12 +2,6 @@
 name: Morning Briefing
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'docs/**'
-      - '.github/workflows/briefing.yml'
   schedule:
     - cron: '0 5 * * 1-5'    # Lun-Ven ore 6:00 CET (5:00 UTC)
   workflow_dispatch:          # Esecuzione manuale da GitHub UI
@@ -42,6 +36,9 @@ jobs:
 
       - name: STEP 1 — Fetch sources
         run: python src/fetcher.py
+
+      - name: STEP 1b — Fetch Market Data
+        run: python src/market_fetcher.py
 
       - name: STEP 2 — AI Summarize
         run: python src/summarizer.py

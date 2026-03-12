@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="{{ lang }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morning Briefing — Finance & Geopolitics</title>
+    <title>{{ lang_info.title }}</title>
+    <link rel="icon" type="image/png" href="{{ favicon_url }}">
     <meta name="description" content="Daily AI-curated financial and geopolitical briefing from institutional sources.">
-    <link rel="alternate" type="application/rss+xml" title="Morning Briefing RSS" href="{{ base_url }}/feed.xml">
-    <link rel="icon" type="image/png" href="{{ base_url }}/favicon.png">
+    <link rel="alternate" type="application/rss+xml" title="Morning Briefing RSS" href="{{ base_url }}/{% if lang == 'it' %}feed.xml{% else %}feed_en.xml{% endif %}">
     <style>
         :root {
             --bg: #1A1A2E; --surface: #16213E; --card: #16213E;
@@ -45,23 +45,22 @@
         .archive a { display: inline-block; color: var(--accent); text-decoration: none; padding: .25rem .5rem; margin: .15rem; font-size: .82rem; background: var(--surface); border-radius: .35rem; border: 1px solid var(--border); }
         .archive a:hover { border-color: var(--accent); }
         .lang-toggle { display: flex; gap: .4rem; justify-content: center; margin-bottom: 1rem; }
-        .lang-toggle button { padding: .3rem .8rem; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: .3rem; cursor: pointer; font-size: .8rem; }
-        .lang-toggle button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .lang-toggle a { padding: .3rem .8rem; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: .3rem; text-decoration: none; font-size: .8rem; }
+        .lang-toggle a.active { background: var(--accent); color: #fff; border-color: var(--accent); }
         footer { text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: .72rem; border-top: 1px solid var(--border); margin-top: 2rem; }
         footer a { color: var(--accent); text-decoration: none; }
-        [data-lang="en"] { display: none; }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1>📰 Morning Briefing</h1>
+        <h1>📰 {{ lang_info.title }}</h1>
         <p class="subtitle">Finance & Geopolitics — AI-curated daily</p>
     </header>
 
     <div class="lang-toggle">
-        <button class="active" onclick="setLang('it')">🇮🇹 IT</button>
-        <button onclick="setLang('en')">🇬🇧 EN</button>
+        <a href="{{ base_url }}/index.html" class="{% if lang == 'it' %}active{% endif %}">🇮🇹 IT</a>
+        <a href="{{ base_url }}/en/index.html" class="{% if lang == 'en' %}active{% endif %}">🇬🇧 EN</a>
     </div>
 
     <div class="today-banner">
@@ -70,13 +69,12 @@
             {% if sentiment.label == 'risk_on' %}🟢 RISK ON{% elif sentiment.label == 'risk_off' %}🔴 RISK OFF{% else %}🟡 NEUTRAL{% endif %}
         </div>
         <p class="sentiment-reason" style="font-size:.8rem; font-style:italic; color:var(--text-muted);">
-            <span data-lang="it">{{ sentiment.reason_it | default('') }}</span>
-            <span data-lang="en">{{ sentiment.reason_en | default('') }}</span>
+            {{ lang_info.sentiment_text }}
         </p>
         {% if market_data %}
         <div class="market-strip">
             {% if market_data.eur_usd %}<span class="market-chip">EUR/USD <strong>{{ market_data.eur_usd }}</strong></span>{% endif %}
-            {% if market_data.vix %}<span class="market-chip">VIX <strong>{{ market_data.vix }}</strong></span>{% endif %}
+            {% if market_data.vix_futures or market_data.vix %}<span class="market-chip">VIX <strong>{{ market_data.vix_futures or market_data.vix }}</strong></span>{% endif %}
             {% if market_data.btp_10y %}<span class="market-chip">BTP 10Y <strong>{{ market_data.btp_10y }}</strong></span>{% endif %}
             {% if market_data.us_10y %}<span class="market-chip">US 10Y <strong>{{ market_data.us_10y }}</strong></span>{% endif %}
             {% if market_data.gold %}<span class="market-chip">GOLD <strong>{{ market_data.gold }}</strong></span>{% endif %}
@@ -87,19 +85,15 @@
             {% if market_data.shanghai %}<span class="market-chip">SHANGHAI <strong>{{ market_data.shanghai }}</strong></span>{% endif %}
         </div>
         {% endif %}
-        <a href="{{ base_url }}/{{ date }}.html" style="color:var(--accent); font-size:.85rem;">Leggi briefing completo →</a>
+        <a href="{{ base_url }}/{% if lang == 'en' %}en/{% endif %}{{ date }}.html" style="color:var(--accent); font-size:.85rem;">{% if lang == 'it' %}Leggi briefing completo{% else %}Read full briefing{% endif %} →</a>
     </div>
 
     {% for item in all_items %}
     <div class="card">
-        <h3>
-            <span data-lang="it">{{ item.title_it | default('') }}</span>
-            <span data-lang="en">{{ item.title_en | default('') }}</span>
-        </h3>
-        <p data-lang="it">{{ item.summary_it | default('') }}</p>
-        <p data-lang="en">{{ item.summary_en | default('') }}</p>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.summary }}</p>
         <div class="meta">
-            <span class="category-tag">{{ item.section | default('') }}</span>
+            <span class="category-tag">{{ item.section }}</span>
             {% if item.source_url %}<a href="{{ item.source_url }}" target="_blank">{{ item.source_name | default('Fonte') }} →</a>{% endif %}
         </div>
     </div>
@@ -107,37 +101,17 @@
 
     {% if archive_dates %}
     <div class="archive">
-        <h2>📚 Archivio</h2>
+        <h2>📚 {% if lang == 'it' %}Archivio{% else %}Archive{% endif %}</h2>
         {% for d in archive_dates %}
-        <a href="{{ base_url }}/{{ d }}.html">{{ d }}</a>
+        <a href="{{ base_url }}/{% if lang == 'en' %}en/{% endif %}{{ d }}.html">{{ d }}</a>
         {% endfor %}
     </div>
     {% endif %}
 
     <footer>
-        <p>Morning Briefing Agent — <a href="https://github.com/vinciber/morning-briefing">GitHub</a> · <a href="{{ base_url }}/feed.xml">RSS</a></p>
+        <p>Morning Briefing Agent — <a href="https://github.com/vinciber/morning-briefing">GitHub</a> · <a href="{{ base_url }}/{% if lang == 'it' %}feed.xml{% else %}feed_en.xml{% endif %}">RSS</a></p>
     </footer>
 
-    <script>
-        function setLang(lang) {
-            document.querySelectorAll('[data-lang]').forEach(el => {
-                el.style.display = el.dataset.lang === lang ? '' : 'none';
-            });
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent.includes(lang === 'it' ? 'IT' : 'EN'));
-            });
-        }
-        setLang('it');
-
-        // Colorize market data values based on +/- prefix
-        document.querySelectorAll('.market-chip strong').forEach(el => {
-            let text = el.innerText;
-            if (text.includes('+')) {
-                el.innerHTML = text.replace(/(\+[^%\s]+%?)/, '<span style="color: var(--risk-on);">$1</span>');
-            } else if (text.includes('-')) {
-                el.innerHTML = text.replace(/(-[^%\s]+%?)/, '<span style="color: var(--risk-off);">$1</span>');
-            }
-        });
     </script>
 </body>
 </html>

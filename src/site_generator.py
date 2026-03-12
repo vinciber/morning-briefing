@@ -36,35 +36,47 @@ def load_config() -> dict:
 # ---------------------------------------------------------------------------
 # Generators
 # ---------------------------------------------------------------------------
-def generate_daily_page(briefing: dict, env: Environment, base_url: str):
-    """Genera la pagina del briefing del giorno: docs/YYYY-MM-DD.html"""
+def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: str = 'it'):
+    """Genera la pagina del briefing del giorno: docs/[en/]YYYY-MM-DD.html"""
     date = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
     template = env.get_template('site_daily.html')
 
     sentiment = briefing.get('sentiment', {})
+    sentiment_label = sentiment.get('label', 'neutral')
     sentiment_color = {
         'risk_on': '#22c55e',
         'risk_off': '#ef4444',
         'neutral': '#eab308',
-    }.get(sentiment.get('label', 'neutral'), '#eab308')
+    }.get(sentiment_label, '#eab308')
+    
+    # Text overrides for language
+    lang_info = {
+        'it': {'title': 'Briefing del Giorno', 'sentiment_text': sentiment.get('reason_it', '')},
+        'en': {'title': 'Daily Briefing', 'sentiment_text': sentiment.get('reason_en', '')}
+    }.get(lang, lang_info['it'])
 
     html = template.render(
         briefing=briefing,
         date=date,
+        lang=lang,
+        lang_info=lang_info,
         sentiment=sentiment,
         sentiment_color=sentiment_color,
-        market_data=briefing.get('market_data', {}),
         base_url=base_url,
+        favicon_url='favicon.png' if lang == 'it' else '../favicon.png'
     )
 
-    output_path = DOCS_DIR / f'{date}.html'
+    out_dir = DOCS_DIR if lang == 'it' else DOCS_DIR / 'en'
+    out_dir.mkdir(parents=True, exist_ok=True)
+    
+    output_path = out_dir / f'{date}.html'
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html)
-    logger.info(f'✅ Pagina generata: {output_path}')
+    logger.info(f'✅ Pagina generata ({lang}): {output_path}')
 
 
-def generate_index(briefing: dict, env: Environment, base_url: str):
-    """Genera la homepage: docs/index.html con le ultime notizie."""
+def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 'it'):
+    """Genera la homepage: docs/[en/]index.html con le ultime notizie."""
     template = env.get_template('site_index.html')
     date = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
     sentiment = briefing.get('sentiment', {})
@@ -74,37 +86,55 @@ def generate_index(briefing: dict, env: Environment, base_url: str):
         'neutral': '#eab308',
     }.get(sentiment.get('label', 'neutral'), '#eab308')
 
-    # Raccolta di tutti gli item per il feed
+    # Prep items for this language
     all_items = []
     for section in briefing.get('sections', []):
         for item in section.get('items', []):
-            item['section'] = section.get('name', '')
-            all_items.append(item)
+            display_item = item.copy()
+            display_item['section'] = section.get('name', '')
+            if lang == 'en':
+                display_item['title'] = item.get('title_en', item.get('title_it', ''))
+                display_item['summary'] = item.get('summary_en', item.get('summary_it', ''))
+            else:
+                display_item['title'] = item.get('title_it', item.get('title_en', ''))
+                display_item['summary'] = item.get('summary_it', item.get('summary_en', ''))
+            all_items.append(display_item)
 
-    # Ordina per importanza decrescente
     all_items.sort(key=lambda x: x.get('importance', 0), reverse=True)
 
-    # Carica archivio date precedenti
+    # Archive links
+    archive_dir = DOCS_DIR if lang == 'it' else DOCS_DIR / 'en'
     archive_dates = sorted(
-        [f.stem for f in DOCS_DIR.glob('20*.html')],
+        [f.stem for f in archive_dir.glob('20*.html')],
         reverse=True
     )[:30]
+
+    lang_info = {
+        'it': {'title': 'Morning Briefing', 'sentiment_text': sentiment.get('reason_it', '')},
+        'en': {'title': 'Morning Briefing', 'sentiment_text': sentiment.get('reason_en', '')}
+    }.get(lang, lang_info['it'])
 
     html = template.render(
         briefing=briefing,
         date=date,
+        lang=lang,
+        lang_info=lang_info,
         sentiment=sentiment,
         sentiment_color=sentiment_color,
         market_data=briefing.get('market_data', {}),
         all_items=all_items,
         archive_dates=archive_dates,
         base_url=base_url,
+        favicon_url='favicon.png' if lang == 'it' else '../favicon.png'
     )
 
-    output_path = DOCS_DIR / 'index.html'
+    out_dir = DOCS_DIR if lang == 'it' else DOCS_DIR / 'en'
+    out_dir.mkdir(parents=True, exist_ok=True)
+    
+    output_path = out_dir / 'index.html'
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html)
-    logger.info(f'✅ Homepage generata: {output_path}')
+    logger.info(f'✅ Homepage generata ({lang}): {output_path}')
 
 
 def generate_rss(briefing: dict, base_url: str, max_items: int = 30, lang: str = 'it'):
@@ -121,7 +151,10 @@ def generate_rss(briefing: dict, base_url: str, max_items: int = 30, lang: str =
             else:
                 title = item.get('title_en', item.get('title_it', ''))
                 summary = item.get('summary_en', item.get('summary_it', ''))
-            source_url = item.get('source_url', f'{base_url}/{date}')
+            
+            # Use specific language link if available
+            link_suffix = f"{date}.html" if lang == 'it' else f"en/{date}.html"
+            source_url = item.get('source_url', f'{base_url}/{link_suffix}')
 
             items_xml.append(f'''    <item>
       <title>{_xml_escape(title)}</title>
@@ -160,13 +193,11 @@ def generate_api_json(briefing: dict):
     api_dir = DOCS_DIR / 'api'
     api_dir.mkdir(parents=True, exist_ok=True)
 
-    # today.json = copia completa del briefing
     output_path = api_dir / 'today.json'
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(briefing, f, ensure_ascii=False, indent=2)
     logger.info(f'✅ API JSON generato: {output_path}')
 
-    # index.json = lista briefing disponibili (ultimi 30 giorni)
     date = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
     index_path = api_dir / 'index.json'
 
@@ -178,7 +209,6 @@ def generate_api_json(briefing: dict):
         except Exception:
             index = []
 
-    # Aggiungi o aggiorna il briefing di oggi
     index = [b for b in index if b.get('date') != date]
     index.insert(0, {
         'date': date,
@@ -186,28 +216,23 @@ def generate_api_json(briefing: dict):
         'sections_count': len(briefing.get('sections', [])),
         'items_count': sum(len(s.get('items', [])) for s in briefing.get('sections', [])),
     })
-    index = index[:30]  # Keep last 30 days
+    index = index[:60] # Esteso a 60 giorni
 
     with open(index_path, 'w', encoding='utf-8') as f:
         json.dump(index, f, ensure_ascii=False, indent=2)
-    logger.info(f'✅ API index generato: {index_path}')
 
 
 def generate_archive(briefing: dict):
-    """Archivia il briefing come JSON in docs/archive/YYYY-MM-DD.json."""
+    """Archivia in docs/archive/YYYY-MM-DD.json."""
     archive_dir = DOCS_DIR / 'archive'
     archive_dir.mkdir(parents=True, exist_ok=True)
-
     date = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
     output_path = archive_dir / f'{date}.json'
-
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(briefing, f, ensure_ascii=False, indent=2)
-    logger.info(f'✅ Archivio JSON: {output_path}')
 
 
 def _xml_escape(text: str) -> str:
-    """Escape XML special characters."""
     return (text
             .replace('&', '&amp;')
             .replace('<', '&lt;')
@@ -220,7 +245,6 @@ def _xml_escape(text: str) -> str:
 # Main
 # ---------------------------------------------------------------------------
 def run():
-    """Pipeline site: carica briefing → genera tutte le pagine + RSS + API."""
     if not INPUT_PATH.exists():
         logger.error(f'❌ File non trovato: {INPUT_PATH}')
         return False
@@ -233,12 +257,17 @@ def run():
     max_feed_items = config.get('output', {}).get('site', {}).get('max_items_feed', 30)
 
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
-
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
 
     logger.info('🌐 Generazione sito...')
-    generate_daily_page(briefing, env, base_url)
-    generate_index(briefing, env, base_url)
+    # Generazione IT
+    generate_daily_page(briefing, env, base_url, lang='it')
+    generate_index(briefing, env, base_url, lang='it')
+    
+    # Generazione EN
+    generate_daily_page(briefing, env, base_url, lang='en')
+    generate_index(briefing, env, base_url, lang='en')
+    
     generate_rss(briefing, base_url, max_feed_items, lang='it')
     generate_rss(briefing, base_url, max_feed_items, lang='en')
     generate_api_json(briefing)
