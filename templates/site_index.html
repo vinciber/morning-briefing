@@ -119,7 +119,16 @@
             text-transform: uppercase;
             letter-spacing: 0.2em;
             font-size: 1rem;
-            color: var(--status-color, var(--neutral));
+        }
+
+        .sentiment-reason {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
 
         .cta-button {
@@ -292,7 +301,7 @@
             
             <div class="sentiment-banner">
                 <div class="status-dot"></div>
-                <div class="sentiment-label">
+                <div class="sentiment-label {% if sentiment.label == 'risk_on' %}text-risk-on{% elif sentiment.label == 'risk_off' %}text-risk-off{% else %}text-neutral{% endif %}">
                     {% if lang == 'it' %}
                         {% if sentiment.label == 'risk_on' %}RISK ON{% elif sentiment.label == 'risk_off' %}RISK OFF{% else %}NEUTRAL{% endif %}
                     {% else %}
@@ -301,7 +310,7 @@
                 </div>
             </div>
 
-            <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            <p class="sentiment-reason">
                 {{ sentiment.get('reason_' + lang, '') | truncate(150) }}
             </p>
 
