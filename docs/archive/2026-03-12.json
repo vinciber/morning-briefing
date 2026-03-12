@@ -3,42 +3,51 @@
   "sentiment": {
     "label": "risk_off",
     "score": 8,
-    "reason_it": "Il sentiment è 'risk_off' a causa dell'escalation del conflitto in Medio Oriente, con un aumento significativo dei prezzi del petrolio e preoccupazioni inflazionistiche. Il Brent sale del 4.2% a $91.3, il VIX tocca 28 e il mercato azionario mostra segni di debolezza.",
-    "reason_en": "The sentiment is 'risk_off' due to the escalating Middle East conflict, with a significant increase in oil prices and inflation concerns. Brent crude rises 4.2% to $91.3, VIX hits 28, and the stock market shows signs of weakness."
+    "reason_it": "Il sentiment è 'risk_off' a causa dell'escalation del conflitto in Medio Oriente, con un aumento significativo dei prezzi del petrolio e preoccupazioni inflazionistiche. Il Brent sale del 4.2% a $95.85, il VIX tocca 26.19 e il mercato azionario mostra segni di debolezza con S&P 500 in calo del 1.16%.",
+    "reason_en": "The sentiment is 'risk_off' due to the escalating Middle East conflict, with a significant increase in oil prices and inflation concerns. Brent crude rises 4.2% to $95.85, VIX hits 26.19, and the stock market shows signs of weakness with S&P 500 down 1.16%."
   },
   "market_impact_summary": {
-    "it": "I mercati azionari globali sono in territorio negativo, con futures Dow, S&P 500 e Nasdaq in calo. Il prezzo del petrolio Brent raggiunge $91.3, in aumento del 4.2%. L'indice di volatilità VIX sale a 28, segnalando un'aumentata avversione al rischio. Le obbligazioni governative sono in compressione, con il TLT in calo.",
-    "en": "Global stock markets are in negative territory, with Dow, S&P 500, and Nasdaq futures down. Brent crude oil price reaches $91.3, up 4.2%. The VIX index rises to 28, indicating increased risk aversion. Government bonds are in compression, with TLT down."
+    "it": "I mercati azionari globali sono in territorio negativo, con S&P 500 in calo dell'1.16% a 6696.94. Il prezzo del petrolio Brent raggiunge $95.85, in aumento del 4.21%. L'indice di volatilità VIX sale a 26.19, segnalando un'aumentata avversione al rischio. Le obbligazioni governative sono in compressione, con il TLT in calo dello 0.21%.",
+    "en": "Global stock markets are in negative territory, with S&P 500 down 1.16% to 6696.94. Brent crude oil price reaches $95.85, up 4.21%. The VIX index rises to 26.19, indicating increased risk aversion. Government bonds are in compression, with TLT down 0.21%."
   },
   "sections": [
     {
       "name": "mercati",
       "items": [
         {
-          "title_it": "Futures azionari USA in calo",
-          "title_en": "US stock futures down",
-          "summary_it": "I futures Dow, S&P 500 e Nasdaq sono in calo a causa dell'escalation del conflitto in Medio Oriente e delle preoccupazioni inflazionistiche.",
-          "summary_en": "Dow, S&P 500, and Nasdaq futures are down due to the escalating Middle East conflict and inflation concerns.",
+          "title_it": "S&P 500 in calo dell'1.16%",
+          "title_en": "S&P 500 down 1.16%",
+          "summary_it": "Il mercato azionario statunitense mostra segni di debolezza con S&P 500 in calo dell'1.16% a 6696.94.",
+          "summary_en": "The US stock market shows signs of weakness with S&P 500 down 1.16% to 6696.94.",
           "source_name": "Yahoo Finance",
-          "source_url": "https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-slip-amid-continued-iran-fallout-with-cpi-on-deck-231325809.html",
+          "source_url": "",
           "importance": 5
         },
         {
-          "title_it": "Petrolio Brent a $91.3",
-          "title_en": "Brent crude at $91.3",
-          "summary_it": "Il prezzo del petrolio Brent aumenta del 4.2% a $91.3 a causa dell'escalation del conflitto in Medio Oriente e delle preoccupazioni sulla produzione di petrolio.",
-          "summary_en": "Brent crude oil price rises 4.2% to $91.3 due to the escalating Middle East conflict and concerns over oil production.",
+          "title_it": "Petrolio Brent a $95.85",
+          "title_en": "Brent crude at $95.85",
+          "summary_it": "Il prezzo del petrolio Brent aumenta del 4.21% a $95.85 a causa dell'escalation del conflitto in Medio Oriente e delle preoccupazioni sulla produzione di petrolio.",
+          "summary_en": "Brent crude oil price rises 4.21% to $95.85 due to the escalating Middle East conflict and concerns over oil production.",
           "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html",
+          "source_url": "",
           "importance": 5
         },
         {
-          "title_it": "VIX a 28",
-          "title_en": "VIX at 28",
-          "summary_it": "L'indice di volatilità VIX sale a 28, segnalando un'aumentata avversione al rischio tra gli investitori a causa dell'incertezza sul conflitto in Medio Oriente.",
-          "summary_en": "The VIX index rises to 28, indicating increased risk aversion among investors due to uncertainty over the Middle East conflict.",
+          "title_it": "VIX a 26.19",
+          "title_en": "VIX at 26.19",
+          "summary_it": "L'indice di volatilità VIX sale a 26.19, segnalando un'aumentata avversione al rischio tra gli investitori a causa dell'incertezza sul conflitto in Medio Oriente.",
+          "summary_en": "The VIX index rises to 26.19, indicating increased risk aversion among investors due to uncertainty over the Middle East conflict.",
           "source_name": "Yahoo Finance",
-          "source_url": "https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-slip-amid-continued-iran-fallout-with-cpi-on-deck-231325809.html",
+          "source_url": "",
+          "importance": 5
+        },
+        {
+          "title_it": "TLT in calo dello 0.21%",
+          "title_en": "TLT down 0.21%",
+          "summary_it": "Le obbligazioni governative sono in compressione, con il TLT in calo dello 0.21%.",
+          "summary_en": "Government bonds are in compression, with TLT down 0.21%.",
+          "source_name": "Yahoo Finance",
+          "source_url": "",
           "importance": 5
         }
       ]
@@ -52,7 +61,7 @@
           "summary_it": "L'attacco congiunto USA-Israele contro l'Iran ha portato a ritorsioni iraniane, coinvolgendo gran parte del Medio Oriente in un conflitto.",
           "summary_en": "The joint U.S.-Israeli attack on Iran has led to Iranian retaliation, engulfing much of the Middle East in conflict.",
           "source_name": "International Crisis Group",
-          "source_url": "https://www.crisisgroup.org/cmt/middle-east-north-africa/iran-israelpalestine-united-states/sprawling-middle-east-war-explodes",
+          "source_url": "",
           "importance": 5
         }
       ]
@@ -61,12 +70,12 @@
       "name": "macro_economia",
       "items": [
         {
-          "title_it": "Inflazione UK potrebbe raggiungere il 3%",
-          "title_en": "UK inflation could reach 3%",
-          "summary_it": "L'inflazione nel Regno Unito potrebbe raggiungere il 3% entro la fine del 2026 a causa dello shock sui prezzi dell'energia innescato dalla crisi in Medio Oriente.",
-          "summary_en": "UK inflation could reach 3% by the end of 2026 due to the energy price shock triggered by the Middle East crisis.",
-          "source_name": "Guardian Economics",
-          "source_url": "https://www.theguardian.com/business/2026/mar/10/uk-inflation-could-rise-1-because-of-middle-east-crisis-says-obr",
+          "title_it": "Inflazione globale potrebbe aumentare",
+          "title_en": "Global inflation could rise",
+          "summary_it": "L'aumento dei prezzi del petrolio potrebbe portare a un aumento dell'inflazione globale.",
+          "summary_en": "The rise in oil prices could lead to an increase in global inflation.",
+          "source_name": "",
+          "source_url": "",
           "importance": 5
         }
       ]
@@ -79,61 +88,57 @@
           "title_en": "Oil prices rising",
           "summary_it": "I prezzi del petrolio sono in aumento a causa dell'escalation del conflitto in Medio Oriente e delle preoccupazioni sulla produzione di petrolio.",
           "summary_en": "Oil prices are rising due to the escalating Middle East conflict and concerns over oil production.",
-          "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html",
+          "source_name": "",
+          "source_url": "",
           "importance": 5
         }
       ]
     }
   ],
   "market_data_raw": {
-    "eur_usd": {
-      "value": "1.1547",
-      "change": "N/A"
-    },
     "dxy": {
-      "value": "N/A",
-      "change": "N/A"
+      "value": "99.6310",
+      "change": "+0.40%"
     },
     "sp500": {
-      "value": "N/A",
-      "change": "N/A"
+      "value": "6696.94",
+      "change": "-1.16%"
     },
     "vix": {
-      "value": "N/A",
-      "change": "N/A"
+      "value": "26.1900",
+      "change": "+8.09%"
     },
     "tlt": {
-      "value": "N/A",
-      "change": "N/A"
+      "value": "86.9599",
+      "change": "-0.21%"
     },
     "us_10y": {
-      "value": "N/A",
-      "change": "N/A"
+      "value": "4.2490%",
+      "change": "+0.97%"
     },
     "gold": {
-      "value": "N/A",
-      "change": "N/A"
+      "value": "$5138.60/oz",
+      "change": "-0.56%"
     },
     "btcusd": {
-      "value": "N/A",
-      "change": "N/A"
+      "value": "$70,178",
+      "change": "-0.04%"
     },
     "oil_brent": {
-      "value": "N/A",
-      "change": "N/A"
+      "value": "$95.8500",
+      "change": "+4.21%"
     },
     "stoxx_600": {
       "value": "N/A",
       "change": "N/A"
     },
     "nikkei": {
-      "value": "N/A",
-      "change": "N/A"
+      "value": "54,453",
+      "change": "-1.04%"
     },
     "shanghai": {
-      "value": "N/A",
-      "change": "N/A"
+      "value": "4129.10",
+      "change": "-0.10%"
     },
     "btp_10y": {
       "value": "N/A",
