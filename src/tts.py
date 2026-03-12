@@ -14,83 +14,75 @@ OUTPUT_DIR = ROOT / 'docs' / 'audio'
 MODEL_DIR = ROOT / 'models'
 
 def briefing_to_text(briefing, lang='it'):
-    """Trasforma il briefing JSON in un testo narrativo strutturato per TTS."""
     parts = []
     date = briefing.get('date', '')
-    
-    # 1. Introduzione
-    if lang == 'it':
-        parts.append(f"Buongiorno. È il {date}. Questo è il vostro Morning Briefing Finanziario e Geopolitico.")
-    else:
-        parts.append(f"Good morning. It is {date}. This is your Financial and Geopolitical Morning Briefing.")
-    parts.append("")
 
-    # 2. Sentiment e Macro Outlook (Il "Punto della Situazione")
+    parts.append(
+        f'Buongiorno. Morning Briefing del {date}.'
+        if lang == 'it' else
+        f'Good morning. Morning Briefing for {date}.'
+    )
+    parts.append('')
+
     sentiment = briefing.get('sentiment', {})
-    if lang == 'it':
-        label = sentiment.get('label', 'neutral').replace('_', ' ')
-        parts.append(f"Iniziamo con il sentiment di mercato, oggi classificato come {label}.")
-    else:
-        label = sentiment.get('label', 'neutral').replace('_', ' ')
-        parts.append(f"Starting with market sentiment, currently rated as {label}.")
-    
     reason = sentiment.get(f'reason_{lang}', '')
     if reason:
         parts.append(reason)
-    parts.append("")
+        parts.append('')
 
-    # 3. Market Impact Summary
     impact = briefing.get('market_impact_summary', {})
     impact_text = impact.get(lang, '') if isinstance(impact, dict) else ''
     if impact_text:
         parts.append(impact_text)
-    parts.append("")
+        parts.append('')
 
-    # 4. Sezioni Dettagliate
     section_labels = {
         'it': {
-            'mercati': 'Passiamo all\'analisi dei mercati e degli asset finanziari.',
-            'geopolitica': 'Sul fronte geopolitico, i riflettori sono puntati sui seguenti eventi.',
-            'macro_economia': 'Per quanto riguarda la macroeconomia e le politiche monetarie.',
-            'energia': 'Infine, uno sguardo al settore energetico e delle materie prime.'
+            'mercati':        'Mercati e impatto finanziario',
+            'geopolitica':    'Geopolitica',
+            'macro_economia': 'Macroeconomia',
+            'energia':        'Energia'
         },
         'en': {
-            'mercati': 'Moving on to market analysis and financial assets.',
-            'geopolitica': 'On the geopolitical front, the focus is on the following events.',
-            'macro_economia': 'Regarding macroeconomics and monetary policy.',
-            'energia': 'Finally, a look at the energy and commodities sector.'
+            'mercati':        'Markets and financial impact',
+            'geopolitica':    'Geopolitics',
+            'macro_economia': 'Macroeconomics',
+            'energia':        'Energy'
         }
     }
 
     for section in briefing.get('sections', []):
         sec_name = section.get('name', '')
-        if sec_name not in section_labels[lang]:
-            continue
-            
-        # Filtriamo solo item molto rilevanti per l'audio
-        items = [i for i in section.get('items', []) if i.get('relevance_score', 0) >= 3]
+        label = section_labels[lang].get(sec_name, sec_name)
+        items = [i for i in section.get('items', [])
+                 if i.get('relevance_score', 0) >= 4]
         if not items:
             continue
 
-        parts.append(section_labels[lang][sec_name])
-        parts.append("")
+        parts.append(
+            f'{"Sezione" if lang == "it" else "Section"}: {label}.'
+        )
+        parts.append('')
 
         for item in items:
-            title = item.get(f'title_{lang}', '')
+            title   = item.get(f'title_{lang}', '')
             summary = item.get(f'summary_{lang}', '')
+            source  = item.get('source_name', '')
             if title:
-                parts.append(f"{title}.")
+                parts.append(title + '.')
             if summary:
                 parts.append(summary)
-            parts.append("")
+            if source:
+                parts.append(
+                    f'{"Fonte" if lang == "it" else "Source"}: {source}.'
+                )
+            parts.append('')
 
-    # 5. Chiusura
-    if lang == 'it':
-        parts.append("Il briefing si conclude qui. Restate sintonizzati per ulteriori aggiornamenti. Buona giornata di trading e lavoro.")
-    else:
-        parts.append("That concludes the briefing. Stay tuned for further updates. Have a productive day.")
-
-    return "\n".join(parts)
+    parts.append(
+        'Fine del briefing. Buona giornata.'
+        if lang == 'it' else
+        'End of briefing. Have a good day.'
+    )
     return '\n'.join(parts)
 
 def run():

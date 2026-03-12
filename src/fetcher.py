@@ -13,6 +13,7 @@ import hashlib
 import logging
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from difflib import SequenceMatcher
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -44,14 +45,14 @@ HIGH_KEYWORDS = [
     'btp', 'eur', 'usd', 'dollar', 'euro',
 ]
 
-# Caps per category
+TIER_SCORE = {1: 1.0, 2: 0.75, 3: 0.5, 4: 0.3}
 CATEGORY_CAPS = {
-    'banche_centrali': 8,
-    'geopolitica': 10,
-    'macro_economia': 8,
-    'finanza': 15,
-    'energia': 7,
+    'mercati':        8,
+    'geopolitica':    6,
+    'macro_economia': 6,
+    'energia':        5,
 }
+GLOBAL_CAP = 25
 
 USER_AGENT = 'MorningBriefingAgent/1.0 (+https://github.com/vinciber/morning-briefing)'
 
@@ -248,55 +249,58 @@ def fetch_webfetch_source(source: dict) -> list[dict]:
 # ---------------------------------------------------------------------------
 # Pipeline
 # ---------------------------------------------------------------------------
-def deduplicate(articles: list[dict]) -> list[dict]:
-    """Rimuove articoli duplicati per hash e similarità titolo."""
-    seen_hashes = set()
-    seen_titles = []
-    unique = []
+def title_similarity(a, b):
+    return SequenceMatcher(None,
+        a.lower().strip(),
+        b.lower().strip()
+    ).ratio()
 
+def smart_select(articles):
+    # PASSAGGIO 1 — score composito
     for art in articles:
-        h = article_hash(art['title'], art['url'])
-        if h in seen_hashes:
-            continue
+        tier = art.get('tier', 4)
+        relevance = art.get('relevance_score', 1)
+        tier_w = TIER_SCORE.get(tier, 0.2)
+        art['_score'] = (tier_w * 0.6) + ((relevance / 5) * 0.4)
 
-        # Controlla similarità con titoli già visti
-        is_dup = False
-        for seen_title in seen_titles:
-            if is_similar(art['title'], seen_title):
-                is_dup = True
+    articles = sorted(articles, key=lambda x: x['_score'], reverse=True)
+
+    # PASSAGGIO 2 — deduplicazione semantica titoli >70% simili
+    deduplicated = []
+    for candidate in articles:
+        title_c = candidate.get('title', '') or candidate.get('title_it', '')
+        is_duplicate = False
+        for kept in deduplicated:
+            title_k = kept.get('title', '') or kept.get('title_it', '')
+            if title_similarity(title_c, title_k) > 0.70:
+                is_duplicate = True
+                logger.debug(f'🔁 Dedup: "{title_c[:60]}" ~ "{title_k[:60]}"')
                 break
+        if not is_duplicate:
+            deduplicated.append(candidate)
 
-        if is_dup:
-            continue
+    # PASSAGGIO 3 — cap per categoria con priorità tier
+    category_counts = {cat: 0 for cat in CATEGORY_CAPS}
+    selected = []
 
-        seen_hashes.add(h)
-        seen_titles.append(art['title'])
-        unique.append(art)
+    for art in deduplicated:
+        cat = art.get('category', 'mercati')
+        cap = CATEGORY_CAPS.get(cat, 4)
+        if category_counts.get(cat, 0) < cap:
+            selected.append(art)
+            category_counts[cat] = category_counts.get(cat, 0) + 1
+        if len(selected) >= GLOBAL_CAP:
+            break
 
-    removed = len(articles) - len(unique)
-    if removed > 0:
-        logger.info(f'🔄 Dedup: rimossi {removed} duplicati, restano {len(unique)}')
-    return unique
+    logger.info(f'🧠 Smart select: {len(articles)} → {len(deduplicated)} '
+                f'(dedup) → {len(selected)} (final)')
+    for cat, count in category_counts.items():
+        logger.info(f'   {cat}: {count} articoli')
 
+    for art in selected:
+        art.pop('_score', None)
 
-def apply_caps(articles: list[dict]) -> list[dict]:
-    """Applica cap per categoria: rispetta i limiti configurati."""
-    cat_counts: dict[str, int] = {}
-    filtered = []
-
-    for art in articles:
-        cat = art['category']
-        cap = CATEGORY_CAPS.get(cat, 10)
-        current = cat_counts.get(cat, 0)
-
-        if current < cap:
-            filtered.append(art)
-            cat_counts[cat] = current + 1
-
-    removed = len(articles) - len(filtered)
-    if removed > 0:
-        logger.info(f'📊 Caps: rimossi {removed} articoli oltre il limite')
-    return filtered
+    return selected
 
 
 def run():
@@ -330,19 +334,8 @@ def run():
 
     logger.info(f'\n📰 Totale grezzo: {len(all_articles)} articoli')
 
-    # Deduplicazione
-    all_articles = deduplicate(all_articles)
-
-    # Ordina: tier ASC (priorità fonti istituzionali), poi relevance DESC
-    all_articles.sort(key=lambda a: (a['tier'], -a['relevance_score']))
-
-    # Applica caps per categoria
-    all_articles = apply_caps(all_articles)
-
-    # Cap globale: max 40 articoli
-    if len(all_articles) > 40:
-        all_articles = all_articles[:40]
-        logger.info('✂️ Cap globale: ridotti a 40 articoli')
+    # Smart Selection (Scoring + Dedup + Caps)
+    all_articles = smart_select(all_articles)
 
     # Salva output
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)

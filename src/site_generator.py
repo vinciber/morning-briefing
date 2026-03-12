@@ -39,33 +39,32 @@ def load_config() -> dict:
 def build_market_strip(market_data):
     order = [
         ('eur_usd',   'EUR/USD'),
+        ('dxy',       'DXY'),
         ('sp500',     'S&P 500'),
         ('stoxx_600', 'STOXX 600'),
         ('nikkei',    'NIKKEI'),
         ('shanghai',  'SHANGHAI'),
         ('vix',       'VIX'),
+        ('tlt',       'TLT'),
         ('gold',      'GOLD'),
+        ('btcusd',    'BTC'),
         ('oil_brent', 'BRENT'),
         ('btp_10y',   'BTP 10Y'),
         ('us_10y',    'US 10Y'),
+        ('global_m2', 'M2 GLOBAL'),
     ]
     strip = []
     for key, label in order:
         item = market_data.get(key, {})
-        if isinstance(item, dict):
-            val = item.get('value', 'N/A')
-            chg = item.get('change', 'N/A')
-        else:
-            val = item
-            chg = 'N/A'
-
+        val = item.get('value', 'N/A')
+        chg = item.get('change', 'N/A')
         if val and val != 'N/A':
             positive = isinstance(chg, str) and '+' in chg
             negative = isinstance(chg, str) and '-' in chg
             strip.append({
-                'label': label,
-                'value': val,
-                'change': chg if chg and chg != 'N/A' else '',
+                'label':    label,
+                'value':    val,
+                'change':   chg if chg and chg != 'N/A' else '',
                 'positive': positive,
                 'negative': negative,
             })
