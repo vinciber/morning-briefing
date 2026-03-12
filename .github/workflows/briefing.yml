@@ -85,6 +85,8 @@ jobs:
             exit 0
           fi
           git clone https://vinciber:$MAIN_REPO_TOKEN@github.com/vinciber/price-alert-tg-backend.git main-repo
+          # Ensure a clean slate for the update
+          rm -rf main-repo/public/morning-update/*
           mkdir -p main-repo/public/morning-update/trial
           cp -r docs/* main-repo/public/morning-update/
           cp -r docs/* main-repo/public/morning-update/trial/
