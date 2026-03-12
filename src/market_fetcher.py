@@ -81,12 +81,12 @@ def run():
     logger.info(f'Gold: {val}')
 
     # Brent — contratto generico stooq
-    val, chg = get_stooq('lco.uk')
+    val, chg = get_stooq('cb.f')
     results['oil_brent'] = {'value': f'${val}' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'Brent: {val}')
 
     # STOXX 600 — simbolo corretto
-    val, chg = get_stooq('stoxx600')
+    val, chg = get_stooq('^ftw5')
     results['stoxx_600'] = {'value': val, 'change': chg}
     logger.info(f'STOXX 600: {val}')
 
@@ -101,12 +101,12 @@ def run():
     logger.info(f'Shanghai: {val}')
 
     # BTP 10Y
-    val, chg = get_stooq('10ity.b')
+    val, chg = get_stooq('10yity.b')
     results['btp_10y'] = {'value': f'{val}%' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'BTP 10Y: {val}')
 
     # US 10Y
-    val, chg = get_stooq('10usy.b')
+    val, chg = get_stooq('10yusy.b')
     results['us_10y'] = {'value': f'{val}%' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'US 10Y: {val}')
 

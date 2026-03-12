@@ -36,31 +36,35 @@ def load_config() -> dict:
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
-def prepare_market_strip(market_data: dict) -> list:
-    """Trasforma il market_data in una lista ordinata per lo strip UI."""
-    market_strip = []
-    labels = {
-        'eur_usd': 'EUR/USD', 'us_10y': 'US 10Y', 'sp500': 'S&P 500',
-        'stoxx_600': 'STOXX 600', 'nikkei': 'NIKKEI', 'shanghai': 'SHANGHAI',
-        'gold': 'GOLD', 'oil_brent': 'BRENT', 'vix': 'VIX', 'btp_10y': 'BTP 10Y'
-    }
-    for key, label in labels.items():
+def build_market_strip(market_data):
+    order = [
+        ('eur_usd',   'EUR/USD'),
+        ('sp500',     'S&P 500'),
+        ('stoxx_600', 'STOXX 600'),
+        ('nikkei',    'NIKKEI'),
+        ('shanghai',  'SHANGHAI'),
+        ('vix',       'VIX'),
+        ('gold',      'GOLD'),
+        ('oil_brent', 'BRENT'),
+        ('btp_10y',   'BTP 10Y'),
+        ('us_10y',    'US 10Y'),
+    ]
+    strip = []
+    for key, label in order:
         item = market_data.get(key, {})
-        if not isinstance(item, dict): continue
         val = item.get('value', 'N/A')
         chg = item.get('change', 'N/A')
         if val and val != 'N/A':
-            # Risk-inverse assets (VIX, BTP, US10Y): positive change is "negative" (red)
-            is_inverse = key in ['vix', 'btp_10y', 'us_10y']
-            has_plus = '+' in str(chg)
-            
-            market_strip.append({
+            positive = isinstance(chg, str) and '+' in chg
+            negative = isinstance(chg, str) and '-' in chg
+            strip.append({
                 'label': label,
                 'value': val,
-                'change': chg,
-                'positive': (not is_inverse and has_plus) or (is_inverse and not has_plus and chg != 'N/A' and '-' in str(chg))
+                'change': chg if chg and chg != 'N/A' else '',
+                'positive': positive,
+                'negative': negative,
             })
-    return market_strip
+    return strip
 
 
 # ---------------------------------------------------------------------------
@@ -80,23 +84,28 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
     }.get(sentiment_label, '#eab308')
     
     # Text overrides for language
-    lang_info_map = {
-        'it': {'title': 'Briefing del Giorno', 'sentiment_text': sentiment.get('reason_it', '')},
-        'en': {'title': 'Daily Briefing', 'sentiment_text': sentiment.get('reason_en', '')}
+    lang_info = {
+        'title': 'The Morning Brief' if lang == 'en' else 'Morning Briefing',
+        'sentiment_text': sentiment.get(f'reason_{lang}', '')
     }
-    lang_info = lang_info_map.get(lang, lang_info_map['it'])
+    
+    template_vars = {
+        'briefing': briefing,
+        'date': date,
+        'lang': lang,
+        'lang_info': lang_info,
+        'sentiment': sentiment,
+        'market_strip': build_market_strip(briefing.get('market_data_raw', briefing.get('market_data', {}))),
+        'sections': briefing.get('sections', []),
+        'audio_url': f'audio/briefing_{date.replace("-", "")}.mp3' if lang == 'it' else f'../audio/briefing_{date.replace("-", "")}.mp3',
+        'rss_url': 'feed.xml' if lang == 'it' else '../feed_en.xml',
+        'index_url': 'index.html' if lang == 'it' else 'index.html',
+        'it_url': f'{date}.html' if lang == 'it' else f'../{date}.html',
+        'en_url': f'en/{date}.html' if lang == 'it' else f'{date}.html',
+        'favicon_url': 'https://vinciber.github.io/morning-briefing/favicon.ico'
+    }
 
-    html = template.render(
-        briefing=briefing,
-        date=date,
-        lang=lang,
-        lang_info=lang_info,
-        sentiment=sentiment,
-        sentiment_color=sentiment_color,
-        market_strip=prepare_market_strip(briefing.get('market_data', {})),
-        base_url=base_url,
-        favicon_url='favicon.png' if lang == 'it' else '../favicon.png'
-    )
+    html = template.render(**template_vars)
 
     out_dir = DOCS_DIR if lang == 'it' else DOCS_DIR / 'en'
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -141,26 +150,33 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
         reverse=True
     )[:30]
 
-    lang_info_map = {
-        'it': {'title': 'Morning Briefing', 'sentiment_text': sentiment.get('reason_it', '')},
-        'en': {'title': 'Morning Briefing', 'sentiment_text': sentiment.get('reason_en', '')}
-    }
-    lang_info = lang_info_map.get(lang, lang_info_map['it'])
+    date_str = date.replace('-', '')
 
-    html = template.render(
-        briefing=briefing,
-        date=date,
-        lang=lang,
-        lang_info=lang_info,
-        sentiment=sentiment,
-        sentiment_color=sentiment_color,
-        market_data=briefing.get('market_data', {}),
-        market_strip=prepare_market_strip(briefing.get('market_data', {})),
-        all_items=all_items,
-        archive_dates=archive_dates,
-        base_url=base_url,
-        favicon_url='favicon.png' if lang == 'it' else '../favicon.png'
-    )
+    lang_info = {
+        'title': 'The Morning Brief' if lang == 'en' else 'Morning Briefing',
+        'sentiment_text': sentiment.get(f'reason_{lang}', '')
+    }
+
+    template_vars = {
+        'briefing': briefing,
+        'date': date,
+        'lang': lang,
+        'lang_info': lang_info,
+        'sentiment': sentiment,
+        'all_items': all_items,
+        'market_strip': build_market_strip(briefing.get('market_data_raw', briefing.get('market_data', {}))),
+        'sections': briefing.get('sections', []),
+        'audio_url': f'audio/briefing_{date.replace("-", "")}.mp3' if lang == 'it' else f'../audio/briefing_{date.replace("-", "")}.mp3',
+        'rss_url': 'feed.xml' if lang == 'it' else '../feed_en.xml',
+        'index_url': 'index.html' if lang == 'it' else 'index.html',
+        'it_url': f'{date}.html' if lang == 'it' else f'../{date}.html',
+        'en_url': f'en/{date}.html' if lang == 'it' else f'{date}.html',
+        'archive_dates': archive_dates,
+        'favicon_url': 'https://vinciber.github.io/morning-briefing/favicon.ico',
+        'base_url': base_url
+    }
+
+    html = template.render(**template_vars)
 
     out_dir = DOCS_DIR if lang == 'it' else DOCS_DIR / 'en'
     out_dir.mkdir(parents=True, exist_ok=True)
