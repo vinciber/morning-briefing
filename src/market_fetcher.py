@@ -9,17 +9,49 @@ ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = ROOT / 'data' / 'market_data.json'
 FRED_API_KEY = os.environ.get('FRED_API_KEY', '')
 
-def get_forex(base, target):
+def get_yahoo_finance(symbol):
+    """
+    Yahoo Finance API v8 — works from GitHub Actions without keys.
+    Symbols: ^GSPC, ^VIX, GC=F (gold), BZ=F (brent), ^TNX (US10Y),
+             TLT, DX-Y.NYB (DXY), ^STOXX600, ^N225, 000001.SS, BTC-USD
+    """
     try:
-        r = requests.get(
-            f'https://api.frankfurter.app/latest?from={base}&to={target}',
-            timeout=10
-        )
-        rate = r.json()['rates'][target]
-        return f'{rate:.4f}', None
+        url = (f'https://query1.finance.yahoo.com/v8/finance/chart/{symbol}'
+               f'?interval=1d&range=5d')
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+            'Accept': 'application/json',
+        }
+        r = requests.get(url, headers=headers, timeout=15)
+        data = r.json()
+        result = data.get('chart', {}).get('result', [])
+        if not result:
+            return 'N/A', 'N/A'
+        
+        indicators = result[0].get('indicators', {})
+        quote = indicators.get('quote', [{}])[0]
+        closes = quote.get('close', [])
+        closes = [c for c in closes if c is not None]
+        
+        if len(closes) < 2:
+            return 'N/A', 'N/A'
+            
+        close = closes[-1]
+        prev  = closes[-2]
+        change_pct = ((close - prev) / prev) * 100
+        
+        if close > 10000:
+            val = f'{close:,.0f}'
+        elif close > 100:
+            val = f'{close:.2f}'
+        elif close > 1:
+            val = f'{close:.4f}'
+        else:
+            val = f'{close:.6f}'
+        return val, f'{change_pct:+.2f}%'
     except Exception as e:
-        logger.error(f'Forex {base}/{target}: {e}')
-        return 'N/A', None
+        logger.error(f'Yahoo {symbol}: {e}')
+        return 'N/A', 'N/A'
 
 def get_stooq(symbol):
     try:
@@ -92,51 +124,47 @@ def run():
     logger.info('📈 Recupero dati di mercato...')
     results = {}
 
-    val, _ = get_forex('EUR', 'USD')
-    results['eur_usd'] = {'value': val, 'change': 'N/A'}
-    logger.info(f'EUR/USD: {val}')
-
-    val, chg = get_stooq('dxy.us')
+    val, chg = get_yahoo_finance('DX-Y.NYB')
     results['dxy'] = {'value': val, 'change': chg}
     logger.info(f'DXY: {val}')
 
-    val, chg = get_stooq('^spx')
+    val, chg = get_yahoo_finance('^GSPC')
     results['sp500'] = {'value': val, 'change': chg}
     logger.info(f'S&P 500: {val}')
 
-    val, chg = get_stooq('vix.us')
+    val, chg = get_yahoo_finance('^VIX')
     results['vix'] = {'value': val, 'change': chg}
     logger.info(f'VIX: {val}')
 
-    val, chg = get_stooq('tlt.us')
+    val, chg = get_yahoo_finance('TLT')
     results['tlt'] = {'value': val, 'change': chg}
     logger.info(f'TLT: {val}')
 
-    val, chg = get_stooq('10usy.b')
+    val, chg = get_yahoo_finance('^TNX')
     results['us_10y'] = {'value': f'{val}%' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'US 10Y: {val}')
 
-    val, chg = get_stooq('xauusd')
+    val, chg = get_yahoo_finance('GC=F')
     results['gold'] = {'value': f'${val}/oz' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'Gold: {val}')
 
-    val, chg = get_stooq('btcusd')
+    val, chg = get_yahoo_finance('BTC-USD')
     results['btcusd'] = {'value': f'${val}' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'BTC: {val}')
 
-    val, chg = get_stooq('lco.uk')
+    val, chg = get_yahoo_finance('BZ=F')
     results['oil_brent'] = {'value': f'${val}' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'Brent: {val}')
 
-    val, chg = get_stooq('^stoxx600')
+    val, chg = get_yahoo_finance('^STOXX600')
     results['stoxx_600'] = {'value': val, 'change': chg}
     logger.info(f'STOXX 600: {val}')
 
-    val, chg = get_stooq('^nkx')
+    val, chg = get_yahoo_finance('^N225')
     results['nikkei'] = {'value': val, 'change': chg}
     logger.info(f'Nikkei: {val}')
 
-    val, chg = get_stooq('^shc')
+    val, chg = get_yahoo_finance('000001.SS')
     results['shanghai'] = {'value': val, 'change': chg}
     logger.info(f'Shanghai: {val}')
 

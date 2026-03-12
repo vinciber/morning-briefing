@@ -255,6 +255,17 @@ def title_similarity(a, b):
         b.lower().strip()
     ).ratio()
 
+CATEGORY_REMAP = {
+    'banche_centrali': 'macro_economia',
+    'finanza':         'mercati',
+    'economia':        'macro_economia',
+    'commodities':     'energia',
+    'politica':        'geopolitica',
+}
+
+def normalize_category(cat):
+    return CATEGORY_REMAP.get(cat, cat)
+
 def smart_select(articles):
     # PASSAGGIO 1 — score composito
     for art in articles:
@@ -284,7 +295,7 @@ def smart_select(articles):
     selected = []
 
     for art in deduplicated:
-        cat = art.get('category', 'mercati')
+        cat = normalize_category(art.get('category', 'mercati'))
         cap = CATEGORY_CAPS.get(cat, 4)
         if category_counts.get(cat, 0) < cap:
             selected.append(art)

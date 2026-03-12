@@ -93,50 +93,45 @@ def run():
     with open(INPUT_PATH, 'r', encoding='utf-8') as f:
         briefing = json.load(f)
 
-    audio_lang = 'it'
-    config_path = ROOT / 'config.yml'
-    if config_path.exists():
-        with open(config_path, 'r') as cf:
-            cfg = yaml.safe_load(cf)
-            audio_lang = cfg.get('output', {}).get('audio', {}).get('language', 'it')
-
-    text = briefing_to_text(briefing, lang=audio_lang)
     date_str = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    temp_wav = OUTPUT_DIR / "temp_briefing.wav"
-    output_mp3 = OUTPUT_DIR / f'briefing_{date_str.replace("-", "")}.mp3'
 
-    # Scegli modello
-    if audio_lang == 'it':
-        model_name = "it_IT-paola-medium.onnx"
-    else:
-        model_name = "en_US-ryan-medium.onnx"
+    generated_files = []
     
-    model_path = MODEL_DIR / model_name
-    if not model_path.exists():
-        logger.error(f'❌ Modello Piper non trovato in {model_path}')
-        return None
-
-    logger.info(f'🎙️ Generazione audio ({audio_lang}) con Piper TTS...')
-    try:
-        voice = PiperVoice.load(str(model_path))
-        with wave.open(str(temp_wav), "wb") as wav_file:
-            voice.synthesize(text, wav_file)
+    for lang in ['it', 'en']:
+        text = briefing_to_text(briefing, lang=lang)
+        temp_wav = OUTPUT_DIR / f"temp_{lang}.wav"
         
-        # Converti WAV in MP3 per compatibilità web e dimensioni
-        segment = AudioSegment.from_wav(str(temp_wav))
-        segment.export(str(output_mp3), format="mp3", bitrate="128k")
-        
-        # Pulisci temp
-        if temp_wav.exists():
-            temp_wav.unlink()
+        # Nome file: briefing_YYYYMMDD.mp3 per IT, briefing_YYYYMMDD_en.mp3 per EN
+        suffix = f'_{lang}' if lang != 'it' else ''
+        output_mp3 = OUTPUT_DIR / f'briefing_{date_str.replace("-", "")}{suffix}.mp3'
 
-        size_kb = output_mp3.stat().st_size / 1024
-        logger.info(f'✅ Audio generato: {output_mp3} ({size_kb:.0f} KB)')
-        return str(output_mp3)
-    except Exception as e:
-        logger.error(f'❌ Errore Piper: {e}')
-        return None
+        model_name = "it_IT-paola-medium.onnx" if lang == 'it' else "en_US-ryan-medium.onnx"
+        model_path = MODEL_DIR / model_name
+        
+        if not model_path.exists():
+            logger.warning(f'⚠️ Modello {lang} non trovato in {model_path}, skip.')
+            continue
+
+        logger.info(f'🎙️ Generazione audio ({lang}) con Piper TTS...')
+        try:
+            voice = PiperVoice.load(str(model_path))
+            with wave.open(str(temp_wav), "wb") as wav_file:
+                voice.synthesize(text, wav_file)
+            
+            segment = AudioSegment.from_wav(str(temp_wav))
+            segment.export(str(output_mp3), format="mp3", bitrate="128k")
+            
+            if temp_wav.exists():
+                temp_wav.unlink()
+
+            size_kb = output_mp3.stat().st_size / 1024
+            logger.info(f'✅ Audio {lang} generato: {output_mp3} ({size_kb:.0f} KB)')
+            generated_files.append(str(output_mp3))
+        except Exception as e:
+            logger.error(f'❌ Errore Piper ({lang}): {e}')
+
+    return generated_files
 
 if __name__ == '__main__':
     run()
