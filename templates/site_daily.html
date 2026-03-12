@@ -192,7 +192,7 @@
         <div class="meta">
             <div>
                 <span class="category-tag" data-cat="{{ section.name }}">{{ section.name }}</span>
-                <span class="importance">{% for i in range(item.importance | default(3)) %}📰{% endfor %}</span>
+                <span class="importance">{% for i in range(item.importance | default(3)) %}⭐{% endfor %}</span>
             </div>
             {% if item.source_url %}
             <a href="{{ item.source_url }}" target="_blank" rel="noopener">{{ item.source_name | default('Fonte') }} →</a>
