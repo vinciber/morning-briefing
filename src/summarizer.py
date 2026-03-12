@@ -48,8 +48,13 @@ REGOLE ASSOLUTE:
 9. Le sezioni devono essere: mercati, geopolitica, macro_economia, energia
 10. Per ogni item includi: title_it, title_en, summary_it, summary_en, source_name, source_url, importance
 11. **FRESHNESS RULE**: Non ripetere notizie che erano già presenti nel briefing di ieri (fornito come history). Se una notizia è un aggiornamento importante di una vecchia storia, focalizzati solo sulle NOVITÀ.
-12. MASSIMO 15 ARTICOLI TOTALI: Seleziona SOLO le notizie più importanti in assoluto.
-13. FILTRO QUALITÁ: Escludi comunicati burocratici o amministrativi. Includi solo decisioni di policy, discorsi su tassi/inflazione/crescita, e pubblicazioni di ricerca macro.
+12. ARTICOLI: produci TUTTI gli articoli rilevanti ricevuti, minimo 3 per sezione.
+    Non tagliare notizie importanti — l'obiettivo è un briefing completo e ricco.
+13. SUMMARY: ogni summary deve essere di almeno 3-4 frasi. Includi: fatto principale,
+    contesto, implicazioni per mercati o geopolitica. Non essere generico.
+14. FILTRO QUALITÁ: escludi solo comunicati puramente burocratici (nomine, procedure
+    amministrative). Includi tutto ciò che ha rilevanza economica o geopolitica.
+15. TITOLI: usa titoli descrittivi e specifici. Evita titoli generici come "Aggiornamento Mercati".
 
 FORMATO OUTPUT ATTESO:
 {
@@ -97,16 +102,16 @@ def run():
             market_raw = json.load(f)
             # Formattiamo per l'AI
             market_data = {
-                "eur_usd": market_raw.get("eur_usd", {}).get("value", "N/A"),
-                "vix": market_raw.get("vix", {}).get("value", "N/A"),
-                "btp_10y": market_raw.get("btp_10y", {}).get("value", "N/A"),
-                "gold": market_raw.get("gold", {}).get("value", "N/A"),
-                "oil_brent": market_raw.get("oil_brent", {}).get("value", "N/A"),
-                "sp500_futures": market_raw.get("sp500", {}).get("value", "N/A"),
-                "stoxx_600": market_raw.get("stoxx_600", {}).get("value", "N/A"),
-                "nikkei": market_raw.get("nikkei", {}).get("value", "N/A"),
-                "shanghai": market_raw.get("shanghai", {}).get("value", "N/A"),
-                "us_10y": market_raw.get("us_10y", {}).get("value", "N/A")
+                "eur_usd": market_raw.get("eur_usd", {"value": "N/A", "change": "N/A"}),
+                "vix": market_raw.get("vix", {"value": "N/A", "change": "N/A"}),
+                "btp_10y": market_raw.get("btp_10y", {"value": "N/A", "change": "N/A"}),
+                "gold": market_raw.get("gold", {"value": "N/A", "change": "N/A"}),
+                "oil_brent": market_raw.get("oil_brent", {"value": "N/A", "change": "N/A"}),
+                "sp500_futures": market_raw.get("sp500", {"value": "N/A", "change": "N/A"}),
+                "stoxx_600": market_raw.get("stoxx_600", {"value": "N/A", "change": "N/A"}),
+                "nikkei": market_raw.get("nikkei", {"value": "N/A", "change": "N/A"}),
+                "shanghai": market_raw.get("shanghai", {"value": "N/A", "change": "N/A"}),
+                "us_10y": market_raw.get("us_10y", {"value": "N/A", "change": "N/A"})
             }
 
     # Carica history (briefing di ieri)
@@ -143,7 +148,7 @@ HISTORY (NON RIPETERE QUESTE NOTIZIE):
                 {'role': 'user', 'content': user_prompt},
             ],
             temperature=0.2,
-            max_tokens=8000,
+            max_tokens=16000,
             response_format={'type': 'json_object'},
         )
         raw_text = response.choices[0].message.content.strip()

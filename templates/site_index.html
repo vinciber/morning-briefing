@@ -72,17 +72,11 @@
             {{ lang_info.sentiment_text }}
         </p>
         {% if market_data %}
-        <div class="market-strip">
-            {% if market_data.eur_usd %}<span class="market-chip">EUR/USD <strong>{{ market_data.eur_usd }}</strong></span>{% endif %}
-            {% if market_data.vix_futures or market_data.vix %}<span class="market-chip">VIX <strong>{{ market_data.vix_futures or market_data.vix }}</strong></span>{% endif %}
-            {% if market_data.btp_10y %}<span class="market-chip">BTP 10Y <strong>{{ market_data.btp_10y }}</strong></span>{% endif %}
-            {% if market_data.us_10y %}<span class="market-chip">US 10Y <strong>{{ market_data.us_10y }}</strong></span>{% endif %}
-            {% if market_data.gold %}<span class="market-chip">GOLD <strong>{{ market_data.gold }}</strong></span>{% endif %}
-            {% if market_data.oil_brent %}<span class="market-chip">BRENT <strong>{{ market_data.oil_brent }}</strong></span>{% endif %}
-            {% if market_data.sp500_futures %}<span class="market-chip">S&P 500 <strong>{{ market_data.sp500_futures }}</strong></span>{% endif %}
-            {% if market_data.stoxx_600 %}<span class="market-chip">STOXX 600 <strong>{{ market_data.stoxx_600 }}</strong></span>{% endif %}
-            {% if market_data.nikkei %}<span class="market-chip">NIKKEI <strong>{{ market_data.nikkei }}</strong></span>{% endif %}
-            {% if market_data.shanghai %}<span class="market-chip">SHANGHAI <strong>{{ market_data.shanghai }}</strong></span>{% endif %}
+        <div class="market-strip" style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+            {% if market_data.eur_usd %}<span class="market-chip" style="background: var(--surface); padding: 0.3rem 0.6rem; border-radius: 0.4rem; border: 1px solid var(--border); font-size: 0.75rem;">EUR/USD <strong>{{ market_data.eur_usd.value }}</strong> <span style="color:{% if '+' in market_data.eur_usd.change %}var(--risk-on){% else %}var(--risk-off){% endif %};">{{ market_data.eur_usd.change }}</span></span>{% endif %}
+            {% if market_data.sp500_futures %}<span class="market-chip" style="background: var(--surface); padding: 0.3rem 0.6rem; border-radius: 0.4rem; border: 1px solid var(--border); font-size: 0.75rem;">S&P 500 <strong>{{ market_data.sp500_futures.value }}</strong> <span style="color:{% if '+' in market_data.sp500_futures.change %}var(--risk-on){% else %}var(--risk-off){% endif %};">{{ market_data.sp500_futures.change }}</span></span>{% endif %}
+            {% if market_data.gold %}<span class="market-chip" style="background: var(--surface); padding: 0.3rem 0.6rem; border-radius: 0.4rem; border: 1px solid var(--border); font-size: 0.75rem;">GOLD <strong>{{ market_data.gold.value }}</strong> <span style="color:{% if '+' in market_data.gold.change %}var(--risk-on){% else %}var(--risk-off){% endif %};">{{ market_data.gold.change }}</span></span>{% endif %}
+            {% if market_data.oil_brent %}<span class="market-chip" style="background: var(--surface); padding: 0.3rem 0.6rem; border-radius: 0.4rem; border: 1px solid var(--border); font-size: 0.75rem;">BRENT <strong>{{ market_data.oil_brent.value }}</strong> <span style="color:{% if '+' in market_data.oil_brent.change %}var(--risk-on){% else %}var(--risk-off){% endif %};">{{ market_data.oil_brent.change }}</span></span>{% endif %}
         </div>
         {% endif %}
         <a href="{{ base_url }}/{% if lang == 'en' %}en/{% endif %}{{ date }}.html" style="color:var(--accent); font-size:.85rem;">{% if lang == 'it' %}Leggi briefing completo{% else %}Read full briefing{% endif %} →</a>

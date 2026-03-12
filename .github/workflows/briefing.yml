@@ -47,8 +47,19 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
 
-      - name: STEP 3a — Generate Audio
-        run: python src/tts.py
+      - name: STEP 3a — Generate Audio (Piper TTS)
+        run: |
+          mkdir -p models
+          # Download modelli se non esistono (Italiano + Inglese)
+          if [ ! -f models/it_IT-paola-medium.onnx ]; then
+            wget -q https://github.com/rhasspy/piper/releases/download/v0.0.2/it_IT-paola-medium.onnx -O models/it_IT-paola-medium.onnx
+            wget -q https://github.com/rhasspy/piper/releases/download/v0.0.2/it_IT-paola-medium.onnx.json -O models/it_IT-paola-medium.onnx.json
+          fi
+          if [ ! -f models/en_US-ryan-medium.onnx ]; then
+            wget -q https://github.com/rhasspy/piper/releases/download/v0.0.2/en_US-ryan-medium.onnx -O models/en_US-ryan-medium.onnx
+            wget -q https://github.com/rhasspy/piper/releases/download/v0.0.2/en_US-ryan-medium.onnx.json -O models/en_US-ryan-medium.onnx.json
+          fi
+          python src/tts.py
         continue-on-error: true
 
       - name: STEP 3b — Send Email
