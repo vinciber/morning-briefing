@@ -396,7 +396,7 @@
         } %}
 
         {% for section in briefing.sections %}
-        {% if section.items %}
+        {% if section['items'] %}
         <div class="section">
             <div class="section-header">
                 <div class="section-icon">{{ section_icons.get(section.name, '📌') }}</div>
@@ -404,7 +404,7 @@
             </div>
 
             <div class="grid">
-                {% for item in section.items %}
+                {% for item in section['items'] %}
                 <div class="news-card">
                     <div class="news-header">
                         <div class="importance-stars">

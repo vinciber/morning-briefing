@@ -3,234 +3,434 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morning Briefing</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="description" content="Daily AI-curated financial and geopolitical briefing from institutional sources.">
-    <link rel="alternate" type="application/rss+xml" title="Morning Briefing RSS" href="https://vinciber.github.io/morning-briefing/feed.xml">
+    <title>The Morning Brief — Alpha Curation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #1A1A2E; --surface: #16213E; --card: #16213E;
-            --text: #E2E8F0; --text-muted: #94A3B8;
-            --accent: #E94560; --border: rgba(255, 255, 255, 0.1);
-            --risk-on: #22C55E; --risk-off: #EF4444; --neutral: #F59E0B;
+            --bg: #0f172a;
+            --glass: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --risk-on: #10b981;
+            --risk-off: #ef4444;
+            --neutral: #f59e0b;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 1rem; }
-        header { text-align: center; padding: 2rem 0; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
-        h1 { font-size: 1.5rem; }
-        .subtitle { color: var(--text-muted); font-size: .85rem; margin-top: .25rem; }
-        .today-banner {
-            background: var(--surface); border: 1px solid var(--border); border-radius: .75rem;
-            padding: 1.25rem; margin-bottom: 1.5rem; text-align: center;
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 1.5rem;
         }
-        .today-banner .date { font-size: 1.1rem; font-weight: 600; }
-        .sentiment-badge {
-            display: inline-block; padding: .3rem .75rem; border-radius: 999px;
-            font-weight: 600; font-size: .8rem; color: #fff; margin: .5rem 0;
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
         }
-        .market-strip { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin: .75rem 0; }
-        .market-chip { background: var(--card); padding: .3rem .6rem; border-radius: .35rem; font-size: .75rem; }
-        .market-chip strong { color: var(--accent); }
-        .card {
-            background: var(--surface); border-radius: .75rem; padding: 1rem;
-            margin-bottom: .6rem; border: 1px solid var(--border);
+
+        header {
+            margin-bottom: 4rem;
+            text-align: center;
         }
-        .card h3 { font-size: .9rem; margin-bottom: .25rem; }
-        .card p { font-size: .82rem; color: var(--text-muted); }
-        .card .meta { display: flex; justify-content: space-between; font-size: .72rem; color: var(--text-muted); margin-top: .4rem; }
-        .card .meta a { color: var(--accent); text-decoration: none; }
-        .category-tag { display: inline-block; padding: .1rem .4rem; border-radius: .2rem; font-size: .65rem; font-weight: 600; background: var(--card); text-transform: uppercase; }
-        .archive { margin-top: 2rem; }
-        .archive h2 { font-size: 1rem; margin-bottom: .75rem; border-bottom: 2px solid var(--accent); padding-bottom: .25rem; }
-        .archive a { display: inline-block; color: var(--accent); text-decoration: none; padding: .25rem .5rem; margin: .15rem; font-size: .82rem; background: var(--surface); border-radius: .35rem; border: 1px solid var(--border); }
-        .archive a:hover { border-color: var(--accent); }
-        .lang-toggle { display: flex; gap: .4rem; justify-content: center; margin-bottom: 1rem; }
-        .lang-toggle a { padding: .3rem .8rem; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: .3rem; text-decoration: none; font-size: .8rem; }
-        .lang-toggle a.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-        footer { text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: .72rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Hero / Today Card */
+        .today-card {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 2rem;
+            padding: 3rem 2rem;
+            margin-bottom: 4rem;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .today-card:hover {
+            transform: scale(1.01);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .date-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 999px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .sentiment-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .status-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--status-color, var(--neutral));
+            box-shadow: 0 0 20px var(--status-color, var(--neutral));
+        }
+
+        .sentiment-label {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            color: var(--status-color, var(--neutral));
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: #0f172a;
+            border-radius: 999px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            box-shadow: 0 10px 20px -5px var(--accent-glow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -5px var(--accent-glow);
+            filter: brightness(1.1);
+        }
+
+        /* Market Mini Strip */
+        .market-mini {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2.5rem 0;
+        }
+
+        .market-chip {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            padding: 0.4rem 1rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .market-chip strong { color: #fff; margin: 0 0.4rem; }
+
+        /* News Section */
+        .news-section { margin-bottom: 5rem; }
+
+        .section-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .news-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .news-card:hover {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .news-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .news-summary {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Archive */
+        .archive-section {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 2rem;
+            padding: 3rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .archive-link {
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .archive-link:hover {
+            background: var(--accent);
+            color: #0f172a;
+            border-color: var(--accent);
+        }
+
+        /* Lang Toggle */
+        .lang-toggle {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.25rem;
+            border-radius: 999px;
+            width: fit-content;
+            margin: 0 auto 3rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .lang-btn {
+            padding: 0.5rem 2rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: #0f172a;
+        }
+
+        footer {
+            text-align: center;
+            padding: 5rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
         footer a { color: var(--accent); text-decoration: none; }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <h1>📰 Morning Briefing</h1>
-        <p class="subtitle">Finance & Geopolitics — AI-curated daily</p>
-    </header>
+<body style="--status-color: var(--risk-off);">
 
-    <div class="lang-toggle">
-        <a href="index.html" class="active">🇮🇹 IT</a>
-        <a href="en/index.html" class="">🇬🇧 EN</a>
-    </div>
+    <div class="container">
+        <header>
+            <h1>The Morning Brief</h1>
+            <p class="subtitle">Daily AI-curated financial and geopolitical intelligence for high-conviction decision making.</p>
+        </header>
 
-    <div class="today-banner">
-        <div class="date">2026-03-12</div>
-        <div class="sentiment-badge" style="background: #ef4444;">
-            🔴 RISK OFF
+        <nav class="lang-toggle">
+            <a href="index.html" class="lang-btn active">🇮🇹 IT</a>
+            <a href="en/index.html" class="lang-btn ">🇬🇧 EN</a>
+        </nav>
+
+        <div class="today-card">
+            <div class="date-badge">2026-03-11</div>
+            
+            <div class="sentiment-banner">
+                <div class="status-dot"></div>
+                <div class="sentiment-label">
+                    
+                        RISK OFF
+                    
+                </div>
+            </div>
+
+            <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+                Il sentiment è 'risk_off' a causa dell'escalation del conflitto in Medio Oriente, che ha portato a interruzioni delle forniture di petrolio,...
+            </p>
+
+            
+            <div class="market-mini">
+                
+                <div class="market-chip">
+                    EUR/USD <strong>1.0780</strong>
+                    
+                </div>
+                
+                <div class="market-chip">
+                    VIX <strong>22.5</strong>
+                    
+                </div>
+                
+                <div class="market-chip">
+                    GOLD <strong>2,280</strong>
+                    
+                </div>
+                
+                <div class="market-chip">
+                    BRENT <strong>98.75</strong>
+                    
+                </div>
+                
+                <div class="market-chip">
+                    BTP 10Y <strong>3.95%</strong>
+                    
+                </div>
+                
+            </div>
+            
+
+            <a href="2026-03-11.html" class="cta-button">
+                Leggi il Briefing di Oggi
+            </a>
         </div>
-        <p class="sentiment-reason" style="font-size:.8rem; font-style:italic; color:var(--text-muted);">
-            Il sentiment è 'risk_off' a causa dell'escalation del conflitto in Medio Oriente, che ha portato a interruzioni delle forniture di petrolio, aumento dei prezzi dell'energia e preoccupazioni inflazionistiche. Gli investitori sono prudenti in attesa di ulteriori sviluppi.
-        </p>
+
+        <div class="news-section">
+            <div class="section-header">
+                <span>🔥</span>
+                Storie in Primo Piano
+            </div>
+            <div class="news-grid">
+                
+                
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                
+
+                
+                <div class="news-card">
+                    <h3 class="news-title">Esplode una guerra estesa in Medio Oriente</h3>
+                    <p class="news-summary">Un attacco congiunto USA-Israele contro l'Iran, seguito da ritorsioni iraniane, ha coinvolto gran parte del Medio...</p>
+                    <a href="2026-03-11.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                </div>
+                
+                <div class="news-card">
+                    <h3 class="news-title">Operazione 'Follia Epica'? La guerra di Trump e Netanyahu contro l'Iran</h3>
+                    <p class="news-summary">Esperti del Crisis Group discutono la guerra tra Stati Uniti e Israele con l'Iran, le sue ricadute nel Golfo e nella...</p>
+                    <a href="2026-03-11.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                </div>
+                
+                <div class="news-card">
+                    <h3 class="news-title">Aumentano i rischi per l'approvvigionamento di petrolio mentre l'Iran posa mine nello Stretto di Hormuz</h3>
+                    <p class="news-summary">L'Iran ha iniziato a posare mine navali nello Stretto di Hormuz, una mossa che potrebbe estendere il blocco del...</p>
+                    <a href="2026-03-11.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                </div>
+                
+                <div class="news-card">
+                    <h3 class="news-title">L'IEA valuta un'azione di emergenza per rilasciare riserve di petrolio</h3>
+                    <p class="news-summary">I leader energetici globali si stanno riunendo per decidere se rilasciare riserve di petrolio di emergenza a causa...</p>
+                    <a href="2026-03-11.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                </div>
+                
+                <div class="news-card">
+                    <h3 class="news-title">Le petroliere evitano il porto emiratino mentre il rischio di guerra nel Golfo interrompe le esportazioni di petrolio</h3>
+                    <p class="news-summary">Le compagnie di navigazione sono diventate riluttanti a fare scalo nel porto di Fujairah negli Emirati Arabi Uniti,...</p>
+                    <a href="2026-03-11.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                </div>
+                
+                <div class="news-card">
+                    <h3 class="news-title">Le scorte di greggio statunitensi diminuiscono mentre la guerra in Iran sostiene i prezzi</h3>
+                    <p class="news-summary">L'American Petroleum Institute (API) ha stimato un calo delle scorte di greggio negli Stati Uniti di 1,7 milioni di...</p>
+                    <a href="2026-03-11.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                </div>
+                
+            </div>
+        </div>
+
         
-        <a href="https://vinciber.github.io/morning-briefing/2026-03-12.html" style="color:var(--accent); font-size:.85rem;">Leggi briefing completo →</a>
-    </div>
-
-    
-    <div class="card">
-        <h3>Futures azionari statunitensi in calo</h3>
-        <p>I futures sui principali indici azionari statunitensi sono in calo a causa delle continue ricadute del conflitto in Medio Oriente. Gli investitori sono prudenti in attesa di ulteriori sviluppi.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag">mercati</span>
-                <span style="color: var(--neutral); font-size: 0.9rem; margin-left: 0.5rem;">
-                    ⭐⭐⭐⭐⭐
-                </span>
+        <div class="archive-section">
+            <div class="section-header">
+                <span>📚</span>
+                Archivio Storico
             </div>
-            <a href="https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-slip-amid-continued-iran-fallout-with-cpi-on-deck-231325809.html" target="_blank">Yahoo Finance →</a>
-        </div>
-    </div>
-    
-    <div class="card">
-        <h3>Guerra estesa in Medio Oriente</h3>
-        <p>Un attacco congiunto USA-Israele contro l'Iran, seguito da ritorsioni iraniane, ha coinvolto gran parte del Medio Oriente in un conflitto. La situazione è tesa e gli investitori sono preoccupati per le ripercussioni globali.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag">geopolitica</span>
-                <span style="color: var(--neutral); font-size: 0.9rem; margin-left: 0.5rem;">
-                    ⭐⭐⭐⭐⭐
-                </span>
+            <div class="archive-grid">
+                
+                <a href="2026-03-12.html" class="archive-link">2026-03-12</a>
+                
+                <a href="2026-03-11.html" class="archive-link">2026-03-11</a>
+                
             </div>
-            <a href="https://www.crisisgroup.org/cmt/middle-east-north-africa/iran-israelpalestine-united-states/sprawling-middle-east-war-explodes" target="_blank">International Crisis Group →</a>
         </div>
-    </div>
-    
-    <div class="card">
-        <h3>Inflazione nel Regno Unito potrebbe aumentare</h3>
-        <p>L'Office for Budget Responsibility (OBR) del Regno Unito prevede che l'inflazione potrebbe raggiungere il 3% entro la fine del 2026 a causa della guerra USA-Israele in Iran. Gli investitori devono considerare questo scenario.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag">macro_economia</span>
-                <span style="color: var(--neutral); font-size: 0.9rem; margin-left: 0.5rem;">
-                    ⭐⭐⭐⭐⭐
-                </span>
-            </div>
-            <a href="https://www.theguardian.com/business/2026/mar/10/uk-inflation-could-rise-1-because-of-middle-east-crisis-says-obr" target="_blank">Guardian Economics →</a>
-        </div>
-    </div>
-    
-    <div class="card">
-        <h3>Rischi per l'approvvigionamento di petrolio</h3>
-        <p>L'Iran ha iniziato a posare mine navali nello Stretto di Hormuz, una mossa che potrebbe estendere il blocco del cruciale punto di strozzatura energetico. La situazione è estremamente critica.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag">energia</span>
-                <span style="color: var(--neutral); font-size: 0.9rem; margin-left: 0.5rem;">
-                    ⭐⭐⭐⭐⭐
-                </span>
-            </div>
-            <a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html" target="_blank">OilPrice →</a>
-        </div>
-    </div>
-    
-    <div class="card">
-        <h3>Conflitto Iran-Israele: escalation</h3>
-        <p>L'attacco iraniano a Israele ha portato a un' escalation del conflitto, con ripercussioni sui mercati globali. Gli investitori monitorano la situazione con attenzione.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag">geopolitica</span>
-                <span style="color: var(--neutral); font-size: 0.9rem; margin-left: 0.5rem;">
-                    ⭐⭐⭐⭐
-                </span>
-            </div>
-            <a href="https://warontherocks.com/2026/03/the-blank-check-how-an-unconditional-alliance-took-america-to-war-in-iran/" target="_blank">War on the Rocks →</a>
-        </div>
-    </div>
-    
-    <div class="card">
-        <h3>Oman evacua il porto petrolifero chiave</h3>
-        <p>L'Oman ha ordinato l'evacuazione delle navi dal porto petrolifero chiave di Mina Al Fahal, a causa dell'intensificarsi degli attacchi alle infrastrutture energetiche regionali. La mossa evidenzia i rischi per l'approvvigionamento energetico globale.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag">geopolitica</span>
-                <span style="color: var(--neutral); font-size: 0.9rem; margin-left: 0.5rem;">
-                    ⭐⭐⭐⭐
-                </span>
-            </div>
-            <a href="https://oilprice.com/Latest-Energy-News/World-News/Oman-Evacuates-Key-Oil-Port-as-Iran-War-Intensifies.html" target="_blank">OilPrice →</a>
-        </div>
-    </div>
-    
-    <div class="card">
-        <h3>Preoccupazioni inflazionistiche</h3>
-        <p>L'aumento dei prezzi dell'energia potrebbe portare a preoccupazioni inflazionistiche a livello globale. Gli investitori devono monitorare l'evoluzione della situazione.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag">macro_economia</span>
-                <span style="color: var(--neutral); font-size: 0.9rem; margin-left: 0.5rem;">
-                    ⭐⭐⭐⭐
-                </span>
-            </div>
-            <a href="https://www.project-syndicate.org/commentary/iran-war-oil-crisis-historical-lessons-by-jim-o-neill-2026-03" target="_blank">Project Syndicate →</a>
-        </div>
-    </div>
-    
-    <div class="card">
-        <h3>Cina e shock petrolifero</h3>
-        <p>La Cina, principale importatore mondiale di petrolio e gas naturale liquefatto, sembra meno vulnerabile al shock petrolifero grazie alle sue riserve strategiche. Tuttavia, la situazione rimane critica.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag">macro_economia</span>
-                <span style="color: var(--neutral); font-size: 0.9rem; margin-left: 0.5rem;">
-                    ⭐⭐⭐⭐
-                </span>
-            </div>
-            <a href="https://oilprice.com/Energy/Crude-Oil/China-Stockpiles-Soften-the-Blow-of-the-Global-Oil-Shock.html" target="_blank">OilPrice →</a>
-        </div>
-    </div>
-    
-    <div class="card">
-        <h3>Aumento dei prezzi del petrolio</h3>
-        <p>I prezzi del petrolio sono aumentati a causa dell'escalation del conflitto in Medio Oriente. Gli investitori devono considerare l'impatto sui mercati globali.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag">energia</span>
-                <span style="color: var(--neutral); font-size: 0.9rem; margin-left: 0.5rem;">
-                    ⭐⭐⭐⭐
-                </span>
-            </div>
-            <a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Surge-Despite-Record-Breaking-Strategic-Reserve-Release.html" target="_blank">OilPrice →</a>
-        </div>
-    </div>
-    
-    <div class="card">
-        <h3>Europa e carenza di carburante per aerei</h3>
-        <p>La chiusura dello Stretto di Hormuz ha innescato una distorsione senza precedenti nel mercato globale del carburante per aerei, spingendo i prezzi ai livelli storici. L'Europa è particolarmente vulnerabile.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag">energia</span>
-                <span style="color: var(--neutral); font-size: 0.9rem; margin-left: 0.5rem;">
-                    ⭐⭐⭐⭐
-                </span>
-            </div>
-            <a href="https://oilprice.com/Energy/Energy-General/Europe-Faces-Jet-Fuel-Price-Surge-and-Supply-Shortages.html" target="_blank">OilPrice →</a>
-        </div>
-    </div>
-    
-
-    
-    <div class="archive">
-        <h2>📚 Archivio</h2>
         
-        <a href="https://vinciber.github.io/morning-briefing/2026-03-12.html">2026-03-12</a>
-        
-        <a href="https://vinciber.github.io/morning-briefing/2026-03-11.html">2026-03-11</a>
-        
+
+        <footer>
+            <p>Institutional Alpha. AI-Driven Curation. Zero Noise.</p>
+            <p style="margin-top: 1.5rem;">
+                <a href="https://github.com/vinciber/morning-briefing">Source</a> · 
+                <a href="feed.xml">RSS</a> · 
+                <a href="api/today.json">JSON API</a>
+            </p>
+        </footer>
     </div>
-    
-
-    <footer>
-        <p>Morning Briefing Agent — <a href="https://github.com/vinciber/morning-briefing">GitHub</a> · <a href="https://vinciber.github.io/morning-briefing/feed.xml">RSS</a></p>
-    </footer>
-
 </body>
 </html>
