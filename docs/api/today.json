@@ -1,106 +1,57 @@
 {
-  "date": "2026-03-12",
+  "date": "2026-03-11",
   "sentiment": {
     "label": "risk_off",
-    "reason_it": "L'escalation del conflitto in Medio Oriente, con attacchi congiunti USA-Israele contro l'Iran e ritorsioni iraniane, ha innescato un'impennata dei prezzi del petrolio e del gas, interruzioni delle spedizioni nello Stretto di Hormuz e un aumento delle aspettative inflazionistiche globali. Le banche centrali si trovano sotto pressione per gestire l'impatto economico. Questo scenario alimenta l'incertezza e la propensione al rischio dei mercati.",
-    "reason_en": "The escalation of the Middle East conflict, with joint US-Israeli attacks on Iran and Iranian retaliation, has triggered a surge in oil and gas prices, shipping disruptions in the Strait of Hormuz, and rising global inflation expectations. Central banks are under pressure to manage the economic fallout. This scenario fuels market uncertainty and risk aversion."
+    "reason_it": "Il sentiment è 'risk_off' a causa dell'escalation del conflitto in Medio Oriente, che ha portato a interruzioni delle forniture di petrolio, aumento dei prezzi dell'energia e preoccupazioni inflazionistiche. I mercati azionari globali mostrano segni di debolezza, e le agenzie internazionali stanno valutando azioni di emergenza per stabilizzare il mercato petrolifero.",
+    "reason_en": "The sentiment is 'risk_off' due to the escalating Middle East conflict, which has led to oil supply disruptions, rising energy prices, and inflation concerns. Global equity markets are showing signs of weakness, and international agencies are considering emergency actions to stabilize the oil market."
   },
   "market_data": {
-    "eur_usd": "1.0780 (-0.8%)",
-    "vix": "22.5 (+15.0%)",
-    "btp_10y": "4.10% (+0.20%)",
-    "gold": "2,250 (+2.5%)",
-    "oil_brent": "98.50 (+7.0%)",
-    "sp500_futures": "5,050 (-2.0%)"
+    "eur_usd": "1.0780",
+    "vix": "22.5",
+    "btp_10y": "3.95%",
+    "gold": "2,280",
+    "oil_brent": "98.75",
+    "sp500_futures": "5,180"
   },
   "sections": [
     {
       "name": "geopolitica",
       "items": [
         {
-          "title_it": "Una guerra estesa in Medio Oriente esplode",
+          "title_it": "Esplode una guerra estesa in Medio Oriente",
           "title_en": "A Sprawling Middle East War Explodes",
-          "summary_it": "Un attacco congiunto USA-israeliano contro l'Iran, seguito da ritorsioni iraniane contro asset militari statunitensi, Israele e altri alleati USA, ha coinvolto gran parte del Medio Oriente nel conflitto. Esperti del Crisis Group offrono una visione a 360 gradi delle prime ripercussioni della nuova guerra nella regione.",
-          "summary_en": "A joint U.S.-Israeli attack on Iran, followed by Iranian retaliation against U.S. military assets, Israel, and other U.S. allies, has engulfed much of the Middle East in conflict. Crisis Group experts offer a 360-degree view of the new war’s initial reverberations in the region.",
+          "summary_it": "Un attacco congiunto USA-Israele contro l'Iran, seguito da ritorsioni iraniane, ha coinvolto gran parte del Medio Oriente in un conflitto. Esperti del Crisis Group offrono una visione a 360 gradi delle prime ripercussioni della nuova guerra nella regione.",
+          "summary_en": "A joint U.S.-Israeli attack on Iran, followed by Iranian retaliation, has engulfed much of the Middle East in conflict. Crisis Group experts offer a 360-degree view of the new war’s initial reverberations in the region.",
           "source_name": "International Crisis Group",
           "source_url": "https://www.crisisgroup.org/cmt/middle-east-north-africa/iran-israelpalestine-united-states/sprawling-middle-east-war-explodes",
-          "importance": 5,
-          "section": "geopolitica"
+          "importance": 5
         },
         {
-          "title_it": "Gli Stati arabi si affrettano ad adattarsi alla nuova guerra regionale",
-          "title_en": "Arab States Scramble to Adapt to New Regional War",
-          "summary_it": "Da quando gli Stati Uniti e Israele hanno iniziato intensi attacchi aerei contro l'Iran il 28 febbraio, l'Iran ha risposto con attacchi missilistici e droni contro diversi paesi arabi. Sebbene l'Iran dichiari di colpire obiettivi militari statunitensi nelle nazioni arabe, ha anche colpito infrastrutture e edifici civili in Iraq, Kuwait, Arabia Saudita, Bahrain, Qatar, Emirati Arabi Uniti, Oman e Giordania. Questo conflitto segna una brusca interruzione del recente riavvicinamento tra l'Iran e alcuni stati del Golfo Arabo.",
-          "summary_en": "Since the United States and Israel began intensive airstrikes against Iran on Feb. 28, Iran has retaliated with missile and drone strikes against multiple Arab countries. Although Iran states it is striking U.S. military targets based in Arab states, it has also hit civilian infrastructure and buildings in Iraq, Kuwait, Saudi Arabia, Bahrain, Qatar, the United Arab Emirates, Oman, and Jordan. This conflict marks a hard stop to a recent warming in relations between Iran and some Gulf Arab states.",
-          "source_name": "War on the Rocks",
-          "source_url": "https://warontherocks.com/2026/03/arab-states-scramble-to-adapt-to-new-regional-war/",
-          "importance": 5,
-          "section": "geopolitica"
+          "title_it": "Operazione 'Follia Epica'? La guerra di Trump e Netanyahu contro l'Iran",
+          "title_en": "Operation Epic Folly? Trump’s and Netanyahu’s War on Iran",
+          "summary_it": "Esperti del Crisis Group discutono la guerra tra Stati Uniti e Israele con l'Iran, le sue ricadute nel Golfo e nella regione più ampia, e cosa potrebbe accadere in seguito. L'analisi si concentra sulle implicazioni strategiche e le possibili evoluzioni del conflitto.",
+          "summary_en": "Crisis Group experts discuss the U.S.-Israel war with Iran, its fallout in the Gulf and wider region, and what might come next. The analysis focuses on the strategic implications and potential evolutions of the conflict.",
+          "source_name": "International Crisis Group",
+          "source_url": "https://www.crisisgroup.org/pod/middle-east-north-africa/iran/operation-epic-folly-trumps-and-netanyahus-war-iran",
+          "importance": 4
         },
         {
-          "title_it": "Verità scomode: la sicurezza artica in un mondo che cambia",
+          "title_it": "Dure verità: la sicurezza artica in un mondo che cambia",
           "title_en": "Cold Hard Truths: Arctic Security in a Changing World",
-          "summary_it": "Un'analisi della sicurezza artica, delle ambizioni di Donald Trump di acquisire la Groenlandia, degli interessi di Russia e Cina nell'Alto Nord e della risposta della NATO e delle capitali europee.",
-          "summary_en": "An analysis of Arctic security, Donald Trump’s ambitions to acquire Greenland, Russia’s and China’s interests in the High North, and how NATO and European capitals are responding.",
+          "summary_it": "Si discute della sicurezza artica, delle ambizioni di Donald Trump di acquisire la Groenlandia e degli interessi di Russia e Cina nell'Alto Nord. Viene analizzata la risposta della NATO e delle capitali europee a questi sviluppi geopolitici.",
+          "summary_en": "Arctic security, Donald Trump’s ambitions to acquire Greenland, and Russia’s and China’s interests in the High North are discussed. The response of NATO and European capitals to these geopolitical developments is analyzed.",
           "source_name": "International Crisis Group",
           "source_url": "https://www.crisisgroup.org/pod/europe-central-asia/cold-hard-truths-arctic-security-changing-world",
-          "importance": 3,
-          "section": "geopolitica"
+          "importance": 3
         },
         {
-          "title_it": "Lezioni dall'Ucraina per la difesa dello spazio aereo del Golfo dagli Shahed",
-          "title_en": "Lessons from Ukraine for Defending Gulf Airspace from Shaheds",
-          "summary_it": "All'inizio di marzo 2026, il Comando Centrale degli Stati Uniti ha confermato le prime vittime statunitensi del conflitto iraniano, con sei militari americani uccisi da un attacco di droni a Port Shuaiba in Kuwait. L'articolo esamina le sfide della difesa aerea contro droni a basso costo come gli Shahed, evidenziando il costo elevato degli intercettori Patriot rispetto ai droni iraniani.",
-          "summary_en": "In early March 2026, U.S. Central Command confirmed the first U.S. fatalities of the Iran conflict, with six American servicemembers killed by a drone strike at Port Shuaiba in Kuwait. The article examines the challenges of air defense against low-cost drones like Shaheds, highlighting the high cost of Patriot interceptors compared to Iranian drones.",
-          "source_name": "War on the Rocks",
-          "source_url": "https://warontherocks.com/2026/03/lessons-from-ukraine-for-defending-gulf-airspace-from-shaheds/",
-          "importance": 3,
-          "section": "geopolitica"
-        }
-      ]
-    },
-    {
-      "name": "macro_economia",
-      "items": [
-        {
-          "title_it": "Come si evolverà questo shock energetico?",
-          "title_en": "How Will This Energy Shock Play Out?",
-          "summary_it": "Sebbene la guerra USA-israeliana contro l'Iran sia senza precedenti, le precedenti crisi energetiche e finanziarie dell'ultimo mezzo secolo offrono lezioni utili per investitori e responsabili politici. I produttori di petrolio e gas naturale non possono presumere che i prezzi rimarranno alti indefinitamente.",
-          "summary_en": "Although the US-Israeli war against Iran is unprecedented, previous energy and financial crises over the past half-century offer useful lessons for investors and policymakers. Oil and natural gas producers cannot assume that prices will stay high indefinitely.",
-          "source_name": "Project Syndicate",
-          "source_url": "https://www.project-syndicate.org/commentary/iran-war-oil-crisis-historical-lessons-by-jim-o-neill-2026-03",
-          "importance": 5,
-          "section": "macro_economia"
-        },
-        {
-          "title_it": "Le banche centrali si affrettano mentre la guerra fa salire le aspettative di inflazione",
-          "title_en": "Central Banks Scramble as War Drives Up Inflation Expectations",
-          "summary_it": "Gli shock energetici raramente rimangono confinati ai mercati energetici, propagandosi attraverso i mercati obbligazionari, i saldi fiscali e le aspettative di inflazione. Il conflitto in Iran sta già influenzando i mercati globali, con un'impennata dei prezzi del petrolio, un aumento dei rendimenti obbligazionari e una rapida rivalutazione delle prospettive di inflazione da parte degli operatori.",
-          "summary_en": "Energy shocks rarely remain confined to energy markets, propagating through bond markets, fiscal balances, and inflation expectations. The conflict in Iran is already affecting global markets, with oil prices surging, bond yields rising, and traders rapidly reassessing the outlook for inflation.",
-          "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Energy/Energy-General/Central-Banks-Scramble-as-War-Drives-Up-Inflation-Expectations.html",
-          "importance": 5,
-          "section": "macro_economia"
-        },
-        {
-          "title_it": "L'inflazione statunitense è rimasta stabile al 2,4% a febbraio prima degli effetti della guerra in Iran",
-          "title_en": "US inflation stayed flat at 2.4% in February before effects of war on Iran kicked in",
-          "summary_it": "L'inflazione statunitense è rimasta stabile al 2,4% a febbraio, secondo i dati governativi rilasciati mercoledì, fornendo un'istantanea dell'economia prima che fosse sconvolta dal conflitto USA-Israele con l'Iran. Questo dato precede l'impatto della guerra sui prezzi, con il Presidente Trump che ha minimizzato la significatività degli shock dei prezzi del petrolio.",
-          "summary_en": "US inflation stayed flat at 2.4% in February, according to government data released Wednesday, providing a snapshot of the US economy before it was thrown into a tailspin by the US-Israel conflict with Iran. This data predates the war's effect on prices, with President Trump downplaying the significance of oil price shocks.",
-          "source_name": "Guardian Economics",
-          "source_url": "https://www.theguardian.com/business/2026/mar/11/inflation-february",
-          "importance": 4,
-          "section": "macro_economia"
-        },
-        {
-          "title_it": "La saggezza della 'Grande Capitolazione' europea",
-          "title_en": "The Wisdom of Europe’s “Great Capitulation”",
-          "summary_it": "L'Unione Europea è stata criticata per aver accettato un accordo commerciale asimmetrico con gli Stati Uniti la scorsa estate. Tuttavia, così facendo, ha di fatto assicurato che gli Stati Uniti continuassero a danneggiare se stessi imponendo costi elevati alle proprie imprese e consumatori, mentre l'Europa ha compiuto il passo economicamente sensato di abbassare le proprie tariffe residue.",
-          "summary_en": "The European Union was widely criticized for agreeing to an asymmetrical trade deal with the US last summer. But in doing so, it effectively ensured that the US would continue harming itself by imposing high costs on its own businesses and consumers, while taking the economically sound step of lowering Europe’s residual tariffs.",
-          "source_name": "Project Syndicate",
-          "source_url": "https://www.project-syndicate.org/commentary/eu-capitulation-to-trump-on-tariffs-was-the-economically-sound-approach-by-daniel-gros-2026-03",
-          "importance": 3,
-          "section": "macro_economia"
+          "title_it": "Gli Stati Uniti si accaparrano petrolio e minerali rari del Venezuela nella corsa alle forniture",
+          "title_en": "U.S. Snaps up Venezuela’s Oil and Rare Minerals in Race for Supplies",
+          "summary_it": "L'amministrazione Trump sta puntando alle risorse naturali del Venezuela, con maggiore urgenza per accedere a petrolio e minerali critici. Esperti del Crisis Group spiegano le sfide future in questa corsa alle forniture.",
+          "summary_en": "The Trump administration is eyeing Venezuela’s natural resources, with increased urgency to access petroleum and critical minerals. Crisis Group experts explain the challenges ahead in this race for supplies.",
+          "source_name": "International Crisis Group",
+          "source_url": "https://www.crisisgroup.org/qna/latin-america-caribbean/venezuela/us-snaps-venezuelas-oil-and-rare-minerals-race-supplies",
+          "importance": 3
         }
       ]
     },
@@ -108,64 +59,72 @@
       "name": "energia",
       "items": [
         {
-          "title_it": "La Russia emerge come il più grande vincitore nella guerra in Medio Oriente",
-          "title_en": "Russia Emerges As The Biggest Winner In Middle East War",
-          "summary_it": "I mercati petroliferi continuano a sperimentare un'elevata volatilità con l'escalation del conflitto in Medio Oriente. I prezzi del petrolio sono in aumento, nonostante le dichiarazioni del Presidente Trump che la guerra sia quasi terminata. Il Brent è salito di oltre il 5% a 92,21 dollari al barile, suggerendo che la Russia potrebbe beneficiare dell'instabilità.",
-          "summary_en": "Oil markets continue to experience heightened volatility as the Middle East conflict escalates, with oil prices trending north despite President Trump signaling the war is nearing completion. Brent crude was up over 5% to trade at $92.21 per barrel, suggesting Russia could benefit from the instability.",
+          "title_it": "Aumentano i rischi per l'approvvigionamento di petrolio mentre l'Iran posa mine nello Stretto di Hormuz",
+          "title_en": "Oil Supply Risks Mount as Iran Lays Mines in Strait of Hormuz",
+          "summary_it": "L'Iran ha iniziato a posare mine navali nello Stretto di Hormuz, una mossa che potrebbe estendere il blocco del cruciale punto di strozzatura energetico. Questa attività rappresenta un'escalation nella campagna iraniana per affermare il controllo sul passaggio, aumentando le interruzioni dei flussi globali di petrolio.",
+          "summary_en": "Iran has begun laying naval mines in the strategically vital Strait of Hormuz, a move that could extend the effective blockade of the world’s most critical energy chokepoint. This activity represents an escalation in Iran’s campaign to assert control over the waterway, deepening disruption to global oil flows.",
           "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Energy/Crude-Oil/Russia-Emerges-As-The-Biggest-Winner-In-Middle-East-War.html",
-          "importance": 5,
-          "section": "energia"
+          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html",
+          "importance": 5
         },
         {
-          "title_it": "I prezzi del petrolio salgono nonostante il rilascio record delle riserve strategiche",
-          "title_en": "Oil Prices Surge Despite Record-Breaking Strategic Reserve Release",
-          "summary_it": "I prezzi del petrolio sono saliti bruscamente mercoledì, anche dopo che l'Agenzia Internazionale dell'Energia ha annunciato il più grande rilascio coordinato di riserve petrolifere strategiche della sua storia. Ciò sottolinea la portata delle preoccupazioni sull'offerta derivanti dall'escalation delle tensioni in Medio Oriente e dalle interruzioni delle spedizioni nello Stretto di Hormuz.",
-          "summary_en": "Oil prices climbed sharply on Wednesday even after the International Energy Agency announced the largest coordinated release of strategic oil reserves in its history. This underscores the scale of supply concerns stemming from escalating tensions in the Middle East and shipping disruptions in the Strait of Hormuz.",
+          "title_it": "L'IEA valuta un'azione di emergenza per rilasciare riserve di petrolio",
+          "title_en": "IEA Mulls Emergency Action To Unleash Oil Reserves",
+          "summary_it": "I leader energetici globali si stanno riunendo per decidere se rilasciare riserve di petrolio di emergenza a causa delle continue interruzioni della produzione e dell'esportazione legate al conflitto in Medio Oriente. Il direttore esecutivo dell'Agenzia Internazionale dell'Energia (IEA) ha avvertito che le condizioni nei mercati petroliferi sono peggiorate negli ultimi giorni.",
+          "summary_en": "Global energy leaders are gathering to decide whether to release emergency oil reserves as production and export disruptions tied to the Middle East conflict continue to strain global markets. The International Energy Agency's (IEA) Executive Director warned that conditions in oil markets have deteriorated in recent days.",
           "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Surge-Despite-Record-Breaking-Strategic-Reserve-Release.html",
-          "importance": 5,
-          "section": "energia"
+          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/IEA-Mulls-Emergency-Action-To-Unleash-Oil-Reserves.html",
+          "importance": 5
         },
         {
-          "title_it": "Aramco avverte di una 'catastrofe' nel mercato petrolifero se lo Stretto di Hormuz non riaprirà presto",
-          "title_en": "Aramco warns of oil market ‘catastrophe’ unless strait of Hormuz reopens soon",
-          "summary_it": "La compagnia petrolifera statale saudita Aramco ha avvertito di 'conseguenze catastrofiche' per i mercati petroliferi mondiali se la guerra USA-israeliana con l'Iran continuerà a bloccare le spedizioni nello Stretto di Hormuz. Sebbene Aramco preveda di poter fornire circa il 70% della sua produzione abituale, il suo CEO ha avvertito di 'drastiche' conseguenze per l'economia mondiale se l'interruzione dovesse continuare.",
-          "summary_en": "Saudi Arabian state oil firm Aramco has warned of 'catastrophic consequences' for the world’s oil markets if the US-Israeli war with Iran continues to block shipping in the Strait of Hormuz. While Aramco expects to be able to supply about 70% of its usual crude output, its chief executive warned of 'drastic' consequences for the world economy if the disruption continued.",
+          "title_it": "Le petroliere evitano il porto emiratino mentre il rischio di guerra nel Golfo interrompe le esportazioni di petrolio",
+          "title_en": "Tankers Avoid Emirati Port as Gulf War Risk Disrupts Oil Exports",
+          "summary_it": "Le compagnie di navigazione sono diventate riluttanti a fare scalo nel porto di Fujairah negli Emirati Arabi Uniti, causando cancellazioni di carichi di petrolio. Adnoc sta rivendendo questi carichi a prezzi più alti, poiché il porto è considerato troppo vicino alla zona di conflitto, nonostante sia fuori dallo Stretto di Hormuz.",
+          "summary_en": "Shipping companies have grown reluctant to call at the port of Fujairah in the UAE, prompting cancellations of oil cargoes. Adnoc is reselling these cargoes at higher prices, as the port is considered too close for comfort to the conflict zone, even though it is outside the Strait of Hormuz.",
+          "source_name": "OilPrice",
+          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Tankers-Avoid-Emirati-Port-as-Gulf-War-Risk-Disrupts-Oil-Exports.html",
+          "importance": 4
+        },
+        {
+          "title_it": "Le scorte di greggio statunitensi diminuiscono mentre la guerra in Iran sostiene i prezzi",
+          "title_en": "US Crude Oil Inventories Sag As Iran War Bolsters Prices",
+          "summary_it": "L'American Petroleum Institute (API) ha stimato un calo delle scorte di greggio negli Stati Uniti di 1,7 milioni di barili nella settimana terminata il 6 marzo. Questo calo, inaspettato dagli analisti, si verifica mentre la guerra in Iran continua a sostenere i prezzi del petrolio.",
+          "summary_en": "The American Petroleum Institute (API) estimated that crude oil inventories in the United States fell by 1.7 million barrels in the week ending March 6. This unexpected decline by analysts occurs as the Iran war continues to bolster oil prices.",
+          "source_name": "OilPrice",
+          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/US-Crude-Oil-Inventories-Sag-As-Iran-War-Bolsters-Prices.html",
+          "importance": 4
+        },
+        {
+          "title_it": "Gli investitori si orientano verso i nomi energetici a media capitalizzazione mentre le grandi compagnie petrolifere rallentano",
+          "title_en": "Investors Rotate Into Mid-Cap Energy Names as Big Oil Stalls",
+          "summary_it": "I prezzi del petrolio hanno registrato un forte calo per il secondo giorno consecutivo dopo che il Presidente Trump ha segnalato una possibile conclusione della guerra in Medio Oriente. Questo ha ridotto il 'premio di rischio geopolitico' che aveva spinto i prezzi verso i 120 dollari al barile, portando gli investitori a ruotare verso nomi energetici a media capitalizzazione.",
+          "summary_en": "Oil prices pulled back sharply for the second day running after U.S. President Trump signaled that the Middle East war is nearing a conclusion. This effectively reduced the 'geopolitical risk premium' that had previously driven prices towards $120 a barrel, leading investors to rotate into mid-cap energy names.",
+          "source_name": "OilPrice",
+          "source_url": "https://oilprice.com/Energy/Energy-General/Investors-Rotate-Into-Mid-Cap-Energy-Names-as-Big-Oil-Stalls.html",
+          "importance": 3
+        }
+      ]
+    },
+    {
+      "name": "macro_economia",
+      "items": [
+        {
+          "title_it": "La crisi in Medio Oriente potrebbe spingere l'inflazione del Regno Unito di nuovo al 3%, dice l'OBR",
+          "title_en": "Middle East crisis could push UK inflation back up to 3%, says OBR",
+          "summary_it": "L'Office for Budget Responsibility (OBR) del Regno Unito prevede che l'inflazione potrebbe raggiungere il 3% entro la fine del 2026 a causa della guerra USA-Israele in Iran. Questa previsione è un punto percentuale più alta rispetto alle aspettative pre-belliche, principalmente a causa dello shock sui prezzi dell'energia innescato dalla crisi in Medio Oriente.",
+          "summary_en": "The UK's Office for Budget Responsibility (OBR) believes inflation could end 2026 at 3% due to the U.S.-Israel war in Iran. This forecast is a percentage point higher than pre-war expectations, primarily driven by the energy price shock triggered by the Middle East crisis.",
           "source_name": "Guardian Economics",
-          "source_url": "https://www.theguardian.com/business/2026/mar/10/aramco-warns-oil-market-catastrophe-strait-of-hormuz",
-          "importance": 5,
-          "section": "energia"
+          "source_url": "https://www.theguardian.com/business/2026/mar/10/uk-inflation-could-rise-1-because-of-middle-east-crisis-says-obr",
+          "importance": 5
         },
         {
-          "title_it": "L'Iran avverte che il petrolio potrebbe raggiungere i 200 dollari al barile con l'escalation della minaccia di Hormuz",
-          "title_en": "Iran Warns Oil Could Hit $200 per Barrel as Hormuz Threat Escalates",
-          "summary_it": "I mercati petroliferi si preparano a un potenziale shock dei prezzi ancora maggiore, con l'Iran che mercoledì ha avvertito che il greggio potrebbe salire a 200 dollari al barile se la guerra che coinvolge Stati Uniti e Israele continuerà a destabilizzare i corridoi energetici del Medio Oriente. Un portavoce militare iraniano ha esortato il mondo a 'prepararsi a un petrolio a 200 dollari al barile'.",
-          "summary_en": "Oil markets are bracing for an even bigger potential price shock, with Iran on Wednesday warning that crude could surge to $200 per barrel if the war involving the U.S. and Israel continues to destabilize the Middle East’s energy corridors. An Iranian military spokesperson urged the world to 'get ready for oil to be $200 a barrel'.",
-          "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Iran-Warns-Oil-Could-Hit-200-per-Barrel-as-Hormuz-Threat-Escalates.html",
-          "importance": 5,
-          "section": "energia"
-        },
-        {
-          "title_it": "L'Europa affronta un'impennata dei prezzi del carburante per aerei e carenze di approvvigionamento",
-          "title_en": "Europe Faces Jet Fuel Price Surge and Supply Shortages",
-          "summary_it": "La chiusura dello Stretto di Hormuz dal 1° marzo ha innescato una distorsione senza precedenti nei mercati globali del carburante per aerei, spingendo i prezzi del carburante per l'aviazione europea a estremi storici ed esponendo la dipendenza strutturale del continente dall'approvvigionamento mediorientale. Questa interruzione ha invertito le relazioni di prezzo di lunga data, lasciando l'Europa alla ricerca disperata di alternative.",
-          "summary_en": "The closure of the Strait of Hormuz since March 1 has triggered an unprecedented distortion in global jet fuel markets, pushing European aviation fuel prices to historic extremes and exposing the continent’s structural dependence on Middle Eastern supply. This disruption has inverted long-standing price relationships, leaving Europe desperately searching for alternatives.",
-          "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Energy/Energy-General/Europe-Faces-Jet-Fuel-Price-Surge-and-Supply-Shortages.html",
-          "importance": 4,
-          "section": "energia"
-        },
-        {
-          "title_it": "Le scorte cinesi attenuano il colpo dello shock petrolifero globale",
-          "title_en": "China Stockpiles Soften the Blow of the Global Oil Shock",
-          "summary_it": "La Cina, il principale importatore mondiale di greggio e GNL, è meno esposta e vulnerabile alle consegne di energia dal Medio Oriente di quanto si possa pensare. Il paese ha accumulato volumi di greggio in stoccaggio per mesi, ha lavorato per anni per diversificare le fonti e le rotte di approvvigionamento di petrolio e gas, e ha aumentato la quota di elettrificazione dei trasporti, riducendo la domanda di carburanti per il trasporto stradale.",
-          "summary_en": "China, the world’s top crude oil and LNG importer, is not as exposed and vulnerable to energy deliveries from the Middle East as one might think. The country has been amassing crude volumes in storage for months, has worked for years to diversify oil and gas supply sources and routes, and has boosted the share of transport electrification, which has reduced demand for road transportation fuels.",
-          "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Energy/Crude-Oil/China-Stockpiles-Soften-the-Blow-of-the-Global-Oil-Shock.html",
-          "importance": 4,
-          "section": "energia"
+          "title_it": "La saggezza della 'Grande Capitolazione' europea",
+          "title_en": "The Wisdom of Europe’s “Great Capitulation”",
+          "summary_it": "L'Unione Europea è stata criticata per aver accettato un accordo commerciale asimmetrico con gli Stati Uniti la scorsa estate. Tuttavia, così facendo, ha garantito che gli Stati Uniti continuassero a danneggiare se stessi imponendo costi elevati alle proprie imprese e consumatori, mentre l'Europa ha abbassato le proprie tariffe residue.",
+          "summary_en": "The European Union was widely criticized for agreeing to an asymmetrical trade deal with the US last summer. However, in doing so, it effectively ensured that the US would continue harming itself by imposing high costs on its own businesses and consumers, while Europe took the economically sound step of lowering its residual tariffs.",
+          "source_name": "Project Syndicate",
+          "source_url": "https://www.project-syndicate.org/commentary/eu-capitulation-to-trump-on-tariffs-was-the-economically-sound-approach-by-daniel-gros-2026-03",
+          "importance": 3
         }
       ]
     },
@@ -173,14 +132,22 @@
       "name": "mercati",
       "items": [
         {
-          "title_it": "Il Brent scambierà sopra i 95 dollari per i prossimi due mesi a causa della guerra in Iran, dice l'EIA",
-          "title_en": "Brent to trade above $95 for next two months on Iran war, EIA says",
-          "summary_it": "L'Energy Information Administration (EIA) prevede che i prezzi del petrolio Brent si manterranno al di sopra dei 95 dollari al barile per i prossimi due mesi, a causa dell'impatto della guerra in Iran sui mercati energetici globali. Questa previsione riflette le continue preoccupazioni sull'offerta e la volatilità dei prezzi.",
-          "summary_en": "The Energy Information Administration (EIA) forecasts that Brent crude oil prices will remain above $95 per barrel for the next two months, due to the impact of the Iran war on global energy markets. This outlook reflects ongoing supply concerns and price volatility.",
+          "title_it": "Mercato azionario oggi: i futures Dow, S&P 500, Nasdaq scivolano tra le continue ricadute dell'Iran, con il CPI in arrivo",
+          "title_en": "Stock market today: Dow, S&P 500, Nasdaq futures slip amid continued Iran fallout, with CPI on deck",
+          "summary_it": "I futures sui principali indici azionari statunitensi, Dow, S&P 500 e Nasdaq, hanno registrato un calo. Questo scivolamento è attribuito alle continue ricadute del conflitto in Iran, con gli investitori in attesa dei prossimi dati sull'indice dei prezzi al consumo (CPI).",
+          "summary_en": "Futures on major U.S. stock indices, the Dow, S&P 500, and Nasdaq, slipped. This decline is attributed to the continued fallout from the Iran conflict, with investors awaiting upcoming Consumer Price Index (CPI) data.",
           "source_name": "Yahoo Finance",
-          "source_url": "https://finance.yahoo.com/news/brent-oil-prices-remain-above-162259295.html",
-          "importance": 4,
-          "section": "mercati"
+          "source_url": "https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-slip-amid-continued-iran-fallout-with-cpi-on-deck-231325809.html",
+          "importance": 5
+        },
+        {
+          "title_it": "Il Consiglio della Federal Reserve annuncia la cessazione delle azioni esecutive con Industrial and Commercial Bank of China Ltd. e Standard Chartered PLC",
+          "title_en": "Federal Reserve Board announces termination of enforcement actions with Industrial and Commercial Bank of China Ltd., Industrial and Commercial Bank of China Ltd., New York Branch, Standard Chartered PLC, and Standard Chartered Bank",
+          "summary_it": "Il Consiglio della Federal Reserve ha annunciato la cessazione delle azioni esecutive nei confronti di Industrial and Commercial Bank of China Ltd. e Standard Chartered PLC. Questa decisione riguarda sia le entità principali che le loro filiali di New York, indicando la risoluzione di questioni regolamentari precedenti.",
+          "summary_en": "The Federal Reserve Board announced the termination of enforcement actions with Industrial and Commercial Bank of China Ltd. and Standard Chartered PLC. This decision applies to both the main entities and their New York branches, indicating the resolution of previous regulatory issues.",
+          "source_name": "Federal Reserve",
+          "source_url": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20260310a.htm",
+          "importance": 2
         }
       ]
     }

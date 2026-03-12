@@ -50,10 +50,11 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
     }.get(sentiment_label, '#eab308')
     
     # Text overrides for language
-    lang_info = {
+    lang_info_map = {
         'it': {'title': 'Briefing del Giorno', 'sentiment_text': sentiment.get('reason_it', '')},
         'en': {'title': 'Daily Briefing', 'sentiment_text': sentiment.get('reason_en', '')}
-    }.get(lang, lang_info['it'])
+    }
+    lang_info = lang_info_map.get(lang, lang_info_map['it'])
 
     html = template.render(
         briefing=briefing,
@@ -109,10 +110,11 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
         reverse=True
     )[:30]
 
-    lang_info = {
+    lang_info_map = {
         'it': {'title': 'Morning Briefing', 'sentiment_text': sentiment.get('reason_it', '')},
         'en': {'title': 'Morning Briefing', 'sentiment_text': sentiment.get('reason_en', '')}
-    }.get(lang, lang_info['it'])
+    }
+    lang_info = lang_info_map.get(lang, lang_info_map['it'])
 
     html = template.render(
         briefing=briefing,

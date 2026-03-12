@@ -93,7 +93,12 @@
         <h3>{{ item.title }}</h3>
         <p>{{ item.summary }}</p>
         <div class="meta">
-            <span class="category-tag">{{ item.section }}</span>
+            <div>
+                <span class="category-tag">{{ item.section }}</span>
+                <span style="color: var(--neutral); font-size: 0.9rem; margin-left: 0.5rem;">
+                    {% if item.importance %}{% for i in range(item.importance) %}⭐{% endfor %}{% endif %}
+                </span>
+            </div>
             {% if item.source_url %}<a href="{{ item.source_url }}" target="_blank">{{ item.source_name | default('Fonte') }} →</a>{% endif %}
         </div>
     </div>
