@@ -326,7 +326,7 @@
             <div class="news-grid">
                 {% set featured_items = [] %}
                 {% for section in briefing.sections %}
-                    {% for item in section['items'] if item.importance >= 4 %}
+                    {% for item in section['items'] if (item.importance | default(0)) >= 4 %}
                         {% set _ = featured_items.append(item) %}
                     {% endfor %}
                 {% endfor %}

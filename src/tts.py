@@ -55,7 +55,7 @@ def briefing_to_text(briefing, lang='it'):
         sec_name = section.get('name', '')
         label = section_labels[lang].get(sec_name, sec_name)
         items = [i for i in section.get('items', [])
-                 if i.get('relevance_score', 0) >= 4]
+                 if i.get('importance', 0) >= 4]
         if not items:
             continue
 

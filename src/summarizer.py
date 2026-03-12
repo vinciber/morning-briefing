@@ -107,7 +107,7 @@ STRUTTURA OGNI ITEM:
   "source_name": "nome fonte",
   "source_url": "url originale",
   "category": "mercati|geopolitica|macro_economia|energia",
-  "relevance_score": 1-5,
+  "importance": 1-5,
   "tier": 1|2|3|4,
   "market_impact": {
     "assets_affected": ["EUR/USD", "Brent"],
