@@ -21,6 +21,10 @@
             --neutral: #f59e0b;
         }
 
+        .text-risk-on { color: var(--risk-on) !important; }
+        .text-risk-off { color: var(--risk-off) !important; }
+        .text-neutral { color: var(--neutral) !important; }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -137,6 +141,10 @@
             padding: 0.75rem 0;
             white-space: nowrap;
         }
+
+        body.status-risk_on { --status-color: var(--risk-on); --status-rgb: 16, 185, 129; }
+        body.status-risk_off { --status-color: var(--risk-off); --status-rgb: 239, 68, 68; }
+        body.status-neutral { --status-color: var(--neutral); --status-rgb: 245, 158, 11; }
 
         .ticker-content {
             display: flex;
@@ -329,7 +337,7 @@
         footer a { color: var(--accent); text-decoration: none; }
     </style>
 </head>
-<body style="--status-color: {% if sentiment.label == 'risk_on' %}var(--risk-on){% elif sentiment.label == 'risk_off' %}var(--risk-off){% else %}var(--neutral){% endif %}; --status-rgb: {% if sentiment.label == 'risk_on' %}16, 185, 129{% elif sentiment.label == 'risk_off' %}239, 68, 68{% else %}245, 158, 11{% endif %};">
+<body class="status-{{ sentiment.label | default('neutral') }}">
 
     <div class="container">
         <header>
@@ -367,7 +375,7 @@
                     <span class="label">{{ item.label }}</span>
                     <span class="value">{{ item.value }}</span>
                     {% if item.change and item.change != 'N/A' %}
-                    <span class="change" style="color: {{ 'var(--risk-on)' if item.positive else 'var(--risk-off)' }};">
+                    <span class="change {{ 'text-risk-on' if item.positive else 'text-risk-off' }}">
                         {{ item.change }}
                     </span>
                     {% endif %}
@@ -379,7 +387,7 @@
                     <span class="label">{{ item.label }}</span>
                     <span class="value">{{ item.value }}</span>
                     {% if item.change and item.change != 'N/A' %}
-                    <span class="change" style="color: {{ 'var(--risk-on)' if item.positive else 'var(--risk-off)' }};">
+                    <span class="change {{ 'text-risk-on' if item.positive else 'text-risk-off' }}">
                         {{ item.change }}
                     </span>
                     {% endif %}

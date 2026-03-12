@@ -100,7 +100,7 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
         'lang_info': lang_info,
         'sentiment': sentiment,
         'market_strip': build_market_strip(briefing.get('market_data_raw', briefing.get('market_data', {}))),
-        'sections': briefing.get('sections', []),
+        'sections': briefing.get('sections', []) if isinstance(briefing.get('sections'), list) else [],
         'audio_url': f'audio/briefing_{date.replace("-", "")}.mp3' if lang == 'it' else f'../audio/briefing_{date.replace("-", "")}.mp3',
         'rss_url': 'feed.xml' if lang == 'it' else '../feed_en.xml',
         'index_url': 'index.html' if lang == 'it' else 'index.html',
@@ -133,7 +133,12 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
 
     # Prep items for this language
     all_items = []
-    for section in briefing.get('sections', []):
+    sections = briefing.get('sections', [])
+    if not isinstance(sections, list):
+        sections = []
+    
+    for section in sections:
+        if not isinstance(section, dict): continue
         for item in section.get('items', []):
             display_item = item.copy()
             display_item['section'] = section.get('name', '')
@@ -169,7 +174,7 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
         'sentiment': sentiment,
         'all_items': all_items,
         'market_strip': build_market_strip(briefing.get('market_data_raw', briefing.get('market_data', {}))),
-        'sections': briefing.get('sections', []),
+        'sections': briefing.get('sections', []) if isinstance(briefing.get('sections'), list) else [],
         'audio_url': f'audio/briefing_{date.replace("-", "")}.mp3' if lang == 'it' else f'../audio/briefing_{date.replace("-", "")}.mp3',
         'rss_url': 'feed.xml' if lang == 'it' else '../feed_en.xml',
         'index_url': 'index.html' if lang == 'it' else 'index.html',

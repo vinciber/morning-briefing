@@ -306,7 +306,7 @@
                 <div class="market-chip">
                     {{ item.label }} <strong>{{ item.value }}</strong>
                     {% if item.change and item.change != 'N/A' %}
-                    <span style="color: {{ 'var(--risk-on)' if item.positive else 'var(--risk-off)' }};">{{ item.change }}</span>
+                    <span class="{{ 'text-risk-on' if item.positive else 'text-risk-off' }}">{{ item.change }}</span>
                     {% endif %}
                 </div>
                 {% endfor %}
