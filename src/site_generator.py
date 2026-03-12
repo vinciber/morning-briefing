@@ -56,8 +56,12 @@ def build_market_strip(market_data):
     strip = []
     for key, label in order:
         item = market_data.get(key, {})
-        val = item.get('value', 'N/A')
-        chg = item.get('change', 'N/A')
+        if isinstance(item, str):
+            val = item
+            chg = 'N/A'
+        else:
+            val = item.get('value', 'N/A')
+            chg = item.get('change', 'N/A')
         if val and val != 'N/A':
             positive = isinstance(chg, str) and '+' in chg
             negative = isinstance(chg, str) and '-' in chg
