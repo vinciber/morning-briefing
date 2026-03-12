@@ -148,7 +148,7 @@ HISTORY (NON RIPETERE QUESTE NOTIZIE):
                 {'role': 'user', 'content': user_prompt},
             ],
             temperature=0.2,
-            max_tokens=16000,
+            max_tokens=8000,
             response_format={'type': 'json_object'},
         )
         raw_text = response.choices[0].message.content.strip()

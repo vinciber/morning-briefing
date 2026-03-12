@@ -60,55 +60,55 @@ def run():
     logger.info('📈 Recupero dati di mercato...')
     results = {}
 
-    # EUR/USD
+    # EUR/USD — frankfurter
     val, _ = get_forex('EUR', 'USD')
     results['eur_usd'] = {'value': val, 'change': 'N/A'}
     logger.info(f'EUR/USD: {val}')
-
-    # US 10Y Treasury yield
-    val, chg = get_stooq('10usy.b')
-    results['us_10y'] = {'value': f'{val}%' if val != 'N/A' else 'N/A', 'change': chg}
-    logger.info(f'US 10Y: {val}')
 
     # S&P 500
     val, chg = get_stooq('^spx')
     results['sp500'] = {'value': val, 'change': chg}
     logger.info(f'S&P 500: {val}')
 
-    # VIX
+    # VIX — simbolo corretto stooq
     val, chg = get_stooq('^vix')
     results['vix'] = {'value': val, 'change': chg}
     logger.info(f'VIX: {val}')
 
-    # Gold (XAU/USD via forex)
-    val, _ = get_forex('XAU', 'USD')
-    results['gold'] = {'value': f'${val}/oz' if val != 'N/A' else 'N/A', 'change': 'N/A'}
+    # Gold — stooq simbolo diretto
+    val, chg = get_stooq('xauusd')
+    results['gold'] = {'value': f'${val}/oz' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'Gold: {val}')
 
-    # Brent crude
-    val, chg = get_stooq('lcoj25.uk')  # Brent front-month
+    # Brent — contratto generico stooq
+    val, chg = get_stooq('lco.uk')
     results['oil_brent'] = {'value': f'${val}' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'Brent: {val}')
 
-    # STOXX 600
-    val, chg = get_stooq('^ftw5')
+    # STOXX 600 — simbolo corretto
+    val, chg = get_stooq('stoxx600')
     results['stoxx_600'] = {'value': val, 'change': chg}
     logger.info(f'STOXX 600: {val}')
 
-    # Nikkei 225
+    # Nikkei
     val, chg = get_stooq('^nkx')
     results['nikkei'] = {'value': val, 'change': chg}
     logger.info(f'Nikkei: {val}')
 
-    # Shanghai Composite
+    # Shanghai
     val, chg = get_stooq('^shc')
     results['shanghai'] = {'value': val, 'change': chg}
     logger.info(f'Shanghai: {val}')
 
-    # BTP 10Y (proxy: spread BTP-Bund via stooq)
+    # BTP 10Y
     val, chg = get_stooq('10ity.b')
     results['btp_10y'] = {'value': f'{val}%' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'BTP 10Y: {val}')
+
+    # US 10Y
+    val, chg = get_stooq('10usy.b')
+    results['us_10y'] = {'value': f'{val}%' if val != 'N/A' else 'N/A', 'change': chg}
+    logger.info(f'US 10Y: {val}')
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
