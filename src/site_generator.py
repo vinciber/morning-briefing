@@ -34,6 +34,36 @@ def load_config() -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+def prepare_market_strip(market_data: dict) -> list:
+    """Trasforma il market_data in una lista ordinata per lo strip UI."""
+    market_strip = []
+    labels = {
+        'eur_usd': 'EUR/USD', 'us_10y': 'US 10Y', 'sp500': 'S&P 500',
+        'stoxx_600': 'STOXX 600', 'nikkei': 'NIKKEI', 'shanghai': 'SHANGHAI',
+        'gold': 'GOLD', 'oil_brent': 'BRENT', 'vix': 'VIX', 'btp_10y': 'BTP 10Y'
+    }
+    for key, label in labels.items():
+        item = market_data.get(key, {})
+        if not isinstance(item, dict): continue
+        val = item.get('value', 'N/A')
+        chg = item.get('change', 'N/A')
+        if val and val != 'N/A':
+            # Risk-inverse assets (VIX, BTP, US10Y): positive change is "negative" (red)
+            is_inverse = key in ['vix', 'btp_10y', 'us_10y']
+            has_plus = '+' in str(chg)
+            
+            market_strip.append({
+                'label': label,
+                'value': val,
+                'change': chg,
+                'positive': (not is_inverse and has_plus) or (is_inverse and not has_plus and chg != 'N/A' and '-' in str(chg))
+            })
+    return market_strip
+
+
+# ---------------------------------------------------------------------------
 # Generators
 # ---------------------------------------------------------------------------
 def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: str = 'it'):
@@ -63,6 +93,7 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
         lang_info=lang_info,
         sentiment=sentiment,
         sentiment_color=sentiment_color,
+        market_strip=prepare_market_strip(briefing.get('market_data', {})),
         base_url=base_url,
         favicon_url='favicon.png' if lang == 'it' else '../favicon.png'
     )
@@ -124,6 +155,7 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
         sentiment=sentiment,
         sentiment_color=sentiment_color,
         market_data=briefing.get('market_data', {}),
+        market_strip=prepare_market_strip(briefing.get('market_data', {})),
         all_items=all_items,
         archive_dates=archive_dates,
         base_url=base_url,

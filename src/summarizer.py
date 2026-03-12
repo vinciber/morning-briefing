@@ -48,10 +48,9 @@ REGOLE ASSOLUTE:
 9. Le sezioni devono essere: mercati, geopolitica, macro_economia, energia
 10. Per ogni item includi: title_it, title_en, summary_it, summary_en, source_name, source_url, importance
 11. **FRESHNESS RULE**: Non ripetere notizie che erano già presenti nel briefing di ieri (fornito come history). Se una notizia è un aggiornamento importante di una vecchia storia, focalizzati solo sulle NOVITÀ.
-12. ARTICOLI: produci TUTTI gli articoli rilevanti ricevuti, minimo 3 per sezione.
-    Non tagliare notizie importanti — l'obiettivo è un briefing completo e ricco.
-13. SUMMARY: ogni summary deve essere di almeno 3-4 frasi. Includi: fatto principale,
-    contesto, implicazioni per mercati o geopolitica. Non essere generico.
+12. ARTICOLI: produci MINIMO 4 articoli per sezione, con summary di 3-4 frasi ciascuno.
+    Ogni summary deve contenere: fatto principale + dati numerici specifici (se presenti) + implicazione per mercati o policy.
+13. SENTIMENT: il campo 'reason_it' e 'reason_en' deve essere una frase completa di 2-3 righe che spiega il contesto macroeconomico e geopolitico del giorno, non una semplice etichetta.
 14. FILTRO QUALITÁ: escludi solo comunicati puramente burocratici (nomine, procedure
     amministrative). Includi tutto ciò che ha rilevanza economica o geopolitica.
 15. TITOLI: usa titoli descrittivi e specifici. Evita titoli generici come "Aggiornamento Mercati".

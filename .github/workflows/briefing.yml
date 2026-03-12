@@ -50,14 +50,18 @@ jobs:
       - name: STEP 3a — Generate Audio (Piper TTS)
         run: |
           mkdir -p models
-          # Download modelli se non esistono (Italiano + Inglese)
+          # Download modelli da Hugging Face (Italiano + Inglese)
           if [ ! -f models/it_IT-paola-medium.onnx ]; then
-            wget -q https://github.com/rhasspy/piper/releases/download/v0.0.2/it_IT-paola-medium.onnx -O models/it_IT-paola-medium.onnx
-            wget -q https://github.com/rhasspy/piper/releases/download/v0.0.2/it_IT-paola-medium.onnx.json -O models/it_IT-paola-medium.onnx.json
+            wget -q -O models/it_IT-paola-medium.onnx \
+              "https://huggingface.co/rhasspy/piper-voices/resolve/main/it/it_IT/paola/medium/it_IT-paola-medium.onnx"
+            wget -q -O models/it_IT-paola-medium.onnx.json \
+              "https://huggingface.co/rhasspy/piper-voices/resolve/main/it/it_IT/paola/medium/it_IT-paola-medium.onnx.json"
           fi
           if [ ! -f models/en_US-ryan-medium.onnx ]; then
-            wget -q https://github.com/rhasspy/piper/releases/download/v0.0.2/en_US-ryan-medium.onnx -O models/en_US-ryan-medium.onnx
-            wget -q https://github.com/rhasspy/piper/releases/download/v0.0.2/en_US-ryan-medium.onnx.json -O models/en_US-ryan-medium.onnx.json
+            wget -q -O models/en_US-ryan-medium.onnx \
+              "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/ryan/medium/en_US-ryan-medium.onnx"
+            wget -q -O models/en_US-ryan-medium.onnx.json \
+              "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/ryan/medium/en_US-ryan-medium.onnx.json"
           fi
           python src/tts.py
         continue-on-error: true
