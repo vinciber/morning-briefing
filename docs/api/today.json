@@ -7,11 +7,15 @@
   },
   "market_data": {
     "eur_usd": "1.1581",
-    "vix": "18.5",
-    "btp_10y": "3.65%",
-    "gold": "2150",
-    "oil_brent": "82.30",
-    "sp500_futures": "5230"
+    "vix": "N/A",
+    "btp_10y": "N/A",
+    "gold": "$5,180/oz",
+    "oil_brent": "N/A",
+    "sp500_futures": "6,776",
+    "stoxx_600": "N/A",
+    "nikkei": "54,453",
+    "shanghai": "4,129",
+    "us_10y": "N/A"
   },
   "sections": [
     {
@@ -48,6 +52,15 @@
           "source_name": "War on the Rocks",
           "source_url": "https://warontherocks.com/2026/03/the-blank-check-how-an-unconditional-alliance-took-america-to-war-in-iran/",
           "importance": 4
+        },
+        {
+          "title_it": "Oman evacua il porto petrolifero chiave",
+          "title_en": "Oman evacuates key oil port",
+          "summary_it": "L'Oman ha ordinato l'evacuazione delle navi dal porto petrolifero chiave di Mina Al Fahal, a causa dell'intensificarsi degli attacchi alle infrastrutture energetiche regionali.",
+          "summary_en": "Oman has ordered the evacuation of vessels from its key Mina Al Fahal oil port, due to intensifying attacks on regional energy infrastructure.",
+          "source_name": "OilPrice",
+          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Oman-Evacuates-Key-Oil-Port-as-Iran-War-Intensifies.html",
+          "importance": 4
         }
       ]
     },
@@ -70,6 +83,15 @@
           "summary_en": "The rise in energy prices could lead to inflation concerns globally.",
           "source_name": "Project Syndicate",
           "source_url": "https://www.project-syndicate.org/commentary/iran-war-oil-crisis-historical-lessons-by-jim-o-neill-2026-03",
+          "importance": 4
+        },
+        {
+          "title_it": "Cina e shock petrolifero",
+          "title_en": "China and oil shock",
+          "summary_it": "La Cina, principale importatore mondiale di petrolio e gas naturale liquefatto, sembra meno vulnerabile al shock petrolifero grazie alle sue riserve strategiche.",
+          "summary_en": "China, the world's top crude oil and LNG importer, appears less vulnerable to the oil shock due to its strategic reserves.",
+          "source_name": "OilPrice",
+          "source_url": "https://oilprice.com/Energy/Crude-Oil/China-Stockpiles-Soften-the-Blow-of-the-Global-Oil-Shock.html",
           "importance": 4
         }
       ]
@@ -94,20 +116,59 @@
           "source_name": "OilPrice",
           "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Surge-Despite-Record-Breaking-Strategic-Reserve-Release.html",
           "importance": 4
+        },
+        {
+          "title_it": "Europa e carenza di carburante per aerei",
+          "title_en": "Europe faces jet fuel shortage",
+          "summary_it": "La chiusura dello Stretto di Hormuz ha innescato una distorsione senza precedenti nel mercato globale del carburante per aerei, spingendo i prezzi ai livelli storici.",
+          "summary_en": "The closure of the Strait of Hormuz has triggered an unprecedented distortion in global jet fuel markets, pushing European aviation fuel prices to historic extremes.",
+          "source_name": "OilPrice",
+          "source_url": "https://oilprice.com/Energy/Energy-General/Europe-Faces-Jet-Fuel-Price-Surge-and-Supply-Shortages.html",
+          "importance": 4
         }
       ]
     }
   ],
   "market_data_raw": {
-    "eur_usd": "1.1581",
-    "vix": "N/A",
-    "btp_10y": "N/A",
-    "gold": "N/A",
-    "oil_brent": "N/A",
-    "sp500_futures": "676.3300",
-    "stoxx_600": "N/A",
-    "nikkei": "N/A",
-    "shanghai": "N/A",
-    "us_10y": "N/A"
+    "eur_usd": {
+      "value": "1.1581",
+      "change": "N/A"
+    },
+    "vix": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "btp_10y": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "gold": {
+      "value": "$5,180/oz",
+      "change": "-0.04%"
+    },
+    "oil_brent": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "sp500_futures": {
+      "value": "6,776",
+      "change": "-0.08%"
+    },
+    "stoxx_600": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "nikkei": {
+      "value": "54,453",
+      "change": "-1.04%"
+    },
+    "shanghai": {
+      "value": "4,129",
+      "change": "-0.10%"
+    },
+    "us_10y": {
+      "value": "N/A",
+      "change": "N/A"
+    }
   }
 }
