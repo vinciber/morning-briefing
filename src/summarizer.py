@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-import google.generativeai as genai
+from groq import Groq
 
 # ---------------------------------------------------------------------------
 # Setup
@@ -29,7 +29,7 @@ MARKET_DATA_PATH = ROOT / 'data' / 'market_data.json'
 HISTORY_PATH = ROOT / 'docs' / 'api' / 'today.json'
 OUTPUT_PATH = ROOT / 'data' / 'briefing_today.json'
 
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
+GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '')
 
 SYSTEM_PROMPT = '''
 Sei un analista finanziario e geopolitico senior. Ricevi una lista di
@@ -73,9 +73,9 @@ FORMATO OUTPUT ATTESO:
 
 
 def run():
-    """Pipeline principale: carica articoli + market + history → Gemini → salva briefing JSON."""
-    if not GEMINI_API_KEY:
-        logger.error('❌ GEMINI_API_KEY non configurata!')
+    """Pipeline principale: carica articoli + market + history → Groq → salva briefing JSON."""
+    if not GROQ_API_KEY:
+        logger.error('❌ GROQ_API_KEY non configurata!')
         return None
 
     # Carica articoli
@@ -95,7 +95,7 @@ def run():
     if MARKET_DATA_PATH.exists():
         with open(MARKET_DATA_PATH, 'r', encoding='utf-8') as f:
             market_raw = json.load(f)
-            # Formattiamo per Gemini
+            # Formattiamo per l'AI
             market_data = {
                 "eur_usd": market_raw.get("eur_usd", {}).get("value", "N/A"),
                 "vix": market_raw.get("vix", {}).get("value", "N/A"),
@@ -120,16 +120,8 @@ def run():
 
     logger.info(f'📰 Caricati {len(articles)} articoli e {len(history.get("sections", []))} sezioni di history')
 
-    # Configura Gemini
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel(
-        model_name='gemini-2.0-flash', # Upgrade a 2.0 per migliori prestazioni
-        generation_config=genai.GenerationConfig(
-            temperature=0.2,
-            max_output_tokens=8000,
-            response_mime_type='application/json',
-        ),
-    )
+    # Configura Groq
+    client = Groq(api_key=GROQ_API_KEY)
 
     # Prepara prompt
     user_prompt = f'''Ecco gli articoli di oggi ({datetime.now(timezone.utc).strftime('%Y-%m-%d')}):
@@ -142,10 +134,19 @@ HISTORY (NON RIPETERE QUESTE NOTIZIE):
 {json.dumps(history, ensure_ascii=False, indent=1) if history else "Nessuna history disponibile."}
 '''
 
-    logger.info('🤖 Chiamata a Gemini...')
+    logger.info('🤖 Chiamata a Groq...')
     try:
-        response = model.generate_content([SYSTEM_PROMPT, user_prompt])
-        raw_text = response.text.strip()
+        response = client.chat.completions.create(
+            model='meta-llama/llama-4-scout-17b-11e-instruct',
+            messages=[
+                {'role': 'system', 'content': SYSTEM_PROMPT},
+                {'role': 'user', 'content': user_prompt},
+            ],
+            temperature=0.2,
+            max_tokens=8000,
+            response_format={'type': 'json_object'},
+        )
+        raw_text = response.choices[0].message.content.strip()
         briefing = json.loads(raw_text)
 
         # Assicura che la data sia presente
@@ -159,7 +160,7 @@ HISTORY (NON RIPETERE QUESTE NOTIZIE):
 
         return briefing
     except Exception as e:
-        logger.error(f'❌ Errore Gemini: {e}')
+        logger.error(f'❌ Errore Groq: {e}')
         return None
 
 
