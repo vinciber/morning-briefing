@@ -50,6 +50,7 @@
             letter-spacing: -0.02em;
             background: linear-gradient(to right, #fff, var(--accent));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
         }
@@ -101,6 +102,10 @@
             margin-bottom: 2rem;
         }
 
+        .text-risk-on { color: var(--risk-on); }
+        .text-risk-off { color: var(--risk-off); }
+        .text-neutral { color: var(--neutral); }
+
         .status-dot {
             width: 14px;
             height: 14px;
@@ -114,7 +119,16 @@
             text-transform: uppercase;
             letter-spacing: 0.2em;
             font-size: 1rem;
-            color: var(--status-color, var(--neutral));
+        }
+
+        .sentiment-reason {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
 
         .cta-button {
@@ -283,53 +297,33 @@
         </nav>
 
         <div class="today-card">
-            <div class="date-badge">2026-03-11</div>
+            <div class="date-badge">2026-03-12</div>
             
             <div class="sentiment-banner">
                 <div class="status-dot"></div>
-                <div class="sentiment-label">
+                <div class="sentiment-label text-risk-off">
                     
                         RISK OFF
                     
                 </div>
             </div>
 
-            <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-                The sentiment is 'risk_off' due to the escalating Middle East conflict, which has led to oil supply disruptions, rising energy prices, and...
+            <p class="sentiment-reason">
+                The sentiment is 'risk_off' due to the escalating Middle East conflict, with a significant increase in oil prices and inflation concerns. Brent...
             </p>
 
             
             <div class="market-mini">
                 
                 <div class="market-chip">
-                    EUR/USD <strong>1.0780</strong>
-                    
-                </div>
-                
-                <div class="market-chip">
-                    VIX <strong>22.5</strong>
-                    
-                </div>
-                
-                <div class="market-chip">
-                    GOLD <strong>2,280</strong>
-                    
-                </div>
-                
-                <div class="market-chip">
-                    BRENT <strong>98.75</strong>
-                    
-                </div>
-                
-                <div class="market-chip">
-                    BTP 10Y <strong>3.95%</strong>
+                    EUR/USD <strong>1.1547</strong>
                     
                 </div>
                 
             </div>
             
 
-            <a href="en/2026-03-11.html" class="cta-button">
+            <a href="en/2026-03-12.html" class="cta-button">
                 Read Today's Briefing
             </a>
         </div>
@@ -347,13 +341,9 @@
                     
                         
                     
+                        
+                    
                 
-                    
-                        
-                    
-                        
-                    
-                        
                     
                         
                     
@@ -369,39 +359,39 @@
 
                 
                 <div class="news-card">
-                    <h3 class="news-title">A Sprawling Middle East War Explodes</h3>
-                    <p class="news-summary">A joint U.S.-Israeli attack on Iran, followed by Iranian retaliation, has engulfed much of the Middle East in...</p>
-                    <a href="en/2026-03-11.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                    <h3 class="news-title">US stock futures down</h3>
+                    <p class="news-summary">Dow, S&P 500, and Nasdaq futures are down due to the escalating Middle East conflict and inflation concerns.</p>
+                    <a href="en/2026-03-12.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
                 </div>
                 
                 <div class="news-card">
-                    <h3 class="news-title">Operation Epic Folly? Trump’s and Netanyahu’s War on Iran</h3>
-                    <p class="news-summary">Crisis Group experts discuss the U.S.-Israel war with Iran, its fallout in the Gulf and wider region, and what might...</p>
-                    <a href="en/2026-03-11.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                    <h3 class="news-title">Brent crude at $91.3</h3>
+                    <p class="news-summary">Brent crude oil price rises 4.2% to $91.3 due to the escalating Middle East conflict and concerns over oil production.</p>
+                    <a href="en/2026-03-12.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
                 </div>
                 
                 <div class="news-card">
-                    <h3 class="news-title">Oil Supply Risks Mount as Iran Lays Mines in Strait of Hormuz</h3>
-                    <p class="news-summary">Iran has begun laying naval mines in the strategically vital Strait of Hormuz, a move that could extend the...</p>
-                    <a href="en/2026-03-11.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                    <h3 class="news-title">VIX at 28</h3>
+                    <p class="news-summary">The VIX index rises to 28, indicating increased risk aversion among investors due to uncertainty over the Middle...</p>
+                    <a href="en/2026-03-12.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
                 </div>
                 
                 <div class="news-card">
-                    <h3 class="news-title">IEA Mulls Emergency Action To Unleash Oil Reserves</h3>
-                    <p class="news-summary">Global energy leaders are gathering to decide whether to release emergency oil reserves as production and export...</p>
-                    <a href="en/2026-03-11.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                    <h3 class="news-title">Middle East conflict escalates</h3>
+                    <p class="news-summary">The joint U.S.-Israeli attack on Iran has led to Iranian retaliation, engulfing much of the Middle East in conflict.</p>
+                    <a href="en/2026-03-12.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
                 </div>
                 
                 <div class="news-card">
-                    <h3 class="news-title">Tankers Avoid Emirati Port as Gulf War Risk Disrupts Oil Exports</h3>
-                    <p class="news-summary">Shipping companies have grown reluctant to call at the port of Fujairah in the UAE, prompting cancellations of oil...</p>
-                    <a href="en/2026-03-11.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                    <h3 class="news-title">UK inflation could reach 3%</h3>
+                    <p class="news-summary">UK inflation could reach 3% by the end of 2026 due to the energy price shock triggered by the Middle East crisis.</p>
+                    <a href="en/2026-03-12.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
                 </div>
                 
                 <div class="news-card">
-                    <h3 class="news-title">US Crude Oil Inventories Sag As Iran War Bolsters Prices</h3>
-                    <p class="news-summary">The American Petroleum Institute (API) estimated that crude oil inventories in the United States fell by 1.7 million...</p>
-                    <a href="en/2026-03-11.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                    <h3 class="news-title">Oil prices rising</h3>
+                    <p class="news-summary">Oil prices are rising due to the escalating Middle East conflict and concerns over oil production.</p>
+                    <a href="en/2026-03-12.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
                 </div>
                 
             </div>

@@ -3,376 +3,585 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Briefing del Giorno — 2026-03-12</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <title>2026-03-12 — Morning Briefing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #1A1A2E;
-            --surface: #16213E;
-            --card: #16213E;
-            --text: #E2E8F0;
-            --text-muted: #94A3B8;
-            --accent: #E94560;
-            --border: rgba(255, 255, 255, 0.1);
-            --risk-on: #22C55E;
-            --risk-off: #EF4444;
-            --neutral: #F59E0B;
+            --bg: #0f172a;
+            --glass: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --risk-on: #10b981;
+            --risk-off: #ef4444;
+            --neutral: #f59e0b;
         }
+
+        .text-risk-on { color: var(--risk-on) !important; }
+        .text-risk-off { color: var(--risk-off) !important; }
+        .text-neutral { color: var(--neutral) !important; }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            background-attachment: fixed;
             color: var(--text);
             line-height: 1.6;
-            max-width: 800px;
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        .container {
+            max-width: 900px;
             margin: 0 auto;
-            padding: 1rem;
         }
+
         header {
+            margin-bottom: 3rem;
             text-align: center;
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 2rem;
+            position: relative;
         }
-        h1 { font-size: 1.5rem; margin-bottom: .5rem; }
-        .date { color: var(--text-muted); font-size: .9rem; }
-        .sentiment-badge {
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .date-badge {
             display: inline-block;
-            padding: .35rem 1rem;
+            padding: 0.4rem 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
             border-radius: 999px;
-            font-weight: 600;
-            font-size: .85rem;
-            margin: .75rem 0;
-            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(4px);
         }
-        .sentiment-reason { font-style: italic; color: var(--text-muted); font-size: .85rem; }
-        .market-strip {
+
+        /* Sentiment Card */
+        .sentiment-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sentiment-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: var(--status-color, var(--neutral));
+        }
+
+        .sentiment-header {
             display: flex;
-            flex-wrap: wrap;
-            gap: .5rem;
-            padding: 1rem;
-            background: var(--surface);
-            border-radius: .75rem;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--status-color, var(--neutral));
+            box-shadow: 0 0 15px var(--status-color, var(--neutral));
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(var(--status-rgb), 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(var(--status-rgb), 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(var(--status-rgb), 0); }
+        }
+
+        .sentiment-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+            color: var(--status-color, var(--neutral));
+        }
+
+        .sentiment-reason {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Market Ticker */
+        .market-ticker {
+            display: flex;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            margin: 0 -1.5rem 3rem;
+            padding: 0.75rem 0;
+            white-space: nowrap;
+        }
+
+        body.status-risk_on { --status-color: var(--risk-on); --status-rgb: 16, 185, 129; }
+        body.status-risk_off { --status-color: var(--risk-off); --status-rgb: 239, 68, 68; }
+        body.status-neutral { --status-color: var(--neutral); --status-rgb: 245, 158, 11; }
+
+        .ticker-content {
+            display: flex;
+            animation: ticker 60s linear infinite;
+            gap: 3rem;
+            padding-left: 100%;
+        }
+
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .ticker-item .label { color: var(--text-muted); font-weight: 600; }
+        .ticker-item .value { font-weight: 700; font-family: monospace; font-size: 1rem; }
+        .ticker-item .change { font-weight: 800; font-size: 0.8rem; }
+
+        /* Sections */
+        .section { margin-bottom: 4rem; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             margin-bottom: 2rem;
-            border: 1px solid var(--border);
         }
-        .market-item {
-            flex: 1;
-            min-width: 120px;
-            text-align: center;
-            padding: .5rem;
+
+        .section-icon {
+            font-size: 1.5rem;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
         }
-        .market-item strong { display: block; font-size: 1.1rem; color: var(--text); font-weight: 700; margin-top: .25rem; }
-        .market-item span { font-size: .75rem; color: var(--text-muted); text-transform: uppercase; }
+
         .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+        }
+
+        .news-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            background: rgba(30, 41, 59, 0.9);
+        }
+
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .importance-stars { color: #fbbf24; font-size: 0.8rem; letter-spacing: 2px; }
+
+        .news-title {
+            font-family: 'Outfit', sans-serif;
             font-size: 1.15rem;
-            margin: 1.5rem 0 .75rem;
-            padding-bottom: .35rem;
-            border-bottom: 2px solid var(--accent);
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--text);
         }
-        .card {
-            background: var(--surface);
-            border-radius: .75rem;
-            padding: 1rem 1.25rem;
-            margin-bottom: .75rem;
-            border: 1px solid var(--border);
+
+        .news-summary {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
-        .card h3 { font-size: .95rem; margin-bottom: .35rem; }
-        .card p { font-size: .85rem; color: var(--text-muted); margin-bottom: .5rem; }
-        .card .meta {
+
+        .news-footer {
+            margin-top: auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: .75rem;
-            color: var(--text-muted);
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .card .meta a {
+
+        .source-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
             color: var(--accent);
-            text-decoration: none;
-        }
-        .card .meta a:hover { text-decoration: underline; }
-        .category-tag {
-            display: inline-block;
-            padding: .2rem .6rem;
-            border-radius: .25rem;
-            font-size: .65rem;
-            font-weight: 700;
             text-transform: uppercase;
-            color: #fff;
-            background: var(--card);
-            letter-spacing: 0.5px;
+            letter-spacing: 0.05em;
         }
-        .category-tag[data-cat="mercati"] { background: #3B82F6; }
-        .category-tag[data-cat="geopolitica"] { background: #8B5CF6; }
-        .category-tag[data-cat="macro_economia"] { background: #10B981; }
-        .category-tag[data-cat="energia"] { background: #F59E0B; }
-        .importance { color: var(--neutral); font-size: 1rem; }
+
+        .read-more {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .read-more:hover { color: var(--text); }
+
+        /* Audio Player */
+        .audio-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+        }
+
+        .audio-fab {
+            width: 64px;
+            height: 64px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 15px -3px var(--accent-glow);
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            transition: transform 0.2s;
+        }
+
+        .audio-fab:hover { transform: scale(1.1); }
+
+        /* Lang Toggle */
         .lang-toggle {
             display: flex;
-            gap: .5rem;
-            justify-content: center;
-            margin-bottom: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.25rem;
+            border-radius: 999px;
+            width: fit-content;
+            margin: 0 auto 3rem;
+            border: 1px solid var(--glass-border);
         }
-        .lang-toggle a {
-            padding: .4rem 1rem;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text);
-            border-radius: .35rem;
+
+        .lang-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 999px;
             text-decoration: none;
-            font-size: .85rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.2s;
         }
-        .lang-toggle a.active {
+
+        .lang-btn.active {
             background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
+            color: #0f172a;
         }
+
         footer {
             text-align: center;
-            padding: 2rem 0;
+            padding: 4rem 0;
             color: var(--text-muted);
-            font-size: .75rem;
-            border-top: 1px solid var(--border);
-            margin-top: 2rem;
+            font-size: 0.85rem;
         }
+
         footer a { color: var(--accent); text-decoration: none; }
-        .back-link { display: block; text-align: center; margin-top: 1rem; }
-        .back-link a { color: var(--accent); text-decoration: none; font-size: .85rem; }
     </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="favicon.png">
 </head>
-<body>
-    <header>
-        <h1>📰 Briefing del Giorno</h1>
-        <p class="date">2026-03-12</p>
-        <div class="sentiment-badge" style="background: #ef4444;">
-            🔴 RISK OFF
-        </div>
-        <p class="sentiment-reason">Il sentiment è 'risk_off' a causa dell'escalation del conflitto in Medio Oriente, che ha portato a interruzioni delle forniture di petrolio, aumento dei prezzi dell'energia e preoccupazioni inflazionistiche. Gli investitori sono prudenti in attesa di ulteriori sviluppi.</p>
-    </header>
+<body class="status-risk_off">
 
-    <div class="lang-toggle">
-        <a href="2026-03-12.html" class="active">🇮🇹 Italiano</a>
-        <a href="en/2026-03-12.html" class="">🇬🇧 English</a>
-    </div>
+    <div class="container">
+        <header>
+            <div class="date-badge">2026-03-12</div>
+            <h1>The Morning Brief</h1>
+            <p style="color: var(--text-muted); font-weight: 500; font-size: 1.1rem; margin-top: -0.5rem;">Institutional Alpha. Curated by GPT-4o.</p>
+        </header>
 
-    
+        <nav class="lang-toggle">
+            <a href="2026-03-12.html" class="lang-btn active"> ITALIANO</a>
+            <a href="en/2026-03-12.html" class="lang-btn "> ENGLISH</a>
+        </nav>
 
-    
-    
-    
+        <section class="sentiment-card">
+            <div class="sentiment-header">
+                <div class="status-dot"></div>
+                <div class="sentiment-label">
+                    
+                        AVVERSIONE AL RISCHIO
+                    
+                </div>
+            </div>
+            <div class="sentiment-reason">
+                Il sentiment è 'risk_off' a causa dell'escalation del conflitto in Medio Oriente, con un aumento significativo dei prezzi del petrolio e preoccupazioni inflazionistiche. Il Brent sale del 4.2% a $91.3, il VIX tocca 28 e il mercato azionario mostra segni di debolezza.
+            </div>
+        </section>
 
-    
-    <h2 class="section-title">
-        💹
-        Mercati
-    </h2>
+        
+        <div class="market-ticker">
+            <div class="ticker-content">
+                
+                <div class="ticker-item">
+                    <span class="label">EUR/USD</span>
+                    <span class="value">1.1547</span>
+                    
+                </div>
+                
+                
+                
+                <div class="ticker-item">
+                    <span class="label">EUR/USD</span>
+                    <span class="value">1.1547</span>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
 
-    
-    <div class="card">
-        <h3>
-            Futures azionari statunitensi in calo
-        </h3>
-        <p>I futures sui principali indici azionari statunitensi sono in calo a causa delle continue ricadute del conflitto in Medio Oriente. Gli investitori sono prudenti in attesa di ulteriori sviluppi.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag" data-cat="mercati">mercati</span>
-                <span class="importance">⭐⭐⭐⭐⭐</span>
-            </div>
-            
-            <a href="https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-slip-amid-continued-iran-fallout-with-cpi-on-deck-231325809.html" target="_blank" rel="noopener">Yahoo Finance →</a>
-            
-        </div>
-    </div>
-    
-    
-    <h2 class="section-title">
-        🌍
-        Geopolitica
-    </h2>
+        
+        
 
-    
-    <div class="card">
-        <h3>
-            Guerra estesa in Medio Oriente
-        </h3>
-        <p>Un attacco congiunto USA-Israele contro l'Iran, seguito da ritorsioni iraniane, ha coinvolto gran parte del Medio Oriente in un conflitto. La situazione è tesa e gli investitori sono preoccupati per le ripercussioni globali.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag" data-cat="geopolitica">geopolitica</span>
-                <span class="importance">⭐⭐⭐⭐⭐</span>
+        
+        
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">💹</div>
+                <h2 class="section-title">Mercati</h2>
             </div>
-            
-            <a href="https://www.crisisgroup.org/cmt/middle-east-north-africa/iran-israelpalestine-united-states/sprawling-middle-east-war-explodes" target="_blank" rel="noopener">International Crisis Group →</a>
-            
-        </div>
-    </div>
-    
-    <div class="card">
-        <h3>
-            Conflitto Iran-Israele: escalation
-        </h3>
-        <p>L'attacco iraniano a Israele ha portato a un' escalation del conflitto, con ripercussioni sui mercati globali. Gli investitori monitorano la situazione con attenzione.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag" data-cat="geopolitica">geopolitica</span>
-                <span class="importance">⭐⭐⭐⭐</span>
-            </div>
-            
-            <a href="https://warontherocks.com/2026/03/the-blank-check-how-an-unconditional-alliance-took-america-to-war-in-iran/" target="_blank" rel="noopener">War on the Rocks →</a>
-            
-        </div>
-    </div>
-    
-    <div class="card">
-        <h3>
-            Oman evacua il porto petrolifero chiave
-        </h3>
-        <p>L'Oman ha ordinato l'evacuazione delle navi dal porto petrolifero chiave di Mina Al Fahal, a causa dell'intensificarsi degli attacchi alle infrastrutture energetiche regionali. La mossa evidenzia i rischi per l'approvvigionamento energetico globale.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag" data-cat="geopolitica">geopolitica</span>
-                <span class="importance">⭐⭐⭐⭐</span>
-            </div>
-            
-            <a href="https://oilprice.com/Latest-Energy-News/World-News/Oman-Evacuates-Key-Oil-Port-as-Iran-War-Intensifies.html" target="_blank" rel="noopener">OilPrice →</a>
-            
-        </div>
-    </div>
-    
-    
-    <h2 class="section-title">
-        🏛
-        Macroeconomia
-    </h2>
 
-    
-    <div class="card">
-        <h3>
-            Inflazione nel Regno Unito potrebbe aumentare
-        </h3>
-        <p>L'Office for Budget Responsibility (OBR) del Regno Unito prevede che l'inflazione potrebbe raggiungere il 3% entro la fine del 2026 a causa della guerra USA-Israele in Iran. Gli investitori devono considerare questo scenario.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag" data-cat="macro_economia">macro_economia</span>
-                <span class="importance">⭐⭐⭐⭐⭐</span>
+            <div class="grid">
+                
+                <div class="news-card">
+                    <div class="news-header">
+                        <div class="importance-stars">
+                            ★★★★★
+                        </div>
+                    </div>
+                    <h3 class="news-title">Futures azionari USA in calo</h3>
+                    <p class="news-summary">I futures Dow, S&P 500 e Nasdaq sono in calo a causa dell'escalation del conflitto in Medio Oriente e delle preoccupazioni inflazionistiche.</p>
+                    <div class="news-footer">
+                        <span class="source-tag">Yahoo Finance</span>
+                        
+                        <a href="https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-slip-amid-continued-iran-fallout-with-cpi-on-deck-231325809.html" target="_blank" class="read-more">Source →</a>
+                        
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <div class="news-header">
+                        <div class="importance-stars">
+                            ★★★★★
+                        </div>
+                    </div>
+                    <h3 class="news-title">Petrolio Brent a $91.3</h3>
+                    <p class="news-summary">Il prezzo del petrolio Brent aumenta del 4.2% a $91.3 a causa dell'escalation del conflitto in Medio Oriente e delle preoccupazioni sulla produzione di petrolio.</p>
+                    <div class="news-footer">
+                        <span class="source-tag">OilPrice</span>
+                        
+                        <a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html" target="_blank" class="read-more">Source →</a>
+                        
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <div class="news-header">
+                        <div class="importance-stars">
+                            ★★★★★
+                        </div>
+                    </div>
+                    <h3 class="news-title">VIX a 28</h3>
+                    <p class="news-summary">L'indice di volatilità VIX sale a 28, segnalando un'aumentata avversione al rischio tra gli investitori a causa dell'incertezza sul conflitto in Medio Oriente.</p>
+                    <div class="news-footer">
+                        <span class="source-tag">Yahoo Finance</span>
+                        
+                        <a href="https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-slip-amid-continued-iran-fallout-with-cpi-on-deck-231325809.html" target="_blank" class="read-more">Source →</a>
+                        
+                    </div>
+                </div>
+                
             </div>
-            
-            <a href="https://www.theguardian.com/business/2026/mar/10/uk-inflation-could-rise-1-because-of-middle-east-crisis-says-obr" target="_blank" rel="noopener">Guardian Economics →</a>
-            
         </div>
-    </div>
-    
-    <div class="card">
-        <h3>
-            Preoccupazioni inflazionistiche
-        </h3>
-        <p>L'aumento dei prezzi dell'energia potrebbe portare a preoccupazioni inflazionistiche a livello globale. Gli investitori devono monitorare l'evoluzione della situazione.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag" data-cat="macro_economia">macro_economia</span>
-                <span class="importance">⭐⭐⭐⭐</span>
+        
+        
+        
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <h2 class="section-title">Geopolitica</h2>
             </div>
-            
-            <a href="https://www.project-syndicate.org/commentary/iran-war-oil-crisis-historical-lessons-by-jim-o-neill-2026-03" target="_blank" rel="noopener">Project Syndicate →</a>
-            
-        </div>
-    </div>
-    
-    <div class="card">
-        <h3>
-            Cina e shock petrolifero
-        </h3>
-        <p>La Cina, principale importatore mondiale di petrolio e gas naturale liquefatto, sembra meno vulnerabile al shock petrolifero grazie alle sue riserve strategiche. Tuttavia, la situazione rimane critica.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag" data-cat="macro_economia">macro_economia</span>
-                <span class="importance">⭐⭐⭐⭐</span>
-            </div>
-            
-            <a href="https://oilprice.com/Energy/Crude-Oil/China-Stockpiles-Soften-the-Blow-of-the-Global-Oil-Shock.html" target="_blank" rel="noopener">OilPrice →</a>
-            
-        </div>
-    </div>
-    
-    
-    <h2 class="section-title">
-        ⚡
-        Energia
-    </h2>
 
-    
-    <div class="card">
-        <h3>
-            Rischi per l'approvvigionamento di petrolio
-        </h3>
-        <p>L'Iran ha iniziato a posare mine navali nello Stretto di Hormuz, una mossa che potrebbe estendere il blocco del cruciale punto di strozzatura energetico. La situazione è estremamente critica.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag" data-cat="energia">energia</span>
-                <span class="importance">⭐⭐⭐⭐⭐</span>
+            <div class="grid">
+                
+                <div class="news-card">
+                    <div class="news-header">
+                        <div class="importance-stars">
+                            ★★★★★
+                        </div>
+                    </div>
+                    <h3 class="news-title">Conflitto in Medio Oriente si estende</h3>
+                    <p class="news-summary">L'attacco congiunto USA-Israele contro l'Iran ha portato a ritorsioni iraniane, coinvolgendo gran parte del Medio Oriente in un conflitto.</p>
+                    <div class="news-footer">
+                        <span class="source-tag">International Crisis Group</span>
+                        
+                        <a href="https://www.crisisgroup.org/cmt/middle-east-north-africa/iran-israelpalestine-united-states/sprawling-middle-east-war-explodes" target="_blank" class="read-more">Source →</a>
+                        
+                    </div>
+                </div>
+                
             </div>
-            
-            <a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html" target="_blank" rel="noopener">OilPrice →</a>
-            
         </div>
-    </div>
-    
-    <div class="card">
-        <h3>
-            Aumento dei prezzi del petrolio
-        </h3>
-        <p>I prezzi del petrolio sono aumentati a causa dell'escalation del conflitto in Medio Oriente. Gli investitori devono considerare l'impatto sui mercati globali.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag" data-cat="energia">energia</span>
-                <span class="importance">⭐⭐⭐⭐</span>
+        
+        
+        
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🏛</div>
+                <h2 class="section-title">Macroeconomia</h2>
             </div>
-            
-            <a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Surge-Despite-Record-Breaking-Strategic-Reserve-Release.html" target="_blank" rel="noopener">OilPrice →</a>
-            
-        </div>
-    </div>
-    
-    <div class="card">
-        <h3>
-            Europa e carenza di carburante per aerei
-        </h3>
-        <p>La chiusura dello Stretto di Hormuz ha innescato una distorsione senza precedenti nel mercato globale del carburante per aerei, spingendo i prezzi ai livelli storici. L'Europa è particolarmente vulnerabile.</p>
-        <div class="meta">
-            <div>
-                <span class="category-tag" data-cat="energia">energia</span>
-                <span class="importance">⭐⭐⭐⭐</span>
-            </div>
-            
-            <a href="https://oilprice.com/Energy/Energy-General/Europe-Faces-Jet-Fuel-Price-Surge-and-Supply-Shortages.html" target="_blank" rel="noopener">OilPrice →</a>
-            
-        </div>
-    </div>
-    
-    
 
-    <div class="back-link">
-        <a href="index.html">← Torna alla homepage</a>
+            <div class="grid">
+                
+                <div class="news-card">
+                    <div class="news-header">
+                        <div class="importance-stars">
+                            ★★★★★
+                        </div>
+                    </div>
+                    <h3 class="news-title">Inflazione UK potrebbe raggiungere il 3%</h3>
+                    <p class="news-summary">L'inflazione nel Regno Unito potrebbe raggiungere il 3% entro la fine del 2026 a causa dello shock sui prezzi dell'energia innescato dalla crisi in Medio Oriente.</p>
+                    <div class="news-footer">
+                        <span class="source-tag">Guardian Economics</span>
+                        
+                        <a href="https://www.theguardian.com/business/2026/mar/10/uk-inflation-could-rise-1-because-of-middle-east-crisis-says-obr" target="_blank" class="read-more">Source →</a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">⚡</div>
+                <h2 class="section-title">Energia</h2>
+            </div>
+
+            <div class="grid">
+                
+                <div class="news-card">
+                    <div class="news-header">
+                        <div class="importance-stars">
+                            ★★★★★
+                        </div>
+                    </div>
+                    <h3 class="news-title">Prezzi del petrolio in aumento</h3>
+                    <p class="news-summary">I prezzi del petrolio sono in aumento a causa dell'escalation del conflitto in Medio Oriente e delle preoccupazioni sulla produzione di petrolio.</p>
+                    <div class="news-footer">
+                        <span class="source-tag">OilPrice</span>
+                        
+                        <a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html" target="_blank" class="read-more">Source →</a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+
+        <footer>
+            <p>© 2026 Morning Briefing. All curated indices from institutional feeds.</p>
+            <p style="margin-top: 1rem;"><a href="index.html">Homepage</a> · <a href="feed.xml">RSS</a></p>
+        </footer>
     </div>
 
-    <footer>
-        <p>Morning Briefing Agent — <a href="https://github.com/vinciber/morning-briefing">GitHub</a></p>
-        <p><a href="feed.xml">RSS Feed</a></p>
-    </footer>
+    
+    <div class="audio-container">
+        <button class="audio-fab" onclick="toggleAudio()" title="Listen to Briefing">
+            <svg id="play-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg id="pause-icon" style="display:none;" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+        </button>
+        <audio id="briefing-audio" src="audio/briefing_20260312.mp3"></audio>
+    </div>
+    
 
     <script>
-        // Colorize market data values based on +/- prefix
-        document.querySelectorAll('.market-item strong').forEach(el => {
-            let text = el.innerText;
-            if (text.includes('+')) {
-                el.innerHTML = text.replace(/(\+[^%\s]+%?)/, '<span style="color: var(--risk-on);">$1</span>');
-            } else if (text.includes('-')) {
-                el.innerHTML = text.replace(/(-[^%\s]+%?)/, '<span style="color: var(--risk-off);">$1</span>');
+        const audio = document.getElementById('briefing-audio');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            } else {
+                audio.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
             }
-        });
+        }
+
+        audio.onended = () => {
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+        }
     </script>
 </body>
 </html>

@@ -2,30 +2,41 @@
   "date": "2026-03-12",
   "sentiment": {
     "label": "risk_off",
-    "reason_it": "Il sentiment è 'risk_off' a causa dell'escalation del conflitto in Medio Oriente, che ha portato a interruzioni delle forniture di petrolio, aumento dei prezzi dell'energia e preoccupazioni inflazionistiche. Gli investitori sono prudenti in attesa di ulteriori sviluppi.",
-    "reason_en": "The sentiment is 'risk_off' due to the escalating Middle East conflict, which has led to oil supply disruptions, rising energy prices, and inflation concerns. Investors are cautious awaiting further developments."
+    "score": 8,
+    "reason_it": "Il sentiment è 'risk_off' a causa dell'escalation del conflitto in Medio Oriente, con un aumento significativo dei prezzi del petrolio e preoccupazioni inflazionistiche. Il Brent sale del 4.2% a $91.3, il VIX tocca 28 e il mercato azionario mostra segni di debolezza.",
+    "reason_en": "The sentiment is 'risk_off' due to the escalating Middle East conflict, with a significant increase in oil prices and inflation concerns. Brent crude rises 4.2% to $91.3, VIX hits 28, and the stock market shows signs of weakness."
   },
-  "market_data": {
-    "eur_usd": "1.1581",
-    "vix": "N/A",
-    "btp_10y": "N/A",
-    "gold": "$5,177/oz",
-    "oil_brent": "N/A",
-    "sp500_futures": "6,776",
-    "stoxx_600": "N/A",
-    "nikkei": "54,453",
-    "shanghai": "4,129",
-    "us_10y": "N/A"
+  "market_impact_summary": {
+    "it": "I mercati azionari globali sono in territorio negativo, con futures Dow, S&P 500 e Nasdaq in calo. Il prezzo del petrolio Brent raggiunge $91.3, in aumento del 4.2%. L'indice di volatilità VIX sale a 28, segnalando un'aumentata avversione al rischio. Le obbligazioni governative sono in compressione, con il TLT in calo.",
+    "en": "Global stock markets are in negative territory, with Dow, S&P 500, and Nasdaq futures down. Brent crude oil price reaches $91.3, up 4.2%. The VIX index rises to 28, indicating increased risk aversion. Government bonds are in compression, with TLT down."
   },
   "sections": [
     {
       "name": "mercati",
       "items": [
         {
-          "title_it": "Futures azionari statunitensi in calo",
-          "title_en": "US stock futures decline",
-          "summary_it": "I futures sui principali indici azionari statunitensi sono in calo a causa delle continue ricadute del conflitto in Medio Oriente. Gli investitori sono prudenti in attesa di ulteriori sviluppi.",
-          "summary_en": "Futures on major US stock indices are declining due to the ongoing fallout from the Middle East conflict. Investors are cautious awaiting further developments.",
+          "title_it": "Futures azionari USA in calo",
+          "title_en": "US stock futures down",
+          "summary_it": "I futures Dow, S&P 500 e Nasdaq sono in calo a causa dell'escalation del conflitto in Medio Oriente e delle preoccupazioni inflazionistiche.",
+          "summary_en": "Dow, S&P 500, and Nasdaq futures are down due to the escalating Middle East conflict and inflation concerns.",
+          "source_name": "Yahoo Finance",
+          "source_url": "https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-slip-amid-continued-iran-fallout-with-cpi-on-deck-231325809.html",
+          "importance": 5
+        },
+        {
+          "title_it": "Petrolio Brent a $91.3",
+          "title_en": "Brent crude at $91.3",
+          "summary_it": "Il prezzo del petrolio Brent aumenta del 4.2% a $91.3 a causa dell'escalation del conflitto in Medio Oriente e delle preoccupazioni sulla produzione di petrolio.",
+          "summary_en": "Brent crude oil price rises 4.2% to $91.3 due to the escalating Middle East conflict and concerns over oil production.",
+          "source_name": "OilPrice",
+          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html",
+          "importance": 5
+        },
+        {
+          "title_it": "VIX a 28",
+          "title_en": "VIX at 28",
+          "summary_it": "L'indice di volatilità VIX sale a 28, segnalando un'aumentata avversione al rischio tra gli investitori a causa dell'incertezza sul conflitto in Medio Oriente.",
+          "summary_en": "The VIX index rises to 28, indicating increased risk aversion among investors due to uncertainty over the Middle East conflict.",
           "source_name": "Yahoo Finance",
           "source_url": "https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-slip-amid-continued-iran-fallout-with-cpi-on-deck-231325809.html",
           "importance": 5
@@ -36,31 +47,13 @@
       "name": "geopolitica",
       "items": [
         {
-          "title_it": "Guerra estesa in Medio Oriente",
-          "title_en": "A Sprawling Middle East War",
-          "summary_it": "Un attacco congiunto USA-Israele contro l'Iran, seguito da ritorsioni iraniane, ha coinvolto gran parte del Medio Oriente in un conflitto. La situazione è tesa e gli investitori sono preoccupati per le ripercussioni globali.",
-          "summary_en": "A joint U.S.-Israeli attack on Iran, followed by Iranian retaliation, has engulfed much of the Middle East in conflict. The situation is tense and investors are concerned about global repercussions.",
+          "title_it": "Conflitto in Medio Oriente si estende",
+          "title_en": "Middle East conflict escalates",
+          "summary_it": "L'attacco congiunto USA-Israele contro l'Iran ha portato a ritorsioni iraniane, coinvolgendo gran parte del Medio Oriente in un conflitto.",
+          "summary_en": "The joint U.S.-Israeli attack on Iran has led to Iranian retaliation, engulfing much of the Middle East in conflict.",
           "source_name": "International Crisis Group",
           "source_url": "https://www.crisisgroup.org/cmt/middle-east-north-africa/iran-israelpalestine-united-states/sprawling-middle-east-war-explodes",
           "importance": 5
-        },
-        {
-          "title_it": "Conflitto Iran-Israele: escalation",
-          "title_en": "Iran-Israel conflict: escalation",
-          "summary_it": "L'attacco iraniano a Israele ha portato a un' escalation del conflitto, con ripercussioni sui mercati globali. Gli investitori monitorano la situazione con attenzione.",
-          "summary_en": "The Iranian attack on Israel led to an escalation of the conflict, with repercussions on global markets. Investors are monitoring the situation closely.",
-          "source_name": "War on the Rocks",
-          "source_url": "https://warontherocks.com/2026/03/the-blank-check-how-an-unconditional-alliance-took-america-to-war-in-iran/",
-          "importance": 4
-        },
-        {
-          "title_it": "Oman evacua il porto petrolifero chiave",
-          "title_en": "Oman evacuates key oil port",
-          "summary_it": "L'Oman ha ordinato l'evacuazione delle navi dal porto petrolifero chiave di Mina Al Fahal, a causa dell'intensificarsi degli attacchi alle infrastrutture energetiche regionali. La mossa evidenzia i rischi per l'approvvigionamento energetico globale.",
-          "summary_en": "Oman has ordered the evacuation of vessels from its key Mina Al Fahal oil port, due to intensifying attacks on regional energy infrastructure. The move highlights the risks to global energy supply.",
-          "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Oman-Evacuates-Key-Oil-Port-as-Iran-War-Intensifies.html",
-          "importance": 4
         }
       ]
     },
@@ -68,31 +61,13 @@
       "name": "macro_economia",
       "items": [
         {
-          "title_it": "Inflazione nel Regno Unito potrebbe aumentare",
-          "title_en": "UK inflation could rise",
-          "summary_it": "L'Office for Budget Responsibility (OBR) del Regno Unito prevede che l'inflazione potrebbe raggiungere il 3% entro la fine del 2026 a causa della guerra USA-Israele in Iran. Gli investitori devono considerare questo scenario.",
-          "summary_en": "The UK's Office for Budget Responsibility (OBR) believes inflation could end 2026 at 3% due to the U.S.-Israel war in Iran. Investors need to consider this scenario.",
+          "title_it": "Inflazione UK potrebbe raggiungere il 3%",
+          "title_en": "UK inflation could reach 3%",
+          "summary_it": "L'inflazione nel Regno Unito potrebbe raggiungere il 3% entro la fine del 2026 a causa dello shock sui prezzi dell'energia innescato dalla crisi in Medio Oriente.",
+          "summary_en": "UK inflation could reach 3% by the end of 2026 due to the energy price shock triggered by the Middle East crisis.",
           "source_name": "Guardian Economics",
           "source_url": "https://www.theguardian.com/business/2026/mar/10/uk-inflation-could-rise-1-because-of-middle-east-crisis-says-obr",
           "importance": 5
-        },
-        {
-          "title_it": "Preoccupazioni inflazionistiche",
-          "title_en": "Inflation concerns",
-          "summary_it": "L'aumento dei prezzi dell'energia potrebbe portare a preoccupazioni inflazionistiche a livello globale. Gli investitori devono monitorare l'evoluzione della situazione.",
-          "summary_en": "The rise in energy prices could lead to inflation concerns globally. Investors need to monitor the situation closely.",
-          "source_name": "Project Syndicate",
-          "source_url": "https://www.project-syndicate.org/commentary/iran-war-oil-crisis-historical-lessons-by-jim-o-neill-2026-03",
-          "importance": 4
-        },
-        {
-          "title_it": "Cina e shock petrolifero",
-          "title_en": "China and oil shock",
-          "summary_it": "La Cina, principale importatore mondiale di petrolio e gas naturale liquefatto, sembra meno vulnerabile al shock petrolifero grazie alle sue riserve strategiche. Tuttavia, la situazione rimane critica.",
-          "summary_en": "China, the world's top crude oil and LNG importer, appears less vulnerable to the oil shock due to its strategic reserves. However, the situation remains critical.",
-          "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Energy/Crude-Oil/China-Stockpiles-Soften-the-Blow-of-the-Global-Oil-Shock.html",
-          "importance": 4
         }
       ]
     },
@@ -100,41 +75,63 @@
       "name": "energia",
       "items": [
         {
-          "title_it": "Rischi per l'approvvigionamento di petrolio",
-          "title_en": "Oil supply risks",
-          "summary_it": "L'Iran ha iniziato a posare mine navali nello Stretto di Hormuz, una mossa che potrebbe estendere il blocco del cruciale punto di strozzatura energetico. La situazione è estremamente critica.",
-          "summary_en": "Iran has begun laying naval mines in the strategically vital Strait of Hormuz, a move that could extend the effective blockade of the world’s most critical energy chokepoint. The situation is extremely critical.",
+          "title_it": "Prezzi del petrolio in aumento",
+          "title_en": "Oil prices rising",
+          "summary_it": "I prezzi del petrolio sono in aumento a causa dell'escalation del conflitto in Medio Oriente e delle preoccupazioni sulla produzione di petrolio.",
+          "summary_en": "Oil prices are rising due to the escalating Middle East conflict and concerns over oil production.",
           "source_name": "OilPrice",
           "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Supply-Risks-Mount-as-Iran-Lays-Mines-in-Strait-of-Hormuz.html",
           "importance": 5
-        },
-        {
-          "title_it": "Aumento dei prezzi del petrolio",
-          "title_en": "Rise in oil prices",
-          "summary_it": "I prezzi del petrolio sono aumentati a causa dell'escalation del conflitto in Medio Oriente. Gli investitori devono considerare l'impatto sui mercati globali.",
-          "summary_en": "Oil prices have risen due to the escalation of the conflict in the Middle East. Investors need to consider the impact on global markets.",
-          "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Surge-Despite-Record-Breaking-Strategic-Reserve-Release.html",
-          "importance": 4
-        },
-        {
-          "title_it": "Europa e carenza di carburante per aerei",
-          "title_en": "Europe faces jet fuel shortage",
-          "summary_it": "La chiusura dello Stretto di Hormuz ha innescato una distorsione senza precedenti nel mercato globale del carburante per aerei, spingendo i prezzi ai livelli storici. L'Europa è particolarmente vulnerabile.",
-          "summary_en": "The closure of the Strait of Hormuz has triggered an unprecedented distortion in global jet fuel markets, pushing European aviation fuel prices to historic extremes. Europe is particularly vulnerable.",
-          "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Energy/Energy-General/Europe-Faces-Jet-Fuel-Price-Surge-and-Supply-Shortages.html",
-          "importance": 4
         }
       ]
     }
   ],
   "market_data_raw": {
     "eur_usd": {
-      "value": "1.1581",
+      "value": "1.1547",
+      "change": "N/A"
+    },
+    "dxy": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "sp500": {
+      "value": "N/A",
       "change": "N/A"
     },
     "vix": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "tlt": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "us_10y": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "gold": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "btcusd": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "oil_brent": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "stoxx_600": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "nikkei": {
+      "value": "N/A",
+      "change": "N/A"
+    },
+    "shanghai": {
       "value": "N/A",
       "change": "N/A"
     },
@@ -142,31 +139,7 @@
       "value": "N/A",
       "change": "N/A"
     },
-    "gold": {
-      "value": "$5,177/oz",
-      "change": "-0.09%"
-    },
-    "oil_brent": {
-      "value": "N/A",
-      "change": "N/A"
-    },
-    "sp500_futures": {
-      "value": "6,776",
-      "change": "-0.08%"
-    },
-    "stoxx_600": {
-      "value": "N/A",
-      "change": "N/A"
-    },
-    "nikkei": {
-      "value": "54,453",
-      "change": "-1.04%"
-    },
-    "shanghai": {
-      "value": "4,129",
-      "change": "-0.10%"
-    },
-    "us_10y": {
+    "global_m2": {
       "value": "N/A",
       "change": "N/A"
     }
