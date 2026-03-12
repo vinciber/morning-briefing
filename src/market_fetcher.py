@@ -40,8 +40,8 @@ def run():
     logger.info(f'EUR/USD: {val}')
 
     av_symbols = {
-        'sp500':     '^GSPC',
-        'vix':       '^VIX',
+        'sp500':     'SPY',
+        'vix':       'VIXY',
         'gold':      'GLD',
         'oil_brent': 'BNO',
     }

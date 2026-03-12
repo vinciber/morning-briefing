@@ -137,7 +137,7 @@ HISTORY (NON RIPETERE QUESTE NOTIZIE):
     logger.info('🤖 Chiamata a Groq...')
     try:
         response = client.chat.completions.create(
-            model='meta-llama/llama-4-scout-17b-11e-instruct',
+            model='meta-llama/llama-4-scout-17b-16e-instruct',
             messages=[
                 {'role': 'system', 'content': SYSTEM_PROMPT},
                 {'role': 'user', 'content': user_prompt},
