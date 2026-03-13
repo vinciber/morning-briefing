@@ -115,6 +115,24 @@ LUNGHEZZA audio: MINIMO 800 parole per lingua — TASSATIVO.
 MAX TOKENS OUTPUT: 8000.
 """
 
+AUDIO_SYSTEM_PROMPT = """Sei un conduttore radiofonico finanziario senior stile Bloomberg Radio.
+Devi scrivere ESATTAMENTE uno script audio da 800-1000 parole in italiano.
+
+REGOLE ASSOLUTE:
+- MAI frasi come "speriamo che questo podcast sia stato utile" o "arrivederci"
+- MAI elenchi puntati
+- SEMPRE valori numerici specifici per ogni asset citato
+- Tono: autorevole, didattico, mai banale
+
+STRUTTURA OBBLIGATORIA (rispetta i tempi):
+1. APERTURA (150 parole): sentiment del giorno + 3 dati chiave con numeri
+2. MERCATI (250 parole): ogni asset con valore, variazione e implicazione macro
+3. GEOPOLITICA (150 parole): eventi e impatto diretto sui prezzi
+4. MACRO/BANCHE CENTRALI (150 parole): Fed, BCE, tassi, inflazione
+5. CHIUSURA FORWARD-LOOKING (100 parole): cosa monitorare domani
+
+CONTA LE PAROLE. Se sei sotto 800, espandi ogni sezione prima di rispondere."""
+
 
 def _merge_article_impacts(articles: list, article_impacts: list) -> list:
     """
@@ -272,25 +290,25 @@ def run():
 
         # CHIAMATA 2 — Audio Script dedicato (MIN 800 PAROLE)
         logger.info('🎙️ Chiamata 2: Groq Llama 4 Audio Script (MIN 800 parole)...')
-        audio_prompt = f"""
-{market_context}
-SENTIMENT OGGI: {briefing.get('sentiment', {}).get('label', 'neutral')} (score {briefing.get('sentiment', {}).get('score', 5)})
+        audio_user = f"""Scrivi lo script audio completo basandoti su questi dati:
+
+SENTIMENT: {briefing.get('sentiment', {}).get('label', 'neutral').upper()} — score {briefing.get('sentiment', {}).get('score', 5)}/10
 {briefing.get('sentiment', {}).get('reason_it', '')}
 
-ARTICOLI DEL GIORNO:
-{articles_json}
+DATI MERCATO:
+{market_context}
 
-Scrivi SOLO l'audio script per podcast in italiano e inglese.
-MINIMO 800 PAROLE TASSATIVO PER LINGUA.
-Prosa narrativa fluida, tono Bloomberg radio.
-Struttura: apertura → mercati con numeri → geopolitica → macro/banche centrali → chiusura forward-looking.
-Rispondi con JSON: {{"audio_script_it": "...", "audio_script_en": "..."}}
-"""
+NOTIZIE DEL GIORNO:
+{chr(10).join(f"- [{a['category'].upper()}] {a['title']} — {a['snippet'][:150]}" for a in articles_slim[:12])}
+
+REQUISITO: minimo 800 parole. Conta internamente prima di rispondere.
+Restituisci JSON: {{"audio_script_it": "...", "audio_script_en": "..."}}"""
+
         audio_response = client.chat.completions.create(
             model='meta-llama/llama-4-scout-17b-16e-instruct',
             messages=[
-                {'role': 'system', 'content': 'Sei un conduttore radiofonico finanziario senior. Scrivi solo testo parlato fluido, mai elenchi puntati. Ogni sezione deve essere approfondita per raggiungere il target di 800 parole.'},
-                {'role': 'user',   'content': audio_prompt},
+                {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT},
+                {'role': 'user',   'content': audio_user},
             ],
             temperature=0.3,
             max_tokens=6000,
