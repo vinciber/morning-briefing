@@ -173,7 +173,7 @@ def fetch_rss_feed(source: dict, tier: int) -> list[dict]:
                 'url': link,
                 'source': name,
                 'tier': tier,
-                'category': normalize_category(category), # Normalize here (Problem 2)
+                'category': normalize_category(source.get('category', 'mercati')), # Normalize here (Problem 2)
                 'snippet': snippet,
                 'date': date_str,
                 'relevance_score': round(score, 3),
@@ -233,7 +233,7 @@ def fetch_webfetch_source(source: dict) -> list[dict]:
                 'url': href,
                 'source': name,
                 'tier': 3,
-                'category': normalize_category(category), # Normalize here (Problem 2)
+                'category': normalize_category(source.get('category', 'mercati')), # Normalize here (Problem 2)
                 'snippet': '',
                 'date': datetime.now(timezone.utc).isoformat(),
                 'relevance_score': round(score, 3),

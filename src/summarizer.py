@@ -200,7 +200,7 @@ def run():
 
         briefing['date'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
         briefing['market_data_raw'] = md
-        # briefing['macro_calendar'] = md.get('macro_calendar', {}) # Rimossa duplicazione (Problem 1)
+        briefing.pop('macro_calendar', None) # Remove it if LLM generated it top-level
         briefing['articles'] = articles # Iniezione articoli raw per architettura feed
 
         OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)

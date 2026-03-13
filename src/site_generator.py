@@ -234,12 +234,13 @@ def generate_rss(briefing: dict, base_url: str, max_items: int = 30, lang: str =
 
     items_xml = []
     for art in briefing.get('articles', []):
+        # Use localized fields with generic fallbacks to prevent empty cards
         if lang == 'it':
-            title = art.get('title_it', art.get('title_en', ''))
-            summary = art.get('summary_it', art.get('summary_en', ''))
+            title = art.get('title_it') or art.get('title_en') or art.get('title', '')
+            summary = art.get('summary_it') or art.get('summary_en') or art.get('snippet', '')
         else:
-            title = art.get('title_en', art.get('title_it', ''))
-            summary = art.get('summary_en', art.get('summary_it', ''))
+            title = art.get('title_en') or art.get('title_it') or art.get('title', '')
+            summary = art.get('summary_en') or art.get('summary_it') or art.get('snippet', '')
         
         # Link della news originale
         source_url = art.get('source_url', f'{base_url}/{date}.html')
