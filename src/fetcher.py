@@ -282,7 +282,15 @@ def smart_select(articles):
 
     # PASSAGGIO 2 — deduplicazione semantica titoli >70% simili
     deduplicated = []
+    score_1_count = 0
     for candidate in articles:
+        # Cap max 3 articoli con score 1.0 (Problem 2)
+        if candidate.get('relevance_score', 0) >= 1.0:
+            if score_1_count >= 3:
+                candidate['relevance_score'] = 0.9
+            else:
+                score_1_count += 1
+
         title_c = candidate.get('title', '') or candidate.get('title_it', '')
         is_duplicate = False
         for kept in deduplicated:

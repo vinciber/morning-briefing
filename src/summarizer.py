@@ -254,8 +254,9 @@ def run():
                 + "\n".join(f"- {t}" for t in history_titles[:20])
             )
 
-    logger.info(f'🤖 Chiamata a Groq Llama 4 Scout ({len(articles_slim)} articoli)...')
+    logger.info(f'🤖 Chiamata 1: Groq Llama 4 Analysis ({len(articles_slim)} articoli)...')
     try:
+        # CHIAMATA 1 — Sentiment, Market Impact Summary, e Article Impacts
         response = client.chat.completions.create(
             model='meta-llama/llama-4-scout-17b-16e-instruct',
             messages=[
@@ -263,11 +264,41 @@ def run():
                 {'role': 'user',   'content': user_prompt},
             ],
             temperature=0.2,
-            max_tokens=8000,
+            max_tokens=4000,
             response_format={'type': 'json_object'},
         )
         raw_text = response.choices[0].message.content.strip()
         briefing = json.loads(raw_text)
+
+        # CHIAMATA 2 — Audio Script dedicato (MIN 800 PAROLE)
+        logger.info('🎙️ Chiamata 2: Groq Llama 4 Audio Script (MIN 800 parole)...')
+        audio_prompt = f"""
+{market_context}
+SENTIMENT OGGI: {briefing.get('sentiment', {}).get('label', 'neutral')} (score {briefing.get('sentiment', {}).get('score', 5)})
+{briefing.get('sentiment', {}).get('reason_it', '')}
+
+ARTICOLI DEL GIORNO:
+{articles_json}
+
+Scrivi SOLO l'audio script per podcast in italiano e inglese.
+MINIMO 800 PAROLE TASSATIVO PER LINGUA.
+Prosa narrativa fluida, tono Bloomberg radio.
+Struttura: apertura → mercati con numeri → geopolitica → macro/banche centrali → chiusura forward-looking.
+Rispondi con JSON: {{"audio_script_it": "...", "audio_script_en": "..."}}
+"""
+        audio_response = client.chat.completions.create(
+            model='meta-llama/llama-4-scout-17b-16e-instruct',
+            messages=[
+                {'role': 'system', 'content': 'Sei un conduttore radiofonico finanziario senior. Scrivi solo testo parlato fluido, mai elenchi puntati. Ogni sezione deve essere approfondita per raggiungere il target di 800 parole.'},
+                {'role': 'user',   'content': audio_prompt},
+            ],
+            temperature=0.3,
+            max_tokens=6000,
+            response_format={'type': 'json_object'},
+        )
+        audio_data = json.loads(audio_response.choices[0].message.content)
+        briefing['audio_script_it'] = audio_data.get('audio_script_it', '')
+        briefing['audio_script_en'] = audio_data.get('audio_script_en', '')
 
         # Merge article_impacts negli articoli raw
         article_impacts = briefing.pop('article_impacts', [])
@@ -283,7 +314,7 @@ def run():
 
         # Log qualità output
         audio_words = len(briefing.get('audio_script_it', '').split())
-        logger.info(f'✅ Briefing salvato: {len(articles_with_impact)} articoli')
+        logger.info(f'✅ Briefing completato: {len(articles_with_impact)} articoli')
         logger.info(f'🎙️ Audio script IT: {audio_words} parole '
                     f'{"✅" if audio_words >= 800 else "⚠️ SOTTO 800"}')
 
