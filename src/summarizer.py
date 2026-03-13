@@ -7,6 +7,7 @@ Output: data/briefing_today.json
 """
 
 import os
+import sys
 import json
 import logging
 from datetime import datetime, timezone
@@ -83,8 +84,8 @@ OUTPUT JSON:
     "it": "4-5 righe. Almeno 3 asset class con variazioni numeriche.",
     "en": "same in English"
   },
-  "audio_script_it": "Script completo per podcast 7-8 minuti in italiano. MINIMO 800 PAROLE. Tono Bloomberg radio. Mai elenchi puntati.",
-  "audio_script_en": "same in English, minimum 800 words."
+  "audio_script_it": "Script completo per podcast 7-8 minuti in italiano. MINIMO 800-1000 PAROLE. Tono Bloomberg radio. Mai elenchi puntati. Espandi ogni sezione analizzando le implicazioni e non limitarti a leggere i dati.",
+  "audio_script_en": "same in English, minimum 800-1000 words. Expand sections to ensure length."
 }
 """
 # A TARGET: 900-1000 parole IT totali (audio 7-8 minuti).
@@ -95,7 +96,7 @@ def run():
     """Pipeline principale: carica articoli + market + history → Groq → salva briefing JSON."""
     if not GROQ_API_KEY:
         logger.error('❌ GROQ_API_KEY non configurata!')
-        return None
+        sys.exit(1)
 
     if not INPUT_PATH.exists():
         logger.error(f'❌ File non trovato: {INPUT_PATH}')
@@ -199,7 +200,7 @@ def run():
 
         briefing['date'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
         briefing['market_data_raw'] = md
-        briefing['macro_calendar'] = md.get('macro_calendar', {})
+        # briefing['macro_calendar'] = md.get('macro_calendar', {}) # Rimossa duplicazione (Problem 1)
         briefing['articles'] = articles # Iniezione articoli raw per architettura feed
 
         OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
