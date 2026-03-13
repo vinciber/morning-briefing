@@ -146,7 +146,7 @@
       <span class="sentiment-score">Intensità: {{ sentiment.score }}/10</span>
       {% endif %}
     </div>
-    <div class="sentiment-reason">{{ sentiment['reason_' + lang] }}</div>
+    <div class="sentiment-reason">{{ (sentiment.get('reason_' + lang) or sentiment.get('reason_en') or sentiment.get('reason_it', '')) }}</div>
     {% if briefing.get('market_impact_summary') %}
     <div class="market-impact-summary">
       📊 {{ briefing['market_impact_summary'][lang] }}
@@ -219,16 +219,12 @@
         <span class="card-category cat-{{ item.get('category', 'mercati') }}">
           {{ item.get('display_category', item.get('category', '')) | replace('_',' ') }}
         </span>
-        {% set cat = item.get('category', '') %}
-        {% if cat == 'geopolitica' %}
-          <span class="impact-badge impact-bearish">▼ bearish</span>
-        {% elif cat == 'energia' %}
-          <span class="impact-badge impact-mixed">↔ mixed</span>
-        {% elif cat == 'mercati' %}
-          <span class="impact-badge impact-mixed">↔ mixed</span>
-        {% elif cat == 'macro_economia' %}
-          <span class="impact-badge impact-mixed">↔ mixed</span>
-        {% endif %}
+        {% set sentiment_val = item.get('sentiment_label', 'mixed') %}
+        <span class="impact-badge impact-{{ sentiment_val }}">
+          {% if sentiment_val == 'bullish' %}▲ bullish
+          {% elif sentiment_val == 'bearish' %}▼ bearish
+          {% else %}↔ mixed{% endif %}
+        </span>
 
         {% set raw_score = item.get('relevance_score', item.get('importance', 0)) or 0 %}
         {% set score = ((raw_score * 5) | round | int) if raw_score <= 1.0 else (raw_score | int) %}
@@ -240,10 +236,10 @@
       </div>
 
       <div class="card-title">
-        {{ item.get('title_' + lang, item.get('title_it', item.get('title', ''))) }}
+        {{ item.get('display_title') or item.get('title_' + lang) or item.get('title_en') or item.get('title_it', item.get('title', '')) }}
       </div>
       <div class="card-summary">
-        {{ item.get('summary_' + lang, item.get('summary_it', item.get('snippet', ''))) }}
+        {{ item.get('display_summary') or item.get('summary_' + lang) or item.get('summary_en') or item.get('summary_it', item.get('snippet', '')) }}
       </div>
 
       {% if item.get('market_impact') and item.market_impact.get('assets_affected') %}

@@ -113,13 +113,13 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
     for art in all_articles:
         # Fallbacks for titles/summaries
         if lang == 'en':
-            art['display_title'] = art.get('title_en', art.get('title_it', ''))
-            art['display_summary'] = art.get('summary_en', art.get('summary_it', ''))
+            art['display_title'] = art.get('title_en') or art.get('title_it') or art.get('title', '')
+            art['display_summary'] = art.get('summary_en') or art.get('summary_it') or art.get('snippet', art.get('description', ''))
             cat_raw = art.get('category', 'mercati')
             art['display_category'] = cat_map_en.get(cat_raw, cat_raw)
         else:
-            art['display_title'] = art.get('title_it', art.get('title_en', ''))
-            art['display_summary'] = art.get('summary_it', art.get('summary_en', ''))
+            art['display_title'] = art.get('title_it') or art.get('title_en') or art.get('title', '')
+            art['display_summary'] = art.get('summary_it') or art.get('summary_en') or art.get('snippet', art.get('description', ''))
             art['display_category'] = art.get('category', 'mercati')
 
         cat = art.get('category', 'mercati')
@@ -195,13 +195,13 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
     }
     for art in all_articles:
         if lang == 'en':
-            art['display_title'] = art.get('title_en', art.get('title_it', ''))
-            art['display_summary'] = art.get('summary_en', art.get('summary_it', ''))
+            art['display_title'] = art.get('title_en') or art.get('title_it') or art.get('title', '')
+            art['display_summary'] = art.get('summary_en') or art.get('summary_it') or art.get('snippet', art.get('description', ''))
             cat_raw = art.get('category', 'mercati')
             art['display_category'] = cat_map_en.get(cat_raw, cat_raw)
         else:
-            art['display_title'] = art.get('title_it', art.get('title_en', ''))
-            art['display_summary'] = art.get('summary_it', art.get('summary_en', ''))
+            art['display_title'] = art.get('title_it') or art.get('title_en') or art.get('title', '')
+            art['display_summary'] = art.get('summary_it') or art.get('summary_en') or art.get('snippet', art.get('description', ''))
             art['display_category'] = art.get('category', 'mercati')
 
     # Archive links
@@ -299,10 +299,26 @@ def generate_api_json(briefing: dict):
     api_dir = DOCS_DIR / 'api'
     api_dir.mkdir(parents=True, exist_ok=True)
 
+    # Allineamento con Mobile App: l'app si aspetta 'market_data' e 'url'
+    api_briefing = briefing.copy()
+    if 'market_data_raw' in api_briefing:
+        api_briefing['market_data'] = api_briefing['market_data_raw']
+    
+    if 'sections' in api_briefing:
+        for section in api_briefing['sections']:
+            for item in section.get('items', []):
+                if 'source_url' in item and 'url' not in item:
+                    item['url'] = item['source_url']
+    
+    if 'articles' in api_briefing:
+        for item in api_briefing['articles']:
+            if 'source_url' in item and 'url' not in item:
+                item['url'] = item['source_url']
+
     output_path = api_dir / 'today.json'
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(briefing, f, ensure_ascii=False, indent=2)
-    logger.info(f'✅ API JSON generato: {output_path}')
+        json.dump(api_briefing, f, ensure_ascii=False, indent=2)
+    logger.info(f'✅ API JSON generato (con allineamento mobile): {output_path}')
 
     date = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
     index_path = api_dir / 'index.json'
