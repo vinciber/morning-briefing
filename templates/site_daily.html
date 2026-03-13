@@ -1,481 +1,203 @@
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ briefing.date }} — Morning Briefing</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0f172a;
-            --glass: rgba(30, 41, 59, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.4);
-            --text: #f8fafc;
-            --text-muted: #94a3b8;
-            --risk-on: #10b981;
-            --risk-off: #ef4444;
-            --neutral: #f59e0b;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Briefing — {{ date }}</title>
+<style>
+  :root {
+    --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;
+    --border:#30363d;--text:#e6edf3;--text-muted:#7d8590;
+    --green:#3fb950;--red:#f85149;--yellow:#d29922;
+    --blue:#58a6ff;--orange:#e3861a;
+    --risk-on-bg:#0d2b1a;--risk-off-bg:#2b0d0d;--neutral-bg:#1a1a2b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;line-height:1.6;}
 
-        .text-risk-on { color: var(--risk-on) !important; }
-        .text-risk-off { color: var(--risk-off) !important; }
-        .text-neutral { color: var(--neutral) !important; }
+  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+  .header-left{display:flex;align-items:center;gap:16px;}
+  .header-title{font-size:18px;font-weight:700;letter-spacing:-0.3px;}
+  .header-date{color:var(--text-muted);font-size:13px;}
+  .lang-switch{display:flex;gap:8px;}
+  .lang-btn{padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);text-decoration:none;font-size:12px;}
+  .lang-btn.active{border-color:var(--blue);color:var(--blue);}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  .ticker-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 24px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
+  .ticker-bar::-webkit-scrollbar{display:none;}
+  .ticker-items{display:inline-flex;gap:24px;}
+  .ticker-item{display:inline-flex;flex-direction:column;gap:1px;}
+  .ticker-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;}
+  .ticker-value{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;}
+  .ticker-change{font-size:11px;}
+  .up{color:var(--green);}.down{color:var(--red);}.neu{color:var(--text-muted);}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            background-attachment: fixed;
-            color: var(--text);
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 1.5rem;
-        }
+  .container{max-width:900px;margin:0 auto;padding:24px 16px;}
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+  .sentiment-card{border-radius:10px;border:1px solid var(--border);padding:20px 24px;margin-bottom:24px;}
+  .sentiment-card.risk_off{background:var(--risk-off-bg);border-color:#f8514940;}
+  .sentiment-card.risk_on{background:var(--risk-on-bg);border-color:#3fb95040;}
+  .sentiment-card.neutral{background:var(--neutral-bg);border-color:#58a6ff40;}
+  .sentiment-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .sentiment-badge{padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+  .risk_off .sentiment-badge{background:var(--red);color:white;}
+  .risk_on .sentiment-badge{background:var(--green);color:#0d1117;}
+  .neutral .sentiment-badge{background:var(--blue);color:#0d1117;}
+  .sentiment-score{color:var(--text-muted);font-size:12px;}
+  .sentiment-reason{color:var(--text);font-size:14px;line-height:1.7;}
+  .market-impact-summary{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);color:var(--text-muted);font-size:13px;line-height:1.7;}
 
-        header {
-            margin-bottom: 3rem;
-            text-align: center;
-            position: relative;
-        }
+  .audio-section{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .audio-icon{font-size:24px;}
+  .audio-info{flex:1;}
+  .audio-title{font-size:13px;font-weight:600;margin-bottom:2px;}
+  .audio-sub{font-size:11px;color:var(--text-muted);}
+  audio{flex:2;height:36px;min-width:200px;}
 
-        h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            background: linear-gradient(to right, #fff, var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
+  .section{margin-bottom:32px;}
+  .section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .section-icon{font-size:18px;}
+  .section-title{font-size:16px;font-weight:700;}
+  .section-count{margin-left:auto;font-size:11px;color:var(--text-muted);background:var(--surface2);padding:2px 8px;border-radius:10px;}
 
-        .date-badge {
-            display: inline-block;
-            padding: 0.4rem 1.2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 999px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            backdrop-filter: blur(4px);
-        }
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px;margin-bottom:10px;transition:border-color 0.15s;}
+  .card:hover{border-color:#58a6ff60;}
+  .card-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+  .card-category{font-size:10px;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;}
+  .cat-mercati{background:#1a2b4a;color:var(--blue);}
+  .cat-geopolitica{background:#2b1a1a;color:var(--red);}
+  .cat-macro_economia{background:#1a2b1a;color:var(--green);}
+  .cat-energia{background:#2b2210;color:var(--orange);}
+  .impact-badge{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;}
+  .impact-bearish{background:#2b1a1a;color:var(--red);}
+  .impact-bullish{background:#1a2b1a;color:var(--green);}
+  .impact-mixed{background:#2b2210;color:var(--yellow);}
+  .tier-badge{font-size:10px;color:var(--text-muted);margin-left:auto;}
+  .tier-1{color:#d29922;}.tier-2{color:#7d8590;}
+  .stars{font-size:11px;color:var(--yellow);}
+  .card-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:8px;}
+  .card-summary{font-size:13px;color:#b1bac4;line-height:1.7;margin-bottom:10px;}
+  .card-assets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+  .asset-tag{font-size:11px;background:var(--surface2);border:1px solid var(--border);padding:2px 8px;border-radius:4px;color:var(--text-muted);font-family:monospace;}
+  .card-footer{display:flex;align-items:center;justify-content:space-between;}
+  .source-link{font-size:12px;color:var(--blue);text-decoration:none;}
+  .source-link:hover{text-decoration:underline;}
 
-        /* Sentiment Card */
-        .sentiment-card {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 1.5rem;
-            padding: 2rem;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
+  .footer{text-align:center;padding:32px 16px;color:var(--text-muted);font-size:12px;border-top:1px solid var(--border);margin-top:40px;}
+  .footer a{color:var(--blue);text-decoration:none;}
 
-        .sentiment-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 4px;
-            background: var(--status-color, var(--neutral));
-        }
-
-        .sentiment-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--status-color, var(--neutral));
-            box-shadow: 0 0 15px var(--status-color, var(--neutral));
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(var(--status-rgb), 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(var(--status-rgb), 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(var(--status-rgb), 0); }
-        }
-
-        .sentiment-label {
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 0.85rem;
-            color: var(--status-color, var(--neutral));
-        }
-
-        .sentiment-reason {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: var(--text);
-            line-height: 1.7;
-        }
-
-        /* Market Ticker */
-        .market-ticker {
-            display: flex;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.3);
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
-            margin: 0 -1.5rem 3rem;
-            padding: 0.75rem 0;
-            white-space: nowrap;
-        }
-
-        body.status-risk_on { --status-color: var(--risk-on); --status-rgb: 16, 185, 129; }
-        body.status-risk_off { --status-color: var(--risk-off); --status-rgb: 239, 68, 68; }
-        body.status-neutral { --status-color: var(--neutral); --status-rgb: 245, 158, 11; }
-
-        .ticker-content {
-            display: flex;
-            animation: ticker 60s linear infinite;
-            gap: 3rem;
-            padding-left: 100%;
-        }
-
-        @keyframes ticker {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
-        }
-
-        .ticker-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 0.85rem;
-        }
-
-        .ticker-item .label { color: var(--text-muted); font-weight: 600; }
-        .ticker-item .value { font-weight: 700; font-family: monospace; font-size: 1rem; }
-        .ticker-item .change { font-weight: 800; font-size: 0.8rem; }
-
-        /* Sections */
-        .section { margin-bottom: 4rem; }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .section-icon {
-            font-size: 1.5rem;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-        }
-
-        .section-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        /* Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 1.5rem;
-        }
-
-        @media (max-width: 600px) {
-            .grid { grid-template-columns: 1fr; }
-            h1 { font-size: 2rem; }
-        }
-
-        .news-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 1.25rem;
-            padding: 1.5rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .news-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-            background: rgba(30, 41, 59, 0.9);
-        }
-
-        .news-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .importance-stars { color: #fbbf24; font-size: 0.8rem; letter-spacing: 2px; }
-
-        .news-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.15rem;
-            font-weight: 700;
-            line-height: 1.4;
-            color: var(--text);
-        }
-
-        .news-summary {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .news-footer {
-            margin-top: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .source-tag {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .read-more {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .read-more:hover { color: var(--text); }
-
-        /* Audio Player */
-        .audio-container {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 100;
-        }
-
-        .audio-fab {
-            width: 64px;
-            height: 64px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 15px -3px var(--accent-glow);
-            cursor: pointer;
-            border: none;
-            color: #fff;
-            transition: transform 0.2s;
-        }
-
-        .audio-fab:hover { transform: scale(1.1); }
-
-        /* Lang Toggle */
-        .lang-toggle {
-            display: flex;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 0.25rem;
-            border-radius: 999px;
-            width: fit-content;
-            margin: 0 auto 3rem;
-            border: 1px solid var(--glass-border);
-        }
-
-        .lang-btn {
-            padding: 0.5rem 1.5rem;
-            border-radius: 999px;
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            transition: all 0.2s;
-        }
-
-        .lang-btn.active {
-            background: var(--accent);
-            color: #0f172a;
-        }
-
-        footer {
-            text-align: center;
-            padding: 4rem 0;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        footer a { color: var(--accent); text-decoration: none; }
-    </style>
+  @media(max-width:600px){
+    .header{padding:12px 16px;}
+    .container{padding:16px 12px;}
+    audio{width:100%;}
+  }
+</style>
 </head>
-<body class="status-{{ sentiment.label | default('neutral') }}">
+<body>
 
-    <div class="container">
-        <header>
-            <div class="date-badge">{{ date }}</div>
-            <h1>The Morning Brief</h1>
-            <p style="color: var(--text-muted); font-weight: 500; font-size: 1.1rem; margin-top: -0.5rem;">Institutional Alpha. Curated by GPT-4o.</p>
-        </header>
+<header class="header">
+  <div class="header-left">
+    <span class="header-title">📰 Morning Briefing</span>
+    <span class="header-date">{{ date }} · Finance & Geopolitics</span>
+  </div>
+  <div class="lang-switch">
+    <a href="{{ it_url }}" class="lang-btn {% if lang == 'it' %}active{% endif %}">🇮🇹 IT</a>
+    <a href="{{ en_url }}" class="lang-btn {% if lang == 'en' %}active{% endif %}">🇬🇧 EN</a>
+  </div>
+</header>
 
-        <nav class="lang-toggle">
-            <a href="{% if lang == 'en' %}../{% endif %}{{ date }}.html" class="lang-btn {% if lang == 'it' %}active{% endif %}"> ITALIANO</a>
-            <a href="{% if lang == 'it' %}en/{% endif %}{{ date }}.html" class="lang-btn {% if lang == 'en' %}active{% endif %}"> ENGLISH</a>
-        </nav>
-
-        <section class="sentiment-card">
-            <div class="sentiment-header">
-                <div class="status-dot"></div>
-                <div class="sentiment-label">
-                    {% if lang == 'it' %}
-                        {% if sentiment.label == 'risk_on' %}RISPONDERE AL RISCHIO{% elif sentiment.label == 'risk_off' %}AVVERSIONE AL RISCHIO{% else %}NEUTRALE{% endif %}
-                    {% else %}
-                        {% if sentiment.label == 'risk_on' %}RISK ON{% elif sentiment.label == 'risk_off' %}RISK OFF{% else %}NEUTRAL{% endif %}
-                    {% endif %}
-                </div>
-            </div>
-            <div class="sentiment-reason">
-                {{ sentiment.get('reason_' + lang, '') }}
-            </div>
-        </section>
-
-        {% if market_strip %}
-        <div class="market-ticker">
-            <div class="ticker-content">
-                {% for item in market_strip %}
-                <div class="ticker-item">
-                    <span class="label">{{ item.label }}</span>
-                    <span class="value">{{ item.value }}</span>
-                    {% if item.change and item.change != 'N/A' %}
-                    <span class="change {{ 'text-risk-on' if item.positive else 'text-risk-off' }}">
-                        {{ item.change }}
-                    </span>
-                    {% endif %}
-                </div>
-                {% endfor %}
-                {# Repeat for infinite loop effect #}
-                {% for item in market_strip %}
-                <div class="ticker-item">
-                    <span class="label">{{ item.label }}</span>
-                    <span class="value">{{ item.value }}</span>
-                    {% if item.change and item.change != 'N/A' %}
-                    <span class="change {{ 'text-risk-on' if item.positive else 'text-risk-off' }}">
-                        {{ item.change }}
-                    </span>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
-        {% set section_icons = {'mercati': '💹', 'geopolitica': '🌍', 'macro_economia': '🏛', 'energia': '⚡'} %}
-        {% set section_names = {
-            'it': {'mercati': 'Mercati', 'geopolitica': 'Geopolitica', 'macro_economia': 'Macroeconomia', 'energia': 'Energia'},
-            'en': {'mercati': 'Markets', 'geopolitica': 'Geopolitics', 'macro_economia': 'Macroeconomics', 'energia': 'Energy'}
-        } %}
-
-        {% for section in briefing.sections %}
-        {% if section['items'] %}
-        <div class="section">
-            <div class="section-header">
-                <div class="section-icon">{{ section_icons.get(section.name, '📌') }}</div>
-                <h2 class="section-title">{{ section_names[lang].get(section.name, section.name) }}</h2>
-            </div>
-
-            <div class="grid">
-                {% for item in section['items'] %}
-                <div class="news-card">
-                    <div class="news-header">
-                        <div class="importance-stars">
-                            {% for i in range(item.importance | default(3)) %}★{% endfor %}
-                        </div>
-                    </div>
-                    <h3 class="news-title">{{ item.get('title_' + lang, '') }}</h3>
-                    <p class="news-summary">{{ item.get('summary_' + lang, '') }}</p>
-                    <div class="news-footer">
-                        <span class="source-tag">{{ item.source_name | default('ALPHA') }}</span>
-                        {% if item.source_url %}
-                        <a href="{{ item.source_url }}" target="_blank" class="read-more">Source →</a>
-                        {% endif %}
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-        {% endfor %}
-
-        <footer>
-            <p>© {{ date[:4] }} Morning Briefing. All curated indices from institutional feeds.</p>
-            <p style="margin-top: 1rem;"><a href="index.html">Homepage</a> · <a href="feed.xml">RSS</a></p>
-        </footer>
+<div class="ticker-bar">
+  <div class="ticker-items">
+    {% for item in market_strip %}
+    <div class="ticker-item">
+      <span class="ticker-label">{{ item.label }}</span>
+      <span class="ticker-value {% if item.positive %}up{% elif item.negative %}down{% else %}neu{% endif %}">{{ item.value }}</span>
+      {% if item.change %}<span class="ticker-change {% if item.positive %}up{% elif item.negative %}down{% else %}neu{% endif %}">{{ item.change }}</span>{% endif %}
     </div>
+    {% endfor %}
+  </div>
+</div>
 
-    {% if audio_url %}
-    <div class="audio-container">
-        <button class="audio-fab" onclick="toggleAudio()" title="Listen to Briefing">
-            <svg id="play-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 5v14l11-7z"/>
-            </svg>
-            <svg id="pause-icon" style="display:none;" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-            </svg>
-        </button>
-        <audio id="briefing-audio" src="{{ audio_url }}"></audio>
+<div class="container">
+
+  <div class="sentiment-card {{ sentiment.label }}">
+    <div class="sentiment-header">
+      <span class="sentiment-badge">
+        {% if sentiment.label == 'risk_off' %}🔴 RISK OFF
+        {% elif sentiment.label == 'risk_on' %}🟢 RISK ON
+        {% else %}🟡 NEUTRAL{% endif %}
+      </span>
+      {% if sentiment.score %}<span class="sentiment-score">Intensità: {{ sentiment.score }}/10</span>{% endif %}
     </div>
+    <div class="sentiment-reason">{{ sentiment['reason_' + lang] }}</div>
+    {% if briefing.market_impact_summary %}
+    <div class="market-impact-summary">📊 {{ briefing.market_impact_summary[lang] }}</div>
     {% endif %}
+  </div>
 
-    <script>
-        const audio = document.getElementById('briefing-audio');
-        const playIcon = document.getElementById('play-icon');
-        const pauseIcon = document.getElementById('pause-icon');
+  {% if audio_url %}
+  <div class="audio-section">
+    <span class="audio-icon">🎙️</span>
+    <div class="audio-info">
+      <div class="audio-title">Briefing Audio</div>
+      <div class="audio-sub">{% if lang == 'it' %}Ascolta il briefing completo{% else %}Listen to the full briefing{% endif %}</div>
+    </div>
+    <audio controls preload="none">
+      <source src="{{ audio_url }}" type="audio/mpeg">
+    </audio>
+  </div>
+  {% endif %}
 
-        function toggleAudio() {
-            if (audio.paused) {
-                audio.play();
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
-            } else {
-                audio.pause();
-                playIcon.style.display = 'block';
-                pauseIcon.style.display = 'none';
-            }
-        }
+  {% set section_icons = {'mercati': '💹', 'geopolitica': '🌍', 'macro_economia': '🏛', 'energia': '⚡'} %}
+  {% set section_labels_it = {'mercati': 'Mercati & Impatto', 'geopolitica': 'Geopolitica', 'macro_economia': 'Macroeconomia', 'energia': 'Energia'} %}
+  {% set section_labels_en = {'mercati': 'Markets & Impact', 'geopolitica': 'Geopolitics', 'macro_economia': 'Macroeconomics', 'energia': 'Energy'} %}
 
-        audio.onended = () => {
-            playIcon.style.display = 'block';
-            pauseIcon.style.display = 'none';
-        }
-    </script>
+  {% for section in sections %}
+  {% set sec_items = section.items | selectattr('relevance_score', 'ge', 3) | list | sort(attribute='relevance_score', reverse=True) %}
+  {% if sec_items %}
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">{{ section_icons.get(section.name, '📌') }}</span>
+      <span class="section-title">{% if lang == 'it' %}{{ section_labels_it.get(section.name, section.name) }}{% else %}{{ section_labels_en.get(section.name, section.name) }}{% endif %}</span>
+      <span class="section-count">{{ sec_items|length }} notizie</span>
+    </div>
+    {% for item in sec_items %}
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-category cat-{{ item.category }}">{{ item.category | replace('_',' ') }}</span>
+        {% if item.market_impact %}
+        <span class="impact-badge impact-{{ item.market_impact.direction }}">
+          {% if item.market_impact.direction == 'bearish' %}▼ bearish{% elif item.market_impact.direction == 'bullish' %}▲ bullish{% else %}↔ mixed{% endif %}
+        </span>
+        {% endif %}
+        <span class="stars">{{ '★' * item.relevance_score }}{{ '☆' * (5 - item.relevance_score) }}</span>
+        {% if item.tier %}<span class="tier-badge tier-{{ item.tier }}">T{{ item.tier }}</span>{% endif %}
+      </div>
+      <div class="card-title">{{ item['title_' + lang] }}</div>
+      <div class="card-summary">{{ item['summary_' + lang] }}</div>
+      {% if item.market_impact and item.market_impact.assets_affected %}
+      <div class="card-assets">
+        {% for asset in item.market_impact.assets_affected %}
+        <span class="asset-tag">{{ asset }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="card-footer">
+        <a href="{{ item.source_url }}" target="_blank" class="source-link">{{ item.source_name }} →</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% endfor %}
+
+</div>
+
+<footer class="footer">
+  Morning Briefing Agent ·
+  <a href="{{ rss_url }}">RSS</a> ·
+  <a href="https://github.com/vinciber/morning-briefing">GitHub</a> ·
+  <a href="{{ index_url }}">← Archivio</a>
+</footer>
 </body>
 </html>
