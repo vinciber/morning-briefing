@@ -160,7 +160,7 @@
   {% set section_labels_en = {'mercati': 'Markets & Impact', 'geopolitica': 'Geopolitics', 'macro_economia': 'Macroeconomics', 'energia': 'Energy'} %}
 
   {% for section in sections %}
-  {% set sec_items = section['items'] | selectattr('relevance_score', 'ge', 3) | list | sort(attribute='relevance_score', reverse=True) %}
+  {% set sec_items = section['items'] | sort(attribute='relevance_score', reverse=True) %}
   {% if sec_items %}
   <div class="section">
     <div class="section-header">
@@ -173,26 +173,36 @@
     </div>
 
     {% for item in sec_items %}
+    {% if item.get('relevance_score', 0) >= 3 or item.get('importance', 0) >= 3 %}
     <div class="card">
       <div class="card-meta">
-        <span class="card-category cat-{{ item.category }}">{{ item.category | replace('_',' ') }}</span>
-        {% if item.market_impact %}
-        <span class="impact-badge impact-{{ item.market_impact.direction }}">
-          {% if item.market_impact.direction == 'bearish' %}▼ bearish
-          {% elif item.market_impact.direction == 'bullish' %}▲ bullish
+        <span class="card-category cat-{{ item.get('category', 'mercati') }}">
+          {{ item.get('category', '') | replace('_',' ') }}
+        </span>
+        {% if item.get('market_impact') %}
+        <span class="impact-badge impact-{{ item.market_impact.get('direction', 'mixed') }}">
+          {% if item.market_impact.get('direction') == 'bearish' %}▼ bearish
+          {% elif item.market_impact.get('direction') == 'bullish' %}▲ bullish
           {% else %}↔ mixed{% endif %}
         </span>
         {% endif %}
-        <span class="stars">{{ '★' * item.relevance_score }}{{ '☆' * (5 - item.relevance_score) }}</span>
-        {% if item.tier %}
+        {% set score = item.get('relevance_score', item.get('importance', 0)) %}
+        {% if score %}
+        <span class="stars">{{ '★' * score }}{{ '☆' * (5 - score) }}</span>
+        {% endif %}
+        {% if item.get('tier') %}
         <span class="tier-badge tier-{{ item.tier }}">T{{ item.tier }}</span>
         {% endif %}
       </div>
 
-      <div class="card-title">{{ item['title_' + lang] }}</div>
-      <div class="card-summary">{{ item['summary_' + lang] }}</div>
+      <div class="card-title">
+        {{ item.get('title_' + lang, item.get('title_it', item.get('title', ''))) }}
+      </div>
+      <div class="card-summary">
+        {{ item.get('summary_' + lang, item.get('summary_it', item.get('snippet', ''))) }}
+      </div>
 
-      {% if item.market_impact and item.market_impact.assets_affected %}
+      {% if item.get('market_impact') and item.market_impact.get('assets_affected') %}
       <div class="card-assets">
         {% for asset in item.market_impact.assets_affected %}
         <span class="asset-tag">{{ asset }}</span>
@@ -201,12 +211,14 @@
       {% endif %}
 
       <div class="card-footer">
-        <a href="{{ item.source_url }}" target="_blank" class="source-link">
-          {{ item.source_name }} →
+        <a href="{{ item.get('source_url', item.get('url', '#')) }}" target="_blank" class="source-link">
+          {{ item.get('source_name', item.get('source', '')) }} →
         </a>
       </div>
     </div>
+    {% endif %}
     {% endfor %}
+
   </div>
   {% endif %}
   {% endfor %}
