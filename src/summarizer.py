@@ -157,10 +157,15 @@ def _merge_article_impacts(articles: list, article_impacts: list) -> list:
             art['market_impact'] = impacts_by_url[url]
             matched += 1
         else:
-            # Se LLM non ha coperto l'articolo, non assegnare market_impact
-            art['market_impact'] = None
+            # Fallback rule-based per null
+            cat = art.get('category', '').lower()
+            art['market_impact'] = {
+                'direction': 'bearish' if cat in ('geopolitica', 'energia', 'macro') else 'mixed',
+                'magnitude': 'low',
+                'assets_affected': [],
+            }
 
-    logger.info(f'🎯 market_impact: {matched}/{len(articles)} articoli matchati via URL')
+    logger.info(f'🎯 market_impact: {matched}/{len(articles)} articoli matchati via URL, {len(articles)-matched} via fallback')
     return articles
 
 
@@ -288,9 +293,11 @@ def run():
         raw_text = response.choices[0].message.content.strip()
         briefing = json.loads(raw_text)
 
-        # CHIAMATA 2 — Audio Script dedicato (MIN 800 PAROLE)
-        logger.info('🎙️ Chiamata 2: Groq Llama 4 Audio Script (MIN 800 parole)...')
-        audio_user = f"""Scrivi lo script audio completo basandoti su questi dati:
+        # CHIAMATA 2 — Audio Script IT
+        logger.info('🎙️ Chiamata 2: Groq Llama 4 Audio Script IT (MIN 800 parole)...')
+        today_str = datetime.now(timezone.utc).strftime('%d %B %Y')
+        audio_user_it = f"""DATA DI OGGI: {today_str}
+Scrivi lo script audio completo IN ITALIANO basandoti su questi dati:
 
 SENTIMENT: {briefing.get('sentiment', {}).get('label', 'neutral').upper()} — score {briefing.get('sentiment', {}).get('score', 5)}/10
 {briefing.get('sentiment', {}).get('reason_it', '')}
@@ -301,22 +308,51 @@ DATI MERCATO:
 NOTIZIE DEL GIORNO:
 {chr(10).join(f"- [{a['category'].upper()}] {a['title']} — {a['snippet'][:150]}" for a in articles_slim[:12])}
 
-REQUISITO: minimo 800 parole. Conta internamente prima di rispondere.
-Restituisci JSON: {{"audio_script_it": "...", "audio_script_en": "..."}}"""
+REQUISITO: minimo 800 parole in ITALIANO. Conta internamente prima di rispondere.
+Restituisci JSON: {{"audio_script_it": "..."}}"""
 
-        audio_response = client.chat.completions.create(
+        response_it = client.chat.completions.create(
             model='meta-llama/llama-4-scout-17b-16e-instruct',
             messages=[
                 {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT},
-                {'role': 'user',   'content': audio_user},
+                {'role': 'user',   'content': audio_user_it},
             ],
             temperature=0.3,
-            max_tokens=6000,
+            max_tokens=5000,
             response_format={'type': 'json_object'},
         )
-        audio_data = json.loads(audio_response.choices[0].message.content)
-        briefing['audio_script_it'] = audio_data.get('audio_script_it', '')
-        briefing['audio_script_en'] = audio_data.get('audio_script_en', '')
+        audio_it_data = json.loads(response_it.choices[0].message.content)
+        briefing['audio_script_it'] = audio_it_data.get('audio_script_it', '')
+
+        # CHIAMATA 3 — Audio Script EN
+        logger.info('🎙️ Chiamata 3: Groq Llama 4 Audio Script EN (MIN 800 parole)...')
+        audio_user_en = f"""TODAY'S DATE: {today_str}
+Write the complete audio script IN ENGLISH based on these data:
+
+SENTIMENT: {briefing.get('sentiment', {}).get('label', 'neutral').upper()} — score {briefing.get('sentiment', {}).get('score', 5)}/10
+{briefing.get('sentiment', {}).get('reason_en', '')}
+
+MARKET DATA:
+{market_context}
+
+NEWS OF THE DAY:
+{chr(10).join(f"- [{a['category'].upper()}] {a['title']}" for a in articles_slim[:12])}
+
+REQUIREMENT: minimum 800 words in ENGLISH. Count internally before answering.
+Return JSON: {{"audio_script_en": "..."}}"""
+
+        response_en = client.chat.completions.create(
+            model='meta-llama/llama-4-scout-17b-16e-instruct',
+            messages=[
+                {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT.replace("in italiano", "in English")},
+                {'role': 'user',   'content': audio_user_en},
+            ],
+            temperature=0.3,
+            max_tokens=5000,
+            response_format={'type': 'json_object'},
+        )
+        audio_en_data = json.loads(response_en.choices[0].message.content)
+        briefing['audio_script_en'] = audio_en_data.get('audio_script_en', '')
 
         # Merge article_impacts negli articoli raw
         article_impacts = briefing.pop('article_impacts', [])
