@@ -1,0 +1,539 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Briefing — 2026-03-13</title>
+<style>
+  :root {
+    --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;
+    --border:#30363d;--text:#e6edf3;--text-muted:#7d8590;
+    --green:#3fb950;--red:#f85149;--yellow:#d29922;
+    --blue:#58a6ff;--orange:#e3861a;
+    --risk-on-bg:#0d2b1a;--risk-off-bg:#2b0d0d;--neutral-bg:#1a1a2b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;line-height:1.6;}
+
+  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+  .header-left{display:flex;align-items:center;gap:16px;}
+  .header-title{font-size:18px;font-weight:700;letter-spacing:-0.3px;}
+  .header-date{color:var(--text-muted);font-size:13px;}
+  .lang-switch{display:flex;gap:8px;}
+  .lang-btn{padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);text-decoration:none;font-size:12px;}
+  .lang-btn.active{border-color:var(--blue);color:var(--blue);}
+
+  .ticker-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 24px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
+  .ticker-bar::-webkit-scrollbar{display:none;}
+  .ticker-items{display:inline-flex;gap:24px;}
+  .ticker-item{display:inline-flex;flex-direction:column;gap:1px;}
+  .ticker-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;}
+  .ticker-value{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;}
+  .ticker-change{font-size:11px;}
+  .up{color:var(--green);}.down{color:var(--red);}.neu{color:var(--text-muted);}
+
+  .container{max-width:900px;margin:0 auto;padding:24px 16px;}
+
+  .sentiment-card{border-radius:10px;border:1px solid var(--border);padding:20px 24px;margin-bottom:24px;}
+  .sentiment-card.risk_off{background:var(--risk-off-bg);border-color:#f8514940;}
+  .sentiment-card.risk_on{background:var(--risk-on-bg);border-color:#3fb95040;}
+  .sentiment-card.neutral{background:var(--neutral-bg);border-color:#58a6ff40;}
+  .sentiment-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .sentiment-badge{padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+  .risk_off .sentiment-badge{background:var(--red);color:white;}
+  .risk_on .sentiment-badge{background:var(--green);color:#0d1117;}
+  .neutral .sentiment-badge{background:var(--blue);color:#0d1117;}
+  .sentiment-score{color:var(--text-muted);font-size:12px;}
+  .sentiment-reason{color:var(--text);font-size:14px;line-height:1.7;}
+  .market-impact-summary{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);color:var(--text-muted);font-size:13px;line-height:1.7;}
+
+  .audio-section{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .audio-icon{font-size:24px;}
+  .audio-info{flex:1;}
+  .audio-title{font-size:13px;font-weight:600;margin-bottom:2px;}
+  .audio-sub{font-size:11px;color:var(--text-muted);}
+  audio{flex:2;height:36px;min-width:200px;}
+
+  .section{margin-bottom:32px;}
+  .section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .section-icon{font-size:18px;}
+  .section-title{font-size:16px;font-weight:700;}
+  .section-count{margin-left:auto;font-size:11px;color:var(--text-muted);background:var(--surface2);padding:2px 8px;border-radius:10px;}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px;margin-bottom:10px;transition:border-color 0.15s;}
+  .card:hover{border-color:#58a6ff60;}
+  .card-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+  .card-category{font-size:10px;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;}
+  .cat-mercati{background:#1a2b4a;color:var(--blue);}
+  .cat-geopolitica{background:#2b1a1a;color:var(--red);}
+  .cat-macro_economia{background:#1a2b1a;color:var(--green);}
+  .cat-energia{background:#2b2210;color:var(--orange);}
+  .impact-badge{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;}
+  .impact-bearish{background:#2b1a1a;color:var(--red);}
+  .impact-bullish{background:#1a2b1a;color:var(--green);}
+  .impact-mixed{background:#2b2210;color:var(--yellow);}
+  .tier-badge{font-size:10px;color:var(--text-muted);margin-left:auto;}
+  .tier-1{color:#d29922;}.tier-2{color:#7d8590;}
+  .stars{font-size:11px;color:var(--yellow);}
+  .card-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:8px;}
+  .card-summary{font-size:13px;color:#b1bac4;line-height:1.7;margin-bottom:10px;}
+  .card-assets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+  .asset-tag{font-size:11px;background:var(--surface2);border:1px solid var(--border);padding:2px 8px;border-radius:4px;color:var(--text-muted);font-family:monospace;}
+  .card-footer{display:flex;align-items:center;justify-content:space-between;}
+  .source-link{font-size:12px;color:var(--blue);text-decoration:none;}
+  .source-link:hover{text-decoration:underline;}
+
+  .footer{text-align:center;padding:32px 16px;color:var(--text-muted);font-size:12px;border-top:1px solid var(--border);margin-top:40px;}
+  .footer a{color:var(--blue);text-decoration:none;}
+
+  @media(max-width:600px){
+    .header{padding:12px 16px;}
+    .container{padding:16px 12px;}
+    audio{width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <span class="header-title">📰 Morning Briefing</span>
+    <span class="header-date">2026-03-13 · Finance & Geopolitics</span>
+  </div>
+  <div class="lang-switch">
+    <a href="../2026-03-13.html" class="lang-btn ">🇮🇹 IT</a>
+    <a href="2026-03-13.html" class="lang-btn active">🇬🇧 EN</a>
+  </div>
+</header>
+
+<div class="ticker-bar">
+  <div class="ticker-items">
+    
+    <div class="ticker-item">
+      <span class="ticker-label">DXY</span>
+      <span class="ticker-value up">99.6300</span>
+      <span class="ticker-change up">+0.40%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">S&P 500</span>
+      <span class="ticker-value down">6672.62</span>
+      <span class="ticker-change down">-1.52%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">NIKKEI</span>
+      <span class="ticker-value down">53,585</span>
+      <span class="ticker-change down">-2.62%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">SHANGHAI</span>
+      <span class="ticker-value down">4129.10</span>
+      <span class="ticker-change down">-0.10%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">VIX</span>
+      <span class="ticker-value up">27.2900</span>
+      <span class="ticker-change up">+12.63%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">TLT</span>
+      <span class="ticker-value down">86.9700</span>
+      <span class="ticker-change down">-0.20%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">GOLD</span>
+      <span class="ticker-value down">$5116.00/oz</span>
+      <span class="ticker-change down">-0.99%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">BTC</span>
+      <span class="ticker-value up">$71,669</span>
+      <span class="ticker-change up">+2.09%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">BRENT</span>
+      <span class="ticker-value up">$96.7400</span>
+      <span class="ticker-change up">+5.18%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">US 10Y</span>
+      <span class="ticker-value up">4.2730%</span>
+      <span class="ticker-change up">+1.54%</span>
+    </div>
+    
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="sentiment-card risk_off">
+    <div class="sentiment-header">
+      <span class="sentiment-badge">
+        🔴 RISK OFF
+        
+      </span>
+      
+      <span class="sentiment-score">Intensità: 9/10</span>
+      
+    </div>
+    <div class="sentiment-reason">The sentiment is 'risk_off' due to the escalating Middle East conflict, with a significant increase in oil prices and inflation concerns. Brent crude rises 5.18% to $96.74, VIX hits 27.29, and the stock market shows signs of weakness with S&P 500 down 1.52%.</div>
+    
+    <div class="market-impact-summary">
+      📊 Global stock markets are in negative territory, with S&P 500 down 1.52% to 6672.62. Brent crude oil price reaches $96.74, up 5.18%. The VIX index rises to 27.29, indicating increased risk aversion. Government bonds are in compression, with TLT down 0.20%.
+    </div>
+    
+  </div>
+
+  
+  <div class="audio-section">
+    <span class="audio-icon">🎙️</span>
+    <div class="audio-info">
+      <div class="audio-title">Briefing Audio</div>
+      <div class="audio-sub">
+        Listen to the full briefing
+      </div>
+    </div>
+    <audio controls preload="none">
+      <source src="../audio/briefing_20260313_en.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+  
+
+  
+  
+  
+
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">💹</span>
+      <span class="section-title">
+        Markets & Impact
+      </span>
+      <span class="section-count">5 notizie</span>
+    </div>
+
+    
+    
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-category cat-mercati">
+          
+        </span>
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        
+      </div>
+
+      <div class="card-title">
+        S&P 500 down 1.52%
+      </div>
+      <div class="card-summary">
+        The US stock market shows signs of weakness with S&P 500 down 1.52% to 6672.62.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="" target="_blank" class="source-link">
+          Yahoo Finance →
+        </a>
+      </div>
+    </div>
+    
+    
+    
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-category cat-mercati">
+          
+        </span>
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        
+      </div>
+
+      <div class="card-title">
+        Brent crude at $96.74
+      </div>
+      <div class="card-summary">
+        Brent crude oil price rises 5.18% to $96.74 due to the escalating Middle East conflict and concerns over oil production.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="" target="_blank" class="source-link">
+          OilPrice →
+        </a>
+      </div>
+    </div>
+    
+    
+    
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-category cat-mercati">
+          
+        </span>
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        
+      </div>
+
+      <div class="card-title">
+        VIX at 27.29
+      </div>
+      <div class="card-summary">
+        The VIX index rises to 27.29, indicating increased risk aversion among investors due to uncertainty over the Middle East conflict.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="" target="_blank" class="source-link">
+          Yahoo Finance →
+        </a>
+      </div>
+    </div>
+    
+    
+    
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-category cat-mercati">
+          
+        </span>
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        
+      </div>
+
+      <div class="card-title">
+        TLT down 0.20%
+      </div>
+      <div class="card-summary">
+        Government bonds are in compression, with TLT down 0.20%.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="" target="_blank" class="source-link">
+          Yahoo Finance →
+        </a>
+      </div>
+    </div>
+    
+    
+    
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-category cat-mercati">
+          
+        </span>
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        
+      </div>
+
+      <div class="card-title">
+        DXY at 99.6300
+      </div>
+      <div class="card-summary">
+        The US dollar strengthens, with DXY up 0.40% to 99.6300.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="" target="_blank" class="source-link">
+          Yahoo Finance →
+        </a>
+      </div>
+    </div>
+    
+    
+
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🌍</span>
+      <span class="section-title">
+        Geopolitics
+      </span>
+      <span class="section-count">1 notizie</span>
+    </div>
+
+    
+    
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-category cat-mercati">
+          
+        </span>
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        
+      </div>
+
+      <div class="card-title">
+        Middle East conflict escalates
+      </div>
+      <div class="card-summary">
+        The joint U.S.-Israeli attack on Iran has led to Iranian retaliation, engulfing much of the Middle East in conflict.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="" target="_blank" class="source-link">
+          International Crisis Group →
+        </a>
+      </div>
+    </div>
+    
+    
+
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🏛</span>
+      <span class="section-title">
+        Macroeconomics
+      </span>
+      <span class="section-count">1 notizie</span>
+    </div>
+
+    
+    
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-category cat-mercati">
+          
+        </span>
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        
+      </div>
+
+      <div class="card-title">
+        Global inflation could rise
+      </div>
+      <div class="card-summary">
+        The rise in oil prices could lead to an increase in global inflation.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="" target="_blank" class="source-link">
+           →
+        </a>
+      </div>
+    </div>
+    
+    
+
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">⚡</span>
+      <span class="section-title">
+        Energy
+      </span>
+      <span class="section-count">1 notizie</span>
+    </div>
+
+    
+    
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-category cat-mercati">
+          
+        </span>
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        
+      </div>
+
+      <div class="card-title">
+        Oil prices rising
+      </div>
+      <div class="card-summary">
+        Oil prices are rising due to the escalating Middle East conflict and concerns over oil production.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="" target="_blank" class="source-link">
+           →
+        </a>
+      </div>
+    </div>
+    
+    
+
+  </div>
+  
+  
+
+</div>
+
+<footer class="footer">
+  Morning Briefing Agent ·
+  <a href="../feed_en.xml">RSS</a> ·
+  <a href="https://github.com/vinciber/morning-briefing">GitHub</a> ·
+  <a href="index.html">← Archivio</a>
+</footer>
+</body>
+</html>
+```
