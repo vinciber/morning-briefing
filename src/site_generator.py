@@ -309,18 +309,6 @@ def generate_api_json(briefing: dict):
         json.dump(briefing_clone, f, ensure_ascii=False, indent=2)
     logger.info(f'✅ API JSON generato (Schema Canonico): {output_path}')
 
-    # Output per Trial Users (identico a today.json)
-    trial_api_dir = DOCS_DIR / 'trial' / 'api'
-    trial_api_dir.mkdir(parents=True, exist_ok=True)
-    trial_output_path = trial_api_dir / 'today.json'
-    with open(trial_output_path, 'w', encoding='utf-8') as f:
-        json.dump(briefing_clone, f, ensure_ascii=False, indent=2)
-    logger.info(f'✅ Trial API JSON generato: {trial_output_path}')
-
-    # Assicurati che esista trial/audio (anche se i file verranno copiati dal workflow)
-    trial_audio_dir = DOCS_DIR / 'trial' / 'audio'
-    trial_audio_dir.mkdir(parents=True, exist_ok=True)
-
     date = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
     index_path = api_dir / 'index.json'
 

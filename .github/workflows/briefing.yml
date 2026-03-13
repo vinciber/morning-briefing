@@ -118,13 +118,8 @@ jobs:
           echo "📋 Copia docs/ → public/morning-update/..."
           cp -r docs/. main-repo/public/morning-update/
 
-          echo "📋 Sincronizzazione audio trial..."
-          cp -r docs/audio/*.mp3 main-repo/public/morning-update/trial/audio/ || echo "⚠️ Nessun audio da copiare per trial"
-
           echo "🔍 Verifica file chiave:"
           ls -la main-repo/public/morning-update/api/today.json || echo "❌ today.json mancante!"
-          ls -la main-repo/public/morning-update/trial/api/today.json || echo "❌ trial today.json mancante!"
-          ls -la main-repo/public/morning-update/trial/audio/ || echo "⚠️ Cartella audio trial vuota"
 
           cd main-repo
           git config user.name 'MorningBriefingBot'
