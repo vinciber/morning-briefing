@@ -3,7 +3,7 @@
   "sentiment": {
     "label": "risk_off",
     "score": 9,
-    "reason_it": "Il sentiment è 'risk_off' a causa dell'escalation del conflitto in Medio Oriente, con un aumento significativo dei prezzi del petrolio e preoccupazioni inflazionistiche. Il Brent sale del 5.18% a $96.74, il VIX tocca 27.29 e il mercato azionario mostra segni di debolezza con S&P 500 in calo del 1.52%.",
+    "reason_it": "Il sentiment è 'risk_off' a causa dell'escalation del conflitto in Medio Oriente, con un aumento significativo dei prezzi del petrolio e preoccupazioni inflazionistiche. Il Brent sale del 5.18% a $96.74, il VIX tocca 27.29 e il mercato azionario mostra segni di debolezza con S&P 500 in calo dell'1.52%.",
     "reason_en": "The sentiment is 'risk_off' due to the escalating Middle East conflict, with a significant increase in oil prices and inflation concerns. Brent crude rises 5.18% to $96.74, VIX hits 27.29, and the stock market shows signs of weakness with S&P 500 down 1.52%."
   },
   "market_impact_summary": {
@@ -21,7 +21,16 @@
           "summary_en": "The US stock market shows signs of weakness with S&P 500 down 1.52% to 6672.62.",
           "source_name": "Yahoo Finance",
           "source_url": "",
-          "importance": 5
+          "category": "mercati",
+          "importance": 5,
+          "tier": 1,
+          "market_impact": {
+            "assets_affected": [
+              "S&P 500"
+            ],
+            "direction": "bearish",
+            "magnitude": "high"
+          }
         },
         {
           "title_it": "Petrolio Brent a $96.74",
@@ -30,7 +39,16 @@
           "summary_en": "Brent crude oil price rises 5.18% to $96.74 due to the escalating Middle East conflict and concerns over oil production.",
           "source_name": "OilPrice",
           "source_url": "",
-          "importance": 5
+          "category": "energia",
+          "importance": 5,
+          "tier": 1,
+          "market_impact": {
+            "assets_affected": [
+              "Brent crude"
+            ],
+            "direction": "bullish",
+            "magnitude": "high"
+          }
         },
         {
           "title_it": "VIX a 27.29",
@@ -39,7 +57,16 @@
           "summary_en": "The VIX index rises to 27.29, indicating increased risk aversion among investors due to uncertainty over the Middle East conflict.",
           "source_name": "Yahoo Finance",
           "source_url": "",
-          "importance": 5
+          "category": "mercati",
+          "importance": 5,
+          "tier": 1,
+          "market_impact": {
+            "assets_affected": [
+              "VIX"
+            ],
+            "direction": "bullish",
+            "magnitude": "high"
+          }
         },
         {
           "title_it": "TLT in calo dello 0.20%",
@@ -48,7 +75,16 @@
           "summary_en": "Government bonds are in compression, with TLT down 0.20%.",
           "source_name": "Yahoo Finance",
           "source_url": "",
-          "importance": 5
+          "category": "mercati",
+          "importance": 5,
+          "tier": 1,
+          "market_impact": {
+            "assets_affected": [
+              "TLT"
+            ],
+            "direction": "bearish",
+            "magnitude": "medium"
+          }
         },
         {
           "title_it": "DXY a 99.6300",
@@ -57,7 +93,16 @@
           "summary_en": "The US dollar strengthens, with DXY up 0.40% to 99.6300.",
           "source_name": "Yahoo Finance",
           "source_url": "",
-          "importance": 5
+          "category": "mercati",
+          "importance": 5,
+          "tier": 1,
+          "market_impact": {
+            "assets_affected": [
+              "DXY"
+            ],
+            "direction": "bullish",
+            "magnitude": "medium"
+          }
         }
       ]
     },
@@ -71,7 +116,9 @@
           "summary_en": "The joint U.S.-Israeli attack on Iran has led to Iranian retaliation, engulfing much of the Middle East in conflict.",
           "source_name": "International Crisis Group",
           "source_url": "",
-          "importance": 5
+          "category": "geopolitica",
+          "importance": 5,
+          "tier": 2
         }
       ]
     },
@@ -85,7 +132,9 @@
           "summary_en": "The rise in oil prices could lead to an increase in global inflation.",
           "source_name": "",
           "source_url": "",
-          "importance": 5
+          "category": "macro_economia",
+          "importance": 5,
+          "tier": 2
         }
       ]
     },
@@ -99,55 +148,57 @@
           "summary_en": "Oil prices are rising due to the escalating Middle East conflict and concerns over oil production.",
           "source_name": "",
           "source_url": "",
-          "importance": 5
+          "category": "energia",
+          "importance": 5,
+          "tier": 2
         }
       ]
     }
   ],
   "market_data_raw": {
     "dxy": {
-      "value": "99.6300",
-      "change": "+0.40%"
+      "value": "99.7890",
+      "change": "+0.05%"
     },
     "sp500": {
       "value": "6672.62",
-      "change": "-1.52%"
+      "change": "+0.00%"
     },
     "vix": {
       "value": "27.2900",
-      "change": "+12.63%"
+      "change": "+0.00%"
     },
     "tlt": {
       "value": "86.9700",
-      "change": "-0.20%"
+      "change": "+0.00%"
     },
     "us_10y": {
       "value": "4.2730%",
-      "change": "+1.54%"
+      "change": "+0.00%"
     },
     "gold": {
-      "value": "$5116.00/oz",
-      "change": "-0.99%"
+      "value": "$5110.10/oz",
+      "change": "-0.11%"
     },
     "btcusd": {
-      "value": "$71,669",
-      "change": "+2.09%"
+      "value": "$71,606",
+      "change": "+2.00%"
     },
     "oil_brent": {
-      "value": "$96.7400",
-      "change": "+5.18%"
+      "value": "$96.4200",
+      "change": "-4.02%"
     },
     "stoxx_600": {
       "value": "N/A",
       "change": "N/A"
     },
     "nikkei": {
-      "value": "53,585",
-      "change": "-2.62%"
+      "value": "53,791",
+      "change": "-1.22%"
     },
     "shanghai": {
-      "value": "4129.10",
-      "change": "-0.10%"
+      "value": "4116.70",
+      "change": "-0.30%"
     },
     "btp_10y": {
       "value": "N/A",
