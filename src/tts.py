@@ -14,76 +14,8 @@ OUTPUT_DIR = ROOT / 'docs' / 'audio'
 MODEL_DIR = ROOT / 'models'
 
 def briefing_to_text(briefing, lang='it'):
-    parts = []
-    date = briefing.get('date', '')
-
-    parts.append(
-        f'Buongiorno. Morning Briefing del {date}.'
-        if lang == 'it' else
-        f'Good morning. Morning Briefing for {date}.'
-    )
-    parts.append('')
-
-    sentiment = briefing.get('sentiment', {})
-    reason = sentiment.get(f'reason_{lang}', '')
-    if reason:
-        parts.append(reason)
-        parts.append('')
-
-    impact = briefing.get('market_impact_summary', {})
-    impact_text = impact.get(lang, '') if isinstance(impact, dict) else ''
-    if impact_text:
-        parts.append(impact_text)
-        parts.append('')
-
-    section_labels = {
-        'it': {
-            'mercati':        'Mercati e impatto finanziario',
-            'geopolitica':    'Geopolitica',
-            'macro_economia': 'Macroeconomia',
-            'energia':        'Energia'
-        },
-        'en': {
-            'mercati':        'Markets and financial impact',
-            'geopolitica':    'Geopolitics',
-            'macro_economia': 'Macroeconomics',
-            'energia':        'Energy'
-        }
-    }
-
-    for section in briefing.get('sections', []):
-        sec_name = section.get('name', '')
-        label = section_labels[lang].get(sec_name, sec_name)
-        items = [i for i in section.get('items', [])
-                 if i.get('importance', 0) >= 4]
-        if not items:
-            continue
-
-        parts.append(
-            f'{"Sezione" if lang == "it" else "Section"}: {label}.'
-        )
-        parts.append('')
-
-        for item in items:
-            title   = item.get(f'title_{lang}', '')
-            summary = item.get(f'summary_{lang}', '')
-            source  = item.get('source_name', '')
-            if title:
-                parts.append(title + '.')
-            if summary:
-                parts.append(summary)
-            if source:
-                parts.append(
-                    f'{"Fonte" if lang == "it" else "Source"}: {source}.'
-                )
-            parts.append('')
-
-    parts.append(
-        'Fine del briefing. Buona giornata.'
-        if lang == 'it' else
-        'End of briefing. Have a good day.'
-    )
-    return '\n'.join(parts)
+    """Recupera lo script audio pre-generato dall'AI."""
+    return briefing.get(f'audio_script_{lang}', '')
 
 def run():
     if not INPUT_PATH.exists():

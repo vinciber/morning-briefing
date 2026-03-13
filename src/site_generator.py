@@ -11,6 +11,7 @@ import os
 from datetime import datetime, timezone
 from pathlib import Path
 from email.utils import format_datetime
+from collections import defaultdict
 
 import yaml
 from jinja2 import Environment, FileSystemLoader
@@ -97,6 +98,27 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
         'sentiment_text': sentiment.get(f'reason_{lang}', '')
     }
     
+    # Group articles by category
+    all_articles = briefing.get('articles', [])
+    articles_by_cat = defaultdict(list)
+    for art in all_articles:
+        cat = art.get('category', 'mercati')
+        articles_by_cat[cat].append(art)
+    
+    # Transform to sections list expected by site_daily.html
+    sections = []
+    cat_order = ['mercati', 'geopolitica', 'macro_economia', 'energia']
+    for cat in cat_order:
+        if cat in articles_by_cat:
+            sections.append({
+                'name': cat,
+                'items': articles_by_cat[cat]
+            })
+    # Add any other categories not in the main order
+    for cat, items in articles_by_cat.items():
+        if cat not in cat_order:
+            sections.append({'name': cat, 'items': items})
+
     template_vars = {
         'briefing': briefing,
         'date': date,
@@ -104,7 +126,8 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
         'lang_info': lang_info,
         'sentiment': sentiment,
         'market_strip': build_market_strip(briefing.get('market_data_raw', briefing.get('market_data', {}))),
-        'sections': briefing.get('sections', []) if isinstance(briefing.get('sections'), list) else [],
+        'sections': sections,
+        'all_articles': all_articles,
         'audio_url': f'audio/briefing_{date.replace("-", "")}.mp3' if lang == 'it' else f'../audio/briefing_{date.replace("-", "")}_en.mp3',
         'rss_url': 'feed.xml' if lang == 'it' else '../feed_en.xml',
         'index_url': 'index.html' if lang == 'it' else 'index.html',
@@ -135,26 +158,15 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
         'neutral': '#eab308',
     }.get(sentiment.get('label', 'neutral'), '#eab308')
 
-    # Prep items for this language
-    all_items = []
-    sections = briefing.get('sections', [])
-    if not isinstance(sections, list):
-        sections = []
-    
-    for section in sections:
-        if not isinstance(section, dict): continue
-        for item in section.get('items', []):
-            display_item = item.copy()
-            display_item['section'] = section.get('name', '')
-            if lang == 'en':
-                display_item['title'] = item.get('title_en', item.get('title_it', ''))
-                display_item['summary'] = item.get('summary_en', item.get('summary_it', ''))
-            else:
-                display_item['title'] = item.get('title_it', item.get('title_en', ''))
-                display_item['summary'] = item.get('summary_it', item.get('summary_en', ''))
-            all_items.append(display_item)
-
-    all_items.sort(key=lambda x: x.get('importance', 0), reverse=True)
+    # Prep articles for index
+    all_articles = briefing.get('articles', [])
+    for art in all_articles:
+        if lang == 'en':
+            art['display_title'] = art.get('title_en', art.get('title_it', ''))
+            art['display_summary'] = art.get('summary_en', art.get('summary_it', ''))
+        else:
+            art['display_title'] = art.get('title_it', art.get('title_en', ''))
+            art['display_summary'] = art.get('summary_it', art.get('summary_en', ''))
 
     # Archive links
     archive_dir = DOCS_DIR if lang == 'it' else DOCS_DIR / 'en'
@@ -162,8 +174,6 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
         [f.stem for f in archive_dir.glob('20*.html')],
         reverse=True
     )[:30]
-
-    date_str = date.replace('-', '')
 
     lang_info = {
         'title': 'The Morning Brief' if lang == 'en' else 'Morning Briefing',
@@ -176,9 +186,8 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
         'lang': lang,
         'lang_info': lang_info,
         'sentiment': sentiment,
-        'all_items': all_items,
+        'all_articles': all_articles,
         'market_strip': build_market_strip(briefing.get('market_data_raw', briefing.get('market_data', {}))),
-        'sections': briefing.get('sections', []) if isinstance(briefing.get('sections'), list) else [],
         'audio_url': f'audio/briefing_{date.replace("-", "")}.mp3' if lang == 'it' else f'../audio/briefing_{date.replace("-", "")}_en.mp3',
         'rss_url': 'feed.xml' if lang == 'it' else '../feed_en.xml',
         'index_url': 'index.html' if lang == 'it' else 'index.html',
@@ -206,26 +215,24 @@ def generate_rss(briefing: dict, base_url: str, max_items: int = 30, lang: str =
     now_rfc822 = format_datetime(datetime.now(timezone.utc))
 
     items_xml = []
-    for section in briefing.get('sections', []):
-        for item in section.get('items', []):
-            if lang == 'it':
-                title = item.get('title_it', item.get('title_en', ''))
-                summary = item.get('summary_it', item.get('summary_en', ''))
-            else:
-                title = item.get('title_en', item.get('title_it', ''))
-                summary = item.get('summary_en', item.get('summary_it', ''))
-            
-            # Use specific language link if available
-            link_suffix = f"{date}.html" if lang == 'it' else f"en/{date}.html"
-            source_url = item.get('source_url', f'{base_url}/{link_suffix}')
+    for art in briefing.get('articles', []):
+        if lang == 'it':
+            title = art.get('title_it', art.get('title_en', ''))
+            summary = art.get('summary_it', art.get('summary_en', ''))
+        else:
+            title = art.get('title_en', art.get('title_it', ''))
+            summary = art.get('summary_en', art.get('summary_it', ''))
+        
+        # Link della news originale
+        source_url = art.get('source_url', f'{base_url}/{date}.html')
 
-            items_xml.append(f'''    <item>
+        items_xml.append(f'''    <item>
       <title>{_xml_escape(title)}</title>
       <link>{_xml_escape(source_url)}</link>
       <description>{_xml_escape(summary)}</description>
       <pubDate>{now_rfc822}</pubDate>
       <guid>{_xml_escape(source_url)}</guid>
-      <category>{section.get("name", "")}</category>
+      <category>{art.get("category", "mercati")}</category>
     </item>''')
 
     title_suffix = " (EN)" if lang == 'en' else ""
