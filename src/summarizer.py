@@ -135,6 +135,22 @@ def run():
             chg = item.get('change', 'N/A')
             if val and val != 'N/A':
                 lines.append(f"  {label}: {val} ({chg})")
+        
+        # Aggiungi macro calendar al contesto
+        macro = md.get('macro_calendar', {})
+        if macro:
+            lines.append('\nDATI MACRO USA:')
+            for key, item in macro.items():
+                label = item.get('label', key)
+                if item.get('status') == 'released':
+                    val = item.get('value', 'N/A')
+                    prev = item.get('previous', 'N/A')
+                    date = item.get('release_date', '')
+                    lines.append(f"  {label}: {val} (prec. {prev}) — rilasciato {date}")
+                elif item.get('status') == 'upcoming':
+                    next_rel = item.get('next_release', 'N/A')
+                    lines.append(f"  {label}: NON ANCORA RILASCIATO — prossima uscita {next_rel}")
+                    
         market_context = "DATI DI MERCATO ATTUALI:\n" + "\n".join(lines) + "\n\n"
 
     # Carica history (briefing di ieri) per evitare ripetizioni
@@ -183,6 +199,7 @@ def run():
 
         briefing['date'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
         briefing['market_data_raw'] = md
+        briefing['macro_calendar'] = md.get('macro_calendar', {})
         briefing['articles'] = articles # Iniezione articoli raw per architettura feed
 
         OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)

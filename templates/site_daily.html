@@ -92,6 +92,17 @@
     .container{padding:16px 12px;}
     audio{width:100%;}
   }
+  .macro-calendar{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:24px;}
+  .macro-title{font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;}
+  .macro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}
+  .macro-item{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+  .macro-item.upcoming{border-color:#d2992240;opacity:0.8;}
+  .macro-item.released{border-color:#3fb95040;}
+  .macro-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px;}
+  .macro-value{font-size:16px;font-weight:700;color:var(--text);}
+  .macro-value.upcoming-val{color:var(--text-muted);}
+  .macro-prev{font-size:11px;color:var(--text-muted);}
+  .macro-date{font-size:10px;color:var(--text-muted);margin-top:4px;}
 </style>
 </head>
 <body>
@@ -139,6 +150,27 @@
     </div>
     {% endif %}
   </div>
+  
+  {% if briefing.get('market_data_raw', {}).get('macro_calendar') %}
+  <div class="macro-calendar">
+    <div class="macro-title">📊 Macro Calendar USA</div>
+    <div class="macro-grid">
+      {% for key, item in briefing['market_data_raw']['macro_calendar'].items() %}
+      <div class="macro-item {% if item.status == 'upcoming' %}upcoming{% elif item.status == 'released' %}released{% endif %}">
+        <div class="macro-label">{{ item.label }}</div>
+        {% if item.status == 'released' %}
+          <div class="macro-value">{{ item.value }}</div>
+          <div class="macro-prev">prec. {{ item.previous }}</div>
+          <div class="macro-date">{{ item.release_date }}</div>
+        {% elif item.status == 'upcoming' %}
+          <div class="macro-value upcoming-val">—</div>
+          <div class="macro-date">📅 {{ item.next_release }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
 
   {% if audio_url %}
   <div class="audio-section">
