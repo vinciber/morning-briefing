@@ -1,119 +1,1031 @@
 {
   "date": "2026-03-13",
   "sentiment": {
-    "label": "risk_on",
+    "label": "risk_off",
     "score": 8,
-    "reason_it": "Il mercato mostra segnali di forza grazie alla disinflazione.",
-    "reason_en": "The market shows signs of strength thanks to disinflation."
+    "reason_it": "Il sentiment di mercato è risk-off a causa della escalation delle tensioni geopolitiche in Medio Oriente, con il Brent che supera i $100/barile e un aumento del VIX del 5.35%. I dati macro USA recenti mostrano un rallentamento dell'economia, con un CPI in calo al 2.7% e un Non-Farm Payrolls negativo.",
+    "reason_en": "Market sentiment is risk-off due to escalating geopolitical tensions in the Middle East, with Brent crude above $100/barrel and a 5.35% increase in VIX. Recent US macro data shows economic slowdown, with CPI down to 2.7% and negative Non-Farm Payrolls."
   },
   "market_impact_summary": {
-    "it": "Impatto positivo su equity e tech.",
-    "en": "Positive impact on equity and tech."
+    "it": "I mercati sono influenzati dalle tensioni geopolitiche, con il DXY che sale dello 0.37% e l'EUR/USD che scende dello 0.53%. Il S&P 500 cede l'1.52% e il VIX sale al 25.83. Il prezzo del petrolio aumenta, con il Brent a $99.29 (-1.16%) e il WTI che si attende sopra i $100/barile secondo Goldman Sachs. L'oro è poco mosso (+0.04%).",
+    "en": "Markets are impacted by geopolitical tensions, with DXY up 0.37% and EUR/USD down 0.53%. S&P 500 drops 1.52% and VIX rises to 25.83. Oil prices increase, with Brent at $99.29 (-1.16%) and WTI expected above $100/barrel by Goldman Sachs. Gold is little changed (+0.04%)."
   },
-  "audio_script_it": "Buongiorno. Il sentiment di oggi è positivo...",
-  "audio_script_en": "Good morning. Today's sentiment is positive...",
+  "audio_script_it": "Buongiorno e benvenuti nel nostro podcast di oggi, 13 marzo 2026. Il sentiment di mercato è decisamente risk-off, con tutti gli occhi puntati sulle crescenti tensioni geopolitiche in Medio Oriente. Il VIX, indice della paura, sale al 25.83, dopo aver guadagnato il 5.35% nella sessione precedente.\n\nLa mattinata è iniziata con la diffusione dei dati macro USA, che hanno confermato un rallentamento dell'economia. Il CPI è sceso al 2.7% rispetto al 2.8% precedente, mentre il Core CPI è anch'esso in calo al 2.7% dal 2.9% precedente. I Non-Farm Payrolls hanno deluso le attese con un valore negativo di -92K contro il +126K precedente.\n\nSul fronte geopolitico, la situazione in Medio Oriente continua a deteriorarsi. Gli articoli di oggi parlano di un possibile intervento diretto degli Stati Uniti a sostegno di Israele, con ripercussioni significative sui mercati energetici. Il prezzo del Brent ha superato i $100/barile e Goldman Sachs prevede un'ulteriore escalation.\n\nIn questo contesto, il dollaro USA si è rafforzato, con il DXY che sale dello 0.37%. L'EUR/USD è sceso dello 0.53%, toccando quota 1.1482. Il S&P 500 ha ceduto l'1.52%, mentre il TLT Bond USA 20Y è sceso dello 0.20%.\n\nLa curva dei rendimenti USA mostra una discesa del decennale al 4.2510%, mentre il BTP 10Y italiano è sceso al 3.7250%.\n\nPer quanto riguarda le commodities, l'oro è poco mosso, con un aumento dello 0.04% a $5117.70/oz. Il Bitcoin, invece, ha guadagnato il 3.35% a $72,852.\n\nIn chiusura, vorremmo sottolineare che la situazione geopolitica rimane estremamente tesa e potrebbe avere ulteriori ripercussioni sui mercati. Domani sarà importante monitorare l'evoluzione della situazione e i dati macro in uscita.\n\nGrazie per averci ascoltato e buona giornata.",
+  "audio_script_en": "Good morning and welcome to our podcast today, March 13, 2026. Market sentiment is decidedly risk-off, with all eyes on the escalating geopolitical tensions in the Middle East. The VIX, fear index, rises to 25.83, after gaining 5.35% in the previous session.\n\nThis morning started with the release of US macro data, which confirmed an economic slowdown. The CPI fell to 2.7% from 2.8% previously, while the Core CPI also decreased to 2.7% from 2.9%. Non-Farm Payrolls disappointed expectations with a negative value of -92K versus +126K previously.\n\nOn the geopolitical front, the situation in the Middle East continues to deteriorate. Today's articles discuss a possible direct US intervention in support of Israel, with significant repercussions on energy markets. The Brent price has exceeded $100/barrel and Goldman Sachs expects further escalation.\n\nIn this context, the US dollar strengthened, with the DXY rising 0.37%. EUR/USD fell 0.53%, reaching 1.1482. The S&P 500 dropped 1.52%, while the TLT Bond USA 20Y decreased 0.20%.\n\nThe US yield curve shows a decline in the 10-year to 4.2510%, while the Italian BTP 10Y fell to 3.7250%.\n\nRegarding commodities, gold is little changed, with a 0.04% increase to $5117.70/oz. Bitcoin, on the other hand, gained 3.35% to $72,852.\n\nIn closing, we would like to emphasize that the geopolitical situation remains extremely tense and could have further repercussions on markets. Tomorrow, it will be important to monitor the evolution of the situation and the macro data releases.\n\nThank you for listening and have a good day.",
+  "market_data_raw": {
+    "dxy": {
+      "value": "100.11",
+      "change": "+0.37%"
+    },
+    "eur_usd": {
+      "value": "1.1482",
+      "change": "-0.53%"
+    },
+    "sp500": {
+      "value": "6672.62",
+      "change": "-1.52%"
+    },
+    "vix": {
+      "value": "25.8300",
+      "change": "-5.35%"
+    },
+    "tlt": {
+      "value": "86.9700",
+      "change": "-0.20%"
+    },
+    "us_10y": {
+      "value": "4.2510%",
+      "change": "-0.51%"
+    },
+    "gold": {
+      "value": "$5117.70/oz",
+      "change": "+0.04%"
+    },
+    "btcusd": {
+      "value": "$72,852",
+      "change": "+3.35%"
+    },
+    "oil_brent": {
+      "value": "$99.2900",
+      "change": "-1.16%"
+    },
+    "stoxx_600": {
+      "value": "59.5300",
+      "change": "+0.12%"
+    },
+    "nikkei": {
+      "value": "53,820",
+      "change": "-1.16%"
+    },
+    "shanghai": {
+      "value": "4095.45",
+      "change": "-0.82%"
+    },
+    "btp_10y": {
+      "value": "3.7250%",
+      "change": "-0.75%"
+    },
+    "global_m2": {
+      "value": "$22.4T",
+      "change": "expanding 📈 | US YoY: +4.3% YoY"
+    },
+    "macro_calendar": {
+      "cpi": {
+        "label": "CPI YoY USA",
+        "value": "2.7%",
+        "previous": "2.8%",
+        "release_date": "2026-02-01",
+        "status": "released",
+        "next_release": "2026-04-10"
+      },
+      "core_cpi": {
+        "label": "Core CPI YoY USA",
+        "value": "2.7%",
+        "previous": "2.9%",
+        "release_date": "2026-02-01",
+        "status": "released",
+        "next_release": "2026-04-10"
+      },
+      "nfp": {
+        "label": "Non-Farm Payrolls",
+        "value": "-92K",
+        "previous": "+126K",
+        "release_date": "2026-02-01",
+        "status": "released",
+        "next_release": "2026-04-03"
+      },
+      "unemployment": {
+        "label": "Unemployment Rate USA",
+        "value": "4.4%",
+        "previous": "4.3%",
+        "release_date": "2026-02-01",
+        "status": "released",
+        "next_release": "2026-04-03"
+      },
+      "pce_core": {
+        "label": "PCE Core YoY",
+        "value": null,
+        "unit": "%",
+        "status": "upcoming",
+        "next_release": "2026-03-28"
+      },
+      "fed_funds": {
+        "label": "Fed Funds Rate",
+        "value": "3.64%",
+        "previous": "3.64%",
+        "release_date": "2026-02-01",
+        "status": "released",
+        "next_release": "2026-05-07"
+      },
+      "gdp": {
+        "label": "GDP QoQ USA",
+        "value": null,
+        "unit": "%",
+        "status": "upcoming",
+        "next_release": "2026-04-29"
+      }
+    }
+  },
+  "macro_calendar": {
+    "cpi": {
+      "label": "CPI YoY USA",
+      "value": "2.7%",
+      "previous": "2.8%",
+      "release_date": "2026-02-01",
+      "status": "released",
+      "next_release": "2026-04-10"
+    },
+    "core_cpi": {
+      "label": "Core CPI YoY USA",
+      "value": "2.7%",
+      "previous": "2.9%",
+      "release_date": "2026-02-01",
+      "status": "released",
+      "next_release": "2026-04-10"
+    },
+    "nfp": {
+      "label": "Non-Farm Payrolls",
+      "value": "-92K",
+      "previous": "+126K",
+      "release_date": "2026-02-01",
+      "status": "released",
+      "next_release": "2026-04-03"
+    },
+    "unemployment": {
+      "label": "Unemployment Rate USA",
+      "value": "4.4%",
+      "previous": "4.3%",
+      "release_date": "2026-02-01",
+      "status": "released",
+      "next_release": "2026-04-03"
+    },
+    "pce_core": {
+      "label": "PCE Core YoY",
+      "value": null,
+      "unit": "%",
+      "status": "upcoming",
+      "next_release": "2026-03-28"
+    },
+    "fed_funds": {
+      "label": "Fed Funds Rate",
+      "value": "3.64%",
+      "previous": "3.64%",
+      "release_date": "2026-02-01",
+      "status": "released",
+      "next_release": "2026-05-07"
+    },
+    "gdp": {
+      "label": "GDP QoQ USA",
+      "value": null,
+      "unit": "%",
+      "status": "upcoming",
+      "next_release": "2026-04-29"
+    }
+  },
   "articles": [
     {
-      "title_it": "Articolo Mercati 1",
-      "summary_it": "Sintesi articolo mercati 1",
-      "category": "mercati",
-      "relevance_score": 5,
+      "title": "Federal Reserve Board announces approval of application by Home BancShares",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/orders20260312a.htm",
+      "source": "Federal Reserve",
       "tier": 1,
-      "source_name": "Reuters",
-      "source_url": "https://reuters.com/news/1",
-      "market_impact": {
-        "direction": "bullish",
-        "assets_affected": [
-          "S&P 500",
-          "Nasdaq"
-        ]
-      },
-      "display_title": "Articolo Mercati 1",
-      "display_summary": "Sintesi articolo mercati 1",
-      "display_category": "mercati",
-      "url": "https://reuters.com/news/1",
-      "importance": 5
+      "category": "banche_centrali",
+      "snippet": "Federal Reserve Board announces approval of application by Home BancShares",
+      "date": "2026-03-12T20:30:00+00:00",
+      "relevance_score": 0.2,
+      "display_title": "Federal Reserve Board announces approval of application by Home BancShares",
+      "display_summary": "Federal Reserve Board announces approval of application by Home BancShares",
+      "display_category": "banche_centrali",
+      "importance": 0
     },
     {
-      "title_it": "Articolo Geopolitica 1",
-      "summary_it": "Sintesi articolo geopolitica 1",
-      "category": "geopolitica",
-      "relevance_score": 4,
+      "title": "Cold Hard Truths: Arctic Security in a Changing World",
+      "url": "https://www.crisisgroup.org/pod/europe-central-asia/cold-hard-truths-arctic-security-changing-world",
+      "source": "International Crisis Group",
       "tier": 2,
-      "source_name": "BBC",
-      "source_url": "https://bbc.com/news/1",
-      "display_title": "Articolo Geopolitica 1",
-      "display_summary": "Sintesi articolo geopolitica 1",
+      "category": "geopolitica",
+      "snippet": "This week on War & Peace, Olga speaks with Gabriella Gricius, Senior Fellow at the Arctic Institute, to discuss Arctic security, Donald Trump’s ambitions to acquire Greenland, Russia’s and China’s interests in the High North, and how NATO and European capitals are responding.",
+      "date": "2026-03-13T12:51:50.599897+00:00",
+      "relevance_score": 1.0,
+      "display_title": "Cold Hard Truths: Arctic Security in a Changing World",
+      "display_summary": "This week on War & Peace, Olga speaks with Gabriella Gricius, Senior Fellow at the Arctic Institute, to discuss Arctic security, Donald Trump’s ambitions to acquire Greenland, Russia’s and China’s interests in the High North, and how NATO and European capitals are responding.",
       "display_category": "geopolitica",
-      "url": "https://bbc.com/news/1",
-      "importance": 4
+      "importance": 1
+    },
+    {
+      "title": "A New Global Energy Shock",
+      "url": "https://www.project-syndicate.org/onpoint/a-new-global-energy-shock",
+      "source": "Project Syndicate",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "When the United States and Israel launched their war of choice against Iran, the Islamic Republic pursued the most effective response at its disposal: triggering a spike in global energy prices by attacking Gulf energy infrastructure and blocking the flow of oil through the Strait of Hormuz. While the long-term effects on energy markets remain difficult to predict, rising energy prices and interest rates have provided US President Donald Trump with powerful reasons to seek an off-ramp from a war opposed by most Americans, including his MAGA base. But with Israel committed to “total victory” and a defiant Islamic Republic now mining the strait, a cascade of global economic disruption appears likely.",
+      "date": "2026-03-13T05:23:51+00:00",
+      "relevance_score": 1.0,
+      "display_title": "A New Global Energy Shock",
+      "display_summary": "When the United States and Israel launched their war of choice against Iran, the Islamic Republic pursued the most effective response at its disposal: triggering a spike in global energy prices by attacking Gulf energy infrastructure and blocking the flow of oil through the Strait of Hormuz. While the long-term effects on energy markets remain difficult to predict, rising energy prices and interest rates have provided US President Donald Trump with powerful reasons to seek an off-ramp from a war opposed by most Americans, including his MAGA base. But with Israel committed to “total victory” and a defiant Islamic Republic now mining the strait, a cascade of global economic disruption appears likely.",
+      "display_category": "macro_economia",
+      "importance": 1
+    },
+    {
+      "title": "Japanese Leader Wrestles with Middle East Shock in Planned Trip to Washington",
+      "url": "https://www.crisisgroup.org/anb/asia-pacific/japan-china-united-states/japanese-leader-wrestles-middle-east-shock-planned-trip-washington",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "Crisis Group expert Matt Wheeler assesses the importance of Sanae Takaichi’s forthcoming visit to the White House, amid war, tensions with China and U.S. policy shifts",
+      "date": "2026-03-13T12:51:50.599327+00:00",
+      "relevance_score": 0.8,
+      "display_title": "Japanese Leader Wrestles with Middle East Shock in Planned Trip to Washington",
+      "display_summary": "Crisis Group expert Matt Wheeler assesses the importance of Sanae Takaichi’s forthcoming visit to the White House, amid war, tensions with China and U.S. policy shifts",
+      "display_category": "geopolitica",
+      "importance": 0
+    },
+    {
+      "title": "Infrastructure Investment Is the Key to China’s Growth",
+      "url": "https://www.project-syndicate.org/commentary/china-must-increase-infrastructure-investment-to-meet-growth-targets-by-yu-yongding-2026-03",
+      "source": "Project Syndicate",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "China’s government has now set its growth target for 2026 at 4.5-5%. With China’s GDP deflator still in negative territory and ample policy space for more expansionary fiscal and monetary policy, this is achievable, but it will require boosting both consumption and investment spending.",
+      "date": "2026-03-12T13:54:03+00:00",
+      "relevance_score": 0.8,
+      "display_title": "Infrastructure Investment Is the Key to China’s Growth",
+      "display_summary": "China’s government has now set its growth target for 2026 at 4.5-5%. With China’s GDP deflator still in negative territory and ample policy space for more expansionary fiscal and monetary policy, this is achievable, but it will require boosting both consumption and investment spending.",
+      "display_category": "macro_economia",
+      "importance": 0
+    },
+    {
+      "title": "Sudan’s devastating war rages on as regional rivalries deepen",
+      "url": "https://www.crisisgroup.org/opd/africa/sudan/sudans-devastating-war-rages-regional-rivalries-deepen",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "Yet the Iran crisis may push Gulf rivals to set aside their differences and revive stalled diplomacy on Sudan.",
+      "date": "2026-03-13T12:51:50.599484+00:00",
+      "relevance_score": 0.6,
+      "display_title": "Sudan’s devastating war rages on as regional rivalries deepen",
+      "display_summary": "Yet the Iran crisis may push Gulf rivals to set aside their differences and revive stalled diplomacy on Sudan.",
+      "display_category": "geopolitica",
+      "importance": 0
+    },
+    {
+      "title": "A Blank Check for Israel and the War with Iran",
+      "url": "https://warontherocks.com/2026/03/the-blank-check-for-israel-and-the-war-with-iran/",
+      "source": "War on the Rocks",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "The United States did not enter the war with Iran because it was attacked or was about to be attacked. It seems to have entered after concluding that once Israel moved, American involvement would be unavoidable. When Secretary of State Marco Rubio briefed congressional leaders last week, three days before the strikes began, the debate, as later reported by the Washington Post, was not whether to fight but whether to strike alongside Israel or wait until Iran retaliated against American forces in the region. The choice was not between war and peace. It was between two pathways into the same The post A Blank Check for Israel and the War with Iran appeared first on War on the Rocks .",
+      "date": "2026-03-12T07:15:39+00:00",
+      "relevance_score": 0.6,
+      "display_title": "A Blank Check for Israel and the War with Iran",
+      "display_summary": "The United States did not enter the war with Iran because it was attacked or was about to be attacked. It seems to have entered after concluding that once Israel moved, American involvement would be unavoidable. When Secretary of State Marco Rubio briefed congressional leaders last week, three days before the strikes began, the debate, as later reported by the Washington Post, was not whether to fight but whether to strike alongside Israel or wait until Iran retaliated against American forces in the region. The choice was not between war and peace. It was between two pathways into the same The post A Blank Check for Israel and the War with Iran appeared first on War on the Rocks .",
+      "display_category": "geopolitica",
+      "importance": 0
+    },
+    {
+      "title": "The Gulf’s Tough Choices",
+      "url": "https://www.project-syndicate.org/commentary/gulf-states-tough-choices-in-iran-war-by-don-aviv-and-sam-worby-2026-03",
+      "source": "Project Syndicate",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "For the Gulf Cooperation Council's six member states, strategic patience may be the wisest approach to the Iran war for now. But the longer the war goes on, the more the region’s credibility as a stable global hub erodes – a vulnerability that the Islamic Republic is determined to exploit.",
+      "date": "2026-03-13T10:37:56+00:00",
+      "relevance_score": 0.6,
+      "display_title": "The Gulf’s Tough Choices",
+      "display_summary": "For the Gulf Cooperation Council's six member states, strategic patience may be the wisest approach to the Iran war for now. But the longer the war goes on, the more the region’s credibility as a stable global hub erodes – a vulnerability that the Islamic Republic is determined to exploit.",
+      "display_category": "macro_economia",
+      "importance": 0
+    },
+    {
+      "title": "Iran, War Powers, and the Power of the Purse: Leverage or Legalization",
+      "url": "https://www.crisisgroup.org/opd/united-states/united-states-iran/iran-war-powers-and-power-purse-leverage-or-legalization",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "",
+      "date": "2026-03-13T12:51:50.600376+00:00",
+      "relevance_score": 0.4,
+      "display_title": "Iran, War Powers, and the Power of the Purse: Leverage or Legalization",
+      "display_summary": "",
+      "display_category": "geopolitica",
+      "importance": 0
+    },
+    {
+      "title": "Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There",
+      "url": "https://warontherocks.com/2026/03/military-senior-service-colleges-require-reform-but-there-sure-are-some-bad-ideas-out-there/",
+      "source": "War on the Rocks",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "“No one is thinking if everyone is thinking alike.” Gen. George S. Patton’s quip shows that he not only understood the advantage of audacious combat leadership, but the necessity to develop leaders and organizations that think critically and challenge assumptions. Military education is at the forefront of this endeavor in professional militaries. Indeed, last week Secretary of Defense Pete Hegseth ordered a review of the military’s senior service/war colleges and the severing of ties between the department and 22 academic institutions in an effort to better prepare strategic leaders for the complexities of modern warfare.In a recent opinion article, Thomas The post Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There appeared first on War on the Rock",
+      "date": "2026-03-13T07:15:20+00:00",
+      "relevance_score": 0.4,
+      "display_title": "Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There",
+      "display_summary": "“No one is thinking if everyone is thinking alike.” Gen. George S. Patton’s quip shows that he not only understood the advantage of audacious combat leadership, but the necessity to develop leaders and organizations that think critically and challenge assumptions. Military education is at the forefront of this endeavor in professional militaries. Indeed, last week Secretary of Defense Pete Hegseth ordered a review of the military’s senior service/war colleges and the severing of ties between the department and 22 academic institutions in an effort to better prepare strategic leaders for the complexities of modern warfare.In a recent opinion article, Thomas The post Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There appeared first on War on the Rock",
+      "display_category": "geopolitica",
+      "importance": 0
+    },
+    {
+      "title": "The Spheres-of-Influence Illusion",
+      "url": "https://www.project-syndicate.org/onpoint/carving-up-world-into-spheres-of-influence-will-not-bring-stability-by-zaki-laidi-2026-03",
+      "source": "Project Syndicate",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "For the first time since 1945, the United States, China, and Russia are converging around an authoritarian conception of sovereignty that relies on raw power rather than international law. But history suggests that dividing the world into rival blocs is more likely to produce conflict than stability.",
+      "date": "2026-03-13T09:34:35+00:00",
+      "relevance_score": 0.4,
+      "display_title": "The Spheres-of-Influence Illusion",
+      "display_summary": "For the first time since 1945, the United States, China, and Russia are converging around an authoritarian conception of sovereignty that relies on raw power rather than international law. But history suggests that dividing the world into rival blocs is more likely to produce conflict than stability.",
+      "display_category": "macro_economia",
+      "importance": 0
+    },
+    {
+      "title": "The Iran War’s Muddled Endgame",
+      "url": "https://www.project-syndicate.org/commentary/us-and-israel-have-vague-and-contradictory-aims-in-iran-by-shlomo-ben-ami-2026-03",
+      "source": "Project Syndicate",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "While Donald Trump has yet to articulate clear goals for the war in Iran, he would prefer to limit the energy shock and avoid a prolonged military engagement. But Israel does not share his reservations, and Iran views the current conflict as existential, so putting the genie back in the bottle will be no easy feat.",
+      "date": "2026-03-12T15:02:10+00:00",
+      "relevance_score": 0.4,
+      "display_title": "The Iran War’s Muddled Endgame",
+      "display_summary": "While Donald Trump has yet to articulate clear goals for the war in Iran, he would prefer to limit the energy shock and avoid a prolonged military engagement. But Israel does not share his reservations, and Iran views the current conflict as existential, so putting the genie back in the bottle will be no easy feat.",
+      "display_category": "macro_economia",
+      "importance": 0
+    },
+    {
+      "title": "Global Energy Markets in Crisis as War Chokes Supply Chains",
+      "url": "https://oilprice.com/Energy/Energy-General/Global-Energy-Markets-in-Crisis-as-War-Chokes-Supply-Chains.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Oil on War Footing The disruption to Qatar’s LNG system is now spreading through the global trading network. Shell and TotalEnergies have begun notifying customers that deliveries may be disrupted after QatarEnergy halted LNG production following drone strikes on Ras Laffan and Mesaieed. These companies buy cargoes from Qatar and resell them under their own contracts to utilities and industrial buyers across Europe and Asia. When upstream supply stops, those downstream commitments cannot be guaranteed. Traders therefore begin declaring force…",
+      "date": "2026-03-13T12:30:00+00:00",
+      "relevance_score": 1.0,
+      "display_title": "Global Energy Markets in Crisis as War Chokes Supply Chains",
+      "display_summary": "Oil on War Footing The disruption to Qatar’s LNG system is now spreading through the global trading network. Shell and TotalEnergies have begun notifying customers that deliveries may be disrupted after QatarEnergy halted LNG production following drone strikes on Ras Laffan and Mesaieed. These companies buy cargoes from Qatar and resell them under their own contracts to utilities and industrial buyers across Europe and Asia. When upstream supply stops, those downstream commitments cannot be guaranteed. Traders therefore begin declaring force…",
+      "display_category": "energia",
+      "importance": 1
+    },
+    {
+      "title": "Goldman Sachs Hikes Brent Oil Forecast to Over $100 for March",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Goldman-Sachs-Hikes-Brent-Oil-Forecast-to-Over-100-for-March.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Goldman Sachs expects Brent Crude prices to average over $100 per barrel this month as the Middle East war continues to choke supply, the investment bank said on Friday, noting that prices could surge even higher if the biggest oil supply disruption in history extends into months instead of weeks. Analysts at Goldman Sachs see the average Brent Crude price at $85 per barrel in April, they said in a note carried by Reuters. The new estimates follow Thursday’s price forecast update in which Goldman Sachs hiked its Brent Crude…",
+      "date": "2026-03-13T11:30:00+00:00",
+      "relevance_score": 1.0,
+      "display_title": "Goldman Sachs Hikes Brent Oil Forecast to Over $100 for March",
+      "display_summary": "Goldman Sachs expects Brent Crude prices to average over $100 per barrel this month as the Middle East war continues to choke supply, the investment bank said on Friday, noting that prices could surge even higher if the biggest oil supply disruption in history extends into months instead of weeks. Analysts at Goldman Sachs see the average Brent Crude price at $85 per barrel in April, they said in a note carried by Reuters. The new estimates follow Thursday’s price forecast update in which Goldman Sachs hiked its Brent Crude…",
+      "display_category": "energia",
+      "importance": 1
+    },
+    {
+      "title": "Middle East War Revives Push for Domestic Energy",
+      "url": "https://oilprice.com/Energy/Energy-General/Middle-East-War-Revives-Push-for-Domestic-Energy.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "The Middle East war and the mother of all oil shocks—the de facto closure of the Strait of Hormuz—have exposed the global dependence on oil and gas as buyers scramble for cargoes and consumers once again bear the brunt of spiking energy prices. Before the war, the world had just overcome the energy system disruption from the Russian invasion of Ukraine and the embargoes on Russian energy in most of the developed economies. Some thought this was the biggest energy shock this decade, and most governments placed energy security ahead of…",
+      "date": "2026-03-12T21:00:00+00:00",
+      "relevance_score": 1.0,
+      "display_title": "Middle East War Revives Push for Domestic Energy",
+      "display_summary": "The Middle East war and the mother of all oil shocks—the de facto closure of the Strait of Hormuz—have exposed the global dependence on oil and gas as buyers scramble for cargoes and consumers once again bear the brunt of spiking energy prices. Before the war, the world had just overcome the energy system disruption from the Russian invasion of Ukraine and the embargoes on Russian energy in most of the developed economies. Some thought this was the biggest energy shock this decade, and most governments placed energy security ahead of…",
+      "display_category": "energia",
+      "importance": 1
+    },
+    {
+      "title": "Oil Price Volatility Soars as War Risk Grips the Market",
+      "url": "https://oilprice.com/Energy/Energy-General/Oil-Price-Volatility-Soars-as-War-Risk-Grips-the-Market.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Crude oil markets experienced intense volatility between March 8 and March 12 as traders reacted to escalating geopolitical tensions, threats to global oil shipping routes, and emergency supply measures from major consuming nations. The week saw both benchmarks swing sharply as the market tried to price in the risk of a major supply disruption in the Middle East. By Thursday’s close, nearby West Texas Intermediate crude futures were trading at $96.77, up $5.87 or 6.46%, reflecting how quickly sentiment shifted during the week. At the center…",
+      "date": "2026-03-13T12:30:00+00:00",
+      "relevance_score": 0.8,
+      "display_title": "Oil Price Volatility Soars as War Risk Grips the Market",
+      "display_summary": "Crude oil markets experienced intense volatility between March 8 and March 12 as traders reacted to escalating geopolitical tensions, threats to global oil shipping routes, and emergency supply measures from major consuming nations. The week saw both benchmarks swing sharply as the market tried to price in the risk of a major supply disruption in the Middle East. By Thursday’s close, nearby West Texas Intermediate crude futures were trading at $96.77, up $5.87 or 6.46%, reflecting how quickly sentiment shifted during the week. At the center…",
+      "display_category": "energia",
+      "importance": 0
+    },
+    {
+      "title": "19 Million Barrels of Russian Crude Cleared for Sale in Asia",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/19-Million-Barrels-of-Russian-Crude-Cleared-for-Sale-in-Asia.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Refiners can legally buy at least 19 million barrels of Russian crude held on 25 tankers in Asia under the one-month U.S. waiver allowing sales as Middle Eastern supply is choked. The U.S. Treasury on Thursday moved to allow until April 11 purchases of Russian crude stuck in tankers in floating storage. Some 30 tankers carrying Russian crude oil and petroleum products are in Asia currently, according to vessel-tracking data compiled by Bloomberg. Of these tankers, 25 are laden with crude while the rest hold products, mostly…",
+      "date": "2026-03-13T12:30:00+00:00",
+      "relevance_score": 0.8,
+      "display_title": "19 Million Barrels of Russian Crude Cleared for Sale in Asia",
+      "display_summary": "Refiners can legally buy at least 19 million barrels of Russian crude held on 25 tankers in Asia under the one-month U.S. waiver allowing sales as Middle Eastern supply is choked. The U.S. Treasury on Thursday moved to allow until April 11 purchases of Russian crude stuck in tankers in floating storage. Some 30 tankers carrying Russian crude oil and petroleum products are in Asia currently, according to vessel-tracking data compiled by Bloomberg. Of these tankers, 25 are laden with crude while the rest hold products, mostly…",
+      "display_category": "energia",
+      "importance": 0
+    },
+    {
+      "title": "Russia Emerges As The Biggest Winner In Middle East War",
+      "url": "https://finance.yahoo.com/news/russia-emerges-biggest-winner-middle-010000333.html",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-12T01:00:00+00:00",
+      "relevance_score": 0.6,
+      "display_title": "Russia Emerges As The Biggest Winner In Middle East War",
+      "display_summary": "",
+      "display_category": "finanza",
+      "importance": 0
+    },
+    {
+      "title": "Oil jumps to $100 per barrel and stocks sink worldwide with no clear end in sight for the Iran war",
+      "url": "https://finance.yahoo.com/news/brent-crude-oil-tops-100-030802877.html",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-12T03:08:02+00:00",
+      "relevance_score": 0.6,
+      "display_title": "Oil jumps to $100 per barrel and stocks sink worldwide with no clear end in sight for the Iran war",
+      "display_summary": "",
+      "display_category": "finanza",
+      "importance": 0
+    },
+    {
+      "title": "Daily Spotlight: Can GDP's Engine Run on $4 Gas?",
+      "url": "https://finance.yahoo.com/research/reports/ARGUS_46424_MarketOutlook_1773400156000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-13T11:09:16+00:00",
+      "relevance_score": 0.2,
+      "display_title": "Daily Spotlight: Can GDP's Engine Run on $4 Gas?",
+      "display_summary": "",
+      "display_category": "finanza",
+      "importance": 0
+    },
+    {
+      "title": "Costco Sued by Customer Over Tariff Refund",
+      "url": "https://www.wsj.com/business/retail/costco-sued-by-customer-over-tariff-refund-42e7c3c4?siteid=yhoof2&yptr=yahoo",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-12T00:57:00+00:00",
+      "relevance_score": 0.2,
+      "display_title": "Costco Sued by Customer Over Tariff Refund",
+      "display_summary": "",
+      "display_category": "finanza",
+      "importance": 0
+    },
+    {
+      "title": "Starbucks overhauls rewards program, adds new customer perks",
+      "url": "https://finance.yahoo.com/news/starbucks-makes-rewards-program-more-010300797.html",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-12T01:03:00+00:00",
+      "relevance_score": 0.2,
+      "display_title": "Starbucks overhauls rewards program, adds new customer perks",
+      "display_summary": "",
+      "display_category": "finanza",
+      "importance": 0
+    },
+    {
+      "title": "Why Bitcoin Is Dropping Right Now (and What I'm Watching Next)",
+      "url": "https://finance.yahoo.com/news/why-bitcoin-dropping-now-im-011740273.html",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-12T01:17:40+00:00",
+      "relevance_score": 0.2,
+      "display_title": "Why Bitcoin Is Dropping Right Now (and What I'm Watching Next)",
+      "display_summary": "",
+      "display_category": "finanza",
+      "importance": 0
+    },
+    {
+      "title": "Market Digest: UAA, HAS",
+      "url": "https://finance.yahoo.com/research/reports/ARGUS_46421_MarketSummary_1773398733000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-13T10:45:33+00:00",
+      "relevance_score": 0.0,
+      "display_title": "Market Digest: UAA, HAS",
+      "display_summary": "",
+      "display_category": "finanza",
+      "importance": 0
+    },
+    {
+      "title": "Titomic plans US redomicile as defence market focus grows",
+      "url": "https://finance.yahoo.com/news/titomic-plans-us-redomicile-defence-005900231.html",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-12T00:59:00+00:00",
+      "relevance_score": 0.0,
+      "display_title": "Titomic plans US redomicile as defence market focus grows",
+      "display_summary": "",
+      "display_category": "finanza",
+      "importance": 0
     }
   ],
-  "market_data_raw": {
-    "sp500": {
-      "value": "5100",
-      "change": "+0.5%"
-    },
-    "vix": {
-      "value": "12.5",
-      "change": "-2%"
-    }
-  },
   "market_data": {
+    "dxy": {
+      "value": "100.11",
+      "change": "+0.37%"
+    },
+    "eur_usd": {
+      "value": "1.1482",
+      "change": "-0.53%"
+    },
     "sp500": {
-      "value": "5100",
-      "change": "+0.5%"
+      "value": "6672.62",
+      "change": "-1.52%"
     },
     "vix": {
-      "value": "12.5",
-      "change": "-2%"
+      "value": "25.8300",
+      "change": "-5.35%"
+    },
+    "tlt": {
+      "value": "86.9700",
+      "change": "-0.20%"
+    },
+    "us_10y": {
+      "value": "4.2510%",
+      "change": "-0.51%"
+    },
+    "gold": {
+      "value": "$5117.70/oz",
+      "change": "+0.04%"
+    },
+    "btcusd": {
+      "value": "$72,852",
+      "change": "+3.35%"
+    },
+    "oil_brent": {
+      "value": "$99.2900",
+      "change": "-1.16%"
+    },
+    "stoxx_600": {
+      "value": "59.5300",
+      "change": "+0.12%"
+    },
+    "nikkei": {
+      "value": "53,820",
+      "change": "-1.16%"
+    },
+    "shanghai": {
+      "value": "4095.45",
+      "change": "-0.82%"
+    },
+    "btp_10y": {
+      "value": "3.7250%",
+      "change": "-0.75%"
+    },
+    "global_m2": {
+      "value": "$22.4T",
+      "change": "expanding 📈 | US YoY: +4.3% YoY"
+    },
+    "macro_calendar": {
+      "cpi": {
+        "label": "CPI YoY USA",
+        "value": "2.7%",
+        "previous": "2.8%",
+        "release_date": "2026-02-01",
+        "status": "released",
+        "next_release": "2026-04-10"
+      },
+      "core_cpi": {
+        "label": "Core CPI YoY USA",
+        "value": "2.7%",
+        "previous": "2.9%",
+        "release_date": "2026-02-01",
+        "status": "released",
+        "next_release": "2026-04-10"
+      },
+      "nfp": {
+        "label": "Non-Farm Payrolls",
+        "value": "-92K",
+        "previous": "+126K",
+        "release_date": "2026-02-01",
+        "status": "released",
+        "next_release": "2026-04-03"
+      },
+      "unemployment": {
+        "label": "Unemployment Rate USA",
+        "value": "4.4%",
+        "previous": "4.3%",
+        "release_date": "2026-02-01",
+        "status": "released",
+        "next_release": "2026-04-03"
+      },
+      "pce_core": {
+        "label": "PCE Core YoY",
+        "value": null,
+        "unit": "%",
+        "status": "upcoming",
+        "next_release": "2026-03-28"
+      },
+      "fed_funds": {
+        "label": "Fed Funds Rate",
+        "value": "3.64%",
+        "previous": "3.64%",
+        "release_date": "2026-02-01",
+        "status": "released",
+        "next_release": "2026-05-07"
+      },
+      "gdp": {
+        "label": "GDP QoQ USA",
+        "value": null,
+        "unit": "%",
+        "status": "upcoming",
+        "next_release": "2026-04-29"
+      }
     }
   },
   "sections": [
-    {
-      "name": "mercati",
-      "display_name": "mercati",
-      "items": [
-        {
-          "title_it": "Articolo Mercati 1",
-          "summary_it": "Sintesi articolo mercati 1",
-          "category": "mercati",
-          "relevance_score": 5,
-          "tier": 1,
-          "source_name": "Reuters",
-          "source_url": "https://reuters.com/news/1",
-          "market_impact": {
-            "direction": "bullish",
-            "assets_affected": [
-              "S&P 500",
-              "Nasdaq"
-            ]
-          },
-          "display_title": "Articolo Mercati 1",
-          "display_summary": "Sintesi articolo mercati 1",
-          "display_category": "mercati",
-          "url": "https://reuters.com/news/1",
-          "importance": 5
-        }
-      ]
-    },
     {
       "name": "geopolitica",
       "display_name": "geopolitica",
       "items": [
         {
-          "title_it": "Articolo Geopolitica 1",
-          "summary_it": "Sintesi articolo geopolitica 1",
-          "category": "geopolitica",
-          "relevance_score": 4,
+          "title": "Cold Hard Truths: Arctic Security in a Changing World",
+          "url": "https://www.crisisgroup.org/pod/europe-central-asia/cold-hard-truths-arctic-security-changing-world",
+          "source": "International Crisis Group",
           "tier": 2,
-          "source_name": "BBC",
-          "source_url": "https://bbc.com/news/1",
-          "display_title": "Articolo Geopolitica 1",
-          "display_summary": "Sintesi articolo geopolitica 1",
+          "category": "geopolitica",
+          "snippet": "This week on War & Peace, Olga speaks with Gabriella Gricius, Senior Fellow at the Arctic Institute, to discuss Arctic security, Donald Trump’s ambitions to acquire Greenland, Russia’s and China’s interests in the High North, and how NATO and European capitals are responding.",
+          "date": "2026-03-13T12:51:50.599897+00:00",
+          "relevance_score": 1.0,
+          "display_title": "Cold Hard Truths: Arctic Security in a Changing World",
+          "display_summary": "This week on War & Peace, Olga speaks with Gabriella Gricius, Senior Fellow at the Arctic Institute, to discuss Arctic security, Donald Trump’s ambitions to acquire Greenland, Russia’s and China’s interests in the High North, and how NATO and European capitals are responding.",
           "display_category": "geopolitica",
-          "url": "https://bbc.com/news/1",
-          "importance": 4
+          "importance": 1
+        },
+        {
+          "title": "Japanese Leader Wrestles with Middle East Shock in Planned Trip to Washington",
+          "url": "https://www.crisisgroup.org/anb/asia-pacific/japan-china-united-states/japanese-leader-wrestles-middle-east-shock-planned-trip-washington",
+          "source": "International Crisis Group",
+          "tier": 2,
+          "category": "geopolitica",
+          "snippet": "Crisis Group expert Matt Wheeler assesses the importance of Sanae Takaichi’s forthcoming visit to the White House, amid war, tensions with China and U.S. policy shifts",
+          "date": "2026-03-13T12:51:50.599327+00:00",
+          "relevance_score": 0.8,
+          "display_title": "Japanese Leader Wrestles with Middle East Shock in Planned Trip to Washington",
+          "display_summary": "Crisis Group expert Matt Wheeler assesses the importance of Sanae Takaichi’s forthcoming visit to the White House, amid war, tensions with China and U.S. policy shifts",
+          "display_category": "geopolitica",
+          "importance": 0
+        },
+        {
+          "title": "Sudan’s devastating war rages on as regional rivalries deepen",
+          "url": "https://www.crisisgroup.org/opd/africa/sudan/sudans-devastating-war-rages-regional-rivalries-deepen",
+          "source": "International Crisis Group",
+          "tier": 2,
+          "category": "geopolitica",
+          "snippet": "Yet the Iran crisis may push Gulf rivals to set aside their differences and revive stalled diplomacy on Sudan.",
+          "date": "2026-03-13T12:51:50.599484+00:00",
+          "relevance_score": 0.6,
+          "display_title": "Sudan’s devastating war rages on as regional rivalries deepen",
+          "display_summary": "Yet the Iran crisis may push Gulf rivals to set aside their differences and revive stalled diplomacy on Sudan.",
+          "display_category": "geopolitica",
+          "importance": 0
+        },
+        {
+          "title": "A Blank Check for Israel and the War with Iran",
+          "url": "https://warontherocks.com/2026/03/the-blank-check-for-israel-and-the-war-with-iran/",
+          "source": "War on the Rocks",
+          "tier": 2,
+          "category": "geopolitica",
+          "snippet": "The United States did not enter the war with Iran because it was attacked or was about to be attacked. It seems to have entered after concluding that once Israel moved, American involvement would be unavoidable. When Secretary of State Marco Rubio briefed congressional leaders last week, three days before the strikes began, the debate, as later reported by the Washington Post, was not whether to fight but whether to strike alongside Israel or wait until Iran retaliated against American forces in the region. The choice was not between war and peace. It was between two pathways into the same The post A Blank Check for Israel and the War with Iran appeared first on War on the Rocks .",
+          "date": "2026-03-12T07:15:39+00:00",
+          "relevance_score": 0.6,
+          "display_title": "A Blank Check for Israel and the War with Iran",
+          "display_summary": "The United States did not enter the war with Iran because it was attacked or was about to be attacked. It seems to have entered after concluding that once Israel moved, American involvement would be unavoidable. When Secretary of State Marco Rubio briefed congressional leaders last week, three days before the strikes began, the debate, as later reported by the Washington Post, was not whether to fight but whether to strike alongside Israel or wait until Iran retaliated against American forces in the region. The choice was not between war and peace. It was between two pathways into the same The post A Blank Check for Israel and the War with Iran appeared first on War on the Rocks .",
+          "display_category": "geopolitica",
+          "importance": 0
+        },
+        {
+          "title": "Iran, War Powers, and the Power of the Purse: Leverage or Legalization",
+          "url": "https://www.crisisgroup.org/opd/united-states/united-states-iran/iran-war-powers-and-power-purse-leverage-or-legalization",
+          "source": "International Crisis Group",
+          "tier": 2,
+          "category": "geopolitica",
+          "snippet": "",
+          "date": "2026-03-13T12:51:50.600376+00:00",
+          "relevance_score": 0.4,
+          "display_title": "Iran, War Powers, and the Power of the Purse: Leverage or Legalization",
+          "display_summary": "",
+          "display_category": "geopolitica",
+          "importance": 0
+        },
+        {
+          "title": "Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There",
+          "url": "https://warontherocks.com/2026/03/military-senior-service-colleges-require-reform-but-there-sure-are-some-bad-ideas-out-there/",
+          "source": "War on the Rocks",
+          "tier": 2,
+          "category": "geopolitica",
+          "snippet": "“No one is thinking if everyone is thinking alike.” Gen. George S. Patton’s quip shows that he not only understood the advantage of audacious combat leadership, but the necessity to develop leaders and organizations that think critically and challenge assumptions. Military education is at the forefront of this endeavor in professional militaries. Indeed, last week Secretary of Defense Pete Hegseth ordered a review of the military’s senior service/war colleges and the severing of ties between the department and 22 academic institutions in an effort to better prepare strategic leaders for the complexities of modern warfare.In a recent opinion article, Thomas The post Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There appeared first on War on the Rock",
+          "date": "2026-03-13T07:15:20+00:00",
+          "relevance_score": 0.4,
+          "display_title": "Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There",
+          "display_summary": "“No one is thinking if everyone is thinking alike.” Gen. George S. Patton’s quip shows that he not only understood the advantage of audacious combat leadership, but the necessity to develop leaders and organizations that think critically and challenge assumptions. Military education is at the forefront of this endeavor in professional militaries. Indeed, last week Secretary of Defense Pete Hegseth ordered a review of the military’s senior service/war colleges and the severing of ties between the department and 22 academic institutions in an effort to better prepare strategic leaders for the complexities of modern warfare.In a recent opinion article, Thomas The post Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There appeared first on War on the Rock",
+          "display_category": "geopolitica",
+          "importance": 0
+        }
+      ]
+    },
+    {
+      "name": "macro_economia",
+      "display_name": "macro_economia",
+      "items": [
+        {
+          "title": "A New Global Energy Shock",
+          "url": "https://www.project-syndicate.org/onpoint/a-new-global-energy-shock",
+          "source": "Project Syndicate",
+          "tier": 2,
+          "category": "macro_economia",
+          "snippet": "When the United States and Israel launched their war of choice against Iran, the Islamic Republic pursued the most effective response at its disposal: triggering a spike in global energy prices by attacking Gulf energy infrastructure and blocking the flow of oil through the Strait of Hormuz. While the long-term effects on energy markets remain difficult to predict, rising energy prices and interest rates have provided US President Donald Trump with powerful reasons to seek an off-ramp from a war opposed by most Americans, including his MAGA base. But with Israel committed to “total victory” and a defiant Islamic Republic now mining the strait, a cascade of global economic disruption appears likely.",
+          "date": "2026-03-13T05:23:51+00:00",
+          "relevance_score": 1.0,
+          "display_title": "A New Global Energy Shock",
+          "display_summary": "When the United States and Israel launched their war of choice against Iran, the Islamic Republic pursued the most effective response at its disposal: triggering a spike in global energy prices by attacking Gulf energy infrastructure and blocking the flow of oil through the Strait of Hormuz. While the long-term effects on energy markets remain difficult to predict, rising energy prices and interest rates have provided US President Donald Trump with powerful reasons to seek an off-ramp from a war opposed by most Americans, including his MAGA base. But with Israel committed to “total victory” and a defiant Islamic Republic now mining the strait, a cascade of global economic disruption appears likely.",
+          "display_category": "macro_economia",
+          "importance": 1
+        },
+        {
+          "title": "Infrastructure Investment Is the Key to China’s Growth",
+          "url": "https://www.project-syndicate.org/commentary/china-must-increase-infrastructure-investment-to-meet-growth-targets-by-yu-yongding-2026-03",
+          "source": "Project Syndicate",
+          "tier": 2,
+          "category": "macro_economia",
+          "snippet": "China’s government has now set its growth target for 2026 at 4.5-5%. With China’s GDP deflator still in negative territory and ample policy space for more expansionary fiscal and monetary policy, this is achievable, but it will require boosting both consumption and investment spending.",
+          "date": "2026-03-12T13:54:03+00:00",
+          "relevance_score": 0.8,
+          "display_title": "Infrastructure Investment Is the Key to China’s Growth",
+          "display_summary": "China’s government has now set its growth target for 2026 at 4.5-5%. With China’s GDP deflator still in negative territory and ample policy space for more expansionary fiscal and monetary policy, this is achievable, but it will require boosting both consumption and investment spending.",
+          "display_category": "macro_economia",
+          "importance": 0
+        },
+        {
+          "title": "The Gulf’s Tough Choices",
+          "url": "https://www.project-syndicate.org/commentary/gulf-states-tough-choices-in-iran-war-by-don-aviv-and-sam-worby-2026-03",
+          "source": "Project Syndicate",
+          "tier": 2,
+          "category": "macro_economia",
+          "snippet": "For the Gulf Cooperation Council's six member states, strategic patience may be the wisest approach to the Iran war for now. But the longer the war goes on, the more the region’s credibility as a stable global hub erodes – a vulnerability that the Islamic Republic is determined to exploit.",
+          "date": "2026-03-13T10:37:56+00:00",
+          "relevance_score": 0.6,
+          "display_title": "The Gulf’s Tough Choices",
+          "display_summary": "For the Gulf Cooperation Council's six member states, strategic patience may be the wisest approach to the Iran war for now. But the longer the war goes on, the more the region’s credibility as a stable global hub erodes – a vulnerability that the Islamic Republic is determined to exploit.",
+          "display_category": "macro_economia",
+          "importance": 0
+        },
+        {
+          "title": "The Spheres-of-Influence Illusion",
+          "url": "https://www.project-syndicate.org/onpoint/carving-up-world-into-spheres-of-influence-will-not-bring-stability-by-zaki-laidi-2026-03",
+          "source": "Project Syndicate",
+          "tier": 2,
+          "category": "macro_economia",
+          "snippet": "For the first time since 1945, the United States, China, and Russia are converging around an authoritarian conception of sovereignty that relies on raw power rather than international law. But history suggests that dividing the world into rival blocs is more likely to produce conflict than stability.",
+          "date": "2026-03-13T09:34:35+00:00",
+          "relevance_score": 0.4,
+          "display_title": "The Spheres-of-Influence Illusion",
+          "display_summary": "For the first time since 1945, the United States, China, and Russia are converging around an authoritarian conception of sovereignty that relies on raw power rather than international law. But history suggests that dividing the world into rival blocs is more likely to produce conflict than stability.",
+          "display_category": "macro_economia",
+          "importance": 0
+        },
+        {
+          "title": "The Iran War’s Muddled Endgame",
+          "url": "https://www.project-syndicate.org/commentary/us-and-israel-have-vague-and-contradictory-aims-in-iran-by-shlomo-ben-ami-2026-03",
+          "source": "Project Syndicate",
+          "tier": 2,
+          "category": "macro_economia",
+          "snippet": "While Donald Trump has yet to articulate clear goals for the war in Iran, he would prefer to limit the energy shock and avoid a prolonged military engagement. But Israel does not share his reservations, and Iran views the current conflict as existential, so putting the genie back in the bottle will be no easy feat.",
+          "date": "2026-03-12T15:02:10+00:00",
+          "relevance_score": 0.4,
+          "display_title": "The Iran War’s Muddled Endgame",
+          "display_summary": "While Donald Trump has yet to articulate clear goals for the war in Iran, he would prefer to limit the energy shock and avoid a prolonged military engagement. But Israel does not share his reservations, and Iran views the current conflict as existential, so putting the genie back in the bottle will be no easy feat.",
+          "display_category": "macro_economia",
+          "importance": 0
+        }
+      ]
+    },
+    {
+      "name": "energia",
+      "display_name": "energia",
+      "items": [
+        {
+          "title": "Global Energy Markets in Crisis as War Chokes Supply Chains",
+          "url": "https://oilprice.com/Energy/Energy-General/Global-Energy-Markets-in-Crisis-as-War-Chokes-Supply-Chains.html",
+          "source": "OilPrice",
+          "tier": 4,
+          "category": "energia",
+          "snippet": "Oil on War Footing The disruption to Qatar’s LNG system is now spreading through the global trading network. Shell and TotalEnergies have begun notifying customers that deliveries may be disrupted after QatarEnergy halted LNG production following drone strikes on Ras Laffan and Mesaieed. These companies buy cargoes from Qatar and resell them under their own contracts to utilities and industrial buyers across Europe and Asia. When upstream supply stops, those downstream commitments cannot be guaranteed. Traders therefore begin declaring force…",
+          "date": "2026-03-13T12:30:00+00:00",
+          "relevance_score": 1.0,
+          "display_title": "Global Energy Markets in Crisis as War Chokes Supply Chains",
+          "display_summary": "Oil on War Footing The disruption to Qatar’s LNG system is now spreading through the global trading network. Shell and TotalEnergies have begun notifying customers that deliveries may be disrupted after QatarEnergy halted LNG production following drone strikes on Ras Laffan and Mesaieed. These companies buy cargoes from Qatar and resell them under their own contracts to utilities and industrial buyers across Europe and Asia. When upstream supply stops, those downstream commitments cannot be guaranteed. Traders therefore begin declaring force…",
+          "display_category": "energia",
+          "importance": 1
+        },
+        {
+          "title": "Goldman Sachs Hikes Brent Oil Forecast to Over $100 for March",
+          "url": "https://oilprice.com/Latest-Energy-News/World-News/Goldman-Sachs-Hikes-Brent-Oil-Forecast-to-Over-100-for-March.html",
+          "source": "OilPrice",
+          "tier": 4,
+          "category": "energia",
+          "snippet": "Goldman Sachs expects Brent Crude prices to average over $100 per barrel this month as the Middle East war continues to choke supply, the investment bank said on Friday, noting that prices could surge even higher if the biggest oil supply disruption in history extends into months instead of weeks. Analysts at Goldman Sachs see the average Brent Crude price at $85 per barrel in April, they said in a note carried by Reuters. The new estimates follow Thursday’s price forecast update in which Goldman Sachs hiked its Brent Crude…",
+          "date": "2026-03-13T11:30:00+00:00",
+          "relevance_score": 1.0,
+          "display_title": "Goldman Sachs Hikes Brent Oil Forecast to Over $100 for March",
+          "display_summary": "Goldman Sachs expects Brent Crude prices to average over $100 per barrel this month as the Middle East war continues to choke supply, the investment bank said on Friday, noting that prices could surge even higher if the biggest oil supply disruption in history extends into months instead of weeks. Analysts at Goldman Sachs see the average Brent Crude price at $85 per barrel in April, they said in a note carried by Reuters. The new estimates follow Thursday’s price forecast update in which Goldman Sachs hiked its Brent Crude…",
+          "display_category": "energia",
+          "importance": 1
+        },
+        {
+          "title": "Middle East War Revives Push for Domestic Energy",
+          "url": "https://oilprice.com/Energy/Energy-General/Middle-East-War-Revives-Push-for-Domestic-Energy.html",
+          "source": "OilPrice",
+          "tier": 4,
+          "category": "energia",
+          "snippet": "The Middle East war and the mother of all oil shocks—the de facto closure of the Strait of Hormuz—have exposed the global dependence on oil and gas as buyers scramble for cargoes and consumers once again bear the brunt of spiking energy prices. Before the war, the world had just overcome the energy system disruption from the Russian invasion of Ukraine and the embargoes on Russian energy in most of the developed economies. Some thought this was the biggest energy shock this decade, and most governments placed energy security ahead of…",
+          "date": "2026-03-12T21:00:00+00:00",
+          "relevance_score": 1.0,
+          "display_title": "Middle East War Revives Push for Domestic Energy",
+          "display_summary": "The Middle East war and the mother of all oil shocks—the de facto closure of the Strait of Hormuz—have exposed the global dependence on oil and gas as buyers scramble for cargoes and consumers once again bear the brunt of spiking energy prices. Before the war, the world had just overcome the energy system disruption from the Russian invasion of Ukraine and the embargoes on Russian energy in most of the developed economies. Some thought this was the biggest energy shock this decade, and most governments placed energy security ahead of…",
+          "display_category": "energia",
+          "importance": 1
+        },
+        {
+          "title": "Oil Price Volatility Soars as War Risk Grips the Market",
+          "url": "https://oilprice.com/Energy/Energy-General/Oil-Price-Volatility-Soars-as-War-Risk-Grips-the-Market.html",
+          "source": "OilPrice",
+          "tier": 4,
+          "category": "energia",
+          "snippet": "Crude oil markets experienced intense volatility between March 8 and March 12 as traders reacted to escalating geopolitical tensions, threats to global oil shipping routes, and emergency supply measures from major consuming nations. The week saw both benchmarks swing sharply as the market tried to price in the risk of a major supply disruption in the Middle East. By Thursday’s close, nearby West Texas Intermediate crude futures were trading at $96.77, up $5.87 or 6.46%, reflecting how quickly sentiment shifted during the week. At the center…",
+          "date": "2026-03-13T12:30:00+00:00",
+          "relevance_score": 0.8,
+          "display_title": "Oil Price Volatility Soars as War Risk Grips the Market",
+          "display_summary": "Crude oil markets experienced intense volatility between March 8 and March 12 as traders reacted to escalating geopolitical tensions, threats to global oil shipping routes, and emergency supply measures from major consuming nations. The week saw both benchmarks swing sharply as the market tried to price in the risk of a major supply disruption in the Middle East. By Thursday’s close, nearby West Texas Intermediate crude futures were trading at $96.77, up $5.87 or 6.46%, reflecting how quickly sentiment shifted during the week. At the center…",
+          "display_category": "energia",
+          "importance": 0
+        },
+        {
+          "title": "19 Million Barrels of Russian Crude Cleared for Sale in Asia",
+          "url": "https://oilprice.com/Latest-Energy-News/World-News/19-Million-Barrels-of-Russian-Crude-Cleared-for-Sale-in-Asia.html",
+          "source": "OilPrice",
+          "tier": 4,
+          "category": "energia",
+          "snippet": "Refiners can legally buy at least 19 million barrels of Russian crude held on 25 tankers in Asia under the one-month U.S. waiver allowing sales as Middle Eastern supply is choked. The U.S. Treasury on Thursday moved to allow until April 11 purchases of Russian crude stuck in tankers in floating storage. Some 30 tankers carrying Russian crude oil and petroleum products are in Asia currently, according to vessel-tracking data compiled by Bloomberg. Of these tankers, 25 are laden with crude while the rest hold products, mostly…",
+          "date": "2026-03-13T12:30:00+00:00",
+          "relevance_score": 0.8,
+          "display_title": "19 Million Barrels of Russian Crude Cleared for Sale in Asia",
+          "display_summary": "Refiners can legally buy at least 19 million barrels of Russian crude held on 25 tankers in Asia under the one-month U.S. waiver allowing sales as Middle Eastern supply is choked. The U.S. Treasury on Thursday moved to allow until April 11 purchases of Russian crude stuck in tankers in floating storage. Some 30 tankers carrying Russian crude oil and petroleum products are in Asia currently, according to vessel-tracking data compiled by Bloomberg. Of these tankers, 25 are laden with crude while the rest hold products, mostly…",
+          "display_category": "energia",
+          "importance": 0
+        }
+      ]
+    },
+    {
+      "name": "banche_centrali",
+      "display_name": "banche_centrali",
+      "items": [
+        {
+          "title": "Federal Reserve Board announces approval of application by Home BancShares",
+          "url": "https://www.federalreserve.gov/newsevents/pressreleases/orders20260312a.htm",
+          "source": "Federal Reserve",
+          "tier": 1,
+          "category": "banche_centrali",
+          "snippet": "Federal Reserve Board announces approval of application by Home BancShares",
+          "date": "2026-03-12T20:30:00+00:00",
+          "relevance_score": 0.2,
+          "display_title": "Federal Reserve Board announces approval of application by Home BancShares",
+          "display_summary": "Federal Reserve Board announces approval of application by Home BancShares",
+          "display_category": "banche_centrali",
+          "importance": 0
+        }
+      ]
+    },
+    {
+      "name": "finanza",
+      "display_name": "finanza",
+      "items": [
+        {
+          "title": "Russia Emerges As The Biggest Winner In Middle East War",
+          "url": "https://finance.yahoo.com/news/russia-emerges-biggest-winner-middle-010000333.html",
+          "source": "Yahoo Finance",
+          "tier": 4,
+          "category": "finanza",
+          "snippet": "",
+          "date": "2026-03-12T01:00:00+00:00",
+          "relevance_score": 0.6,
+          "display_title": "Russia Emerges As The Biggest Winner In Middle East War",
+          "display_summary": "",
+          "display_category": "finanza",
+          "importance": 0
+        },
+        {
+          "title": "Oil jumps to $100 per barrel and stocks sink worldwide with no clear end in sight for the Iran war",
+          "url": "https://finance.yahoo.com/news/brent-crude-oil-tops-100-030802877.html",
+          "source": "Yahoo Finance",
+          "tier": 4,
+          "category": "finanza",
+          "snippet": "",
+          "date": "2026-03-12T03:08:02+00:00",
+          "relevance_score": 0.6,
+          "display_title": "Oil jumps to $100 per barrel and stocks sink worldwide with no clear end in sight for the Iran war",
+          "display_summary": "",
+          "display_category": "finanza",
+          "importance": 0
+        },
+        {
+          "title": "Daily Spotlight: Can GDP's Engine Run on $4 Gas?",
+          "url": "https://finance.yahoo.com/research/reports/ARGUS_46424_MarketOutlook_1773400156000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei",
+          "source": "Yahoo Finance",
+          "tier": 4,
+          "category": "finanza",
+          "snippet": "",
+          "date": "2026-03-13T11:09:16+00:00",
+          "relevance_score": 0.2,
+          "display_title": "Daily Spotlight: Can GDP's Engine Run on $4 Gas?",
+          "display_summary": "",
+          "display_category": "finanza",
+          "importance": 0
+        },
+        {
+          "title": "Costco Sued by Customer Over Tariff Refund",
+          "url": "https://www.wsj.com/business/retail/costco-sued-by-customer-over-tariff-refund-42e7c3c4?siteid=yhoof2&yptr=yahoo",
+          "source": "Yahoo Finance",
+          "tier": 4,
+          "category": "finanza",
+          "snippet": "",
+          "date": "2026-03-12T00:57:00+00:00",
+          "relevance_score": 0.2,
+          "display_title": "Costco Sued by Customer Over Tariff Refund",
+          "display_summary": "",
+          "display_category": "finanza",
+          "importance": 0
+        },
+        {
+          "title": "Starbucks overhauls rewards program, adds new customer perks",
+          "url": "https://finance.yahoo.com/news/starbucks-makes-rewards-program-more-010300797.html",
+          "source": "Yahoo Finance",
+          "tier": 4,
+          "category": "finanza",
+          "snippet": "",
+          "date": "2026-03-12T01:03:00+00:00",
+          "relevance_score": 0.2,
+          "display_title": "Starbucks overhauls rewards program, adds new customer perks",
+          "display_summary": "",
+          "display_category": "finanza",
+          "importance": 0
+        },
+        {
+          "title": "Why Bitcoin Is Dropping Right Now (and What I'm Watching Next)",
+          "url": "https://finance.yahoo.com/news/why-bitcoin-dropping-now-im-011740273.html",
+          "source": "Yahoo Finance",
+          "tier": 4,
+          "category": "finanza",
+          "snippet": "",
+          "date": "2026-03-12T01:17:40+00:00",
+          "relevance_score": 0.2,
+          "display_title": "Why Bitcoin Is Dropping Right Now (and What I'm Watching Next)",
+          "display_summary": "",
+          "display_category": "finanza",
+          "importance": 0
+        },
+        {
+          "title": "Market Digest: UAA, HAS",
+          "url": "https://finance.yahoo.com/research/reports/ARGUS_46421_MarketSummary_1773398733000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei",
+          "source": "Yahoo Finance",
+          "tier": 4,
+          "category": "finanza",
+          "snippet": "",
+          "date": "2026-03-13T10:45:33+00:00",
+          "relevance_score": 0.0,
+          "display_title": "Market Digest: UAA, HAS",
+          "display_summary": "",
+          "display_category": "finanza",
+          "importance": 0
+        },
+        {
+          "title": "Titomic plans US redomicile as defence market focus grows",
+          "url": "https://finance.yahoo.com/news/titomic-plans-us-redomicile-defence-005900231.html",
+          "source": "Yahoo Finance",
+          "tier": 4,
+          "category": "finanza",
+          "snippet": "",
+          "date": "2026-03-12T00:59:00+00:00",
+          "relevance_score": 0.0,
+          "display_title": "Titomic plans US redomicile as defence market focus grows",
+          "display_summary": "",
+          "display_category": "finanza",
+          "importance": 0
         }
       ]
     }
