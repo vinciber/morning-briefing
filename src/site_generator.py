@@ -92,17 +92,9 @@ def group_articles_into_sections(articles, lang):
     
     articles_by_cat = defaultdict(list)
     for art in articles:
-        # Fallbacks for titles/summaries
-        if lang == 'en':
-            art['display_title'] = art.get('title_en') or art.get('title_it') or art.get('title', '')
-            art['display_summary'] = art.get('summary_en') or art.get('summary_it') or art.get('snippet', art.get('description', ''))
-            cat_raw = art.get('category', 'mercati')
-            art['display_category'] = cat_map_en.get(cat_raw, cat_raw)
-        else:
-            art['display_title'] = art.get('title_it') or art.get('title_en') or art.get('title', '')
-            art['display_summary'] = art.get('summary_it') or art.get('summary_en') or art.get('snippet', art.get('description', ''))
-            art['display_category'] = art.get('category', 'mercati')
-
+        # Create a copy for template display to avoid modifying the original article
+        # The display logic for title/summary/category is now handled directly in the Jinja2 templates
+        # by checking for _en or _it suffixes, or falling back to generic fields.
         cat = art.get('category', 'mercati')
         articles_by_cat[cat].append(art)
 
@@ -191,16 +183,8 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
         'tecnologia': 'technology',
         'cripto': 'crypto'
     }
-    for art in all_articles:
-        if lang == 'en':
-            art['display_title'] = art.get('title_en') or art.get('title_it') or art.get('title', '')
-            art['display_summary'] = art.get('summary_en') or art.get('summary_it') or art.get('snippet', art.get('description', ''))
-            cat_raw = art.get('category', 'mercati')
-            art['display_category'] = cat_map_en.get(cat_raw, cat_raw)
-        else:
-            art['display_title'] = art.get('title_it') or art.get('title_en') or art.get('title', '')
-            art['display_summary'] = art.get('summary_it') or art.get('summary_en') or art.get('snippet', art.get('description', ''))
-            art['display_category'] = art.get('category', 'mercati')
+    # No modifications to articles here, Jinja2 template handles display labels
+    # by checking for _en or _it suffixes, or falling back to generic fields.
 
     # Archive links
     archive_dir = DOCS_DIR if lang == 'it' else DOCS_DIR / 'en'
@@ -297,30 +281,32 @@ def generate_api_json(briefing: dict):
     api_dir = DOCS_DIR / 'api'
     api_dir.mkdir(parents=True, exist_ok=True)
 
-    # Allineamento con Mobile App: l'app si aspetta 'market_data', 'sections' e 'url'
-    api_briefing = briefing.copy()
+    # Schema Canonico: Rimuovere ridondanze
+    briefing_clone = json.loads(json.dumps(briefing)) # Deep copy
     
-    # 1. Market Data Alignment
-    if 'market_data_raw' in api_briefing:
-        api_briefing['market_data'] = api_briefing['market_data_raw']
+    # 1. Rimuovere market_data (usare solo market_data_raw)
+    if 'market_data' in briefing_clone:
+        del briefing_clone['market_data']
     
-    # 2. Add sections for Mobile (it/en)
-    # Default to IT for the mobile app's main view, but we could make it smarter if needed.
-    # The mobile app currently expects 'sections' in the root.
-    all_articles = api_briefing.get('articles', [])
-    for art in all_articles:
-        # Cross-alias fields for mobile
+    # 2. Rimuovere sections
+    if 'sections' in briefing_clone:
+        del briefing_clone['sections']
+
+    # 3. Pulizia articoli
+    for art in briefing_clone.get('articles', []):
+        # Rimuovere campi non previsti
+        for field in ['display_title', 'display_summary', 'display_category', 'importance']:
+            if field in art:
+                del art[field]
+        
+        # Assicurarsi che url esista
         if 'source_url' in art and 'url' not in art:
             art['url'] = art['source_url']
-        if 'relevance_score' in art and 'importance' not in art:
-            art['importance'] = int(art['relevance_score'])
-
-    api_briefing['sections'] = group_articles_into_sections(all_articles, lang='it')
 
     output_path = api_dir / 'today.json'
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(api_briefing, f, ensure_ascii=False, indent=2)
-    logger.info(f'✅ API JSON generato (con allineamento mobile): {output_path}')
+        json.dump(briefing_clone, f, ensure_ascii=False, indent=2)
+    logger.info(f'✅ API JSON generato (Schema Canonico): {output_path}')
 
     date = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
     index_path = api_dir / 'index.json'
@@ -337,9 +323,9 @@ def generate_api_json(briefing: dict):
     index.insert(0, {
         'date': date,
         'sentiment': briefing.get('sentiment', {}).get('label', 'neutral'),
-        'sections_count': len(briefing.get('sections', [])),
-        'items_count': sum(len(s.get('items', [])) for s in briefing.get('sections', [])),
+        'items_count': len(briefing.get('articles', [])),
     })
+ 
     index = index[:60] # Esteso a 60 giorni
 
     with open(index_path, 'w', encoding='utf-8') as f:
@@ -347,13 +333,23 @@ def generate_api_json(briefing: dict):
 
 
 def generate_archive(briefing: dict):
-    """Archivia in docs/archive/YYYY-MM-DD.json."""
+    """Archivia in docs/archive/YYYY-MM-DD.json con schema canonico."""
     archive_dir = DOCS_DIR / 'archive'
     archive_dir.mkdir(parents=True, exist_ok=True)
     date = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
+    
+    # Use same cleanup logic as for today.json
+    briefing_clone = json.loads(json.dumps(briefing))
+    if 'market_data' in briefing_clone: del briefing_clone['market_data']
+    if 'sections' in briefing_clone: del briefing_clone['sections']
+    for art in briefing_clone.get('articles', []):
+        for field in ['display_title', 'display_summary', 'display_category', 'importance']:
+            if field in art: del art[field]
+        if 'source_url' in art and 'url' not in art: art['url'] = art['source_url']
+
     output_path = archive_dir / f'{date}.json'
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(briefing, f, ensure_ascii=False, indent=2)
+        json.dump(briefing_clone, f, ensure_ascii=False, indent=2)
 
 
 def _xml_escape(text: str) -> str:

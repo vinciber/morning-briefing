@@ -74,7 +74,7 @@ OUTPUT JSON:
 {
   "date": "YYYY-MM-DD",
   "sentiment": {
-    "label": "risk_on|risk_off|neutral",
+    "label": "risk_on | risk_off | neutral",
     "score": 1-10,
     "reason_it": "3-4 righe. Almeno 3 asset con valori numerici. Mai generico.",
     "reason_en": "same in English"
@@ -83,14 +83,7 @@ OUTPUT JSON:
     "it": "4-5 righe. Almeno 3 asset class con variazioni numeriche.",
     "en": "same in English"
   },
-  "audio_script_it": "Script completo per podcast 7-8 minuti in italiano.
-    MINIMO 800 PAROLE. Struttura OBBLIGATORIA:
-    (1) Apertura: sentiment + 3 dati chiave — 2 minuti
-    (2) Mercati: ogni asset con numero e implicazione — 2 minuti
-    (3) Geopolitica: contesto e impatto prezzi — 1.5 minuti
-    (4) Macro/BCE/Fed: scenario tassi — 1.5 minuti
-    (5) Chiusura: cosa guardare domani — 1 minuto
-    Tono Bloomberg radio. Mai elenchi puntati — solo prosa narrativa fluida.",
+  "audio_script_it": "Script completo per podcast 7-8 minuti in italiano. MINIMO 800 PAROLE. Tono Bloomberg radio. Mai elenchi puntati.",
   "audio_script_en": "same in English, minimum 800 words."
 }
 """
@@ -171,8 +164,7 @@ def run():
         except Exception:
             pass
 
-    logger.info(f'📰 Caricati {len(articles)} articoli, '
-                f'{len(history.get("sections", []))} sezioni di history')
+    logger.info(f'📰 Caricati {len(articles)} articoli.')
 
     client = Groq(api_key=GROQ_API_KEY)
 
@@ -182,11 +174,10 @@ def run():
     if history:
         # Passa solo i titoli della history per non sprecare token
         history_titles = []
-        for section in history.get('sections', []):
-            for item in section.get('items', []):
-                t = item.get('title_it', '')
-                if t:
-                    history_titles.append(t)
+        for art in history.get('articles', []):
+            t = art.get('title_it', '')
+            if t:
+                history_titles.append(t)
         if history_titles:
             user_prompt += f"\n\nHISTORY TITOLI GIÀ PUBBLICATI (EVITA RIPETIZIONI):\n" \
                            + "\n".join(f"- {t}" for t in history_titles)
