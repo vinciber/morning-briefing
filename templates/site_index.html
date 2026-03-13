@@ -327,7 +327,7 @@
             </div>
             {% endif %}
 
-            <a href="{% if lang == 'en' %}en/{% endif %}{{ date }}.html" class="cta-button">
+            <a href="{{ date }}.html" class="cta-button">
                 {% if lang == 'it' %}Leggi il Briefing di Oggi{% else %}Read Today's Briefing{% endif %}
             </a>
         </div>
@@ -345,9 +345,9 @@
 
                 {% for item in featured_items[:6] %}
                 <div class="news-card">
-                    <h3 class="news-title">{{ item.get('title_' + lang, '') }}</h3>
-                    <p class="news-summary">{{ item.get('summary_' + lang, '') | truncate(120) }}</p>
-                    <a href="{% if lang == 'en' %}en/{% endif %}{{ date }}.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
+                    <h3 class="news-title">{{ item.get('display_title', item.get('title_' + lang, '')) }}</h3>
+                    <p class="news-summary">{{ item.get('display_summary', item.get('summary_' + lang, '')) | truncate(120) }}</p>
+                    <a href="{{ date }}.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
                 </div>
                 {% endfor %}
             </div>

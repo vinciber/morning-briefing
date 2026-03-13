@@ -100,8 +100,28 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
     
     # Group articles by category
     all_articles = briefing.get('articles', [])
+    cat_map_en = {
+        'mercati': 'markets',
+        'geopolitica': 'geopolitics',
+        'macro_economia': 'macro',
+        'energia': 'energy',
+        'tecnologia': 'technology',
+        'cripto': 'crypto'
+    }
+
     articles_by_cat = defaultdict(list)
     for art in all_articles:
+        # Fallbacks for titles/summaries
+        if lang == 'en':
+            art['display_title'] = art.get('title_en', art.get('title_it', ''))
+            art['display_summary'] = art.get('summary_en', art.get('summary_it', ''))
+            cat_raw = art.get('category', 'mercati')
+            art['display_category'] = cat_map_en.get(cat_raw, cat_raw)
+        else:
+            art['display_title'] = art.get('title_it', art.get('title_en', ''))
+            art['display_summary'] = art.get('summary_it', art.get('summary_en', ''))
+            art['display_category'] = art.get('category', 'mercati')
+
         cat = art.get('category', 'mercati')
         articles_by_cat[cat].append(art)
     
@@ -112,12 +132,17 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
         if cat in articles_by_cat:
             sections.append({
                 'name': cat,
+                'display_name': cat_map_en.get(cat, cat) if lang == 'en' else cat,
                 'items': articles_by_cat[cat]
             })
     # Add any other categories not in the main order
     for cat, items in articles_by_cat.items():
         if cat not in cat_order:
-            sections.append({'name': cat, 'items': items})
+            sections.append({
+                'name': cat,
+                'display_name': cat_map_en.get(cat, cat) if lang == 'en' else cat,
+                'items': items
+            })
 
     template_vars = {
         'briefing': briefing,
@@ -160,13 +185,24 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
 
     # Prep articles for index
     all_articles = briefing.get('articles', [])
+    cat_map_en = {
+        'mercati': 'markets',
+        'geopolitica': 'geopolitics',
+        'macro_economia': 'macro',
+        'energia': 'energy',
+        'tecnologia': 'technology',
+        'cripto': 'crypto'
+    }
     for art in all_articles:
         if lang == 'en':
             art['display_title'] = art.get('title_en', art.get('title_it', ''))
             art['display_summary'] = art.get('summary_en', art.get('summary_it', ''))
+            cat_raw = art.get('category', 'mercati')
+            art['display_category'] = cat_map_en.get(cat_raw, cat_raw)
         else:
             art['display_title'] = art.get('title_it', art.get('title_en', ''))
             art['display_summary'] = art.get('summary_it', art.get('summary_en', ''))
+            art['display_category'] = art.get('category', 'mercati')
 
     # Archive links
     archive_dir = DOCS_DIR if lang == 'it' else DOCS_DIR / 'en'

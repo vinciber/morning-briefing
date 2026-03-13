@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 <head>
@@ -198,17 +197,16 @@
     <div class="section-header">
       <span class="section-icon">{{ section_icons.get(section.name, '📌') }}</span>
       <span class="section-title">
-        {% if lang == 'it' %}{{ section_labels_it.get(section.name, section.name) }}
-        {% else %}{{ section_labels_en.get(section.name, section.name) }}{% endif %}
+        {{ section.display_name | default(section.name) | title }}
       </span>
-      <span class="section-count">{{ sec_items|length }} notizie</span>
+      <span class="section-count">{{ sec_items|length }} {% if lang == 'it' %}notizie{% else %}articles{% endif %}</span>
     </div>
 
     {% for item in sec_items %}
     <div class="card">
       <div class="card-meta">
         <span class="card-category cat-{{ item.get('category', 'mercati') }}">
-          {{ item.get('category', '') | replace('_',' ') }}
+          {{ item.get('display_category', item.get('category', '')) | replace('_',' ') }}
         </span>
         {% if item.get('market_impact') %}
         <span class="impact-badge impact-{{ item.market_impact.get('direction', 'mixed') }}">
@@ -263,4 +261,3 @@
 </footer>
 </body>
 </html>
-```
