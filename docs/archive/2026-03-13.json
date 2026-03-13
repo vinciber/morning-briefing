@@ -3,158 +3,27 @@
   "sentiment": {
     "label": "risk_off",
     "score": 8,
-    "reason_it": "Il VIX sale a 27.66, livello critico che indica volatilità strutturale e un mercato difensivo. Il Brent scende del 2.96% a $97.49, mentre l'S&P 500 rimane stabile. La M2 globale mostra un trend in contrazione, il che potrebbe limitare la liquidità e favorire un atteggiamento risk-off. L'oro scende dello 0.41% a $5094.70, ma rimane un'opzione difensiva.",
-    "reason_en": "The VIX rises to 27.66, a critical level indicating structural volatility and a defensive market. Brent crude falls 2.96% to $97.49, while the S&P 500 remains stable. The global M2 trend is contracting, which could limit liquidity and favor a risk-off attitude. Gold declines 0.41% to $5094.70 but remains a defensive option."
+    "reason_it": "Il sentiment di mercato è risk-off a causa dell'aumento del VIX (+1.94%) a 27.82 e della debolezza dei mercati azionari, come il Nikkei (-1.16%) e lo Shanghai (-0.82%). Il DXY è stabile (+0.04%) a 99.7840, mentre il prezzo del petrolio (Brent) scende del 2.11% a $98.3400. L'aumento delle tensioni geopolitiche in Medio Oriente contribuisce al sentiment negativo.",
+    "reason_en": "Market sentiment is risk-off due to the increase in VIX (+1.94%) to 27.82 and weakness in equity markets, such as Nikkei (-1.16%) and Shanghai (-0.82%). The DXY is stable (+0.04%) at 99.7840, while the oil price (Brent) drops by 2.11% to $98.3400. Rising geopolitical tensions in the Middle East contribute to the negative sentiment."
   },
   "market_impact_summary": {
-    "it": "La escalation del conflitto in Medio Oriente spinge il VIX sopra 27, livello di allerta per la volatilità. Il Brent scende del 2.96% a $97.49, mentre il DXY sale dello 0.07% a 99.8060. L'S&P 500 è stabile, ma il sentiment è negativo a causa della possibile inflazione e della crisi geopolitica. La repressione finanziaria potrebbe essere una strategia per contenere l'inflazione.",
-    "en": "The escalation of the Middle East conflict pushes the VIX above 27, a volatility alert level. Brent crude falls 2.96% to $97.49, while the DXY rises 0.07% to 99.8060. The S&P 500 is stable, but the sentiment is negative due to possible inflation and geopolitical crisis. Financial repression could be a strategy to contain inflation."
+    "it": "I mercati azionari asiatici sono deboli, con Nikkei (-1.16%) e Shanghai (-0.82%). Il S&P 500 è stabile (+0.00%) a 6672.62. Il VIX aumenta (+1.94%) a 27.82, indicando un aumento dell'incertezza. Il prezzo del petrolio (Brent) scende del 2.11% a $98.3400. Il DXY è stabile (+0.04%) a 99.7840.",
+    "en": "Asian equity markets are weak, with Nikkei (-1.16%) and Shanghai (-0.82%). The S&P 500 is stable (+0.00%) at 6672.62. The VIX increases (+1.94%) to 27.82, indicating rising uncertainty. The oil price (Brent) drops by 2.11% to $98.3400. The DXY is stable (+0.04%) at 99.7840."
   },
-  "sections": [
-    {
-      "name": "mercati",
-      "items": [
-        {
-          "title_it": "S&P 500 stabile, VIX in aumento",
-          "title_en": "S&P 500 stable, VIX rising",
-          "summary_it": "L'S&P 500 è stabile a 6672.62, mentre il VIX sale a 27.66, livello critico che indica volatilità strutturale. Il mercato è difensivo.",
-          "summary_en": "The S&P 500 is stable at 6672.62, while the VIX rises to 27.66, a critical level indicating structural volatility. The market is defensive.",
-          "source_name": "Yahoo Finance",
-          "source_url": "",
-          "category": "mercati",
-          "relevance_score": 5,
-          "tier": 1,
-          "market_impact": {
-            "assets_affected": [
-              "S&P 500",
-              "VIX"
-            ],
-            "direction": "bearish",
-            "magnitude": "high"
-          }
-        },
-        {
-          "title_it": "Brent in calo del 2.96%",
-          "title_en": "Brent down 2.96%",
-          "summary_it": "Il Brent scende del 2.96% a $97.49. La possibile escalation del conflitto in Medio Oriente spinge il prezzo del petrolio.",
-          "summary_en": "Brent crude falls 2.96% to $97.49. The possible escalation of the Middle East conflict drives the oil price.",
-          "source_name": "Yahoo Finance",
-          "source_url": "",
-          "category": "mercati",
-          "relevance_score": 5,
-          "tier": 1,
-          "market_impact": {
-            "assets_affected": [
-              "Brent"
-            ],
-            "direction": "bearish",
-            "magnitude": "high"
-          }
-        },
-        {
-          "title_it": "DXY in aumento dello 0.07%",
-          "title_en": "DXY up 0.07%",
-          "summary_it": "Il DXY sale dello 0.07% a 99.8060. La forza del dollaro potrebbe limitare la liquidità e favorire un atteggiamento risk-off.",
-          "summary_en": "The DXY rises 0.07% to 99.8060. The strength of the dollar could limit liquidity and favor a risk-off attitude.",
-          "source_name": "Yahoo Finance",
-          "source_url": "",
-          "category": "mercati",
-          "relevance_score": 5,
-          "tier": 1,
-          "market_impact": {
-            "assets_affected": [
-              "DXY"
-            ],
-            "direction": "bearish",
-            "magnitude": "high"
-          }
-        }
-      ]
-    },
-    {
-      "name": "geopolitica",
-      "items": [
-        {
-          "title_it": "Conflitto in Medio Oriente si estende",
-          "title_en": "Middle East conflict escalates",
-          "summary_it": "La possibile escalation del conflitto in Medio Oriente spinge il prezzo del petrolio e aumenta la volatilità.",
-          "summary_en": "The possible escalation of the Middle East conflict drives the oil price and increases volatility.",
-          "source_name": "International Crisis Group",
-          "source_url": "https://www.crisisgroup.org/cmt/middle-east-north-africa/iran-israelpalestine-united-states/sprawling-middle-east-war-explodes",
-          "category": "geopolitica",
-          "relevance_score": 5,
-          "tier": 2,
-          "market_impact": {
-            "assets_affected": [
-              "Brent",
-              "VIX"
-            ],
-            "direction": "bearish",
-            "magnitude": "high"
-          }
-        }
-      ]
-    },
-    {
-      "name": "macro_economia",
-      "items": [
-        {
-          "title_it": "Inflazione globale potrebbe aumentare",
-          "title_en": "Global inflation could rise",
-          "summary_it": "La possibile escalation del conflitto in Medio Oriente potrebbe aumentare l'inflazione globale.",
-          "summary_en": "The possible escalation of the Middle East conflict could increase global inflation.",
-          "source_name": "Project Syndicate",
-          "source_url": "https://www.project-syndicate.org/onpoint/a-new-global-energy-shock",
-          "category": "macro_economia",
-          "relevance_score": 5,
-          "tier": 2,
-          "market_impact": {
-            "assets_affected": [
-              "VIX",
-              "TLT"
-            ],
-            "direction": "bearish",
-            "magnitude": "high"
-          }
-        }
-      ]
-    },
-    {
-      "name": "energia",
-      "items": [
-        {
-          "title_it": "Prezzi del petrolio in aumento",
-          "title_en": "Oil prices rising",
-          "summary_it": "La possibile escalation del conflitto in Medio Oriente spinge il prezzo del petrolio.",
-          "summary_en": "The possible escalation of the Middle East conflict drives the oil price.",
-          "source_name": "OilPrice",
-          "source_url": "https://oilprice.com/Energy/Energy-General/Middle-East-War-Revives-Push-for-Domestic-Energy.html",
-          "category": "energia",
-          "relevance_score": 5,
-          "tier": 4,
-          "market_impact": {
-            "assets_affected": [
-              "Brent"
-            ],
-            "direction": "bearish",
-            "magnitude": "high"
-          }
-        }
-      ]
-    }
-  ],
+  "audio_script_it": "Buongiorno e benvenuti nel nostro briefing mattutino. Il sentiment di mercato è decisamente risk-off oggi, con l'aumento del VIX che riflette una maggiore incertezza tra gli investitori. I mercati azionari asiatici hanno aperto in territorio negativo, con il Nikkei che perde l'1.16% e lo Shanghai lo 0.82%. L'S&P 500, invece, sembra essersi stabilizzato, con una variazione nulla. Il prezzo del petrolio, dopo gli aumenti delle ultime settimane, oggi scende del 2.11%. Le tensioni geopolitiche in Medio Oriente continuano a pesare sui mercati, con notizie di possibili escalation nel conflitto. La Federal Reserve, intanto, sembra mantenere una posizione attendista, senza particolari novità in merito alla politica monetaria. In questo contesto, gli investitori sono prudenti e attendono ulteriori sviluppi prima di prendere posizioni più decise. La giornata sarà sicuramente movimentata e richiederà una grande attenzione da parte degli investitori.",
+  "audio_script_en": "Good morning and welcome to our morning briefing. Market sentiment is clearly risk-off today, with the VIX rising to reflect increased uncertainty among investors. Asian equity markets opened in negative territory, with Nikkei down 1.16% and Shanghai down 0.82%. The S&P 500, on the other hand, seems to have stabilized with no change. Oil prices, after recent increases, are down 2.11% today. Geopolitical tensions in the Middle East continue to weigh on markets, with news of possible escalations in the conflict. The Federal Reserve appears to be maintaining a wait-and-see stance, with no significant changes in monetary policy. In this context, investors are cautious and await further developments before taking more decisive positions. The day will likely be quite eventful and will require great attention from investors.",
   "market_data_raw": {
     "dxy": {
-      "value": "99.8060",
-      "change": "+0.07%"
+      "value": "99.7840",
+      "change": "+0.04%"
     },
     "sp500": {
       "value": "6672.62",
       "change": "+0.00%"
     },
     "vix": {
-      "value": "27.6600",
-      "change": "+1.36%"
+      "value": "27.8200",
+      "change": "+1.94%"
     },
     "tlt": {
       "value": "86.9700",
@@ -165,16 +34,16 @@
       "change": "+0.00%"
     },
     "gold": {
-      "value": "$5094.70/oz",
-      "change": "-0.41%"
+      "value": "$5087.20/oz",
+      "change": "-0.56%"
     },
     "btcusd": {
-      "value": "$71,647",
-      "change": "+1.64%"
+      "value": "$71,500",
+      "change": "+1.43%"
     },
     "oil_brent": {
-      "value": "$97.4900",
-      "change": "-2.96%"
+      "value": "$98.3400",
+      "change": "-2.11%"
     },
     "stoxx_600": {
       "value": "N/A",
@@ -196,5 +65,257 @@
       "value": "N/A",
       "change": "N/A"
     }
-  }
+  },
+  "articles": [
+    {
+      "title": "Federal Reserve Board announces approval of application by Home BancShares",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/orders20260312a.htm",
+      "source": "Federal Reserve",
+      "tier": 1,
+      "category": "banche_centrali",
+      "snippet": "Federal Reserve Board announces approval of application by Home BancShares",
+      "date": "2026-03-12T20:30:00+00:00",
+      "relevance_score": 0.2
+    },
+    {
+      "title": "Cold Hard Truths: Arctic Security in a Changing World",
+      "url": "https://www.crisisgroup.org/pod/europe-central-asia/cold-hard-truths-arctic-security-changing-world",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "This week on War & Peace, Olga speaks with Gabriella Gricius, Senior Fellow at the Arctic Institute, to discuss Arctic security, Donald Trump’s ambitions to acquire Greenland, Russia’s and China’s interests in the High North, and how NATO and European capitals are responding.",
+      "date": "2026-03-13T08:07:10.902552+00:00",
+      "relevance_score": 1.0
+    },
+    {
+      "title": "A Sprawling Middle East War Explodes",
+      "url": "https://www.crisisgroup.org/cmt/middle-east-north-africa/iran-israelpalestine-united-states/sprawling-middle-east-war-explodes",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "A joint U.S.-Israeli attack on Iran, followed by Iranian retaliation against U.S. military assets, Israel and other U.S. allies, has engulfed much of the Middle East in conflict. Crisis Group experts offer a 360-degree view of the new war’s initial reverberations in the region.",
+      "date": "2026-03-13T08:07:10.903655+00:00",
+      "relevance_score": 1.0
+    },
+    {
+      "title": "Infrastructure Investment Is the Key to China’s Growth",
+      "url": "https://www.project-syndicate.org/commentary/china-must-increase-infrastructure-investment-to-meet-growth-targets-by-yu-yongding-2026-03",
+      "source": "Project Syndicate",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "China’s government has now set its growth target for 2026 at 4.5-5%. With China’s GDP deflator still in negative territory and ample policy space for more expansionary fiscal and monetary policy, this is achievable, but it will require boosting both consumption and investment spending.",
+      "date": "2026-03-12T13:54:03+00:00",
+      "relevance_score": 0.8
+    },
+    {
+      "title": "Sudan’s devastating war rages on as regional rivalries deepen",
+      "url": "https://www.crisisgroup.org/opd/africa/sudan/sudans-devastating-war-rages-regional-rivalries-deepen",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "Yet the Iran crisis may push Gulf rivals to set aside their differences and revive stalled diplomacy on Sudan.",
+      "date": "2026-03-13T08:07:10.902097+00:00",
+      "relevance_score": 0.6
+    },
+    {
+      "title": "A Blank Check for Israel and the War with Iran",
+      "url": "https://warontherocks.com/2026/03/the-blank-check-for-israel-and-the-war-with-iran/",
+      "source": "War on the Rocks",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "The United States did not enter the war with Iran because it was attacked or was about to be attacked. It seems to have entered after concluding that once Israel moved, American involvement would be unavoidable. When Secretary of State Marco Rubio briefed congressional leaders last week, three days before the strikes began, the debate, as later reported by the Washington Post, was not whether to fight but whether to strike alongside Israel or wait until Iran retaliated against American forces in the region. The choice was not between war and peace. It was between two pathways into the same The post A Blank Check for Israel and the War with Iran appeared first on War on the Rocks .",
+      "date": "2026-03-12T07:15:39+00:00",
+      "relevance_score": 0.6
+    },
+    {
+      "title": "A New Global Energy Shock",
+      "url": "https://www.project-syndicate.org/onpoint/a-new-global-energy-shock",
+      "source": "Project Syndicate",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "When the United States and Israel launched their war of choice against Iran, the Islamic Republic pursued the most effective response at its disposal: triggering a spike in global energy prices by attacking Gulf energy infrastructure and blocking the flow of oil through the Strait of Hormuz. While the long-term effects on energy markets remain difficult to predict, US President Donald Trump has good reason to seek an off-ramp from a war opposed by most Americans, including his MAGA base. But with Israel committed to “total victory” and a defiant Islamic Republic now mining the strait, a cascade of global economic disruption appears increasingly likely.",
+      "date": "2026-03-13T05:23:51+00:00",
+      "relevance_score": 0.6
+    },
+    {
+      "title": "Iran, War Powers, and the Power of the Purse: Leverage or Legalization",
+      "url": "https://www.crisisgroup.org/opd/united-states/united-states-iran/iran-war-powers-and-power-purse-leverage-or-legalization",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "",
+      "date": "2026-03-13T08:07:10.903032+00:00",
+      "relevance_score": 0.4
+    },
+    {
+      "title": "Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There",
+      "url": "https://warontherocks.com/2026/03/military-senior-service-colleges-require-reform-but-there-sure-are-some-bad-ideas-out-there/",
+      "source": "War on the Rocks",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "“No one is thinking if everyone is thinking alike.” Gen. George S. Patton’s quip shows that he not only understood the advantage of audacious combat leadership, but the necessity to develop leaders and organizations that think critically and challenge assumptions. Military education is at the forefront of this endeavor in professional militaries. Indeed, last week Secretary of Defense Pete Hegseth ordered a review of the military’s senior service/war colleges and the severing of ties between the department and 22 academic institutions in an effort to better prepare strategic leaders for the complexities of modern warfare.In a recent opinion article, Thomas The post Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There appeared first on War on the Rock",
+      "date": "2026-03-13T07:15:20+00:00",
+      "relevance_score": 0.4
+    },
+    {
+      "title": "The Iran War’s Muddled Endgame",
+      "url": "https://www.project-syndicate.org/commentary/us-and-israel-have-vague-and-contradictory-aims-in-iran-by-shlomo-ben-ami-2026-03",
+      "source": "Project Syndicate",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "While Donald Trump has yet to articulate clear goals for the war in Iran, he would prefer to limit the energy shock and avoid a prolonged military engagement. But Israel does not share his reservations, and Iran views the current conflict as existential, so putting the genie back in the bottle will be no easy feat.",
+      "date": "2026-03-12T15:02:10+00:00",
+      "relevance_score": 0.4
+    },
+    {
+      "title": "The Growing Cyber Risk to Supply Chains",
+      "url": "https://www.project-syndicate.org/commentary/firms-must-protect-supply-chains-from-growing-cyber-risks-by-marko-kovacevic-1-and-sasha-pailet-koff-2026-03",
+      "source": "Project Syndicate",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Many corporate leaders regard cybersecurity as an internal IT problem that can be delegated and forgotten. But as AI and automation reshape global supply chains, cyber readiness has become an operational capability, similar to quality or safety, with the goal being continuity in the face of disruption.",
+      "date": "2026-03-12T11:21:50+00:00",
+      "relevance_score": 0.4
+    },
+    {
+      "title": "How to Electrify the Global South",
+      "url": "https://www.project-syndicate.org/commentary/lessons-for-expanding-energy-access-in-emerging-economies-by-abba-aliyu-et-al-2026-03",
+      "source": "Project Syndicate",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Rather than rely on incremental efforts or one-size-fits-all models, countries hoping to achieve rapid progress on electrification must integrate distributed and centralized systems, make the most of AI-enabled tools, and send credible signals that attract private capital. India and Nigeria have shown how this can be done.",
+      "date": "2026-03-12T16:15:17+00:00",
+      "relevance_score": 0.2
+    },
+    {
+      "title": "Middle East War Revives Push for Domestic Energy",
+      "url": "https://oilprice.com/Energy/Energy-General/Middle-East-War-Revives-Push-for-Domestic-Energy.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "The Middle East war and the mother of all oil shocks—the de facto closure of the Strait of Hormuz—have exposed the global dependence on oil and gas as buyers scramble for cargoes and consumers once again bear the brunt of spiking energy prices. Before the war, the world had just overcome the energy system disruption from the Russian invasion of Ukraine and the embargoes on Russian energy in most of the developed economies. Some thought this was the biggest energy shock this decade, and most governments placed energy security ahead of…",
+      "date": "2026-03-12T21:00:00+00:00",
+      "relevance_score": 1.0
+    },
+    {
+      "title": "Iran Warns Gulf Energy Assets Could Burn if Its Oil Facilities Are Targeted",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Iran-Warns-Gulf-Energy-Assets-Could-Burn-if-Its-Oil-Facilities-Are-Targeted.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Iran’s Islamic Revolutionary Guard Corps (IRGC) warned Thursday that it could ignite a wider energy crisis across the Middle East if Iran’s own oil and gas infrastructure comes under attack. In a statement carried by state broadcaster IRIB, the IRGC said any strike on Iran’s energy facilities or ports would trigger a “crushing and devastating response.” The force warned that, in such a scenario, oil and gas infrastructure across the region linked to the United States and its Western allies would be “set on fire…",
+      "date": "2026-03-12T20:41:00+00:00",
+      "relevance_score": 1.0
+    },
+    {
+      "title": "The UAE’s Energy Playbook Is Paying Off Amid Global Turmoil",
+      "url": "https://oilprice.com/Energy/Crude-Oil/The-UAEs-Energy-Playbook-Is-Paying-Off-Amid-Global-Turmoil.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Energy markets have entered an unprecedented crisis, pushing the world to look instinctively toward the largest producers: Saudi Arabia, the United States, or Russia. However, in the background, but sometimes hitting already the headlines, of today’s geopolitical turbulence, especially due to the ongoing, escalating confrontation around Iran, showing the fragility of maritime chokepoints (Hormuz), another actor has already, for years, quietly become indispensable to the current and future stability of global energy. The United Arab Emirates,…",
+      "date": "2026-03-12T19:00:00+00:00",
+      "relevance_score": 1.0
+    },
+    {
+      "title": "Oil Prices Dip as U.S. Opens Brief Window for Stranded Russian Crude",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Dip-as-US-Opens-Brief-Window-for-Stranded-Russian-Crude.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Oil prices edged lower in early Asian trade on Friday morning after the United States issued a temporary license allowing countries to purchase Russian crude and petroleum products currently stranded at sea. The move, which promises to provide some temporary relief to global oil markets, helped push Brent crude down 0.38% to $100.10 per barrel, while West Texas Intermediate futures dropped by 0.58% to $95.17 per barrel. The 30-day waiver, permitting the purchase of Russian oil cargoes already loaded on tankers but left stranded by sanctions and…",
+      "date": "2026-03-13T02:09:44+00:00",
+      "relevance_score": 0.8
+    },
+    {
+      "title": "How War in Iran Could Cripple the Global Digital Economy",
+      "url": "https://oilprice.com/Energy/Energy-General/How-War-in-Iran-Could-Cripple-the-Global-Digital-Economy.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "The semiconducting industry is in trouble, which means the global economy is in trouble. The sector that creates the computer chips that increasingly power our world requires a huge amount of resources to operate efficiently, including a number of different critical minerals and a whole lot of energy. And those supply chains are now facing major disruptions thanks to the war that the United States and Israel are waging in Iran. Though Donald Trump stated on Monday that the war will end “very soon”, there is cause for concern that…",
+      "date": "2026-03-12T17:00:00+00:00",
+      "relevance_score": 0.8
+    },
+    {
+      "title": "Stock Market Today: Dow Sinks As Oil Jumps Amid U.S.-Iran War; Oracle Soars (Live Coverage)",
+      "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-cpi-inflation-data-oracle-orcl/?src=A00220&yptr=yahoo",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-11T20:33:32+00:00",
+      "relevance_score": 0.6
+    },
+    {
+      "title": "Mortgage rates rise again, but remain near three-year low",
+      "url": "https://finance.yahoo.com/news/mortgage-rates-rise-again-remain-205000536.html",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-11T20:50:00+00:00",
+      "relevance_score": 0.4
+    },
+    {
+      "title": "Stocks Pressured by Higher Oil Prices, But Positive Oracle AI News Helps Tech Stocks",
+      "url": "https://finance.yahoo.com/news/stocks-pressured-higher-oil-prices-203333340.html",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-11T20:33:33+00:00",
+      "relevance_score": 0.2
+    },
+    {
+      "title": "Global Strategic Petroleum Reserves, Part 1: SPR is Not one Thing",
+      "url": "https://finance.yahoo.com/news/global-strategic-petroleum-reserves-part-203043518.html",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-11T20:30:43+00:00",
+      "relevance_score": 0.2
+    },
+    {
+      "title": "4 gold storage myths debunked",
+      "url": "https://finance.yahoo.com/personal-finance/investing/article/4-gold-storage-myths-debunked-204749637.html",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-11T20:47:49+00:00",
+      "relevance_score": 0.2
+    },
+    {
+      "title": "Full enterprise sale of Forward Air ‘unlikely,’ report says",
+      "url": "https://finance.yahoo.com/news/full-enterprise-sale-forward-air-202333750.html",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-11T20:23:33+00:00",
+      "relevance_score": 0.2
+    },
+    {
+      "title": "Ur-Energy Inc. Q4 2025 Earnings Call Summary",
+      "url": "https://finance.yahoo.com/news/ur-energy-inc-q4-2025-204404314.html",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-11T20:44:04+00:00",
+      "relevance_score": 0.0
+    },
+    {
+      "title": "IBD Stock Of The Day: Ubiquiti Nears Entry On Strong 2026 Gains",
+      "url": "https://www.investors.com/research/ibd-stock-of-the-day/ubiquiti-stock-ui-networking/?src=A00220&yptr=yahoo",
+      "source": "Yahoo Finance",
+      "tier": 4,
+      "category": "finanza",
+      "snippet": "",
+      "date": "2026-03-11T20:43:41+00:00",
+      "relevance_score": 0.0
+    }
+  ]
 }
