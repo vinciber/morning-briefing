@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json, logging, os, requests
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -136,8 +137,6 @@ def get_macro_calendar() -> dict:
         logger.warning('⚠️ FRED_API_KEY non configurata — macro calendar skip')
         return {}
 
-    from datetime import timedelta
-
     # Calendario release date 2026 (aggiornare a inizio anno)
     # Fonte: https://www.bls.gov/schedule/ e https://www.federalreserve.gov/
     NEXT_RELEASE = {
@@ -172,7 +171,7 @@ def get_macro_calendar() -> dict:
                 'api_key':         FRED_API_KEY,
                 'file_type':       'json',
                 'sort_order':      'desc',
-                'limit':           2,
+                'limit':           25, # Aumentato per trovare YoY (12 mesi fa)
                 'observation_start': '2024-01-01',
             }
             r = requests.get(BASE, params=params, timeout=15)
@@ -183,12 +182,10 @@ def get_macro_calendar() -> dict:
                 raise ValueError('Nessuna osservazione')
 
             latest = obs[0]
-            previous = obs[1] if len(obs) > 1 else None
-
             val_raw = latest.get('value', '.')
             date_str = latest.get('date', '')
 
-            # Controlla se il dato è recente
+            # Controlla se il dato è recente (released) o vecchio (upcoming)
             try:
                 obs_dt = datetime.strptime(date_str, '%Y-%m-%d').replace(tzinfo=timezone.utc)
                 is_recent = obs_dt >= cutoff
@@ -196,52 +193,75 @@ def get_macro_calendar() -> dict:
                 is_recent = False
 
             if val_raw == '.' or not is_recent:
-                # Dato non ancora uscito
                 result[key] = {
                     'label':        label,
                     'value':        None,
                     'unit':         unit,
                     'status':       'upcoming',
                     'next_release': NEXT_RELEASE.get(key, 'N/A'),
-                    'consensus':    None,
                 }
                 logger.info(f'📅 {label}: upcoming ({NEXT_RELEASE.get(key)})')
                 continue
 
-            # Formatta valore
             val = float(val_raw)
-            
-            # NFP: converti da migliaia, calcola variazione MoM
-            if key == 'nfp':
-                val_fmt = f'{val/1000:+.0f}K' if previous else f'{val/1000:.0f}K'
-                prev_val = float(previous['value']) / 1000 if previous and previous['value'] != '.' else None
-            else:
-                val_fmt = f'{val:.{decimals}f}{unit}'
-                prev_val = float(previous['value']) if previous and previous['value'] != '.' else None
+            previous = obs[1] if len(obs) > 1 else None
+            prev_val = float(previous['value']) if previous and previous['value'] != '.' else None
 
-            # Calcola YoY per CPI/PCE (FRED dà livello, non variazione)
-            if key in ('cpi', 'core_cpi', 'pce_core') and previous:
-                # FRED CPIAUCSL è già indice — calcola YoY manualmente
-                # Per semplicità usiamo la variazione rispetto al dato precedente come proxy
+            # Calcolo Valore Visualizzato (val_fmt) e Previous
+            if key in ('cpi', 'core_cpi', 'pce_core'):
+                # Filtra valori nulli per calcolo YoY corretto
+                clean_obs = [o for o in obs if o['value'] != '.']
+                
+                # Calcola YoY reale (vs 12 mesi fa)
+                val = float(latest['value'])
+                yoy_obs = clean_obs[12] if len(clean_obs) >= 13 else None
+                if yoy_obs:
+                    base_val = float(yoy_obs['value'])
+                    yoy_val = ((val - base_val) / base_val) * 100
+                    val_fmt = f'{yoy_val:.{decimals}f}{unit}'
+                else:
+                    val_fmt = f'{val:.{decimals}f}' # Fallback
+                
+                # Previous YoY (dato del mese scorso vs 13 mesi fa)
+                prev_latest_obs = clean_obs[1] if len(clean_obs) > 1 else None
+                prev_base_obs = clean_obs[13] if len(clean_obs) >= 14 else None
+                
+                if prev_latest_obs and prev_base_obs:
+                    p_val = float(prev_latest_obs['value'])
+                    p_base = float(prev_base_obs['value'])
+                    p_yoy = ((p_val - p_base) / p_base) * 100
+                    prev_fmt = f'{p_yoy:.{decimals}f}{unit}'
+                else:
+                    prev_fmt = 'N/A'
+
+            elif key == 'nfp':
+                # NFP: Valore è la variazione (+200k), Previous è la variazione del mese scorso
+                # PAYEMS è in migliaia, quindi diff 150 = 150K.
                 change = val - prev_val if prev_val else 0
-                beat = None  # senza consensus non possiamo determinarlo
+                val_fmt = f'{change:+.0f}K'
+                
+                # Previous NFP (variazione del mese precedente: obs[1] - obs[2])
+                if len(obs) >= 3 and obs[1]['value'] != '.' and obs[2]['value'] != '.':
+                    p_val = float(obs[1]['value'])
+                    p_prev = float(obs[2]['value'])
+                    p_change = p_val - p_prev
+                    prev_fmt = f'{p_change:+.0f}K'
+                else:
+                    prev_fmt = 'N/A'
             else:
-                change = (val - prev_val) if prev_val else 0
-                beat = None
+                # Unemployment, Fed Funds, GDP (già in %)
+                val_fmt = f'{val:.{decimals}f}{unit}'
+                prev_fmt = f'{prev_val:.{decimals}f}{unit}' if prev_val else 'N/A'
 
             result[key] = {
                 'label':        label,
                 'value':        val_fmt,
-                'raw':          val,
-                'previous':     f'{prev_val:.{decimals}f}{unit}' if prev_val else 'N/A',
-                'change':       f'{change:+.{decimals}f}',
-                'unit':         unit,
+                'previous':     prev_fmt,
                 'release_date': date_str,
                 'status':       'released',
-                'beat':         beat,
                 'next_release': NEXT_RELEASE.get(key, 'N/A'),
             }
-            logger.info(f'✅ {label}: {val_fmt} ({date_str})')
+            logger.info(f'✅ {label}: {val_fmt} (prev: {prev_fmt})')
 
         except Exception as e:
             logger.error(f'✗ FRED {key} ({series_id}): {e}')
@@ -291,7 +311,7 @@ def run():
     results['oil_brent'] = {'value': f'${val}' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'Brent: {val}')
 
-    val, chg = get_yahoo_finance('^STOXX600')
+    val, chg = get_yahoo_finance('EXSA.DE')
     results['stoxx_600'] = {'value': val, 'change': chg}
     logger.info(f'STOXX 600: {val}')
 
@@ -303,7 +323,7 @@ def run():
     results['shanghai'] = {'value': val, 'change': chg}
     logger.info(f'Shanghai: {val}')
 
-    val, chg = get_stooq('10ity.b')
+    val, chg = get_stooq('10YITY.B')
     results['btp_10y'] = {'value': f'{val}%' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'BTP 10Y: {val}')
 
