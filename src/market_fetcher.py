@@ -33,11 +33,17 @@ def get_yahoo_finance(symbol):
         closes = quote.get('close', [])
         closes = [c for c in closes if c is not None]
         
-        if len(closes) < 2:
+        # Troviamo gli ultimi due valori distinti per evitare 0% a mercati chiusi
+        distinct_closes = []
+        for c in closes:
+            if not distinct_closes or c != distinct_closes[-1]:
+                distinct_closes.append(c)
+        
+        if len(distinct_closes) < 2:
             return 'N/A', 'N/A'
             
-        close = closes[-1]
-        prev  = closes[-2]
+        close = distinct_closes[-1]
+        prev  = distinct_closes[-2]
         change_pct = ((close - prev) / prev) * 100
         
         if close > 10000:

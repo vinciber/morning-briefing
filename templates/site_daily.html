@@ -173,7 +173,6 @@
     </div>
 
     {% for item in sec_items %}
-    {% if item.get('relevance_score', 0) >= 3 or item.get('importance', 0) >= 3 %}
     <div class="card">
       <div class="card-meta">
         <span class="card-category cat-{{ item.get('category', 'mercati') }}">
@@ -216,7 +215,6 @@
         </a>
       </div>
     </div>
-    {% endif %}
     {% endfor %}
 
   </div>
