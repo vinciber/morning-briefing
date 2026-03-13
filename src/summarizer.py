@@ -79,10 +79,14 @@ OUTPUT JSON:
     "en": "same in English"
   },
   "audio_script_it": "Script completo per podcast 7-8 minuti in italiano.
-    Struttura: apertura sentiment → mercati con numeri → geopolitica →
-    macro/banche centrali → energia → chiusura forward-looking.
+    MINIMO 800 PAROLE. Struttura OBBLIGATORIA:
+    (1) Apertura: sentiment + 3 dati chiave — 2 minuti
+    (2) Mercati: ogni asset con numero e implicazione — 2 minuti
+    (3) Geopolitica: contesto e impatto prezzi — 1.5 minuti
+    (4) Macro/BCE/Fed: scenario tassi — 1.5 minuti
+    (5) Chiusura: cosa guardare domani — 1 minuto
     Tono Bloomberg radio. Mai elenchi puntati — solo prosa narrativa fluida.",
-  "audio_script_en": "same in English"
+  "audio_script_en": "same in English, minimum 800 words."
 }
 """
 # A TARGET: 900-1000 parole IT totali (audio 7-8 minuti).

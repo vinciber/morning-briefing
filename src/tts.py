@@ -13,9 +13,40 @@ INPUT_PATH = ROOT / 'data' / 'briefing_today.json'
 OUTPUT_DIR = ROOT / 'docs' / 'audio'
 MODEL_DIR = ROOT / 'models'
 
+def normalize_for_tts(text: str) -> str:
+    """Sostituzioni per una migliore pronuncia finanziaria in italiano."""
+    replacements = {
+        'VIX':    'Vix',
+        'S&P 500': 'S e P 500',
+        'S&P':    'S e P',
+        'DXY':    'D X Y',
+        'TLT':    'T L T',
+        'BTP':    'B T P',
+        'BCE':    'B C E',
+        'Fed':    'Fed',
+        'FOMC':   'F O M C',
+        'GDP':    'G D P',
+        'PIL':    'Pil',
+        'PCE':    'P C E',
+        'CPI':    'C P I',
+        'NFP':    'N F P',
+        'ETF':    'E T F',
+        'QE':     'Q E',
+        'QT':     'Q T',
+        '%':      ' percento',
+        '$':      ' dollari ',
+        '€':      ' euro ',
+    }
+    for k, v in replacements.items():
+        text = text.replace(k, v)
+    return text
+
 def briefing_to_text(briefing, lang='it'):
     """Recupera lo script audio pre-generato dall'AI."""
-    return briefing.get(f'audio_script_{lang}', '')
+    text = briefing.get(f'audio_script_{lang}', '')
+    if lang == 'it':
+        text = normalize_for_tts(text)
+    return text
 
 def run():
     if not INPUT_PATH.exists():
@@ -48,15 +79,26 @@ def run():
         logger.info(f'🎙️ Generazione audio ({lang}) con Piper TTS...')
         try:
             voice = PiperVoice.load(str(model_path))
-            with wave.open(str(temp_wav), "wb") as wav_file:
-                voice.synthesize(text, wav_file)
             
-            segment = AudioSegment.from_wav(str(temp_wav))
-            segment.export(str(output_mp3), format="mp3", bitrate="128k")
-            
-            if temp_wav.exists():
-                temp_wav.unlink()
+            # Dividi in paragrafi per inserire silenzi naturali
+            paragraphs = [p.strip() for p in text.split('\n\n') if p.strip()]
+            combined = AudioSegment.empty()
+            silence = AudioSegment.silent(duration=600)
 
+            for i, p in enumerate(paragraphs):
+                p_wav = io.BytesIO()
+                with wave.open(p_wav, "wb") as wav_file:
+                    voice.synthesize(p, wav_file)
+                
+                p_wav.seek(0)
+                p_segment = AudioSegment.from_wav(p_wav)
+                combined += p_segment
+                
+                if i < len(paragraphs) - 1:
+                    combined += silence
+            
+            combined.export(str(output_mp3), format="mp3", bitrate="128k")
+            
             size_kb = output_mp3.stat().st_size / 1024
             logger.info(f'✅ Audio {lang} generato: {output_mp3} ({size_kb:.0f} KB)')
             generated_files.append(str(output_mp3))

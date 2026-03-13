@@ -102,6 +102,7 @@
   .macro-value.upcoming-val{color:var(--text-muted);}
   .macro-prev{font-size:11px;color:var(--text-muted);}
   .macro-date{font-size:10px;color:var(--text-muted);margin-top:4px;}
+  .stars{font-size:11px;color:var(--yellow);letter-spacing:1px;}
 </style>
 </head>
 <body>
@@ -208,17 +209,21 @@
         <span class="card-category cat-{{ item.get('category', 'mercati') }}">
           {{ item.get('display_category', item.get('category', '')) | replace('_',' ') }}
         </span>
-        {% if item.get('market_impact') %}
-        <span class="impact-badge impact-{{ item.market_impact.get('direction', 'mixed') }}">
-          {% if item.market_impact.get('direction') == 'bearish' %}▼ bearish
-          {% elif item.market_impact.get('direction') == 'bullish' %}▲ bullish
-          {% else %}↔ mixed{% endif %}
-        </span>
+        {% set cat = item.get('category', '') %}
+        {% if cat == 'geopolitica' %}
+          <span class="impact-badge impact-bearish">▼ bearish</span>
+        {% elif cat == 'energia' %}
+          <span class="impact-badge impact-mixed">↔ mixed</span>
+        {% elif cat == 'mercati' %}
+          <span class="impact-badge impact-mixed">↔ mixed</span>
+        {% elif cat == 'macro_economia' %}
+          <span class="impact-badge impact-mixed">↔ mixed</span>
         {% endif %}
-        {% set score = (item.get('relevance_score', item.get('importance', 0)) or 0) | int %}
-        {% if score %}
+
+        {% set raw_score = item.get('relevance_score', item.get('importance', 0)) or 0 %}
+        {% set score = ((raw_score * 5) | round | int) if raw_score <= 1.0 else (raw_score | int) %}
+        {% set score = [[score, 1] | max, 5] | min %}
         <span class="stars">{{ '★' * score }}{{ '☆' * (5 - score) }}</span>
-        {% endif %}
         {% if item.get('tier') %}
         <span class="tier-badge tier-{{ item.tier }}">T{{ item.tier }}</span>
         {% endif %}
