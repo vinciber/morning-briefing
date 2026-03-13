@@ -112,7 +112,7 @@ Vengono passati dal fetcher e rimangono invariati.
 
 LINGUA: reason_it/en e market_impact_summary sempre bilingue.
 LUNGHEZZA audio: MINIMO 800 parole per lingua — TASSATIVO.
-MAX TOKENS OUTPUT: 12000.
+MAX TOKENS OUTPUT: 8000.
 """
 
 
@@ -263,7 +263,7 @@ def run():
                 {'role': 'user',   'content': user_prompt},
             ],
             temperature=0.2,
-            max_tokens=12000,
+            max_tokens=8000,
             response_format={'type': 'json_object'},
         )
         raw_text = response.choices[0].message.content.strip()
