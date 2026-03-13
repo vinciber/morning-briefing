@@ -93,8 +93,11 @@ jobs:
         run: |
           git config --global user.name 'MorningBriefingBot'
           git config --global user.email 'bot@briefing.local'
-          git add docs/
-          git diff --staged --quiet || (git commit -m "briefing: $(date +%Y-%m-%d)" && (git pull --ff-only origin main || git pull --rebase origin main) && git push)
+          git add docs/ data/
+          git commit -m "briefing: $(date +%Y-%m-%d)" || exit 0
+          git fetch origin main
+          git rebase origin/main -X theirs || (git rebase --abort && git pull --rebase origin main -X theirs)
+          git push origin main
 
       - name: STEP 4b — Push to Main Site Repository
         env:
