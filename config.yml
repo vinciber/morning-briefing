@@ -82,6 +82,10 @@ sources:
     - url: 'https://www.project-syndicate.org/rss'
       name: 'Project Syndicate'
       category: 'macro_economia'
+    - url: 'https://feeds.content.dowjones.io/public/rss/mw_realtimeheadlines'
+      name: 'MarketWatch Markets'
+      category: 'mercati'
+      tier: 2
 
   # TIER 3 — Analisi Finanziaria (web_fetch periodico)
   tier3_webfetch:

@@ -349,6 +349,11 @@ def run():
 
     logger.info(f'\n📰 Totale grezzo: {len(all_articles)} articoli')
 
+    # Filtra articoli con score troppo basso
+    before = len(all_articles)
+    all_articles = [a for a in all_articles if a.get('relevance_score', 0) >= 0.3]
+    logger.info(f'🗑️ Filtrati {before - len(all_articles)} articoli rumore (score < 0.3)')
+
     # Smart Selection (Scoring + Dedup + Caps)
     all_articles = smart_select(all_articles)
 
