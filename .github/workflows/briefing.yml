@@ -65,6 +65,8 @@ jobs:
               "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/ryan/medium/en_US-ryan-medium.onnx.json"
           fi
           python src/tts.py
+          # Verifica che l'audio sia stato generato
+          ls docs/audio/*.mp3 && echo "✅ Audio generato" || echo "⚠️ Nessun file audio"
         continue-on-error: true
 
       - name: STEP 3b — Send Email
@@ -92,27 +94,27 @@ jobs:
           git config --global user.name 'MorningBriefingBot'
           git config --global user.email 'bot@briefing.local'
           git add docs/
-          git diff --staged --quiet || (git commit -m "briefing: $(date +%Y-%m-%d)" && git pull --rebase origin main && git push)
+          git diff --staged --quiet || (git commit -m "briefing: $(date +%Y-%m-%d)" && (git pull --ff-only origin main || git pull --rebase origin main) && git push)
 
       - name: STEP 4b — Push to Main Site Repository
         env:
           MAIN_REPO_TOKEN: ${{ secrets.MAIN_REPO_TOKEN }}
         run: |
           if [ -z "$MAIN_REPO_TOKEN" ]; then
-            echo "MAIN_REPO_TOKEN not set, skipping cross-repo push."
-            exit 0
+            echo "❌ MAIN_REPO_TOKEN not set, skipping."
+            exit 1
           fi
           git clone https://vinciber:$MAIN_REPO_TOKEN@github.com/vinciber/price-alert-tg-backend.git main-repo
           # Ensure a clean slate for the update
           rm -rf main-repo/public/morning-update/*
-          mkdir -p main-repo/public/morning-update/trial
+          mkdir -p main-repo/public/morning-update
           cp -r docs/* main-repo/public/morning-update/
-          cp -r docs/* main-repo/public/morning-update/trial/
           cd main-repo
           git config user.name 'MorningBriefingBot'
           git config user.email 'bot@briefing.local'
           git add -A public/morning-update
-          git diff --staged --quiet || (git commit -m "briefing update: $(date +%Y-%m-%d)" && git push origin main)
+          git diff --staged --quiet && echo "✅ Nessuna modifica" || \
+            (git commit -m "briefing update: $(date +%Y-%m-%d)" && git push origin main && echo "✅ Push completato")
 
       - name: STEP 5 — Upload artifact
         uses: actions/upload-pages-artifact@v3
