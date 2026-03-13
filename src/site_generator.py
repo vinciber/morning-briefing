@@ -79,27 +79,8 @@ def build_market_strip(market_data):
 # ---------------------------------------------------------------------------
 # Generators
 # ---------------------------------------------------------------------------
-def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: str = 'it'):
-    """Genera la pagina del briefing del giorno: docs/[en/]YYYY-MM-DD.html"""
-    date = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
-    template = env.get_template('site_daily.html')
-
-    sentiment = briefing.get('sentiment', {})
-    sentiment_label = sentiment.get('label', 'neutral')
-    sentiment_color = {
-        'risk_on': '#22c55e',
-        'risk_off': '#ef4444',
-        'neutral': '#eab308',
-    }.get(sentiment_label, '#eab308')
-    
-    # Text overrides for language
-    lang_info = {
-        'title': 'The Morning Brief' if lang == 'en' else 'Morning Briefing',
-        'sentiment_text': sentiment.get(f'reason_{lang}', '')
-    }
-    
-    # Group articles by category
-    all_articles = briefing.get('articles', [])
+def group_articles_into_sections(articles, lang):
+    """Gruppa gli articoli per categoria e ordina le sezioni."""
     cat_map_en = {
         'mercati': 'markets',
         'geopolitica': 'geopolitics',
@@ -108,9 +89,9 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
         'tecnologia': 'technology',
         'cripto': 'crypto'
     }
-
+    
     articles_by_cat = defaultdict(list)
-    for art in all_articles:
+    for art in articles:
         # Fallbacks for titles/summaries
         if lang == 'en':
             art['display_title'] = art.get('title_en') or art.get('title_it') or art.get('title', '')
@@ -124,8 +105,7 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
 
         cat = art.get('category', 'mercati')
         articles_by_cat[cat].append(art)
-    
-    # Transform to sections list expected by site_daily.html
+
     sections = []
     cat_order = ['mercati', 'geopolitica', 'macro_economia', 'energia']
     for cat in cat_order:
@@ -135,7 +115,6 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
                 'display_name': cat_map_en.get(cat, cat) if lang == 'en' else cat,
                 'items': articles_by_cat[cat]
             })
-    # Add any other categories not in the main order
     for cat, items in articles_by_cat.items():
         if cat not in cat_order:
             sections.append({
@@ -143,6 +122,25 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
                 'display_name': cat_map_en.get(cat, cat) if lang == 'en' else cat,
                 'items': items
             })
+    return sections
+
+
+def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: str = 'it'):
+    """Genera la pagina del briefing del giorno: docs/[en/]YYYY-MM-DD.html"""
+    date = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
+    template = env.get_template('site_daily.html')
+
+    sentiment = briefing.get('sentiment', {})
+    sentiment_label = sentiment.get('label', 'neutral')
+    
+    # Text overrides for language
+    lang_info = {
+        'title': 'The Morning Brief' if lang == 'en' else 'Morning Briefing',
+        'sentiment_text': sentiment.get(f'reason_{lang}', '')
+    }
+    
+    all_articles = briefing.get('articles', [])
+    sections = group_articles_into_sections(all_articles, lang)
 
     template_vars = {
         'briefing': briefing,
@@ -299,21 +297,25 @@ def generate_api_json(briefing: dict):
     api_dir = DOCS_DIR / 'api'
     api_dir.mkdir(parents=True, exist_ok=True)
 
-    # Allineamento con Mobile App: l'app si aspetta 'market_data' e 'url'
+    # Allineamento con Mobile App: l'app si aspetta 'market_data', 'sections' e 'url'
     api_briefing = briefing.copy()
+    
+    # 1. Market Data Alignment
     if 'market_data_raw' in api_briefing:
         api_briefing['market_data'] = api_briefing['market_data_raw']
     
-    if 'sections' in api_briefing:
-        for section in api_briefing['sections']:
-            for item in section.get('items', []):
-                if 'source_url' in item and 'url' not in item:
-                    item['url'] = item['source_url']
-    
-    if 'articles' in api_briefing:
-        for item in api_briefing['articles']:
-            if 'source_url' in item and 'url' not in item:
-                item['url'] = item['source_url']
+    # 2. Add sections for Mobile (it/en)
+    # Default to IT for the mobile app's main view, but we could make it smarter if needed.
+    # The mobile app currently expects 'sections' in the root.
+    all_articles = api_briefing.get('articles', [])
+    for art in all_articles:
+        # Cross-alias fields for mobile
+        if 'source_url' in art and 'url' not in art:
+            art['url'] = art['source_url']
+        if 'relevance_score' in art and 'importance' not in art:
+            art['importance'] = int(art['relevance_score'])
+
+    api_briefing['sections'] = group_articles_into_sections(all_articles, lang='it')
 
     output_path = api_dir / 'today.json'
     with open(output_path, 'w', encoding='utf-8') as f:
