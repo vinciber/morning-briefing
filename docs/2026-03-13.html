@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -103,6 +102,10 @@
   .macro-value.upcoming-val{color:var(--text-muted);}
   .macro-prev{font-size:11px;color:var(--text-muted);}
   .macro-date{font-size:10px;color:var(--text-muted);margin-top:4px;}
+  .stars{font-size:11px;color:var(--yellow);letter-spacing:1px;}
+  
+  .tier-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--text-muted);}
+  .tier-legend span{display:flex;align-items:center;gap:4px;}
 </style>
 </head>
 <body>
@@ -122,81 +125,15 @@
   <div class="ticker-items">
     
     <div class="ticker-item">
-      <span class="ticker-label">DXY</span>
-      <span class="ticker-value up">100.12</span>
-      <span class="ticker-change up">+0.38%</span>
-    </div>
-    
-    <div class="ticker-item">
       <span class="ticker-label">S&P 500</span>
-      <span class="ticker-value down">6672.62</span>
-      <span class="ticker-change down">-1.52%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">STOXX 600</span>
-      <span class="ticker-value down">59.1100</span>
-      <span class="ticker-change down">-0.59%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">NIKKEI</span>
-      <span class="ticker-value down">53,820</span>
-      <span class="ticker-change down">-1.16%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">SHANGHAI</span>
-      <span class="ticker-value down">4095.45</span>
-      <span class="ticker-change down">-0.82%</span>
+      <span class="ticker-value up">5100</span>
+      <span class="ticker-change up">+0.5%</span>
     </div>
     
     <div class="ticker-item">
       <span class="ticker-label">VIX</span>
-      <span class="ticker-value down">27.0700</span>
-      <span class="ticker-change down">-0.81%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">TLT</span>
-      <span class="ticker-value down">86.9700</span>
-      <span class="ticker-change down">-0.20%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">GOLD</span>
-      <span class="ticker-value down">$5096.90/oz</span>
-      <span class="ticker-change down">-0.37%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BTC</span>
-      <span class="ticker-value up">$71,880</span>
-      <span class="ticker-change up">+1.97%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BRENT</span>
-      <span class="ticker-value down">$97.2700</span>
-      <span class="ticker-change down">-3.18%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BTP 10Y</span>
-      <span class="ticker-value up">3.7900%</span>
-      <span class="ticker-change up">+0.99%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">US 10Y</span>
-      <span class="ticker-value up">4.2730%</span>
-      <span class="ticker-change up">+1.54%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">M2 GLOBAL</span>
-      <span class="ticker-value up">$22.4T</span>
-      <span class="ticker-change up">expanding 📈 | US YoY: +4.3% YoY</span>
+      <span class="ticker-value down">12.5</span>
+      <span class="ticker-change down">-2%</span>
     </div>
     
   </div>
@@ -204,92 +141,24 @@
 
 <div class="container">
 
-  <div class="sentiment-card risk_off">
+  <div class="sentiment-card risk_on">
     <div class="sentiment-header">
       <span class="sentiment-badge">
-        🔴 RISK OFF
+        🟢 RISK ON
         
       </span>
       
-      <span class="sentiment-score">Intensità: 7/10</span>
+      <span class="sentiment-score">Intensità: 8/10</span>
       
     </div>
-    <div class="sentiment-reason">Il sentiment di mercato è risk-off a causa dell'aumento delle tensioni geopolitiche nel Medio Oriente, con un impatto negativo sugli asset di rischio. Il VIX si attesta a 27,07, ancora sopra la soglia di 20, indicando un mercato difensivo. Il DXY in aumento del 0,38% e il calo dell'S&P 500 dell'1,52% contribuiscono a questo sentiment.</div>
+    <div class="sentiment-reason">Il mercato mostra segnali di forza grazie alla disinflazione.</div>
     
     <div class="market-impact-summary">
-      📊 I mercati azionari sono in calo, con S&P 500 -1,52% e STOXX 600 -0,59%. Il mercato obbligazionario mostra un aumento dei rendimenti, con US 10Y Yield al 4,2730% (+1,54%). Il prezzo del petrolio scende, con Brent a $97,27 (-3,18%). L'oro è poco mosso, a $5096,90/oz (-0,37%).
+      📊 Impatto positivo su equity e tech.
     </div>
     
   </div>
   
-  
-  <div class="macro-calendar">
-    <div class="macro-title">📊 Macro Calendar USA</div>
-    <div class="macro-grid">
-      
-      <div class="macro-item released">
-        <div class="macro-label">CPI YoY USA</div>
-        
-          <div class="macro-value">2.7%</div>
-          <div class="macro-prev">prec. 2.8%</div>
-          <div class="macro-date">2026-02-01</div>
-        
-      </div>
-      
-      <div class="macro-item released">
-        <div class="macro-label">Core CPI YoY USA</div>
-        
-          <div class="macro-value">2.7%</div>
-          <div class="macro-prev">prec. 2.9%</div>
-          <div class="macro-date">2026-02-01</div>
-        
-      </div>
-      
-      <div class="macro-item released">
-        <div class="macro-label">Non-Farm Payrolls</div>
-        
-          <div class="macro-value">-92K</div>
-          <div class="macro-prev">prec. +126K</div>
-          <div class="macro-date">2026-02-01</div>
-        
-      </div>
-      
-      <div class="macro-item released">
-        <div class="macro-label">Unemployment Rate USA</div>
-        
-          <div class="macro-value">4.4%</div>
-          <div class="macro-prev">prec. 4.3%</div>
-          <div class="macro-date">2026-02-01</div>
-        
-      </div>
-      
-      <div class="macro-item upcoming">
-        <div class="macro-label">PCE Core YoY</div>
-        
-          <div class="macro-value upcoming-val">—</div>
-          <div class="macro-date">📅 2026-03-28</div>
-        
-      </div>
-      
-      <div class="macro-item released">
-        <div class="macro-label">Fed Funds Rate</div>
-        
-          <div class="macro-value">3.64%</div>
-          <div class="macro-prev">prec. 3.64%</div>
-          <div class="macro-date">2026-02-01</div>
-        
-      </div>
-      
-      <div class="macro-item upcoming">
-        <div class="macro-label">GDP QoQ USA</div>
-        
-          <div class="macro-value upcoming-val">—</div>
-          <div class="macro-date">📅 2026-04-29</div>
-        
-      </div>
-      
-    </div>
-  </div>
   
 
   
@@ -311,6 +180,72 @@
   
   
 
+  <div class="tier-legend">
+    <strong style="color:var(--text);margin-right:4px;">Fonti:</strong>
+    <span><strong style="color:#d29922">T1</strong> Banca Centrale / Istituzione</span>
+    <span><strong style="color:#7d8590">T2</strong> Media finanziaria primaria</span>
+    <span><strong style="color:#555">T3</strong> Digital / Blog</span>
+  </div>
+
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">💹</span>
+      <span class="section-title">
+        Mercati
+      </span>
+      <span class="section-count">1 notizie</span>
+    </div>
+
+    
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-category cat-mercati">
+          mercati
+        </span>
+        
+        
+          <span class="impact-badge impact-mixed">↔ mixed</span>
+        
+
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        Articolo Mercati 1
+      </div>
+      <div class="card-summary">
+        Sintesi articolo mercati 1
+      </div>
+
+      
+      <div class="card-assets">
+        
+        <span class="asset-tag">S&P 500</span>
+        
+        <span class="asset-tag">Nasdaq</span>
+        
+      </div>
+      
+
+      <div class="card-footer">
+        <a href="https://reuters.com/news/1" target="_blank" class="source-link">
+          Reuters →
+        </a>
+      </div>
+    </div>
+    
+
+  </div>
+  
   
   
   
@@ -319,532 +254,6 @@
       <span class="section-icon">🌍</span>
       <span class="section-title">
         Geopolitica
-        
-      </span>
-      <span class="section-count">6 notizie</span>
-    </div>
-
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          geopolitica
-        </span>
-        
-        
-        
-        <span class="stars">★☆☆☆☆</span>
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Cold Hard Truths: Arctic Security in a Changing World
-      </div>
-      <div class="card-summary">
-        This week on War & Peace, Olga speaks with Gabriella Gricius, Senior Fellow at the Arctic Institute, to discuss Arctic security, Donald Trump’s ambitions to acquire Greenland, Russia’s and China’s interests in the High North, and how NATO and European capitals are responding.
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.crisisgroup.org/pod/europe-central-asia/cold-hard-truths-arctic-security-changing-world" target="_blank" class="source-link">
-          International Crisis Group →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          geopolitica
-        </span>
-        
-        
-        
-        <span class="stars">★☆☆☆☆</span>
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        A Sprawling Middle East War Explodes
-      </div>
-      <div class="card-summary">
-        A joint U.S.-Israeli attack on Iran, followed by Iranian retaliation against U.S. military assets, Israel and other U.S. allies, has engulfed much of the Middle East in conflict. Crisis Group experts offer a 360-degree view of the new war’s initial reverberations in the region.
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.crisisgroup.org/cmt/middle-east-north-africa/iran-israelpalestine-united-states/sprawling-middle-east-war-explodes" target="_blank" class="source-link">
-          International Crisis Group →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          geopolitica
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Sudan’s devastating war rages on as regional rivalries deepen
-      </div>
-      <div class="card-summary">
-        Yet the Iran crisis may push Gulf rivals to set aside their differences and revive stalled diplomacy on Sudan.
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.crisisgroup.org/opd/africa/sudan/sudans-devastating-war-rages-regional-rivalries-deepen" target="_blank" class="source-link">
-          International Crisis Group →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          geopolitica
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        A Blank Check for Israel and the War with Iran
-      </div>
-      <div class="card-summary">
-        The United States did not enter the war with Iran because it was attacked or was about to be attacked. It seems to have entered after concluding that once Israel moved, American involvement would be unavoidable. When Secretary of State Marco Rubio briefed congressional leaders last week, three days before the strikes began, the debate, as later reported by the Washington Post, was not whether to fight but whether to strike alongside Israel or wait until Iran retaliated against American forces in the region. The choice was not between war and peace. It was between two pathways into the same The post A Blank Check for Israel and the War with Iran appeared first on War on the Rocks .
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://warontherocks.com/2026/03/the-blank-check-for-israel-and-the-war-with-iran/" target="_blank" class="source-link">
-          War on the Rocks →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          geopolitica
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Iran, War Powers, and the Power of the Purse: Leverage or Legalization
-      </div>
-      <div class="card-summary">
-        
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.crisisgroup.org/opd/united-states/united-states-iran/iran-war-powers-and-power-purse-leverage-or-legalization" target="_blank" class="source-link">
-          International Crisis Group →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          geopolitica
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There
-      </div>
-      <div class="card-summary">
-        “No one is thinking if everyone is thinking alike.” Gen. George S. Patton’s quip shows that he not only understood the advantage of audacious combat leadership, but the necessity to develop leaders and organizations that think critically and challenge assumptions. Military education is at the forefront of this endeavor in professional militaries. Indeed, last week Secretary of Defense Pete Hegseth ordered a review of the military’s senior service/war colleges and the severing of ties between the department and 22 academic institutions in an effort to better prepare strategic leaders for the complexities of modern warfare.In a recent opinion article, Thomas The post Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There appeared first on War on the Rock
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://warontherocks.com/2026/03/military-senior-service-colleges-require-reform-but-there-sure-are-some-bad-ideas-out-there/" target="_blank" class="source-link">
-          War on the Rocks →
-        </a>
-      </div>
-    </div>
-    
-
-  </div>
-  
-  
-  
-  
-  <div class="section">
-    <div class="section-header">
-      <span class="section-icon">🏛</span>
-      <span class="section-title">
-        Macroeconomia
-        
-      </span>
-      <span class="section-count">5 notizie</span>
-    </div>
-
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          macro economia
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Infrastructure Investment Is the Key to China’s Growth
-      </div>
-      <div class="card-summary">
-        China’s government has now set its growth target for 2026 at 4.5-5%. With China’s GDP deflator still in negative territory and ample policy space for more expansionary fiscal and monetary policy, this is achievable, but it will require boosting both consumption and investment spending.
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.project-syndicate.org/commentary/china-must-increase-infrastructure-investment-to-meet-growth-targets-by-yu-yongding-2026-03" target="_blank" class="source-link">
-          Project Syndicate →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          macro economia
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        A New Global Energy Shock
-      </div>
-      <div class="card-summary">
-        When the United States and Israel launched their war of choice against Iran, the Islamic Republic pursued the most effective response at its disposal: triggering a spike in global energy prices by attacking Gulf energy infrastructure and blocking the flow of oil through the Strait of Hormuz. While the long-term effects on energy markets remain difficult to predict, US President Donald Trump has good reason to seek an off-ramp from a war opposed by most Americans, including his MAGA base. But with Israel committed to “total victory” and a defiant Islamic Republic now mining the strait, a cascade of global economic disruption appears increasingly likely.
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.project-syndicate.org/onpoint/a-new-global-energy-shock" target="_blank" class="source-link">
-          Project Syndicate →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          macro economia
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        The Iran War’s Muddled Endgame
-      </div>
-      <div class="card-summary">
-        While Donald Trump has yet to articulate clear goals for the war in Iran, he would prefer to limit the energy shock and avoid a prolonged military engagement. But Israel does not share his reservations, and Iran views the current conflict as existential, so putting the genie back in the bottle will be no easy feat.
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.project-syndicate.org/commentary/us-and-israel-have-vague-and-contradictory-aims-in-iran-by-shlomo-ben-ami-2026-03" target="_blank" class="source-link">
-          Project Syndicate →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          macro economia
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        The Growing Cyber Risk to Supply Chains
-      </div>
-      <div class="card-summary">
-        Many corporate leaders regard cybersecurity as an internal IT problem that can be delegated and forgotten. But as AI and automation reshape global supply chains, cyber readiness has become an operational capability, similar to quality or safety, with the goal being continuity in the face of disruption.
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.project-syndicate.org/commentary/firms-must-protect-supply-chains-from-growing-cyber-risks-by-marko-kovacevic-1-and-sasha-pailet-koff-2026-03" target="_blank" class="source-link">
-          Project Syndicate →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          macro economia
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        How to Electrify the Global South
-      </div>
-      <div class="card-summary">
-        Rather than rely on incremental efforts or one-size-fits-all models, countries hoping to achieve rapid progress on electrification must integrate distributed and centralized systems, make the most of AI-enabled tools, and send credible signals that attract private capital. India and Nigeria have shown how this can be done.
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.project-syndicate.org/commentary/lessons-for-expanding-energy-access-in-emerging-economies-by-abba-aliyu-et-al-2026-03" target="_blank" class="source-link">
-          Project Syndicate →
-        </a>
-      </div>
-    </div>
-    
-
-  </div>
-  
-  
-  
-  
-  <div class="section">
-    <div class="section-header">
-      <span class="section-icon">⚡</span>
-      <span class="section-title">
-        Energia
-        
-      </span>
-      <span class="section-count">5 notizie</span>
-    </div>
-
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-energia">
-          energia
-        </span>
-        
-        
-        
-        <span class="stars">★☆☆☆☆</span>
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Middle East War Revives Push for Domestic Energy
-      </div>
-      <div class="card-summary">
-        The Middle East war and the mother of all oil shocks—the de facto closure of the Strait of Hormuz—have exposed the global dependence on oil and gas as buyers scramble for cargoes and consumers once again bear the brunt of spiking energy prices. Before the war, the world had just overcome the energy system disruption from the Russian invasion of Ukraine and the embargoes on Russian energy in most of the developed economies. Some thought this was the biggest energy shock this decade, and most governments placed energy security ahead of…
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://oilprice.com/Energy/Energy-General/Middle-East-War-Revives-Push-for-Domestic-Energy.html" target="_blank" class="source-link">
-          OilPrice →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-energia">
-          energia
-        </span>
-        
-        
-        
-        <span class="stars">★☆☆☆☆</span>
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Iran Warns Gulf Energy Assets Could Burn if Its Oil Facilities Are Targeted
-      </div>
-      <div class="card-summary">
-        Iran’s Islamic Revolutionary Guard Corps (IRGC) warned Thursday that it could ignite a wider energy crisis across the Middle East if Iran’s own oil and gas infrastructure comes under attack. In a statement carried by state broadcaster IRIB, the IRGC said any strike on Iran’s energy facilities or ports would trigger a “crushing and devastating response.” The force warned that, in such a scenario, oil and gas infrastructure across the region linked to the United States and its Western allies would be “set on fire…
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://oilprice.com/Latest-Energy-News/World-News/Iran-Warns-Gulf-Energy-Assets-Could-Burn-if-Its-Oil-Facilities-Are-Targeted.html" target="_blank" class="source-link">
-          OilPrice →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-energia">
-          energia
-        </span>
-        
-        
-        
-        <span class="stars">★☆☆☆☆</span>
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        The UAE’s Energy Playbook Is Paying Off Amid Global Turmoil
-      </div>
-      <div class="card-summary">
-        Energy markets have entered an unprecedented crisis, pushing the world to look instinctively toward the largest producers: Saudi Arabia, the United States, or Russia. However, in the background, but sometimes hitting already the headlines, of today’s geopolitical turbulence, especially due to the ongoing, escalating confrontation around Iran, showing the fragility of maritime chokepoints (Hormuz), another actor has already, for years, quietly become indispensable to the current and future stability of global energy. The United Arab Emirates,…
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://oilprice.com/Energy/Crude-Oil/The-UAEs-Energy-Playbook-Is-Paying-Off-Amid-Global-Turmoil.html" target="_blank" class="source-link">
-          OilPrice →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-energia">
-          energia
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        This Ohio Factory is Trump’s Secret Weapon in the Rare Earth War
-      </div>
-      <div class="card-summary">
-        The fight for geopolitical supremacy is increasingly a fight over rare earths — the critical elements that power advanced defense systems, high-performance manufacturing, and next-generation energy technologies. REalloys (NASDAQ: ALOY) is already operating in the most strategic segment of that chain, converting heavy rare earth materials into high-performance magnets and alloys inside the United States.For Washington, the challenge is not geology — it’s processing. Many Western companies are still in early exploration or planning…
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://oilprice.com/Energy/Energy-General/This-Ohio-Factory-is-Trumps-Secret-Weapon-in-the-Rare-Earth-War.html" target="_blank" class="source-link">
-          OilPrice →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-energia">
-          energia
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Oil Prices Dip as U.S. Opens Brief Window for Stranded Russian Crude
-      </div>
-      <div class="card-summary">
-        Oil prices edged lower in early Asian trade on Friday morning after the United States issued a temporary license allowing countries to purchase Russian crude and petroleum products currently stranded at sea. The move, which promises to provide some temporary relief to global oil markets, helped push Brent crude down 0.38% to $100.10 per barrel, while West Texas Intermediate futures dropped by 0.58% to $95.17 per barrel. The 30-day waiver, permitting the purchase of Russian oil cargoes already loaded on tankers but left stranded by sanctions and…
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Dip-as-US-Opens-Brief-Window-for-Stranded-Russian-Crude.html" target="_blank" class="source-link">
-          OilPrice →
-        </a>
-      </div>
-    </div>
-    
-
-  </div>
-  
-  
-  
-  
-  <div class="section">
-    <div class="section-header">
-      <span class="section-icon">📌</span>
-      <span class="section-title">
-        banche_centrali
-        
       </span>
       <span class="section-count">1 notizie</span>
     </div>
@@ -852,278 +261,35 @@
     
     <div class="card">
       <div class="card-meta">
-        <span class="card-category cat-banche_centrali">
-          banche centrali
+        <span class="card-category cat-geopolitica">
+          geopolitica
         </span>
         
         
+          <span class="impact-badge impact-bearish">▼ bearish</span>
+        
+
         
         
-        <span class="tier-badge tier-1">T1</span>
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
         
       </div>
 
       <div class="card-title">
-        Federal Reserve Board announces approval of application by Home BancShares
+        Articolo Geopolitica 1
       </div>
       <div class="card-summary">
-        Federal Reserve Board announces approval of application by Home BancShares
+        Sintesi articolo geopolitica 1
       </div>
 
       
 
       <div class="card-footer">
-        <a href="https://www.federalreserve.gov/newsevents/pressreleases/orders20260312a.htm" target="_blank" class="source-link">
-          Federal Reserve →
-        </a>
-      </div>
-    </div>
-    
-
-  </div>
-  
-  
-  
-  
-  <div class="section">
-    <div class="section-header">
-      <span class="section-icon">📌</span>
-      <span class="section-title">
-        finanza
-        
-      </span>
-      <span class="section-count">8 notizie</span>
-    </div>
-
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-finanza">
-          finanza
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Shale Producers Stay on the Sidelines as Oil Crisis Deepens
-      </div>
-      <div class="card-summary">
-        
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://finance.yahoo.com/news/shale-producers-stay-sidelines-oil-220000512.html" target="_blank" class="source-link">
-          Yahoo Finance →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-finanza">
-          finanza
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Citizens and Oppenheimer Cut Freshworks Inc. (FRSH) Price Targets After Q4 Results
-      </div>
-      <div class="card-summary">
-        
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://finance.yahoo.com/news/citizens-oppenheimer-cut-freshworks-inc-214204513.html" target="_blank" class="source-link">
-          Yahoo Finance →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-finanza">
-          finanza
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Analysts Raise TransMedics Group, Inc. (TMDX) Price Targets After Q4 Results
-      </div>
-      <div class="card-summary">
-        
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://finance.yahoo.com/news/analysts-raise-transmedics-group-inc-214522170.html" target="_blank" class="source-link">
-          Yahoo Finance →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-finanza">
-          finanza
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        B. Riley and BMO Capital Raise Price Targets on Century Aluminum Company (CENX)
-      </div>
-      <div class="card-summary">
-        
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://finance.yahoo.com/news/b-riley-bmo-capital-raise-221055747.html" target="_blank" class="source-link">
-          Yahoo Finance →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-finanza">
-          finanza
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Raymond James Upgrades Oscar Health, Inc. (OSCR), UBS Lowers PT
-      </div>
-      <div class="card-summary">
-        
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://finance.yahoo.com/news/raymond-james-upgrades-oscar-health-221353135.html" target="_blank" class="source-link">
-          Yahoo Finance →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-finanza">
-          finanza
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Benchmark Reaffirms Buy on QXO, Inc. (QXO) After Kodiak Deal
-      </div>
-      <div class="card-summary">
-        
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://finance.yahoo.com/news/benchmark-reaffirms-buy-qxo-inc-221942404.html" target="_blank" class="source-link">
-          Yahoo Finance →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-finanza">
-          finanza
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Corn Rallies Back on Wednesday
-      </div>
-      <div class="card-summary">
-        
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://finance.yahoo.com/news/corn-rallies-back-wednesday-222015764.html" target="_blank" class="source-link">
-          Yahoo Finance →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-meta">
-        <span class="card-category cat-finanza">
-          finanza
-        </span>
-        
-        
-        
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Soybeans Post Double Digit Gains on Wednesday
-      </div>
-      <div class="card-summary">
-        
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://finance.yahoo.com/news/soybeans-post-double-digit-gains-222015752.html" target="_blank" class="source-link">
-          Yahoo Finance →
+        <a href="https://bbc.com/news/1" target="_blank" class="source-link">
+          BBC →
         </a>
       </div>
     </div>
@@ -1143,4 +309,3 @@
 </footer>
 </body>
 </html>
-```

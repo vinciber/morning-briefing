@@ -38,6 +38,11 @@ Produci un briefing mattutino JSON con tre componenti:
 2. MARKET IMPACT SUMMARY
 3. AUDIO SCRIPT per podcast (7-8 minuti)
 
+REGOLA CRITICA — relevance_score (0.1 - 1.0):
+- Analizza gli articoli forniti. Se un articolo è marginale o rumore, assegna un punteggio basso (<0.5).
+- Se un articolo è "market moving" o cambia il paradigma, assegna un punteggio alto (>0.8).
+- DISTRIBUZIONE OBBLIGATORIA: Massimo 2 articoli con "relevance_score": 1.0 (rilevanza estrema), massimo 3 articoli tra 0.8 e 0.9.
+
 REGOLA CRITICA — market_impact.direction:
 "direction" indica l'impatto netto sul SENTIMENT, NON la direzione del prezzo.
   VIX in aumento          → SEMPRE "bearish"

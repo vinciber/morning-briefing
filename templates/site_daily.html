@@ -103,6 +103,9 @@
   .macro-prev{font-size:11px;color:var(--text-muted);}
   .macro-date{font-size:10px;color:var(--text-muted);margin-top:4px;}
   .stars{font-size:11px;color:var(--yellow);letter-spacing:1px;}
+  
+  .tier-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--text-muted);}
+  .tier-legend span{display:flex;align-items:center;gap:4px;}
 </style>
 </head>
 <body>
@@ -190,6 +193,13 @@
   {% set section_icons = {'mercati': '💹', 'geopolitica': '🌍', 'macro_economia': '🏛', 'energia': '⚡'} %}
   {% set section_labels_it = {'mercati': 'Mercati & Impatto', 'geopolitica': 'Geopolitica', 'macro_economia': 'Macroeconomia', 'energia': 'Energia'} %}
   {% set section_labels_en = {'mercati': 'Markets & Impact', 'geopolitica': 'Geopolitics', 'macro_economia': 'Macroeconomics', 'energia': 'Energy'} %}
+
+  <div class="tier-legend">
+    <strong style="color:var(--text);margin-right:4px;">{% if lang == 'it' %}Fonti:{% else %}Sources:{% endif %}</strong>
+    <span><strong style="color:#d29922">T1</strong> {% if lang == 'it' %}Banca Centrale / Istituzione{% else %}Central Bank / Institution{% endif %}</span>
+    <span><strong style="color:#7d8590">T2</strong> {% if lang == 'it' %}Media finanziaria primaria{% else %}Tier 1 Financial Media{% endif %}</span>
+    <span><strong style="color:#555">T3</strong> Digital / Blog</span>
+  </div>
 
   {% for section in sections %}
   {% set sec_items = section['items'] | sort(attribute='relevance_score', reverse=True) %}

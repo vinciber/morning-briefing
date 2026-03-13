@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Morning Brief — Alpha Curation</title>
+    <title>{{ lang_info.title }} — Alpha Curation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -342,6 +342,7 @@
                 {% for item in all_articles if (item.relevance_score | default(0)) >= 0.5 %}
                     {% set _ = featured_items.append(item) %}
                 {% endfor %}
+                {% set featured_items = featured_items | sort(attribute='relevance_score', reverse=True) %}
 
                 {% for item in featured_items[:6] %}
                 <div class="news-card">
@@ -361,7 +362,7 @@
             </div>
             <div class="archive-grid">
                 {% for d in archive_dates %}
-                <a href="{% if lang == 'en' %}en/{% endif %}{{ d }}.html" class="archive-link">{{ d }}</a>
+                <a href="{% if lang == 'it' %}{{ d }}.html{% else %}{{ d }}.html{% endif %}" class="archive-link">{{ d }}</a>
                 {% endfor %}
             </div>
         </div>

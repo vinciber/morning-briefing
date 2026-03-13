@@ -283,6 +283,10 @@ def run():
     results['dxy'] = {'value': val, 'change': chg}
     logger.info(f'DXY: {val}')
 
+    val, chg = get_yahoo_finance('EURUSD=X')
+    results['eur_usd'] = {'value': val, 'change': chg}
+    logger.info(f'EUR/USD: {val}')
+
     val, chg = get_yahoo_finance('^GSPC')
     results['sp500'] = {'value': val, 'change': chg}
     logger.info(f'S&P 500: {val}')
