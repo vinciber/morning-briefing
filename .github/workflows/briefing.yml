@@ -104,20 +104,35 @@ jobs:
           MAIN_REPO_TOKEN: ${{ secrets.MAIN_REPO_TOKEN }}
         run: |
           if [ -z "$MAIN_REPO_TOKEN" ]; then
-            echo "❌ MAIN_REPO_TOKEN not set, skipping."
+            echo "❌ MAIN_REPO_TOKEN non configurato — push saltato"
             exit 1
           fi
+
+          echo "📦 Clono price-alert-tg-backend..."
           git clone https://vinciber:$MAIN_REPO_TOKEN@github.com/vinciber/price-alert-tg-backend.git main-repo
-          # Ensure a clean slate for the update
-          rm -rf main-repo/public/morning-update/*
+
+          echo "🗑️ Pulizia cartella morning-update..."
+          rm -rf main-repo/public/morning-update
           mkdir -p main-repo/public/morning-update
-          cp -r docs/* main-repo/public/morning-update/
+
+          echo "📋 Copia docs/ → public/morning-update/..."
+          cp -r docs/. main-repo/public/morning-update/
+
+          echo "🔍 Verifica file chiave:"
+          ls -la main-repo/public/morning-update/api/today.json || echo "❌ today.json mancante!"
+          ls -la main-repo/public/morning-update/audio/ || echo "⚠️ Cartella audio vuota"
+
           cd main-repo
           git config user.name 'MorningBriefingBot'
           git config user.email 'bot@briefing.local'
           git add -A public/morning-update
-          git diff --staged --quiet && echo "✅ Nessuna modifica" || \
-            (git commit -m "briefing update: $(date +%Y-%m-%d)" && git push origin main && echo "✅ Push completato")
+
+          if git diff --staged --quiet; then
+            echo "✅ Nessuna modifica da committare"
+          else
+            git commit -m "briefing update: $(date +%Y-%m-%d)"
+            git push origin main && echo "✅ Push completato" || echo "❌ Push fallito"
+          fi
 
       - name: STEP 5 — Upload artifact
         uses: actions/upload-pages-artifact@v3
