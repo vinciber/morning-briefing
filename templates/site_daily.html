@@ -217,7 +217,7 @@
           {% else %}↔ mixed{% endif %}
         </span>
         {% endif %}
-        {% set score = item.get('relevance_score', item.get('importance', 0)) %}
+        {% set score = (item.get('relevance_score', item.get('importance', 0)) or 0) | int %}
         {% if score %}
         <span class="stars">{{ '★' * score }}{{ '☆' * (5 - score) }}</span>
         {% endif %}
