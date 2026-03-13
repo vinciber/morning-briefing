@@ -1,381 +1,54 @@
 {
   "date": "2026-03-13",
   "sentiment": {
-    "label": "risk_off",
+    "label": "risk_on",
     "score": 8,
-    "reason_it": "Il sentiment di mercato è risk-off a causa dell'aumento del VIX (+0.70%) a 27.48 e del prezzo del petrolio (BRENT +2.99% a $103.46). La chiusura di Wall Street e l'apertura debole in Asia hanno contribuito a questo sentiment. Il DXY in aumento (+0.35% a 100.09) e il calo dell'EUR/USD (-0.93% a 1.1436) rafforzano la percezione di un mercato risk-off.",
-    "reason_en": "Market sentiment is risk-off due to the increase in VIX (+0.70% to 27.48) and oil prices (BRENT +2.99% to $103.46). The weak opening in Asia and the closure of Wall Street contributed to this sentiment. The rising DXY (+0.35% to 100.09) and the decline in EUR/USD (-0.93% to 1.1436) reinforce the perception of a risk-off market."
+    "reason_it": "Il mercato mostra segnali di forza grazie alla disinflazione.",
+    "reason_en": "The market shows signs of strength thanks to disinflation."
   },
   "market_impact_summary": {
-    "it": "Il mercato oggi è influenzato principalmente dalle tensioni geopolitiche e dall'aumento del prezzo del petrolio. Il Brent è salito sopra i $103, influenzando negativamente le borse. Il VIX sopra i 27 punti indica un mercato difensivo. L'S&P 500 ha chiuso con un calo del -0.50% a 6638.98, mentre il TLT ha perso -0.48% a 86.5501. L'oro è sceso del -1.36% a $5046.00/oz.",
-    "en": "The market today is mainly influenced by geopolitical tensions and the increase in oil prices. Brent rose above $103, negatively impacting stock markets. The VIX above 27 points indicates a defensive market. The S&P 500 closed down -0.50% at 6638.98, while TLT lost -0.48% at 86.5501. Gold fell -1.36% to $5046.00/oz."
+    "it": "Impatto positivo su equity e tech.",
+    "en": "Positive impact on equity and tech."
   },
-  "audio_script_it": "Buongiorno e benvenuti nel nostro briefing mattutino. Oggi analizzeremo come le tensioni geopolitiche e l'aumento del prezzo del petrolio stanno influenzando i mercati. Il Brent è salito sopra i $103, un aumento del 2.99%, e questo ha avuto un impatto negativo sulle borse. L'S&P 500 ha chiuso con un calo del -0.50% a 6638.98. Il VIX, indice della volatilità, è salito a 27.48, indicando un mercato difensivo. \n\nLa situazione geopolitica continua a essere tesa, con notizie di attacchi nello Stretto di Hormuz e un possibile intervento dell'IEA per stabilizzare il mercato del petrolio. Questo contesto ha portato a un aumento della domanda di asset rifugio, come i bond governativi e l'oro, che tuttavia oggi ha perso terreno.\n\nIl dollaro statunitense si è rafforzato, con il DXY in aumento del 0.35% a 100.09, e l'EUR/USD in calo del -0.93% a 1.1436. Questo rafforzamento del dollaro, insieme all'aumento del prezzo del petrolio, potrebbe avere implicazioni significative per l'inflazione e la politica monetaria.\n\nLa Federal Reserve e altre banche centrali potrebbero essere costrette a rivedere le loro strategie per contrastare l'inflazione, che già sembra essere in aumento. Questo scenario potrebbe portare a una riduzione della liquidità nel sistema finanziario e a un aumento dei tassi di interesse.\n\nIn questo contesto, gli investitori sono prudenti e preferiscono asset più sicuri. Il mercato azionario è sotto pressione, con il Nikkei che ha perso -1.16% e lo STOXX 600 in calo del -0.55%. \n\nIn sintesi, il mercato oggi è dominato dalle preoccupazioni legate alle tensioni geopolitiche e all'aumento del prezzo del petrolio. Gli investitori sono prudenti e cercano asset rifugio. La situazione rimane fragile e potrebbe evolversi rapidamente.",
-  "audio_script_en": "Good morning and welcome to our morning briefing. Today, we will analyze how geopolitical tensions and the increase in oil prices are impacting markets. Brent rose above $103, a 2.99% increase, and this has had a negative impact on stock markets. The S&P 500 closed down -0.50% at 6638.98. The VIX, an index of volatility, rose to 27.48, indicating a defensive market.\n\nThe geopolitical situation continues to be tense, with news of attacks in the Strait of Hormuz and a possible intervention by the IEA to stabilize the oil market. This context has led to an increase in demand for safe-haven assets, such as government bonds and gold, which however lost ground today.\n\nThe US dollar strengthened, with the DXY up 0.35% to 100.09, and EUR/USD down -0.93% to 1.1436. This strengthening of the dollar, combined with the increase in oil prices, could have significant implications for inflation and monetary policy.\n\nThe Federal Reserve and other central banks may be forced to review their strategies to counter inflation, which already seems to be rising. This scenario could lead to a reduction in liquidity in the financial system and an increase in interest rates.\n\nIn this context, investors are cautious and prefer safer assets. The stock market is under pressure, with the Nikkei losing -1.16% and the STOXX 600 down -0.55%.\n\nIn summary, the market today is dominated by concerns related to geopolitical tensions and the increase in oil prices. Investors are cautious and seeking safe-haven assets. The situation remains fragile and could evolve rapidly.",
-  "market_data_raw": {
-    "dxy": {
-      "value": "100.09",
-      "change": "+0.35%"
-    },
-    "eur_usd": {
-      "value": "1.1436",
-      "change": "-0.93%"
-    },
-    "sp500": {
-      "value": "6638.98",
-      "change": "-0.50%"
-    },
-    "vix": {
-      "value": "27.4800",
-      "change": "+0.70%"
-    },
-    "tlt": {
-      "value": "86.5501",
-      "change": "-0.48%"
-    },
-    "us_10y": {
-      "value": "4.2850%",
-      "change": "+0.28%"
-    },
-    "gold": {
-      "value": "$5046.00/oz",
-      "change": "-1.36%"
-    },
-    "btcusd": {
-      "value": "$71,006",
-      "change": "+0.73%"
-    },
-    "oil_brent": {
-      "value": "$103.46",
-      "change": "+2.99%"
-    },
-    "stoxx_600": {
-      "value": "59.1300",
-      "change": "-0.55%"
-    },
-    "nikkei": {
-      "value": "53,820",
-      "change": "-1.16%"
-    },
-    "shanghai": {
-      "value": "4095.45",
-      "change": "-0.82%"
-    },
-    "btp_10y": {
-      "value": "3.7930%",
-      "change": "+1.07%"
-    },
-    "global_m2": {
-      "value": "$22.4T",
-      "change": "expanding 📈 | US YoY: +4.3% YoY"
-    },
-    "macro_calendar": {
-      "cpi": {
-        "label": "CPI YoY USA",
-        "value": "2.7%",
-        "previous": "2.8%",
-        "release_date": "2026-02-01",
-        "status": "released",
-        "next_release": "2026-04-10"
-      },
-      "core_cpi": {
-        "label": "Core CPI YoY USA",
-        "value": "2.7%",
-        "previous": "2.9%",
-        "release_date": "2026-02-01",
-        "status": "released",
-        "next_release": "2026-04-10"
-      },
-      "nfp": {
-        "label": "Non-Farm Payrolls",
-        "value": "-92K",
-        "previous": "+126K",
-        "release_date": "2026-02-01",
-        "status": "released",
-        "next_release": "2026-04-03"
-      },
-      "unemployment": {
-        "label": "Unemployment Rate USA",
-        "value": "4.4%",
-        "previous": "4.3%",
-        "release_date": "2026-02-01",
-        "status": "released",
-        "next_release": "2026-04-03"
-      },
-      "pce_core": {
-        "label": "PCE Core YoY",
-        "value": null,
-        "unit": "%",
-        "status": "upcoming",
-        "next_release": "2026-03-28"
-      },
-      "fed_funds": {
-        "label": "Fed Funds Rate",
-        "value": "3.64%",
-        "previous": "3.64%",
-        "release_date": "2026-02-01",
-        "status": "released",
-        "next_release": "2026-05-07"
-      },
-      "gdp": {
-        "label": "GDP QoQ USA",
-        "value": null,
-        "unit": "%",
-        "status": "upcoming",
-        "next_release": "2026-04-29"
-      }
-    }
-  },
+  "audio_script_it": "Buongiorno. Il sentiment di oggi è positivo...",
+  "audio_script_en": "Good morning. Today's sentiment is positive...",
   "articles": [
     {
-      "title": "Federal Reserve Board issues enforcement actions with former employee of Equity Bank and former employee of First State Bank of Dongola",
-      "url": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20260313a.htm",
-      "source": "Federal Reserve",
+      "title_it": "Articolo Mercati 1",
+      "summary_it": "Sintesi articolo mercati 1",
+      "category": "mercati",
+      "relevance_score": 5,
       "tier": 1,
-      "category": "macro_economia",
-      "snippet": "Federal Reserve Board issues enforcement actions with former employee of Equity Bank and former employee of First State Bank of Dongola",
-      "date": "2026-03-13T15:00:00+00:00",
-      "relevance_score": 0.2
+      "source_name": "Reuters",
+      "source_url": "https://reuters.com/news/1",
+      "market_impact": {
+        "direction": "bullish",
+        "assets_affected": [
+          "S&P 500",
+          "Nasdaq"
+        ]
+      },
+      "url": "https://reuters.com/news/1"
     },
     {
-      "title": "Federal Reserve Board announces approval of application by Home BancShares",
-      "url": "https://www.federalreserve.gov/newsevents/pressreleases/orders20260312a.htm",
-      "source": "Federal Reserve",
-      "tier": 1,
-      "category": "macro_economia",
-      "snippet": "Federal Reserve Board announces approval of application by Home BancShares",
-      "date": "2026-03-12T20:30:00+00:00",
-      "relevance_score": 0.2
-    },
-    {
-      "title": "Cold Hard Truths: Arctic Security in a Changing World",
-      "url": "https://www.crisisgroup.org/pod/europe-central-asia/cold-hard-truths-arctic-security-changing-world",
-      "source": "International Crisis Group",
-      "tier": 2,
+      "title_it": "Articolo Geopolitica 1",
+      "summary_it": "Sintesi articolo geopolitica 1",
       "category": "geopolitica",
-      "snippet": "This week on War & Peace, Olga speaks with Gabriella Gricius, Senior Fellow at the Arctic Institute, to discuss Arctic security, Donald Trump’s ambitions to acquire Greenland, Russia’s and China’s interests in the High North, and how NATO and European capitals are responding.",
-      "date": "2026-03-13T18:25:20.521385+00:00",
-      "relevance_score": 1.0
-    },
-    {
-      "title": "A New Global Energy Shock",
-      "url": "https://www.project-syndicate.org/onpoint/a-new-global-energy-shock",
-      "source": "Project Syndicate",
+      "relevance_score": 4,
       "tier": 2,
-      "category": "macro_economia",
-      "snippet": "When the United States and Israel launched their war of choice against Iran, the Islamic Republic pursued the most effective response at its disposal: triggering a spike in global energy prices by attacking Gulf energy infrastructure and blocking the flow of oil through the Strait of Hormuz. While the long-term effects on energy markets remain difficult to predict, rising energy prices and interest rates have provided US President Donald Trump with powerful reasons to seek an off-ramp from a war opposed by most Americans, including his MAGA base. But with Israel committed to “total victory” and a defiant Islamic Republic now mining the strait, a cascade of global economic disruption appears likely.",
-      "date": "2026-03-13T05:23:51+00:00",
-      "relevance_score": 1.0
-    },
-    {
-      "title": "Japanese Leader Wrestles with Middle East Shock in Planned Trip to Washington",
-      "url": "https://www.crisisgroup.org/anb/asia-pacific/japan-china-united-states/japanese-leader-wrestles-middle-east-shock-planned-trip-washington",
-      "source": "International Crisis Group",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "Crisis Group expert Matt Wheeler assesses the importance of Sanae Takaichi’s forthcoming visit to the White House, amid war, tensions with China and U.S. policy shifts",
-      "date": "2026-03-13T18:25:20.520767+00:00",
-      "relevance_score": 0.8
-    },
-    {
-      "title": "Infrastructure Investment Is the Key to China’s Growth",
-      "url": "https://www.project-syndicate.org/commentary/china-must-increase-infrastructure-investment-to-meet-growth-targets-by-yu-yongding-2026-03",
-      "source": "Project Syndicate",
-      "tier": 2,
-      "category": "macro_economia",
-      "snippet": "China’s government has now set its growth target for 2026 at 4.5-5%. With China’s GDP deflator still in negative territory and ample policy space for more expansionary fiscal and monetary policy, this is achievable, but it will require boosting both consumption and investment spending.",
-      "date": "2026-03-12T13:54:03+00:00",
-      "relevance_score": 0.8
-    },
-    {
-      "title": "Sudan’s devastating war rages on as regional rivalries deepen",
-      "url": "https://www.crisisgroup.org/opd/africa/sudan/sudans-devastating-war-rages-regional-rivalries-deepen",
-      "source": "International Crisis Group",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "Yet the Iran crisis may push Gulf rivals to set aside their differences and revive stalled diplomacy on Sudan.",
-      "date": "2026-03-13T18:25:20.520914+00:00",
-      "relevance_score": 0.6
-    },
-    {
-      "title": "A Blank Check for Israel and the War with Iran",
-      "url": "https://warontherocks.com/2026/03/the-blank-check-for-israel-and-the-war-with-iran/",
-      "source": "War on the Rocks",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "The United States did not enter the war with Iran because it was attacked or was about to be attacked. It seems to have entered after concluding that once Israel moved, American involvement would be unavoidable. When Secretary of State Marco Rubio briefed congressional leaders last week, three days before the strikes began, the debate, as later reported by the Washington Post, was not whether to fight but whether to strike alongside Israel or wait until Iran retaliated against American forces in the region. The choice was not between war and peace. It was between two pathways into the same The post A Blank Check for Israel and the War with Iran appeared first on War on the Rocks .",
-      "date": "2026-03-12T07:15:39+00:00",
-      "relevance_score": 0.6
-    },
-    {
-      "title": "The Gulf’s Tough Choices",
-      "url": "https://www.project-syndicate.org/commentary/gulf-states-tough-choices-in-iran-war-by-don-aviv-and-sam-worby-2026-03",
-      "source": "Project Syndicate",
-      "tier": 2,
-      "category": "macro_economia",
-      "snippet": "For the Gulf Cooperation Council's six member states, strategic patience may be the wisest approach to the Iran war for now. But the longer the war goes on, the more the region’s credibility as a stable global hub erodes – a vulnerability that the Islamic Republic is determined to exploit.",
-      "date": "2026-03-13T10:37:56+00:00",
-      "relevance_score": 0.6
-    },
-    {
-      "title": "Iran, War Powers, and the Power of the Purse: Leverage or Legalization",
-      "url": "https://www.crisisgroup.org/opd/united-states/united-states-iran/iran-war-powers-and-power-purse-leverage-or-legalization",
-      "source": "International Crisis Group",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "Iran, War Powers, and the Power of the Purse: Leverage or Legalization",
-      "date": "2026-03-13T18:25:20.521833+00:00",
-      "relevance_score": 0.4
-    },
-    {
-      "title": "Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There",
-      "url": "https://warontherocks.com/2026/03/military-senior-service-colleges-require-reform-but-there-sure-are-some-bad-ideas-out-there/",
-      "source": "War on the Rocks",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "“No one is thinking if everyone is thinking alike.” Gen. George S. Patton’s quip shows that he not only understood the advantage of audacious combat leadership, but the necessity to develop leaders and organizations that think critically and challenge assumptions. Military education is at the forefront of this endeavor in professional militaries. Indeed, last week Secretary of Defense Pete Hegseth ordered a review of the military’s senior service/war colleges and the severing of ties between the department and 22 academic institutions in an effort to better prepare strategic leaders for the complexities of modern warfare.In a recent opinion article, Thomas The post Military Senior Service Colleges Require Reform, But There Sure Are Some Bad Ideas Out There appeared first on War on the Rock",
-      "date": "2026-03-13T07:15:20+00:00",
-      "relevance_score": 0.4
-    },
-    {
-      "title": "The Spheres-of-Influence Illusion",
-      "url": "https://www.project-syndicate.org/onpoint/carving-up-world-into-spheres-of-influence-will-not-bring-stability-by-zaki-laidi-2026-03",
-      "source": "Project Syndicate",
-      "tier": 2,
-      "category": "macro_economia",
-      "snippet": "For the first time since 1945, the United States, China, and Russia are converging around an authoritarian conception of sovereignty that relies on raw power rather than international law. But history suggests that dividing the world into rival blocs is more likely to produce conflict than stability.",
-      "date": "2026-03-13T09:34:35+00:00",
-      "relevance_score": 0.4
-    },
-    {
-      "title": "Bank of America: Sell Oil Above $100",
-      "url": "https://oilprice.com/Latest-Energy-News/World-News/Bank-of-America-Sell-Oil-Above-100.html",
-      "source": "OilPrice",
-      "tier": 4,
-      "category": "energia",
-      "snippet": "Bank of America is warning investors not to chase oil prices higher if crude climbs above $100 per barrel, arguing that prices at those levels tend to trigger government and central bank responses aimed at cooling the economy. The bank said oil has already been one of the biggest market movers this year. Crude prices are up nearly 70% year-to-date, far outpacing broader commodities, which are up about 41%, and gold, which has gained roughly 17%. Over the same period, the S&P 500 has fallen about 2.5%, while bitcoin has dropped around 20%. According…",
-      "date": "2026-03-13T18:02:00+00:00",
-      "relevance_score": 1.0
-    },
-    {
-      "title": "The World’s Biggest Oil Supply Shock Is Now Unfolding",
-      "url": "https://oilprice.com/Energy/Energy-General/The-Worlds-Biggest-Oil-Supply-Shock-Is-Now-Unfolding.html",
-      "source": "OilPrice",
-      "tier": 4,
-      "category": "energia",
-      "snippet": "The International Energy Agency (IEA) has warned that the current energy crisis triggered by the war in the Middle East marks the “largest disruption” in the history of the oil market. The group made a record intervention in the market on Wednesday, with the release of 400m barrels from the strategic reserves. But the move has made little difference to the surging price of Brent crude – the international benchmark for oil – which once again eclipsed the $100 mark on Thursday on the news two Iraqi tankers had been struck…",
-      "date": "2026-03-13T18:00:00+00:00",
-      "relevance_score": 1.0
-    },
-    {
-      "title": "China’s Sinopec to Slash Refinery Rates amid Crude Supply Shock",
-      "url": "https://oilprice.com/Latest-Energy-News/World-News/Chinas-Sinopec-to-Slash-Refinery-Rates-amid-Crude-Supply-Shock.html",
-      "source": "OilPrice",
-      "tier": 4,
-      "category": "energia",
-      "snippet": "The top Asian refiner, China’s state-controlled Sinopec, plans to slash this month its refinery processing rates by 11-13% as crude supply is choked by the Middle East war, Reuters reported on Friday, quoting sources with knowledge of the refining giant’s operations. Sinopec, whose refineries account for a third of all Chinese throughput, plans to lower its crude runs by between 600,000 and 700,000 barrels per day (bpd) in March, from initial plans to process 5.2 million bpd. The loss in refinery throughput does not include regular…",
-      "date": "2026-03-13T17:30:00+00:00",
-      "relevance_score": 1.0
-    },
-    {
-      "title": "Iran’s All-or-Nothing Game in the Strait of Hormuz",
-      "url": "https://oilprice.com/Energy/Oil-Prices/Irans-All-or-Nothing-Game-in-the-Strait-of-Hormuz.html",
-      "source": "OilPrice",
-      "tier": 4,
-      "category": "energia",
-      "snippet": "Brent crude is set to close above $100 for the first time since 2022 as tensions around the Strait of Hormuz intensify. ICE Brent is set to settle above $100 per barrel for the first time since August 2022, undeterred by the US’ easing of sanctions on Russia and the IEA’s mulled release of strategic petroleum stocks. The closure of the Strait of Hormuz sits front and centre to any oil price outlook, with Iran already striking at least 18 vessels since the US-Iran conflict started two weeks ago. Iran’s New Supreme Leader Goes All…",
-      "date": "2026-03-13T15:00:00+00:00",
-      "relevance_score": 1.0
-    },
-    {
-      "title": "Banks Hike Oil Price Forecasts, and Some See $150 Crude",
-      "url": "https://oilprice.com/Latest-Energy-News/World-News/Banks-Hike-Oil-Price-Forecasts-and-Some-See-150-Crude.html",
-      "source": "OilPrice",
-      "tier": 4,
-      "category": "energia",
-      "snippet": "Investment banks are scrambling to revise up their oil price forecasts as the Middle East war cripples supply from the most important oil-producing region, with some expecting oil to surge to $150 per barrel or even higher if the Strait of Hormuz remains off limits for tanker traffic for several weeks. Analysts at Macquarie warned of this potential price spike, while all other major investment banks hiked their first-quarter and second-quarter forecasts. Goldman Sachs, for example, expects Brent Crude prices to average over $100…",
-      "date": "2026-03-13T13:30:00+00:00",
-      "relevance_score": 1.0
-    },
-    {
-      "title": "Bitcoin’s $70K Floor at Risk: Why Rising Oil Prices and the Fed Could Snap the Rally",
-      "url": "https://finance.yahoo.com/news/bitcoin-70k-floor-risk-why-082053565.html",
-      "source": "Yahoo Finance",
-      "tier": 4,
-      "category": "mercati",
-      "snippet": "Bitcoin’s $70K Floor at Risk: Why Rising Oil Prices and the Fed Could Snap the Rally",
-      "date": "2026-03-12T08:20:53+00:00",
-      "relevance_score": 0.6
-    },
-    {
-      "title": "Oil Trims Gains After Brent Soars Back Above $100 on Hormuz Fears",
-      "url": "https://www.barrons.com/livecoverage/stock-market-news-today-031226/card/oil-trims-gains-after-brent-soars-back-above-100-on-hormuz-fears-IgK6u2I7wWw7GEeQa0nK?siteid=yhoof2&yptr=yahoo",
-      "source": "Yahoo Finance",
-      "tier": 4,
-      "category": "mercati",
-      "snippet": "Oil Trims Gains After Brent Soars Back Above $100 on Hormuz Fears",
-      "date": "2026-03-12T08:36:06+00:00",
-      "relevance_score": 0.4
-    },
-    {
-      "title": "After Rewarding 2025, Zalando Plans for Even More Profit Using AI",
-      "url": "https://finance.yahoo.com/news/zalando-notches-23-growth-q4-082518413.html",
-      "source": "Yahoo Finance",
-      "tier": 4,
-      "category": "mercati",
-      "snippet": "After Rewarding 2025, Zalando Plans for Even More Profit Using AI",
-      "date": "2026-03-12T08:25:18+00:00",
-      "relevance_score": 0.2
-    },
-    {
-      "title": "Is Westinghouse Air Brake Technologies Stock Outperforming the Nasdaq?",
-      "url": "https://finance.yahoo.com/news/westinghouse-air-brake-technologies-stock-083932668.html",
-      "source": "Yahoo Finance",
-      "tier": 4,
-      "category": "mercati",
-      "snippet": "Is Westinghouse Air Brake Technologies Stock Outperforming the Nasdaq?",
-      "date": "2026-03-12T08:39:32+00:00",
-      "relevance_score": 0.2
-    },
-    {
-      "title": "Is Equifax Stock Underperforming the S&P 500?",
-      "url": "https://finance.yahoo.com/news/equifax-stock-underperforming-p-500-085149006.html",
-      "source": "Yahoo Finance",
-      "tier": 4,
-      "category": "mercati",
-      "snippet": "Is Equifax Stock Underperforming the S&P 500?",
-      "date": "2026-03-12T08:51:49+00:00",
-      "relevance_score": 0.2
-    },
-    {
-      "title": "Innoviz Technologies Ltd. (INVZ) Announces Strategic Collaboration With Dataspeed to Integrate InnovizSMART LiDAR Sensors",
-      "url": "https://finance.yahoo.com/news/innoviz-technologies-ltd-invz-announces-073813662.html",
-      "source": "Yahoo Finance",
-      "tier": 4,
-      "category": "mercati",
-      "snippet": "Innoviz Technologies Ltd. (INVZ) Announces Strategic Collaboration With Dataspeed to Integrate InnovizSMART LiDAR Sensors",
-      "date": "2026-03-12T07:38:13+00:00",
-      "relevance_score": 0.2
-    },
-    {
-      "title": "B. Riley Lowers its Price Target on Enovix Corporation (ENVX) to $10 from $17 and Maintains a Buy Rating",
-      "url": "https://finance.yahoo.com/news/b-riley-lowers-price-target-073806460.html",
-      "source": "Yahoo Finance",
-      "tier": 4,
-      "category": "mercati",
-      "snippet": "B. Riley Lowers its Price Target on Enovix Corporation (ENVX) to $10 from $17 and Maintains a Buy Rating",
-      "date": "2026-03-12T07:38:06+00:00",
-      "relevance_score": 0.2
-    },
-    {
-      "title": "Is Edison International Stock Outperforming the Dow?",
-      "url": "https://finance.yahoo.com/news/edison-international-stock-outperforming-dow-082852978.html",
-      "source": "Yahoo Finance",
-      "tier": 4,
-      "category": "mercati",
-      "snippet": "Is Edison International Stock Outperforming the Dow?",
-      "date": "2026-03-12T08:28:52+00:00",
-      "relevance_score": 0.0
+      "source_name": "BBC",
+      "source_url": "https://bbc.com/news/1",
+      "url": "https://bbc.com/news/1"
     }
-  ]
+  ],
+  "market_data_raw": {
+    "sp500": {
+      "value": "5100",
+      "change": "+0.5%"
+    },
+    "vix": {
+      "value": "12.5",
+      "change": "-2%"
+    }
+  }
 }
