@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, logging, yaml, wave, io, os
+import json, logging, yaml, wave, io, os, re
 from datetime import datetime, timezone
 from pathlib import Path
 from piper.voice import PiperVoice
@@ -15,6 +15,9 @@ MODEL_DIR = ROOT / 'models'
 
 def normalize_for_tts(text: str) -> str:
     """Sostituzioni per una migliore pronuncia finanziaria in italiano."""
+    # Tronca decimali a 2 cifre: 27.1900 -> 27.19
+    text = re.sub(r'(\d+)\.(\d{2})\d+', r'\1.\2', text)
+
     replacements = {
         'VIX':    'Vix',
         'S&P 500': 'S e P 500',

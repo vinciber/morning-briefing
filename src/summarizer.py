@@ -10,6 +10,7 @@ import os
 import sys
 import json
 import logging
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from dotenv import load_dotenv
@@ -17,6 +18,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from groq import Groq
+
+def _format_value(val: str) -> str:
+    """Tronca decimali a 2 cifre: 27.1900 → 27.19"""
+    val_str = str(val)
+    if '.' in val_str:
+        return re.sub(r'(\d+)\.(\d{2})\d+', r'\1.\2', val_str)
+    return val_str
 
 # ---------------------------------------------------------------------------
 # Setup
@@ -120,9 +128,15 @@ Devi scrivere ESATTAMENTE uno script audio da 800-1000 parole in italiano.
 
 REGOLE ASSOLUTE:
 - MAI frasi come "speriamo che questo podcast sia stato utile" o "arrivederci"
-- MAI elenchi puntati
+- MAI elenchi puntati (1. 2. 3.) o con trattini
 - SEMPRE valori numerici specifici per ogni asset citato
+- Per citare più asset usare connettivi: "mentre", "al contempo", "parallelamente", "contestualmente"
 - Tono: autorevole, didattico, mai banale
+
+REGOLA DATI MACRO FRED:
+- Se il dato è contrassegnato "DATO NON RECENTE" → citare come "l'ultimo dato disponibile, risalente a [data], mostrava..." — MAI come se fosse di oggi
+- Se contrassegnato "RECENTE" → citare normalmente come dato fresco
+- MAI presentare dati di 30-60 giorni fa come breaking news
 
 STRUTTURA OBBLIGATORIA (rispetta i tempi):
 1. APERTURA (150 parole): sentiment del giorno + 3 dati chiave con numeri
@@ -215,8 +229,8 @@ def run():
         }
         for key, label in labels.items():
             item = md.get(key, {})
-            val = item.get('value', 'N/A')
-            chg = item.get('change', 'N/A')
+            val = _format_value(item.get('value', 'N/A'))
+            chg = _format_value(item.get('change', 'N/A'))
             if val and val != 'N/A':
                 lines.append(f"  {label}: {val} ({chg})")
 
@@ -227,10 +241,23 @@ def run():
             for key, item in macro.items():
                 label = item.get('label', key)
                 if item.get('status') == 'released':
-                    val = item.get('value', 'N/A')
-                    prev = item.get('previous', 'N/A')
+                    val = _format_value(item.get('value', 'N/A'))
+                    prev = _format_value(item.get('previous', 'N/A'))
                     date = item.get('release_date', '')
-                    lines.append(f"  {label}: {val} (prec. {prev}) — rilasciato {date}")
+                    
+                    try:
+                        release_dt = datetime.strptime(date, '%Y-%m-%d').replace(tzinfo=timezone.utc)
+                        days_ago = (datetime.now(timezone.utc) - release_dt).days
+                        if days_ago <= 3:
+                            freshness = f"rilasciato {days_ago} giorni fa ⚡ RECENTE"
+                        elif days_ago <= 14:
+                            freshness = f"rilasciato {days_ago} giorni fa"
+                        else:
+                            freshness = f"rilasciato il {date} ({days_ago} giorni fa — DATO NON RECENTE)"
+                    except Exception:
+                        freshness = f"rilasciato {date}"
+                    
+                    lines.append(f"  {label}: {val} (prec. {prev}) — {freshness}")
                 elif item.get('status') == 'upcoming':
                     next_rel = item.get('next_release', 'N/A')
                     lines.append(f"  {label}: NON ANCORA RILASCIATO — prossima uscita {next_rel}")
@@ -353,6 +380,29 @@ Return JSON: {{"audio_script_en": "..."}}"""
         )
         audio_en_data = json.loads(response_en.choices[0].message.content)
         briefing['audio_script_en'] = audio_en_data.get('audio_script_en', '')
+
+        # RETRY AUDIO SE SOTTO 700 PAROLE
+        audio_words = len(briefing.get('audio_script_it', '').split())
+        if audio_words < 700:
+            logger.warning(f'⚠️ Audio IT sotto soglia ({audio_words} parole), retry...')
+            retry_prompt = audio_user_it + "\n\nATTENZIONE: lo script precedente era troppo corto. Devi scrivere ALMENO 800 parole. Espandi ogni sezione con più analisi e contesto."
+            retry_response = client.chat.completions.create(
+                model='meta-llama/llama-4-scout-17b-16e-instruct',
+                messages=[
+                    {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT},
+                    {'role': 'user', 'content': retry_prompt},
+                ],
+                temperature=0.3,
+                max_tokens=6000,
+                response_format={'type': 'json_object'},
+            )
+            retry_data = json.loads(retry_response.choices[0].message.content)
+            briefing['audio_script_it'] = retry_data.get('audio_script_it', briefing['audio_script_it'])
+            # Se retry ha successo per IT, aggiorniamo anche EN per consistenza se possibile o lasciamo così
+            # Il prompt utente chiedeva di aggiornare entrambi
+            briefing['audio_script_en'] = retry_data.get('audio_script_en', briefing['audio_script_en'])
+            audio_words = len(briefing.get('audio_script_it', '').split())
+            logger.info(f'🎙️ Audio dopo retry: {audio_words} parole {"✅" if audio_words >= 700 else "⚠️ ancora sotto"}')
 
         # Merge article_impacts negli articoli raw
         article_impacts = briefing.pop('article_impacts', [])

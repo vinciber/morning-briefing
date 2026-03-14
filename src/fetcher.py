@@ -45,6 +45,13 @@ HIGH_KEYWORDS = [
     'btp', 'eur', 'usd', 'dollar', 'euro',
 ]
 
+TITLE_BLACKLIST = [
+    'mortgage', 'heloc', 'real estate', 'housing market', 'rent',
+    'credit card', 'personal loan', 'rating', 'downgrade', 'upgrade',
+    'zillow', 'redfin', 'realtor', 'home prices', 'savings interest',
+    'best rates', 'how to buy', 'first-time homebuyer', 'refinance'
+]
+
 TIER_SCORE = {1: 1.0, 2: 0.75, 3: 0.5, 4: 0.3}
 CATEGORY_CAPS = {
     'mercati':        8,
@@ -142,6 +149,10 @@ def fetch_rss_feed(source: dict, tier: int) -> list[dict]:
         for entry in feed.entries[:30]:  # Max 30 entries per feed
             title = clean_html(getattr(entry, 'title', ''))
             if not title:
+                continue
+
+            # Filtro blacklist (Problem 3)
+            if any(term in title.lower() for term in TITLE_BLACKLIST):
                 continue
 
             # Snippet: usa summary o content
