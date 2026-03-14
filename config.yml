@@ -76,9 +76,6 @@ sources:
     - url: 'https://warontherocks.com/feed'
       name: 'War on the Rocks'
       category: 'geopolitica'
-    - url: 'https://www.bruegel.org/rss.xml'
-      name: 'Bruegel'
-      category: 'macro_economia'
     - url: 'https://www.project-syndicate.org/rss'
       name: 'Project Syndicate'
       category: 'macro_economia'
@@ -89,11 +86,6 @@ sources:
 
   # TIER 3 — Analisi Finanziaria (web_fetch periodico)
   tier3_webfetch:
-    - url: 'https://www.pimco.com/en-us/insights/blog/rss'
-      name: 'PIMCO Blog'
-      type: 'rss'
-      category: 'finanza'
-      frequency: 'daily'
     - url: 'https://www.blackrock.com/corporate/insights/blackrock-investment-institute'
       name: 'BlackRock Investment Institute'
       type: 'webfetch'
@@ -116,7 +108,7 @@ sources:
     - url: 'https://oilprice.com/rss/main'
       name: 'OilPrice'
       category: 'energia'
-    - url: 'https://www.ansa.it/sito/ansait/rss/economia/economia_rss.xml'
+    - url: 'https://www.ansa.it/sito/notizie/economia/economia_rss.xml'
       name: 'ANSA Economia'
       category: 'finanza'
     - url: 'https://www.corriere.it/rss/economia.xml'
