@@ -61,7 +61,7 @@ CATEGORY_CAPS = {
 }
 GLOBAL_CAP = 25
 
-USER_AGENT = 'MorningBriefingAgent/1.0 (+https://github.com/vinciber/morning-briefing)'
+USER_AGENT = 'MorningBriefingAgent/1.0'
 
 
 # ---------------------------------------------------------------------------
@@ -131,14 +131,112 @@ def parse_date(entry) -> str:
 # ---------------------------------------------------------------------------
 # Fetchers
 # ---------------------------------------------------------------------------
+def _fetch_pimco(source: dict) -> list[dict]:
+    """Scraper ad hoc per PIMCO Insights (Tier 3)."""
+    url = source['url']
+    name = source['name']
+    
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        resp = requests.get(url, headers=headers, timeout=15)
+        resp.raise_for_status()
+        
+        soup = BeautifulSoup(resp.text, 'html.parser')
+        articles = []
+        
+        # PIMCO structure: insights usually in cards
+        for card in soup.select('.insight-card, .article-card, .list-item')[:3]:
+            title_tag = card.select_one('h3, h4, .title')
+            link_tag = card.select_one('a[href]')
+            
+            if title_tag and link_tag:
+                title = title_tag.get_text(strip=True)
+                href = link_tag['href']
+                if href.startswith('/'):
+                    from urllib.parse import urljoin
+                    href = urljoin(url, href)
+                
+                score = relevance_score(title, '')
+                articles.append({
+                    'title': title,
+                    'url': href,
+                    'source': name,
+                    'tier': 3,
+                    'category': 'finanza',
+                    'snippet': '',
+                    'date': datetime.now(timezone.utc).isoformat(),
+                    'relevance_score': round(score, 3),
+                })
+        
+        # Fallback if specific selectors fail (try all <a> with significant text)
+        if not articles:
+            seen = set()
+            for a in soup.find_all('a', href=True):
+                text = a.get_text(strip=True)
+                if len(text) > 40 and text not in seen:
+                    href = a['href']
+                    if href.startswith('/'):
+                        from urllib.parse import urljoin
+                        href = urljoin(url, href)
+                    
+                    score = relevance_score(text, '')
+                    articles.append({
+                        'title': text,
+                        'url': href,
+                        'source': name,
+                        'tier': 3,
+                        'category': 'finanza',
+                        'snippet': '',
+                        'date': datetime.now(timezone.utc).isoformat(),
+                        'relevance_score': round(score, 3),
+                    })
+                    seen.add(text)
+                    if len(articles) >= 3: break
+
+        logger.info(f'✓ {name}: {len(articles)} articoli (scraper)')
+        return articles
+    except Exception as e:
+        logger.error(f'✗ {name} (scraper): {e}')
+        return []
+
+def _calculate_cross_reference_score(articles: list[dict]):
+    """Aumenta lo score se un tema compare in più fonti istituzionali."""
+    themes = ['inflation', 'fed', 'ecb', 'bce', 'rates', 'china', 'energy', 'oil', 'growth', 'recession', 'debt']
+    theme_counts = {t: 0 for t in themes}
+    
+    # Conta occorrenze nei titoli (fonti Tier 1 e 2)
+    for art in articles:
+        if art.get('tier', 4) <= 2:
+            title = art.get('title', '').lower()
+            for t in themes:
+                if t in title:
+                    theme_counts[t] += 1
+                    
+    # Applica bonus (max +0.2)
+    for art in articles:
+        title = art.get('title', '').lower()
+        bonus = 0
+        for t, count in theme_counts.items():
+            if t in title and count > 1:
+                bonus += 0.05 * min(count, 4)
+        art['relevance_score'] = min(art.get('relevance_score', 0) + bonus, 1.0)
+
 def fetch_rss_feed(source: dict, tier: int) -> list[dict]:
     """Fetcha un singolo feed RSS e restituisce articoli normalizzati."""
     url = source['url']
     name = source['name']
     category = source.get('category', 'finanza')
 
+    # Header speciale per Bruegel e altri che bloccano bot
+    custom_headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+    
     try:
-        feed = feedparser.parse(url, agent=USER_AGENT)
+        # feedparser can take a request object or string. For custom headers we might need to fetch with requests first
+        # OR use the 'request_headers' param if supported by the version
+        resp = requests.get(url, headers=custom_headers, timeout=15)
+        resp.raise_for_status()
+        feed = feedparser.parse(resp.content)
+        
         if feed.bozo and not feed.entries:
             logger.warning(f'Feed RSS non valido o vuoto: {name} ({url})')
             return []
@@ -350,13 +448,18 @@ def run():
     for source in config.get('sources', {}).get('tier2', []):
         all_articles.extend(fetch_rss_feed(source, tier=2))
 
-    # Fetch Tier 3 (web_fetch)
+    # Fetch Tier 3 (web_fetch e scraper)
     for source in config.get('sources', {}).get('tier3_webfetch', []):
         stype = source.get('type', 'rss')
         if stype == 'rss':
             all_articles.extend(fetch_rss_feed(source, tier=3))
+        elif stype == 'scraper':
+            all_articles.extend(_fetch_pimco(source))
         else:
             all_articles.extend(fetch_webfetch_source(source))
+            
+    # Task 4: Cross-Reference Scoring
+    _calculate_cross_reference_score(all_articles)
 
     # Fetch Tier 4
     for source in config.get('sources', {}).get('tier4', []):

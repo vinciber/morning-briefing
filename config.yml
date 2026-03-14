@@ -1,13 +1,9 @@
-# MORNING BRIEFING AGENT — Configurazione
-# Repository: https://github.com/vinciber/morning-briefing
+# Morning Briefing Configuration
 
 schedule:
   morning: '0 5 * * 1-5'      # Lun-Ven ore 6:00 CET (5:00 UTC)
 
 output:
-  email:
-    languages: ['it', 'en']
-    format: 'html'
   audio:
     language: 'it'
     voice_it: 'it-IT-DiegoNeural'
@@ -46,10 +42,10 @@ sources:
     - url: 'https://www.ecb.europa.eu/home/html/rss.en.html'
       name: 'BCE'
       category: 'banche_centrali'
-    - url: 'https://www.bancaditalia.it/pubblicazioni/feed.xml'
+    - url: 'https://www.bancaditalia.it/media/feed/index.xml'
       name: 'Banca d Italia'
       category: 'banche_centrali'
-    - url: 'https://www.bis.org/doclist/all_speeches.rss'
+    - url: 'https://www.bis.org/rss/all.xml'
       name: 'BIS'
       category: 'banche_centrali'
     - url: 'https://www.imf.org/en/News/rss?language=eng'
@@ -58,8 +54,11 @@ sources:
     - url: 'https://feeds.reuters.com/reuters/businessNews'
       name: 'Reuters Business'
       category: 'geopolitica'
+    - url: 'https://www.ft.com/global-economy?format=rss'
+      name: 'Financial Times (Global Economy)'
+      category: 'macro_economia'
 
-  # TIER 2 — Think Tank di Riferimento
+  # TIER 2 — Think Tank e Istituzioni
   tier2:
     - url: 'https://www.ispionline.it/en/feed'
       name: 'ISPI'
@@ -79,12 +78,32 @@ sources:
     - url: 'https://www.project-syndicate.org/rss'
       name: 'Project Syndicate'
       category: 'macro_economia'
-    - url: 'https://feeds.content.dowjones.io/public/rss/mw_realtimeheadlines'
-      name: 'MarketWatch Markets'
-      category: 'mercati'
-      tier: 2
+    - url: 'https://ideas.repec.org/s/nbr/nberwo.rss'
+      name: 'NBER (Working Papers)'
+      category: 'macro_economia'
+    - url: 'https://oecdecoscope.blog/feed/'
+      name: 'OECD (Ecoscope Macro)'
+      category: 'macro_economia'
+    - url: 'https://www.bruegel.org/rss.xml'
+      name: 'Bruegel'
+      category: 'macro_economia'
+    - url: 'https://www.piie.com/rss.xml'
+      name: 'PIIE'
+      category: 'macro_economia'
+    - url: 'https://carnegieendowment.org/rss/'
+      name: 'Carnegie Endowment'
+      category: 'geopolitica'
+    - url: 'https://asia.nikkei.com/rss/feed'
+      name: 'Nikkei Asia'
+      category: 'geopolitica'
+    - url: 'https://www.eia.gov/rss/'
+      name: 'US EIA (Energy)'
+      category: 'energia'
+    - url: 'https://rss.art19.com/the-insight'
+      name: 'Oaktree Capital (Memos)'
+      category: 'finanza'
 
-  # TIER 3 — Analisi Finanziaria (web_fetch periodico)
+  # TIER 3 — Analisi Finanziaria e Scraper
   tier3_webfetch:
     - url: 'https://www.blackrock.com/corporate/insights/blackrock-investment-institute'
       name: 'BlackRock Investment Institute'
@@ -96,24 +115,19 @@ sources:
       type: 'webfetch'
       category: 'finanza'
       frequency: 'weekly'
-
-  # TIER 4 — News Quotidiane
-  tier4:
-    - url: 'https://finance.yahoo.com/rss/topstories'
-      name: 'Yahoo Finance'
+    - url: 'https://www.pimco.com/us/en/insights'
+      name: 'PIMCO Insights'
+      type: 'scraper'
       category: 'finanza'
+
+  # TIER 4 — News Quotidiane Istituzionali
+  tier4:
     - url: 'https://www.theguardian.com/business/economics/rss'
       name: 'Guardian Economics'
       category: 'macro_economia'
     - url: 'https://oilprice.com/rss/main'
       name: 'OilPrice'
       category: 'energia'
-    - url: 'https://www.ansa.it/sito/notizie/economia/economia_rss.xml'
-      name: 'ANSA Economia'
-      category: 'finanza'
-    - url: 'https://www.corriere.it/rss/economia.xml'
-      name: 'Corriere Economia'
-      category: 'finanza'
     - url: 'https://www.fsb.org/feed'
       name: 'Financial Stability Board'
       category: 'finanza'

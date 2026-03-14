@@ -129,7 +129,10 @@ def briefing_to_html(briefing: dict) -> str:
                 lines.append(f'  📎 <a href="{url}">{escape_html(source)}</a>')
             lines.append('')
 
-    lines.append(f'🌐 <a href="https://vinciber.github.io/morning-briefing/{date}.html">Leggi tutto →</a>')
+    read_more_it = f'<a href="https://www.pricealertapp.app/morning-update/{date}.html">Leggi tutto →</a>'
+    read_more_en = f'<a href="https://www.pricealertapp.app/morning-update/en/{date}.html">Read more →</a>'
+    lines.append(f'🌐 {read_more_it}') # Assuming Italian is the primary language for this bot
+
     return '\n'.join(lines)
 
 

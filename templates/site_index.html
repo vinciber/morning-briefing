@@ -382,11 +382,11 @@
         {% endif %}
 
         <footer>
-            <p>Institutional Alpha. AI-Driven Curation. Zero Noise.</p>
+            <p>Price Alert&reg; - Morning Briefing Agent - All right Reserved</p>
             <p style="margin-top: 1.5rem;">
-                <a href="https://github.com/vinciber/morning-briefing">Source</a> · 
-                <a href="feed.xml">RSS</a> · 
-                <a href="api/today.json">JSON API</a>
+                <a href="{{ rss_url }}">RSS</a> · 
+                <a href="{{ api_url }}">JSON</a> ·
+                <a href="{{ index_url }}">{% if lang == 'it' %}Archivio{% else %}Archive{% endif %}</a>
             </p>
         </footer>
     </div>

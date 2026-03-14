@@ -214,7 +214,7 @@
     </div>
 
     {% for item in sec_items %}
-    <div class="card">
+    <div class="card" id="article-{{ loop.index0 }}-{{ section.name }}">
       <div class="card-meta">
         <span class="card-category cat-{{ item.get('category', 'mercati') }}">
           {{ item.get('display_category', item.get('category', '')) | replace('_',' ') }}
@@ -265,10 +265,12 @@
 </div>
 
 <footer class="footer">
-  Morning Briefing Agent ·
-  <a href="{{ rss_url }}">RSS</a> ·
-  <a href="https://github.com/vinciber/morning-briefing">GitHub</a> ·
-  <a href="{{ index_url }}">← Archivio</a>
+  <p>Price Alert&reg; - Morning Briefing Agent - All right Reserved</p>
+  <div style="margin-top: 10px;">
+    <a href="{{ rss_url }}">RSS</a> ·
+    <a href="{{ api_url }}">JSON</a> ·
+    <a href="{{ index_url }}">{% if lang == 'it' %}Archivio{% else %}Archive{% endif %}</a>
+  </div>
 </footer>
 </body>
 </html>
