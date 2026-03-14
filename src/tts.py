@@ -14,35 +14,122 @@ OUTPUT_DIR = ROOT / 'docs' / 'audio'
 MODEL_DIR = ROOT / 'models'
 
 def normalize_for_tts(text: str) -> str:
-    """Sostituzioni per una migliore pronuncia finanziaria in italiano."""
-    # Tronca decimali a 2 cifre: 27.1900 -> 27.19
+    """Normalizza testo per sintesi vocale naturale."""
+
+    # 1. ABBREVIAZIONI FINANZIARIE → forma parlata
+    abbreviations = {
+        'S&P 500':        "Standard and Poor's 500",
+        'S&P500':         "Standard and Poor's 500",
+        'S&P':            "Standard and Poor's",
+        'EUR/USD':        'cambio euro dollaro',
+        'EUR/GBP':        'cambio euro sterlina',
+        'USD/JPY':        'cambio dollaro yen',
+        'GBP/USD':        'cambio sterlina dollaro',
+        'VIX':            'indice Vix',
+        'DXY':            'indice del dollaro',
+        'TLT':            'ETF obbligazionario Treasury',
+        'BTP':            'BTP',
+        'BCE':            'Banca Centrale Europea',
+        'Fed':            'Federal Reserve',
+        'FOMC':           'Comitato della Federal Reserve',
+        'GDP':            'PIL',
+        'PCE':            'indice PCE',
+        'CPI':            'inflazione CPI',
+        'NFP':            'Non-Farm Payrolls',
+        'BOJ':            'Banca del Giappone',
+        'QE':             'quantitative easing',
+        'QT':             'quantitative tightening',
+        'ETF':            'ETF',
+        'STOXX 600':      'indice Stoxx seicento',
+        'STOXX600':       'indice Stoxx seicento',
+        'NIKKEI':         'indice Nikkei',
+        'BTC':            'Bitcoin',
+        'btc':            'Bitcoin',
+        'bps':            'punti base',
+        'bp':             'punti base',
+    }
+    for abbr, expanded in abbreviations.items():
+        text = text.replace(abbr, expanded)
+
+    # 2. SIMBOLI VALUTA → forma parlata
+    def replace_usd_thousands(m):
+        num_str = m.group(1).replace(',', '')
+        try:
+            val = float(num_str)
+            if val >= 1_000_000:
+                return f'{val/1_000_000:.1f} milioni di dollari'
+            elif val >= 1_000:
+                thousands = int(val // 1000)
+                remainder = int(val % 1000)
+                if remainder:
+                    return f'{thousands}mila {remainder} dollari'
+                else:
+                    return f'{thousands}mila dollari'
+            else:
+                return f'{val:.0f} dollari'
+        except Exception:
+            return m.group(0)
+
+    text = re.sub(r'\$([0-9,]+(?:\.[0-9]+)?)', replace_usd_thousands, text)
+    text = re.sub(r'€([0-9,.]+)', r'\1 euro', text)
+
+    # 3. PERCENTUALI CON SEGNO → forma parlata
+    def replace_pct_signed(m):
+        sign = m.group(1)
+        integer = m.group(2)
+        decimal = m.group(3)
+        sign_word = 'più ' if sign == '+' else 'meno ' if sign == '-' else ''
+        return f'{sign_word}{integer} virgola {decimal} percento'
+
+    text = re.sub(r'([+-])(\d+)\.(\d+)%', replace_pct_signed, text)
+
+    def replace_pct_unsigned(m):
+        integer = m.group(1)
+        decimal = m.group(2)
+        return f'{integer} virgola {decimal} percento'
+
+    text = re.sub(r'(\d+)\.(\d+)%', replace_pct_unsigned, text)
+
+    def replace_pct_int(m):
+        sign = m.group(1)
+        integer = m.group(2)
+        sign_word = 'più ' if sign == '+' else 'meno ' if sign == '-' else ''
+        return f'{sign_word}{integer} percento'
+
+    text = re.sub(r'([+-]?)(\d+)%', replace_pct_int, text)
+
+    # 4. NUMERI CON SEPARATORE MIGLIAIA → forma parlata
+    def replace_thousands(m):
+        num_str = m.group(0).replace(',', '')
+        try:
+            val = int(num_str)
+            if val >= 1_000_000:
+                return f'{val // 1_000_000} milioni'
+            elif val >= 1_000:
+                thousands = val // 1000
+                remainder = val % 1000
+                if remainder:
+                    return f'{thousands}mila {remainder}'
+                else:
+                    return f'{thousands}mila'
+            else:
+                return str(val)
+        except Exception:
+            return m.group(0)
+
+    text = re.sub(r'\b\d{1,3}(?:,\d{3})+\b', replace_thousands, text)
+
+    # 5. RENDIMENTI CON % ATTACCATA
+    text = re.sub(r'(\d+)\.(\d{2})\d*%', r'\1 virgola \2 percento', text)
+
+    # 6. TRONCA DECIMALI A 2 CIFRE
     text = re.sub(r'(\d+)\.(\d{2})\d+', r'\1.\2', text)
 
-    replacements = {
-        'VIX':    'Vix',
-        'S&P 500': 'S e P 500',
-        'S&P':    'S e P',
-        'DXY':    'D X Y',
-        'TLT':    'T L T',
-        'BTP':    'B T P',
-        'BCE':    'B C E',
-        'Fed':    'Fed',
-        'FOMC':   'F O M C',
-        'GDP':    'G D P',
-        'PIL':    'Pil',
-        'PCE':    'P C E',
-        'CPI':    'C P I',
-        'NFP':    'N F P',
-        'ETF':    'E T F',
-        'QE':     'Q E',
-        'QT':     'Q T',
-        '%':      ' percento',
-        '$':      ' dollari ',
-        '€':      ' euro ',
-    }
-    for k, v in replacements.items():
-        text = text.replace(k, v)
+    # 7. PUNTI DECIMALI RESIDUI → virgola per TTS italiano
+    text = re.sub(r'(\d+)\.(\d+)', r'\1 virgola \2', text)
+
     return text
+
 
 def briefing_to_text(briefing, lang='it'):
     """Recupera lo script audio pre-generato dall'AI."""

@@ -143,7 +143,7 @@ STRUTTURA OBBLIGATORIA (rispetta i tempi):
 2. MERCATI (250 parole): ogni asset con valore, variazione e implicazione macro
 3. GEOPOLITICA (150 parole): eventi e impatto diretto sui prezzi
 4. MACRO/BANCHE CENTRALI (150 parole): Fed, BCE, tassi, inflazione
-5. CHIUSURA FORWARD-LOOKING (100 parole): cosa monitorare domani
+5. CHIUSURA FORWARD-LOOKING (100 parole): cosa monitorare domani e sintesi finale
 
 CONTA LE PAROLE. Se sei sotto 800, espandi ogni sezione prima di rispondere."""
 
@@ -248,10 +248,8 @@ def run():
                     try:
                         release_dt = datetime.strptime(date, '%Y-%m-%d').replace(tzinfo=timezone.utc)
                         days_ago = (datetime.now(timezone.utc) - release_dt).days
-                        if days_ago <= 3:
+                        if days_ago <= 14:
                             freshness = f"rilasciato {days_ago} giorni fa ⚡ RECENTE"
-                        elif days_ago <= 14:
-                            freshness = f"rilasciato {days_ago} giorni fa"
                         else:
                             freshness = f"rilasciato il {date} ({days_ago} giorni fa — DATO NON RECENTE)"
                     except Exception:
@@ -398,8 +396,6 @@ Return JSON: {{"audio_script_en": "..."}}"""
             )
             retry_data = json.loads(retry_response.choices[0].message.content)
             briefing['audio_script_it'] = retry_data.get('audio_script_it', briefing['audio_script_it'])
-            # Se retry ha successo per IT, aggiorniamo anche EN per consistenza se possibile o lasciamo così
-            # Il prompt utente chiedeva di aggiornare entrambi
             briefing['audio_script_en'] = retry_data.get('audio_script_en', briefing['audio_script_en'])
             audio_words = len(briefing.get('audio_script_it', '').split())
             logger.info(f'🎙️ Audio dopo retry: {audio_words} parole {"✅" if audio_words >= 700 else "⚠️ ancora sotto"}')
