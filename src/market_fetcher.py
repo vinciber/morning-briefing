@@ -278,64 +278,74 @@ def get_macro_calendar() -> dict:
 
     return result
 
+def _format_market_value(val):
+    """Tronca decimali a 2 cifre per il risparmio nel JSON."""
+    if val == 'N/A' or not val: return val
+    val_str = str(val).replace(',', '')
+    if '.' in val_str:
+        try:
+            return re.sub(r'(\d+)\.(\d{2})\d+', r'\1.\2', val_str)
+        except: return val
+    return val
+
 def run():
     logger.info('📈 Recupero dati di mercato...')
     results = {}
 
     val, chg = get_yahoo_finance('DX-Y.NYB')
-    results['dxy'] = {'value': val, 'change': chg}
+    results['dxy'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'DXY: {val}')
 
     val, chg = get_yahoo_finance('EURUSD=X')
-    results['eur_usd'] = {'value': val, 'change': chg}
+    results['eur_usd'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'EUR/USD: {val}')
 
     val, chg = get_yahoo_finance('^GSPC')
-    results['sp500'] = {'value': val, 'change': chg}
+    results['sp500'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'S&P 500: {val}')
 
     val, chg = get_yahoo_finance('^VIX')
-    results['vix'] = {'value': val, 'change': chg}
+    results['vix'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'VIX: {val}')
 
     val, chg = get_yahoo_finance('TLT')
-    results['tlt'] = {'value': val, 'change': chg}
+    results['tlt'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'TLT: {val}')
 
     val, chg = get_yahoo_finance('^TNX')
-    results['us_10y'] = {'value': f'{val}%' if val != 'N/A' else 'N/A', 'change': chg}
+    results['us_10y'] = {'value': f'{_format_market_value(val)}%' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'US 10Y: {val}')
 
     val, chg = get_yahoo_finance('GC=F')
-    results['gold'] = {'value': f'${val}/oz' if val != 'N/A' else 'N/A', 'change': chg}
+    results['gold'] = {'value': f'${_format_market_value(val)}/oz' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'Gold: {val}')
 
     val, chg = get_yahoo_finance('BTC-USD')
-    results['btcusd'] = {'value': f'${val}' if val != 'N/A' else 'N/A', 'change': chg}
+    results['btcusd'] = {'value': f'${_format_market_value(val)}' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'BTC: {val}')
 
     val, chg = get_yahoo_finance('BZ=F')
-    results['oil_brent'] = {'value': f'${val}' if val != 'N/A' else 'N/A', 'change': chg}
+    results['oil_brent'] = {'value': f'${_format_market_value(val)}' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'Brent: {val}')
 
     val, chg = get_yahoo_finance('EXSA.DE')
-    results['stoxx_600'] = {'value': val, 'change': chg}
+    results['stoxx_600'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'STOXX 600: {val}')
 
     val, chg = get_yahoo_finance('^N225')
-    results['nikkei'] = {'value': val, 'change': chg}
+    results['nikkei'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'Nikkei: {val}')
 
     val, chg = get_yahoo_finance('000001.SS')
-    results['shanghai'] = {'value': val, 'change': chg}
+    results['shanghai'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'Shanghai: {val}')
 
     val, chg = get_stooq('10YITY.B')
-    results['btp_10y'] = {'value': f'{val}%' if val != 'N/A' else 'N/A', 'change': chg}
+    results['btp_10y'] = {'value': f'{_format_market_value(val)}%' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'BTP 10Y: {val}')
 
     val, chg = get_global_m2_proxy()
-    results['global_m2'] = {'value': val, 'change': chg}
+    results['global_m2'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'Global M2: {val} ({chg})')
 
     # Macro calendar
