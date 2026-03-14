@@ -24,6 +24,12 @@ import yaml
 from bs4 import BeautifulSoup
 
 # ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+feedparser.USER_AGENT = USER_AGENT
+
+# ---------------------------------------------------------------------------
 # Setup
 # ---------------------------------------------------------------------------
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -61,7 +67,6 @@ CATEGORY_CAPS = {
 }
 GLOBAL_CAP = 25
 
-USER_AGENT = 'MorningBriefingAgent/1.0'
 
 
 # ---------------------------------------------------------------------------
@@ -137,7 +142,7 @@ def _fetch_pimco(source: dict) -> list[dict]:
     name = source['name']
     
     try:
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        headers = {'User-Agent': USER_AGENT}
         resp = requests.get(url, headers=headers, timeout=15)
         resp.raise_for_status()
         
@@ -227,13 +232,18 @@ def fetch_rss_feed(source: dict, tier: int) -> list[dict]:
     name = source['name']
     category = source.get('category', 'finanza')
 
-    # Header speciale per Bruegel e altri che bloccano bot
-    custom_headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+    # Header più robusti per bypass blocchi (IMF, PIIE, etc.)
+    headers = {
+        'User-Agent': USER_AGENT,
+        'Accept': 'application/rss+xml, application/xml;q=0.9, */*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1',
+    }
     
     try:
-        # feedparser can take a request object or string. For custom headers we might need to fetch with requests first
-        # OR use the 'request_headers' param if supported by the version
-        resp = requests.get(url, headers=custom_headers, timeout=15)
+        # feedparser can take a request object or string. For custom headers we fetch with requests first
+        resp = requests.get(url, headers=headers, timeout=15)
         resp.raise_for_status()
         feed = feedparser.parse(resp.content)
         
