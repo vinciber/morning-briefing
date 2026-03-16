@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Briefing — 2026-03-16</title>
+<style>
+  :root {
+    --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;
+    --border:#30363d;--text:#e6edf3;--text-muted:#7d8590;
+    --green:#3fb950;--red:#f85149;--yellow:#d29922;
+    --blue:#58a6ff;--orange:#e3861a;
+    --risk-on-bg:#0d2b1a;--risk-off-bg:#2b0d0d;--neutral-bg:#1a1a2b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;line-height:1.6;}
+
+  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+  .header-left{display:flex;align-items:center;gap:16px;}
+  .header-title{font-size:18px;font-weight:700;letter-spacing:-0.3px;}
+  .header-date{color:var(--text-muted);font-size:13px;}
+  .lang-switch{display:flex;gap:8px;}
+  .lang-btn{padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);text-decoration:none;font-size:12px;}
+  .lang-btn.active{border-color:var(--blue);color:var(--blue);}
+
+  .ticker-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 24px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
+  .ticker-bar::-webkit-scrollbar{display:none;}
+  .ticker-items{display:inline-flex;gap:24px;}
+  .ticker-item{display:inline-flex;flex-direction:column;gap:1px;}
+  .ticker-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;}
+  .ticker-value{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;}
+  .ticker-change{font-size:11px;}
+  .up{color:var(--green);}.down{color:var(--red);}.neu{color:var(--text-muted);}
+
+  .container{max-width:900px;margin:0 auto;padding:24px 16px;}
+
+  .sentiment-card{border-radius:10px;border:1px solid var(--border);padding:20px 24px;margin-bottom:24px;}
+  .sentiment-card.risk_off{background:var(--risk-off-bg);border-color:#f8514940;}
+  .sentiment-card.risk_on{background:var(--risk-on-bg);border-color:#3fb95040;}
+  .sentiment-card.neutral{background:var(--neutral-bg);border-color:#58a6ff40;}
+  .sentiment-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .sentiment-badge{padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+  .risk_off .sentiment-badge{background:var(--red);color:white;}
+  .risk_on .sentiment-badge{background:var(--green);color:#0d1117;}
+  .neutral .sentiment-badge{background:var(--blue);color:#0d1117;}
+  .sentiment-score{color:var(--text-muted);font-size:12px;}
+  .sentiment-reason{color:var(--text);font-size:14px;line-height:1.7;}
+  .market-impact-summary{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);color:var(--text-muted);font-size:13px;line-height:1.7;}
+
+  .audio-section{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .audio-icon{font-size:24px;}
+  .audio-info{flex:1;}
+  .audio-title{font-size:13px;font-weight:600;margin-bottom:2px;}
+  .audio-sub{font-size:11px;color:var(--text-muted);}
+  audio{flex:2;height:36px;min-width:200px;}
+
+  .section{margin-bottom:32px;}
+  .section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .section-icon{font-size:18px;}
+  .section-title{font-size:16px;font-weight:700;}
+  .section-count{margin-left:auto;font-size:11px;color:var(--text-muted);background:var(--surface2);padding:2px 8px;border-radius:10px;}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px;margin-bottom:10px;transition:border-color 0.15s;}
+  .card:hover{border-color:#58a6ff60;}
+  .card-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+  .card-category{font-size:10px;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;}
+  .cat-mercati{background:#1a2b4a;color:var(--blue);}
+  .cat-geopolitica{background:#2b1a1a;color:var(--red);}
+  .cat-macro_economia{background:#1a2b1a;color:var(--green);}
+  .cat-energia{background:#2b2210;color:var(--orange);}
+  .impact-badge{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;}
+  .impact-bearish{background:#2b1a1a;color:var(--red);}
+  .impact-bullish{background:#1a2b1a;color:var(--green);}
+  .impact-mixed{background:#2b2210;color:var(--yellow);}
+  .tier-badge{font-size:10px;color:var(--text-muted);margin-left:auto;}
+  .tier-1{color:#d29922;}.tier-2{color:#7d8590;}
+  .stars{font-size:11px;color:var(--yellow);}
+  .card-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:8px;}
+  .card-summary{font-size:13px;color:#b1bac4;line-height:1.7;margin-bottom:10px;}
+  .card-assets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+  .asset-tag{font-size:11px;background:var(--surface2);border:1px solid var(--border);padding:2px 8px;border-radius:4px;color:var(--text-muted);font-family:monospace;}
+  .card-footer{display:flex;align-items:center;justify-content:space-between;}
+  .source-link{font-size:12px;color:var(--blue);text-decoration:none;}
+  .source-link:hover{text-decoration:underline;}
+
+  .footer{text-align:center;padding:32px 16px;color:var(--text-muted);font-size:12px;border-top:1px solid var(--border);margin-top:40px;}
+  .footer a{color:var(--blue);text-decoration:none;}
+
+  @media(max-width:600px){
+    .header{padding:12px 16px;}
+    .container{padding:16px 12px;}
+    audio{width:100%;}
+  }
+  .macro-calendar{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:24px;}
+  .macro-title{font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;}
+  .macro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}
+  .macro-item{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+  .macro-item.upcoming{border-color:#d2992240;opacity:0.8;}
+  .macro-item.released{border-color:#3fb95040;}
+  .macro-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px;}
+  .macro-value{font-size:16px;font-weight:700;color:var(--text);}
+  .macro-value.upcoming-val{color:var(--text-muted);}
+  .macro-prev{font-size:11px;color:var(--text-muted);}
+  .macro-date{font-size:10px;color:var(--text-muted);margin-top:4px;}
+  .stars{font-size:11px;color:var(--yellow);letter-spacing:1px;}
+  
+  .tier-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--text-muted);}
+  .tier-legend span{display:flex;align-items:center;gap:4px;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <span class="header-title">📰 Morning Briefing</span>
+    <span class="header-date">2026-03-16 · Finance & Geopolitics</span>
+  </div>
+  <div class="lang-switch">
+    <a href="2026-03-16.html" class="lang-btn active">🇮🇹 IT</a>
+    <a href="en/2026-03-16.html" class="lang-btn ">🇬🇧 EN</a>
+  </div>
+</header>
+
+<div class="ticker-bar">
+  <div class="ticker-items">
+    
+    <div class="ticker-item">
+      <span class="ticker-label">EUR/USD</span>
+      <span class="ticker-value down">1.1438</span>
+      <span class="ticker-change down">-0.73%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">DXY</span>
+      <span class="ticker-value down">100.29</span>
+      <span class="ticker-change down">-0.07%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">S&P 500</span>
+      <span class="ticker-value down">6632.19</span>
+      <span class="ticker-change down">-0.61%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">STOXX 600</span>
+      <span class="ticker-value down">59.1300</span>
+      <span class="ticker-change down">-0.55%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">NIKKEI</span>
+      <span class="ticker-value down">53,709</span>
+      <span class="ticker-change down">-0.21%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">SHANGHAI</span>
+      <span class="ticker-value down">4073.32</span>
+      <span class="ticker-change down">-0.54%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">VIX</span>
+      <span class="ticker-value down">27.1900</span>
+      <span class="ticker-change down">-0.37%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">TLT</span>
+      <span class="ticker-value down">86.5400</span>
+      <span class="ticker-change down">-0.49%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">GOLD</span>
+      <span class="ticker-value down">$5025.90/oz</span>
+      <span class="ticker-change down">-0.53%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">BTC</span>
+      <span class="ticker-value up">$73,730</span>
+      <span class="ticker-change up">+3.53%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">BRENT</span>
+      <span class="ticker-value down">$99.6000</span>
+      <span class="ticker-change down">-3.43%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">BTP 10Y</span>
+      <span class="ticker-value up">3.7930%</span>
+      <span class="ticker-change up">+1.07%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">US 10Y</span>
+      <span class="ticker-value up">4.2850%</span>
+      <span class="ticker-change up">+0.28%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">M2 GLOBAL</span>
+      <span class="ticker-value up">$22.4T</span>
+      <span class="ticker-change up">expanding 📈 | US YoY: +4.3% YoY</span>
+    </div>
+    
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="sentiment-card risk_off">
+    <div class="sentiment-header">
+      <span class="sentiment-badge">
+        🔴 RISK OFF
+        
+      </span>
+      
+      <span class="sentiment-score">Intensità: 7/10</span>
+      
+    </div>
+    <div class="sentiment-reason">Il sentiment di mercato è risk-off a causa della escalation delle tensioni geopolitiche in Medio Oriente. Il VIX è sopra 27, il DXY è stabile intorno a 100.29 e il prezzo del petrolio è sceso del 3.43% a $99.60. La Fed e altre banche centrali stanno monitorando la situazione.</div>
+    
+    <div class="market-impact-summary">
+      📊 Il mercato azionario è in calo: S&P 500 -0.61%, STOXX 600 -0.55%, NIKKEI -0.21%. Il mercato obbligazionario è in tensione: TLT -0.49%, US 10Y Yield +0.28%. Il prezzo dell'oro è in calo del 0.53% a $5025.90. Il mercato valutario è stabile: EUR/USD 1.14.
+    </div>
+    
+  </div>
+  
+  
+  <div class="macro-calendar">
+    <div class="macro-title">📊 Macro Calendar USA</div>
+    <div class="macro-grid">
+      
+      <div class="macro-item released">
+        <div class="macro-label">CPI YoY USA</div>
+        
+          <div class="macro-value">2.7%</div>
+          <div class="macro-prev">prec. 2.8%</div>
+          <div class="macro-date">2026-02-01</div>
+        
+      </div>
+      
+      <div class="macro-item released">
+        <div class="macro-label">Core CPI YoY USA</div>
+        
+          <div class="macro-value">2.7%</div>
+          <div class="macro-prev">prec. 2.9%</div>
+          <div class="macro-date">2026-02-01</div>
+        
+      </div>
+      
+      <div class="macro-item released">
+        <div class="macro-label">Non-Farm Payrolls</div>
+        
+          <div class="macro-value">-92K</div>
+          <div class="macro-prev">prec. +126K</div>
+          <div class="macro-date">2026-02-01</div>
+        
+      </div>
+      
+      <div class="macro-item released">
+        <div class="macro-label">Unemployment Rate USA</div>
+        
+          <div class="macro-value">4.4%</div>
+          <div class="macro-prev">prec. 4.3%</div>
+          <div class="macro-date">2026-02-01</div>
+        
+      </div>
+      
+      <div class="macro-item upcoming">
+        <div class="macro-label">PCE Core YoY</div>
+        
+          <div class="macro-value upcoming-val">—</div>
+          <div class="macro-date">📅 2026-03-28</div>
+        
+      </div>
+      
+      <div class="macro-item released">
+        <div class="macro-label">Fed Funds Rate</div>
+        
+          <div class="macro-value">3.64%</div>
+          <div class="macro-prev">prec. 3.64%</div>
+          <div class="macro-date">2026-02-01</div>
+        
+      </div>
+      
+      <div class="macro-item upcoming">
+        <div class="macro-label">GDP QoQ USA</div>
+        
+          <div class="macro-value upcoming-val">—</div>
+          <div class="macro-date">📅 2026-04-29</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+
+  
+  <div class="audio-section">
+    <span class="audio-icon">🎙️</span>
+    <div class="audio-info">
+      <div class="audio-title">Briefing Audio</div>
+      <div class="audio-sub">
+        Ascolta il briefing completo
+      </div>
+    </div>
+    <audio controls preload="none">
+      <source src="audio/briefing_20260316.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+  
+
+  
+  
+  
+
+  <div class="tier-legend">
+    <strong style="color:var(--text);margin-right:4px;">Fonti:</strong>
+    <span><strong style="color:#d29922">T1</strong> Banca Centrale / Istituzione</span>
+    <span><strong style="color:#7d8590">T2</strong> Media finanziaria primaria</span>
+    <span><strong style="color:#555">T3</strong> Digital / Blog</span>
+  </div>
+
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">💹</span>
+      <span class="section-title">
+        Mercati
+      </span>
+      <span class="section-count">1 notizie</span>
+    </div>
+
+    
+    <div class="card" id="article-0-mercati">
+      <div class="card-meta">
+        <span class="card-category cat-mercati">
+          mercati
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★☆☆☆</span>
+        
+        <span class="tier-badge tier-3">T3</span>
+        
+      </div>
+
+      <div class="card-title">
+        ExchangesOil Market Impacts from IranPodcast|Mar 2, 2026
+      </div>
+      <div class="card-summary">
+        
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.goldmansachs.com/insights/goldman-sachs-exchanges/oil-market-impacts-from-iran" target="_blank" class="source-link">
+          Goldman Sachs Insights →
+        </a>
+      </div>
+    </div>
+    
+
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🌍</span>
+      <span class="section-title">
+        Geopolitica
+      </span>
+      <span class="section-count">6 notizie</span>
+    </div>
+
+    
+    <div class="card" id="article-0-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          geopolitica
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        Cold Hard Truths: Arctic Security in a Changing World
+      </div>
+      <div class="card-summary">
+        This week on War & Peace, Olga speaks with Gabriella Gricius, Senior Fellow at the Arctic Institute, to discuss Arctic security, Donald Trump’s ambitions to acquire Greenland, Russia’s and China’s interests in the High North, and how NATO and European capitals are responding.
+      </div>
+
+      
+      <div class="card-assets">
+        
+        <span class="asset-tag">Gold</span>
+        
+      </div>
+      
+
+      <div class="card-footer">
+        <a href="https://www.crisisgroup.org/pod/europe-central-asia/cold-hard-truths-arctic-security-changing-world" target="_blank" class="source-link">
+          International Crisis Group →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-1-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          geopolitica
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        Conflict and Consequences: The Global Impact of the New Middle East War
+      </div>
+      <div class="card-summary">
+        The U.S.-Israeli war with Iran is entering its third week, with no end yet in sight. Crisis Group experts offer a 360-degree view of its effects on peace, security and economic stability around the world.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.crisisgroup.org/cmt/middle-east-north-africa/iran-israelpalestine-united-states-global/conflict-and-consequences-global-impact-new-middle-east-war" target="_blank" class="source-link">
+          International Crisis Group →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-2-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          geopolitica
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        Japanese Leader Wrestles with Middle East Shock in Planned Trip to Washington
+      </div>
+      <div class="card-summary">
+        Crisis Group expert Matt Wheeler assesses the importance of Sanae Takaichi’s forthcoming visit to the White House, amid war, tensions with China and U.S. policy shifts
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.crisisgroup.org/anb/asia-pacific/japan-china-united-states/japanese-leader-wrestles-middle-east-shock-planned-trip-washington" target="_blank" class="source-link">
+          International Crisis Group →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-3-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          geopolitica
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★☆☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        Escalation or off-Ramp in the Gulf? And What Hope for a Ceasefire in Lebanon?
+      </div>
+      <div class="card-summary">
+        This week on Hold Your Fire!, Richard speaks with Crisis Group’s former President Robert Malley about the U.S.-Israeli war on Iran, whether U.S. President Donald Trump will escalate or seek an off-ramp and what Iran might do. He also talks to Crisis Group’s Lebanon expert David Wood about the latest Israel-Hezbollah war.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.crisisgroup.org/pod/middle-east-north-africa/iran/escalation-or-ramp-gulf-and-what-hope-ceasefire-lebanon" target="_blank" class="source-link">
+          International Crisis Group →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-4-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          geopolitica
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★☆☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        Sudan’s devastating war rages on as regional rivalries deepen
+      </div>
+      <div class="card-summary">
+        Yet the Iran crisis may push Gulf rivals to set aside their differences and revive stalled diplomacy on Sudan.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.crisisgroup.org/opd/africa/sudan/sudans-devastating-war-rages-regional-rivalries-deepen" target="_blank" class="source-link">
+          International Crisis Group →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-5-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          geopolitica
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★☆☆☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        China retail sales rise, boosted by Lunar New Year holiday
+      </div>
+      <div class="card-summary">
+        China retail sales rise, boosted by Lunar New Year holiday
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://asia.nikkei.com/economy/china-retail-sales-rise-boosted-by-lunar-new-year-holiday" target="_blank" class="source-link">
+          Nikkei Asia →
+        </a>
+      </div>
+    </div>
+    
+
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🏛</span>
+      <span class="section-title">
+        Macro_economia
+      </span>
+      <span class="section-count">6 notizie</span>
+    </div>
+
+    
+    <div class="card" id="article-0-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          macro economia
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        FirstFT: Trump warns European allies on Nato over Hormuz plea
+      </div>
+      <div class="card-summary">
+        Also in today’s newsletter: global inflation fears and French local elections
+      </div>
+
+      
+      <div class="card-assets">
+        
+        <span class="asset-tag">S&P 500</span>
+        
+        <span class="asset-tag">Brent</span>
+        
+      </div>
+      
+
+      <div class="card-footer">
+        <a href="https://www.ft.com/content/3d92284c-874e-42ce-8049-6b18e20eeb9c" target="_blank" class="source-link">
+          Financial Times (Global Economy) →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-1-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          macro economia
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        Iran war reawakens global inflation fears
+      </div>
+      <div class="card-summary">
+        The Federal Reserve, ECB and Bank of England will this week deliver their first formal verdicts on the threat posed by the conflict
+      </div>
+
+      
+      <div class="card-assets">
+        
+        <span class="asset-tag">S&P 500</span>
+        
+        <span class="asset-tag">Brent</span>
+        
+      </div>
+      
+
+      <div class="card-footer">
+        <a href="https://www.ft.com/content/d4f1c4a8-ed5f-4f2a-8b70-436b93f9052b" target="_blank" class="source-link">
+          Financial Times (Global Economy) →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-2-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          macro economia
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        China’s economy rebounded ahead of Iran crisis
+      </div>
+      <div class="card-summary">
+        Beijing warns of geopolitical risks even as key indicators show growth
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.ft.com/content/660df1e6-0ab4-47ac-9c2f-dd0ed659b647" target="_blank" class="source-link">
+          Financial Times (Global Economy) →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-3-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          macro economia
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        Central bank guidance in focus as big four set rates for first time since Iran war
+      </div>
+      <div class="card-summary">
+        Plus, Nvidia talks AI chips, Rachel Reeves makes a pitch for closer EU ties and Japan’s prime minister heads to Washington
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.ft.com/content/837eb0dd-b75e-4f77-9382-3c909d9265bf" target="_blank" class="source-link">
+          Financial Times (Global Economy) →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-4-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          macro economia
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        Trump warns Nato faces ‘very bad future’ if allies fail to help US in Iran
+      </div>
+      <div class="card-summary">
+        US president tells the FT in an interview that China summit could be delayed
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.ft.com/content/1ca6d121-760b-4ec5-b6ad-514fdaa94873" target="_blank" class="source-link">
+          Financial Times (Global Economy) →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-5-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          macro economia
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        Starmer to set out £50mn energy support package to ease Iran war fallout
+      </div>
+      <div class="card-summary">
+        Prime minister will promise to crack down on price gouging as global oil disruption fuels inflation fears
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.ft.com/content/603847c6-d9ad-431f-afd5-a23e0a1e5a1a" target="_blank" class="source-link">
+          Financial Times (Global Economy) →
+        </a>
+      </div>
+    </div>
+    
+
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">⚡</span>
+      <span class="section-title">
+        Energia
+      </span>
+      <span class="section-count">5 notizie</span>
+    </div>
+
+    
+    <div class="card" id="article-0-energia">
+      <div class="card-meta">
+        <span class="card-category cat-energia">
+          energia
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Middle East Crisis Could Triple Pakistan’s Oil Import Bill
+      </div>
+      <div class="card-summary">
+        Previously, we reported that Pakistan could find itself sucked into the Middle East war thanks to the Strategic Mutual Defence Agreement (SMDA) it signed with Saudi Arabia in September 2025. The core of the agreement states that any aggression against one country is considered an aggression against both, potentially requiring Pakistan to intervene against Iran’s missile strikes on Saudi Arabia. However, military confrontation with its southerly neighbor might turn out to be a less existential threat for Pakistan. Surging oil prices are already…
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://oilprice.com/Energy/Crude-Oil/Middle-East-Crisis-Could-Triple-Pakistans-Oil-Import-Bill.html" target="_blank" class="source-link">
+          OilPrice →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-1-energia">
+      <div class="card-meta">
+        <span class="card-category cat-energia">
+          energia
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        How the Iran War Could Reshape Global Energy Policy
+      </div>
+      <div class="card-summary">
+        The U.S.-Israeli attack on Iran and the ongoing conflict in the Middle East have caused the biggest oil disruption in history. The closure of a major transit route between Asia and Europe, as well as restrictions on fossil fuel production in the region, have driven oil and gas prices up, a trend that is set to continue. So, as governments are facing rising consumer energy bills once again, will it be enough to encourage a Covid-era pivot to renewable energy? The U.S. war against Iran has caused the largest oil disruption in history, according to…
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://oilprice.com/Energy/Energy-General/How-the-Iran-War-Could-Reshape-Global-Energy-Policy.html" target="_blank" class="source-link">
+          OilPrice →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-2-energia">
+      <div class="card-meta">
+        <span class="card-category cat-energia">
+          energia
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Jet Fuel Prices Soar as War in Iran Ripples Through Global Aviation
+      </div>
+      <div class="card-summary">
+        As the war in Iran spills over into other parts of the Middle East, energy experts expect the price of several oil and gas products to soar over the coming months, driven by shortages. This will likely affect flight prices, with several airlines warning of anticipated price hikes. It could lead to a travel slump, as consumers wait for prices to fall again. Australia’s Qantas Airways, Scandinavia’s SAS, and Air New Zealand are three of the airlines to have already announced airfare hikes in response to the ongoing conflict in the Middle…
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://oilprice.com/Energy/Energy-General/Jet-Fuel-Prices-Soar-as-War-in-Iran-Ripples-Through-Global-Aviation.html" target="_blank" class="source-link">
+          OilPrice →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-3-energia">
+      <div class="card-meta">
+        <span class="card-category cat-energia">
+          energia
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★☆☆</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Oil Prices Remain Volatile as Hormuz Tensions Rise
+      </div>
+      <div class="card-summary">
+        Oil markets remained volatile in early Asian trade on Monday as Trump attempts to form a broader coalition of countries to protect shipping through the Strait of Hormuz amid fresh attacks on energy infrastructure across the Middle East. At the time of writing, West Texas Intermediate had dipped 0.53% to $98.19 after an initial surge, while Brent was continuing its climb, rising 0.41% to $103.60 per barrel. The volatility follows a weekend of escalation in the Middle East conflict, beginning on Friday evening when the U.S. bombed military assets…
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Remain-Volatile-as-Hormuz-Tensions-Rise.html" target="_blank" class="source-link">
+          OilPrice →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-4-energia">
+      <div class="card-meta">
+        <span class="card-category cat-energia">
+          energia
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★☆☆☆</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Asia’s LNG Lifeline Takes a Hit
+      </div>
+      <div class="card-summary">
+        Asia is the biggest market for liquefied natural gas. Asia is also the destination of up to 90% of Qatari and Emirati LNG—or was, until this month. With the shutdown of Qatar’s Ras Laffan LNG complex and the Strait of Hormuz traffic disruption, Asia is facing a lot of energy supply pain. QatarEnergy announced a complete halt to LNG production after Iranian drone strikes hit facilities at Ras Laffan Industrial City and Mesaieed Industrial City on March 2. A force majeure declaration followed on QatarEnergy exports. The move started a…
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://oilprice.com/Energy/Crude-Oil/Asias-LNG-Lifeline-Takes-a-Hit.html" target="_blank" class="source-link">
+          OilPrice →
+        </a>
+      </div>
+    </div>
+    
+
+  </div>
+  
+  
+
+</div>
+
+<footer class="footer">
+  <p>Price Alert&reg; - Morning Briefing Agent - All right Reserved</p>
+  <div style="margin-top: 10px;">
+    <a href="feed.xml">RSS</a> ·
+    <a href="api/today.json">JSON</a> ·
+    <a href="index.html">Archivio</a>
+  </div>
+</footer>
+</body>
+</html>
