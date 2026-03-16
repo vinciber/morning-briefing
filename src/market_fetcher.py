@@ -278,6 +278,122 @@ def get_macro_calendar() -> dict:
 
     return result
 
+def get_macro_calendar_eu() -> dict:
+    """
+    Scarica dati macro Eurozona via FRED API + ECB Data Portal.
+    """
+    FRED_API_KEY = os.environ.get('FRED_API_KEY', '')
+    
+    NEXT_RELEASE_EU = {
+        'ecb_rate':        '2026-04-17',  # Prossima riunione BCE
+        'cpi_eu':          '2026-04-02',  # Flash CPI Eurozona
+        'gdp_eu':          '2026-04-30',  # PIL Eurozona 1° stima
+        'unemployment_eu': '2026-04-01',  # Disoccupazione Eurozona
+        'pmi_composite':   '2026-04-23',  # PMI Composito flash
+        'ppi_eu':          '2026-04-03',  # PPI Eurozona
+    }
+
+    result = {}
+    cutoff = datetime.now(timezone.utc) - timedelta(days=180)
+
+    # Serie FRED per dati europei (Eurostat source - Changing Composition Area)
+    # Usiamo 'units' della FRED API per le variazioni, se supportate
+    FRED_SERIES_EU = {
+        'cpi_eu':          ('CP0000EZCCM086NEST',  'CPI YoY Eurozona',     1, '%', 'pc1'), 
+        'gdp_eu':          ('CLVMNACSCAB1GQEA',    'PIL QoQ Eurozona',     1, '%', 'lin'), 
+        'unemployment_eu': ('LRHUTTTTEZM156S',     'Disoccupazione EU',    1, '%', 'lin'), 
+        'ecb_rate':        ('ECBDFR',              'Tasso BCE',            2, '%', 'lin'),
+    }
+
+    if FRED_API_KEY:
+        BASE = 'https://api.stlouisfed.org/fred/series/observations'
+        for key, (series_id, label, decimals, unit, transform) in FRED_SERIES_EU.items():
+            try:
+                params = {
+                    'series_id':        series_id,
+                    'api_key':          FRED_API_KEY,
+                    'file_type':        'json',
+                    'sort_order':       'desc',
+                    'limit':            2,
+                }
+                # Applichiamo transform solo se esplicitamente richiesto e non è 'lin'
+                if transform != 'lin':
+                    params['units'] = transform
+
+                r = requests.get(BASE, params=params, timeout=15)
+                r.raise_for_status()
+                obs = r.json().get('observations', [])
+
+                if not obs or obs[0].get('value') == '.':
+                    raise ValueError('Nessun dato')
+
+                latest  = obs[0]
+                previous = obs[1] if len(obs) > 1 else None
+                val_raw  = latest.get('value', '.')
+                prev_raw = previous.get('value', '.') if previous else '.'
+                date_str = latest.get('date', '')
+
+                try:
+                    obs_dt   = datetime.strptime(date_str, '%Y-%m-%d').replace(tzinfo=timezone.utc)
+                    is_recent = obs_dt >= cutoff
+                except Exception:
+                    is_recent = False
+                
+                if not is_recent or val_raw == '.':
+                    msg = f"Dato non recente ({date_str})" if val_raw != '.' else "Nessun dato"
+                    logger.warning(f'⚠️ EU {label}: {msg} -> segnato come upcoming')
+                    result[key] = {
+                        'label':        label,
+                        'value':        None,
+                        'unit':         unit,
+                        'status':       'upcoming',
+                        'next_release': NEXT_RELEASE_EU.get(key, 'N/A'),
+                        'region':       'EU',
+                    }
+                    continue
+
+                val_f  = float(val_raw)
+                prev_f = float(prev_raw) if prev_raw != '.' else None
+                
+                # Calcolo manuale se abbiamo ricevuto index/livelli (es. > 20) invece di %
+                # Questo serve se FRED respinge 'pcq' o se 'lin' restituisce un indice
+                if val_f > 20 and prev_f:
+                    val = ((val_f - prev_f) / prev_f) * 100
+                    # Troviamo un "previous" approssimativo (non perfetto ma utile per UI)
+                    prev = None 
+                else:
+                    val  = val_f
+                    prev = prev_f
+
+                val_fmt  = f'{val:.{decimals}f}{unit}'
+                prev_fmt = f'{prev:.{decimals}f}{unit}' if prev is not None else 'N/A'
+
+                result[key] = {
+                    'label':        label,
+                    'value':        val_fmt,
+                    'previous':     prev_fmt,
+                    'release_date': date_str,
+                    'status':       'released',
+                    'next_release': NEXT_RELEASE_EU.get(key, 'N/A'),
+                    'region':       'EU',
+                }
+                logger.info(f'✅ EU {label}: {val_fmt} ({date_str})')
+
+            except Exception as e:
+                logger.error(f'✗ FRED EU {key}: {e}')
+                result[key] = {
+                    'label':        label,
+                    'value':        None,
+                    'unit':         unit,
+                    'status':       'upcoming',
+                    'next_release': NEXT_RELEASE_EU.get(key, 'N/A'),
+                    'region':       'EU',
+                }
+
+    # Il portale ECB Data Portal è instabile o richiede registrazione per molti dati (es. PMI)
+    # Per ora ci affidiamo esclusivamente a FRED che è più affidabile.
+    return result
+
 def _format_market_value(val):
     """Tronca decimali a 2 cifre per il risparmio nel JSON."""
     if val == 'N/A' or not val: return val
@@ -351,6 +467,8 @@ def run():
     # Macro calendar
     logger.info('📅 Fetching macro calendar...')
     results['macro_calendar'] = get_macro_calendar()
+    results['macro_calendar_eu'] = get_macro_calendar_eu()
+    logger.info(f'🇪🇺 Macro EU: {len(results["macro_calendar_eu"])} indicatori')
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:

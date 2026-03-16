@@ -367,6 +367,27 @@ def run():
                     next_rel = item.get('next_release', 'N/A')
                     lines.append(f"  {label}: NON ANCORA RILASCIATO — prossima uscita {next_rel}")
 
+        # Aggiungi macro EU
+        macro_eu = md.get('macro_calendar_eu', {})
+        if macro_eu:
+            lines.append('\nDATI MACRO EUROZONA:')
+            for key, item in macro_eu.items():
+                label = item.get('label', key)
+                if item.get('status') == 'released':
+                    val  = _format_value(item.get('value', 'N/A'))
+                    prev = _format_value(item.get('previous', 'N/A'))
+                    date = item.get('release_date', '')
+                    try:
+                        release_dt = datetime.strptime(date, '%Y-%m-%d').replace(tzinfo=timezone.utc)
+                        days_ago   = (datetime.now(timezone.utc) - release_dt).days
+                        freshness  = f"rilasciato il {date} ({days_ago}gg fa — DATO NON RECENTE)" \
+                                     if days_ago > 14 else f"rilasciato {days_ago}gg fa ⚡ RECENTE"
+                    except Exception:
+                        freshness = f"rilasciato {date}"
+                    lines.append(f"  {label}: {val} (prec. {prev}) — {freshness}")
+                elif item.get('status') == 'upcoming':
+                    lines.append(f"  {label}: NON RILASCIATO — prossima uscita {item.get('next_release')}")
+
         market_context = "DATI DI MERCATO ATTUALI:\n" + "\n".join(lines) + "\n\n"
 
     # Carica history — solo titoli per non sprecare token
