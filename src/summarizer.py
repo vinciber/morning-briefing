@@ -155,6 +155,12 @@ VIETATO ASSOLUTO:
   "il mercato è estremamente volatile" — se non supportate da dato specifico
 - Finali tipo "That's all for today", "arrivederci", "Stay tuned", "We'll be back"
 - Chiudere con un riassunto di quanto già detto — la chiusura deve guardare avanti
+- MAI scrivere l'acronimo accanto al nome esteso: 
+  NON "l'indice del dollaro (DXY)" o "l'indice del dollaro, noto come DXY"
+  SÌ "l'indice del dollaro" — senza acronimo
+  NON "la Federal Reserve (Fed)"
+  SÌ "la Federal Reserve" — senza acronimo tra parentesi
+  Regola generale: se usi il nome esteso, NON aggiungere mai l'acronimo
 
 PRONUNCIA ASSET — scrivi sempre la forma estesa, mai l'acronimo:
 - S&P 500 → "lo Standard and Poor's 500"
@@ -217,6 +223,12 @@ ABSOLUTELY FORBIDDEN:
 - Repeating the same concept more than once
 - Generic phrases like "it will be important to monitor" without specific data
 - Endings like "That's all for today", "Stay tuned", "We'll be back"
+- NEVER write the acronym next to the full name:
+  NON "the dollar index (DXY)" or "the dollar index, known as DXY"
+  YES "the dollar index" — without acronym
+  NON "the Federal Reserve (Fed)"
+  YES "the Federal Reserve" — without parenthetical acronym
+  General rule: if you use the full name, NEVER add the acronym
 
 ASSET PRONUNCIATION — always use full form:
 - S&P 500 → "the Standard and Poor's 500"

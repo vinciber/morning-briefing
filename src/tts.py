@@ -16,24 +16,17 @@ MODEL_DIR = ROOT / 'models'
 def normalize_for_tts(text: str) -> str:
     """Normalizza testo per sintesi vocale naturale italiana."""
 
-    # 0. RIMUOVI ACRONIMI TRA PARENTESI — evita doppioni
-    # "cambio euro-dollaro (EUR/USD)" → "cambio euro-dollaro"
-    # "Federal Reserve (Fed)" → "Federal Reserve"
-    # "indice Vix (VIX)" → "indice Vix"
+    # 0. RIMUOVI ACRONIMI TRA PARENTESI E VARIANTI — evita doppioni
     parenthetical_acronyms = [
-        'EUR/USD', 'USD/JPY', 'GBP/USD', 'EUR/GBP',
-        'S&P 500', 'S&P500', 'S&P',
-        'VIX', 'DXY', 'TLT', 'BTP', 'BCE', 'Fed',
-        'FOMC', 'BOJ', 'GDP', 'PCE', 'CPI', 'NFP',
-        'QE', 'QT', 'BTC', 'ETF',
-        'STOXX 600', 'STOXX600', 'NIKKEI',
+        'EUR/USD', 'DXY', 'VIX', 'TLT', 'BTP', 'BCE', 'Fed',
+        'FOMC', 'BOJ', 'GDP', 'PCE', 'CPI', 'NFP', 'BTC', 'S&P 500', 'S&P',
+        'STOXX 600', 'NIKKEI', 'QE', 'QT', 'ETF',
     ]
     for acronym in parenthetical_acronyms:
-        text = re.sub(
-            r'\s*\(\s*' + re.escape(acronym) + r'\s*\)',
-            '',
-            text
-        )
+        # Rimuove (ACRONIMO)
+        text = re.sub(r'\s*\(\s*' + re.escape(acronym) + r'\s*\)', '', text)
+        # Rimuove "noto come ACRONIMO", "conosciuto come ACRONIMO", ecc.
+        text = re.sub(r',?\s*(noto come|conosciuto come|detto|chiamato)\s+' + re.escape(acronym), '', text, flags=re.IGNORECASE)
 
     # 1. PREZZI CON DOLLARO + MIGLIAIA → forma parlata PRIMA di tutto
     # $70,646 → "settantamila 646 dollari"
