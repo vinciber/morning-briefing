@@ -390,54 +390,82 @@ def normalize_category(cat):
     return CATEGORY_REMAP.get(cat, cat)
 
 def smart_select(articles):
-    # PASSAGGIO 1 — score composito
-    for art in articles:
-        tier = art.get('tier', 4)
-        relevance = art.get('relevance_score', 1)
-        tier_w = TIER_SCORE.get(tier, 0.2)
-        art['_score'] = (tier_w * 0.6) + ((relevance / 5) * 0.4)
+    
+    is_monday = datetime.now(timezone.utc).weekday() == 0
 
-    articles = sorted(articles, key=lambda x: x['_score'], reverse=True)
-
-    # PASSAGGIO 2 — deduplicazione semantica titoli >70% simili
-    deduplicated = []
-    score_1_count = 0
-    for candidate in articles:
-        # Cap max 3 articoli con score 1.0 (Problem 2)
-        if candidate.get('relevance_score', 0) >= 1.0:
-            if score_1_count >= 3:
-                candidate['relevance_score'] = 0.9
+    # PASSAGGIO 0 — Proteggi report settimanali il lunedì
+    # Questi articoli bypassano i cap di categoria ma restano nel conteggio globale
+    weekly_sources = ['BlackRock Investment Institute', 'Goldman Sachs Insights']
+    weekly_protected = []
+    regular_articles = []
+    
+    if is_monday:
+        for art in articles:
+            if art.get('source') in weekly_sources:
+                weekly_protected.append(art)
             else:
-                score_1_count += 1
+                regular_articles.append(art)
+        logger.info(f'📅 Lunedì: {len(weekly_protected)} articoli settimanali protetti '
+                    f'(BlackRock: {sum(1 for a in weekly_protected if "BlackRock" in a.get("source",""))}, '
+                    f'Goldman: {sum(1 for a in weekly_protected if "Goldman" in a.get("source",""))})')
+    else:
+        regular_articles = articles
 
-        title_c = candidate.get('title', '') or candidate.get('title_it', '')
+    # PASSAGGIO 1 — score composito (solo articoli regolari)
+    for art in regular_articles:
+        tier = art.get('tier', 4)
+        relevance = art.get('relevance_score', 0)
+        tier_w = TIER_SCORE.get(tier, 0.2)
+        # relevance / 5 was in previous version, the user prompt suggests relevance (0-1 range assumed)
+        # Keeping relevance * 0.4 as per user instruction
+        art['_score'] = (tier_w * 0.6) + (relevance * 0.4)
+
+    regular_articles = sorted(regular_articles, key=lambda x: x['_score'], reverse=True)
+
+    # PASSAGGIO 2 — deduplicazione semantica
+    deduplicated = []
+    for candidate in regular_articles:
+        title_c = candidate.get('title', '')
         is_duplicate = False
         for kept in deduplicated:
-            title_k = kept.get('title', '') or kept.get('title_it', '')
+            title_k = kept.get('title', '')
             if title_similarity(title_c, title_k) > 0.70:
                 is_duplicate = True
-                logger.debug(f'🔁 Dedup: "{title_c[:60]}" ~ "{title_k[:60]}"')
                 break
         if not is_duplicate:
             deduplicated.append(candidate)
 
-    # PASSAGGIO 3 — cap per categoria con priorità tier
+    # PASSAGGIO 3 — cap per categoria
     category_counts = {cat: 0 for cat in CATEGORY_CAPS}
     selected = []
 
+    # Riserva slot per i weekly (max 6 slot totali tra BlackRock e Goldman)
+    weekly_slots = min(len(weekly_protected), 6) if is_monday else 0
+    effective_cap = GLOBAL_CAP - weekly_slots
+
     for art in deduplicated:
         cat = normalize_category(art.get('category', 'mercati'))
+        if cat not in category_counts:
+            category_counts[cat] = 0
         cap = CATEGORY_CAPS.get(cat, 4)
-        if category_counts.get(cat, 0) < cap:
+        if category_counts[cat] < cap:
             selected.append(art)
-            category_counts[cat] = category_counts.get(cat, 0) + 1
-        if len(selected) >= GLOBAL_CAP:
+            category_counts[cat] += 1
+        if len(selected) >= effective_cap:
             break
+
+    # Aggiungi weekly protetti in coda
+    if is_monday and weekly_protected:
+        # Ordina per relevance_score
+        weekly_protected.sort(key=lambda x: x.get('relevance_score', 0), reverse=True)
+        selected.extend(weekly_protected[:weekly_slots])
+        logger.info(f'✅ Aggiunti {weekly_slots} articoli settimanali al feed')
 
     logger.info(f'🧠 Smart select: {len(articles)} → {len(deduplicated)} '
                 f'(dedup) → {len(selected)} (final)')
     for cat, count in category_counts.items():
-        logger.info(f'   {cat}: {count} articoli')
+        if count > 0:
+            logger.info(f'   {cat}: {count} articoli')
 
     for art in selected:
         art.pop('_score', None)

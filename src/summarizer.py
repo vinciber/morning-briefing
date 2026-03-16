@@ -155,12 +155,12 @@ VIETATO ASSOLUTO:
   "il mercato è estremamente volatile" — se non supportate da dato specifico
 - Finali tipo "That's all for today", "arrivederci", "Stay tuned", "We'll be back"
 - Chiudere con un riassunto di quanto già detto — la chiusura deve guardare avanti
-- MAI scrivere l'acronimo accanto al nome esteso: 
-  NON "l'indice del dollaro (DXY)" o "l'indice del dollaro, noto come DXY"
-  SÌ "l'indice del dollaro" — senza acronimo
-  NON "la Federal Reserve (Fed)"
-  SÌ "la Federal Reserve" — senza acronimo tra parentesi
   Regola generale: se usi il nome esteso, NON aggiungere mai l'acronimo
+
+SE OGGI È LUNEDÌ e sono presenti report di BlackRock Investment Institute o Goldman Sachs:
+- Dedicare una sezione specifica alle view istituzionali settimanali
+- Citare esplicitamente: "Il team di ricerca di BlackRock..." o "Gli strategist di Goldman Sachs..."
+- Questi report danno la view della settimana, non solo del giorno
 
 PRONUNCIA ASSET — scrivi sempre la forma estesa, mai l'acronimo:
 - S&P 500 → "lo Standard and Poor's 500"
@@ -407,6 +407,18 @@ def run():
                 f"\n\nHISTORY TITOLI GIÀ PUBBLICATI (EVITA RIPETIZIONI):\n"
                 + "\n".join(f"- {t}" for t in history_titles[:20])
             )
+
+    # Monday Protection logic for LLM awareness
+    is_monday = datetime.now(timezone.utc).weekday() == 0
+    weekly_sources = ['BlackRock Investment Institute', 'Goldman Sachs Insights']
+    weekly_articles = [a for a in articles_slim if a.get('source') in weekly_sources]
+
+    if is_monday and weekly_articles:
+        user_prompt += f"\n\n⚠️ OGGI È LUNEDÌ — REPORT SETTIMANALI DISPONIBILI:\n"
+        user_prompt += f"Sono presenti {len(weekly_articles)} articoli da BlackRock Investment Institute e Goldman Sachs Insights.\n"
+        user_prompt += "Questi sono report istituzionali settimanali di altissima qualità (tier 1).\n"
+        user_prompt += "OBBLIGATORIO: citarli nel sentiment e nel market_impact_summary.\n"
+        user_prompt += "Nell'audio script dedicare almeno 2-3 frasi alle view istituzionali di BlackRock e Goldman.\n"
 
     logger.info(f'🤖 Chiamata 1: Groq Llama 4 Analysis ({len(articles_slim)} articoli)...')
     try:
