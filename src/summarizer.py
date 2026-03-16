@@ -14,6 +14,7 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 from dotenv import load_dotenv
+import time
 
 load_dotenv()
 
@@ -430,7 +431,7 @@ def run():
                 {'role': 'user',   'content': user_prompt},
             ],
             temperature=0.2,
-            max_tokens=4000,
+            max_tokens=6000,
             response_format={'type': 'json_object'},
         )
         raw_text = response.choices[0].message.content.strip()
@@ -449,7 +450,7 @@ DATI MERCATO:
 {market_context}
 
 NOTIZIE DEL GIORNO:
-{chr(10).join(f"- [{a['category'].upper()}] {a['title']} — {a['snippet'][:150]}" for a in articles_slim[:12])}
+{chr(10).join(f"- [{a['category'].upper()}] {'⭐ REPORT SETTIMANALE: ' if a.get('source') in weekly_sources else ''}{a['title']} — {a['snippet'][:150]}" for a in (([a for a in articles_slim if a.get('source') in weekly_sources] + [a for a in articles_slim if a.get('source') not in weekly_sources])[:14]))}
 
 REQUISITO: minimo 800 parole in ITALIANO. Conta internamente prima di rispondere.
 Restituisci JSON: {{"audio_script_it": "..."}}"""
@@ -479,7 +480,7 @@ MARKET DATA:
 {market_context}
 
 NEWS OF THE DAY:
-{chr(10).join(f"- [{a['category'].upper()}] {a['title']}" for a in articles_slim[:12])}
+{chr(10).join(f"- [{a['category'].upper()}] {'⭐ WEEKLY REPORT: ' if a.get('source') in weekly_sources else ''}{a['title']}" for a in (([a for a in articles_slim if a.get('source') in weekly_sources] + [a for a in articles_slim if a.get('source') not in weekly_sources])[:14]))}
 
 REQUIREMENT: minimum 800 words in ENGLISH. Count internally before answering.
 Return JSON: {{"audio_script_en": "..."}}"""
@@ -498,25 +499,46 @@ Return JSON: {{"audio_script_en": "..."}}"""
         briefing['audio_script_en'] = audio_en_data.get('audio_script_en', '')
 
         # RETRY AUDIO SE SOTTO 700 PAROLE
-        audio_words = len(briefing.get('audio_script_it', '').split())
-        if audio_words < 700:
-            logger.warning(f'⚠️ Audio IT sotto soglia ({audio_words} parole), retry...')
-            retry_prompt = audio_user_it + "\n\nATTENZIONE: lo script precedente era troppo corto. Devi scrivere ALMENO 800 parole. Espandi ogni sezione con più analisi e contesto."
-            retry_response = client.chat.completions.create(
-                model='meta-llama/llama-4-scout-17b-16e-instruct',
-                messages=[
-                    {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT},
-                    {'role': 'user', 'content': retry_prompt},
-                ],
-                temperature=0.3,
-                max_tokens=6000,
-                response_format={'type': 'json_object'},
-            )
-            retry_data = json.loads(retry_response.choices[0].message.content)
-            briefing['audio_script_it'] = retry_data.get('audio_script_it', briefing['audio_script_it'])
-            briefing['audio_script_en'] = retry_data.get('audio_script_en', briefing['audio_script_en'])
-            audio_words = len(briefing.get('audio_script_it', '').split())
-            logger.info(f'🎙️ Audio dopo retry: {audio_words} parole {"✅" if audio_words >= 700 else "⚠️ ancora sotto"}')
+        for lang, user_prompt_key, script_key in [('IT', audio_user_it, 'audio_script_it'), ('EN', audio_user_en, 'audio_script_en')]:
+            audio_words = len(briefing.get(script_key, '').split())
+            if audio_words < 700:
+                logger.warning(f'⚠️ Audio {lang} sotto soglia ({audio_words} parole), primo retry...')
+                retry_prompt = user_prompt_key + f"\n\nATTENZIONE: lo script precedente era troppo corto. Devi scrivere ALMENO 800 parole. Espandi ogni sezione con più analisi e contesto."
+                
+                # Primo Retry
+                retry_response = client.chat.completions.create(
+                    model='meta-llama/llama-4-scout-17b-16e-instruct',
+                    messages=[
+                        {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT if lang == 'IT' else AUDIO_SYSTEM_PROMPT_EN},
+                        {'role': 'user', 'content': retry_prompt},
+                    ],
+                    temperature=0.3,
+                    max_tokens=6000,
+                    response_format={'type': 'json_object'},
+                )
+                retry_data = json.loads(retry_response.choices[0].message.content)
+                briefing[script_key] = retry_data.get(script_key, briefing[script_key])
+                audio_words = len(briefing.get(script_key, '').split())
+                logger.info(f'🎙️ Audio {lang} dopo primo retry: {audio_words} parole')
+
+                # Secondo Retry con pausa se ancora sotto 700
+                if audio_words < 700:
+                    logger.warning(f'⚠️ {lang} ancora corto ({audio_words}), secondo retry dopo pausa...')
+                    time.sleep(10)
+                    retry2_response = client.chat.completions.create(
+                        model='meta-llama/llama-4-scout-17b-16e-instruct',
+                        messages=[
+                            {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT if lang == 'IT' else AUDIO_SYSTEM_PROMPT_EN},
+                            {'role': 'user', 'content': retry_prompt},
+                        ],
+                        temperature=0.4,
+                        max_tokens=6000,
+                        response_format={'type': 'json_object'},
+                    )
+                    retry2_data = json.loads(retry2_response.choices[0].message.content)
+                    briefing[script_key] = retry2_data.get(script_key, briefing[script_key])
+                    audio_words = len(briefing.get(script_key, '').split())
+                    logger.info(f'🎙️ Audio {lang} finale: {audio_words} parole')
 
         # Merge article_impacts negli articoli raw
         article_impacts = briefing.pop('article_impacts', [])
