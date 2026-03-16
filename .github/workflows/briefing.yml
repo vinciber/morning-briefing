@@ -69,12 +69,12 @@ jobs:
           ls docs/audio/*.mp3 && echo "✅ Audio generato" || echo "⚠️ Nessun file audio"
         continue-on-error: true
 
-      - name: STEP 3b — Send Email
-        run: python src/email_sender.py
-        continue-on-error: true
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+#      - name: STEP 3b — Send Email
+#        run: python src/email_sender.py
+#        continue-on-error: true
+#        env:
+#          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+#          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
 
       - name: STEP 3c — Telegram
         run: python src/telegram_bot.py

@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import resend
+import yaml
 from jinja2 import Environment, FileSystemLoader
 from dotenv import load_dotenv
 
@@ -26,6 +27,7 @@ logger = logging.getLogger(__name__)
 ROOT = Path(__file__).resolve().parent.parent
 INPUT_PATH = ROOT / 'data' / 'briefing_today.json'
 TEMPLATES_DIR = ROOT / 'templates'
+CONFIG_PATH = ROOT / 'config.yml'
 
 RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '')
 RECIPIENT_EMAIL = os.environ.get('RECIPIENT_EMAIL', '')
@@ -33,6 +35,18 @@ RECIPIENT_EMAIL = os.environ.get('RECIPIENT_EMAIL', '')
 
 def run():
     """Pipeline email: carica briefing → render HTML → invia via Resend."""
+    # Controllo se disabilitato in config.yml
+    if CONFIG_PATH.exists():
+        try:
+            with open(CONFIG_PATH, 'r', encoding='utf-8') as f:
+                config = yaml.safe_load(f)
+                email_config = config.get('output', {}).get('email', {})
+                if not email_config.get('enabled', True):
+                    logger.info('ℹ️ Invio email disabilitato in config.yml. Salto.')
+                    return True
+        except Exception as e:
+            logger.warning(f'⚠️ Errore lettura config.yml: {e}')
+
     if not RESEND_API_KEY:
         logger.error('❌ RESEND_API_KEY non configurata!')
         return False

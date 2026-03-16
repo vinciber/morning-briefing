@@ -13,6 +13,8 @@ output:
     base_url: 'https://vinciber.github.io/morning-briefing'
     languages: ['it', 'en']
     max_items_feed: 30
+  email:
+    enabled: false
 
 briefing:
   sections:
