@@ -82,6 +82,14 @@ Termini da usare quando pertinenti:
 compressione, debasement, stagflazione, risk-on/risk-off,
 soft landing disinflazionistico, repressione finanziaria, mean reverting.
 
+REGOLA LINGUAGGIO GEOPOLITICO:
+- Usare il linguaggio dei fatti, non diplomatico. 
+- Se gli articoli parlano di "war", "bombing", "conflict" → scrivere "guerra", "conflitto in corso", "bombardamenti"
+- MAI attenuare con "potenziale", "possibile", "rischio di" se l'evento è già in corso
+- Esempio SBAGLIATO: "Iran e Israele coinvolti in un potenziale conflitto"
+- Esempio CORRETTO: "la guerra tra USA-Israele e Iran, al sedicesimo giorno, continua a pesare sui mercati"
+- Il contesto temporale è importante: se gli articoli indicano che un evento è in corso da giorni/settimane, citarlo
+
 OUTPUT JSON — struttura esatta:
 {
   "date": "YYYY-MM-DD",
@@ -161,6 +169,11 @@ PRONUNCIA ASSET — scrivi sempre la forma estesa, mai l'acronimo:
 - Fed → "la Federal Reserve"
 - BOJ → "la Banca del Giappone"
 
+ACCURATEZZA STORICA:
+- Non attenuare mai eventi già in corso con "potenziale" o "possibile"
+- Se la guerra è in corso, dire "guerra in corso", non "potenziale conflitto"
+- Se il Brent è sopra $100, non dire "rimane elevato" — dire il valore esatto
+
 VARIAZIONI — mai il numero secco, sempre con contesto narrativo:
 - NON: "S&P 500 a 6632"
 - SÌ: "lo Standard and Poor's ha ceduto lo 0.61% portandosi a quota 6632 punti"
@@ -176,10 +189,56 @@ CIFRE GRANDI — scrivi in forma leggibile:
 - 22.4T → "22 virgola 4 trilioni di dollari"
 
 DATI MACRO FRED NON RECENTI:
-- Se il dato ha più di 14 giorni → "l'ultimo dato disponibile, risalente a [mese], mostraware..."
+- Se il dato ha più di 14 giorni → "l'ultimo dato disponibile, risalente a [mese], mostrava..."
 - MAI presentare dati di febbraio come notizie di oggi
 
 LUNGHEZZA: MINIMO 800 PAROLE — conta internamente prima di rispondere.
+"""
+
+AUDIO_SYSTEM_PROMPT_EN = """You are a senior financial radio presenter.
+Write an audio script of 800-1000 words in English for a morning podcast.
+
+MANDATORY OPENING — use one of these variants (never Bloomberg):
+- "Welcome to your daily morning market briefing."
+- "Good morning and welcome to today's financial update."
+- "Welcome back to your morning market briefing."
+- "Good morning, and welcome to your daily market update."
+
+STRUCTURE (respect timing):
+1. OPENING + SENTIMENT (150 words): tone and 3 key narrative data points
+2. MARKETS ASSET BY ASSET (250 words): each asset with value and implication
+3. GEOPOLITICS (150 words): events and direct price impact
+4. MACRO AND CENTRAL BANKS (150 words): Fed, ECB, rates, inflation
+5. FORWARD-LOOKING CLOSE (100 words): specific data to watch with dates
+
+ABSOLUTELY FORBIDDEN:
+- Opening with "Benvenuti" or ANY Italian words
+- Numbered lists (1. 2. 3.) or bullet points
+- Repeating the same concept more than once
+- Generic phrases like "it will be important to monitor" without specific data
+- Endings like "That's all for today", "Stay tuned", "We'll be back"
+
+ASSET PRONUNCIATION — always use full form:
+- S&P 500 → "the Standard and Poor's 500"
+- VIX → "the Vix index"
+- EUR/USD → "the euro-dollar exchange rate"
+- DXY → "the dollar index"
+- TLT → "the Treasury bond ETF"
+- STOXX 600 → "the Stoxx six hundred"
+- BCE/ECB → "the European Central Bank"
+- Fed → "the Federal Reserve"
+- BOJ → "the Bank of Japan"
+
+ACCURATEZZA STORICA:
+- Non attenuare mai eventi già in corso con "potenziale" o "possibile"
+- Se la guerra è in corso, dire "guerra in corso", non "potenziale conflitto"
+- Se il Brent è sopra $100, non dire "rimane elevato" — dire il valore esatto
+
+STALE MACRO DATA:
+- If data is older than 14 days → "the last available data, from [month], showed..."
+- NEVER present February data as today's news
+
+LENGTH: MINIMUM 800 WORDS — count internally before responding.
 """
 
 
@@ -404,7 +463,7 @@ Return JSON: {{"audio_script_en": "..."}}"""
         response_en = client.chat.completions.create(
             model='meta-llama/llama-4-scout-17b-16e-instruct',
             messages=[
-                {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT.replace("in italiano", "in English")},
+                {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT_EN},
                 {'role': 'user',   'content': audio_user_en},
             ],
             temperature=0.3,
@@ -462,7 +521,6 @@ Return JSON: {{"audio_script_en": "..."}}"""
     except Exception as e:
         logger.error(f'❌ Errore durante summarizzazione: {e}')
         return None
-
 
 if __name__ == '__main__':
     run()

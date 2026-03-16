@@ -16,7 +16,26 @@ MODEL_DIR = ROOT / 'models'
 def normalize_for_tts(text: str) -> str:
     """Normalizza testo per sintesi vocale naturale italiana."""
 
-    # 0. PREZZI CON DOLLARO + MIGLIAIA → forma parlata PRIMA di tutto
+    # 0. RIMUOVI ACRONIMI TRA PARENTESI — evita doppioni
+    # "cambio euro-dollaro (EUR/USD)" → "cambio euro-dollaro"
+    # "Federal Reserve (Fed)" → "Federal Reserve"
+    # "indice Vix (VIX)" → "indice Vix"
+    parenthetical_acronyms = [
+        'EUR/USD', 'USD/JPY', 'GBP/USD', 'EUR/GBP',
+        'S&P 500', 'S&P500', 'S&P',
+        'VIX', 'DXY', 'TLT', 'BTP', 'BCE', 'Fed',
+        'FOMC', 'BOJ', 'GDP', 'PCE', 'CPI', 'NFP',
+        'QE', 'QT', 'BTC', 'ETF',
+        'STOXX 600', 'STOXX600', 'NIKKEI',
+    ]
+    for acronym in parenthetical_acronyms:
+        text = re.sub(
+            r'\s*\(\s*' + re.escape(acronym) + r'\s*\)',
+            '',
+            text
+        )
+
+    # 1. PREZZI CON DOLLARO + MIGLIAIA → forma parlata PRIMA di tutto
     # $70,646 → "settantamila 646 dollari"
     # $5,061.70 → "cinquemila 61 dollari"
     # $103.14 → "103 dollari"
@@ -47,7 +66,7 @@ def normalize_for_tts(text: str) -> str:
 
     text = re.sub(r'\$([0-9,]+(?:\.[0-9]{1,2})?)', replace_usd, text)
 
-    # 1. ACRONIMI E ABBREVIAZIONI → forma parlata
+    # 2. ACRONIMI E ABBREVIAZIONI → forma parlata
     # Ordine importante: prima le forme più lunghe
     abbreviations = [
         ("Standard and Poor's 500",  "Standard and Poor's 500"),  # già espanso
@@ -83,10 +102,10 @@ def normalize_for_tts(text: str) -> str:
     for abbr, expanded in abbreviations:
         text = text.replace(abbr, expanded)
 
-    # 2. EURO SIMBOLO
+    # 3. EURO SIMBOLO
     text = re.sub(r'€([0-9,.]+)', r'\1 euro', text)
 
-    # 3. PERCENTUALI CON SEGNO → forma parlata
+    # 4. PERCENTUALI CON SEGNO → forma parlata
     def replace_pct_signed_dec(m):
         sign = m.group(1)
         integer = m.group(2)
@@ -104,7 +123,7 @@ def normalize_for_tts(text: str) -> str:
         return f'{sign_word}{m.group(2)} percento'
     text = re.sub(r'([+-]?)(\d+)%', replace_pct_int, text)
 
-    # 4. NUMERI CON SEPARATORE MIGLIAIA RIMASTI (es. 53,820)
+    # 5. NUMERI CON SEPARATORE MIGLIAIA RIMASTI (es. 53,820)
     def replace_thousands(m):
         num_str = m.group(0).replace(',', '')
         try:
@@ -122,13 +141,13 @@ def normalize_for_tts(text: str) -> str:
             return m.group(0)
     text = re.sub(r'\b\d{1,3}(?:,\d{3})+\b', replace_thousands, text)
 
-    # 5. RENDIMENTI CON % (es. 4.2850%)
+    # 6. RENDIMENTI CON % (es. 4.2850%)
     text = re.sub(r'(\d+)\.(\d{2})\d*%', r'\1 virgola \2 percento', text)
 
-    # 6. TRONCA DECIMALI A 2 CIFRE RESIDUI
+    # 7. TRONCA DECIMALI A 2 CIFRE RESIDUI
     text = re.sub(r'(\d+)\.(\d{2})\d+', r'\1.\2', text)
 
-    # 7. PUNTI DECIMALI RESIDUI → virgola
+    # 8. PUNTI DECIMALI RESIDUI → virgola
     text = re.sub(r'(\d+)\.(\d+)', r'\1 virgola \2', text)
 
     return text
