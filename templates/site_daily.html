@@ -117,7 +117,7 @@
 
 <header class="header">
   <div class="header-left">
-    <span class="header-title">📰 Morning Briefing</span>
+    <span class="header-title">📰 {{ lang_info.title }}</span>
     <span class="header-date">{{ date }} · Finance & Geopolitics</span>
   </div>
   <div class="lang-switch">
@@ -148,7 +148,7 @@
         {% else %}🟡 NEUTRAL{% endif %}
       </span>
       {% if sentiment.score %}
-      <span class="sentiment-score">Intensità: {{ sentiment.score }}/10</span>
+      <span class="sentiment-score">{% if lang == 'it' %}Intensità{% else %}Intensity{% endif %}: {{ sentiment.score }}/10</span>
       {% endif %}
     </div>
     <div class="sentiment-reason">{{ (sentiment.get('reason_' + lang) or sentiment.get('reason_en') or sentiment.get('reason_it', '')) }}</div>
@@ -161,14 +161,15 @@
   
   {% if briefing.get('market_data_raw', {}).get('macro_calendar') %}
   <div class="macro-calendar">
-    <div class="macro-title">📊 Macro Calendar USA</div>
+    <div class="macro-title">📊 {% if lang == 'it' %}DATI MACRO E CALENDARIO{% else %}MACRO DATA & CALENDAR{% endif %}</div>
+    <div class="macro-region-title">🇺🇸 {% if lang == 'it' %}STATI UNITI — FED & MACRO{% else %}UNITED STATES — FED & MACRO{% endif %}</div>
     <div class="macro-grid">
       {% for key, item in briefing['market_data_raw']['macro_calendar'].items() %}
       <div class="macro-item {% if item.status == 'upcoming' %}upcoming{% elif item.status == 'released' %}released{% endif %}">
         <div class="macro-label">{{ item.label }}</div>
         {% if item.status == 'released' %}
           <div class="macro-value">{{ item.value }}</div>
-          <div class="macro-prev">prec. {{ item.previous }}</div>
+          <div class="macro-prev">{% if lang == 'it' %}prec.{% else %}prev.{% endif %} {{ item.previous }}</div>
           <div class="macro-date">{{ item.release_date }}</div>
         {% elif item.status == 'upcoming' %}
           <div class="macro-value upcoming-val">—</div>
@@ -179,14 +180,14 @@
     </div>
 
     {% if briefing.get('market_data_raw', {}).get('macro_calendar_eu') %}
-    <div class="macro-region-title">🇪🇺 Europa — BCE & Macro</div>
+    <div class="macro-region-title">🇪🇺 {% if lang == 'it' %}Europa{% else %}Europe{% endif %} — BCE & Macro</div>
     <div class="macro-grid">
       {% for key, item in briefing['market_data_raw']['macro_calendar_eu'].items() %}
       <div class="macro-item eu {% if item.status == 'upcoming' %}upcoming{% else %}released{% endif %}">
         <div class="macro-label">{{ item.label }}</div>
         {% if item.status == 'released' %}
           <div class="macro-value">{{ item.value }}</div>
-          <div class="macro-prev">prec. {{ item.previous }}</div>
+          <div class="macro-prev">{% if lang == 'it' %}prec.{% else %}prev.{% endif %} {{ item.previous }}</div>
           <div class="macro-date">{{ item.release_date }}</div>
         {% else %}
           <div class="macro-value upcoming-val">—</div>
@@ -196,6 +197,27 @@
       {% endfor %}
     </div>
     {% endif %}
+  </div>
+  {% endif %}
+  
+  {% if briefing.get('market_data_raw', {}).get('crypto') %}
+  <div class="macro-calendar">
+    <div class="macro-title">₿ {% if lang == 'it' %}MERCATO CRIPTO{% else %}CRYPTO MARKET{% endif %}</div>
+    <div class="macro-grid">
+      {% set crypto = briefing['market_data_raw']['crypto'] %}
+      <div class="macro-item fear-greed" style="border-color: #f59e0b40;">
+        <div class="macro-label">Fear & Greed</div>
+        <div class="macro-value">{{ crypto.fear_greed.value }}</div>
+        <div class="macro-date">{{ crypto.fear_greed.class }}</div>
+      </div>
+      {% for ticker, info in crypto.prices.items() %}
+      <div class="macro-item">
+        <div class="macro-label">{{ ticker }}</div>
+        <div class="macro-value">{{ info.value }}</div>
+        <div class="macro-date {% if '+' in info.change %}up{% elif '-' in info.change %}down{% endif %}">{{ info.change }}</div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
   {% endif %}
 
@@ -214,9 +236,9 @@
   </div>
   {% endif %}
 
-  {% set section_icons = {'mercati': '💹', 'geopolitica': '🌍', 'macro_economia': '🏛', 'energia': '⚡'} %}
-  {% set section_labels_it = {'mercati': 'Mercati & Impatto', 'geopolitica': 'Geopolitica', 'macro_economia': 'Macroeconomia', 'energia': 'Energia'} %}
-  {% set section_labels_en = {'mercati': 'Markets & Impact', 'geopolitica': 'Geopolitics', 'macro_economia': 'Macroeconomics', 'energia': 'Energy'} %}
+  {% set section_icons = {'mercati': '💹', 'geopolitica': '🌍', 'macro_economia': '🏛', 'energia': '⚡', 'crypto': '₿'} %}
+  {% set section_labels_it = {'mercati': 'Mercati & Impatto', 'geopolitica': 'Geopolitica', 'macro_economia': 'Macroeconomia', 'energia': 'Energia', 'crypto': 'Mercato Cripto'} %}
+  {% set section_labels_en = {'mercati': 'Markets & Impact', 'geopolitica': 'Geopolitics', 'macro_economia': 'Macroeconomics', 'energia': 'Energy', 'crypto': 'Crypto Market'} %}
 
   <div class="tier-legend">
     <strong style="color:var(--text);margin-right:4px;">{% if lang == 'it' %}Fonti:{% else %}Sources:{% endif %}</strong>
@@ -241,7 +263,13 @@
     <div class="card" id="article-{{ loop.index0 }}-{{ section.name }}">
       <div class="card-meta">
         <span class="card-category cat-{{ item.get('category', 'mercati') }}">
-          {{ item.get('display_category', item.get('category', '')) | replace('_',' ') }}
+          {% set cat_labels_it = {'mercati': 'MERCATI', 'geopolitica': 'GEOPOLITICA', 'macro_economia': 'MACROECONOMIA', 'energia': 'ENERGIA', 'tecnologia': 'TECNOLOGIA', 'crypto': 'CRIPTO', 'cripto': 'CRIPTO'} %}
+          {% set cat_labels_en = {'mercati': 'MARKETS', 'geopolitica': 'GEOPOLITICS', 'macro_economia': 'MACRO', 'energia': 'ENERGY', 'tecnologia': 'TECH', 'crypto': 'CRYPTO', 'cripto': 'CRYPTO'} %}
+          {% if lang == 'it' %}
+            {{ cat_labels_it.get(item.get('category', 'mercati'), item.get('category', '').replace('_',' ').upper()) }}
+          {% else %}
+            {{ cat_labels_en.get(item.get('category', 'mercati'), item.get('category', '').replace('_',' ').upper()) }}
+          {% endif %}
         </span>
         {% set sentiment_val = item.get('sentiment_label', 'mixed') %}
         <span class="impact-badge impact-{{ sentiment_val }}">

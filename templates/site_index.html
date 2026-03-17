@@ -367,17 +367,31 @@
             </div>
         </div>
 
-        {% if archive_dates %}
+        {% if hierarchical_archive %}
         <div class="archive-section">
             <div class="section-header">
                 <span>📚</span>
                 {% if lang == 'it' %}Archivio Storico{% else %}Historical Archive{% endif %}
             </div>
-            <div class="archive-grid">
-                {% for d in archive_dates %}
-                <a href="{% if lang == 'it' %}{{ d }}.html{% else %}{{ d }}.html{% endif %}" class="archive-link">{{ d }}</a>
+            {% for year_item in hierarchical_archive %}
+            <div class="archive-year">
+                <h3 style="margin: 1.5rem 0 1rem; color: var(--accent); font-family: 'Outfit', sans-serif;">{{ year_item.year }}</h3>
+                {% for month_item in year_item.months %}
+                <div class="archive-month" style="margin-bottom: 2rem;">
+                    <h4 style="margin: 1rem 0 0.75rem; text-transform: capitalize; color: var(--text-muted); font-size: 0.9rem; letter-spacing: 0.05em;">
+                        {% set month_names_it = {'01':'Gennaio','02':'Febbraio','03':'Marzo','04':'Aprile','05':'Maggio','06':'Giugno','07':'Luglio','08':'Agosto','09':'Settembre','10':'Ottobre','11':'Novembre','12':'Dicembre'} %}
+                        {% set month_names_en = {'01':'January','02':'February','03':'March','04':'April','05':'May','06':'June','07':'July','08':'August','09':'September','10':'October','11':'November','12':'December'} %}
+                        {% if lang == 'it' %}{{ month_names_it.get(month_item.month) }}{% else %}{{ month_names_en.get(month_item.month) }}{% endif %}
+                    </h4>
+                    <div class="archive-grid">
+                        {% for d in month_item.dates %}
+                        <a href="{{ d }}.html" class="archive-link">{{ d }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
                 {% endfor %}
             </div>
+            {% endfor %}
         </div>
         {% endif %}
 

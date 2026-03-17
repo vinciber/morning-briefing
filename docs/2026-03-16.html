@@ -106,6 +106,11 @@
   
   .tier-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--text-muted);}
   .tier-legend span{display:flex;align-items:center;gap:4px;}
+
+  .macro-region-title{font-size:11px;font-weight:700;color:var(--text-muted);
+    text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px;
+    padding-bottom:6px;border-bottom:1px solid var(--border);}
+  .macro-item.eu{border-color:#3b82f640;}
 </style>
 </head>
 <body>
@@ -125,87 +130,15 @@
   <div class="ticker-items">
     
     <div class="ticker-item">
-      <span class="ticker-label">EUR/USD</span>
-      <span class="ticker-value down">1.1448</span>
-      <span class="ticker-change down">-0.64%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">DXY</span>
-      <span class="ticker-value down">100.35</span>
-      <span class="ticker-change down">-0.01%</span>
-    </div>
-    
-    <div class="ticker-item">
       <span class="ticker-label">S&P 500</span>
-      <span class="ticker-value down">6632.19</span>
-      <span class="ticker-change down">-0.61%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">STOXX 600</span>
-      <span class="ticker-value down">58.9100</span>
-      <span class="ticker-change down">-0.37%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">NIKKEI</span>
-      <span class="ticker-value down">53,751</span>
-      <span class="ticker-change down">-0.13%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">SHANGHAI</span>
-      <span class="ticker-value down">4084.79</span>
-      <span class="ticker-change down">-0.26%</span>
+      <span class="ticker-value up">5100</span>
+      <span class="ticker-change up">+0.5%</span>
     </div>
     
     <div class="ticker-item">
       <span class="ticker-label">VIX</span>
-      <span class="ticker-value down">26.0600</span>
-      <span class="ticker-change down">-4.16%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">TLT</span>
-      <span class="ticker-value down">86.5400</span>
-      <span class="ticker-change down">-0.49%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">GOLD</span>
-      <span class="ticker-value down">$4990.70/oz</span>
-      <span class="ticker-change down">-1.22%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BTC</span>
-      <span class="ticker-value up">$72,932</span>
-      <span class="ticker-change up">+0.20%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BRENT</span>
-      <span class="ticker-value down">$101.43</span>
-      <span class="ticker-change down">-1.66%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BTP 10Y</span>
-      <span class="ticker-value down">3.7830%</span>
-      <span class="ticker-change down">-0.26%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">US 10Y</span>
-      <span class="ticker-value up">4.2850%</span>
-      <span class="ticker-change up">+0.28%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">M2 GLOBAL</span>
-      <span class="ticker-value up">$22.4T</span>
-      <span class="ticker-change up">expanding 📈 | US YoY: +4.3% YoY</span>
+      <span class="ticker-value down">12.5</span>
+      <span class="ticker-change down">-2%</span>
     </div>
     
   </div>
@@ -213,91 +146,56 @@
 
 <div class="container">
 
-  <div class="sentiment-card risk_off">
+  <div class="sentiment-card risk_on">
     <div class="sentiment-header">
       <span class="sentiment-badge">
-        🔴 RISK OFF
+        🟢 RISK ON
         
       </span>
       
-      <span class="sentiment-score">Intensità: 7/10</span>
+      <span class="sentiment-score">Intensità: 8/10</span>
       
     </div>
-    <div class="sentiment-reason">Il sentiment di mercato è risk-off a causa della guerra tra Israele e Iran, con il VIX a 26.06 e il DXY a 100.35. La produzione industriale cinese è aumentata, ma le preoccupazioni sull'inflazione globale sono elevate. Il mercato azionario è in calo, con l'S&P 500 a 6632.19 e lo STOXX 600 a 58.91. Le banche centrali saranno sotto la lente d'ingrandimento questa settimana con le loro decisioni sui tassi.</div>
+    <div class="sentiment-reason">Il mercato mostra segnali di forza grazie alla disinflazione.</div>
     
     <div class="market-impact-summary">
-      📊 La guerra tra Israele e Iran ha aumentato le preoccupazioni sull'inflazione globale e ha portato a un aumento del VIX. Il DXY è stabile, mentre l'S&P 500 e lo STOXX 600 sono in calo. Il prezzo del petrolio è sceso a $101.43. Le banche centrali saranno sotto la lente d'ingrandimento questa settimana. BlackRock Investment Institute e Goldman Sachs hanno pubblicato report settimanali che analizzano l'impatto della guerra sui mercati.
+      📊 Impatto positivo su equity e tech.
     </div>
     
   </div>
   
   
   <div class="macro-calendar">
-    <div class="macro-title">📊 Macro Calendar USA</div>
+    <div class="macro-title">📊 DATI MACRO E CALENDARIO</div>
+    <div class="macro-region-title">🇺🇸 STATI UNITI — FED & MACRO</div>
     <div class="macro-grid">
       
       <div class="macro-item released">
-        <div class="macro-label">CPI YoY USA</div>
+        <div class="macro-label">FED Interest Rate</div>
         
-          <div class="macro-value">2.7%</div>
-          <div class="macro-prev">prec. 2.8%</div>
-          <div class="macro-date">2026-02-01</div>
-        
-      </div>
-      
-      <div class="macro-item released">
-        <div class="macro-label">Core CPI YoY USA</div>
-        
-          <div class="macro-value">2.7%</div>
-          <div class="macro-prev">prec. 2.9%</div>
-          <div class="macro-date">2026-02-01</div>
-        
-      </div>
-      
-      <div class="macro-item released">
-        <div class="macro-label">Non-Farm Payrolls</div>
-        
-          <div class="macro-value">-92K</div>
-          <div class="macro-prev">prec. +126K</div>
-          <div class="macro-date">2026-02-01</div>
-        
-      </div>
-      
-      <div class="macro-item released">
-        <div class="macro-label">Unemployment Rate USA</div>
-        
-          <div class="macro-value">4.4%</div>
-          <div class="macro-prev">prec. 4.3%</div>
-          <div class="macro-date">2026-02-01</div>
-        
-      </div>
-      
-      <div class="macro-item upcoming">
-        <div class="macro-label">PCE Core YoY</div>
-        
-          <div class="macro-value upcoming-val">—</div>
-          <div class="macro-date">📅 2026-03-28</div>
-        
-      </div>
-      
-      <div class="macro-item released">
-        <div class="macro-label">Fed Funds Rate</div>
-        
-          <div class="macro-value">3.64%</div>
-          <div class="macro-prev">prec. 3.64%</div>
-          <div class="macro-date">2026-02-01</div>
-        
-      </div>
-      
-      <div class="macro-item upcoming">
-        <div class="macro-label">GDP QoQ USA</div>
-        
-          <div class="macro-value upcoming-val">—</div>
-          <div class="macro-date">📅 2026-04-29</div>
+          <div class="macro-value">5.50%</div>
+          <div class="macro-prev">prec. 5.50%</div>
+          <div class="macro-date">2026-03-15</div>
         
       </div>
       
     </div>
+
+    
+    <div class="macro-region-title">🇪🇺 Europa — BCE & Macro</div>
+    <div class="macro-grid">
+      
+      <div class="macro-item eu released">
+        <div class="macro-label">BCE Interest Rate</div>
+        
+          <div class="macro-value">4.50%</div>
+          <div class="macro-prev">prec. 4.50%</div>
+          <div class="macro-date">2026-03-15</div>
+        
+      </div>
+      
+    </div>
+    
   </div>
   
 
@@ -343,7 +241,11 @@
     <div class="card" id="article-0-mercati">
       <div class="card-meta">
         <span class="card-category cat-mercati">
-          mercati
+          
+          
+          
+            MERCATI
+          
         </span>
         
         <span class="impact-badge impact-mixed">
@@ -353,24 +255,32 @@
         
         
         
-        <span class="stars">★★☆☆☆</span>
+        <span class="stars">★★★★★</span>
         
-        <span class="tier-badge tier-3">T3</span>
+        <span class="tier-badge tier-1">T1</span>
         
       </div>
 
       <div class="card-title">
-        ExchangesOil Market Impacts from IranPodcast|Mar 2, 2026
+        Articolo Mercati 1
       </div>
       <div class="card-summary">
-        
+        Sintesi articolo mercati 1
       </div>
 
       
+      <div class="card-assets">
+        
+        <span class="asset-tag">S&P 500</span>
+        
+        <span class="asset-tag">Nasdaq</span>
+        
+      </div>
+      
 
       <div class="card-footer">
-        <a href="https://www.goldmansachs.com/insights/goldman-sachs-exchanges/oil-market-impacts-from-iran" target="_blank" class="source-link">
-          Goldman Sachs Insights →
+        <a href="https://reuters.com/news/1" target="_blank" class="source-link">
+          Reuters →
         </a>
       </div>
     </div>
@@ -387,49 +297,18 @@
       <span class="section-title">
         Geopolitica
       </span>
-      <span class="section-count">6 notizie</span>
+      <span class="section-count">1 notizie</span>
     </div>
 
     
     <div class="card" id="article-0-geopolitica">
       <div class="card-meta">
         <span class="card-category cat-geopolitica">
-          geopolitica
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★★</span>
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Cold Hard Truths: Arctic Security in a Changing World
-      </div>
-      <div class="card-summary">
-        This week on War & Peace, Olga speaks with Gabriella Gricius, Senior Fellow at the Arctic Institute, to discuss Arctic security, Donald Trump’s ambitions to acquire Greenland, Russia’s and China’s interests in the High North, and how NATO and European capitals are responding.
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.crisisgroup.org/pod/europe-central-asia/cold-hard-truths-arctic-security-changing-world" target="_blank" class="source-link">
-          International Crisis Group →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-1-geopolitica">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          geopolitica
+          
+          
+          
+            GEOPOLITICA
+          
         </span>
         
         <span class="impact-badge impact-mixed">
@@ -446,596 +325,17 @@
       </div>
 
       <div class="card-title">
-        Conflict and Consequences: The Global Impact of the New Middle East War
+        Articolo Geopolitica 1
       </div>
       <div class="card-summary">
-        The U.S.-Israeli war with Iran is entering its third week, with no end yet in sight. Crisis Group experts offer a 360-degree view of its effects on peace, security and economic stability around the world.
+        Sintesi articolo geopolitica 1
       </div>
 
       
 
       <div class="card-footer">
-        <a href="https://www.crisisgroup.org/cmt/middle-east-north-africa/iran-israelpalestine-united-states-global/conflict-and-consequences-global-impact-new-middle-east-war" target="_blank" class="source-link">
-          International Crisis Group →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-2-geopolitica">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          geopolitica
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★☆</span>
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Japanese Leader Wrestles with Middle East Shock in Planned Trip to Washington
-      </div>
-      <div class="card-summary">
-        Crisis Group expert Matt Wheeler assesses the importance of Sanae Takaichi’s forthcoming visit to the White House, amid war, tensions with China and U.S. policy shifts
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.crisisgroup.org/anb/asia-pacific/japan-china-united-states/japanese-leader-wrestles-middle-east-shock-planned-trip-washington" target="_blank" class="source-link">
-          International Crisis Group →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-3-geopolitica">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          geopolitica
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★☆☆</span>
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Escalation or off-Ramp in the Gulf? And What Hope for a Ceasefire in Lebanon?
-      </div>
-      <div class="card-summary">
-        This week on Hold Your Fire!, Richard speaks with Crisis Group’s former President Robert Malley about the U.S.-Israeli war on Iran, whether U.S. President Donald Trump will escalate or seek an off-ramp and what Iran might do. He also talks to Crisis Group’s Lebanon expert David Wood about the latest Israel-Hezbollah war.
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.crisisgroup.org/pod/middle-east-north-africa/iran/escalation-or-ramp-gulf-and-what-hope-ceasefire-lebanon" target="_blank" class="source-link">
-          International Crisis Group →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-4-geopolitica">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          geopolitica
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★☆☆</span>
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Sudan’s devastating war rages on as regional rivalries deepen
-      </div>
-      <div class="card-summary">
-        Yet the Iran crisis may push Gulf rivals to set aside their differences and revive stalled diplomacy on Sudan.
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.crisisgroup.org/opd/africa/sudan/sudans-devastating-war-rages-regional-rivalries-deepen" target="_blank" class="source-link">
-          International Crisis Group →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-5-geopolitica">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          geopolitica
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★☆☆</span>
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        The Danger of Vibe Patriotism in Defense Tech
-      </div>
-      <div class="card-summary">
-        At conferences, in pitch decks, and increasingly in public writing, “service” is increasingly being used to describe the work of startup founders, employees, and venture capital investors in defense technology. The claim, sometimes explicit, more often implied, is that building defense technology is itself a form of service comparable to uniformed military service.It is visible in corporate messaging that invites civilians to “serve” through product work, from Palantir’s “Why We Serve” to Anduril’s description of “national service as a form of innovation,” to public-private innovation narratives that describe entrepreneurship as a form of national service and “answering the call” advocacy The post The Danger of Vibe Patriotism in Defense Tech appeared first on War on the Rocks .
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://warontherocks.com/2026/03/the-danger-of-vibe-patriotism-in-defense-tech/" target="_blank" class="source-link">
-          War on the Rocks →
-        </a>
-      </div>
-    </div>
-    
-
-  </div>
-  
-  
-  
-  
-  <div class="section">
-    <div class="section-header">
-      <span class="section-icon">🏛</span>
-      <span class="section-title">
-        Macro_economia
-      </span>
-      <span class="section-count">6 notizie</span>
-    </div>
-
-    
-    <div class="card" id="article-0-macro_economia">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          macro economia
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★★</span>
-        
-        <span class="tier-badge tier-1">T1</span>
-        
-      </div>
-
-      <div class="card-title">
-        FirstFT: Trump warns European allies on Nato over Hormuz plea
-      </div>
-      <div class="card-summary">
-        Also in today’s newsletter: global inflation fears and French local elections
-      </div>
-
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">S&P 500</span>
-        
-        <span class="asset-tag">STOXX 600</span>
-        
-      </div>
-      
-
-      <div class="card-footer">
-        <a href="https://www.ft.com/content/3d92284c-874e-42ce-8049-6b18e20eeb9c" target="_blank" class="source-link">
-          Financial Times (Global Economy) →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-1-macro_economia">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          macro economia
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★★</span>
-        
-        <span class="tier-badge tier-1">T1</span>
-        
-      </div>
-
-      <div class="card-title">
-        Iran war reawakens global inflation fears
-      </div>
-      <div class="card-summary">
-        The Federal Reserve, ECB and Bank of England will this week deliver their first formal verdicts on the threat posed by the conflict
-      </div>
-
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">Oil</span>
-        
-        <span class="asset-tag">S&P 500</span>
-        
-      </div>
-      
-
-      <div class="card-footer">
-        <a href="https://www.ft.com/content/d4f1c4a8-ed5f-4f2a-8b70-436b93f9052b" target="_blank" class="source-link">
-          Financial Times (Global Economy) →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-2-macro_economia">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          macro economia
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★★</span>
-        
-        <span class="tier-badge tier-1">T1</span>
-        
-      </div>
-
-      <div class="card-title">
-        China’s economy rebounded ahead of Iran crisis
-      </div>
-      <div class="card-summary">
-        Beijing warns of geopolitical risks even as key indicators show growth
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.ft.com/content/660df1e6-0ab4-47ac-9c2f-dd0ed659b647" target="_blank" class="source-link">
-          Financial Times (Global Economy) →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-3-macro_economia">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          macro economia
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★★</span>
-        
-        <span class="tier-badge tier-1">T1</span>
-        
-      </div>
-
-      <div class="card-title">
-        Central bank guidance in focus as big four set rates for first time since Iran war
-      </div>
-      <div class="card-summary">
-        Plus, Nvidia talks AI chips, Rachel Reeves makes a pitch for closer EU ties and Japan’s prime minister heads to Washington
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.ft.com/content/837eb0dd-b75e-4f77-9382-3c909d9265bf" target="_blank" class="source-link">
-          Financial Times (Global Economy) →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-4-macro_economia">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          macro economia
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★☆</span>
-        
-        <span class="tier-badge tier-1">T1</span>
-        
-      </div>
-
-      <div class="card-title">
-        Starmer to set out £50mn energy support package to ease Iran war fallout
-      </div>
-      <div class="card-summary">
-        Prime minister will promise to crack down on price gouging as global oil disruption fuels inflation fears
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.ft.com/content/603847c6-d9ad-431f-afd5-a23e0a1e5a1a" target="_blank" class="source-link">
-          Financial Times (Global Economy) →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-5-macro_economia">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          macro economia
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★☆☆</span>
-        
-        <span class="tier-badge tier-1">T1</span>
-        
-      </div>
-
-      <div class="card-title">
-        How will the Fed respond to the Iran war’s fallout?
-      </div>
-      <div class="card-summary">
-        Market Questions is the FT’s guide to the week ahead
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://www.ft.com/content/0cf2001a-1dc6-45ef-99b8-a506197f3abf" target="_blank" class="source-link">
-          Financial Times (Global Economy) →
-        </a>
-      </div>
-    </div>
-    
-
-  </div>
-  
-  
-  
-  
-  <div class="section">
-    <div class="section-header">
-      <span class="section-icon">⚡</span>
-      <span class="section-title">
-        Energia
-      </span>
-      <span class="section-count">5 notizie</span>
-    </div>
-
-    
-    <div class="card" id="article-0-energia">
-      <div class="card-meta">
-        <span class="card-category cat-energia">
-          energia
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★★</span>
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Sinopec Slashes Refining Runs as Hormuz Disruption Squeezes Crude Supply
-      </div>
-      <div class="card-summary">
-        Sinopec, China’s biggest oil refiner, has reduced its run rates by 10%, Bloomberg reported today, citing unnamed sources, in response to the supply squeeze resulting from the traffic disruption in the Strait of Hormuz. The size of the cut is equal to about half a million barrels daily. There will also be additional output losses from maintenance operations, the sources said. The refining major accounts for about a third of China’s total refined petroleum product output, with an average processing rate of 5.2 million barrels daily, the…
-      </div>
-
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">Oil</span>
-        
-      </div>
-      
-
-      <div class="card-footer">
-        <a href="https://oilprice.com/Latest-Energy-News/World-News/Sinopec-Slashes-Refining-Runs-as-Hormuz-Disruption-Squeezes-Crude-Supply.html" target="_blank" class="source-link">
-          OilPrice →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-1-energia">
-      <div class="card-meta">
-        <span class="card-category cat-energia">
-          energia
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★★</span>
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Middle East Crisis Could Triple Pakistan’s Oil Import Bill
-      </div>
-      <div class="card-summary">
-        Previously, we reported that Pakistan could find itself sucked into the Middle East war thanks to the Strategic Mutual Defence Agreement (SMDA) it signed with Saudi Arabia in September 2025. The core of the agreement states that any aggression against one country is considered an aggression against both, potentially requiring Pakistan to intervene against Iran’s missile strikes on Saudi Arabia. However, military confrontation with its southerly neighbor might turn out to be a less existential threat for Pakistan. Surging oil prices are already…
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://oilprice.com/Energy/Crude-Oil/Middle-East-Crisis-Could-Triple-Pakistans-Oil-Import-Bill.html" target="_blank" class="source-link">
-          OilPrice →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-2-energia">
-      <div class="card-meta">
-        <span class="card-category cat-energia">
-          energia
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★★</span>
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        How the Iran War Could Reshape Global Energy Policy
-      </div>
-      <div class="card-summary">
-        The U.S.-Israeli attack on Iran and the ongoing conflict in the Middle East have caused the biggest oil disruption in history. The closure of a major transit route between Asia and Europe, as well as restrictions on fossil fuel production in the region, have driven oil and gas prices up, a trend that is set to continue. So, as governments are facing rising consumer energy bills once again, will it be enough to encourage a Covid-era pivot to renewable energy? The U.S. war against Iran has caused the largest oil disruption in history, according to…
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://oilprice.com/Energy/Energy-General/How-the-Iran-War-Could-Reshape-Global-Energy-Policy.html" target="_blank" class="source-link">
-          OilPrice →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-3-energia">
-      <div class="card-meta">
-        <span class="card-category cat-energia">
-          energia
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★☆☆</span>
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        Oil Prices Remain Volatile as Hormuz Tensions Rise
-      </div>
-      <div class="card-summary">
-        Oil markets remained volatile in early Asian trade on Monday as Trump attempts to form a broader coalition of countries to protect shipping through the Strait of Hormuz amid fresh attacks on energy infrastructure across the Middle East. At the time of writing, West Texas Intermediate had dipped 0.53% to $98.19 after an initial surge, while Brent was continuing its climb, rising 0.41% to $103.60 per barrel. The volatility follows a weekend of escalation in the Middle East conflict, beginning on Friday evening when the U.S. bombed military assets…
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Remain-Volatile-as-Hormuz-Tensions-Rise.html" target="_blank" class="source-link">
-          OilPrice →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-4-energia">
-      <div class="card-meta">
-        <span class="card-category cat-energia">
-          energia
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★☆☆☆</span>
-        
-        <span class="tier-badge tier-4">T4</span>
-        
-      </div>
-
-      <div class="card-title">
-        EU Ministers Race to Shield Industry From an Escalating Energy Shock
-      </div>
-      <div class="card-summary">
-        The European Union is in a rush to find ways to alleviate the energy cost pain for consumers and businesses, with energy ministers of member states set to meet later today to discuss options. These, according to Reuters, include boosting the supply of carbon permits to reduce their price, state support for industrial energy consumers, and tax cuts. The reportedly discussed options suggest European leaders are making a rare move to prioritize energy affordability over emission reduction. The option with greater availability of carbon permits is…
-      </div>
-
-      
-
-      <div class="card-footer">
-        <a href="https://oilprice.com/Latest-Energy-News/World-News/EU-Ministers-Race-to-Shield-Industry-From-an-Escalating-Energy-Shock.html" target="_blank" class="source-link">
-          OilPrice →
+        <a href="https://bbc.com/news/1" target="_blank" class="source-link">
+          BBC →
         </a>
       </div>
     </div>

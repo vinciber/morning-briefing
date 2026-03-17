@@ -123,6 +123,15 @@ sources:
     - url: 'https://www.fsb.org/feed'
       name: 'Financial Stability Board'
       category: 'finanza'
+    - url: 'https://cointelegraph.com/rss'
+      name: 'Cointelegraph'
+      category: 'crypto'
+    - url: 'https://www.coindesk.com/arc/outboundfeeds/rss/'
+      name: 'CoinDesk'
+      category: 'crypto'
+    - url: 'https://bitcoinmagazine.com/.rss/full/'
+      name: 'Bitcoin Magazine'
+      category: 'crypto'
 
   # FONTI CUSTOM (aggiungere qui le fonti personali)
   custom: []

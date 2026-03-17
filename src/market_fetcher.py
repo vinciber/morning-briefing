@@ -130,6 +130,50 @@ def get_global_m2_proxy():
         logger.error(f'Global M2 proxy: {e}')
         return 'N/A', 'N/A'
 
+def get_crypto_fear_greed():
+    """Recupera l'indice Crypto Fear & Greed da alternative.me."""
+    try:
+        url = 'https://api.alternative.me/fng/'
+        r = requests.get(url, timeout=10)
+        data = r.json()
+        val = data['data'][0]['value']
+        cls = data['data'][0]['value_classification']
+        return val, cls
+    except Exception as e:
+        logger.error(f'Fear & Greed: {e}')
+        return 'N/A', 'N/A'
+
+def get_coingecko_prices():
+    """Recupera prezzi BTC, ETH, SOL da CoinGecko (API pubblica)."""
+    try:
+        url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true'
+        r = requests.get(url, timeout=15)
+        data = r.json()
+        
+        res = {}
+        mapping = {'bitcoin': 'BTC', 'ethereum': 'ETH', 'solana': 'SOL'}
+        for cg_id, ticker in mapping.items():
+            if cg_id in data:
+                price = data[cg_id]['usd']
+                change = data[cg_id]['usd_24h_change']
+                res[ticker] = {
+                    'value': f'${price:,.0f}' if price > 1000 else f'${price:.2f}',
+                    'change': f'{change:+.2f}%'
+                }
+        return res
+    except Exception as e:
+        logger.error(f'CoinGecko: {e}')
+        return {}
+
+def get_crypto_data():
+    """Wrapper per aggregare dati crypto."""
+    fng_val, fng_cls = get_crypto_fear_greed()
+    prices = get_coingecko_prices()
+    return {
+        'fear_greed': {'value': fng_val, 'class': fng_cls},
+        'prices': prices
+    }
+
 def get_macro_calendar() -> dict:
     """
     Scarica dati macro USA via FRED API.
@@ -268,130 +312,7 @@ def get_macro_calendar() -> dict:
 
         except Exception as e:
             logger.error(f'✗ FRED {key} ({series_id}): {e}')
-            result[key] = {
-                'label':        label,
-                'value':        None,
-                'unit':         unit,
-                'status':       'error',
-                'next_release': NEXT_RELEASE.get(key, 'N/A'),
-            }
 
-    return result
-
-def get_macro_calendar_eu() -> dict:
-    """
-    Scarica dati macro Eurozona via FRED API + ECB Data Portal.
-    """
-    FRED_API_KEY = os.environ.get('FRED_API_KEY', '')
-    
-    NEXT_RELEASE_EU = {
-        'ecb_rate':        '2026-04-17',  # Prossima riunione BCE
-        'cpi_eu':          '2026-04-02',  # Flash CPI Eurozona
-        'gdp_eu':          '2026-04-30',  # PIL Eurozona 1° stima
-        'unemployment_eu': '2026-04-01',  # Disoccupazione Eurozona
-        'pmi_composite':   '2026-04-23',  # PMI Composito flash
-        'ppi_eu':          '2026-04-03',  # PPI Eurozona
-    }
-
-    result = {}
-    cutoff = datetime.now(timezone.utc) - timedelta(days=180)
-
-    # Serie FRED per dati europei (Eurostat source - Changing Composition Area)
-    # Usiamo 'units' della FRED API per le variazioni, se supportate
-    FRED_SERIES_EU = {
-        'cpi_eu':          ('CP0000EZCCM086NEST',  'CPI YoY Eurozona',     1, '%', 'pc1'), 
-        'gdp_eu':          ('CLVMNACSCAB1GQEA',    'PIL QoQ Eurozona',     1, '%', 'lin'), 
-        'unemployment_eu': ('LRHUTTTTEZM156S',     'Disoccupazione EU',    1, '%', 'lin'), 
-        'ecb_rate':        ('ECBDFR',              'Tasso BCE',            2, '%', 'lin'),
-    }
-
-    if FRED_API_KEY:
-        BASE = 'https://api.stlouisfed.org/fred/series/observations'
-        for key, (series_id, label, decimals, unit, transform) in FRED_SERIES_EU.items():
-            try:
-                params = {
-                    'series_id':        series_id,
-                    'api_key':          FRED_API_KEY,
-                    'file_type':        'json',
-                    'sort_order':       'desc',
-                    'limit':            2,
-                }
-                # Applichiamo transform solo se esplicitamente richiesto e non è 'lin'
-                if transform != 'lin':
-                    params['units'] = transform
-
-                r = requests.get(BASE, params=params, timeout=15)
-                r.raise_for_status()
-                obs = r.json().get('observations', [])
-
-                if not obs or obs[0].get('value') == '.':
-                    raise ValueError('Nessun dato')
-
-                latest  = obs[0]
-                previous = obs[1] if len(obs) > 1 else None
-                val_raw  = latest.get('value', '.')
-                prev_raw = previous.get('value', '.') if previous else '.'
-                date_str = latest.get('date', '')
-
-                try:
-                    obs_dt   = datetime.strptime(date_str, '%Y-%m-%d').replace(tzinfo=timezone.utc)
-                    is_recent = obs_dt >= cutoff
-                except Exception:
-                    is_recent = False
-                
-                if not is_recent or val_raw == '.':
-                    msg = f"Dato non recente ({date_str})" if val_raw != '.' else "Nessun dato"
-                    logger.warning(f'⚠️ EU {label}: {msg} -> segnato come upcoming')
-                    result[key] = {
-                        'label':        label,
-                        'value':        None,
-                        'unit':         unit,
-                        'status':       'upcoming',
-                        'next_release': NEXT_RELEASE_EU.get(key, 'N/A'),
-                        'region':       'EU',
-                    }
-                    continue
-
-                val_f  = float(val_raw)
-                prev_f = float(prev_raw) if prev_raw != '.' else None
-                
-                # Calcolo manuale se abbiamo ricevuto index/livelli (es. > 20) invece di %
-                # Questo serve se FRED respinge 'pcq' o se 'lin' restituisce un indice
-                if val_f > 20 and prev_f:
-                    val = ((val_f - prev_f) / prev_f) * 100
-                    # Troviamo un "previous" approssimativo (non perfetto ma utile per UI)
-                    prev = None 
-                else:
-                    val  = val_f
-                    prev = prev_f
-
-                val_fmt  = f'{val:.{decimals}f}{unit}'
-                prev_fmt = f'{prev:.{decimals}f}{unit}' if prev is not None else 'N/A'
-
-                result[key] = {
-                    'label':        label,
-                    'value':        val_fmt,
-                    'previous':     prev_fmt,
-                    'release_date': date_str,
-                    'status':       'released',
-                    'next_release': NEXT_RELEASE_EU.get(key, 'N/A'),
-                    'region':       'EU',
-                }
-                logger.info(f'✅ EU {label}: {val_fmt} ({date_str})')
-
-            except Exception as e:
-                logger.error(f'✗ FRED EU {key}: {e}')
-                result[key] = {
-                    'label':        label,
-                    'value':        None,
-                    'unit':         unit,
-                    'status':       'upcoming',
-                    'next_release': NEXT_RELEASE_EU.get(key, 'N/A'),
-                    'region':       'EU',
-                }
-
-    # Il portale ECB Data Portal è instabile o richiede registrazione per molti dati (es. PMI)
-    # Per ora ci affidiamo esclusivamente a FRED che è più affidabile.
     return result
 
 def _format_market_value(val):
@@ -400,9 +321,169 @@ def _format_market_value(val):
     val_str = str(val).replace(',', '')
     if '.' in val_str:
         try:
+            import re
             return re.sub(r'(\d+)\.(\d{2})\d+', r'\1.\2', val_str)
         except: return val
     return val
+
+def fetch_eurostat_indicator(indicator_url: str):
+    """
+    Helper per recuperare dati da Eurostat API.
+    Restituisce (valore, precedente, data_str)
+    """
+    try:
+        r = requests.get(indicator_url, timeout=15)
+        r.raise_for_status()
+        data = r.json()
+        values = data.get('value', {})
+        indices = sorted([int(k) for k in values.keys()])
+        
+        if not indices:
+            return None, None, None
+            
+        latest_idx = indices[-1]
+        prev_idx = indices[-2] if len(indices) > 1 else None
+        
+        val = float(values[str(latest_idx)])
+        prev = float(values[str(prev_idx)]) if prev_idx is not None else None
+        
+        time_cat = data['dimension']['time']['category']
+        time_labels = {idx: label for label, idx in time_cat['index'].items()}
+        date_str = time_labels.get(latest_idx, "N/A")
+        
+        return val, prev, date_str
+    except Exception as e:
+        logger.error(f'✗ Eurostat Error ({indicator_url.split("/")[-1].split("?")[0]}): {e}')
+        return None, None, None
+
+def get_macro_calendar_eu() -> dict:
+    """
+    Scarica dati macro Eurozona via Eurostat API + FRED.
+    """
+    FRED_API_KEY = os.environ.get('FRED_API_KEY', '')
+    
+    NEXT_RELEASE_EU = {
+        'ecb_rate':        '2026-04-17',  # Prossima riunione BCE
+        'cpi_eu':          '2026-04-02',  # Flash CPI Eurozona
+        'gdp_eu':          '2026-04-30',  # PIL Eurozona 1° stima
+        'unemployment_eu': '2026-04-01',  # Disoccupazione Eurozona
+    }
+
+    result = {}
+    cutoff_short = datetime.now(timezone.utc) - timedelta(days=60)  # Per CPI/Unemp
+    cutoff_long = datetime.now(timezone.utc) - timedelta(days=150) # Per GDP (trimestrale)
+
+    # 1. Indicatore PIL (Eurostat)
+    gdp_url = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/namq_10_gdp?geo=EA&unit=CLV_PCH_PRE&na_item=B1GQ&s_adj=SCA&lastTimePeriod=2"
+    val, prev, date_str = fetch_eurostat_indicator(gdp_url)
+    if val is not None:
+        is_recent = False
+        try:
+            if '-Q' in date_str:
+                year, q = date_str.split('-Q')
+                month = int(q) * 3
+                dt = datetime(int(year), month, 28, tzinfo=timezone.utc)
+                is_recent = dt >= cutoff_long
+        except: pass
+
+        if is_recent:
+            result['gdp_eu'] = {
+                'label':        'PIL QoQ Eurozona',
+                'value':        f'{val:.1f}%',
+                'previous':     f'{prev:.1f}%' if prev is not None else 'N/A',
+                'release_date': date_str,
+                'status':       'released',
+                'next_release': NEXT_RELEASE_EU.get('gdp_eu', 'N/A'),
+                'region':       'EU',
+            }
+            logger.info(f'✅ EU PIL QoQ: {val:.1f}% ({date_str})')
+        else:
+            logger.warning(f'⚠️ EU PIL QoQ: Dato datato ({date_str})')
+
+    # 2. Indicatore Inflazione CPI (Eurostat)
+    cpi_url = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_manr?geo=EA20&coicop=CP00&lastTimePeriod=2"
+    val, prev, date_str = fetch_eurostat_indicator(cpi_url)
+    if val is not None:
+        is_recent = False
+        try:
+            dt = datetime.strptime(date_str, '%Y-%m').replace(tzinfo=timezone.utc)
+            is_recent = dt >= cutoff_short
+        except: pass
+
+        if is_recent:
+            result['cpi_eu'] = {
+                'label':        'CPI YoY Eurozona',
+                'value':        f'{val:.1f}%',
+                'previous':     f'{prev:.1f}%' if prev is not None else 'N/A',
+                'release_date': date_str,
+                'status':       'released',
+                'next_release': NEXT_RELEASE_EU.get('cpi_eu', 'N/A'),
+                'region':       'EU',
+            }
+            logger.info(f'✅ EU CPI YoY: {val:.1f}% ({date_str})')
+
+    # 3. Indicatore Disoccupazione (Eurostat)
+    unemp_url = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/une_rt_m?geo=EA20&unit=PC_ACT&s_adj=SA&age=TOTAL&sex=T&lastTimePeriod=2"
+    val, prev, date_str = fetch_eurostat_indicator(unemp_url)
+    if val is not None:
+        is_recent = False
+        try:
+            dt = datetime.strptime(date_str, '%Y-%m').replace(tzinfo=timezone.utc)
+            is_recent = dt >= cutoff_short
+        except: pass
+
+        if is_recent:
+            result['unemployment_eu'] = {
+                'label':        'Disoccupazione EU',
+                'value':        f'{val:.1f}%',
+                'previous':     f'{prev:.1f}%' if prev is not None else 'N/A',
+                'release_date': date_str,
+                'status':       'released',
+                'next_release': NEXT_RELEASE_EU.get('unemployment_eu', 'N/A'),
+                'region':       'EU',
+            }
+            logger.info(f'✅ EU Disoccupazione: {val:.1f}% ({date_str})')
+
+    # 4. Tasso BCE (FRED)
+    if FRED_API_KEY:
+        try:
+            params = {'series_id': 'ECBDFR', 'api_key': FRED_API_KEY, 'file_type': 'json', 'sort_order': 'desc', 'limit': 2}
+            r = requests.get('https://api.stlouisfed.org/fred/series/observations', params=params, timeout=15)
+            r.raise_for_status()
+            obs = r.json().get('observations', [])
+            if obs and obs[0]['value'] != '.':
+                val_bce = float(obs[0]['value'])
+                date_bce = obs[0]['date']
+                result['ecb_rate'] = {
+                    'label': 'Tasso BCE',
+                    'value': f'{val_bce:.2f}%',
+                    'release_date': date_bce,
+                    'status': 'released',
+                    'next_release': NEXT_RELEASE_EU.get('ecb_rate', 'N/A'),
+                    'region': 'EU',
+                }
+                logger.info(f'✅ EU Tasso BCE: {val_bce:.2f}% ({date_bce})')
+        except Exception as e:
+            logger.error(f'✗ FRED ECB Rate: {e}')
+
+    # Gestione fallback per indicatori mancanti (status upcoming)
+    for key in ['gdp_eu', 'cpi_eu', 'unemployment_eu', 'ecb_rate']:
+        if key not in result:
+            label_map = {
+                'gdp_eu': 'PIL QoQ Eurozona',
+                'cpi_eu': 'CPI YoY Eurozona',
+                'unemployment_eu': 'Disoccupazione EU',
+                'ecb_rate': 'Tasso BCE'
+            }
+            result[key] = {
+                'label': label_map.get(key, key),
+                'value': None,
+                'status': 'upcoming',
+                'next_release': NEXT_RELEASE_EU.get(key, 'N/A'),
+                'region': 'EU',
+            }
+
+    return result
 
 def run():
     logger.info('📈 Recupero dati di mercato...')
@@ -463,6 +544,12 @@ def run():
     val, chg = get_global_m2_proxy()
     results['global_m2'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'Global M2: {val} ({chg})')
+
+    # Crypto data
+    logger.info('₿ Fetching crypto data...')
+    results['crypto'] = get_crypto_data()
+    logger.info(f'Crypto: BTC {results["crypto"]["prices"].get("BTC", {}).get("value", "N/A")}, '
+                f'F&G: {results["crypto"]["fear_greed"]["value"]}')
 
     # Macro calendar
     logger.info('📅 Fetching macro calendar...')

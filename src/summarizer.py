@@ -156,6 +156,11 @@ VIETATO ASSOLUTO:
   "il mercato è estremamente volatile" — se non supportate da dato specifico
 - Finali tipo "That's all for today", "arrivederci", "Stay tuned", "We'll be back"
 - Chiudere con un riassunto di quanto già detto — la chiusura deve guardare avanti
+- MAI scrivere l'acronimo accanto al nome esteso: 
+  NON "l'indice del dollaro (DXY)" o "l'indice del dollaro, noto come DXY"
+  SÌ "l'indice del dollaro" — senza acronimo
+  NON "la Federal Reserve (Fed)"
+  SÌ "la Federal Reserve" — senza acronimo tra parentesi
   Regola generale: se usi il nome esteso, NON aggiungere mai l'acronimo
 
 SE OGGI È LUNEDÌ e sono presenti report di BlackRock Investment Institute o Goldman Sachs:
@@ -340,6 +345,16 @@ def run():
             chg = _format_value(item.get('change', 'N/A'))
             if val and val != 'N/A':
                 lines.append(f"  {label}: {val} ({chg})")
+
+        # Aggiungi Crypto Data
+        crypto = md.get('crypto', {})
+        if crypto:
+            lines.append('\nCRYPTO MARKET DATA:')
+            fg = crypto.get('fear_greed', {})
+            lines.append(f"  Fear & Greed Index: {fg.get('value', 'N/A')} ({fg.get('class', 'N/A')})")
+            prices = crypto.get('prices', {})
+            for ticker, pinfo in prices.items():
+                lines.append(f"  {ticker}: {pinfo.get('value', 'N/A')} ({pinfo.get('change', 'N/A')})")
 
         # Aggiungi macro calendar al contesto
         macro = md.get('macro_calendar', {})

@@ -99,7 +99,7 @@ def group_articles_into_sections(articles, lang):
         articles_by_cat[cat].append(art)
 
     sections = []
-    cat_order = ['mercati', 'geopolitica', 'macro_economia', 'energia']
+    cat_order = ['mercati', 'geopolitica', 'macro_economia', 'energia', 'crypto']
     for cat in cat_order:
         if cat in articles_by_cat:
             sections.append({
@@ -187,12 +187,32 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
     # No modifications to articles here, Jinja2 template handles display labels
     # by checking for _en or _it suffixes, or falling back to generic fields.
 
-    # Archive links
+    # Hierarchical archive
     archive_dir = DOCS_DIR if lang == 'it' else DOCS_DIR / 'en'
-    archive_dates = sorted(
+    all_dates = sorted(
         [f.stem for f in archive_dir.glob('20*.html')],
         reverse=True
-    )[:30]
+    )
+    
+    hierarchical_raw = defaultdict(lambda: defaultdict(list))
+    for d in all_dates:
+        parts = d.split('-')
+        if len(parts) == 3:
+            year, month, _ = parts
+            hierarchical_raw[year][month].append(d)
+    
+    hierarchical_archive = []
+    for year in sorted(hierarchical_raw.keys(), reverse=True):
+        months_list = []
+        for month in sorted(hierarchical_raw[year].keys(), reverse=True):
+            months_list.append({
+                'month': month,
+                'dates': hierarchical_raw[year][month]
+            })
+        hierarchical_archive.append({
+            'year': year,
+            'months': months_list
+        })
 
     lang_info = {
         'title': 'The Morning Brief' if lang == 'en' else 'Morning Briefing',
@@ -213,7 +233,7 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
         'index_url': 'index.html' if lang == 'it' else 'index.html',
         'it_url': f'{date}.html' if lang == 'it' else f'../{date}.html',
         'en_url': f'en/{date}.html' if lang == 'it' else f'{date}.html',
-        'archive_dates': archive_dates,
+        'hierarchical_archive': hierarchical_archive,
         'favicon_url': 'https://vinciber.github.io/morning-briefing/favicon.ico',
         'base_url': base_url
     }

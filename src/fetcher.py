@@ -64,6 +64,7 @@ CATEGORY_CAPS = {
     'geopolitica':    6,
     'macro_economia': 6,
     'energia':        5,
+    'crypto':         5,
 }
 GLOBAL_CAP = 25
 
@@ -382,8 +383,9 @@ CATEGORY_REMAP = {
     'banche_centrali': 'macro_economia',
     'finanza':         'mercati',
     'economia':        'macro_economia',
-    'commodities':     'energia',
+    'energia':        'energia',
     'politica':        'geopolitica',
+    'crypto':          'crypto',
 }
 
 def normalize_category(cat):
