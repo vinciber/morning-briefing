@@ -494,7 +494,7 @@ NOTIZIE DEL GIORNO:
 
 REQUISITO: obiettivo 700-800 parole in ITALIANO.
 REGOLA D'ORO: Sii discorsivo. Non ripetere gli stessi dati tra apertura e analisi mercati. Inserisci la sezione Cripto dopo i mercati tradizionali.
-Restituisci JSON: {"audio_script_it": "..."}"""
+Restituisci JSON: {{"audio_script_it": "..."}}"""
 
         response_it = client.chat.completions.create(
             model='meta-llama/llama-4-scout-17b-16e-instruct',
@@ -525,7 +525,7 @@ NEWS OF THE DAY:
 
 REQUIREMENT: target 700-800 words in ENGLISH.
 GOLDEN RULE: Be narrative. Do not repeat data points between the opening and the market analysis. Include the Crypto section after traditional markets.
-Return JSON: {"audio_script_en": "..."}"""
+Return JSON: {{"audio_script_en": "..."}}"""
 
         response_en = client.chat.completions.create(
             model='meta-llama/llama-4-scout-17b-16e-instruct',
