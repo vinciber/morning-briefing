@@ -141,17 +141,18 @@ APERTURA OBBLIGATORIA — usare una di queste varianti (mai Bloomberg):
 - "Bentornati al briefing finanziario mattutino."
 - "Buongiorno a tutti, iniziamo il nostro aggiornamento quotidiano sui mercati."
 
-STRUTTURA (rispetta i tempi):
-1. APERTURA + SENTIMENT (150 parole): tono e 3 dati chiave narrativi
-2. MERCATI ASSET PER ASSET (250 parole): ogni asset con valore e implicazione
-3. GEOPOLITICA (150 parole): eventi e impatto diretto sui prezzi
-4. MACRO E BANCHE CENTRALI (150 parole): Fed, BCE, tassi, inflazione
-5. CHIUSURA FORWARD-LOOKING (100 parole): dati specifici da monitorare con date
+STRUTTURA NARRATIVA (non ripetere i dati tra le sezioni):
+1. APERTURA + SENTIMENT (100 parole): Focus sul "perché" oggi è risk-on/off. Non elencare ancora i prezzi.
+2. MERCATI FINANZIARI (200 parole): Azionario (S&P/Stoxx/Nikkei), Obbligazionario (TLT/10Y), Valute (DXY/Euro) e Commodities (Oil/Gold). Dai i numeri qui.
+3. DIGITAL ASSETS E CRIPTOVALUTE (150 parole): SEZIONE OBBLIGATORIA. Commenta Bitcoin, Ethereum, Solana e l'indice Fear & Greed. Spiega l'interazione tra crypto e mercati tradizionali.
+4. GEOPOLITICA (150 parole): Eventi in corso e impatto diretto sui prezzi dell'energia o sulla stabilità.
+5. MACRO E BANCHE CENTRALI (150 parole): Decisioni Fed/BCE, inflazione e dati macro recenti.
+6. CHIUSURA E OUTLOOK (100 parole): Cosa monitorare domani e nei prossimi giorni.
 
 VIETATO ASSOLUTO:
 - Aprire con "Buongiorno e benvenuti a Bloomberg Radio" o qualsiasi riferimento a Bloomberg
 - Elenchi numerati (1. 2. 3.) o con trattini
-- Ripetere lo stesso concetto più di una volta — ogni frase deve aggiungere informazione nuova
+- RIPETERE lo stesso dato numerico in più sezioni (es. se dici il VIX in apertura, non ripeterlo nel market analysis)
 - Frasi generiche come "sarà importante monitorare", "bisogna essere pronti a reagire",
   "il mercato è estremamente volatile" — se non supportate da dato specifico
 - Finali tipo "That's all for today", "arrivederci", "Stay tuned", "We'll be back"
@@ -216,17 +217,18 @@ MANDATORY OPENING — use one of these variants (never Bloomberg):
 - "Welcome back to your morning market briefing."
 - "Good morning, and welcome to your daily market update."
 
-STRUCTURE (respect timing):
-1. OPENING + SENTIMENT (150 words): tone and 3 key narrative data points
-2. MARKETS ASSET BY ASSET (250 words): each asset with value and implication
-3. GEOPOLITICS (150 words): events and direct price impact
-4. MACRO AND CENTRAL BANKS (150 words): Fed, ECB, rates, inflation
-5. FORWARD-LOOKING CLOSE (100 words): specific data to watch with dates
+NARRATIVE STRUCTURE (do not repeat data points between sections):
+1. OPENING + SENTIMENT (100 words): Focus on the "why" of today's market mood. Do not list all prices yet.
+2. FINANCIAL MARKETS (200 words): Equities (S&P/Stoxx/Nikkei), Bonds (Treasury/10Y), Currencies (DXY/Euro), and Commodities (Oil/Gold). Provide numerical values here.
+3. DIGITAL ASSETS & CRYPTO (150 words): MANDATORY SECTION. Discuss Bitcoin, Ethereum, Solana and the Fear & Greed index. Explain how crypto relates to broader market trends.
+4. GEOPOLITICS (150 words): Ongoing events and direct impact on energy prices or stability.
+5. MACRO & CENTRAL BANKS (150 words): Fed/ECB decisions, inflation, and recent macro data.
+6. CLOSE & OUTLOOK (100 words): What to watch tomorrow and in the coming days.
 
 ABSOLUTELY FORBIDDEN:
 - Opening with "Benvenuti" or ANY Italian words
 - Numbered lists (1. 2. 3.) or bullet points
-- Repeating the same concept more than once
+- REPEATING the same numerical data in multiple sections (e.g., if you mention the VIX in the opening, do not repeat it in market analysis)
 - Generic phrases like "it will be important to monitor" without specific data
 - Endings like "That's all for today", "Stay tuned", "We'll be back"
 - NEVER write the acronym next to the full name:
@@ -488,8 +490,9 @@ DATI MERCATO:
 NOTIZIE DEL GIORNO:
 {chr(10).join(f"- [{a['category'].upper()}] {'⭐ REPORT SETTIMANALE: ' if a.get('source') in weekly_sources else ''}{a['title']} — {a['snippet'][:150]}" for a in (([a for a in articles_slim if a.get('source') in weekly_sources] + [a for a in articles_slim if a.get('source') not in weekly_sources])[:14]))}
 
-REQUISITO: obiettivo 700 parole in ITALIANO.
-Restituisci JSON: {{"audio_script_it": "..."}}"""
+REQUISITO: obiettivo 700-800 parole in ITALIANO.
+REGOLA D'ORO: Sii discorsivo. Non ripetere gli stessi dati tra apertura e analisi mercati. Inserisci la sezione Cripto dopo i mercati tradizionali.
+Restituisci JSON: {"audio_script_it": "..."}"""
 
         response_it = client.chat.completions.create(
             model='meta-llama/llama-4-scout-17b-16e-instruct',
@@ -518,8 +521,9 @@ MARKET DATA:
 NEWS OF THE DAY:
 {chr(10).join(f"- [{a['category'].upper()}] {'⭐ WEEKLY REPORT: ' if a.get('source') in weekly_sources else ''}{a['title']}" for a in (([a for a in articles_slim if a.get('source') in weekly_sources] + [a for a in articles_slim if a.get('source') not in weekly_sources])[:14]))}
 
-REQUIREMENT: target 700 words in ENGLISH.
-Return JSON: {{"audio_script_en": "..."}}"""
+REQUIREMENT: target 700-800 words in ENGLISH.
+GOLDEN RULE: Be narrative. Do not repeat data points between the opening and the market analysis. Include the Crypto section after traditional markets.
+Return JSON: {"audio_script_en": "..."}"""
 
         response_en = client.chat.completions.create(
             model='meta-llama/llama-4-scout-17b-16e-instruct',
