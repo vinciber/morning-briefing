@@ -144,7 +144,7 @@ APERTURA OBBLIGATORIA — usare una di queste varianti (mai Bloomberg):
 STRUTTURA NARRATIVA (non ripetere i dati tra le sezioni):
 1. APERTURA + SENTIMENT (100 parole): Focus sul "perché" oggi è risk-on/off. Non elencare ancora i prezzi.
 2. MERCATI FINANZIARI (200 parole): Azionario (S&P/Stoxx/Nikkei), Obbligazionario (TLT/10Y), Valute (DXY/Euro) e Commodities (Oil/Gold). Dai i numeri qui.
-3. DIGITAL ASSETS E CRIPTOVALUTE (150 parole): SEZIONE OBBLIGATORIA. Commenta Bitcoin, Ethereum, Solana e l'indice Fear & Greed. Spiega l'interazione tra crypto e mercati tradizionali.
+3. DIGITAL ASSETS E CRIPTOVALUTE (150 parole): SEZIONE OBBLIGATORIA. Commenta Bitcoin, Ethereum, Solana e BNB, oltre all'indice Fear & Greed. Spiega l'interazione tra crypto e mercati tradizionali.
 4. GEOPOLITICA (150 parole): Eventi in corso e impatto diretto sui prezzi dell'energia o sulla stabilità.
 5. MACRO E BANCHE CENTRALI (150 parole): Decisioni Fed/BCE, inflazione e dati macro recenti.
 6. CHIUSURA E OUTLOOK (100 parole): Cosa monitorare domani e nei prossimi giorni.
@@ -181,6 +181,7 @@ PRONUNCIA ASSET — scrivi sempre la forma estesa, mai l'acronimo:
 - BCE → "la Banca Centrale Europea"
 - Fed → "la Federal Reserve"
 - BOJ → "la Banca del Giappone"
+- BNB → "il Binance Coin"
 
 ACCURATEZZA STORICA:
 - Non attenuare mai eventi già in corso con "potenziale" o "possibile"
@@ -220,7 +221,7 @@ MANDATORY OPENING — use one of these variants (never Bloomberg):
 NARRATIVE STRUCTURE (do not repeat data points between sections):
 1. OPENING + SENTIMENT (100 words): Focus on the "why" of today's market mood. Do not list all prices yet.
 2. FINANCIAL MARKETS (200 words): Equities (S&P/Stoxx/Nikkei), Bonds (Treasury/10Y), Currencies (DXY/Euro), and Commodities (Oil/Gold). Provide numerical values here.
-3. DIGITAL ASSETS & CRYPTO (150 words): MANDATORY SECTION. Discuss Bitcoin, Ethereum, Solana and the Fear & Greed index. Explain how crypto relates to broader market trends.
+3. DIGITAL ASSETS & CRYPTO (150 words): MANDATORY SECTION. Discuss Bitcoin, Ethereum, Solana, BNB and the Fear & Greed index. Explain how crypto relates to broader market trends.
 4. GEOPOLITICS (150 words): Ongoing events and direct impact on energy prices or stability.
 5. MACRO & CENTRAL BANKS (150 words): Fed/ECB decisions, inflation, and recent macro data.
 6. CLOSE & OUTLOOK (100 words): What to watch tomorrow and in the coming days.
@@ -248,6 +249,7 @@ ASSET PRONUNCIATION — always use full form:
 - BCE/ECB → "the European Central Bank"
 - Fed → "the Federal Reserve"
 - BOJ → "the Bank of Japan"
+- BNB → "Binance Coin"
 
 ACCURATEZZA STORICA:
 - Non attenuare mai eventi già in corso con "potenziale" o "possibile"

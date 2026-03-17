@@ -146,12 +146,17 @@ def get_crypto_fear_greed():
 def get_coingecko_prices():
     """Recupera prezzi BTC, ETH, SOL da CoinGecko (API pubblica)."""
     try:
-        url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true'
+        url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin&vs_currencies=usd&include_24hr_change=true'
         r = requests.get(url, timeout=15)
         data = r.json()
         
         res = {}
-        mapping = {'bitcoin': 'BTC', 'ethereum': 'ETH', 'solana': 'SOL'}
+        mapping = {
+            'bitcoin': 'BTC',
+            'ethereum': 'ETH',
+            'solana': 'SOL',
+            'binancecoin': 'BNB'
+        }
         for cg_id, ticker in mapping.items():
             if cg_id in data:
                 price = data[cg_id]['usd']
