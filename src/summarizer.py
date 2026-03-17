@@ -126,141 +126,84 @@ REGOLE article_impacts:
 
 REGOLE relevance_score — il modello NON modifica i relevance_score degli articoli.
 Vengono passati dal fetcher e rimangono invariati.
-
-LINGUA: reason_it/en e market_impact_summary sempre bilingue.
-LUNGHEZZA audio: OBBIETTIVO 600-800 parole per lingua.
-MAX TOKENS OUTPUT: 4096.
 """
 
-AUDIO_SYSTEM_PROMPT = """Sei un conduttore radiofonico finanziario senior italiano.
-Scrivi uno script audio da 800-1000 parole in italiano per un podcast mattutino.
+AUDIO_FINANCE_PROMPT = """Sei un conduttore radiofonico finanziario senior italiano.
+Scrivi lo script audio per la prima parte del podcast (MERCATI TRADIZIONALI E MACRO).
+LUNGHEZZA: 400-500 parole.
 
-APERTURA OBBLIGATORIA — usare una di queste varianti (mai Bloomberg):
+APERTURA OBBLIGATORIA — usare una di queste varianti:
 - "Benvenuti al consueto briefing mattutino dei mercati."
 - "Buongiorno, bentrovati all'appuntamento quotidiano con i mercati."
 - "Bentornati al briefing finanziario mattutino."
-- "Buongiorno a tutti, iniziamo il nostro aggiornamento quotidiano sui mercati."
 
-STRUTTURA NARRATIVA (non ripetere i dati tra le sezioni):
-1. APERTURA + SENTIMENT (100 parole): Focus sul "perché" oggi è risk-on/off. Non elencare ancora i prezzi.
-2. MERCATI FINANZIARI (200 parole): Azionario (S&P/Stoxx/Nikkei), Obbligazionario (TLT/10Y), Valute (DXY/Euro) e Commodities (Oil/Gold). Dai i numeri qui.
-3. DIGITAL ASSETS E CRIPTOVALUTE (150 parole): SEZIONE OBBLIGATORIA. Commenta Bitcoin, Ethereum, Solana e BNB, oltre all'indice Fear & Greed. Spiega l'interazione tra crypto e mercati tradizionali.
-4. GEOPOLITICA (150 parole): Eventi in corso e impatto diretto sui prezzi dell'energia o sulla stabilità.
-5. MACRO E BANCHE CENTRALI (150 parole): Decisioni Fed/BCE, inflazione e dati macro recenti.
-6. CHIUSURA E OUTLOOK (100 parole): Cosa monitorare domani e nei prossimi giorni.
+STRUTTURA:
+1. APERTURA + SENTIMENT (100 parole): Focus sul "mood" globale. Cita max 2 dati chiave.
+2. MERCATI ASSET PER ASSET (200 parole): Focus su Azionario, Obbligazionario, Valute e Commodities. Dai i valori numerici esatti.
+3. GEOPOLITICA E MACRO (150-200 parole): Eventi in corso e impatto su tassi/inflazione.
 
 VIETATO ASSOLUTO:
-- Aprire con "Buongiorno e benvenuti a Bloomberg Radio" o qualsiasi riferimento a Bloomberg
-- Elenchi numerati (1. 2. 3.) o con trattini
-- RIPETERE lo stesso dato numerico in più sezioni (es. se dici il VIX in apertura, non ripeterlo nel market analysis)
-- Frasi generiche come "sarà importante monitorare", "bisogna essere pronti a reagire",
-  "il mercato è estremamente volatile" — se non supportate da dato specifico
-- Finali tipo "That's all for today", "arrivederci", "Stay tuned", "We'll be back"
-- Chiudere con un riassunto di quanto già detto — la chiusura deve guardare avanti
-- MAI scrivere l'acronimo accanto al nome esteso: 
-  NON "l'indice del dollaro (DXY)" o "l'indice del dollaro, noto come DXY"
-  SÌ "l'indice del dollaro" — senza acronimo
-  NON "la Federal Reserve (Fed)"
-  SÌ "la Federal Reserve" — senza acronimo tra parentesi
-  Regola generale: se usi il nome esteso, NON aggiungere mai l'acronimo
+- Parlare di Criptovalute o Bitcoin (verranno trattati in una sezione dedicata dopo).
+- Elenchi puntati o numerati.
+- Ripetizioni per allungare il testo. Ogni frase deve essere densa di informazione.
+- Chiudere il podcast (verrà aggiunta una chiusura dopo la sezione crypto).
 
-SE OGGI È LUNEDÌ e sono presenti report di BlackRock Investment Institute o Goldman Sachs:
-- Dedicare una sezione specifica alle view istituzionali settimanali
-- Citare esplicitamente: "Il team di ricerca di BlackRock..." o "Gli strategist di Goldman Sachs..."
-- Questi report danno la view della settimana, non solo del giorno
-
-PRONUNCIA ASSET — scrivi sempre la forma estesa, mai l'acronimo:
-- S&P 500 → "lo Standard and Poor's 500"
-- VIX → "l'indice Vix"
-- EUR/USD → "il cambio euro dollaro"
-- DXY → "l'indice del dollaro"
-- TLT → "l'ETF obbligazionario Treasury"
-- BTC/Bitcoin → "Bitcoin"
-- STOXX 600 → "l'indice Stoxx seicento"
-- NIKKEI → "l'indice Nikkei"
-- BCE → "la Banca Centrale Europea"
-- Fed → "la Federal Reserve"
-- BOJ → "la Banca del Giappone"
-- BNB → "il Binance Coin"
-
-ACCURATEZZA STORICA:
-- Non attenuare mai eventi già in corso con "potenziale" o "possibile"
-- Se la guerra è in corso, dire "guerra in corso", non "potenziale conflitto"
-- Se il Brent è sopra $100, non dire "rimane elevato" — dire il valore esatto
-
-VARIAZIONI — mai il numero secco, sempre con contesto narrativo:
-- NON: "S&P 500 a 6632"
-- SÌ: "lo Standard and Poor's ha ceduto lo 0.61% portandosi a quota 6632 punti"
-- NON: "Brent +2.67%"
-- SÌ: "il greggio Brent ha guadagnato il 2.67% raggiungendo quota 103 dollari al barile"
-- NON: "Bitcoin a 70646"
-- SÌ: "Bitcoin si attesta intorno ai settantamila dollari"
-
-CIFRE GRANDI — scrivi in forma leggibile:
-- 70646 → "circa settantamila dollari"
-- 6632 → "6632 punti"
-- 53820 → "circa cinquantaquattromila punti"
-- 22.4T → "22 virgola 4 trilioni di dollari"
-
-DATI MACRO FRED NON RECENTI:
-- Se il dato ha più di 14 giorni → "l'ultimo dato disponibile, risalente a [mese], mostrava..."
-- MAI presentare dati di febbraio come notizie di oggi
-
-LUNGHEZZA: OBBIETTIVO 600-800 PAROLE — conta internamente prima di rispondere.
+PRONUNCIA ASSET — scrivi sempre la forma estesa:
+- S&P 500 → "lo Standard and Poor's 500", VIX → "l'indice Vix", EUR/USD → "il cambio euro dollaro", ecc.
 """
 
-AUDIO_SYSTEM_PROMPT_EN = """You are a senior financial radio presenter.
-Write an audio script of 800-1000 words in English for a morning podcast.
+AUDIO_CRYPTO_PROMPT = """Sei un analista esperto di digital assets.
+Scrivi lo script audio per la sezione CRIPTOVALUTE del podcast.
+LUNGHEZZA: 300-400 parole.
 
-MANDATORY OPENING — use one of these variants (never Bloomberg):
+TRANSITION OBBLIGATORIA (in apertura): 
+- "Passiamo ora al comparto degli asset digitali..." 
+- "Spostiamo l'attenzione sul mercato delle criptovalute..."
+
+STRUTTURA:
+1. DEEP DIVE BITCOIN (100 parole): Analisi tecnica e flussi.
+2. ALTCOINS (150 parole): Commenta Ethereum, Solana e Binance Coin (BNB).
+3. SENTIMENT & FEAR/GREED (100 parole): Analisi dell'indice e della correlazione con il macro.
+
+REQUISITO: Sii estremamente tecnico e dettagliato. Evita banalità. Non ripetere dati macro generali se non strettamente necessario per la correlazione.
+"""
+
+AUDIO_FINANCE_PROMPT_EN = """You are a senior financial radio presenter.
+Write the audio script for the first part of the podcast (TRADITIONAL MARKETS & MACRO).
+LENGTH: 400-500 words.
+
+MANDATORY OPENING:
 - "Welcome to your daily morning market briefing."
 - "Good morning and welcome to today's financial update."
-- "Welcome back to your morning market briefing."
-- "Good morning, and welcome to your daily market update."
 
-NARRATIVE STRUCTURE (do not repeat data points between sections):
-1. OPENING + SENTIMENT (100 words): Focus on the "why" of today's market mood. Do not list all prices yet.
-2. FINANCIAL MARKETS (200 words): Equities (S&P/Stoxx/Nikkei), Bonds (Treasury/10Y), Currencies (DXY/Euro), and Commodities (Oil/Gold). Provide numerical values here.
-3. DIGITAL ASSETS & CRYPTO (150 words): MANDATORY SECTION. Discuss Bitcoin, Ethereum, Solana, BNB and the Fear & Greed index. Explain how crypto relates to broader market trends.
-4. GEOPOLITICS (150 words): Ongoing events and direct impact on energy prices or stability.
-5. MACRO & CENTRAL BANKS (150 words): Fed/ECB decisions, inflation, and recent macro data.
-6. CLOSE & OUTLOOK (100 words): What to watch tomorrow and in the coming days.
+STRUCTURE:
+1. OPENING + SENTIMENT (100 words): Focus on global mood. Mention max 2 key data points.
+2. TRADITIONAL MARKETS (200 words): Equities, Bonds, Currencies, Commodities. Use exact numerical values.
+3. GEOPOLITICS & MACRO (150-200 words): Ongoing events and impact on rates/inflation.
 
-ABSOLUTELY FORBIDDEN:
-- Opening with "Benvenuti" or ANY Italian words
-- Numbered lists (1. 2. 3.) or bullet points
-- REPEATING the same numerical data in multiple sections (e.g., if you mention the VIX in the opening, do not repeat it in market analysis)
-- Generic phrases like "it will be important to monitor" without specific data
-- Endings like "That's all for today", "Stay tuned", "We'll be back"
-- NEVER write the acronym next to the full name:
-  NON "the dollar index (DXY)" or "the dollar index, known as DXY"
-  YES "the dollar index" — without acronym
-  NON "the Federal Reserve (Fed)"
-  YES "the Federal Reserve" — without parenthetical acronym
-  General rule: if you use the full name, NEVER add the acronym
+PROHIBITED:
+- Do NOT mention Cryptocurrencies or Bitcoin (covered later).
+- No bullet points. No fluff.
+- Do NOT close the podcast yet.
+"""
 
-ASSET PRONUNCIATION — always use full form:
-- S&P 500 → "the Standard and Poor's 500"
-- VIX → "the Vix index"
-- EUR/USD → "the euro-dollar exchange rate"
-- DXY → "the dollar index"
-- TLT → "the Treasury bond ETF"
-- STOXX 600 → "the Stoxx six hundred"
-- BCE/ECB → "the European Central Bank"
-- Fed → "the Federal Reserve"
-- BOJ → "the Bank of Japan"
-- BNB → "Binance Coin"
+AUDIO_CRYPTO_PROMPT_EN = """You are a digital assets expert analyst.
+Write the audio script for the CRYPTO section of the podcast.
+LENGTH: 300-400 words.
 
-ACCURATEZZA STORICA:
-- Non attenuare mai eventi già in corso con "potenziale" o "possibile"
-- Se la guerra è in corso, dire "guerra in corso", non "potenziale conflitto"
-- Se il Brent è sopra $100, non dire "rimane elevato" — dire il valore esatto
+MANDATORY TRANSITION:
+- "Moving on to the digital assets space..."
+- "Let's pivot to the cryptocurrency markets..."
 
-STALE MACRO DATA:
-- If data is older than 14 days → "the last available data, from [month], showed..."
-- NEVER present February data as today's news
+STRUCTURE:
+1. BTC DEEP DIVE (100 words): Technical analysis and flows.
+2. ALTCOINS (150 words): Discuss Ethereum, Solana, and Binance Coin.
+3. SENTIMENT & FEAR/GREED (100 words): Market correlation and index analysis.
+"""
 
-LENGTH: TARGET 600-800 WORDS — count internally before responding.
+AUDIO_CLOSE_PROMPT = """Genera una chiusura rapida (50-100 parole) per il podcast.
+Focus: outlook per domani e cosa monitorare.
+Chiudi con una frase professionale tipo "Grazie per l'attenzione e buon trading."
 """
 
 
@@ -477,110 +420,67 @@ def run():
         raw_text = response.choices[0].message.content.strip()
         briefing = json.loads(raw_text)
 
-        # CHIAMATA 2 — Audio Script IT
-        logger.info('🎙️ Chiamata 2: Groq Llama 4 Audio Script IT (MIN 800 parole)...')
+        # --- GENERAZIONE AUDIO SCRIPT ---
         today_str = datetime.now(timezone.utc).strftime('%d %B %Y')
-        audio_user_it = f"""DATA DI OGGI: {today_str}
-Scrivi lo script audio completo IN ITALIANO basandoti su questi dati:
+        
+        # Filtro articoli per weekly
+        weekly_it = [a for a in articles_slim if a.get('source') in weekly_sources]
+        other_it = [a for a in articles_slim if a.get('source') not in weekly_sources]
+        news_it = weekly_it + other_it
+        
+        # Helper per chiamate audio
+        def get_audio_part(system_p, user_p, lang_key, model='meta-llama/llama-4-scout-17b-16e-instruct'):
+            # Forza JSON nel prompt utente
+            full_user_p = f"{user_p}\n\nREQUISITO CORE: Restituisci SOLO un oggetto JSON con la chiave '{lang_key}'."
+            resp = client.chat.completions.create(
+                model=model,
+                messages=[
+                    {'role': 'system', 'content': system_p},
+                    {'role': 'user',   'content': full_user_p},
+                ],
+                temperature=0.3,
+                max_tokens=2048,
+                response_format={'type': 'json_object'},
+            )
+            return json.loads(resp.choices[0].message.content)
 
-SENTIMENT: {briefing.get('sentiment', {}).get('label', 'neutral').upper()} — score {briefing.get('sentiment', {}).get('score', 5)}/10
-{briefing.get('sentiment', {}).get('reason_it', '')}
+        # 1. ITALIANO
+        logger.info('🎙️ Generazione Audio IT (3 segmenti)...')
+        
+        # Part A: Finance
+        it_finance_user = f"DATA: {today_str}\nSENTIMENT: {briefing['sentiment']['label']}\nMERCATI:\n{market_context}\nNOTIZIE PRINCIPALI:\n" + \
+                         "\n".join(f"- {a['title']}" for a in news_it[:10])
+        it_finance = get_audio_part(AUDIO_FINANCE_PROMPT, it_finance_user, 'audio_script_it')
+        
+        # Part B: Crypto
+        crypto_ctx = market_context.split('CRYPTO MARKET DATA:')[1] if 'CRYPTO MARKET DATA:' in market_context else market_context
+        it_crypto_user = f"DATI CRYPTO:\n{crypto_ctx}\nNOTIZIE CRYPTO:\n" + \
+                        "\n".join(f"- {a['title']}" for a in articles_slim if a.get('category') == 'crypto')
+        it_crypto = get_audio_part(AUDIO_CRYPTO_PROMPT, it_crypto_user, 'audio_script_it')
+        
+        # Part C: Close
+        it_close = get_audio_part(AUDIO_CLOSE_PROMPT, "Genera chiusura per podcast finanziario italiano.", 'audio_script_it')
+        
+        # Merge IT
+        briefing['audio_script_it'] = f"{it_finance.get('audio_script_it', '')}\n\n{it_crypto.get('audio_script_it', '')}\n\n{it_close.get('audio_script_it', '')}"
 
-DATI MERCATO:
-{market_context}
-
-NOTIZIE DEL GIORNO:
-{chr(10).join(f"- [{a['category'].upper()}] {'⭐ REPORT SETTIMANALE: ' if a.get('source') in weekly_sources else ''}{a['title']} — {a['snippet'][:150]}" for a in (([a for a in articles_slim if a.get('source') in weekly_sources] + [a for a in articles_slim if a.get('source') not in weekly_sources])[:14]))}
-
-REQUISITO: obiettivo 700-800 parole in ITALIANO.
-REGOLA D'ORO: Sii discorsivo. Non ripetere gli stessi dati tra apertura e analisi mercati. Inserisci la sezione Cripto dopo i mercati tradizionali.
-Restituisci JSON: {{"audio_script_it": "..."}}"""
-
-        response_it = client.chat.completions.create(
-            model='meta-llama/llama-4-scout-17b-16e-instruct',
-            messages=[
-                {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT},
-                {'role': 'user',   'content': audio_user_it},
-            ],
-            temperature=0.3,
-            max_tokens=4096,
-            response_format={'type': 'json_object'},
-        )
-        audio_it_data = json.loads(response_it.choices[0].message.content)
-        briefing['audio_script_it'] = audio_it_data.get('audio_script_it', '')
-
-        # CHIAMATA 3 — Audio Script EN
-        logger.info('🎙️ Chiamata 3: Groq Llama 4 Audio Script EN (MIN 800 parole)...')
-        audio_user_en = f"""TODAY'S DATE: {today_str}
-Write the complete audio script IN ENGLISH based on these data:
-
-SENTIMENT: {briefing.get('sentiment', {}).get('label', 'neutral').upper()} — score {briefing.get('sentiment', {}).get('score', 5)}/10
-{briefing.get('sentiment', {}).get('reason_en', '')}
-
-MARKET DATA:
-{market_context}
-
-NEWS OF THE DAY:
-{chr(10).join(f"- [{a['category'].upper()}] {'⭐ WEEKLY REPORT: ' if a.get('source') in weekly_sources else ''}{a['title']}" for a in (([a for a in articles_slim if a.get('source') in weekly_sources] + [a for a in articles_slim if a.get('source') not in weekly_sources])[:14]))}
-
-REQUIREMENT: target 700-800 words in ENGLISH.
-GOLDEN RULE: Be narrative. Do not repeat data points between the opening and the market analysis. Include the Crypto section after traditional markets.
-Return JSON: {{"audio_script_en": "..."}}"""
-
-        response_en = client.chat.completions.create(
-            model='meta-llama/llama-4-scout-17b-16e-instruct',
-            messages=[
-                {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT_EN},
-                {'role': 'user',   'content': audio_user_en},
-            ],
-            temperature=0.3,
-            max_tokens=4096,
-            response_format={'type': 'json_object'},
-        )
-        audio_en_data = json.loads(response_en.choices[0].message.content)
-        briefing['audio_script_en'] = audio_en_data.get('audio_script_en', '')
-
-        # RETRY AUDIO SE SOTTO 700 PAROLE
-        for lang, user_prompt_key, script_key in [('IT', audio_user_it, 'audio_script_it'), ('EN', audio_user_en, 'audio_script_en')]:
-            audio_words = len(briefing.get(script_key, '').split())
-            if audio_words < 500:
-                logger.warning(f'⚠️ Audio {lang} sotto soglia ({audio_words} parole), primo retry...')
-                retry_prompt = user_prompt_key + f"\n\nATTENZIONE: lo script precedente era troppo corto. Devi scrivere ALMENO 600-700 parole. Espandi ogni sezione con più analisi e contesto."
-                
-                # Primo Retry
-                retry_response = client.chat.completions.create(
-                    model='meta-llama/llama-4-scout-17b-16e-instruct',
-                    messages=[
-                        {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT if lang == 'IT' else AUDIO_SYSTEM_PROMPT_EN},
-                        {'role': 'user', 'content': retry_prompt},
-                    ],
-                    temperature=0.3,
-                    max_tokens=4096,
-                    response_format={'type': 'json_object'},
-                )
-                retry_data = json.loads(retry_response.choices[0].message.content)
-                briefing[script_key] = retry_data.get(script_key, briefing[script_key])
-                audio_words = len(briefing.get(script_key, '').split())
-                logger.info(f'🎙️ Audio {lang} dopo primo retry: {audio_words} parole')
-
-                # Secondo Retry con pausa se ancora sotto 500
-                if audio_words < 500:
-                    logger.warning(f'⚠️ {lang} ancora corto ({audio_words}), secondo retry dopo pausa...')
-                    time.sleep(10)
-                    retry2_response = client.chat.completions.create(
-                        model='meta-llama/llama-4-scout-17b-16e-instruct',
-                        messages=[
-                            {'role': 'system', 'content': AUDIO_SYSTEM_PROMPT if lang == 'IT' else AUDIO_SYSTEM_PROMPT_EN},
-                            {'role': 'user', 'content': retry_prompt},
-                        ],
-                        temperature=0.4,
-                        max_tokens=4096,
-                        response_format={'type': 'json_object'},
-                    )
-                    retry2_data = json.loads(retry2_response.choices[0].message.content)
-                    briefing[script_key] = retry2_data.get(script_key, briefing[script_key])
-                    audio_words = len(briefing.get(script_key, '').split())
-                    logger.info(f'🎙️ Audio {lang} finale: {audio_words} parole')
+        # 2. ENGLISH
+        logger.info('🎙️ Generazione Audio EN (3 segmenti)...')
+        
+        # Part A: Finance
+        en_finance_user = f"DATE: {today_str}\nSENTIMENT: {briefing['sentiment']['label']}\nMARKETS:\n{market_context}\nTOP NEWS:\n" + \
+                         "\n".join(f"- {a['title']}" for a in news_it[:10])
+        en_finance = get_audio_part(AUDIO_FINANCE_PROMPT_EN, en_finance_user, 'audio_script_en')
+        
+        # Part B: Crypto
+        en_crypto_user = it_crypto_user # Contesto è lo stesso
+        en_crypto = get_audio_part(AUDIO_CRYPTO_PROMPT_EN, en_crypto_user, 'audio_script_en')
+        
+        # Part C: Close
+        en_close = get_audio_part(AUDIO_CLOSE_PROMPT, "Generate closing for English financial podcast.", 'audio_script_en')
+        
+        # Merge EN
+        briefing['audio_script_en'] = f"{en_finance.get('audio_script_en', '')}\n\n{en_crypto.get('audio_script_en', '')}\n\n{en_close.get('audio_script_en', '')}"
 
         # Merge article_impacts negli articoli raw
         article_impacts = briefing.pop('article_impacts', [])

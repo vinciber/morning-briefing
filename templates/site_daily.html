@@ -178,6 +178,9 @@
       </div>
       {% endfor %}
     </div>
+    <div style="margin-top: 10px; font-size: 10px; color: var(--text-muted); text-align: right;">
+      Data provided by <a href="https://fred.stlouisfed.org/" target="_blank" style="color: var(--blue); text-decoration: none;">St. Louis Fed (FRED)</a>
+    </div>
 
     {% if briefing.get('market_data_raw', {}).get('macro_calendar_eu') %}
     <div class="macro-region-title">🇪🇺 {% if lang == 'it' %}Europa{% else %}Europe{% endif %} — BCE & Macro</div>
@@ -217,6 +220,9 @@
         <div class="macro-date {% if '+' in info.change %}up{% elif '-' in info.change %}down{% endif %}">{{ info.change }}</div>
       </div>
       {% endfor %}
+    </div>
+    <div style="margin-top: 10px; font-size: 10px; color: var(--text-muted); text-align: right;">
+      Powered by <a href="https://www.coingecko.com/" target="_blank" style="color: var(--orange); text-decoration: none;">CoinGecko</a>
     </div>
   </div>
   {% endif %}
