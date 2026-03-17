@@ -128,8 +128,8 @@ REGOLE relevance_score — il modello NON modifica i relevance_score degli artic
 Vengono passati dal fetcher e rimangono invariati.
 
 LINGUA: reason_it/en e market_impact_summary sempre bilingue.
-LUNGHEZZA audio: MINIMO 800 parole per lingua — TASSATIVO.
-MAX TOKENS OUTPUT: 8000.
+LUNGHEZZA audio: OBBIETTIVO 600-800 parole per lingua.
+MAX TOKENS OUTPUT: 4096.
 """
 
 AUDIO_SYSTEM_PROMPT = """Sei un conduttore radiofonico finanziario senior italiano.
@@ -204,7 +204,7 @@ DATI MACRO FRED NON RECENTI:
 - Se il dato ha più di 14 giorni → "l'ultimo dato disponibile, risalente a [mese], mostrava..."
 - MAI presentare dati di febbraio come notizie di oggi
 
-LUNGHEZZA: MINIMO 800 PAROLE — conta internamente prima di rispondere.
+LUNGHEZZA: OBBIETTIVO 600-800 PAROLE — conta internamente prima di rispondere.
 """
 
 AUDIO_SYSTEM_PROMPT_EN = """You are a senior financial radio presenter.
@@ -256,7 +256,7 @@ STALE MACRO DATA:
 - If data is older than 14 days → "the last available data, from [month], showed..."
 - NEVER present February data as today's news
 
-LENGTH: MINIMUM 800 WORDS — count internally before responding.
+LENGTH: TARGET 600-800 WORDS — count internally before responding.
 """
 
 
@@ -467,7 +467,7 @@ def run():
                 {'role': 'user',   'content': user_prompt},
             ],
             temperature=0.2,
-            max_tokens=6000,
+            max_tokens=4096,
             response_format={'type': 'json_object'},
         )
         raw_text = response.choices[0].message.content.strip()
@@ -488,7 +488,7 @@ DATI MERCATO:
 NOTIZIE DEL GIORNO:
 {chr(10).join(f"- [{a['category'].upper()}] {'⭐ REPORT SETTIMANALE: ' if a.get('source') in weekly_sources else ''}{a['title']} — {a['snippet'][:150]}" for a in (([a for a in articles_slim if a.get('source') in weekly_sources] + [a for a in articles_slim if a.get('source') not in weekly_sources])[:14]))}
 
-REQUISITO: minimo 800 parole in ITALIANO. Conta internamente prima di rispondere.
+REQUISITO: obiettivo 700 parole in ITALIANO.
 Restituisci JSON: {{"audio_script_it": "..."}}"""
 
         response_it = client.chat.completions.create(
@@ -498,7 +498,7 @@ Restituisci JSON: {{"audio_script_it": "..."}}"""
                 {'role': 'user',   'content': audio_user_it},
             ],
             temperature=0.3,
-            max_tokens=5000,
+            max_tokens=4096,
             response_format={'type': 'json_object'},
         )
         audio_it_data = json.loads(response_it.choices[0].message.content)
@@ -518,7 +518,7 @@ MARKET DATA:
 NEWS OF THE DAY:
 {chr(10).join(f"- [{a['category'].upper()}] {'⭐ WEEKLY REPORT: ' if a.get('source') in weekly_sources else ''}{a['title']}" for a in (([a for a in articles_slim if a.get('source') in weekly_sources] + [a for a in articles_slim if a.get('source') not in weekly_sources])[:14]))}
 
-REQUIREMENT: minimum 800 words in ENGLISH. Count internally before answering.
+REQUIREMENT: target 700 words in ENGLISH.
 Return JSON: {{"audio_script_en": "..."}}"""
 
         response_en = client.chat.completions.create(
@@ -528,7 +528,7 @@ Return JSON: {{"audio_script_en": "..."}}"""
                 {'role': 'user',   'content': audio_user_en},
             ],
             temperature=0.3,
-            max_tokens=5000,
+            max_tokens=4096,
             response_format={'type': 'json_object'},
         )
         audio_en_data = json.loads(response_en.choices[0].message.content)
@@ -537,9 +537,9 @@ Return JSON: {{"audio_script_en": "..."}}"""
         # RETRY AUDIO SE SOTTO 700 PAROLE
         for lang, user_prompt_key, script_key in [('IT', audio_user_it, 'audio_script_it'), ('EN', audio_user_en, 'audio_script_en')]:
             audio_words = len(briefing.get(script_key, '').split())
-            if audio_words < 700:
+            if audio_words < 500:
                 logger.warning(f'⚠️ Audio {lang} sotto soglia ({audio_words} parole), primo retry...')
-                retry_prompt = user_prompt_key + f"\n\nATTENZIONE: lo script precedente era troppo corto. Devi scrivere ALMENO 800 parole. Espandi ogni sezione con più analisi e contesto."
+                retry_prompt = user_prompt_key + f"\n\nATTENZIONE: lo script precedente era troppo corto. Devi scrivere ALMENO 600-700 parole. Espandi ogni sezione con più analisi e contesto."
                 
                 # Primo Retry
                 retry_response = client.chat.completions.create(
@@ -549,7 +549,7 @@ Return JSON: {{"audio_script_en": "..."}}"""
                         {'role': 'user', 'content': retry_prompt},
                     ],
                     temperature=0.3,
-                    max_tokens=6000,
+                    max_tokens=4096,
                     response_format={'type': 'json_object'},
                 )
                 retry_data = json.loads(retry_response.choices[0].message.content)
@@ -557,8 +557,8 @@ Return JSON: {{"audio_script_en": "..."}}"""
                 audio_words = len(briefing.get(script_key, '').split())
                 logger.info(f'🎙️ Audio {lang} dopo primo retry: {audio_words} parole')
 
-                # Secondo Retry con pausa se ancora sotto 700
-                if audio_words < 700:
+                # Secondo Retry con pausa se ancora sotto 500
+                if audio_words < 500:
                     logger.warning(f'⚠️ {lang} ancora corto ({audio_words}), secondo retry dopo pausa...')
                     time.sleep(10)
                     retry2_response = client.chat.completions.create(
@@ -568,7 +568,7 @@ Return JSON: {{"audio_script_en": "..."}}"""
                             {'role': 'user', 'content': retry_prompt},
                         ],
                         temperature=0.4,
-                        max_tokens=6000,
+                        max_tokens=4096,
                         response_format={'type': 'json_object'},
                     )
                     retry2_data = json.loads(retry2_response.choices[0].message.content)
