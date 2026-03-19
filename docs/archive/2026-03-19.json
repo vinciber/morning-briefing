@@ -3,31 +3,31 @@
   "sentiment": {
     "label": "risk_off",
     "score": 8,
-    "reason_it": "Il sentiment di mercato è risk-off a causa dell'aumento del VIX del 12.16% a 25.09 e del calo dell'S&P 500 dell'1.36% a 6624.70. Il DXY è salito dello 0.09% a 100.18, mentre il TLT è sceso dello 0.01% a 86.95. L'aumento del prezzo del petrolio e la situazione geopolitica in Medio Oriente contribuiscono a questo sentiment.",
-    "reason_en": "Market sentiment is risk-off due to the 12.16% increase in VIX to 25.09 and the 1.36% decline in S&P 500 to 6624.70. The DXY rose 0.09% to 100.18, while TLT fell 0.01% to 86.95. The increase in oil prices and the geopolitical situation in the Middle East contribute to this sentiment."
+    "reason_it": "Il sentiment di mercato è risk-off a causa dell'aumento delle tensioni geopolitiche in Medio Oriente. Il VIX è salito a 25,60 (+2,03%), il DXY è a 100,20 (+0,11%) e il prezzo del petrolio è aumentato a $108,76 (+1,29%). La Fed ha lasciato invariati i tassi di interesse, ma ha segnalato un possibile aumento dell'inflazione.",
+    "reason_en": "Market sentiment is risk-off due to rising geopolitical tensions in the Middle East. VIX rose to 25.60 (+2.03%), DXY is at 100.20 (+0.11%), and oil prices increased to $108.76 (+1.29%). The Fed kept interest rates unchanged but signaled potential inflation increase."
   },
   "market_impact_summary": {
-    "it": "Il mercato azionario è sotto pressione a causa dell'aumento delle tensioni in Medio Oriente. L'S&P 500 è sceso dell'1.36%, mentre il VIX è salito del 12.16%. Il prezzo del petrolio è aumentato, influenzando negativamente la crescita economica e alimentando l'inflazione. La Federal Reserve ha mantenuto invariati i tassi di interesse, ma ha segnalato un possibile aumento dell'inflazione.",
-    "en": "The stock market is under pressure due to rising tensions in the Middle East. The S&P 500 fell 1.36%, while the VIX rose 12.16%. Oil prices have increased, negatively impacting economic growth and fueling inflation. The Federal Reserve kept interest rates unchanged but signaled a possible increase in inflation."
+    "it": "Il mercato azionario è in calo, con S&P 500 a 6624,70 (-1,36%) e STOXX 600 a 59,19 (-0,75%). Il mercato obbligazionario è in tensione, con il TLT a 86,95 (-0,01%) e il BTP 10Y a 3,73% (+2,02%). Il prezzo dell'oro è sceso a $4740,70/oz (-3,05%).",
+    "en": "Equity market is down, with S&P 500 at 6624.70 (-1.36%) and STOXX 600 at 59.19 (-0.75%). Bond market is under pressure, with TLT at 86.95 (-0.01%) and BTP 10Y at 3.73% (+2.02%). Gold price dropped to $4740.70/oz (-3.05%)."
   },
-  "audio_script_it": "{'apertura': 'Benvenuti al consueto briefing mattutino dei mercati.', 'sentiment': \"Il sentiment globale è decisamente risk-off, con l'indice Vix che sale del 12.16% a 25.09 e lo Standard and Poor's 500 che perde l'1.36% a 6624.70. Il dollaro si rafforza, con il cambio euro dollaro che scende dello 0.60% a 1.14.\", 'mercati': \"Sul fronte dei mercati, l'azionario è sotto pressione: lo Standard and Poor's 500 cede l'1.36% a 6624.70, il Nikkei perde il 3.43% a 53,345 e lo STOXX 600 scende dello 0.75% a 59.19. Sul fronte obbligazionario, il TLT Bond USA 20Y stabile a 86.95, mentre il rendimento del decennale USA sale a 4.25%. Le commodities sono deboli: l'oro perde l'1.14% a $4834.00/oz e il Brent scende dello 0.10% a $107.27. Le valute: il dollaro si rafforza contro l'euro, con il cambio euro dollaro a 1.14.\", 'geopolitica_e_macro': \"Sul fronte geopolitico, la situazione in Medio Oriente continua a preoccupare, con l'Iran che ha colpito un sito di gas naturale liquido in Qatar. La Banca del Giappone ha posticipato l'aumento dei tassi a causa dell'instabilità nella regione. La Federal Reserve ha mantenuto i tassi invariati, ma ha segnalato che l'inflazione potrebbe aumentare a causa dell'aumento del prezzo del petrolio. In agenda, prossime uscite macroeconomiche importanti, tra cui il PCE Core YoY il 28 marzo e il GDP QoQ USA il 29 aprile.\"}\n\n{'intro': \"Spostiamo l'attenzione sul mercato delle criptovalute, dove abbiamo visto movimenti interessanti nelle ultime ore.\", 'deep_dive_bitcoin': 'Il Bitcoin ha subito un calo del 4.21%, portandosi a $70,831. Dal punto di vista tecnico, il prezzo ha trovato supporto nella zona dei $70,000, ma la pressione venditrice sembra ancora essere presente. I flussi on-chain mostrano un aumento delle vendite da parte degli investitori istituzionali, che potrebbero essere influenzati dalle recenti dichiarazioni della Fed sulla politica monetaria.', 'altcoins': \"Ethereum, Solana e Binance Coin (BNB) hanno anch'esse subito cali significativi, rispettivamente del 5.51%, 4.54% e 3.24%. Ethereum ha trovato supporto nella zona dei $2,000, ma la sua struttura tecnica sembra fragile. Solana e BNB stanno testando i loro livelli di supporto, rispettivamente a $80 e $600. La correlazione tra queste altcoin e il Bitcoin è ancora alta, ma ci sono segnali di una possibile divergenza.\", 'sentiment_fear_greed': \"L'indice Fear & Greed è sceso a 23, livello di Extreme Fear. Questo indice è influenzato dalla volatilità del mercato e dalle notizie macroeconomiche. La correlazione con il mercato macroeconomico è ancora presente, ma sembra esserci una leggera decoupling tra il mercato crypto e le altre asset class. La decisione della Fed di lasciare invariati i tassi di interesse ha avuto un impatto positivo sul mercato crypto, ma la cautela degli investitori è ancora alta.\"}\n\nPer domani ci attendiamo un'apertura dei mercati europei cauta, con gli investitori che monitoreranno i dati macroeconomici in uscita. È importante tenere d'occhio l'andamento delle borse asiatiche e le dichiarazioni dei rappresentanti delle banche centrali. Gli Stati Uniti pubblicheranno i dati sull'inflazione, un evento che potrebbe influenzare le decisioni della Fed. Grazie per l'attenzione e buon trading.",
-  "audio_script_en": "{'INTRODUCTION': \"Welcome to your daily morning market briefing. Good morning and welcome to today's financial update.\", 'SENTIMENT': \"Global sentiment is risk-off today, as escalating tensions in the Middle East weigh on investor mood. Key data points include a surge in oil prices following Iran's strike on a Qatari LNG site and a postponement of the Bank of Japan's rate rise decision due to the conflict.\", 'TRADITIONAL MARKETS': 'In traditional markets, equities are under pressure. The S&P 500 is down 1.36% to 6624.70, and the VIX index is up 12.16% to 25.09, reflecting increased volatility. The Stoxx 600 is down 0.75% to 59.19, while the Nikkei and Shanghai indices are also lower, down 3.43% to 53,345 and 1.38% to 4006.84, respectively. In the currency markets, the dollar index is up 0.09% to 100.18, while the EUR/USD pair is down 0.60% to 1.14. Commodities are seeing a flight to safe-havens, with gold down 1.14% to $4834.00 per ounce, while Brent crude is up 0.10% to $107.27 a barrel. Bond yields are higher, with the US 10-year yield up 1.36% to 4.25%, and the TLT Bond USA 20Y down 0.01% to 86.95.', 'GEOPOLITICS & MACRO': \"Geopolitics and macro news are driving market movements. The conflict in the Middle East continues to escalate, with Iran's strike on a Qatari LNG site causing oil prices to surge. The Federal Reserve has stuck to its plans to cut rates this year, despite the inflationary impact of rising energy prices. The Bank of Japan has postponed its rate rise decision due to the conflict, while the ECB's rate remains at 2.00%. Inflation expectations are rising, with Fed chief Jay Powell warning that the Iran oil crisis will worsen US inflation. Global M2 liquidity continues to expand, up 4.3% YoY to $22.4T.\"}\n\nMoving on to the digital assets space, let's take a closer look at the current state of the cryptocurrency market. \n\nThe Bitcoin price has been under pressure, currently trading at $70,831, down 4.21% over the past 24 hours. From a technical analysis perspective, we can see that the recent price action has been characterized by significant outflows, which have contributed to the current downward trend. \n\nLet's pivot to the cryptocurrency markets and examine some of the key players. In the altcoin space, Ethereum, Solana, and Binance Coin have all seen declines in recent 24 hours. Ethereum is currently trading at $2,191, down 5.51%, while Solana is at $89.82, down 4.54%. Binance Coin is also in the red, trading at $649.48, down 3.24%. \n\nIn terms of market sentiment, the Fear & Greed Index is currently at 23, indicating extreme fear. This is often seen as a contrarian indicator, suggesting that the market may be due for a bounce. However, it's essential to consider the broader market correlation. The cryptocurrency market's correlation with traditional assets has been decreasing, which could be a bullish sign for the space. \n\nOverall, the current market conditions suggest that investors are cautious, but this could also present opportunities for those looking to enter the market. As always, it's crucial to do your own research and consider your own risk tolerance before making any investment decisions.\n\nThat's all for today. Looking ahead to tomorrow, keep an eye on [insert key market events or data releases]. We'll be monitoring [specific trends or stocks] closely. Stay tuned for more updates. Thanks for your attention and happy trading.",
+  "audio_script_it": "{'apertura': 'Benvenuti al consueto briefing mattutino dei mercati.', 'sentiment': \"Il sentiment globale è decisamente risk-off, con l'indice Vix che sale a 25,60, guadagnando lo 2,03%. Questo aumento della propensione al rischio si accompagna a una performance negativa degli asset azionari, con lo Standard and Poor's 500 che perde l'1,36% a 6624,70.\", 'mercati_asset_per_asset': \"Sul fronte dei mercati, l'azionario è sotto pressione: lo Standard and Poor's 500 cede l'1,36% a 6624,70, mentre il Nikkei perde il 3,38% a 53,373 e lo Shanghai Composite scende dell'1,39% a 4006,55. L'obbligazionario mostra una sostanziale stabilità, con il TLT Bond USA 20Y che perde lo 0,01% a 86,95. Sul fronte valutario, il cambio euro dollaro scende a 1,14, in perdita dello 0,68%. Le commodities sono contrastate: l'oro perde il 3,05% a $4740,70/oz, mentre il Brent guadagna l'1,29% a $108.76.\", 'geopolitica_e_macro': \"La geopolitica è sempre più tesa, con l'attacco iraniano a un sito di gas naturale qatariano che ha fatto impennare il prezzo del petrolio. La Banca del Giappone ha rinviato il rialzo dei tassi a causa dell'instabilità in Medio Oriente. La Federal Reserve ha mantenuto i tassi invariati e confermato la previsione di un solo taglio dei tassi per il 2026, nonostante la crescente inflazione dovuta ai prezzi energetici. Il PIL dell'Eurozona è cresciuto solo dello 0,2% nel quarto trimestre del 2025, mentre il tasso BCE è salito al 2,00%. In questo contesto, gli investitori continuano a monitorare i dati macroeconomici in uscita, come il PCE Core YoY e il GDP QoQ USA.\"}\n\n{'intro': \"Spostiamo l'attenzione sul mercato delle criptovalute, dove abbiamo visto movimenti interessanti nelle ultime ore.\", 'deep_dive_bitcoin': 'Il Bitcoin ha subito un calo del 5.07%, portandosi a $70,146. Dal punto di vista tecnico, il prezzo ha trovato supporto nella zona dei $69,000, ma la pressione venditrice sembra ancora essere presente. I flussi on-chain mostrano un aumento delle vendite da parte degli investitori istituzionali, che potrebbe essere stato influenzato dalle dichiarazioni della Fed sulla stabilità dei tassi di interesse. La correlazione con il mercato tech è scesa ai minimi del 2018, suggerendo una possibile decoupling del prezzo del Bitcoin dalle altre attività di rischio.', 'altcoins': 'Le altcoin hanno seguito la tendenza del Bitcoin, con Ethereum che ha perso il 6.45% e si trova a $2,169. Solana e Binance Coin hanno subito perdite del 4.71% e 4.10%, rispettivamente, portandosi a $89.56 e $645.91. Ethereum sembra essere in una fase di consolidamento, con un livello di supporto importante a $2,000. Solana e Binance Coin mostrano una relativa forza, con un interesse aperto in aumento.', 'sentiment_fear_greed': \"L'indice Fear & Greed è sceso a 23, in territorio di Extreme Fear. Questo livello di sentiment negativo potrebbe essere un indicatore di un possibile punto di inversione del mercato. Tuttavia, è importante notare che la correlazione con i dati macroeconomici è ancora limitata, in quanto molti dati importanti non sono stati rilasciati recentemente. La decisione della Fed di mantenere i tassi di interesse invariati ha avuto un impatto positivo sul prezzo del Bitcoin, ma la prospettiva di una possibile ripresa dell'inflazione potrebbe mantenere la pressione sul mercato.\"}\n\nPer domani ci attendiamo un'apertura dei mercati europei con un'attenzione particolare rivolta ai dati macroeconomici in uscita. Sarà importante monitorare l'indice ZEW dell'economia tedesca e le dichiarazioni dei membri della BCE. Sul fronte americano, seguiremo con interesse l'andamento delle richieste di sussidio di disoccupazione. Restate sintonizzati per ulteriori aggiornamenti. Grazie per l'attenzione e buon trading.",
+  "audio_script_en": "{'INTRODUCTION': \"Welcome to your daily morning market briefing. Good morning and welcome to today's financial update.\", 'SENTIMENT': 'Global sentiment is risk-off today, as escalating tensions in the Middle East weigh on investor mood. Key data points include a surge in oil prices, with Brent crude up 1.29% to $108.76, and a significant decline in equities, with the S&P 500 down 1.36% to 6624.70.', 'TRADITIONAL MARKETS': 'In traditional markets, equities are under pressure, with the S&P 500 down 1.36% to 6624.70, and the STOXX 600 down 0.75% to 59.19. Bonds are seeing safe-haven demand, with the TLT Bond USA 20Y up 0.01% to 86.95, while yields are rising, with the US 10Y Yield up 1.36% to 4.25%. Currencies are also reacting, with the Dollar Index up 0.11% to 100.20, and EUR/USD down 0.68% to 1.14. Commodities are seeing a flight to safety, with gold down 3.05% to $4740.70 per ounce.', 'GEOPOLITICS & MACRO': 'Geopolitics and macro news are driving market movements today. The conflict in the Middle East continues to escalate, with Iran striking a Qatari LNG site, causing oil prices to surge. The Fed has stuck to its plans to cut rates, despite the inflationary pressures from rising energy prices. The Bank of Japan has postponed its rate rise decision due to the uncertainty. Inflation concerns are growing, with Fed chief Jay Powell warning that the Iran oil crisis will worsen US inflation. The global economic implications of the conflict are becoming increasingly concerning, with economists warning that the oil price surge will hurt US growth and fuel inflation.'}\n\nMoving on to the digital assets space, let's take a look at the current state of the cryptocurrency market. \n\nThe Bitcoin price has been under pressure, currently trading at $70,146, down 5.07% over the past 24 hours. From a technical analysis perspective, we can see that the recent price action has been characterized by significant outflows, which have contributed to the current price weakness. \n\nLet's pivot to the cryptocurrency markets and examine some of the key players. In the altcoin space, Ethereum is trading at $2,169, down 6.45%, while Solana is at $89.56, down 4.71%. Binance Coin is also experiencing losses, currently trading at $645.91, down 4.10%. \n\nIn terms of market sentiment, the Fear & Greed Index is currently at 23, indicating extreme fear. This is a sign that investors are becoming increasingly risk-averse, which can often lead to a contrarian buying opportunity. \n\nThe correlation between cryptocurrency and traditional markets remains a key theme, with Bitcoin's recent price action showing signs of decoupling from tech stocks. As we continue to monitor the market, it's clear that investors are positioning themselves for a potential relief rally. \n\nOverall, the cryptocurrency market remains highly volatile, and investors should be cautious when making investment decisions. However, for those with a long-term perspective, the current price weakness may present a buying opportunity.\n\nThat's all for today. Looking ahead to tomorrow, keep an eye on [insert key market events or data releases]. We'll be monitoring [specific trends or stocks] closely. Stay informed and make informed decisions. Thanks for your attention and happy trading.",
   "market_data_raw": {
     "dxy": {
-      "value": "100.18",
-      "change": "+0.09%"
+      "value": "100.20",
+      "change": "+0.11%"
     },
     "eur_usd": {
       "value": "1.14",
-      "change": "-0.60%"
+      "change": "-0.68%"
     },
     "sp500": {
       "value": "6624.70",
       "change": "-1.36%"
     },
     "vix": {
-      "value": "25.09",
-      "change": "+12.16%"
+      "value": "25.60",
+      "change": "+2.03%"
     },
     "tlt": {
       "value": "86.95",
@@ -38,28 +38,28 @@
       "change": "+1.36%"
     },
     "gold": {
-      "value": "$4834.00/oz",
-      "change": "-1.14%"
+      "value": "$4740.70/oz",
+      "change": "-3.05%"
     },
     "btcusd": {
-      "value": "$70,827",
-      "change": "-4.19%"
+      "value": "$70,161",
+      "change": "-1.52%"
     },
     "oil_brent": {
-      "value": "$107.27",
-      "change": "-0.10%"
+      "value": "$108.76",
+      "change": "+1.29%"
     },
     "stoxx_600": {
       "value": "59.19",
       "change": "-0.75%"
     },
     "nikkei": {
-      "value": "53,345",
-      "change": "-3.43%"
+      "value": "53,373",
+      "change": "-3.38%"
     },
     "shanghai": {
-      "value": "4006.84",
-      "change": "-1.38%"
+      "value": "4006.55",
+      "change": "-1.39%"
     },
     "btp_10y": {
       "value": "3.73%",
@@ -76,20 +76,20 @@
       },
       "prices": {
         "BTC": {
-          "value": "$70,831",
-          "change": "-4.21%"
+          "value": "$70,146",
+          "change": "-5.07%"
         },
         "ETH": {
-          "value": "$2,191",
-          "change": "-5.51%"
+          "value": "$2,169",
+          "change": "-6.45%"
         },
         "SOL": {
-          "value": "$89.82",
-          "change": "-4.54%"
+          "value": "$89.56",
+          "change": "-4.71%"
         },
         "BNB": {
-          "value": "$649.48",
-          "change": "-3.24%"
+          "value": "$645.91",
+          "change": "-4.10%"
         }
       }
     },
@@ -211,7 +211,7 @@
         "magnitude": "medium",
         "assets_affected": [
           "JPY",
-          "Nikkei"
+          "S&P 500"
         ]
       }
     },
@@ -243,9 +243,12 @@
       "date": "2026-03-18T19:09:16+00:00",
       "relevance_score": 1.0,
       "market_impact": {
-        "direction": "mixed",
-        "magnitude": "low",
-        "assets_affected": []
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500",
+          "Interest Rates"
+        ]
       }
     },
     {
@@ -258,9 +261,12 @@
       "date": "2026-03-18T18:23:37+00:00",
       "relevance_score": 1.0,
       "market_impact": {
-        "direction": "mixed",
-        "magnitude": "low",
-        "assets_affected": []
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500",
+          "Interest Rates"
+        ]
       }
     },
     {
@@ -273,9 +279,12 @@
       "date": "2026-03-18T13:55:42+00:00",
       "relevance_score": 1.0,
       "market_impact": {
-        "direction": "mixed",
-        "magnitude": "low",
-        "assets_affected": []
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "S&P 500",
+          "Oil"
+        ]
       }
     },
     {
@@ -285,7 +294,7 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "The U.S.-Israeli war with Iran is entering its third week, with no end yet in sight. Crisis Group experts offer a 360-degree view of its effects on peace, security and economic stability around the world.",
-      "date": "2026-03-19T05:57:17.526003+00:00",
+      "date": "2026-03-19T07:54:30.071203+00:00",
       "relevance_score": 0.8,
       "market_impact": {
         "direction": "bearish",
@@ -315,7 +324,7 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "China shipbuilding orders bounce back after US port fee turmoil",
-      "date": "2026-03-19T05:57:19.529813+00:00",
+      "date": "2026-03-19T07:54:32.493509+00:00",
       "relevance_score": 0.8,
       "market_impact": {
         "direction": "bearish",
@@ -330,7 +339,7 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "Yemen has a new government, formed after elements of the old one clashed on the battlefield. In this Q&A, Crisis Group expert Ahmed Nagi looks at its makeup and its prospects against the backdrop of Middle East war that may draw in the Houthi rebels.",
-      "date": "2026-03-19T05:57:17.525082+00:00",
+      "date": "2026-03-19T07:54:30.070122+00:00",
       "relevance_score": 0.6,
       "market_impact": {
         "direction": "bearish",
@@ -345,7 +354,7 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "While the U.S. and Israel have damaged Iran in the Middle East war, Tehran has expanded the conflict. With neither side positioned for a decisive win, the escalation risks are sobering. Diplomacy is crucial to prevent renewed hostilities, but an immediate ceasefire is the priority.",
-      "date": "2026-03-19T05:57:17.525444+00:00",
+      "date": "2026-03-19T07:54:30.070450+00:00",
       "relevance_score": 0.6,
       "market_impact": {
         "direction": "bearish",
@@ -360,7 +369,7 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "This week on Hold Your Fire!, Richard speaks with Crisis Group’s former President Robert Malley about the U.S.-Israeli war on Iran, whether U.S. President Donald Trump will escalate or seek an off-ramp and what Iran might do. He also talks to Crisis Group’s Lebanon expert David Wood about the latest Israel-Hezbollah war.",
-      "date": "2026-03-19T05:57:17.525803+00:00",
+      "date": "2026-03-19T07:54:30.070911+00:00",
       "relevance_score": 0.6,
       "market_impact": {
         "direction": "bearish",
@@ -378,12 +387,9 @@
       "date": "2026-03-18T21:00:00+00:00",
       "relevance_score": 1.0,
       "market_impact": {
-        "direction": "bullish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "CNY",
-          "China's Energy Stocks"
-        ]
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": []
       }
     },
     {
@@ -497,7 +503,7 @@
       "source": "Cointelegraph",
       "tier": 4,
       "category": "crypto",
-      "snippet": "Expectation of a relief rally came despite a widely used crypto sentiment indicator falling back into “Extreme Fear” on Wednesday.",
+      "snippet": "Expectation of a relief rally persisted despite a widely used crypto sentiment indicator falling back into “Extreme Fear” on Wednesday.",
       "date": "2026-03-19T05:23:40+00:00",
       "relevance_score": 0.8,
       "market_impact": {
