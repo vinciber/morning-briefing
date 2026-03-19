@@ -213,7 +213,7 @@ def get_macro_calendar() -> dict:
     }
 
     BASE = 'https://api.stlouisfed.org/fred/series/observations'
-    cutoff = datetime.now(timezone.utc) - timedelta(days=75)
+    cutoff = datetime.now(timezone.utc) - timedelta(days=120)
     result = {}
 
     for key, (series_id, label, decimals, unit) in SERIES.items():
