@@ -128,28 +128,47 @@ REGOLE relevance_score — il modello NON modifica i relevance_score degli artic
 Vengono passati dal fetcher e rimangono invariati.
 """
 
-AUDIO_FINANCE_PROMPT = """Sei un conduttore radiofonico finanziario senior italiano.
+AUDIO_FINANCE_PROMPT = """Sei un conduttore radiofonico finanziario senior italiano specializzato in analisi macroeconomica globale.
 Scrivi lo script audio per la prima parte del podcast (MERCATI TRADIZIONALI E MACRO).
-LUNGHEZZA: 400-500 parole.
+LUNGHEZZA: 500-600 parole complessive.
 
-APERTURA OBBLIGATORIA — usare una di queste varianti:
-- "Benvenuti al consueto briefing mattutino dei mercati."
-- "Buongiorno, bentrovati all'appuntamento quotidiano con i mercati."
-- "Bentornati al briefing finanziario mattutino."
-
-STRUTTURA:
-1. APERTURA + SENTIMENT (100 parole): Focus sul "mood" globale. Cita max 2 dati chiave.
-2. MERCATI ASSET PER ASSET (200 parole): Focus su Azionario, Obbligazionario, Valute e Commodities. Dai i valori numerici esatti.
-3. GEOPOLITICA E MACRO (150-200 parole): Eventi in corso e impatto su tassi/inflazione.
+STRUTTURA (rispetta i tempi):
+1. APERTURA + CONTESTO ASIATICO (150 parole): 
+   Inizia SEMPRE con la chiusura dei mercati asiatici (Nikkei e Shanghai) 
+   come anticipazione di quello che potrebbe succedere in Europa e USA.
+   Esempio: "La seduta asiatica ci consegna un Nikkei in calo dell'uno virgola 
+   due percento a cinquantatremila punti, segnale che..."
+2. SENTIMENT + MERCATI OCCIDENTALI (250 parole): 
+   Analisi dell'S&P 500, DXY, VIX e tassi. Cita i valori esatti.
+3. GEOPOLITICA (150 parole): 
+   Analisi degli eventi in corso e impatto sui prezzi.
+4. MACRO E BANCHE CENTRALI (150 parole): 
+   Focus su tassi d'interesse e dati economici fresh.
+5. CRYPTO (80 parole): 
+   Transizione rapida al comparto digitale se i dati sono disponibili.
+6. CHIUSURA FORWARD-LOOKING (100 parole): 
+   Outlook e cosa osservare alla ripresa degli scambi.
 
 VIETATO ASSOLUTO:
-- Parlare di Criptovalute o Bitcoin (verranno trattati in una sezione dedicata dopo).
 - Elenchi puntati o numerati.
-- Ripetizioni per allungare il testo. Ogni frase deve essere densa di informazione.
-- Chiudere il podcast (verrà aggiunta una chiusura dopo la sezione crypto).
+- Ripetizioni per allungare il testo.
+- Usare parole inglesi inutili se esiste il termine italiano tecnico (es. "yield" -> "rendimento").
 
-PRONUNCIA ASSET — scrivi sempre la forma estesa:
-- S&P 500 → "lo Standard and Poor's 500", VIX → "l'indice Vix", EUR/USD → "il cambio euro dollaro", ecc.
+PRONUNCIA IN AUDIO ITALIANO — REGOLE SPECIALI:
+- USA → scrivere "Usa" (pronunciato come parola, non sillabare U-S-A)
+- NATO → scrivere "Nato"
+- OPEC → scrivere "Opek"  
+- IMF → scrivere "Fondo Monetario Internazionale"
+- Nomi propri inglesi (BlackRock, Goldman Sachs, JPMorgan) → 
+  lasciare in inglese così come sono, Piper li legge correttamente
+- MAI sillabare acronimi di 3+ lettere se sono pronunciabili come parola
+- Nikkei → "Nikkei" (pronuncia giapponese, Piper la gestisce)
+- Shanghai → "Shanghai"
+
+APERTURA CON ASIA:
+- Iniziare SEMPRE citando Nikkei e Shanghai con valori e variazioni
+- Collegare la chiusura asiatica all'apertura europea prevista
+- Esempio CORRETTO: "La chiusura asiatica consegna un Nikkei in calo dell'uno virgola due percento, segnalando pressione ribassista che potrebbe pesare sull'apertura europea"
 """
 
 AUDIO_CRYPTO_PROMPT = """Sei un analista esperto di digital assets.
@@ -281,8 +300,9 @@ def run():
             'btcusd':    'Bitcoin',
             'oil_brent': 'BRENT',
             'stoxx_600': 'STOXX 600',
-            'nikkei':    'NIKKEI',
-            'shanghai':  'SHANGHAI',
+            'nikkei':    'NIKKEI (chiusura Asia — indicatore apertura Europa)',
+            'shanghai':  'SHANGHAI (chiusura Asia — indicatore apertura Europa)',
+            'hang_seng': 'HANG SENG (Hong Kong)',
             'btp_10y':   'BTP 10Y',
             'global_m2': 'Global M2 Liquidity (proxy mensile)',
         }

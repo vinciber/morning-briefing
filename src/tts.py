@@ -21,6 +21,7 @@ def normalize_for_tts(text: str) -> str:
         'EUR/USD', 'DXY', 'VIX', 'TLT', 'BTP', 'BCE', 'Fed',
         'FOMC', 'BOJ', 'GDP', 'PCE', 'CPI', 'NFP', 'BTC', 'S&P 500', 'S&P',
         'STOXX 600', 'NIKKEI', 'QE', 'QT', 'ETF',
+        'USA', 'NATO', 'IMF', 'WTO', 'OPEC', 'SWIFT',
     ]
     for acronym in parenthetical_acronyms:
         # Rimuove (ACRONIMO)
@@ -28,7 +29,35 @@ def normalize_for_tts(text: str) -> str:
         # Rimuove "noto come ACRONIMO", "conosciuto come ACRONIMO", ecc.
         text = re.sub(r',?\s*(noto come|conosciuto come|detto|chiamato)\s+' + re.escape(acronym), '', text, flags=re.IGNORECASE)
 
-    # 1. PREZZI CON DOLLARO + MIGLIAIA → forma parlata PRIMA di tutto
+    # 1. ACRONIMI E NOMI INGLESI — pronuncia naturale
+    acronym_words = [
+        # Pronuncia come parola
+        ('USA',    'Usa'),
+        ('NATO',   'Nato'),
+        ('OPEC',   'Opek'),
+        ('SWIFT',  'Swift'),
+        ('IMF',    'Fondo Monetario Internazionale'),
+        ('WTO',    'Organizzazione Mondiale del Commercio'),
+        ('FOMC',   'Comitato della Federal Reserve'),
+        # Nomi propri inglesi — lasciare in inglese
+        ('BlackRock',   'BlackRock'),
+        ('Goldman Sachs', 'Goldman Sachs'),
+        ('JPMorgan',    'Jay Pi Morgan'),
+        ('Morgan Stanley', 'Morgan Stanley'),
+        ('Citigroup',   'Citigroup'),
+        # Indici — pronuncia estesa
+        ('Nikkei',      'Nikkei'),
+        ('Shanghai',    'Shanghai'),
+        ('Hang Seng',   'Hang Seng'),
+        # Crypto
+        ('Ethereum',    'Ethereum'),
+        ('Solana',      'Solana'),
+        ('Ripple',      'Ripple'),
+    ]
+    for orig, replacement in acronym_words:
+        text = text.replace(orig, replacement)
+
+    # 2. PREZZI CON DOLLARO + MIGLIAIA → forma parlata PRIMA di tutto
     # $70,646 → "settantamila 646 dollari"
     # $5,061.70 → "cinquemila 61 dollari"
     # $103.14 → "103 dollari"
@@ -59,7 +88,7 @@ def normalize_for_tts(text: str) -> str:
 
     text = re.sub(r'\$([0-9,]+(?:\.[0-9]{1,2})?)', replace_usd, text)
 
-    # 2. ACRONIMI E ABBREVIAZIONI → forma parlata
+    # 3. ACRONIMI E ABBREVIAZIONI → forma parlata
     # Ordine importante: prima le forme più lunghe
     abbreviations = [
         ("Standard and Poor's 500",  "Standard and Poor's 500"),  # già espanso
@@ -70,6 +99,8 @@ def normalize_for_tts(text: str) -> str:
         ("EUR/GBP",                  "cambio euro sterlina"),
         ("USD/JPY",                  "cambio dollaro yen"),
         ("GBP/USD",                  "cambio sterlina dollaro"),
+        ("STOXX 600",                "indice Stoxx seicento"),
+        ("STOXX600",                 "indice Stoxx seicento"),
         ("STOXX 600",                "indice Stoxx seicento"),
         ("STOXX600",                 "indice Stoxx seicento"),
         ("NIKKEI",                   "indice Nikkei"),
@@ -91,6 +122,24 @@ def normalize_for_tts(text: str) -> str:
         ("bp",                       "punti base"),
         ("BTP",                      "BTP"),
         ("Fed",                      "Federal Reserve"),
+        ("USA",                      "Usa"),
+        ("U.S.A.",                    "Usa"),
+        ("EU",                       "Europa"),
+        ("E.U.",                      "Europa"),
+        ("UK",                       "Regno Unito"),
+        ("U.K.",                      "Regno Unito"),
+        ("ECB",                      "Banca Centrale Europea"),
+        ("BCE",                      "Banca Centrale Europea"),
+        ("treasury",                 "trèsiuri"),
+        ("growth",                   "grouth"),
+        ("yield",                    "ild"),
+        ("hawkish",                  "ho-kish"),
+        ("dovish",                   "da-vish"),
+        ("rally",                    "ralli"),
+        ("trend",                    "trend"),
+        ("recession",                "recescion"),
+        ("bearish",                  "berish"),
+        ("bullish",                  "bullish"),
     ]
     for abbr, expanded in abbreviations:
         text = text.replace(abbr, expanded)

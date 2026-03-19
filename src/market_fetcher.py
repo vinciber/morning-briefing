@@ -213,7 +213,7 @@ def get_macro_calendar() -> dict:
     }
 
     BASE = 'https://api.stlouisfed.org/fred/series/observations'
-    cutoff = datetime.now(timezone.utc) - timedelta(days=45)
+    cutoff = datetime.now(timezone.utc) - timedelta(days=75)
     result = {}
 
     for key, (series_id, label, decimals, unit) in SERIES.items():
@@ -541,6 +541,10 @@ def run():
     val, chg = get_yahoo_finance('000001.SS')
     results['shanghai'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'Shanghai: {val}')
+
+    val, chg = get_yahoo_finance('^HSI')
+    results['hang_seng'] = {'value': _format_market_value(val), 'change': chg}
+    logger.info(f'Hang Seng: {val}')
 
     val, chg = get_stooq('10YITY.B')
     results['btp_10y'] = {'value': f'{_format_market_value(val)}%' if val != 'N/A' else 'N/A', 'change': chg}
