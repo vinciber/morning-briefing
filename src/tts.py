@@ -66,11 +66,33 @@ def normalize_for_tts(text: str) -> str:
     # $103.14 → "103 dollari"
     def replace_usd(m):
         num_str = m.group(1).replace(',', '')
+        suffix = m.group(2)
         try:
             val = float(num_str)
-            if val >= 1_000_000:
+            
+            # Gestione suffissi espliciti (es. $45.1M, $1.2B)
+            if suffix:
+                s = suffix.lower()
+                if s in ('m', 'million', 'milioni'):
+                    val_str = f"{val:g}".replace('.', ' virgola ')
+                    unit = 'milione' if val == 1 else 'milioni'
+                    return f'{val_str} {unit} di dollari'
+                if s in ('b', 'billion', 'miliardi'):
+                    val_str = f"{val:g}".replace('.', ' virgola ')
+                    unit = 'miliardo' if val == 1 else 'miliardi'
+                    return f'{val_str} {unit} di dollari'
+
+            # Gestione numeri estesi (es. $1,000,000)
+            if val >= 1_000_000_000:
+                miliardi = val / 1_000_000_000
+                val_str = f"{miliardi:g}".replace('.', ' virgola ')
+                unit = 'miliardo' if miliardi == 1 else 'miliardi'
+                return f'{val_str} {unit} di dollari'
+            elif val >= 1_000_000:
                 milioni = val / 1_000_000
-                return f'{milioni:.1f} milioni di dollari'.replace('.', ' virgola ')
+                val_str = f"{milioni:g}".replace('.', ' virgola ')
+                unit = 'milione' if milioni == 1 else 'milioni'
+                return f'{val_str} {unit} di dollari'
             elif val >= 1_000:
                 thousands = int(val // 1000)
                 remainder = int(val % 1000)
@@ -89,7 +111,7 @@ def normalize_for_tts(text: str) -> str:
         except Exception:
             return m.group(0)
 
-    text = re.sub(r'\$([0-9,]+(?:\.[0-9]{1,2})?)', replace_usd, text)
+    text = re.sub(r'\$([0-9,]+(?:\.[0-9]+)?)\s*(million|billion|milioni|miliardi|M|B)?', replace_usd, text, flags=re.IGNORECASE)
 
     # 3. ACRONIMI E ABBREVIAZIONI → forma parlata
     # Ordine importante: prima le forme più lunghe

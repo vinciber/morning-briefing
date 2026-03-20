@@ -181,7 +181,7 @@ TRANSITION OBBLIGATORIA (in apertura):
 - "Spostiamo l'attenzione sul mercato delle criptovalute..."
 
 STRUTTURA:
-1. DEEP DIVE BITCOIN (100 parole): Analisi tecnica e flussi. Cita TASSATIVAMENTE il dato degli ETF (BTC ETF Daily Net Inflow).
+1. DEEP DIVE BITCOIN (100 parole): Analisi tecnica e flussi. Cita TASSATIVAMENTE il valore esatto degli ETF (BTC ETF Daily Net Inflow) fornito nei dati di mercato. NON inventare o allucinare numeri differenti. Se il dato è negativo, indicalo come deflusso.
 2. ALTCOINS (150 parole): Commenta Ethereum, Solana e Binance Coin (BNB).
 3. SENTIMENT & FEAR/GREED (100 parole): Analisi dell'indice e della correlazione con il macro.
 
