@@ -156,7 +156,8 @@ def get_crypto_fear_greed():
     """Recupera l'indice Crypto Fear & Greed da alternative.me."""
     try:
         url = 'https://api.alternative.me/fng/'
-        r = requests.get(url, timeout=10)
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+        r = requests.get(url, headers=headers, timeout=10)
         data = r.json()
         val = data['data'][0]['value']
         cls = data['data'][0]['value_classification']
@@ -220,16 +221,12 @@ def get_etf_flow():
         
         if not data:
             logger.warning(f"⚠️ ETF Data not found. Checked file: {ETF_STATUS_PATH} and fallback URL. (data={data})")
-            return 'N/A', 'N/A'
+            return None
             
-        val = data.get('net_flow_usd_m', 0)
-        # Se il dato è 0, potrebbe essere che non è ancora uscito oggi.
-        # Ma lo scraper di solito prende l'ultimo dato non nullo.
-        
-        return f'${val:+.1f}M', data.get('trend_indicator', '➡️')
+        return data
     except Exception as e:
         logger.error(f'ETF Flow: {e}')
-        return 'N/A', 'N/A'
+        return None
 
 def get_macro_calendar() -> dict:
     """
@@ -624,9 +621,14 @@ def run():
     results['global_m2'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'Global M2: {val} ({chg})')
 
-    val, chg = get_etf_flow()
-    results['btc_etf_flow'] = {'value': val, 'change': chg}
-    logger.info(f'BTC ETF Flow: {val}')
+    etf_data = get_etf_flow()
+    if etf_data:
+        val = etf_data.get('net_flow_usd_m', 0)
+        results['btc_etf_flow'] = {'value': f'${val:+.1f}M', 'change': etf_data.get('trend_indicator', '➡️')}
+        results['btc_etf_data'] = etf_data # Per uso esteso nel template site
+    else:
+        results['btc_etf_flow'] = {'value': 'N/A', 'change': 'N/A'}
+    logger.info(f"BTC ETF Flow: {results['btc_etf_flow']['value']}")
 
     # Crypto data
     logger.info('₿ Fetching crypto data...')
