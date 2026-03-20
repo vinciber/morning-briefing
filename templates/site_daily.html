@@ -213,6 +213,16 @@
         <div class="macro-value">{{ crypto.fear_greed.value }}</div>
         <div class="macro-date">{{ crypto.fear_greed.class }}</div>
       </div>
+      
+      {% if briefing.get('market_data_raw', {}).get('btc_etf_flow') %}
+      {% set flow = briefing['market_data_raw']['btc_etf_flow'] %}
+      <div class="macro-item etf-flow" style="border-color: #58a6ff40;">
+        <div class="macro-label">BTC ETF Flow</div>
+        <div class="macro-value">{{ flow.value }}</div>
+        <div class="macro-date {% if '+' in flow.value %}up{% elif '-' in flow.value %}down{% endif %}">{{ flow.change }}</div>
+      </div>
+      {% endif %}
+
       {% for ticker, info in crypto.prices.items() %}
       <div class="macro-item">
         <div class="macro-label">{{ ticker }}</div>
