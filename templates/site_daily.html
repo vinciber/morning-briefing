@@ -206,6 +206,8 @@
   {% if briefing.get('market_data_raw', {}).get('crypto') %}
   <div class="macro-calendar">
     <div class="macro-title">₿ {% if lang == 'it' %}MERCATO CRIPTO{% else %}CRYPTO MARKET{% endif %}</div>
+    
+    <!-- Row 1: Fear & Greed + Prices (BTC, ETH, SOL, BNB) -->
     <div class="macro-grid">
       {% set crypto = briefing['market_data_raw']['crypto'] %}
       <div class="macro-item fear-greed" style="border-color: #f59e0b40;">
@@ -214,27 +216,32 @@
         <div class="macro-date">{{ crypto.fear_greed.class }}</div>
       </div>
       
-      {% if briefing.get('market_data_raw', {}).get('btc_etf_flow') %}
-      {% set flow = briefing['market_data_raw']['btc_etf_flow'] %}
-      <div class="macro-item etf-flow" style="border-color: #58a6ff40;">
-        <div class="macro-label">BTC ETF Flow</div>
-        <div class="macro-value">{{ flow.value }}</div>
-        <div class="macro-date {% if '+' in flow.value %}up{% elif '-' in flow.value %}down{% endif %}">{{ flow.change }}</div>
-      </div>
-      {% endif %}
-
       {% for ticker, info in crypto.prices.items() %}
+      {% if loop.index <= 4 %}
       <div class="macro-item">
         <div class="macro-label">{{ ticker }}</div>
         <div class="macro-value">{{ info.value }}</div>
         <div class="macro-date {% if '+' in info.change %}up{% elif '-' in info.change %}down{% endif %}">{{ info.change }}</div>
       </div>
+      {% endif %}
       {% endfor %}
-      
+    </div>
+
+    <!-- Row 2: ETF Flow + ETF Stats -->
+    <div class="macro-grid" style="margin-top: 15px;">
+      {% if briefing.get('market_data_raw', {}).get('btc_etf_flow') %}
+      {% set flow = briefing['market_data_raw']['btc_etf_flow'] %}
+      <div class="macro-item etf-flow" style="border-color: #58a6ff40;">
+        <div class="macro-label">BTC ETF Flow</div>
+        <div class="macro-value {% if '+' in flow.value %}up{% elif '-' in flow.value %}down{% endif %}">{{ flow.value }}</div>
+        <div class="macro-date">{{ flow.change }}</div>
+      </div>
+      {% endif %}
+
       {% if briefing.get('market_data_raw', {}).get('btc_etf_data') %}
       {% set etf = briefing['market_data_raw']['btc_etf_data'] %}
-      <div class="macro-item" style="grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; border-color: #58a6ff30;">
-        <div style="display: flex; flex-direction: column;">
+      <div class="macro-item" style="grid-column: span 2; display: flex; justify-content: space-around; align-items: center; border-color: #58a6ff30;">
+        <div style="text-align: center;">
           <div class="macro-label">BTC ETF Holdings</div>
           <div class="macro-value" style="font-size: 14px;">{{ "{:,.0f}".format(etf.total_btc) }} BTC</div>
         </div>
@@ -242,19 +249,20 @@
           <div class="macro-label">Total AUM</div>
           <div class="macro-value" style="font-size: 14px;">${{ etf.total_aum_bn }}B</div>
         </div>
-        <div style="text-align: right;">
+        <div style="text-align: center;">
           <div class="macro-label">% of 21M</div>
           <div class="macro-value" style="font-size: 14px;">{{ etf.pct_of_21m }}%</div>
         </div>
       </div>
       {% endif %}
     </div>
+    
     <div style="margin-top: 16px; font-size: 10px; color: var(--text-muted); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px;">
       <div>
-        Powered by <a href="https://www.coingecko.com/" target="_blank" style="text-decoration: none; font-weight: 600;"><span style="color: #8cc63f;">Coin</span><span style="color: #e4772b;">Gecko</span></a>
+        Powered by <a href="https://www.coingecko.com/" target="_blank" style="text-decoration: none; font-weight: 600;"><span style="color: #22c55e;">CoinGecko</span></a>
       </div>
       <div style="font-size: 9px; opacity: 0.8;">
-        Fear & Greed by <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" style="color: var(--text-muted); text-decoration: none;">Alternative.me</a>
+        Fear & Greed by <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" style="color: #f59e0b; text-decoration: none; font-weight: 600;">Alternative.me</a>
       </div>
     </div>
   </div>

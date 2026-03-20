@@ -65,8 +65,11 @@ def build_market_strip(market_data):
             val = item.get('value', 'N/A')
             chg = item.get('change', 'N/A')
         if val and val != 'N/A':
-            positive = isinstance(chg, str) and '+' in chg
-            negative = isinstance(chg, str) and '-' in chg
+            # Per BTC ETF e simili, il segno è nel valore (es. $+10.2M$ o $-5.0M$)
+            # Per gli altri è nel change (es. $+0.5\%$)
+            positive = (isinstance(chg, str) and '+' in chg) or (key == 'btc_etf_flow' and isinstance(val, str) and '+' in val)
+            negative = (isinstance(chg, str) and '-' in chg) or (key == 'btc_etf_flow' and isinstance(val, str) and '-' in val)
+            
             strip.append({
                 'label':    label,
                 'value':    val,
