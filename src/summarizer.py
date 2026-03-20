@@ -160,7 +160,8 @@ PRONUNCIA IN AUDIO ITALIANO — REGOLE SPECIALI:
 - OPEC → scrivere "Opek"  
 - IMF → scrivere "Fondo Monetario Internazionale"
 - Nomi propri inglesi (BlackRock, Goldman Sachs, JPMorgan) → 
-  lasciare in inglese così come sono, Piper li legge correttamente
+  lasciare in inglese così come sono, Piper li legge correttamente.
+- Price Alert → scrivere "Prais Alért" (per forzare la pronuncia corretta in italiano)
 - MAI sillabare acronimi di 3+ lettere se sono pronunciabili come parola
 - Nikkei → "Nikkei" (pronuncia giapponese, Piper la gestisce)
 - Shanghai → "Shanghai"
@@ -223,7 +224,7 @@ STRUCTURE:
 AUDIO_CLOSE_PROMPT = """CHIUSURA OBBLIGATORIA:
 - Focus: outlook per domani e cosa monitorare.
 - NON terminare MAI con la frase "buon trading" o "buon trading a tutti".
-- Usa chiusure professionali come "Grazie per l'attenzione e a domani", "Un saluto da Price Alert", "Al prossimo aggiornamento".
+- Usa chiusure professionali come "Grazie per l'attenzione e a domani", "Un saluto da Prais Alért", "Al prossimo aggiornamento".
 """
 
 
