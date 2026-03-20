@@ -159,6 +159,35 @@
     {% endif %}
   </div>
   
+  {% if briefing.get('market_data_raw', {}).get('crypto') %}
+  <div class="macro-calendar">
+    <div class="macro-title">₿ {% if lang == 'it' %}MERCATO CRIPTO{% else %}CRYPTO MARKET{% endif %}</div>
+    <div class="macro-grid">
+      {% set crypto = briefing['market_data_raw']['crypto'] %}
+      <div class="macro-item fear-greed" style="border-color: #f59e0b40;">
+        <div class="macro-label">Fear & Greed</div>
+        <div class="macro-value">{{ crypto.fear_greed.value }}</div>
+        <div class="macro-date">{{ crypto.fear_greed.class }}</div>
+      </div>
+      {% for ticker, info in crypto.prices.items() %}
+      <div class="macro-item">
+        <div class="macro-label">{{ ticker }}</div>
+        <div class="macro-value">{{ info.value }}</div>
+        <div class="macro-date {% if '+' in info.change %}up{% elif '-' in info.change %}down{% endif %}">{{ info.change }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    <div style="margin-top: 16px; font-size: 10px; color: var(--text-muted); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+      <div>
+        Powered by <a href="https://www.coingecko.com/" target="_blank" style="color: var(--text-muted); text-decoration: underline;">CoinGecko</a>
+      </div>
+      <div style="font-size: 9px; opacity: 0.7;">
+        Fear & Greed by <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" style="color: var(--text-muted); text-decoration: underline;">Alternative.me</a>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
   {% if briefing.get('market_data_raw', {}).get('macro_calendar') %}
   <div class="macro-calendar">
     <div class="macro-title">📊 {% if lang == 'it' %}DATI MACRO E CALENDARIO{% else %}MACRO DATA & CALENDAR{% endif %}</div>
@@ -202,35 +231,7 @@
     {% endif %}
   </div>
   {% endif %}
-  
-  {% if briefing.get('market_data_raw', {}).get('crypto') %}
-  <div class="macro-calendar">
-    <div class="macro-title">₿ {% if lang == 'it' %}MERCATO CRIPTO{% else %}CRYPTO MARKET{% endif %}</div>
-    <div class="macro-grid">
-      {% set crypto = briefing['market_data_raw']['crypto'] %}
-      <div class="macro-item fear-greed" style="border-color: #f59e0b40;">
-        <div class="macro-label">Fear & Greed</div>
-        <div class="macro-value">{{ crypto.fear_greed.value }}</div>
-        <div class="macro-date">{{ crypto.fear_greed.class }}</div>
-      </div>
-      {% for ticker, info in crypto.prices.items() %}
-      <div class="macro-item">
-        <div class="macro-label">{{ ticker }}</div>
-        <div class="macro-value">{{ info.value }}</div>
-        <div class="macro-date {% if '+' in info.change %}up{% elif '-' in info.change %}down{% endif %}">{{ info.change }}</div>
-      </div>
-      {% endfor %}
-    </div>
-    <div style="margin-top: 16px; font-size: 10px; color: var(--text-muted); text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
-      <div style="font-weight: 600;">
-        Powered by <a href="https://www.coingecko.com/" target="_blank" style="color: var(--text); text-decoration: none;">CoinGecko</a>
-      </div>
-      <div style="font-size: 8px; opacity: 0.8;">
-        Fear & Greed by <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" style="color: var(--text-muted); text-decoration: none;">Alternative.me</a>
-      </div>
-    </div>
-  </div>
-  {% endif %}
+
 
   {% if audio_url %}
   <div class="audio-section">

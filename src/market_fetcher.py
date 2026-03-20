@@ -11,7 +11,10 @@ logger = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = ROOT / 'data' / 'market_data.json'
+# Path robustness: check both repo root and local dir
 ETF_STATUS_PATH = ROOT.parent / 'public' / 'data' / 'etf_status.json'
+if not ETF_STATUS_PATH.exists():
+    ETF_STATUS_PATH = ROOT / 'public' / 'data' / 'etf_status.json'
 FRED_API_KEY = os.environ.get('FRED_API_KEY', '')
 
 def get_yahoo_finance(symbol):
@@ -184,20 +187,27 @@ def get_etf_flow():
     """Carica gli inflow degli ETF BTC. Prova file locale, poi URL pubblico."""
     try:
         data = None
+        # Prova percorso locale (prioritario per Vercel/Repo)
         if ETF_STATUS_PATH.exists():
             with open(ETF_STATUS_PATH, 'r') as f:
                 data = json.load(f)
+                logger.info(f"✅ ETF Data loaded from file: {ETF_STATUS_PATH}")
         else:
-            # Fallback URL per ambienti GitHub Actions
+            # Fallback URL per ambienti GitHub Actions / Production
             url = "https://www.pricealertapp.app/public/data/etf_status.json"
             resp = requests.get(url, timeout=10)
             if resp.status_code == 200:
                 data = resp.json()
+                logger.info(f"✅ ETF Data loaded from fallback URL")
         
         if not data:
+            logger.warning("⚠️ ETF Data not found (both file and URL failed)")
             return 'N/A', 'N/A'
             
         val = data.get('net_flow_usd_m', 0)
+        # Se il dato è 0, potrebbe essere che non è ancora uscito oggi.
+        # Ma lo scraper di solito prende l'ultimo dato non nullo.
+        
         return f'${val:+.1f}M', data.get('trend_indicator', '➡️')
     except Exception as e:
         logger.error(f'ETF Flow: {e}')
