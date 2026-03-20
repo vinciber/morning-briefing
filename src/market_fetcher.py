@@ -213,7 +213,7 @@ def get_etf_flow():
                 logger.info(f"✅ ETF Data loaded from file: {ETF_STATUS_PATH}")
         else:
             # Fallback URL per ambienti GitHub Actions / Production
-            url = "https://www.pricealertapp.app/public/data/etf_status.json"
+            url = "https://www.pricealertapp.app/data/etf_status.json"
             resp = requests.get(url, timeout=10)
             if resp.status_code == 200:
                 data = resp.json()
