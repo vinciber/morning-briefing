@@ -10,30 +10,27 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger(__name__)
 
 def get_root():
-    """Trova la root del progetto in modo robusto."""
-    # Prova 1: Risaliamo dalla posizione del file
+    """Determina la root del progetto in modo robusto."""
+    # 1. GitHub Actions Workspace (il più affidabile in CI)
+    github_workspace = os.environ.get('GITHUB_WORKSPACE')
+    if github_workspace:
+        return Path(github_workspace)
+
+    # 2. Risaliamo dalla posizione del file corrente
+    # Struttura: [ROOT]/morning-briefing/src/market_fetcher.py
     current = Path(__file__).resolve()
-    for _ in range(5):
-        if (current / 'public').exists() and (current / 'morning-briefing').exists():
-            return current
-        current = current.parent
-    
-    # Prova 2: Path assoluto noto (per local dev)
-    fixed_path = Path('/Users/vinciber/Documents/price-alert-tg-backend')
-    if fixed_path.exists():
-        return fixed_path
+    for parent in [current] + list(current.parents):
+        # Cerchiamo la cartella 'public' che è solo nella root
+        if (parent / 'public').exists() and (parent / 'public').is_dir():
+            return parent
+            
+    # 3. Fallback dev local (se il file è in morning-briefing/src/)
+    if current.parent.name == 'src' and current.parent.parent.name == 'morning-briefing':
+        return current.parent.parent.parent
         
-    # Prova 3: Fallback standard
-    return Path(__file__).resolve().parent.parent
+    return current.parent.parent
 
 ROOT = get_root()
-# Assicuriamoci che ROOT punti alla cartella principale del repo
-if ROOT.name == 'src' or ROOT.name == 'morning-briefing':
-    ROOT = ROOT.parent
-if ROOT.name == 'morning-briefing': # double check
-    ROOT = ROOT.parent
-
-# Path robusti
 OUTPUT_PATH = ROOT / 'morning-briefing' / 'data' / 'market_data.json'
 ETF_STATUS_PATH = ROOT / 'public' / 'data' / 'etf_status.json'
 FRED_API_KEY = os.environ.get('FRED_API_KEY', '')
