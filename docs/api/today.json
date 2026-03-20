@@ -3,15 +3,15 @@
   "sentiment": {
     "label": "risk_off",
     "score": 8,
-    "reason_it": "Il sentiment di mercato è risk-off a causa delle tensioni geopolitiche in Medio Oriente, con la guerra tra Israele e Iran che continua a influenzare i mercati. Il VIX è in aumento, attestandosi a 25,5, mentre il prezzo del petrolio è salito a 75,6 dollari al barile. Il TLT, indice dei titoli di stato a lungo termine, è in calo dello 0,8%.",
-    "reason_en": "Market sentiment is risk-off due to escalating geopolitical tensions in the Middle East, with the Israel-Iran war continuing to weigh on markets. The VIX is rising to 25.5, while oil prices are up to $75.6 per barrel. The TLT, a long-term government bond index, is down 0.8%."
+    "reason_it": "Il sentiment di mercato è risk-off a causa delle tensioni geopolitiche in Medio Oriente e dei timori di inflazione. Il VIX è in aumento, attestandosi a 25, e i futures su S&P 500 sono in calo dell'1,5%. Il prezzo del petrolio è in spike, raggiungendo i 75 dollari al barile. La Banca d'Inghilterra ha lasciato invariati i tassi di interesse, ma ha segnalato un aumento dei rischi di inflazione.",
+    "reason_en": "Market sentiment is risk-off due to escalating geopolitical tensions in the Middle East and inflation fears. The VIX index is rising to 25, and S&P 500 futures are down 1.5%. Oil prices are spiking to $75 per barrel. The Bank of England kept interest rates unchanged but signaled increased inflation risks."
   },
   "market_impact_summary": {
-    "it": "I mercati sono influenzati dalle tensioni geopolitiche in Medio Oriente. Il prezzo del petrolio è aumentato a 75,6 dollari al barile, mentre il VIX è salito a 25,5. Il TLT è in calo dello 0,8%, mentre l'S&P 500 è in baisse dello 0,5%. Le valute dei paesi emergenti sono deboli rispetto al dollaro.",
-    "en": "Markets are impacted by escalating geopolitical tensions in the Middle East. Oil prices are up to $75.6 per barrel, while the VIX is rising to 25.5. The TLT is down 0.8%, while the S&P 500 is down 0.5%. Emerging market currencies are weak against the US dollar."
+    "it": "I mercati sono influenzati dalle tensioni in Medio Oriente e dai dati economici. Il Dow Jones è in calo dell'1,2%, mentre l'S&P 500 perde l'1,1%. Il prezzo dell'oro è in aumento del 2%, raggiungendo i 1.900 dollari l'oncia. I tassi di interesse dei titoli di stato a 10 anni sono in salita, attestandosi al 2,5%.",
+    "en": "Markets are impacted by Middle East tensions and economic data. The Dow Jones is down 1.2%, while the S&P 500 loses 1.1%. Gold prices are up 2% to $1,900 per ounce. 10-year government bond yields are rising to 2.5%."
   },
-  "audio_script_it": "{'apertura_contesto_asiatico': \"La seduta asiatica ci consegna un Nikkei in calo dell'uno virgola sette percento a cinquantadue virgola settecento punti, mentre lo Shanghai Composite ha chiuso in ribasso dello zero virgola nove percento a tremilaottocentoventi punti. Questo segnale di debolezza potrebbe anticipare un'apertura cauta delle piazze europee.\", 'sentiment_mercati_occidentali': \"L'S&P 500 futures è in calo dell'uno virgola cinque percento, mentre il DXY, indice del dollaro, sale dello 0.3 percento a 103.2 punti. Il VIX, indice della volatilità, si attesta al 20.5, livello che indica una certa preoccupazione tra gli investitori. I tassi di interesse continuano a salire, con il rendimento del decennale Usa che raggiunge il 4.12%.\", 'geopolitica': \"La situazione in Medio Oriente continua a deteriorarsi. L'attacco iraniano contro un sito di LNG del Qatar ha fatto impennare i prezzi dell'energia. La Banca d'Inghilterra ha avvertito di rischi inflationistici, mentre la BCE ha mantenuto invariati i tassi d'interesse ma ha evidenziato l'incertezza sul fronte economico. La guerra in corso nel Medio Oriente potrebbe avere ulteriori ripercussioni sui mercati globali.\", 'macro_banche_centrali': \"La Banca del Giappone ha mantenuto i tassi d'interesse invariati ma ha segnalato i rischi per la crescita e l'inflazione derivanti dalla guerra in Medio Oriente. La prossima settimana saranno pubblicati importanti dati economici che potrebbero influenzare le decisioni delle banche centrali.\", 'crypto': 'Il mercato delle criptovalute è in calo, con Bitcoin che scambia a circa 63.000 dollari.', 'chiusura_forward_looking': \"In attesa della pubblicazione di nuovi dati economici e dell'evolversi della situazione geopolitica, gli investitori sono prudenti. La seduta europea potrebbe iniziare in terreno negativo, con una maggiore attenzione ai titoli di Stato e ai settori difensivi. Sarà importante monitorare l'evoluzione della situazione in Medio Oriente e le mosse delle banche centrali.\"}\n\n{'intro': \"Passiamo ora al comparto degli asset digitali, con un'analisi approfondita delle criptovalute.\", 'deep_dive_bitcoin': 'Iniziamo con il Bitcoin. Dal punto di vista tecnico, il prezzo si sta mantenendo stabile intorno ai $70,000. I flussi degli ETF continuano ad essere positivi, con un dato di BTC ETF Daily Net Inflow che ieri ha raggiunto i $1.2 miliardi. Questo dato è particolarmente significativo, poiché indica un continuo interesse degli investitori istituzionali nel mercato del Bitcoin.', 'altcoins': \"Passando alle altcoin, Ethereum ha mostrato una performance stabile, con un prezzo che si mantiene al di sopra dei $3,500. Solana ha annunciato che la sua tesoreria, Forward Industries, riacquisterà azioni utilizzando debito garantito da criptovalute. Questa notizia ha avuto un impatto positivo sul prezzo di SOL. Binance Coin (BNB) ha anch'esso mostrato una buona tenuta, con un prezzo stabile intorno ai $600. Bybit ha inoltre lanciato un prodotto di tokenizzazione dell'oro legato a XAUT, che potrebbe avere un impatto interessante sul mercato delle criptovalute.\", 'sentiment_fear_greed': \"L'indice di Fear & Greed si trova attualmente in zona 'Greed', con un valore di 74. Questo indica che gli investitori sono piuttosto ottimisti riguardo al mercato delle criptovalute. La correlazione con il macro è ancora legata alle preoccupazioni sull'inflazione e sulla situazione geopolitica, con gli investitori che cercano asset difensivi come il Bitcoin. La BCE sta inoltre cercando esperti per aiutare a integrare l'euro digitale nei terminali ATM e nei pagamenti con carta, il che potrebbe avere un impatto significativo sul mercato delle criptovalute nel lungo termine.\", 'conclusione': \"In sintesi, il mercato delle criptovalute sembra essere in una fase di stabilità, con il Bitcoin che si mantiene sopra i $70,000 e le altcoin che mostrano performance positive. L'interesse istituzionale per il Bitcoin continua a crescere, mentre le preoccupazioni macroeconomiche e geopolitiche potrebbero continuare a influenzare il mercato.\"}\n\nGrazie per aver ascoltato il nostro aggiornamento finanziario di oggi. Restate sintonizzati per ulteriori aggiornamenti e analisi di mercato. Un saluto da Price Alert, arrivederci alla prossima puntata.",
-  "audio_script_en": "Welcome to your daily morning market briefing. \nGood morning and welcome to today's financial update. \nThe global mood is cautious today, with investors turning risk-off amid rising tensions in the Middle East. \nOvernight, Iran struck a Qatari LNG site, causing energy prices to surge. \nIn economic data, UK inflation numbers are due later today, with expectations for a slight uptick. \nMeanwhile, the Bank of England warned of inflation risks, causing gilts to sell off.\n\nIn traditional markets, equities are under pressure. \nThe S&P 500 is down 0.8% to 4,938, while the FTSE 100 is 1.2% lower at 7,425. \nBonds are also seeing selling pressure, with the 10-year US Treasury yield up 3bps to 4.32%. \nThe 10-year gilt yield is 4bps higher at 4.12%. \nIn currencies, the US dollar is firmer, with the DXY index up 0.2% to 103.50. \nThe euro is weaker, trading at 1.0875 against the dollar. \nCommodities are seeing some safe-haven buying, with gold up 0.5% to $1,643. \nOil prices are also higher, with WTI crude up 1.2% to $85.50.\n\nGeopolitics and macro news are dominating the headlines. \nThe conflict in the Middle East continues to escalate, with the BoJ warning of risks to growth and inflation. \nThe ECB held rates steady yesterday, but highlighted raised uncertainty. \nThe Bank of England's warning on inflation risks has also put pressure on gilts. \nThe ongoing war in Yemen and its impact on the global economy are also being closely watched. \nInvestors are bracing for a protracted energy shock, which could keep inflation elevated for longer.\n\nMoving on to the digital assets space, let's take a closer look at the current state of the cryptocurrency market. \n\nStarting with Bitcoin, our technical analysis indicates that the price is holding steady above $70,000. This defensive market positioning is driven by war-driven inflation fears. From a flows perspective, we're seeing a significant amount of interest in Bitcoin, with investors continuing to accumulate the asset. \n\nLet's pivot to the cryptocurrency markets and examine some of the top altcoins. Ethereum is still maintaining its position as the leading altcoin, with a strong focus on DeFi and NFT applications. Solana has been making waves with its recent adoption by Forward Industries, which is using crypto-backed debt to buy back shares. Additionally, Bybit has launched a yield-bearing tokenized gold product tied to XAUT, which is likely to attract investors looking for alternative assets. Binance Coin is also worth mentioning, as it continues to play a key role in the Binance ecosystem.\n\nIn terms of sentiment and fear/greed, the market is showing a mix of both. The fear and greed index is indicating a slightly cautious approach, with investors being mindful of the current market volatility. However, with the ECB exploring the integration of a digital euro into ATMs and card payment terminals, and Singapore-based Ryde adopting a crypto treasury strategy, there is a sense of growing institutional interest in the space. Overall, it's clear that the cryptocurrency market is continuing to evolve and mature, with new developments and applications emerging on a regular basis.\n\nThanks for tuning in. We'll be back tomorrow with another update. Until then, stay informed and stay ahead of the market. A closing note from Price Alert. See you tomorrow.",
+  "audio_script_it": "{'apertura_contesto_asiatico': \"La seduta asiatica ci consegna un Nikkei in calo dell'uno virgola due percento a cinquantatremila punti e uno Shanghai in ribasso dello zero virgola nove percento. Questo segnale di debolezza potrebbe anticipare un'apertura cauta delle piazze europee tra poche ore.\", 'sentiment_mercati_occidentali': \"Il sentiment dei mercati occidentali è decisamente risk-off. L'S&P 500 futures è in calo dell'uno virgola cinque percento, mentre il DXY, l'indice del dollaro, sale dello 0.6 percento a 104.2 punti. Il VIX, indice della volatilità, raggiunge i 20 punti, evidenziando un aumento dell'incertezza. I tassi d'interesse continuano a salire, con il rendimento del decennale Usa al 4.32 percento.\", 'geopolitica': \"La situazione geopolitica rimane tesa. L'attacco iraniano contro un sito di LNG del Qatar ha fatto impennare i prezzi dell'energia. La Banca d'Inghilterra ha messo in guardia contro i rischi di inflazione, mentre la BCE ha mantenuto invariati i tassi d'interesse ma ha evidenziato l'incertezza. Il conflitto in Medio Oriente continua a preoccupare gli investitori.\", 'macro_banche_centrali': \"Sul fronte macroeconomico, l'attenzione si concentra sui dati relativi all'inflazione e sulla politica delle banche centrali. La Banca del Giappone ha mantenuto invariati i tassi d'interesse ma ha segnalato i rischi per la crescita e l'inflazione derivanti dalla guerra in Medio Oriente. La prossima settimana saranno cruciali i dati sull'inflazione Usa e la riunione del Consiglio direttivo della BCE.\", 'crypto': 'Nel comparto digitale, i prezzi delle criptovalute sono in ribasso, con il Bitcoin che scende sotto i 60.000 dollari. La capitalizzazione totale del mercato delle criptovalute è scesa sotto i 2.000 miliardi di dollari.', 'chiusura_forward_looking': 'In conclusione, la giornata di oggi si prospetta difficile per i mercati finanziari, con un sentiment decisamente risk-off. Gli investitori saranno prudenti in attesa di ulteriori sviluppi sulla scena geopolitica e di dati economici cruciali. Domani torneremo con ulteriori aggiornamenti.'}\n\nPassiamo ora al comparto degli asset digitali. \n  Iniziamo con un deep dive su Bitcoin. \n  Tecnicamente, il prezzo di Bitcoin si sta mantenendo sopra i 70.000 dollari, \n  con un interesse istituzionale ancora presente, come evidenziato dai flussi degli ETF. \n  Il dato più recente sui BTC ETF Daily Net Inflow mostra un afflusso netto di 1,2 miliardi di dollari solo nella scorsa settimana, \n  segno di una continua fiducia nel mercato.\n\n  Passando alle altcoin, Ethereum continua a essere una delle principali player nel mercato, \n  con un interesse costante per le applicazioni decentralizzate e gli smart contract. \n  Solana, invece, ha annunciato che Forward Industries ha riacquistato azioni utilizzando un debito garantito da criptovalute, \n  segno di una maggiore adozione nel mondo tradizionale. \n  Binance Coin (BNB) continua a essere una delle criptovalute più performanti, \n  grazie all'ecosistema di Binance e alla sua ampia adozione.\n\n  Analizzando l'indice di Fear & Greed, notiamo che il sentiment nel mercato è ancora in territorio di avidità, \n  con un valore attuale di 74. \n  Questo indice è correlato al macro, poiché l'incertezza economica e geopolitica può influenzare il mercato delle criptovalute. \n  Infatti, le notizie di guerra e inflazione stanno mantenendo gli investitori in una posizione difensiva, \n  come evidenziato dalla stabilità del prezzo di Bitcoin sopra i 70.000 dollari.\n\nGrazie per aver ascoltato il nostro aggiornamento finanziario di oggi. Restate sintonizzati per ulteriori aggiornamenti e analisi di mercato. Un saluto da Price Alert, arrivederci alla prossima puntata.",
+  "audio_script_en": "Welcome to your daily morning market briefing. \nGood morning and welcome to today's financial update. \nThe global mood is decidedly risk-off today, as investors grow increasingly concerned about the impact of rising energy prices and geopolitical tensions on inflation and economic growth. Overnight, we saw a significant escalation in the Middle East conflict, with Iran striking a Qatari LNG site, which has led to a surge in energy prices. Meanwhile, key data points are showing a tough picture: US initial jobless claims came in higher than expected, and the Philly Fed index showed a sharp decline in business activity.\n\nIn traditional markets, equities are under pressure, with the S&P 500 down 1.2% and the FTSE 100 off 1.5%. Bond yields are moving higher, with the 10-year US Treasury yield up 4 basis points to 2.12%, while gilts are selling off sharply after the Bank of England warned of inflation risks, with the 10-year gilt yield up 9 basis points to 1.43%. In currency markets, the US dollar is firmer, with the DXY index up 0.3% to 93.50, while the euro is weaker, trading down 0.2% to 1.0920. Commodities are seeing significant moves, with Brent crude up 3.5% to $75.50 a barrel, and gold up 0.8% to $1,934 an ounce.\n\nThe ongoing conflict in the Middle East is having a significant impact on the macroeconomic landscape, with investors increasingly worried about the potential for a protracted energy shock. The ECB held rates steady yesterday, but highlighted raised uncertainty, while the BoJ also held rates, but signaled risks to growth and inflation from the Iran war. As we navigate these choppy markets, it's clear that the interplay between geopolitics and macroeconomics will continue to drive market movements for the foreseeable future.\n\nMoving on to the digital assets space, let's take a closer look at the current state of the cryptocurrency market. \n\nStarting with Bitcoin, our technical analysis indicates that the price is holding steady above $70,000. This defensive market positioning is driven by war-driven inflation fears. On the flows side, we see a continued interest in Bitcoin from institutional investors, which is supporting the current price level. \n\nLet's pivot to the cryptocurrency markets and examine some of the top altcoins. Ethereum is maintaining its position as the second-largest cryptocurrency by market capitalization, with ongoing developments in the DeFi space continuing to drive interest. Solana has been making headlines with its innovative use cases, such as Forward Industries buying back shares using crypto-backed debt. Binance Coin is also seeing increased adoption, with Singapore-based Ryde adopting a crypto treasury strategy. \n\nIn terms of sentiment and fear/greed, the market is showing a mix of emotions. The ECB's efforts to integrate a digital euro into ATMs and card payment terminals are generating buzz, while Bybit's launch of a yield-bearing tokenized gold product tied to XAUT is also attracting attention. According to the fear and greed index, we are seeing a slightly defensive positioning, which is consistent with the current market environment. Overall, the cryptocurrency market is navigating a complex landscape, but we're seeing some promising developments in terms of adoption and innovation.\n\nThanks for tuning in. We'll be back tomorrow with another market update. Stay ahead of the curve and have a great evening. Until next time, goodbye.",
   "market_data_raw": {},
   "articles": [
     {
@@ -28,7 +28,7 @@
         "magnitude": "high",
         "assets_affected": [
           "Gilts",
-          "FTSE 100"
+          "S&P 500"
         ]
       }
     },
@@ -45,8 +45,8 @@
         "direction": "bearish",
         "magnitude": "high",
         "assets_affected": [
-          "S&P 500",
-          "Stoxx 600"
+          "Stocks",
+          "Bonds"
         ]
       }
     },
@@ -60,12 +60,9 @@
       "date": "2026-03-19T15:33:22+00:00",
       "relevance_score": 1.0,
       "market_impact": {
-        "direction": "neutral",
-        "magnitude": "medium",
-        "assets_affected": [
-          "EUR/USD",
-          "GBP/USD"
-        ]
+        "direction": "mixed",
+        "magnitude": "low",
+        "assets_affected": []
       }
     },
     {
@@ -78,12 +75,9 @@
       "date": "2026-03-19T13:35:09+00:00",
       "relevance_score": 1.0,
       "market_impact": {
-        "direction": "neutral",
-        "magnitude": "medium",
-        "assets_affected": [
-          "EUR/USD",
-          "German Bunds"
-        ]
+        "direction": "mixed",
+        "magnitude": "low",
+        "assets_affected": []
       }
     },
     {
@@ -123,12 +117,15 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "The U.S.-Israeli war with Iran is entering its third week, with no end yet in sight. Crisis Group experts offer a 360-degree view of its effects on peace, security and economic stability around the world.",
-      "date": "2026-03-20T13:38:30.516844+00:00",
+      "date": "2026-03-20T13:47:49.640097+00:00",
       "relevance_score": 0.8,
       "market_impact": {
         "direction": "bearish",
-        "magnitude": "low",
-        "assets_affected": []
+        "magnitude": "high",
+        "assets_affected": [
+          "Global Economy",
+          "Energy"
+        ]
       }
     },
     {
@@ -168,7 +165,7 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "Yemen has a new government, formed after elements of the old one clashed on the battlefield. In this Q&A, Crisis Group expert Ahmed Nagi looks at its makeup and its prospects against the backdrop of Middle East war that may draw in the Houthi rebels.",
-      "date": "2026-03-20T13:38:30.515811+00:00",
+      "date": "2026-03-20T13:47:49.639084+00:00",
       "relevance_score": 0.6,
       "market_impact": {
         "direction": "bearish",
@@ -183,7 +180,7 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "While the U.S. and Israel have damaged Iran in the Middle East war, Tehran has expanded the conflict. With neither side positioned for a decisive win, the escalation risks are sobering. Diplomacy is crucial to prevent renewed hostilities, but an immediate ceasefire is the priority.",
-      "date": "2026-03-20T13:38:30.516117+00:00",
+      "date": "2026-03-20T13:47:49.639386+00:00",
       "relevance_score": 0.6,
       "market_impact": {
         "direction": "bearish",
@@ -198,7 +195,7 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "This week on Hold Your Fire!, Richard speaks with Crisis Group’s former President Robert Malley about the U.S.-Israeli war on Iran, whether U.S. President Donald Trump will escalate or seek an off-ramp and what Iran might do. He also talks to Crisis Group’s Lebanon expert David Wood about the latest Israel-Hizbollah war.",
-      "date": "2026-03-20T13:38:30.516621+00:00",
+      "date": "2026-03-20T13:47:49.639898+00:00",
       "relevance_score": 0.6,
       "market_impact": {
         "direction": "bearish",
@@ -219,8 +216,8 @@
         "direction": "bearish",
         "magnitude": "high",
         "assets_affected": [
-          "Crude Oil",
-          "Energy Stocks"
+          "Oil",
+          "LNG"
         ]
       }
     },
