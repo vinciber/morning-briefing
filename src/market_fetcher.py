@@ -31,7 +31,12 @@ def get_root():
     return current.parent.parent
 
 ROOT = get_root()
-OUTPUT_PATH = ROOT / 'morning-briefing' / 'data' / 'market_data.json'
+# Se ROOT è già la cartella del progetto o siamo in CI del sottomodulo
+if (ROOT / 'morning-briefing').exists():
+    OUTPUT_PATH = ROOT / 'morning-briefing' / 'data' / 'market_data.json'
+else:
+    OUTPUT_PATH = ROOT / 'data' / 'market_data.json'
+
 ETF_STATUS_PATH = ROOT / 'public' / 'data' / 'etf_status.json'
 FRED_API_KEY = os.environ.get('FRED_API_KEY', '')
 
