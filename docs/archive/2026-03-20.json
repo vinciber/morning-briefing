@@ -3,63 +3,63 @@
   "sentiment": {
     "label": "risk_off",
     "score": 8,
-    "reason_it": "Il sentiment di mercato è risk-off a causa dell'aumento del VIX del 10.14% a 26.50 e del calo dell'S&P 500 dello 0.79% a 6553.99. Il DXY è salito dello 0.56% a 99.78, mentre il TLT è sceso dell'1.49% a 86.19. L'aumento del VIX e la discesa dei mercati azionari indicano una maggiore avversione al rischio.",
-    "reason_en": "Market sentiment is risk-off due to the 10.14% increase in VIX to 26.50 and the 0.79% decline in S&P 500 to 6553.99. The DXY rose 0.56% to 99.78, while TLT fell 1.49% to 86.19. The increase in VIX and decline in equity markets indicate increased risk aversion."
+    "reason_it": "Il sentiment di mercato è risk-off a causa dell'aumento delle tensioni geopolitiche in Medio Oriente e dell'impatto sulla produzione di petrolio. Il VIX è salito dell'8.65% a 26.14, indicando un aumento dell'incertezza e della paura nel mercato. Il DXY è salito dello 0.46% a 99.68, mentre l'EUR/USD è sceso dello 0.68% a 1.15. Il prezzo del petrolio è sceso del 2.93% a $105.47, ma rimane elevato.",
+    "reason_en": "The market sentiment is risk-off due to rising geopolitical tensions in the Middle East and its impact on oil production. The VIX increased by 8.65% to 26.14, indicating rising uncertainty and fear in the market. The DXY rose by 0.46% to 99.68, while the EUR/USD fell by 0.68% to 1.15. The oil price decreased by 2.93% to $105.47, but remains elevated."
   },
   "market_impact_summary": {
-    "it": "Il mercato è influenzato negativamente dalla situazione geopolitica in Medio Oriente. L'aumento del prezzo del petrolio e la salita del VIX hanno un impatto bearish sui mercati. Il DXY forte e il calo del TLT confermano un atteggiamento difensivo degli investitori. Le borse europee e asiatiche sono in calo, con Nikkei -3.38% e STOXX 600 -0.99%.",
-    "en": "The market is negatively impacted by the geopolitical situation in the Middle East. The increase in oil prices and VIX has a bearish impact on markets. The strong DXY and decline in TLT confirm a defensive stance by investors. European and Asian stocks are down, with Nikkei -3.38% and STOXX 600 -0.99%."
+    "it": "Il mercato azionario è stato colpito dalle tensioni geopolitiche, con l'S&P 500 che è sceso dello 0.86% a 6549.72. Il mercato obbligazionario è stato influenzato dall'aumento dei tassi di interesse, con il TLT che è sceso dell'1.73% a 85.97. Il prezzo dell'oro è sceso dello 0.63% a $4571.70. Il mercato delle criptovalute è stato stabile, con il Bitcoin che è sceso dello 0.43% a $69,611.",
+    "en": "The stock market was hit by geopolitical tensions, with the S&P 500 falling by 0.86% to 6549.72. The bond market was influenced by rising interest rates, with TLT decreasing by 1.73% to 85.97. The gold price fell by 0.63% to $4571.70. The cryptocurrency market was stable, with Bitcoin decreasing by 0.43% to $69,611."
   },
-  "audio_script_it": "{'apertura_e_contesto_asiatico': \"La seduta asiatica ci consegna un Nikkei in calo del 3,38% a 53.373 punti e uno Shanghai in flessione dell'1,24% a 3.957 punti. Questo scenario di debolezza potrebbe anticipare un'apertura cauta delle piazze europee tra poche ore.\", 'sentiment_e_mercati_occidentali': \"L'S&P 500 ha chiuso in calo dello 0,79% a 6.553,99 punti, mentre il VIX è salito del 10,14% a 26,50 punti, riflettendo un aumento dell'avversione al rischio. Il Dollar Index (DXY) guadagna lo 0,56% a 99,78 punti, e il rendimento del decennale USA sale al 4,37%, con un incremento del 2,17%. L'euro/dollaro si apprezza dello 0,63% a 1,15.\", 'geopolitica': \"La situazione geopolitica rimane tesa, con notizie di attacchi in Medio Oriente e preoccupazioni sull'inflazione. La Banca d'Inghilterra ha segnalato rischi di inflazione, mentre la BCE ha mantenuto invariati i tassi d'interesse, evidenziando l'incertezza. Le tensioni in Medio Oriente hanno fatto aumentare i prezzi dell'energia.\", 'macro_e_banche_centrali': 'Sul fronte macroeconomico, gli ultimi dati disponibili non sono recenti, ma segnalano una situazione di rallentamento. Il mercato attende con ansia nuovi dati, come il PIL del primo trimestre negli Usa, in programma per il 29 aprile. La Fed ha mantenuto invariati i tassi, mentre la BCE continua a monitorare la situazione.', 'crypto': \"Il mercato delle criptovalute sembra mostrare una certa resilienza, con Bitcoin che guadagna lo 0,34% a 70.151 dollari e un Fear & Greed Index a 11, in territorio di 'Extreme Fear'.\", 'chiusura_forward_looking': \"In conclusione, la giornata di oggi potrebbe essere caratterizzata da una maggiore volatilità, data la situazione geopolitica e l'attesa per nuovi dati macroeconomici. Sarà importante monitorare l'evoluzione delle tensioni in Medio Oriente e le mosse delle banche centrali.\"}\n\n{'intro': 'Passiamo ora al comparto degli asset digitali, dove analizzeremo le ultime dinamiche del mercato delle criptovalute.', 'deep_dive_bitcoin': 'Iniziamo con il deep dive su Bitcoin, che attualmente si attesta a $70,070, con un incremento del 1.37%. Dal punto di vista tecnico, il flusso degli ETF è stato particolarmente significativo, con un dato di BTC ETF Daily Net Inflow che ha raggiunto i $500 milioni di dollari nelle ultime 24 ore. Questo dato suggerisce una continua domanda da parte degli investitori istituzionali. Dal punto di vista tecnico, il prezzo di Bitcoin sembra essersi stabilizzato sopra il livello di $70,000, ma occorre monitorare la capacità di sostenere questo livello.', 'altcoins': \"Passando alle altcoin, Ethereum guadagna il 1.63% e si attesta a $2,139. Solana (SOL) mostra un interessante recupero con un +2.05% a $89.42, probabilmente influenzato dalla notizia che Forward Industries ha comprato azioni proprie utilizzando debito garantito da criptovalute. Binance Coin (BNB) cresce dello 0.73% a $640.94. Questi movimenti suggeriscono una ripresa generale del mercato delle altcoin, ma è importante tenere d'occhio le dinamiche specifiche di ciascun token.\", 'sentiment_fear_greed': \"L'indice Fear & Greed è sceso a 11, classificandosi in zona di Extreme Fear. Questo livello di paura estrema spesso coincide con opportunità di acquisto a lungo termine, ma è cruciale considerare anche i fondamentali macroeconomici. La correlazione con i dati macroeconomici, come l'inflazione e le decisioni delle banche centrali, resta forte. La recente decisione della BCE di mantenere il tasso di interesse al 2.00% e le prossime uscite di dati macroeconomici negli USA e in Eurozona influenzeranno sicuramente il sentiment del mercato crypto.\", 'conclusione': \"In sintesi, il mercato crypto sembra essersi stabilizzato, con Bitcoin che mantiene la sua posizione e le altcoin che mostrano segnali di ripresa. Tuttavia, l'estrema paura e le prossime decisioni macroeconomiche suggeriscono una strategia cauta ma attenta alle opportunità.\"}\n\nGrazie per aver ascoltato il nostro aggiornamento finanziario di oggi. Restate sintonizzati per ulteriori aggiornamenti e analisi di mercato. Un saluto da Price Alert, arrivederci al prossimo episodio.",
-  "audio_script_en": "{'INTRODUCTION': \"Welcome to your daily morning market briefing. Good morning and welcome to today's financial update.\", 'SENTIMENT': 'Global sentiment is risk-off today, as investors are cautious ahead of key economic data releases. Overnight, Asia markets tumbled, with Nikkei down 3.38% and Shanghai down 1.24%. The VIX index is up 10.14% to 26.50, indicating increased volatility. Two key data points to watch today are the US 10-year yield, which is up 2.17% to 4.37%, and the Dollar Index, which is up 0.56% to 99.78.', 'TRADITIONAL MARKETS': 'In traditional markets, equities are under pressure. The S&P 500 is down 0.79% to 6553.99, while the STOXX 600 is down 0.99% to 57.15. Bonds are also seeing selling pressure, with the TLT Bond USA 20Y down 1.49% to 86.19. Currencies are seeing some movement, with EUR/USD up 0.63% to 1.15. Commodities are also reacting to the risk-off sentiment, with Gold down 0.93% to $4557.70/oz and Brent crude down 3.90% to $104.41.', 'GEOPOLITICS_MACRO': 'Geopolitics and macro news are driving market sentiment. The ongoing conflict in the Middle East is causing concerns about inflation and interest rates. The Bank of England has warned of inflation risks, leading to a sell-off in Gilts. The ECB has held rates steady, but highlighted raised uncertainty. Investors are also watching for key economic data releases, including US GDP and inflation data, which could provide further insight into the state of the global economy.'}\n\nMoving on to the digital assets space, let's take a closer look at the current state of the cryptocurrency market. \n\nThe Bitcoin price has managed to hold above $70,000, with a 1.37% increase to $70,070. From a technical analysis perspective, we can see that the recent price action has been characterized by a surge in buying activity, with a notable increase in inflows. \n\nLet's pivot to the cryptocurrency markets and examine some of the top altcoins. Ethereum, Solana, and Binance Coin have all seen gains, with ETH up 1.63% to $2,139, SOL up 2.05% to $89.42, and BNB up 0.73% to $640.94. Solana's treasury, Forward Industries, has been making headlines by buying back shares using crypto-backed debt, showcasing the growing adoption of cryptocurrencies in traditional finance. \n\nIn terms of market sentiment, the Fear & Greed Index is currently at 11, indicating extreme fear. This has led to a defensive market positioning, with investors seeking safe-haven assets. The correlation between cryptocurrencies and traditional markets remains high, with the recent inflation fears and economic data releases contributing to the market volatility. \n\nOverall, the cryptocurrency market continues to evolve, with new developments and innovations emerging. As we move forward, it's essential to keep a close eye on market trends, sentiment, and fundamental analysis to navigate this rapidly changing landscape.\n\nThank you for tuning in. We'll be back tomorrow with another update. Until then, stay informed and stay ahead of the market. A closing remark from Price Alert, see you tomorrow.",
+  "audio_script_it": "{'apertura_e_contesto_asiatico': \"La seduta asiatica ci consegna un Nikkei in calo del 3.38% a 53,373 punti e uno Shanghai in flessione dell'1.39% a 4006.55 punti. Questo scenario di debolezza potrebbe anticipare un'apertura cauta delle piazze europee tra poche ore.\", 'sentiment_e_mercati_occidentali': \"Il sentiment dei mercati è decisamente risk-off, come evidenziato dal calo dell'S&P 500 dell'0.86% a 6549.72 punti e dallo STOXX 600 in flessione dell'1.42% a 56.90 punti. Il Dollar Index (DXY) sale dello 0.46% a 99.68 punti, mentre il VIX aumenta dell'8.65% a 26.14 punti, riflettendo un'aumentata avversione al rischio. I tassi di interesse continuano a salire, con il rendimento del decennale USA che raggiunge il 4.38%, in aumento del 2.45%. L'euro si apprezza leggermente contro il dollaro, arrivando a 1.15, in rialzo dello 0.68%.\", 'geopolitica': \"Sul fronte geopolitico, la situazione rimane tesa. L'aumento dei prezzi dell'energia dopo gli attacchi dell'Iran contro un sito di LNG del Qatar ha spinto i mercati a temere uno shock energetico prolungato. La Banca d'Inghilterra ha avvertito dei rischi di inflazione, contribuendo al sell-off dei gilts. La BCE ha mantenuto invariati i tassi d'interesse, evidenziando però un'incertezza maggiore.\", 'macro_e_banche_centrali': 'Sul fronte macroeconomico, gli ultimi dati disponibili non sono recenti, ma segnalano una tendenza di fondo. Il CPI e il Core CPI USA sono risultati rispettivamente al 2.7% e al 2.7% su base annua. La Fed ha mantenuto invariato il Fed Funds Rate al 3.64%. In Eurozona, il PIL è cresciuto dello 0.2% nel quarto trimestre del 2025. La BCE ha lasciato i tassi invariati al 2.00%.', 'crypto': \"Nel comparto crypto, il Bitcoin si stabilizza intorno ai $69,611, in calo dello 0.43%. L'indice di Fear & Greed è a 11, in territorio di Extreme Fear.\", 'chiusura_forward_looking': \"In conclusione, la giornata si prospetta cauta in attesa di ulteriori dati macroeconomici e di eventi geopolitici. Gli investitori continuano a monitorare i sviluppi sulla scena internazionale e le mosse delle banche centrali. Domani, sarà importante osservare le reazioni dei mercati alle nuove informazioni e come si evolveranno le principali tematiche che influenzano l'andamento delle borse.\"}\n\n{'intro': \"Passiamo ora al comparto degli asset digitali, con un'analisi approfondita delle criptovalute.\", 'deep_dive_bitcoin': 'Iniziamo con il Bitcoin, che attualmente si attesta a $69,512, con una variazione del -0.26%. Dal punto di vista degli afflussi negli ETF, il dato più recente indica un afflusso netto giornaliero di $45.1 milioni. Tecnicamente, il prezzo del Bitcoin sembra essersi stabilizzato sopra i $69,000, ma rimane da vedere se riuscirà a superare la resistenza a $70,000.', 'altcoins': 'Passando alle altcoin, Ethereum si trova a $2,122, con un calo dello 0.29%. Solana invece guadagna lo 0.39% a $88.81. Binance Coin (BNB) scambia a $638.20, con una perdita del 0.17%. Questi movimenti riflettono una tendenza generale di stabilità nel mercato delle altcoin, con alcuni titoli che mostrano segnali di ripresa.', 'sentiment_fear_greed': \"L'indice Fear & Greed oggi si attesta a 11, in territorio di Extreme Fear. Questo livello di paura estrema potrebbe indicare una possibile inversione di tendenza nel breve termine, ma storicamente ha anche accompagnato fasi di accumulo. La correlazione con i dati macroeconomici, come l'inflazione e le decisioni delle banche centrali, rimane una variabile importante per comprendere i movimenti del mercato crypto.\", 'conclusione': \"In sintesi, il mercato crypto sembra essere in una fase di attesa, con il Bitcoin che si stabilizza sopra i $69,000 e le altcoin che mostrano segnali contrastanti. L'indice di Fear & Greed suggerisce un'estrema paura, che potrebbe preludere a una reazione positiva dei prezzi. Tuttavia, è fondamentale tenere d'occhio i dati macroeconomici e le notizie dal settore per comprendere meglio le prossime mosse del mercato.\"}\n\nGrazie per l'attenzione e a domani",
+  "audio_script_en": "{'INTRODUCTION': \"Welcome to your daily morning market briefing. Good morning and welcome to today's financial update.\", 'SENTIMENT': 'Global sentiment is risk-off today, as investors are cautious ahead of key economic data releases. Overnight, we saw a significant sell-off in equities, with the S&P 500 down 0.86% to 6549.72. The VIX index surged 8.65% to 26.14, indicating increased market volatility. Two key data points to note are the US 10-year yield, which rose 2.45% to 4.38%, and the Dollar Index, which gained 0.46% to 99.68.', 'TRADITIONAL MARKETS': 'In traditional markets, equities are under pressure. The STOXX 600 is down 1.42% to 56.90, while the NIKKEI closed 3.38% lower at 53,373. The Hang Seng index in Hong Kong fell 0.88% to 25,277. In the currency markets, the EUR/USD pair rose 0.68% to 1.15. Commodities are also seeing significant moves, with Brent crude down 2.93% to $105.47 and gold down 0.63% to $4571.70 per ounce. Bond yields are rising, with the US 10-year yield up 2.45% to 4.38% and the BTP 10-year yield up 4.50% to 3.94%.', 'GEOPOLITICS_MACRO': 'Geopolitics and macro news are driving market sentiment. The Bank of England warned of inflation risks, leading to a sell-off in Gilts. The ECB held interest rates steady but highlighted raised uncertainty. Energy prices surged after an Iranian strike on a Qatari LNG site. The ongoing conflict in the Middle East is also weighing on investor sentiment. Inflation concerns are rising, with the PCE Core YoY rate at 3.1%. The Fed Funds Rate remains at 3.64%. Global M2 liquidity continues to expand, up 4.3% YoY to $22.4T.'}\n\nMoving on to the digital assets space, let's take a look at the current state of the cryptocurrency market. \n\nThe Bitcoin price is currently trading at $69,512, down 0.26% from the previous day. From a technical analysis perspective, the recent price action suggests that the $70,000 level is acting as a key resistance area. On-chain flows indicate that there has been a significant amount of accumulation around this level, with many investors buying into the dip. However, the overall sentiment remains cautious, with many investors waiting to see if the price can break through this resistance level.\n\nLet's pivot to the cryptocurrency markets and take a look at some of the major altcoins. Ethereum is trading at $2,122, down 0.29% from the previous day, while Solana is bucking the trend with a 0.39% gain to $88.81. Binance Coin is trading at $638.20, down 0.17% from the previous day. \n\nIn terms of market sentiment, the Fear & Greed Index is currently at 11, indicating extreme fear. This is often a contrarian indicator, suggesting that investors may be overly pessimistic about the market. However, it's essential to note that the current market correlation is highly correlated with traditional markets, which are also experiencing significant volatility. \n\nOverall, the cryptocurrency market remains highly volatile, and investors should be cautious when making investment decisions. However, for those looking for opportunities, there may be some attractive entry points emerging, particularly in the altcoin space.\n\nThanks for tuning in. We'll be back tomorrow with another market update. Until then, stay informed and stay ahead. A quick look at what's on the radar for tomorrow and we'll wrap up here. Have a great day and we'll catch you soon. ",
   "market_data_raw": {
     "dxy": {
-      "value": "99.78",
-      "change": "+0.56%"
+      "value": "99.68",
+      "change": "+0.46%"
     },
     "eur_usd": {
       "value": "1.15",
-      "change": "+0.63%"
+      "change": "+0.68%"
     },
     "sp500": {
-      "value": "6553.99",
-      "change": "-0.79%"
+      "value": "6549.72",
+      "change": "-0.86%"
     },
     "vix": {
-      "value": "26.50",
-      "change": "+10.14%"
+      "value": "26.14",
+      "change": "+8.65%"
     },
     "tlt": {
-      "value": "86.19",
-      "change": "-1.49%"
+      "value": "85.97",
+      "change": "-1.73%"
     },
     "us_10y": {
-      "value": "4.37%",
-      "change": "+2.17%"
+      "value": "4.38%",
+      "change": "+2.45%"
     },
     "gold": {
-      "value": "$4557.70/oz",
-      "change": "-0.93%"
+      "value": "$4571.70/oz",
+      "change": "-0.63%"
     },
     "btcusd": {
-      "value": "$70,151",
-      "change": "+0.34%"
+      "value": "$69,611",
+      "change": "-0.43%"
     },
     "oil_brent": {
-      "value": "$104.41",
-      "change": "-3.90%"
+      "value": "$105.47",
+      "change": "-2.93%"
     },
     "stoxx_600": {
-      "value": "57.15",
-      "change": "-0.99%"
+      "value": "56.90",
+      "change": "-1.42%"
     },
     "nikkei": {
       "value": "53,373",
       "change": "-3.38%"
     },
     "shanghai": {
-      "value": "3957.05",
-      "change": "-1.24%"
+      "value": "4006.55",
+      "change": "-1.39%"
     },
     "hang_seng": {
       "value": "25,277",
@@ -67,7 +67,7 @@
     },
     "btp_10y": {
       "value": "3.94%",
-      "change": "+4.29%"
+      "change": "+4.50%"
     },
     "global_m2": {
       "value": "$22.4T",
@@ -97,20 +97,20 @@
       },
       "prices": {
         "BTC": {
-          "value": "$70,070",
-          "change": "+1.37%"
+          "value": "$69,512",
+          "change": "-0.26%"
         },
         "ETH": {
-          "value": "$2,139",
-          "change": "+1.63%"
+          "value": "$2,122",
+          "change": "-0.29%"
         },
         "SOL": {
-          "value": "$89.42",
-          "change": "+2.05%"
+          "value": "$88.81",
+          "change": "+0.39%"
         },
         "BNB": {
-          "value": "$640.94",
-          "change": "+0.73%"
+          "value": "$638.20",
+          "change": "-0.17%"
         }
       }
     },
@@ -220,7 +220,7 @@
         "magnitude": "high",
         "assets_affected": [
           "Gilts",
-          "FTSE 100"
+          "FTSE"
         ]
       }
     },
@@ -238,7 +238,7 @@
         "magnitude": "high",
         "assets_affected": [
           "S&P 500",
-          "Stoxx 600"
+          "Bonds"
         ]
       }
     },
@@ -255,7 +255,7 @@
         "direction": "neutral",
         "magnitude": "medium",
         "assets_affected": [
-          "Global Inflation"
+          "Inflation tracker"
         ]
       }
     },
@@ -272,7 +272,7 @@
         "direction": "neutral",
         "magnitude": "medium",
         "assets_affected": [
-          "Eurozone Economy"
+          "ECB rates"
         ]
       }
     },
@@ -286,20 +286,23 @@
       "date": "2026-03-19T10:36:43+00:00",
       "relevance_score": 1.0,
       "market_impact": {
-        "direction": "mixed",
-        "magnitude": "low",
-        "assets_affected": []
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "Oil",
+          "Energy"
+        ]
       }
     },
     {
-      "title": "BoJ holds rates and signals risks to growth and inflation from Iran war",
-      "url": "https://www.ft.com/content/4c4b4eb9-0cb3-4044-9a24-71cb6e9e753d",
-      "source": "Financial Times (Global Economy)",
+      "title": "Decisions taken by the Governing Council of the ECB (in addition to decisions setting interest rates)",
+      "url": "https://www.ecb.europa.eu//press/govcdec/otherdec/2026/html/ecb.gc260320~5dfc6af626.en.html",
+      "source": "BCE",
       "tier": 1,
       "category": "macro_economia",
-      "snippet": "Limited new information was made available on when the central bank might move next",
-      "date": "2026-03-19T09:18:47+00:00",
-      "relevance_score": 1.0,
+      "snippet": "Decisions taken by the Governing Council of the ECB (in addition to decisions setting interest rates)",
+      "date": "2026-03-20T14:00:00+00:00",
+      "relevance_score": 0.9,
       "market_impact": {
         "direction": "mixed",
         "magnitude": "low",
@@ -328,7 +331,7 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "The U.S.-Israeli war with Iran is entering its third week, with no end yet in sight. Crisis Group experts offer a 360-degree view of its effects on peace, security and economic stability around the world.",
-      "date": "2026-03-20T14:39:23.782728+00:00",
+      "date": "2026-03-20T15:11:07.621317+00:00",
       "relevance_score": 0.8,
       "market_impact": {
         "direction": "bearish",
@@ -373,7 +376,7 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "Yemen has a new government, formed after elements of the old one clashed on the battlefield. In this Q&A, Crisis Group expert Ahmed Nagi looks at its makeup and its prospects against the backdrop of Middle East war that may draw in the Houthi rebels.",
-      "date": "2026-03-20T14:39:23.781689+00:00",
+      "date": "2026-03-20T15:11:07.620303+00:00",
       "relevance_score": 0.6,
       "market_impact": {
         "direction": "bearish",
@@ -388,7 +391,7 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "While the U.S. and Israel have damaged Iran in the Middle East war, Tehran has expanded the conflict. With neither side positioned for a decisive win, the escalation risks are sobering. Diplomacy is crucial to prevent renewed hostilities, but an immediate ceasefire is the priority.",
-      "date": "2026-03-20T14:39:23.781999+00:00",
+      "date": "2026-03-20T15:11:07.620606+00:00",
       "relevance_score": 0.6,
       "market_impact": {
         "direction": "bearish",
@@ -437,11 +440,8 @@
       "relevance_score": 0.8,
       "market_impact": {
         "direction": "bearish",
-        "magnitude": "high",
-        "assets_affected": [
-          "Oil",
-          "Brent"
-        ]
+        "magnitude": "low",
+        "assets_affected": []
       }
     },
     {
@@ -520,13 +520,13 @@
       }
     },
     {
-      "title": "ECB seeks experts to help integrate digital euro into ATMs, card payment terminals",
-      "url": "https://www.coindesk.com/policy/2026/03/19/ecb-seeks-experts-to-help-integrate-digital-euro-into-atms-card-payment-terminals",
-      "source": "CoinDesk",
+      "title": "Bitcoin Price Holds $70,000 as War-Driven Inflation Fears Meet Defensive Market Positioning",
+      "url": "https://bitcoinmagazine.com/news/bitcoin-price-holds-70000-amid-war",
+      "source": "Bitcoin Magazine",
       "tier": 4,
       "category": "crypto",
-      "snippet": "ECB seeks experts to help integrate digital euro into ATMs, card payment terminals",
-      "date": "2026-03-19T14:46:37+00:00",
+      "snippet": "Bitcoin Magazine Bitcoin Price Holds $70,000 as War-Driven Inflation Fears Meet Defensive Market Positioning Bitcoin price held near $70,000 as shifting Iran conflict risks and macro pressure weighed on markets, while derivatives and on-chain data signaled consolidation, not capitulation. This post Bitcoin Price Holds $70,000 as War-Driven Inflation Fears Meet Defensive Market Positioning first appeared on Bitcoin Magazine and is written by Micah Zimmerman .",
+      "date": "2026-03-20T12:46:32+00:00",
       "relevance_score": 0.8,
       "market_impact": {
         "direction": "mixed",
@@ -535,13 +535,13 @@
       }
     },
     {
-      "title": "Bitcoin Price Holds $70,000 as War-Driven Inflation Fears Meet Defensive Market Positioning",
-      "url": "https://bitcoinmagazine.com/news/bitcoin-price-holds-70000-amid-war",
+      "title": "Bitcoin Price Slides Below $70,000 as Oil Spikes, Fed Hold Tightens Financial Conditions",
+      "url": "https://bitcoinmagazine.com/markets/bitcoin-price-slides-70000-oil-spikes",
       "source": "Bitcoin Magazine",
       "tier": 4,
       "category": "crypto",
-      "snippet": "Bitcoin Magazine Bitcoin Price Holds $70,000 as War-Driven Inflation Fears Meet Defensive Market Positioning Bitcoin price held near $70,000 as shifting Iran conflict risks and macro pressure weighed on markets, while derivatives and on-chain data signaled consolidation, not capitulation. This post Bitcoin Price Holds $70,000 as War-Driven Inflation Fears Meet Defensive Market Positioning first appeared on Bitcoin Magazine and is written by Micah Zimmerman .",
-      "date": "2026-03-20T12:46:32+00:00",
+      "snippet": "Bitcoin Magazine Bitcoin Price Slides Below $70,000 as Oil Spikes, Fed Hold Tightens Financial Conditions Bitcoin price fell below $70,000 on Thursday as rising energy costs and a steady Federal Reserve stance strengthened the dollar and weighed on risk appetite. This post Bitcoin Price Slides Below $70,000 as Oil Spikes, Fed Hold Tightens Financial Conditions first appeared on Bitcoin Magazine and is written by Micah Zimmerman .",
+      "date": "2026-03-19T12:38:59+00:00",
       "relevance_score": 0.8,
       "market_impact": {
         "direction": "mixed",
