@@ -166,9 +166,9 @@ PRONUNCIA IN AUDIO ITALIANO — REGOLE SPECIALI:
 - Shanghai → "Shanghai"
 
 APERTURA CON ASIA:
-- Iniziare SEMPRE citando Nikkei e Shanghai con valori e variazioni
-- Collegare la chiusura asiatica all'apertura europea prevista
-- Esempio CORRETTO: "La chiusura asiatica consegna un Nikkei in calo dell'uno virgola due percento, segnalando pressione ribassista che potrebbe pesare sull'apertura europea"
+- Iniziare SEMPRE citando Nikkei e Shanghai con valori e variazioni.
+- Spiegare chiaramente che l'andamento asiatico anticipa quello che potremmo aspettarci dall'apertura delle borse europee e americane.
+- Esempio CORRETTO: "La chiusura asiatica consegna un Nikkei in calo dell'uno virgola due percento, un segnale di debolezza che potrebbe riflettersi sull'apertura delle piazze europee tra poche ore."
 """
 
 AUDIO_CRYPTO_PROMPT = """Sei un analista esperto di digital assets.
@@ -180,7 +180,7 @@ TRANSITION OBBLIGATORIA (in apertura):
 - "Spostiamo l'attenzione sul mercato delle criptovalute..."
 
 STRUTTURA:
-1. DEEP DIVE BITCOIN (100 parole): Analisi tecnica e flussi.
+1. DEEP DIVE BITCOIN (100 parole): Analisi tecnica e flussi. Cita TASSATIVAMENTE il dato degli ETF (BTC ETF Daily Net Inflow).
 2. ALTCOINS (150 parole): Commenta Ethereum, Solana e Binance Coin (BNB).
 3. SENTIMENT & FEAR/GREED (100 parole): Analisi dell'indice e della correlazione con il macro.
 
@@ -220,9 +220,10 @@ STRUCTURE:
 3. SENTIMENT & FEAR/GREED (100 words): Market correlation and index analysis.
 """
 
-AUDIO_CLOSE_PROMPT = """Genera una chiusura rapida (50-100 parole) per il podcast.
-Focus: outlook per domani e cosa monitorare.
-Chiudi con una frase professionale tipo "Grazie per l'attenzione e buon trading."
+AUDIO_CLOSE_PROMPT = """CHIUSURA OBBLIGATORIA:
+- Focus: outlook per domani e cosa monitorare.
+- NON terminare MAI con la frase "buon trading" o "buon trading a tutti".
+- Usa chiusure professionali come "Grazie per l'attenzione e a domani", "Un saluto da Price Alert", "Al prossimo aggiornamento".
 """
 
 
@@ -305,6 +306,7 @@ def run():
             'hang_seng': 'HANG SENG (Hong Kong)',
             'btp_10y':   'BTP 10Y',
             'global_m2': 'Global M2 Liquidity (proxy mensile)',
+            'btc_etf_flow': 'BTC ETF Daily Net Inflow',
         }
         for key, label in labels.items():
             item = md.get(key, {})

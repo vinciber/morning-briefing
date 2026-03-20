@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = ROOT / 'data' / 'market_data.json'
+ETF_STATUS_PATH = ROOT.parent / 'public' / 'data' / 'etf_status.json'
 FRED_API_KEY = os.environ.get('FRED_API_KEY', '')
 
 def get_yahoo_finance(symbol):
@@ -179,6 +180,19 @@ def get_crypto_data():
         'prices': prices
     }
 
+def get_etf_flow():
+    """Carica gli inflow degli ETF BTC dal file generato dallo scraper."""
+    try:
+        if not ETF_STATUS_PATH.exists():
+            return 'N/A', 'N/A'
+        with open(ETF_STATUS_PATH, 'r') as f:
+            data = json.load(f)
+        val = data.get('net_flow_usd_m', 0)
+        return f'${val:+.1f}M', data.get('trend_indicator', '➡️')
+    except Exception as e:
+        logger.error(f'ETF Flow: {e}')
+        return 'N/A', 'N/A'
+
 def get_macro_calendar() -> dict:
     """
     Scarica dati macro USA via FRED API.
@@ -245,14 +259,32 @@ def get_macro_calendar() -> dict:
                 is_recent = False
 
             if val_raw == '.' or not is_recent:
-                result[key] = {
-                    'label':        label,
-                    'value':        None,
-                    'unit':         unit,
-                    'status':       'upcoming',
-                    'next_release': NEXT_RELEASE.get(key, 'N/A'),
-                }
-                logger.info(f'📅 {label}: upcoming ({NEXT_RELEASE.get(key)})')
+                # Fallback: prendi l'ultimo valore disponibile anche se non recente
+                latest_obs = [o for o in obs if o['value'] != '.']
+                if latest_obs:
+                   val_fallback = float(latest_obs[0]['value'])
+                   prev_fallback = float(latest_obs[1]['value']) if len(latest_obs) > 1 else None
+                   
+                   # Formattazione base (senza YoY complesso per brevità nel fallback)
+                   val_fmt = f'{val_fallback:.{decimals}f}{unit}'
+                   prev_fmt = f'{prev_fallback:.{decimals}f}{unit}' if prev_fallback else 'N/A'
+                   
+                   result[key] = {
+                       'label':        label,
+                       'value':        val_fmt,
+                       'previous':     prev_fmt,
+                       'status':       'upcoming',
+                       'next_release': NEXT_RELEASE.get(key, 'N/A'),
+                   }
+                else:
+                    result[key] = {
+                        'label':        label,
+                        'value':        None,
+                        'unit':         unit,
+                        'status':       'upcoming',
+                        'next_release': NEXT_RELEASE.get(key, 'N/A'),
+                    }
+                logger.info(f'📅 {label}: upcoming ({NEXT_RELEASE.get(key)}) - showing last: {result[key].get("value")}')
                 continue
 
             val = float(val_raw)
@@ -553,6 +585,10 @@ def run():
     val, chg = get_global_m2_proxy()
     results['global_m2'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'Global M2: {val} ({chg})')
+
+    val, chg = get_etf_flow()
+    results['btc_etf_flow'] = {'value': val, 'change': chg}
+    logger.info(f'BTC ETF Flow: {val}')
 
     # Crypto data
     logger.info('₿ Fetching crypto data...')

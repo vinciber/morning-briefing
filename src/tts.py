@@ -38,6 +38,9 @@ def normalize_for_tts(text: str) -> str:
         ('SWIFT',  'Swift'),
         ('IMF',    'Fondo Monetario Internazionale'),
         ('WTO',    'Organizzazione Mondiale del Commercio'),
+        ('USA',    'America'),
+        ('U.S.A.',  'America'),
+        ('FED',    'Fed'),
         ('FOMC',   'Comitato della Federal Reserve'),
         # Nomi propri inglesi — lasciare in inglese
         ('BlackRock',   'BlackRock'),
@@ -140,6 +143,18 @@ def normalize_for_tts(text: str) -> str:
         ("recession",                "recescion"),
         ("bearish",                  "berish"),
         ("bullish",                  "bullish"),
+        ("briefing",                 "brifing"),
+        ("sentiment",                "sèntiment"),
+        ("Binance",                  "Bainans"),
+        ("deep dive",                "dip daiv"),
+        ("deep_dive",                "dip daiv"),
+        ("Fear & Greed",             "fiar end grid"),
+        ("Fear and Greed",           "fiar end grid"),
+        ("Extreme",                  "extrim"),
+        ("fear",                     "fiar"),
+        ("greed",                    "grid"),
+        ("Bybit",                    "Baibit"),
+        ("Coinbase",                 "Coin-beis"),
     ]
     for abbr, expanded in abbreviations:
         text = text.replace(abbr, expanded)

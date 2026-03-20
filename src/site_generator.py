@@ -52,6 +52,7 @@ def build_market_strip(market_data):
         ('oil_brent', 'BRENT'),
         ('btp_10y',   'BTP 10Y'),
         ('us_10y',    'US 10Y'),
+        ('btc_etf_flow', 'BTC ETF'),
         ('global_m2', 'M2 GLOBAL'),
     ]
     strip = []
