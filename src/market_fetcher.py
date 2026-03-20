@@ -181,12 +181,22 @@ def get_crypto_data():
     }
 
 def get_etf_flow():
-    """Carica gli inflow degli ETF BTC dal file generato dallo scraper."""
+    """Carica gli inflow degli ETF BTC. Prova file locale, poi URL pubblico."""
     try:
-        if not ETF_STATUS_PATH.exists():
+        data = None
+        if ETF_STATUS_PATH.exists():
+            with open(ETF_STATUS_PATH, 'r') as f:
+                data = json.load(f)
+        else:
+            # Fallback URL per ambienti GitHub Actions
+            url = "https://www.pricealertapp.app/public/data/etf_status.json"
+            resp = requests.get(url, timeout=10)
+            if resp.status_code == 200:
+                data = resp.json()
+        
+        if not data:
             return 'N/A', 'N/A'
-        with open(ETF_STATUS_PATH, 'r') as f:
-            data = json.load(f)
+            
         val = data.get('net_flow_usd_m', 0)
         return f'${val:+.1f}M', data.get('trend_indicator', '➡️')
     except Exception as e:
