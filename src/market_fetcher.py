@@ -9,12 +9,33 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 logger = logging.getLogger(__name__)
 
-ROOT = Path(__file__).resolve().parent.parent
-OUTPUT_PATH = ROOT / 'data' / 'market_data.json'
-# Path robustness: check both repo root and local dir
-ETF_STATUS_PATH = ROOT.parent / 'public' / 'data' / 'etf_status.json'
-if not ETF_STATUS_PATH.exists():
-    ETF_STATUS_PATH = ROOT / 'public' / 'data' / 'etf_status.json'
+def get_root():
+    """Trova la root del progetto in modo robusto."""
+    # Prova 1: Risaliamo dalla posizione del file
+    current = Path(__file__).resolve()
+    for _ in range(5):
+        if (current / 'public').exists() and (current / 'morning-briefing').exists():
+            return current
+        current = current.parent
+    
+    # Prova 2: Path assoluto noto (per local dev)
+    fixed_path = Path('/Users/vinciber/Documents/price-alert-tg-backend')
+    if fixed_path.exists():
+        return fixed_path
+        
+    # Prova 3: Fallback standard
+    return Path(__file__).resolve().parent.parent
+
+ROOT = get_root()
+# Assicuriamoci che ROOT punti alla cartella principale del repo
+if ROOT.name == 'src' or ROOT.name == 'morning-briefing':
+    ROOT = ROOT.parent
+if ROOT.name == 'morning-briefing': # double check
+    ROOT = ROOT.parent
+
+# Path robusti
+OUTPUT_PATH = ROOT / 'morning-briefing' / 'data' / 'market_data.json'
+ETF_STATUS_PATH = ROOT / 'public' / 'data' / 'etf_status.json'
 FRED_API_KEY = os.environ.get('FRED_API_KEY', '')
 
 def get_yahoo_finance(symbol):
