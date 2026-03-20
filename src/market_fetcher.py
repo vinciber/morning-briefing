@@ -222,7 +222,7 @@ def get_etf_flow():
                 logger.info(f"✅ ETF Data loaded from fallback URL")
         
         if not data:
-            logger.warning("⚠️ ETF Data not found (both file and URL failed)")
+            logger.warning(f"⚠️ ETF Data not found. Checked file: {ETF_STATUS_PATH} and fallback URL. (data={data})")
             return 'N/A', 'N/A'
             
         val = data.get('net_flow_usd_m', 0)
@@ -564,7 +564,7 @@ def get_macro_calendar_eu() -> dict:
     return result
 
 def run():
-    logger.info('📈 Recupero dati di mercato...')
+    logger.info('📈 Recupero dati di mercato (v15-robust-path)...')
     results = {}
 
     val, chg = get_yahoo_finance('DX-Y.NYB')
