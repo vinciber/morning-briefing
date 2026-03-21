@@ -257,20 +257,20 @@ def get_macro_calendar() -> dict:
 
     # Serie FRED → (label, unità, decimali)
     SERIES = {
-        'cpi':         ('CPIAUCSL',       'CPI YoY USA',          1, '%'),
-        'core_cpi':    ('CPILFESL',       'Core CPI YoY USA',     1, '%'),
-        'nfp':         ('PAYEMS',         'Non-Farm Payrolls',     0, 'K'),
-        'unemployment':('UNRATE',         'Unemployment Rate USA', 1, '%'),
-        'pce_core':    ('PCEPILFE',       'PCE Core YoY',         1, '%'),
-        'fed_funds':   ('FEDFUNDS',       'Fed Funds Rate',        2, '%'),
-        'gdp':         ('A191RL1Q225SBEA','GDP QoQ USA',           1, '%'),
+        'cpi':         ('CPIAUCSL',       'CPI YoY USA',          1, '%', 'CPI YoY USA'),
+        'core_cpi':    ('CPILFESL',       'Core CPI YoY USA',     1, '%', 'Core CPI YoY USA'),
+        'nfp':         ('PAYEMS',         'Non-Farm Payrolls',     0, 'K', 'Non-Farm Payrolls'),
+        'unemployment':('UNRATE',         'Unemployment Rate USA', 1, '%', 'Tasso Disoccupazione USA'),
+        'pce_core':    ('PCEPILFE',       'PCE Core YoY',         1, '%', 'PCE Core YoY'),
+        'fed_funds':   ('FEDFUNDS',       'Fed Funds Rate',        2, '%', 'Tasso Fed Funds'),
+        'gdp':         ('A191RL1Q225SBEA','GDP QoQ USA',           1, '%', 'PIL QoQ USA'),
     }
 
     BASE = 'https://api.stlouisfed.org/fred/series/observations'
     cutoff = datetime.now(timezone.utc) - timedelta(days=120)
     result = {}
 
-    for key, (series_id, label, decimals, unit) in SERIES.items():
+    for key, (series_id, label_en, decimals, unit, label_it) in SERIES.items():
         try:
             params = {
                 'series_id':       series_id,
@@ -310,7 +310,9 @@ def get_macro_calendar() -> dict:
                    prev_fmt = f'{prev_fallback:.{decimals}f}{unit}' if prev_fallback else 'N/A'
                    
                    result[key] = {
-                       'label':        label,
+                       'label':        label_it,
+                       'label_it':     label_it,
+                       'label_en':     label_en,
                        'value':        val_fmt,
                        'previous':     prev_fmt,
                        'status':       'upcoming',
@@ -318,13 +320,15 @@ def get_macro_calendar() -> dict:
                    }
                 else:
                     result[key] = {
-                        'label':        label,
+                        'label':        label_it,
+                        'label_it':     label_it,
+                        'label_en':     label_en,
                         'value':        None,
                         'unit':         unit,
                         'status':       'upcoming',
                         'next_release': NEXT_RELEASE.get(key, 'N/A'),
                     }
-                logger.info(f'📅 {label}: upcoming ({NEXT_RELEASE.get(key)}) - showing last: {result[key].get("value")}')
+                logger.info(f'📅 {label_it}: upcoming ({NEXT_RELEASE.get(key)}) - showing last: {result[key].get("value")}')
                 continue
 
             val = float(val_raw)
@@ -378,14 +382,16 @@ def get_macro_calendar() -> dict:
                 prev_fmt = f'{prev_val:.{decimals}f}{unit}' if prev_val else 'N/A'
 
             result[key] = {
-                'label':        label,
+                'label':        label_it,
+                'label_it':     label_it,
+                'label_en':     label_en,
                 'value':        val_fmt,
                 'previous':     prev_fmt,
                 'release_date': date_str,
                 'status':       'released',
                 'next_release': NEXT_RELEASE.get(key, 'N/A'),
             }
-            logger.info(f'✅ {label}: {val_fmt} (prev: {prev_fmt})')
+            logger.info(f'✅ {label_it}: {val_fmt} (prev: {prev_fmt})')
 
         except Exception as e:
             logger.error(f'✗ FRED {key} ({series_id}): {e}')
@@ -466,6 +472,8 @@ def get_macro_calendar_eu() -> dict:
         if is_recent:
             result['gdp_eu'] = {
                 'label':        'PIL QoQ Eurozona',
+                'label_it':     'PIL QoQ Eurozona',
+                'label_en':     'GDP QoQ Eurozone',
                 'value':        f'{val:.1f}%',
                 'previous':     f'{prev:.1f}%' if prev is not None else 'N/A',
                 'release_date': date_str,
@@ -490,6 +498,8 @@ def get_macro_calendar_eu() -> dict:
         if is_recent:
             result['cpi_eu'] = {
                 'label':        'CPI YoY Eurozona',
+                'label_it':     'CPI YoY Eurozona',
+                'label_en':     'CPI YoY Eurozone',
                 'value':        f'{val:.1f}%',
                 'previous':     f'{prev:.1f}%' if prev is not None else 'N/A',
                 'release_date': date_str,
@@ -512,6 +522,8 @@ def get_macro_calendar_eu() -> dict:
         if is_recent:
             result['unemployment_eu'] = {
                 'label':        'Disoccupazione EU',
+                'label_it':     'Disoccupazione EU',
+                'label_en':     'Unemployment EU',
                 'value':        f'{val:.1f}%',
                 'previous':     f'{prev:.1f}%' if prev is not None else 'N/A',
                 'release_date': date_str,
@@ -533,6 +545,8 @@ def get_macro_calendar_eu() -> dict:
                 date_bce = obs[0]['date']
                 result['ecb_rate'] = {
                     'label': 'Tasso BCE',
+                    'label_it': 'Tasso BCE',
+                    'label_en': 'ECB Rate',
                     'value': f'{val_bce:.2f}%',
                     'release_date': date_bce,
                     'status': 'released',
@@ -546,14 +560,16 @@ def get_macro_calendar_eu() -> dict:
     # Gestione fallback per indicatori mancanti (status upcoming)
     for key in ['gdp_eu', 'cpi_eu', 'unemployment_eu', 'ecb_rate']:
         if key not in result:
-            label_map = {
-                'gdp_eu': 'PIL QoQ Eurozona',
-                'cpi_eu': 'CPI YoY Eurozona',
-                'unemployment_eu': 'Disoccupazione EU',
-                'ecb_rate': 'Tasso BCE'
-            }
+            labels = {
+                'gdp_eu': ('PIL Eurozona', 'Eurozone GDP'),
+                'cpi_eu': ('CPI Eurozona', 'Eurozone CPI'),
+                'unemployment_eu': ('Disoccupazione EU', 'EU Unemployment'),
+                'ecb_rate': ('Tasso BCE', 'ECB Rate')
+            }.get(key, (key, key))
             result[key] = {
-                'label': label_map.get(key, key),
+                'label': labels[0],
+                'label_it': labels[0],
+                'label_en': labels[1],
                 'value': None,
                 'status': 'upcoming',
                 'next_release': NEXT_RELEASE_EU.get(key, 'N/A'),

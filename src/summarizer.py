@@ -109,6 +109,10 @@ OUTPUT JSON — struttura esatta:
   "article_impacts": [
     {
       "url": "url esatto dell'articolo",
+      "title_it": "Titolo breve e d'impatto in italiano",
+      "title_en": "Short catchy title in English",
+      "summary_it": "Sintesi di 1-2 righe in italiano",
+      "summary_en": "1-2 lines summary in English",
       "direction": "bearish | bullish | mixed",
       "magnitude": "high | medium | low",
       "assets_affected": ["S&P 500", "Brent"]
@@ -239,6 +243,10 @@ def _merge_article_impacts(articles: list, article_impacts: list) -> list:
         url = impact.get('url', '').strip()
         if url:
             impacts_by_url[url] = {
+                'title_it': impact.get('title_it'),
+                'title_en': impact.get('title_en'),
+                'summary_it': impact.get('summary_it'),
+                'summary_en': impact.get('summary_en'),
                 'direction': impact.get('direction', 'mixed'),
                 'magnitude': impact.get('magnitude', 'low'),
                 'assets_affected': impact.get('assets_affected', []),
@@ -248,11 +256,24 @@ def _merge_article_impacts(articles: list, article_impacts: list) -> list:
     for art in articles:
         url = art.get('url', '').strip()
         if url in impacts_by_url:
-            art['market_impact'] = impacts_by_url[url]
+            impact = impacts_by_url[url]
+            art['title_it'] = impact.get('title_it') or art.get('title')
+            art['title_en'] = impact.get('title_en') or art.get('title')
+            art['summary_it'] = impact.get('summary_it') or art.get('snippet')
+            art['summary_en'] = impact.get('summary_en') or art.get('snippet')
+            art['market_impact'] = {
+                'direction': impact.get('direction'),
+                'magnitude': impact.get('magnitude'),
+                'assets_affected': impact.get('assets_affected'),
+            }
             matched += 1
         else:
             # Fallback rule-based per null
             cat = art.get('category', '').lower()
+            art['title_it'] = art.get('title')
+            art['title_en'] = art.get('title')
+            art['summary_it'] = art.get('snippet')
+            art['summary_en'] = art.get('snippet')
             art['market_impact'] = {
                 'direction': 'bearish' if cat in ('geopolitica', 'energia', 'macro') else 'mixed',
                 'magnitude': 'low',
