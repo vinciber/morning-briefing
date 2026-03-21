@@ -166,10 +166,10 @@ PRONUNCIA IN AUDIO ITALIANO — REGOLE SPECIALI:
 - Nikkei → "Nikkei" (pronuncia giapponese, Piper la gestisce)
 - Shanghai → "Shanghai"
 
-APERTURA CON ASIA:
-- Iniziare SEMPRE citando Nikkei e Shanghai con valori e variazioni.
+APERTURA CON ASIA (SOLO GIORNI FERIALI):
+- Nei giorni feriali (Lun-Ven), iniziare SEMPRE citando Nikkei e Shanghai con valori e variazioni.
 - Spiegare chiaramente che l'andamento asiatico anticipa quello che potremmo aspettarci dall'apertura delle borse europee e americane.
-- Esempio CORRETTO: "La chiusura asiatica consegna un Nikkei in calo dell'uno virgola due percento, un segnale di debolezza che potrebbe riflettersi sull'apertura delle piazze europee tra poche ore."
+- Se è sabato o domenica, ignora questa sezione o scrivi: "Mentre i mercati tradizionali osservano la pausa del fine settimana, l'attenzione resta alta sugli asset digitali..."
 """
 
 AUDIO_CRYPTO_PROMPT = """Sei un analista esperto di digital assets.
@@ -414,9 +414,10 @@ def run():
                 f"\n\nHISTORY TITOLI GIÀ PUBBLICATI (EVITA RIPETIZIONI):\n"
                 + "\n".join(f"- {t}" for t in history_titles[:20])
             )
-
-    # Monday Protection logic for LLM awareness
-    is_monday = datetime.now(timezone.utc).weekday() == 0
+    
+    # Context variables
+    now = datetime.now(timezone.utc)
+    is_monday = now.weekday() == 0
     weekly_sources = ['BlackRock Investment Institute', 'Goldman Sachs Insights']
     weekly_articles = [a for a in articles_slim if a.get('source') in weekly_sources]
 
@@ -426,6 +427,16 @@ def run():
         user_prompt += "Questi sono report istituzionali settimanali di altissima qualità (tier 1).\n"
         user_prompt += "OBBLIGATORIO: citarli nel sentiment e nel market_impact_summary.\n"
         user_prompt += "Nell'audio script dedicare almeno 2-3 frasi alle view istituzionali di BlackRock e Goldman.\n"
+
+    # Weekend / Holiday Awareness
+    is_weekend = now.weekday() >= 5 # 5=Sat, 6=Sun
+    if is_weekend:
+        day_name = now.strftime('%A').lower()
+        user_prompt += f"\n\n⚠️ OGGI È {day_name.upper()} (MERCATI TRADIZIONALI CHIUSI):\n"
+        user_prompt += "Nota: Oggi i mercati azionari e obbligazionari mondiali sono chiusi per il fine settimana.\n"
+        user_prompt += "Nell'audio script (Parte Finance), menziona esplicitamente che i mercati tradizionali sono chiusi e passa rapidamente all'analisi degli asset digitali (Crypto) che sono aperti 24 ore su 24.\n"
+        user_prompt += "Esempio apertura: 'Mentre le borse mondiali osservano la consueta pausa del weekend, i riflettori restano accesi sul comparto digitale...' o simili.\n"
+        user_prompt += "Concentrati sulla chiusura di venerdì per il contesto macro, ma dai priorità assoluta ai movimenti attuali di Bitcoin e delle crypto.\n"
 
     logger.info(f'🤖 Chiamata 1: Groq Llama 4 Analysis ({len(articles_slim)} articoli)...')
     try:
