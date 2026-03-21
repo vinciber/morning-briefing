@@ -444,13 +444,26 @@ def run():
     is_holiday = today_md in holidays_2026
     holiday_name = holidays_2026.get(today_md)
 
+    holiday_warning_it = ""
+    holiday_warning_en = ""
+
     if is_weekend or is_holiday:
-        reason = "IL FINE SETTIMANA" if is_weekend else f"LA FESTIVITÀ DI {holiday_name.upper()}"
-        user_prompt += f"\n\n⚠️ OGGI I MERCATI TRADIZIONALI SONO CHIUSI PER {reason}:\n"
-        user_prompt += f"Nota: Oggi le borse azionarie e obbligazionarie mondiali sono chiuse {'per il weekend' if is_weekend else 'per festività'}.\n"
-        user_prompt += "Nell'audio script (Parte Finance), menziona esplicitamente che i mercati tradizionali sono chiusi e passa rapidamente all'analisi degli asset digitali (Crypto) che sono aperti 24 ore su 24.\n"
-        user_prompt += "Esempio apertura: 'Mentre le borse mondiali osservano la consueta pausa festiva, i riflettori restano accesi sul comparto digitale...' o simili.\n"
-        user_prompt += "Concentrati sulla chiusura precedente per il contesto macro, ma dai priorità assoluta ai movimenti attuali di Bitcoin e delle crypto.\n"
+        reason_it = "IL FINE SETTIMANA" if is_weekend else f"LA FESTIVITÀ DI {holiday_name.upper()}"
+        reason_en = "THE WEEKEND" if is_weekend else f"THE {holiday_name.upper()} HOLIDAY"
+        
+        holiday_warning_it += f"\n\n⚠️ OGGI I MERCATI TRADIZIONALI SONO CHIUSI PER {reason_it}:\n"
+        holiday_warning_it += f"Nota: Oggi le borse azionarie e obbligazionarie mondiali sono chiuse {'per il weekend' if is_weekend else 'per festività'}.\n"
+        holiday_warning_it += "Nell'audio script (Parte Finance), menziona esplicitamente che i mercati tradizionali sono chiusi e passa rapidamente all'analisi degli asset digitali (Crypto) che sono aperti 24 ore su 24.\n"
+        holiday_warning_it += "Esempio apertura: 'Mentre le borse mondiali osservano la consueta pausa festiva, i riflettori restano accesi sul comparto digitale...' o simili.\n"
+        holiday_warning_it += "Concentrati sulla chiusura precedente per il contesto macro, ma dai priorità assoluta ai movimenti attuali di Bitcoin e delle crypto.\n"
+
+        holiday_warning_en += f"\n\n⚠️ TODAY TRADITIONAL MARKETS ARE CLOSED FOR {reason_en}:\n"
+        holiday_warning_en += f"Note: Today global stock and bond markets are closed {'for the weekend' if is_weekend else 'for a holiday'}.\n"
+        holiday_warning_en += "In the audio script (Finance Part), explicitly mention that traditional markets are closed and quickly pivot to the analysis of digital assets (Crypto) which are open 24/7.\n"
+        holiday_warning_en += "Example opening: 'While traditional markets observe their holiday break, the spotlight remains on digital assets...'\n"
+        holiday_warning_en += "Focus on the previous close for macro context, but give absolute priority to current Bitcoin and crypto movements.\n"
+
+        user_prompt += holiday_warning_it
 
     logger.info(f'🤖 Chiamata 1: Groq Llama 4 Analysis ({len(articles_slim)} articoli)...')
     try:
@@ -498,6 +511,7 @@ def run():
         # Part A: Finance
         it_finance_user = f"DATA: {today_str}\nSENTIMENT: {briefing['sentiment']['label']}\nMERCATI:\n{market_context}\nNOTIZIE PRINCIPALI:\n" + \
                          "\n".join(f"- {a['title']}" for a in news_it[:10])
+        it_finance_user += holiday_warning_it
         it_finance = get_audio_part(AUDIO_FINANCE_PROMPT, it_finance_user, 'audio_script_it')
         
         # Part B: Crypto
@@ -518,6 +532,7 @@ def run():
         # Part A: Finance
         en_finance_user = f"DATE: {today_str}\nSENTIMENT: {briefing['sentiment']['label']}\nMARKETS:\n{market_context}\nTOP NEWS:\n" + \
                          "\n".join(f"- {a['title']}" for a in news_it[:10])
+        en_finance_user += holiday_warning_en
         en_finance = get_audio_part(AUDIO_FINANCE_PROMPT_EN, en_finance_user, 'audio_script_en')
         
         # Part B: Crypto
