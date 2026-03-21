@@ -169,7 +169,7 @@ PRONUNCIA IN AUDIO ITALIANO — REGOLE SPECIALI:
 APERTURA CON ASIA (SOLO GIORNI FERIALI):
 - Nei giorni feriali (Lun-Ven), iniziare SEMPRE citando Nikkei e Shanghai con valori e variazioni.
 - Spiegare chiaramente che l'andamento asiatico anticipa quello che potremmo aspettarci dall'apertura delle borse europee e americane.
-- Se è sabato o domenica, ignora questa sezione o scrivi: "Mentre i mercati tradizionali osservano la pausa del fine settimana, l'attenzione resta alta sugli asset digitali..."
+- Se è sabato, domenica o un giorno festivo di chiusura mercati (es. Natale, Capodanno), ignora questa sezione o scrivi: "Mentre i mercati tradizionali osservano la pausa festiva, l'attenzione resta alta sugli asset digitali..."
 """
 
 AUDIO_CRYPTO_PROMPT = """Sei un analista esperto di digital assets.
@@ -430,13 +430,27 @@ def run():
 
     # Weekend / Holiday Awareness
     is_weekend = now.weekday() >= 5 # 5=Sat, 6=Sun
-    if is_weekend:
-        day_name = now.strftime('%A').lower()
-        user_prompt += f"\n\n⚠️ OGGI È {day_name.upper()} (MERCATI TRADIZIONALI CHIUSI):\n"
-        user_prompt += "Nota: Oggi i mercati azionari e obbligazionari mondiali sono chiusi per il fine settimana.\n"
+    
+    # 2026 Holidays (Major Markets)
+    holidays_2026 = {
+        "01-01": "Capodanno",
+        "04-03": "Venerdì Santo",
+        "04-06": "Lunedì dell'Angelo (Pasquetta)",
+        "05-01": "Festa del Lavoro",
+        "12-25": "Natale",
+        "12-26": "Santo Stefano",
+    }
+    today_md = now.strftime("%m-%d")
+    is_holiday = today_md in holidays_2026
+    holiday_name = holidays_2026.get(today_md)
+
+    if is_weekend or is_holiday:
+        reason = "IL FINE SETTIMANA" if is_weekend else f"LA FESTIVITÀ DI {holiday_name.upper()}"
+        user_prompt += f"\n\n⚠️ OGGI I MERCATI TRADIZIONALI SONO CHIUSI PER {reason}:\n"
+        user_prompt += f"Nota: Oggi le borse azionarie e obbligazionarie mondiali sono chiuse {'per il weekend' if is_weekend else 'per festività'}.\n"
         user_prompt += "Nell'audio script (Parte Finance), menziona esplicitamente che i mercati tradizionali sono chiusi e passa rapidamente all'analisi degli asset digitali (Crypto) che sono aperti 24 ore su 24.\n"
-        user_prompt += "Esempio apertura: 'Mentre le borse mondiali osservano la consueta pausa del weekend, i riflettori restano accesi sul comparto digitale...' o simili.\n"
-        user_prompt += "Concentrati sulla chiusura di venerdì per il contesto macro, ma dai priorità assoluta ai movimenti attuali di Bitcoin e delle crypto.\n"
+        user_prompt += "Esempio apertura: 'Mentre le borse mondiali osservano la consueta pausa festiva, i riflettori restano accesi sul comparto digitale...' o simili.\n"
+        user_prompt += "Concentrati sulla chiusura precedente per il contesto macro, ma dai priorità assoluta ai movimenti attuali di Bitcoin e delle crypto.\n"
 
     logger.info(f'🤖 Chiamata 1: Groq Llama 4 Analysis ({len(articles_slim)} articoli)...')
     try:
