@@ -48,6 +48,11 @@ def normalize_for_tts(text: str) -> str:
         ('JPMorgan',    'Jay Pi Morgan'),
         ('Morgan Stanley', 'Morgan Stanley'),
         ('Citigroup',   'Citigroup'),
+        # Nomi propri e termini inglesi comuni — pronuncia naturale
+        ('Trump',       'Tramp'),
+        ('Biden',       'Baiden'),
+        ('Powell',      'Pauel'),
+        ('Lagarde',     'Lagard'),
         # Indici — pronuncia estesa
         ('Nikkei',      'Nikkei'),
         ('Shanghai',    'Shanghai'),
@@ -111,7 +116,18 @@ def normalize_for_tts(text: str) -> str:
         except Exception:
             return m.group(0)
 
-    text = re.sub(r'\$([0-9,]+(?:\.[0-9]+)?)\s*(million|billion|milioni|miliardi|M|B)?', replace_usd, text, flags=re.IGNORECASE)
+    # - supporto numeri negativi: \$(-?[0-9,]+...)
+    # - lookahead (?!\\w) per tagliare prefissi/suffissi M, B solo se isolati o seguiti da spazio,
+    #   evitando di matchare "M" in "$2,100 Mercato"
+    text = re.sub(
+        r'\$(-?[0-9,]+(?:\.[0-9]+)?)(?:\s*(million|billion|milioni|miliardi|M|B)(?!\w))?', 
+        replace_usd, 
+        text, 
+        flags=re.IGNORECASE
+    )
+
+    # 2.5. HANDLING YEARS (20Y -> 20 anni)
+    text = re.sub(r'\b(\d+)Y\b', r'\1 anni', text)
 
     # 3. ACRONIMI E ABBREVIAZIONI → forma parlata
     # Ordine importante: prima le forme più lunghe
@@ -119,6 +135,8 @@ def normalize_for_tts(text: str) -> str:
         ("Standard and Poor's 500",  "Standard and Poor's 500"),  # già espanso
         ("S&P 500",                  "Standard and Poor's 500"),
         ("S&P500",                   "Standard and Poor's 500"),
+        ("L'S&P 500",                "Lo Standard and Poor's 500"),
+        ("L'S&P",                    "Lo Standard and Poor's"),
         ("S&P",                      "Standard and Poor's"),
         ("EUR/USD",                  "cambio euro dollaro"),
         ("EUR/GBP",                  "cambio euro sterlina"),
@@ -172,8 +190,10 @@ def normalize_for_tts(text: str) -> str:
         ("deep_dive",                "dip daiv"),
         ("Fear & Greed",             "fiar end grid"),
         ("Fear and Greed",           "fiar end grid"),
-        ("Extreme",                  "extrim"),
-        ("fear",                     "fiar"),
+        ("Extreme Fear",             "estrema paura"),
+        ("Extreme fear",             "estrema paura"),
+        ("Extreme",                  "estrema"),
+        ("fear",                     "paura"),
         ("greed",                    "grid"),
         ("Bybit",                    "Baibit"),
         ("Coinbase",                 "Coin-beis"),

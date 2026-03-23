@@ -137,12 +137,15 @@ Scrivi lo script audio per la prima parte del podcast (MERCATI TRADIZIONALI E MA
 LUNGHEZZA: 500-600 parole complessive.
 
 STRUTTURA (rispetta i tempi):
-1. APERTURA + CONTESTO ASIATICO (150 parole): 
-   Inizia SEMPRE con la chiusura dei mercati asiatici (Nikkei e Shanghai) 
+1. APERTURA E BENVENUTO (50 parole):
+   Inizia sempre con un saluto professionale e l'introduzione al briefing.
+   Esempio: "Benvenuti al vostro Morning Briefing quotidiano. Buongiorno e benvenuti all'aggiornamento finanziario di oggi."
+2. CONTESTO ASIATICO (100 parole): 
+   Dopo il benvenuto, cita la chiusura dei mercati asiatici (Nikkei e Shanghai) 
    come anticipazione di quello che potrebbe succedere in Europa e USA.
    Esempio: "La seduta asiatica ci consegna un Nikkei in calo dell'uno virgola 
    due percento a cinquantatremila punti, segnale che..."
-2. SENTIMENT + MERCATI OCCIDENTALI (250 parole): 
+3. SENTIMENT + MERCATI OCCIDENTALI (250 parole): 
    Analisi dell'S&P 500, DXY, VIX e tassi. Cita i valori esatti.
 3. GEOPOLITICA (150 parole): 
    Analisi degli eventi in corso e impatto sui prezzi.
@@ -169,6 +172,11 @@ PRONUNCIA IN AUDIO ITALIANO — REGOLE SPECIALI:
 - MAI sillabare acronimi di 3+ lettere se sono pronunciabili come parola
 - Nikkei → "Nikkei" (pronuncia giapponese, Piper la gestisce)
 - Shanghai → "Shanghai"
+- Ethereum / Bitcoin / Solana → pronuncia inglese standard (Piper le gestisce)
+- EVITA la parola "milioni" o "miliardi" se stai parlando di soglie di prezzo (es. "soglia dei 2100 dollari", NON "2100 milioni").
+
+ISTRUZIONE GENERALE PRONUNCIA:
+Se usi termini inglesi tecnici o nomi di personalità (es. Trump, Powell, Fed, Yield), assicurati che il contesto sia chiaro. Se un termine inglese è difficile da pronunciare per un italiano, preferisci la traduzione italiana (es. "rendimento" invece di "yield", "crescita" invece di "growth").
 
 APERTURA CON ASIA (SOLO GIORNI FERIALI):
 - Nei giorni feriali (Lun-Ven), iniziare SEMPRE citando Nikkei e Shanghai con valori e variazioni.
@@ -187,7 +195,7 @@ TRANSITION OBBLIGATORIA (in apertura):
 STRUTTURA:
 1. DEEP DIVE BITCOIN (100 parole): Analisi tecnica e flussi. Cita TASSATIVAMENTE il valore esatto degli ETF (BTC ETF Daily Net Inflow) fornito nei dati di mercato. NON inventare o allucinare numeri differenti. Se il dato è negativo, indicalo come deflusso.
 2. ALTCOINS (150 parole): Commenta Ethereum, Solana e Binance Coin (BNB).
-3. SENTIMENT & FEAR/GREED (100 parole): Analisi dell'indice e della correlazione con il macro.
+3. SENTIMENT & FEAR/GREED (100 parole): Analisi dell'indice e della correlazione con il macro. Usare la traduzione italiana per l'indice Fear & Greed (es. "Indice di Paura ed Avidità") e per i suoi livelli (es. "Extreme Fear" -> "Estrema Paura").
 
 REQUISITO: Sii estremamente tecnico e dettagliato. Evita banalità. Non ripetere dati macro generali se non strettamente necessario per la correlazione.
 """
@@ -525,6 +533,14 @@ def run():
                 response_format={'type': 'json_object'},
             )
             return json.loads(resp.choices[0].message.content)
+            
+        def clean_script(script_obj, key):
+            """Estrae il testo pulito dallo script, gestendo se l'LLM ha restituito un dict invece di una stringa."""
+            content = script_obj.get(key, "")
+            if isinstance(content, dict):
+                # Se è un dict, unisci i valori delle chiavi in ordine
+                return "\n\n".join(str(v) for v in content.values() if v)
+            return str(content)
 
         # 1. ITALIANO
         logger.info('🎙️ Generazione Audio IT (3 segmenti)...')
@@ -536,16 +552,18 @@ def run():
         it_finance = get_audio_part(AUDIO_FINANCE_PROMPT, it_finance_user, 'audio_script_it')
         
         # Part B: Crypto
-        crypto_ctx = market_context.split('CRYPTO MARKET DATA:')[1] if 'CRYPTO MARKET DATA:' in market_context else market_context
-        it_crypto_user = f"DATI CRYPTO:\n{crypto_ctx}\nNOTIZIE CRYPTO:\n" + \
-                        "\n".join(f"- {a['title']}" for a in articles_slim if a.get('category') == 'crypto')
+        # Assicurati che lo split includa anche i dati ETF che sono prima di CRYPTO data ma rilevanti
+        etf_flow_ctx = f"BTC ETF Daily Net Inflow: {md.get('btc_etf_flow', {}).get('value', 'N/A')}\n"
+        crypto_ctx = (market_context.split('CRYPTO MARKET DATA:')[1] if 'CRYPTO MARKET DATA:' in market_context else market_context)
+        it_crypto_user = f"DATI CRYPTO:\n{etf_flow_ctx}{crypto_ctx}\nNOTIZIE CRYPTO:\n" + \
+                        "\n".join(f"- {a['title']}" for a in news_it if a.get('category') == 'crypto')
         it_crypto = get_audio_part(AUDIO_CRYPTO_PROMPT, it_crypto_user, 'audio_script_it')
         
         # Part C: Close
         it_close = get_audio_part(AUDIO_CLOSE_PROMPT, "Genera chiusura per podcast finanziario italiano.", 'audio_script_it')
         
         # Merge IT
-        briefing['audio_script_it'] = f"{it_finance.get('audio_script_it', '')}\n\n{it_crypto.get('audio_script_it', '')}\n\n{it_close.get('audio_script_it', '')}"
+        briefing['audio_script_it'] = f"{clean_script(it_finance, 'audio_script_it')}\n\n{clean_script(it_crypto, 'audio_script_it')}\n\n{clean_script(it_close, 'audio_script_it')}"
 
         # 2. ENGLISH
         logger.info('🎙️ Generazione Audio EN (3 segmenti)...')
@@ -564,7 +582,7 @@ def run():
         en_close = get_audio_part(AUDIO_CLOSE_PROMPT, "Generate closing for English financial podcast.", 'audio_script_en')
         
         # Merge EN
-        briefing['audio_script_en'] = f"{en_finance.get('audio_script_en', '')}\n\n{en_crypto.get('audio_script_en', '')}\n\n{en_close.get('audio_script_en', '')}"
+        briefing['audio_script_en'] = f"{clean_script(en_finance, 'audio_script_en')}\n\n{clean_script(en_crypto, 'audio_script_en')}\n\n{clean_script(en_close, 'audio_script_en')}"
 
         # Merge article_impacts negli articoli raw
         article_impacts = briefing.pop('article_impacts', [])
