@@ -3,7 +3,7 @@ name: Morning Briefing
 
 on:
   schedule:
-    - cron: '0 5 * * *'    # Tutti i giorni ore 6:00 CET (5:00 UTC)
+    - cron: '30 5 * * *'    # Tutti i giorni ore 6:30 CET (5:30 UTC)
   workflow_dispatch:          # Esecuzione manuale da GitHub UI
 
 permissions:
