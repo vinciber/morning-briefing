@@ -66,9 +66,6 @@ def normalize_for_tts(text: str) -> str:
         text = text.replace(orig, replacement)
 
     # 2. PREZZI CON DOLLARO + MIGLIAIA → forma parlata PRIMA di tutto
-    # $70,646 → "settantamila 646 dollari"
-    # $5,061.70 → "cinquemila 61 dollari"
-    # $103.14 → "103 dollari"
     def replace_usd(m):
         num_str = m.group(1).replace(',', '')
         suffix = m.group(2)
@@ -116,9 +113,6 @@ def normalize_for_tts(text: str) -> str:
         except Exception:
             return m.group(0)
 
-    # - supporto numeri negativi: \$(-?[0-9,]+...)
-    # - lookahead (?!\\w) per tagliare prefissi/suffissi M, B solo se isolati o seguiti da spazio,
-    #   evitando di matchare "M" in "$2,100 Mercato"
     text = re.sub(
         r'\$(-?[0-9,]+(?:\.[0-9]+)?)(?:\s*(million|billion|milioni|miliardi|M|B)(?!\w))?', 
         replace_usd, 
@@ -130,9 +124,8 @@ def normalize_for_tts(text: str) -> str:
     text = re.sub(r'\b(\d+)Y\b', r'\1 anni', text)
 
     # 3. ACRONIMI E ABBREVIAZIONI → forma parlata
-    # Ordine importante: prima le forme più lunghe
     abbreviations = [
-        ("Standard and Poor's 500",  "Standard and Poor's 500"),  # già espanso
+        ("Standard and Poor's 500",  "Standard and Poor's 500"),
         ("S&P 500",                  "Standard and Poor's 500"),
         ("S&P500",                   "Standard and Poor's 500"),
         ("L'S&P 500",                "Lo Standard and Poor's 500"),
@@ -142,8 +135,6 @@ def normalize_for_tts(text: str) -> str:
         ("EUR/GBP",                  "cambio euro sterlina"),
         ("USD/JPY",                  "cambio dollaro yen"),
         ("GBP/USD",                  "cambio sterlina dollaro"),
-        ("STOXX 600",                "indice Stoxx seicento"),
-        ("STOXX600",                 "indice Stoxx seicento"),
         ("STOXX 600",                "indice Stoxx seicento"),
         ("STOXX600",                 "indice Stoxx seicento"),
         ("NIKKEI",                   "indice Nikkei"),
@@ -172,7 +163,6 @@ def normalize_for_tts(text: str) -> str:
         ("UK",                       "Regno Unito"),
         ("U.K.",                      "Regno Unito"),
         ("ECB",                      "Banca Centrale Europea"),
-        ("BCE",                      "Banca Centrale Europea"),
         ("treasury",                 "trèsiuri"),
         ("growth",                   "grouth"),
         ("yield",                    "ild"),
@@ -269,7 +259,8 @@ def _number_to_italian(n: int) -> str:
         tens = (n // 10) * 10
         ones = n % 10
         return words[tens] + words[ones]
-        return str(n)
+    return str(n)
+
 
 def normalize_for_tts_en(text: str) -> str:
     """Normalizza testo per sintesi vocale naturale in inglese."""
@@ -288,7 +279,6 @@ def normalize_for_tts_en(text: str) -> str:
         text = text.replace(orig, rep)
 
     # 2. Gestione dei grandi numeri con il Dollaro ($22.7T -> 22.7 trillion dollars)
-    # Match: $ + numero (con eventuale virgola/punto) + T, B o M
     def replace_big_usd_en(m):
         num = m.group(1)
         suffix = m.group(2).upper()
@@ -311,14 +301,17 @@ def normalize_for_tts_en(text: str) -> str:
 
     return text
 
+
 def briefing_to_text(briefing, lang='it'):
     """Recupera lo script audio pre-generato dall'AI."""
     text = briefing.get(f'audio_script_{lang}', '')
     if lang == 'it':
+        text = text.replace('$/oz', '/oz')  # Prevents "$45/oz" from breaking IT regex
         text = normalize_for_tts(text)
     elif lang == 'en':
         text = normalize_for_tts_en(text)
     return text
+
 
 def run():
     if not INPUT_PATH.exists():
