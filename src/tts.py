@@ -269,14 +269,55 @@ def _number_to_italian(n: int) -> str:
         tens = (n // 10) * 10
         ones = n % 10
         return words[tens] + words[ones]
-    return str(n)
+        return str(n)
 
+def normalize_for_tts_en(text: str) -> str:
+    """Normalizza testo per sintesi vocale naturale in inglese."""
+    
+    # 1. Coppie di valute e Acronimi fastidiosi
+    replacements = [
+        ("EUR/USD", "Euro to US Dollar"),
+        ("(DXY)", "Dollar Index"),
+        ("DXY", "Dollar Index"),
+        ("YoY", "Year over Year"),
+        ("QoQ", "Quarter over Quarter"),
+        ("S&P 500", "S and P 500"),
+        ("BTC", "Bitcoin"),
+    ]
+    for orig, rep in replacements:
+        text = text.replace(orig, rep)
+
+    # 2. Gestione dei grandi numeri con il Dollaro ($22.7T -> 22.7 trillion dollars)
+    # Match: $ + numero (con eventuale virgola/punto) + T, B o M
+    def replace_big_usd_en(m):
+        num = m.group(1)
+        suffix = m.group(2).upper()
+        if suffix == 'T':
+            return f"{num} trillion dollars"
+        elif suffix == 'B':
+            return f"{num} billion dollars"
+        elif suffix == 'M':
+            return f"{num} million dollars"
+        return m.group(0)
+
+    text = re.sub(r'\$([0-9.,]+)([TBM])\b', replace_big_usd_en, text, flags=re.IGNORECASE)
+
+    # 3. Gestione dei dollari semplici (es. $112.57 -> 112.57 dollars)
+    text = re.sub(r'\$([0-9.,]+)', r'\1 dollars', text)
+    
+    # 4. Simboli rimasti (come /oz per l'oro)
+    text = text.replace("/oz", " per ounce")
+    text = text.replace("/barrel", " per barrel")
+
+    return text
 
 def briefing_to_text(briefing, lang='it'):
     """Recupera lo script audio pre-generato dall'AI."""
     text = briefing.get(f'audio_script_{lang}', '')
     if lang == 'it':
         text = normalize_for_tts(text)
+    elif lang == 'en':
+        text = normalize_for_tts_en(text)
     return text
 
 def run():
