@@ -261,12 +261,12 @@ def _number_to_italian(n: int) -> str:
         return words[tens] + words[ones]
     return str(n)
 
-
 def normalize_for_tts_en(text: str) -> str:
     """Normalizza testo per sintesi vocale naturale in inglese."""
     
-    # 1. Coppie di valute e Acronimi fastidiosi
+    # 1. Coppie di valute, Simboli e Acronimi fastidiosi
     replacements = [
+        ("&", "and"),                      # "Fear & Greed" -> "Fear and Greed"
         ("EUR/USD", "Euro to US Dollar"),
         ("(DXY)", "Dollar Index"),
         ("DXY", "Dollar Index"),
@@ -278,7 +278,7 @@ def normalize_for_tts_en(text: str) -> str:
     for orig, rep in replacements:
         text = text.replace(orig, rep)
 
-    # 2. Gestione dei grandi numeri con il Dollaro ($22.7T -> 22.7 trillion dollars)
+    # 2. Gestione dei grandi numeri con il Dollaro ($22.7T, $66K)
     def replace_big_usd_en(m):
         num = m.group(1)
         suffix = m.group(2).upper()
@@ -288,19 +288,27 @@ def normalize_for_tts_en(text: str) -> str:
             return f"{num} billion dollars"
         elif suffix == 'M':
             return f"{num} million dollars"
+        elif suffix == 'K':
+            return f"{num} thousand dollars"
         return m.group(0)
 
-    text = re.sub(r'\$([0-9.,]+)([TBM])\b', replace_big_usd_en, text, flags=re.IGNORECASE)
+    text = re.sub(r'\$([0-9.,]+)([TBMK])\b', replace_big_usd_en, text, flags=re.IGNORECASE)
 
     # 3. Gestione dei dollari semplici (es. $112.57 -> 112.57 dollars)
     text = re.sub(r'\$([0-9.,]+)', r'\1 dollars', text)
     
-    # 4. Simboli rimasti (come /oz per l'oro)
+    # 4. Percentuali (es. 2.16% -> 2.16 percent) - Vitale per le sequenze!
+    text = re.sub(r'([0-9.,]+)%', r'\1 percent', text)
+
+    # 5. Simboli rimasti (come /oz per l'oro)
     text = text.replace("/oz", " per ounce")
     text = text.replace("/barrel", " per barrel")
 
-    return text
+    # 6. Pulizia di spazi doppi accidentali che potrebbero far balbettare l'audio
+    text = re.sub(r'\s+', ' ', text).strip()
 
+    return text
+    
 
 def briefing_to_text(briefing, lang='it'):
     """Recupera lo script audio pre-generato dall'AI."""
