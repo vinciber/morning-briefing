@@ -228,6 +228,7 @@ def get_etf_flow():
             logger.warning(f"⚠️ ETF Data not found. Checked file: {ETF_STATUS_PATH} and fallback URL. (data={data})")
             return None
             
+        logger.info(f"📊 ETF Data details: update={data.get('last_update','N/A')}, flow={data.get('net_flow_usd_m','N/A')}M$, scraped={data.get('scraped_at','N/A')}")
         return data
     except Exception as e:
         logger.error(f'ETF Flow: {e}')

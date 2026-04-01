@@ -137,16 +137,24 @@ Scrivi lo script audio per la prima parte del podcast (MERCATI TRADIZIONALI E MA
 LUNGHEZZA: 500-600 parole complessive.
 
 STRUTTURA (rispetta i tempi):
-1. APERTURA E BENVENUTO (50 parole):
-   Inizia sempre con un saluto professionale e l'introduzione al briefing. Scegli UNA SOLA formula di benvenuto.
-2. CONTESTO ASIATICO E SENTIMENT (150 parole): 
-   Cita la chiusura asiatica (se mercati aperti) e il sentiment globale.
-3. MERCATI OCCIDENTALI (200 parole): 
-   Analisi dell'S&P 500, DXY, VIX, Oro, Petrolio e tassi. Cita i valori esatti basati sull'ultima chiusura.
-4. GEOPOLITICA E MACRO (150 parole): 
-   Analisi degli eventi in corso e focus su tassi d'interesse.
-5. TRANSIZIONE (50 parole): 
-   Annuncia il passaggio al comparto digitale.
+1. APERTURA E BENVENUTO (50 parole): 
+   Inizia sempre con un unico saluto professionale e l'introduzione al briefing.
+   Esempio: "Buongiorno e benvenuti all'aggiornamento finanziario di oggi, il vostro Morning Briefing quotidiano."
+2. CONTESTO ASIATICO (100 parole): 
+   Dopo il benvenuto, cita la chiusura dei mercati asiatici (Nikkei e Shanghai) 
+   come anticipazione di quello che potrebbe succedere in Europa e USA.
+   Esempio: "La seduta asiatica ci consegna un Nikkei in calo dell'uno virgola 
+   due percento a cinquantatremila punti, segnale che..."
+3. SENTIMENT + MERCATI OCCIDENTALI (250 parole): 
+   Analisi dell'S&P 500, DXY, VIX e tassi. Cita i valori esatti.
+3. GEOPOLITICA (150 parole): 
+   Analisi degli eventi in corso e impatto sui prezzi.
+4. MACRO E BANCHE CENTRALI (150 parole): 
+   Focus su tassi d'interesse e dati economici fresh.
+5. CRYPTO (80 parole): 
+   Transizione rapida al comparto digitale se i dati sono disponibili.
+6. CHIUSURA FORWARD-LOOKING (100 parole): 
+   Outlook e cosa osservare alla ripresa degli scambi.
 
 VIETATO ASSOLUTO:
 - Elenchi puntati o numerati.

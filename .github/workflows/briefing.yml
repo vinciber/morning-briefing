@@ -91,8 +91,9 @@ jobs:
 
       - name: STEP 4 — Commit & Push changes (Local)
         run: |
-          git config --global user.name 'MorningBriefingBot'
-          git config --global user.email 'bot@briefing.local'
+          git config --global user.name 'vinciber'
+          git config --global user.email 'my.price.alert.app@gmail.com'
+
           git add docs/ data/
           git commit -m "briefing: $(date +%Y-%m-%d)" || exit 0
           git fetch origin main
@@ -122,8 +123,9 @@ jobs:
           ls -la main-repo/public/morning-update/api/today.json || echo "❌ today.json mancante!"
 
           cd main-repo
-          git config user.name 'MorningBriefingBot'
-          git config user.email 'bot@briefing.local'
+          git config user.name 'vinciber'
+          git config user.email 'my.price.alert.app@gmail.com'
+
           git add -A public/morning-update
 
           if git diff --staged --quiet; then

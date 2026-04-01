@@ -239,6 +239,20 @@ def normalize_for_tts(text: str) -> str:
     # 8. PUNTI DECIMALI RESIDUI → virgola
     text = re.sub(r'(\d+)\.(\d+)', r'\1 virgola \2', text)
 
+    # 9. OIL -> petrolio (se rimasto o tradotto male)
+    # Gestione apostrofi italiani: l'olio -> il petrolio, dell'olio -> del petrolio, ecc.
+    text = re.sub(r"\bl'olio\b", "il petrolio", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bdell'olio\b", "del petrolio", text, flags=re.IGNORECASE)
+    text = re.sub(r"\ball'olio\b", "al petrolio", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bsull'olio\b", "sul petrolio", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bolio\b", "petrolio", text, flags=re.IGNORECASE)
+
+    # 10. S&P 500 -> lo Standard & Poor's (correzione articolo)
+    text = re.sub(r"\bl'Standard\b", "lo Standard", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bdell'Standard\b", "dello Standard", text, flags=re.IGNORECASE)
+    text = re.sub(r"\ball'Standard\b", "allo Standard", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bsull'Standard\b", "sullo Standard", text, flags=re.IGNORECASE)
+
     return text
 
 
@@ -361,7 +375,7 @@ def run():
             for i, p in enumerate(paragraphs):
                 p_wav = io.BytesIO()
                 with wave.open(p_wav, "wb") as wav_file:
-                    voice.synthesize(p, wav_file)
+                    voice.synthesize(p, wav_file, length_scale=1.1)
                 
                 p_wav.seek(0)
                 p_segment = AudioSegment.from_wav(p_wav)
