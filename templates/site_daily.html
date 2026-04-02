@@ -210,10 +210,11 @@
     <!-- Row 1: Fear & Greed + Prices (BTC, ETH, SOL, BNB) -->
     <div class="macro-grid">
       {% set crypto = briefing['market_data_raw']['crypto'] %}
-      <div class="macro-item fear-greed" style="border-color: #f59e0b40;">
+      <div class="macro-item fear-greed" style="border-color: #f59e0b40; position: relative;">
         <div class="macro-label">Fear & Greed</div>
         <div class="macro-value">{{ crypto.fear_greed.value }}</div>
         <div class="macro-date">{{ crypto.fear_greed.class }}</div>
+        <a href="https://farside.co.uk/btc/" target="_blank" style="display: block; font-size: 8px; color: var(--blue); text-decoration: none; margin-top: 4px; border-top: 1px solid var(--border); padding-top: 2px;">ETF Data by Farside</a>
       </div>
       
       {% for ticker, info in crypto.prices.items() %}
