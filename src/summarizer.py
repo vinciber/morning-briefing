@@ -20,6 +20,23 @@ load_dotenv()
 
 from groq import Groq
 
+# Ground Truth Macroeconomico (Costanti aggiornate manualmente ogni 6-8 settimane)
+MACRO_GROUND_TRUTH = {
+    'ECB': {
+        'last_meeting': '19 Marzo 2026',
+        'next_meeting': '30 Aprile 2026',
+        'main_rate': '2.15%',
+        'deposit_rate': '2.00%',
+        'result': 'Tassi invariati (Main: 2.15%, Deposit: 2.00%)'
+    },
+    'FED': {
+        'last_meeting': '18 Marzo 2026',
+        'next_meeting': '07 Maggio 2026',
+        'rate_range': '3.50% - 3.75%',
+        'result': 'Tassi invariati (3.50% - 3.75%)'
+    }
+}
+
 def _format_value(val: str) -> str:
     """Tronca decimali a 2 cifre: 27.1900 → 27.19"""
     val_str = str(val)
@@ -128,9 +145,14 @@ REGOLE article_impacts:
 - assets_affected: lista degli asset direttamente impattati
 - Se un articolo non ha un URL, NON includerlo in article_impacts.
 
-REGOLE relevance_score — il modello NON modifica i relevance_score degli articoli.
-Vengono passati dal fetcher e rimangono invariati.
-"""
+REGOLE MACRO - GROUND TRUTH:
+    - Nelle istruzioni utente troverai una sezione [MACRO GROUND TRUTH]. Usa SOLO quelle date per riferirti a quando le banche centrali (BCE/FED) si sono riunite o si riuniranno.
+    - Se vedi un dato con data "ieri" o "1 giorno fa" nei dati di mercato, NON assumere che ci sia stata una riunione ieri a meno che non sia confermato dal GROUND TRUTH.
+    - TASSI BCE: Riporta sempre sia il tasso di rifinanziamento (Main Refi) che quello sui depositi se disponibili.
+    
+    Format: JSON con 'audio_script_it', 'audio_script_en', 'market_sentiment', 'key_takeaways'.
+    """
+    
 
 AUDIO_FINANCE_PROMPT = """Sei un conduttore radiofonico finanziario senior italiano specializzato in analisi macroeconomica globale.
 Scrivi lo script audio per la prima parte del podcast (MERCATI TRADIZIONALI E MACRO).
@@ -433,7 +455,16 @@ def run():
     ]
 
     articles_json = json.dumps(articles_slim, ensure_ascii=False)
-    user_prompt = f"{market_context}ARTICOLI DA ANALIZZARE ({len(articles_slim)} totali):\n{articles_json}"
+    
+    # Iniezione Ground Truth Macro
+    macro_truth_str = f"""
+[MACRO GROUND TRUTH - DATA REALE AL {datetime.now().strftime('%d %B %Y')}]
+- ECB (BCE): Ultima riunione {MACRO_GROUND_TRUTH['ECB']['last_meeting']}, Prossima riunione {MACRO_GROUND_TRUTH['ECB']['next_meeting']}. {MACRO_GROUND_TRUTH['ECB']['result']}.
+- FED (USA): Ultima riunione {MACRO_GROUND_TRUTH['FED']['last_meeting']}, Prossima riunione {MACRO_GROUND_TRUTH['FED']['next_meeting']}. {MACRO_GROUND_TRUTH['FED']['result']}.
+[FINE GROUND TRUTH]
+"""
+    
+    user_prompt = f"{macro_truth_str}\n\n{market_context}ARTICOLI DA ANALIZZARE ({len(articles_slim)} totali):\n{articles_json}"
 
     if history:
         history_titles = [

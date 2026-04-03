@@ -252,7 +252,7 @@ def get_macro_calendar() -> dict:
         'nfp':        '2026-04-03',
         'unemployment':'2026-04-03',
         'pce_core':   '2026-03-28',
-        'fed_funds':  '2026-05-07',  # prossimo FOMC
+        'fed_funds':  '2026-05-07',  # Prossimo FOMC
         'gdp':        '2026-04-29',
     }
 
@@ -447,7 +447,7 @@ def get_macro_calendar_eu() -> dict:
     FRED_API_KEY = os.environ.get('FRED_API_KEY', '')
     
     NEXT_RELEASE_EU = {
-        'ecb_rate':        '2026-04-17',  # Prossima riunione BCE
+        'ecb_rate':        '2026-04-30',  # Prossima riunione BCE
         'cpi_eu':          '2026-04-02',  # Flash CPI Eurozona
         'gdp_eu':          '2026-04-30',  # PIL Eurozona 1° stima
         'unemployment_eu': '2026-04-01',  # Disoccupazione Eurozona
@@ -536,8 +536,9 @@ def get_macro_calendar_eu() -> dict:
 
     # 4. Tasso BCE (FRED)
     if FRED_API_KEY:
+        # Recuperiamo il tasso principale (Refinancing Rate)
         try:
-            params = {'series_id': 'ECBDFR', 'api_key': FRED_API_KEY, 'file_type': 'json', 'sort_order': 'desc', 'limit': 2}
+            params = {'series_id': 'ECBMRRFR', 'api_key': FRED_API_KEY, 'file_type': 'json', 'sort_order': 'desc', 'limit': 2}
             r = requests.get('https://api.stlouisfed.org/fred/series/observations', params=params, timeout=15)
             r.raise_for_status()
             obs = r.json().get('observations', [])
@@ -545,18 +546,38 @@ def get_macro_calendar_eu() -> dict:
                 val_bce = float(obs[0]['value'])
                 date_bce = obs[0]['date']
                 result['ecb_rate'] = {
-                    'label': 'Tasso BCE',
-                    'label_it': 'Tasso BCE',
-                    'label_en': 'ECB Rate',
+                    'label': 'Tasso BCE (Refi)',
+                    'label_it': 'Tasso BCE (Refi)',
+                    'label_en': 'ECB Rate (Refi)',
                     'value': f'{val_bce:.2f}%',
                     'release_date': date_bce,
                     'status': 'released',
                     'next_release': NEXT_RELEASE_EU.get('ecb_rate', 'N/A'),
                     'region': 'EU',
+                    'is_main_rate': True
                 }
-                logger.info(f'✅ EU Tasso BCE: {val_bce:.2f}% ({date_bce})')
+                logger.info(f'✅ EU Tasso BCE (Refi): {val_bce:.2f}% ({date_bce})')
         except Exception as e:
-            logger.error(f'✗ FRED ECB Rate: {e}')
+            logger.error(f'✗ FRED ECB Main Rate: {e}')
+
+        # Aggiungiamo anche il tasso sui depositi per completezza
+        try:
+            params = {'series_id': 'ECBDFR', 'api_key': FRED_API_KEY, 'file_type': 'json', 'sort_order': 'desc', 'limit': 2}
+            r = requests.get('https://api.stlouisfed.org/fred/series/observations', params=params, timeout=15)
+            r.raise_for_status()
+            obs = r.json().get('observations', [])
+            if obs and obs[0]['value'] != '.':
+                val_dep = float(obs[0]['value'])
+                result['ecb_deposit_rate'] = {
+                    'label': 'Tasso Depositi BCE',
+                    'label_it': 'Tasso Depositi BCE',
+                    'label_en': 'ECB Deposit Rate',
+                    'value': f'{val_dep:.2f}%',
+                    'status': 'released',
+                    'region': 'EU'
+                }
+        except Exception as e:
+            logger.error(f'✗ FRED ECB Deposit Rate: {e}')
 
     # Gestione fallback per indicatori mancanti (status upcoming)
     for key in ['gdp_eu', 'cpi_eu', 'unemployment_eu', 'ecb_rate']:
