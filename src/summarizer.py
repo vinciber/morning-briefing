@@ -57,6 +57,25 @@ HISTORY_PATH = ROOT / 'docs' / 'api' / 'today.json'
 OUTPUT_PATH = ROOT / 'data' / 'briefing_today.json'
 
 GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '')
+
+MACRO_GROUND_TRUTH = {
+    'ECB': {
+        'main_rate': '2.15%',     # Refi (Mutui)
+        'deposit_rate': '2.00%',  # DFR (Monitorato dai mercati)
+        'last_meeting': '2026-04-02',
+        'next_meeting': '2026-04-30',
+        'stance_it': 'I tassi sono stati mantenuti invariati nell\'ultima riunione.',
+        'stance_en': 'Rates were kept unchanged in the last meeting.'
+    },
+    'FED': {
+        'rate_range': '3.50% - 3.75%',
+        'last_meeting': '2026-03-18',
+        'next_meeting': '2026-05-07',
+        'stance_it': 'La Fed ha mantenuto i tassi fermi segnalando cautela.',
+        'stance_en': 'The Fed kept rates steady signaling caution.'
+    }
+}
+
 SYSTEM_PROMPT = """
 Sei un analyst quantitativo senior con lo stile di Vito Lops (Il Sole 24 Ore).
 Produci un briefing mattutino JSON con quattro componenti:
@@ -65,6 +84,12 @@ Produci un briefing mattutino JSON con quattro componenti:
 2. MARKET IMPACT SUMMARY
 3. AUDIO SCRIPT per podcast (7-8 minuti)
 4. ARTICLE IMPACTS — giudizio per ogni articolo
+
+REGOLA CRITICA — MACRO TRUTH (BCE/FED):
+- Per la BCE (ECB), il tasso monitorato dai mercati è il DEPOSIT FACILITY RATE (2.00%).
+- Il tasso principale di rifinanziamento (Refi) è al 2.15%, ma viene citato solo per il contesto dei mutui immobiliari.
+- Usa SOLO le date del [MACRO GROUND TRUTH] per riferirti a riunioni passate o future.
+- Tassi BCE: Ultima 2 Aprile, Prossima 30 Aprile. Tasso attuale (Depositi) 2.00%.
 
 REGOLA CRITICA — market_impact.direction:
 "direction" indica l'impatto netto sul SENTIMENT DI MERCATO, NON la direzione del prezzo.
@@ -106,7 +131,6 @@ REGOLA LINGUAGGIO GEOPOLITICO:
 - MAI attenuare con "potenziale", "possibile", "rischio di" se l'evento è già in corso
 - Esempio SBAGLIATO: "Iran e Israele coinvolti in un potenziale conflitto"
 - Esempio CORRETTO: "la guerra tra USA-Israele e Iran, al sedicesimo giorno, continua a pesare sui mercati"
-- Il contesto temporale è importante: se gli articoli indicano che un evento è in corso da giorni/settimane, citarlo
 
 OUTPUT JSON — struttura esatta:
 {
@@ -121,37 +145,21 @@ OUTPUT JSON — struttura esatta:
     "it": "4-5 righe. Almeno 3 asset class con variazioni numeriche. Usa il framework di lettura mercati.",
     "en": "same in English"
   },
-  "audio_script_it": "Script completo per podcast 7-8 minuti in italiano. MINIMO 800 PAROLE OBBLIGATORIO — conta le parole, se sei sotto 800 espandi ogni sezione. Struttura: (1) Apertura sentiment + 3 dati chiave — 2 min. (2) Mercati asset per asset con numeri e implicazioni — 2 min. (3) Geopolitica e impatto prezzi — 1.5 min. (4) Macro/banche centrali/tassi — 1.5 min. (5) Chiusura: cosa monitorare domani — 1 min. Tono Bloomberg radio. Mai elenchi puntati — solo prosa narrativa fluida.",
+  "audio_script_it": "Script completo per podcast 7-8 minuti in italiano. MINIMO 800 PAROLE OBBLIGATORIO. Struttura: (1) Apertura sentiment + 3 dati chiave — 2 min. (2) Mercati asset per asset con numeri e implicazioni — 2 min. (3) Geopolitica e impatto prezzi — 1.5 min. (4) Macro/banche centrali/tassi — 1.5 min. (5) Chiusura: cosa monitorare domani — 1 min. Tono Bloomberg radio.",
   "audio_script_en": "Same structure in English. MINIMUM 800 WORDS MANDATORY.",
   "article_impacts": [
     {
       "url": "url esatto dell'articolo",
-      "title_it": "Titolo breve e d'impatto in italiano",
-      "title_en": "Short catchy title in English",
-      "summary_it": "Sintesi di 1-2 righe in italiano",
-      "summary_en": "1-2 lines summary in English",
+      "title_it": "Titolo breve in italiano",
+      "summary_it": "Sintesi in italiano",
       "direction": "bearish | bullish | mixed",
       "magnitude": "high | medium | low",
       "assets_affected": ["S&P 500", "Brent"]
     }
   ]
 }
+"""
 
-REGOLE article_impacts:
-- Includere TUTTI gli articoli ricevuti in input, uno per uno
-- Usare l'URL esatto come chiave di matching
-- direction segue TASSATIVAMENTE la tabella sopra
-- magnitude: high = impatto immediato su >2 asset, medium = 1 asset, low = contesto/background
-- assets_affected: lista degli asset direttamente impattati
-- Se un articolo non ha un URL, NON includerlo in article_impacts.
-
-REGOLE MACRO - GROUND TRUTH:
-    - Nelle istruzioni utente troverai una sezione [MACRO GROUND TRUTH]. Usa SOLO quelle date per riferirti a quando le banche centrali (BCE/FED) si sono riunite o si riuniranno.
-    - Se vedi un dato con data "ieri" o "1 giorno fa" nei dati di mercato, NON assumere che ci sia stata una riunione ieri a meno che non sia confermato dal GROUND TRUTH.
-    - TASSI BCE: Riporta sempre sia il tasso di rifinanziamento (Main Refi) che quello sui depositi se disponibili.
-    
-    Format: JSON con 'audio_script_it', 'audio_script_en', 'market_sentiment', 'key_takeaways'.
-    """
     
 
 AUDIO_FINANCE_PROMPT = """Sei un conduttore radiofonico finanziario senior italiano specializzato in analisi macroeconomica globale.
@@ -344,6 +352,41 @@ def run():
     if MARKET_DATA_PATH.exists():
         with open(MARKET_DATA_PATH, 'r', encoding='utf-8') as f:
             md = json.load(f)
+        
+        # INIEZIONE HARD - MACRO TRUTH (BCE/FED)
+        # Sovrascriviamo eventuali errori da FRED con i dati del GROUND TRUTH
+        if 'macro_calendar_eu' not in md: md['macro_calendar_eu'] = {}
+        # Usiamo il DEPOSIT RATE come tasso primario perché è quello che monitorano i mercati
+        md['macro_calendar_eu']['ecb_rate'] = {
+            'label': 'Tasso BCE (Depositi)',
+            'label_it': 'Tasso BCE (Depositi)',
+            'label_en': 'ECB Rate (Deposit)',
+            'value': MACRO_GROUND_TRUTH['ECB']['deposit_rate'],
+            'release_date': '2026-04-02', 
+            'status': 'released',
+            'next_release': '2026-04-30',
+            'region': 'EU'
+        }
+        md['macro_calendar_eu']['ecb_refi_rate'] = {
+            'label': 'Tasso BCE (Refi/Mutui)',
+            'label_it': 'Tasso BCE (Refi/Mutui)',
+            'label_en': 'ECB Rate (Refi)',
+            'value': MACRO_GROUND_TRUTH['ECB']['main_rate'],
+            'status': 'released',
+            'region': 'EU'
+        }
+        
+        if 'macro_calendar' not in md: md['macro_calendar'] = {}
+        md['macro_calendar']['fed_funds'] = {
+            'label': 'Tasso Fed Funds',
+            'label_it': 'Tasso Fed Funds',
+            'label_en': 'Fed Funds Rate',
+            'value': MACRO_GROUND_TRUTH['FED']['rate_range'],
+            'release_date': '2026-03-18',
+            'status': 'released',
+            'next_release': '2026-05-07'
+        }
+
         lines = []
         labels = {
             'eur_usd':   'EUR/USD',
@@ -459,8 +502,8 @@ def run():
     # Iniezione Ground Truth Macro
     macro_truth_str = f"""
 [MACRO GROUND TRUTH - DATA REALE AL {datetime.now().strftime('%d %B %Y')}]
-- ECB (BCE): Ultima riunione {MACRO_GROUND_TRUTH['ECB']['last_meeting']}, Prossima riunione {MACRO_GROUND_TRUTH['ECB']['next_meeting']}. {MACRO_GROUND_TRUTH['ECB']['result']}.
-- FED (USA): Ultima riunione {MACRO_GROUND_TRUTH['FED']['last_meeting']}, Prossima riunione {MACRO_GROUND_TRUTH['FED']['next_meeting']}. {MACRO_GROUND_TRUTH['FED']['result']}.
+- ECB (BCE): Ultima riunione {MACRO_GROUND_TRUTH['ECB']['last_meeting']}, Prossima riunione {MACRO_GROUND_TRUTH['ECB']['next_meeting']}. {MACRO_GROUND_TRUTH['ECB']['stance_it']} {MACRO_GROUND_TRUTH['ECB']['deposit_rate']} (DFR) / {MACRO_GROUND_TRUTH['ECB']['main_rate']} (Refi).
+- FED (USA): Ultima riunione {MACRO_GROUND_TRUTH['FED']['last_meeting']}, Prossima riunione {MACRO_GROUND_TRUTH['FED']['next_meeting']}. {MACRO_GROUND_TRUTH['FED']['stance_it']} {MACRO_GROUND_TRUTH['FED']['rate_range']}.
 [FINE GROUND TRUTH]
 """
     

@@ -166,11 +166,18 @@
     <div class="macro-grid">
       {% for key, item in briefing['market_data_raw']['macro_calendar'].items() %}
       <div class="macro-item {% if item.status == 'upcoming' %}upcoming{% elif item.status == 'released' %}released{% endif %}">
-        <div class="macro-label">{{ item.label }}</div>
+        <div class="macro-label">{{ item.get('label_' + lang) or item.label }}</div>
         {% if item.status == 'released' %}
           <div class="macro-value">{{ item.value }}</div>
-          <div class="macro-prev">{% if lang == 'it' %}prec.{% else %}prev.{% endif %} {{ item.previous }}</div>
+          {% if item.previous and item.previous != 'N/A' %}
+            <div class="macro-prev">{% if lang == 'it' %}prec.{% else %}prev.{% endif %} {{ item.previous }}</div>
+          {% endif %}
           <div class="macro-date">{{ item.release_date }}</div>
+          {% if item.next_release and item.next_release != 'N/A' %}
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 {{ item.next_release }}
+            </div>
+          {% endif %}
         {% elif item.status == 'upcoming' %}
           <div class="macro-value upcoming-val">—</div>
           <div class="macro-date">📅 {{ item.next_release }}</div>
@@ -187,11 +194,18 @@
     <div class="macro-grid">
       {% for key, item in briefing['market_data_raw']['macro_calendar_eu'].items() %}
       <div class="macro-item eu {% if item.status == 'upcoming' %}upcoming{% else %}released{% endif %}">
-        <div class="macro-label">{{ item.label }}</div>
+        <div class="macro-label">{{ item.get('label_' + lang) or item.label }}</div>
         {% if item.status == 'released' %}
           <div class="macro-value">{{ item.value }}</div>
-          <div class="macro-prev">{% if lang == 'it' %}prec.{% else %}prev.{% endif %} {{ item.previous }}</div>
+          {% if item.previous and item.previous != 'N/A' %}
+            <div class="macro-prev">{% if lang == 'it' %}prec.{% else %}prev.{% endif %} {{ item.previous }}</div>
+          {% endif %}
           <div class="macro-date">{{ item.release_date }}</div>
+          {% if item.next_release and item.next_release != 'N/A' %}
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 {{ item.next_release }}
+            </div>
+          {% endif %}
         {% else %}
           <div class="macro-value upcoming-val">—</div>
           <div class="macro-date">📅 {{ item.next_release }}</div>
@@ -214,7 +228,6 @@
         <div class="macro-label">Fear & Greed</div>
         <div class="macro-value">{{ crypto.fear_greed.value }}</div>
         <div class="macro-date">{{ crypto.fear_greed.class }}</div>
-        <a href="https://farside.co.uk/btc/" target="_blank" style="display: block; font-size: 8px; color: var(--blue); text-decoration: none; margin-top: 4px; border-top: 1px solid var(--border); padding-top: 2px;">ETF Data by Farside</a>
       </div>
       
       {% for ticker, info in crypto.prices.items() %}
