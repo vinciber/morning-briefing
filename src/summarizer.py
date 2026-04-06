@@ -132,21 +132,23 @@ REGOLA LINGUAGGIO GEOPOLITICO:
 - Esempio SBAGLIATO: "Iran e Israele coinvolti in un potenziale conflitto"
 - Esempio CORRETTO: "la guerra tra USA-Israele e Iran, al sedicesimo giorno, continua a pesare sui mercati"
 
+REGOLA TEMPORALE: Se i mercati sono chiusi oggi o lo sono stati ieri (weekend/festività), non usare MAI il termine "ieri" o "yesterday" per riferirti ai dati dell'ultima sessione. Usa invece termini come "alla chiusura passata", "nella seduta di venerdì" o simili.
+
 OUTPUT JSON — struttura esatta:
 {
   "date": "YYYY-MM-DD",
   "sentiment": {
     "label": "risk_on | risk_off | neutral",
     "score": 1-10,
-    "reason_it": "3-4 righe narrative. Almeno 3 asset con valori numerici. Tono Bloomberg Intelligence. Mai generico. Collega i dati agli scenari macro.",
-    "reason_en": "same in English"
+    "reason_it": "3-4 righe narrative. Almeno 3 asset con valori numerici. Tono Bloomberg Intelligence. Mai generico. Collega i dati agli scenari macro. RISPETTA LA REGOLA TEMPORALE.",
+    "reason_en": "Same in English. RESPECT TEMPORAL RULE."
   },
   "market_impact_summary": {
-    "it": "4-5 righe. Almeno 3 asset class con variazioni numeriche. Usa il framework di lettura mercati.",
-    "en": "same in English"
+    "it": "4-5 righe. Almeno 3 asset class con variazioni numeriche. Usa il framework di lettura mercati. RISPETTA LA REGOLA TEMPORALE.",
+    "en": "Same in English. RESPECT TEMPORAL RULE."
   },
-  "audio_script_it": "Script completo per podcast 7-8 minuti in italiano. MINIMO 800 PAROLE OBBLIGATORIO. Struttura: (1) Apertura sentiment + 3 dati chiave — 2 min. (2) Mercati asset per asset con numeri e implicazioni — 2 min. (3) Geopolitica e impatto prezzi — 1.5 min. (4) Macro/banche centrali/tassi — 1.5 min. (5) Chiusura: cosa monitorare domani — 1 min. Tono Bloomberg radio.",
-  "audio_script_en": "Same structure in English. MINIMUM 800 WORDS MANDATORY.",
+  "audio_script_it": "Script completo gestito in segmenti (A, B, C).",
+  "audio_script_en": "Script completo gestito in segmenti (A, B, C).",
   "article_impacts": [
     {
       "url": "url esatto dell'articolo",
@@ -166,45 +168,33 @@ AUDIO_FINANCE_PROMPT = """Sei un conduttore radiofonico finanziario senior itali
 Scrivi lo script audio per la prima parte del podcast (MERCATI TRADIZIONALI E MACRO).
 LUNGHEZZA: 500-600 parole complessive.
 
-STRUTTURA (rispetta i tempi):
+STRUTTURA:
 1. APERTURA E BENVENUTO (50 parole): 
    Inizia sempre con un unico saluto professionale e l'introduzione al briefing.
    Esempio: "Buongiorno e benvenuti all'aggiornamento finanziario di oggi, il vostro Morning Briefing quotidiano."
 2. CONTESTO ASIATICO (100 parole): 
    Dopo il benvenuto, cita la chiusura dei mercati asiatici (Nikkei e Shanghai) 
    come anticipazione di quello che potrebbe succedere in Europa e USA.
-   Esempio: "La seduta asiatica ci consegna un Nikkei in calo dell'uno virgola 
-   due percento a cinquantatremila punti, segnale che..."
 3. SENTIMENT + MERCATI OCCIDENTALI (250 parole): 
    Analisi dell'S&P 500, DXY, VIX e tassi. Cita i valori esatti.
-3. GEOPOLITICA (150 parole): 
+   REGOLA TEMPORALE: Se i mercati sono chiusi oggi o sono stati chiusi ieri, non usare MAI il termine "ieri" per i dati. Usa invece "nella seduta di [GIORNO]" o "alla chiusura passata".
+4. GEOPOLITICA (150 parole): 
    Analisi degli eventi in corso e impatto sui prezzi.
-4. MACRO E BANCHE CENTRALI (150 parole): 
-   Focus su tassi d'interesse e dati economici fresh.
-5. CRYPTO (80 parole): 
-   Transizione rapida al comparto digitale se i dati sono disponibili.
-6. CHIUSURA FORWARD-LOOKING (100 parole): 
-   Outlook e cosa osservare alla ripresa degli scambi.
+5. MACRO E BANCHE CENTRALI (150 parole): 
+   Focus su tassi d'interesse e dati economici freschi.
 
 VIETATO ASSOLUTO:
-- Elenchi puntati o numerati.
-- Ripetizioni per allungare il testo.
-- NON CITARE i prezzi di Bitcoin, delle Altcoin, i flussi degli ETF o l'indice Fear & Greed in questa sezione. Lascia tutti i dettagli e i numeri per il segmento crypto.
+- NON parlare di Bitcoin, delle Altcoin, di flussi ETF o Fear & Greed in questa sezione.
+- NON chiudere il podcast. Fermati dopo l'analisi macro per lasciare spazio alla sezione crypto.
+- NON fare elenchi puntati.
 
-PRONUNCIA IN AUDIO ITALIANO — REGOLE SPECIALI:
-- ORO: Traduci sempre "/oz" con "l'oncia" (es. scrivi "4492 dollari l'oncia", NON "$4492/oz" e NON "slash oz").
-- BITCOIN: MAI usare l'articolo determinativo davanti a Bitcoin (scrivi "Bitcoin ha perso...", NON "Il Bitcoin ha perso...").
+PRONUNCIA — REGOLE SPECIALI:
+- ORO: Traduci sempre "/oz" con "l'oncia".
 - USA → scrivere "Usa"
 - NATO → scrivere "Nato"
 - OPEC → scrivere "Opek"  
 - IMF → scrivere "Fondo Monetario Internazionale"
-- Nomi propri inglesi (BlackRock, Goldman Sachs) → lasciare invariati.
 - Price Alert → scrivere "Prais Alért"
-- EVITA la parola "milioni" o "miliardi" se stai parlando di soglie di prezzo (es. "soglia dei 2100 dollari", NON "2100 milioni").
-
-APERTURA CON ASIA E WEEKEND:
-- Nei giorni feriali (Lun-Ven), iniziare citando Nikkei e Shanghai, spiegando che anticipano l'apertura occidentale.
-- SE I MERCATI SONO CHIUSI (weekend/festività): NON fare MAI speculazioni o ipotesi sull'apertura (vietato dire "qualora fossero aperte" o "potrebbe influenzare le aperture"). Limitati a dire che le borse tradizionali osservano la pausa festiva e analizza esclusivamente i dati dell'ultima seduta passata.
 """
 
 AUDIO_CRYPTO_PROMPT = """Sei un analista esperto di digital assets.
@@ -212,17 +202,16 @@ Scrivi lo script audio per la sezione CRIPTOVALUTE del podcast.
 LUNGHEZZA: 300-400 parole.
 
 TRANSITION OBBLIGATORIA (in apertura): 
-- "Passiamo ora al comparto degli asset digitali..." 
-- "Spostiamo l'attenzione sul mercato delle criptovalute..."
+"Passiamo ora al comparto degli asset digitali..."
 
 STRUTTURA E REGOLE:
-1. DEEP DIVE BITCOIN (100 parole): Analisi tecnica e flussi. Cita TASSATIVAMENTE il valore esatto degli ETF (BTC ETF Daily Net Inflow). NON inventare numeri. Se il dato è negativo, indicalo come deflusso.
-2. ALTCOINS (150 parole): Commenta Ethereum, Solana e Binance Coin (BNB).
-3. SENTIMENT & FEAR/GREED (100 parole): Analisi dell'indice e correlazione macro. Usare la traduzione italiana per i livelli (es. "Estrema Paura").
+1. DEEP DIVE BITCOIN (100 parole): Analisi tecnica e flussi ETF. 
+2. ALTCOINS (150 parole): Ethereum, Solana, e Binance Coin (BNB).
+3. SENTIMENT & FEAR/GREED (100 parole): Indice e correlazione macro.
 
 REGOLE GRAMMATICALI:
-- MAI usare l'articolo determinativo davanti a Bitcoin (scrivi "Bitcoin è sceso", NON "il Bitcoin è sceso").
-- Sii tecnico. Evita di ripetere dati macro della prima parte se non strettamente necessari.
+- MAI usare l'articolo determinativo davanti a Bitcoin.
+- Sii tecnico, non ripetere dati già detti nella sezione macro se non per collegamenti diretti.
 """
 
 AUDIO_FINANCE_PROMPT_EN = """You are a senior financial radio presenter.
@@ -230,26 +219,17 @@ Write the audio script for the first part of the podcast (TRADITIONAL MARKETS & 
 LENGTH: 400-500 words.
 
 MANDATORY OPENING:
-Choose EXACTLY ONE of these openings (Do NOT use both):
-- "Welcome to your daily morning market briefing."
-- "Good morning and welcome to today's financial update."
+Choose EXACTLY ONE: "Welcome to your daily morning market briefing." OR "Good morning and welcome to today's financial update."
 
 STRUCTURE:
-1. OPENING + SENTIMENT (100 words): Focus on global mood. Mention max 2 key data points.
-2. TRADITIONAL MARKETS (200 words): Equities, Bonds, Currencies, Commodities. Use exact numerical values from the latest close.
-3. GEOPOLITICS & MACRO (150-200 words): Ongoing events and impact on rates/inflation.
-
-PRONUNCIATION & FORMATTING RULES (CRITICAL FOR TTS):
-- NO ACRONYMS for comparisons: Write "Year over Year" instead of "YoY", and "Quarter over Quarter" instead of "QoQ".
-- NO ABBREVIATED BIG NUMBERS: Write "trillion dollars" instead of "$...T" (e.g., "22.7 trillion dollars" instead of "$22.7T"). Write "billion dollars" instead of "$...B", and "million dollars" instead of "$...M".
-- NO SLASHES: Write "Euro to US Dollar" instead of "EUR/USD", and "dollars per ounce" instead of "$/oz" or "$/barrel".
-- NO SYMBOL SOUP: Write "D X Y" or "Dollar Index" instead of "(DXY)".
+1. OPENING + SENTIMENT (100 words): Global mood. 
+2. TRADITIONAL MARKETS (200 words): Equities, Bonds, Currencies, Commodities. 
+   TEMPORAL RULE: If markets were closed yesterday or are closed today, DO NOT say "yesterday". Use "at the last close" or "on [Friday/Day]".
+3. GEOPOLITICS & MACRO (150 words): Key events.
 
 PROHIBITED:
-- Do NOT mention Cryptocurrencies, Bitcoin, ETF flows, or Fear & Greed in this section. Keep all crypto data for the second part of the podcast.
-- Do NOT speculate on market openings if it is the weekend. Just state the markets are closed and analyze the previous close.
-- No bullet points. No fluff.
-- Do NOT close the podcast yet.
+- Do NOT mention Cryptocurrencies, Bitcoin, ETF flows, or Fear & Greed.
+- Do NOT close the podcast.
 """
 
 AUDIO_CRYPTO_PROMPT_EN = """You are a digital assets expert analyst.
@@ -257,19 +237,18 @@ Write the audio script for the CRYPTO section of the podcast.
 LENGTH: 300-400 words.
 
 MANDATORY TRANSITION:
-- "Moving on to the digital assets space..."
-- "Let's pivot to the cryptocurrency markets..."
+"Let's pivot to the cryptocurrency markets..."
 
 STRUCTURE:
-1. BTC DEEP DIVE (100 words): Technical analysis and flows.
-2. ALTCOINS (150 words): Discuss Ethereum, Solana, and Binance Coin.
-3. SENTIMENT & FEAR/GREED (100 words): Market correlation and index analysis.
+1. BTC DEEP DIVE (150 words).
+2. ALTCOINS (150 words).
+3. SENTIMENT & FEAR/GREED (100 words).
 """
 
 AUDIO_CLOSE_PROMPT = """CHIUSURA OBBLIGATORIA:
 - Focus: outlook per domani e cosa monitorare.
-- NON terminare MAI con la frase "buon trading" o "buon trading a tutti".
-- Usa chiusure professionali come "Grazie per l'attenzione e a domani", "Un saluto da Prais Alért", "Al prossimo aggiornamento".
+- Saluto finale professionale: "Grazie per l'attenzione e a domani", "Un saluto da Prais Alért", etc.
+- NON terminare MAI con "buon trading".
 """
 
 
