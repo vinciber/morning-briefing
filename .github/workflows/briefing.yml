@@ -3,7 +3,7 @@ name: Morning Briefing
 
 on:
   schedule:
-    - cron: '30 5 * * *'    # Tutti i giorni ore 6:30 CET (5:30 UTC)
+    - cron: '48 6 * * *'    # Forzato per girare adessp
   workflow_dispatch:          # Esecuzione manuale da GitHub UI
 
 permissions:
