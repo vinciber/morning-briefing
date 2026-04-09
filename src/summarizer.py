@@ -591,18 +591,36 @@ def run():
             return json.loads(resp.choices[0].message.content)
             
         def clean_script(script_obj, key):
-            """Estrae il testo pulito dallo script, gestendo se l'LLM ha restituito un dict invece di una stringa."""
+            """Estrae il testo pulito dallo script, gestendo se l'LLM ha restituito un dict invece di una stringa o una lista."""
+            if isinstance(script_obj, list) and len(script_obj) > 0:
+                script_obj = script_obj[0]
+            
+            if not isinstance(script_obj, dict):
+                return ""
+                
             content = script_obj.get(key, "")
             if isinstance(content, dict):
                 # Se è un dict, unisci i valori delle chiavi in ordine
                 return "\n\n".join(str(v) for v in content.values() if v)
             return str(content)
 
+        def _safe_get(obj, key, default=""):
+            """Safely get a value from a dict OR a single-item list containing a dict."""
+            if isinstance(obj, list) and len(obj) > 0:
+                obj = obj[0]
+            if isinstance(obj, dict):
+                return obj.get(key, default)
+            return default
+
         # 1. ITALIANO
         logger.info('🎙️ Generazione Audio IT (3 segmenti)...')
         
+        # Access sentiment safely
+        sentiment_obj = briefing.get('sentiment', {})
+        sentiment_label = _safe_get(sentiment_obj, 'label', 'neutral')
+        
         # Part A: Finance
-        it_finance_user = f"DATA: {today_str}\nSENTIMENT: {briefing['sentiment']['label']}\nMERCATI:\n{market_context}\nNOTIZIE PRINCIPALI:\n" + \
+        it_finance_user = f"DATA: {today_str}\nSENTIMENT: {sentiment_label}\nMERCATI:\n{market_context}\nNOTIZIE PRINCIPALI:\n" + \
                          "\n".join(f"- {a['title']}" for a in news_it[:10])
         it_finance_user += holiday_warning_it
         it_finance = get_audio_part(AUDIO_FINANCE_PROMPT, it_finance_user, 'audio_script_it')
@@ -625,7 +643,7 @@ def run():
         logger.info('🎙️ Generazione Audio EN (3 segmenti)...')
         
         # Part A: Finance
-        en_finance_user = f"DATE: {today_str}\nSENTIMENT: {briefing['sentiment']['label']}\nMARKETS:\n{market_context}\nTOP NEWS:\n" + \
+        en_finance_user = f"DATE: {today_str}\nSENTIMENT: {sentiment_label}\nMARKETS:\n{market_context}\nTOP NEWS:\n" + \
                          "\n".join(f"- {a['title']}" for a in news_it[:10])
         en_finance_user += holiday_warning_en
         en_finance = get_audio_part(AUDIO_FINANCE_PROMPT_EN, en_finance_user, 'audio_script_en')
