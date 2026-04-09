@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Briefing — 2026-04-09</title>
+<style>
+  :root {
+    --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;
+    --border:#30363d;--text:#e6edf3;--text-muted:#7d8590;
+    --green:#3fb950;--red:#f85149;--yellow:#d29922;
+    --blue:#58a6ff;--orange:#e3861a;
+    --risk-on-bg:#0d2b1a;--risk-off-bg:#2b0d0d;--neutral-bg:#1a1a2b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;line-height:1.6;}
+
+  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+  .header-left{display:flex;align-items:center;gap:16px;}
+  .header-title{font-size:18px;font-weight:700;letter-spacing:-0.3px;}
+  .header-date{color:var(--text-muted);font-size:13px;}
+  .lang-switch{display:flex;gap:8px;}
+  .lang-btn{padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);text-decoration:none;font-size:12px;}
+  .lang-btn.active{border-color:var(--blue);color:var(--blue);}
+
+  .ticker-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 24px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
+  .ticker-bar::-webkit-scrollbar{display:none;}
+  .ticker-items{display:inline-flex;gap:24px;}
+  .ticker-item{display:inline-flex;flex-direction:column;gap:1px;}
+  .ticker-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;}
+  .ticker-value{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;}
+  .ticker-change{font-size:11px;}
+  .up{color:var(--green);}.down{color:var(--red);}.neu{color:var(--text-muted);}
+
+  .container{max-width:900px;margin:0 auto;padding:24px 16px;}
+
+  .sentiment-card{border-radius:10px;border:1px solid var(--border);padding:20px 24px;margin-bottom:24px;}
+  .sentiment-card.risk_off{background:var(--risk-off-bg);border-color:#f8514940;}
+  .sentiment-card.risk_on{background:var(--risk-on-bg);border-color:#3fb95040;}
+  .sentiment-card.neutral{background:var(--neutral-bg);border-color:#58a6ff40;}
+  .sentiment-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .sentiment-badge{padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+  .risk_off .sentiment-badge{background:var(--red);color:white;}
+  .risk_on .sentiment-badge{background:var(--green);color:#0d1117;}
+  .neutral .sentiment-badge{background:var(--blue);color:#0d1117;}
+  .sentiment-score{color:var(--text-muted);font-size:12px;}
+  .sentiment-reason{color:var(--text);font-size:14px;line-height:1.7;}
+  .market-impact-summary{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);color:var(--text-muted);font-size:13px;line-height:1.7;}
+
+  .audio-section{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .audio-icon{font-size:24px;}
+  .audio-info{flex:1;}
+  .audio-title{font-size:13px;font-weight:600;margin-bottom:2px;}
+  .audio-sub{font-size:11px;color:var(--text-muted);}
+  audio{flex:2;height:36px;min-width:200px;}
+
+  .section{margin-bottom:32px;}
+  .section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .section-icon{font-size:18px;}
+  .section-title{font-size:16px;font-weight:700;}
+  .section-count{margin-left:auto;font-size:11px;color:var(--text-muted);background:var(--surface2);padding:2px 8px;border-radius:10px;}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px;margin-bottom:10px;transition:border-color 0.15s;}
+  .card:hover{border-color:#58a6ff60;}
+  .card-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+  .card-category{font-size:10px;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;}
+  .cat-mercati{background:#1a2b4a;color:var(--blue);}
+  .cat-geopolitica{background:#2b1a1a;color:var(--red);}
+  .cat-macro_economia{background:#1a2b1a;color:var(--green);}
+  .cat-energia{background:#2b2210;color:var(--orange);}
+  .impact-badge{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;}
+  .impact-bearish{background:#2b1a1a;color:var(--red);}
+  .impact-bullish{background:#1a2b1a;color:var(--green);}
+  .impact-mixed{background:#2b2210;color:var(--yellow);}
+  .tier-badge{font-size:10px;color:var(--text-muted);margin-left:auto;}
+  .tier-1{color:#d29922;}.tier-2{color:#7d8590;}
+  .stars{font-size:11px;color:var(--yellow);}
+  .card-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:8px;}
+  .card-summary{font-size:13px;color:#b1bac4;line-height:1.7;margin-bottom:10px;}
+  .card-assets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+  .asset-tag{font-size:11px;background:var(--surface2);border:1px solid var(--border);padding:2px 8px;border-radius:4px;color:var(--text-muted);font-family:monospace;}
+  .card-footer{display:flex;align-items:center;justify-content:space-between;}
+  .source-link{font-size:12px;color:var(--blue);text-decoration:none;}
+  .source-link:hover{text-decoration:underline;}
+
+  .footer{text-align:center;padding:32px 16px;color:var(--text-muted);font-size:12px;border-top:1px solid var(--border);margin-top:40px;}
+  .footer a{color:var(--blue);text-decoration:none;}
+
+  @media(max-width:600px){
+    .header{padding:12px 16px;}
+    .container{padding:16px 12px;}
+    audio{width:100%;}
+  }
+  .macro-calendar{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:24px;}
+  .macro-title{font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;}
+  .macro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}
+  .macro-item{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+  .macro-item.upcoming{border-color:#d2992240;opacity:0.8;}
+  .macro-item.released{border-color:#3fb95040;}
+  .macro-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px;}
+  .macro-value{font-size:16px;font-weight:700;color:var(--text);}
+  .macro-value.upcoming-val{color:var(--text-muted);}
+  .macro-prev{font-size:11px;color:var(--text-muted);}
+  .macro-date{font-size:10px;color:var(--text-muted);margin-top:4px;}
+  .stars{font-size:11px;color:var(--yellow);letter-spacing:1px;}
+  
+  .tier-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--text-muted);}
+  .tier-legend span{display:flex;align-items:center;gap:4px;}
+
+  .macro-region-title{font-size:11px;font-weight:700;color:var(--text-muted);
+    text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px;
+    padding-bottom:6px;border-bottom:1px solid var(--border);}
+  .macro-item.eu{border-color:#3b82f640;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <span class="header-title">📰 Morning Briefing</span>
+    <span class="header-date">2026-04-09 · Finance & Geopolitics</span>
+  </div>
+  <div class="lang-switch">
+    <a href="2026-04-09.html" class="lang-btn active">🇮🇹 IT</a>
+    <a href="en/2026-04-09.html" class="lang-btn ">🇬🇧 EN</a>
+  </div>
+</header>
+
+<div class="ticker-bar">
+  <div class="ticker-items">
+    
+    <div class="ticker-item">
+      <span class="ticker-label">EUR/USD</span>
+      <span class="ticker-value down">1.16</span>
+      <span class="ticker-change down">-0.06%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">DXY</span>
+      <span class="ticker-value down">99.01</span>
+      <span class="ticker-change down">-0.02%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">S&P 500</span>
+      <span class="ticker-value up">6782.81</span>
+      <span class="ticker-change up">+2.51%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">STOXX 600</span>
+      <span class="ticker-value down">60.55</span>
+      <span class="ticker-change down">-0.75%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">NIKKEI</span>
+      <span class="ticker-value down">55,895</span>
+      <span class="ticker-change down">-0.73%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">SHANGHAI</span>
+      <span class="ticker-value up">3995.00</span>
+      <span class="ticker-change up">+2.69%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">VIX</span>
+      <span class="ticker-value up">21.59</span>
+      <span class="ticker-change up">+2.61%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">TLT</span>
+      <span class="ticker-value up">86.92</span>
+      <span class="ticker-change up">+0.32%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">GOLD</span>
+      <span class="ticker-value up">$4764.80/oz</span>
+      <span class="ticker-change up">+0.32%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">BTC</span>
+      <span class="ticker-value up">$71,205</span>
+      <span class="ticker-change up">+0.11%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">BRENT</span>
+      <span class="ticker-value up">$98.60</span>
+      <span class="ticker-change up">+4.06%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">US 10Y</span>
+      <span class="ticker-value down">4.29%</span>
+      <span class="ticker-change down">-1.20%</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">BTC ETF</span>
+      <span class="ticker-value down">$-93.9M</span>
+      <span class="ticker-change down">📈 Improving</span>
+    </div>
+    
+    <div class="ticker-item">
+      <span class="ticker-label">M2 GLOBAL</span>
+      <span class="ticker-value up">$22.7T</span>
+      <span class="ticker-change up">expanding 📈 | US YoY: +4.9% YoY</span>
+    </div>
+    
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="sentiment-card risk_off">
+    <div class="sentiment-header">
+      <span class="sentiment-badge">
+        🔴 RISK OFF
+        
+      </span>
+      
+      <span class="sentiment-score">Intensità: 6/10</span>
+      
+    </div>
+    <div class="sentiment-reason">Il sentiment di mercato è risk-off a causa della situazione geopolitica tesa tra Iran e Israele, con un impatto negativo sui mercati azionari e un aumento della domanda di asset rifugio. Il VIX è salito al 21.59, mentre l'S&P 500 ha guadagnato il 2.51%. L'aumento del prezzo del petrolio (BRENT +4.06%) e la debolezza del DXY (-0.02%) contribuiscono a questo sentiment.</div>
+    
+    <div class="market-impact-summary">
+      📊 La situazione geopolitica continua a influenzare i mercati. L'S&P 500 ha guadagnato il 2.51%, mentre il VIX è salito al 21.59. Il prezzo del petrolio è aumentato del 4.06% (BRENT a $98.60). Il DXY è sceso dello 0.02% a 99.01. L'oro è salito dello 0.32% a $4764.80. I tassi dei bond USA a 10 anni sono scesi dell'1.20% al 4.29%.
+    </div>
+    
+  </div>
+  
+  
+  <div class="macro-calendar">
+    <div class="macro-title">📊 DATI MACRO E CALENDARIO</div>
+    <div class="macro-region-title">🇺🇸 STATI UNITI — FED & MACRO</div>
+    <div class="macro-grid">
+      
+      <div class="macro-item released">
+        <div class="macro-label">CPI YoY USA</div>
+        
+          <div class="macro-value">2.7%</div>
+          
+            <div class="macro-prev">prec. 2.8%</div>
+          
+          <div class="macro-date">2026-02-01</div>
+          
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 2026-04-10
+            </div>
+          
+        
+      </div>
+      
+      <div class="macro-item released">
+        <div class="macro-label">Core CPI YoY USA</div>
+        
+          <div class="macro-value">2.7%</div>
+          
+            <div class="macro-prev">prec. 2.9%</div>
+          
+          <div class="macro-date">2026-02-01</div>
+          
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 2026-04-10
+            </div>
+          
+        
+      </div>
+      
+      <div class="macro-item released">
+        <div class="macro-label">Non-Farm Payrolls</div>
+        
+          <div class="macro-value">+178K</div>
+          
+            <div class="macro-prev">prec. -133K</div>
+          
+          <div class="macro-date">2026-03-01</div>
+          
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 2026-04-03
+            </div>
+          
+        
+      </div>
+      
+      <div class="macro-item released">
+        <div class="macro-label">Tasso Disoccupazione USA</div>
+        
+          <div class="macro-value">4.3%</div>
+          
+            <div class="macro-prev">prec. 4.4%</div>
+          
+          <div class="macro-date">2026-03-01</div>
+          
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 2026-04-03
+            </div>
+          
+        
+      </div>
+      
+      <div class="macro-item released">
+        <div class="macro-label">PCE Core YoY</div>
+        
+          <div class="macro-value">3.1%</div>
+          
+            <div class="macro-prev">prec. 3.0%</div>
+          
+          <div class="macro-date">2026-01-01</div>
+          
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 2026-03-28
+            </div>
+          
+        
+      </div>
+      
+      <div class="macro-item released">
+        <div class="macro-label">Tasso Fed Funds</div>
+        
+          <div class="macro-value">3.50% - 3.75%</div>
+          
+          <div class="macro-date">2026-03-18</div>
+          
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 2026-05-07
+            </div>
+          
+        
+      </div>
+      
+      <div class="macro-item upcoming">
+        <div class="macro-label">PIL QoQ USA</div>
+        
+          <div class="macro-value upcoming-val">—</div>
+          <div class="macro-date">📅 2026-04-29</div>
+        
+      </div>
+      
+    </div>
+    <div style="margin-top: 10px; font-size: 10px; color: var(--text-muted); text-align: right;">
+      Data provided by <a href="https://fred.stlouisfed.org/" target="_blank" style="color: var(--blue); text-decoration: none;">St. Louis Fed (FRED)</a>
+    </div>
+
+    
+    <div class="macro-region-title">🇪🇺 Europa — BCE & Macro</div>
+    <div class="macro-grid">
+      
+      <div class="macro-item eu released">
+        <div class="macro-label">PIL QoQ Eurozona</div>
+        
+          <div class="macro-value">0.2%</div>
+          
+            <div class="macro-prev">prec. 0.3%</div>
+          
+          <div class="macro-date">2025-Q4</div>
+          
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 2026-04-30
+            </div>
+          
+        
+      </div>
+      
+      <div class="macro-item eu released">
+        <div class="macro-label">Tasso BCE (Depositi)</div>
+        
+          <div class="macro-value">2.00%</div>
+          
+          <div class="macro-date">2026-04-02</div>
+          
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 2026-04-30
+            </div>
+          
+        
+      </div>
+      
+      <div class="macro-item eu released">
+        <div class="macro-label">Tasso Depositi BCE</div>
+        
+          <div class="macro-value">2.00%</div>
+          
+          <div class="macro-date"></div>
+          
+        
+      </div>
+      
+      <div class="macro-item eu upcoming">
+        <div class="macro-label">CPI Eurozona</div>
+        
+          <div class="macro-value upcoming-val">—</div>
+          <div class="macro-date">📅 2026-04-02</div>
+        
+      </div>
+      
+      <div class="macro-item eu upcoming">
+        <div class="macro-label">Disoccupazione EU</div>
+        
+          <div class="macro-value upcoming-val">—</div>
+          <div class="macro-date">📅 2026-04-01</div>
+        
+      </div>
+      
+      <div class="macro-item eu released">
+        <div class="macro-label">Tasso BCE (Refi/Mutui)</div>
+        
+          <div class="macro-value">2.15%</div>
+          
+          <div class="macro-date"></div>
+          
+        
+      </div>
+      
+    </div>
+    
+  </div>
+  
+
+  
+  <div class="macro-calendar">
+    <div class="macro-title">₿ MERCATO CRIPTO</div>
+    
+    <!-- Row 1: Fear & Greed + Prices (BTC, ETH, SOL, BNB) -->
+    <div class="macro-grid">
+      
+      <div class="macro-item fear-greed" style="border-color: #f59e0b40; position: relative;">
+        <div class="macro-label">Fear & Greed</div>
+        <div class="macro-value">14</div>
+        <div class="macro-date">Extreme Fear</div>
+      </div>
+      
+      
+      
+      <div class="macro-item">
+        <div class="macro-label">BTC</div>
+        <div class="macro-value">$71,205</div>
+        <div class="macro-date down">-0.58%</div>
+      </div>
+      
+      
+      
+      <div class="macro-item">
+        <div class="macro-label">ETH</div>
+        <div class="macro-value">$2,186</div>
+        <div class="macro-date down">-2.75%</div>
+      </div>
+      
+      
+      
+      <div class="macro-item">
+        <div class="macro-label">SOL</div>
+        <div class="macro-value">$82.31</div>
+        <div class="macro-date down">-2.85%</div>
+      </div>
+      
+      
+      
+      <div class="macro-item">
+        <div class="macro-label">BNB</div>
+        <div class="macro-value">$602.58</div>
+        <div class="macro-date down">-1.62%</div>
+      </div>
+      
+      
+    </div>
+
+    <!-- Row 2: ETF Flow + ETF Stats -->
+    <div class="macro-grid" style="margin-top: 15px;">
+      
+      
+      <div class="macro-item etf-flow" style="border-color: #58a6ff40;">
+        <div class="macro-label">BTC ETF Flow</div>
+        <div class="macro-value down">$-93.9M</div>
+        <div class="macro-date">📈 Improving</div>
+      </div>
+      
+
+      
+      
+      <div class="macro-item" style="grid-column: span 2; display: flex; justify-content: space-around; align-items: center; border-color: #58a6ff30;">
+        <div style="text-align: center;">
+          <div class="macro-label">BTC ETF Holdings</div>
+          <div class="macro-value" style="font-size: 14px;">1,291,798 BTC</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="macro-label">Total AUM</div>
+          <div class="macro-value" style="font-size: 14px;">$91.628576036B</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="macro-label">% of 21M</div>
+          <div class="macro-value" style="font-size: 14px;">6.151%</div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <div style="margin-top: 16px; font-size: 10px; color: var(--text-muted); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+      <div>
+        Powered by <a href="https://www.coingecko.com/" target="_blank" style="text-decoration: none; font-weight: 600;"><span style="color: #22c55e;">CoinGecko</span></a>
+      </div>
+      <div style="font-size: 9px; opacity: 0.8; display: flex; gap: 8px; justify-content: center;">
+        <span>Fear & Greed by <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" style="color: #f59e0b; text-decoration: none; font-weight: 600;">Alternative.me</a></span>
+        <span style="opacity: 0.5;">|</span>
+        <span>ETF Data by <a href="https://farside.co.uk/btc/" target="_blank" style="color: #58a6ff; text-decoration: none; font-weight: 600;">Farside Investors</a></span>
+      </div>
+    </div>
+  </div>
+  
+
+
+  
+  <div class="audio-section">
+    <span class="audio-icon">🎙️</span>
+    <div class="audio-info">
+      <div class="audio-title">Briefing Audio</div>
+      <div class="audio-sub">
+        Ascolta il briefing completo
+      </div>
+    </div>
+    <audio controls preload="none">
+      <source src="audio/briefing_20260409.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+  
+
+  
+  
+  
+
+  <div class="tier-legend">
+    <strong style="color:var(--text);margin-right:4px;">Fonti:</strong>
+    <span><strong style="color:#d29922">T1</strong> Banca Centrale / Istituzione</span>
+    <span><strong style="color:#7d8590">T2</strong> Media finanziaria primaria</span>
+    <span><strong style="color:#555">T3</strong> Digital / Blog</span>
+    <span><strong style="color:#444">T4</strong> Social / Forum</span>
+  </div>
+
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🌍</span>
+      <span class="section-title">
+        Geopolitica
+      </span>
+      <span class="section-count">6 notizie</span>
+    </div>
+
+    
+    <div class="card" id="article-0-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          
+          
+          
+            GEOPOLITICA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        How NATO’s Air Defense Future Is Unfolding
+      </div>
+      <div class="card-summary">
+        In 2024, Shaan Shaikh wrote, “Three Visions for NATO Air and Missile Defense,” where he laid out three potential scenarios NATO could take in the next few years to further its air and missile defense capabilities. Two years later, amidst alliance tensions and ongoing conflicts in Ukraine and the Middle East, we asked Shaan to revisit his arguments. Image: Sgt. Mariah Gonzalez via DVIDSIn your 2024 article, you laid out three potential directions NATO could take in the next few years for further developing its air and missile defense capabilities. Two years later, amidst alliance tensions and ongoing conflicts in The post How NATO’s Air Defense Future Is Unfolding appeared first on War on the Rocks .
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://warontherocks.com/2026/04/how-natos-air-defense-future-is-unfolding/" target="_blank" class="source-link">
+          War on the Rocks →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-1-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          
+          
+          
+            GEOPOLITICA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★☆☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        What is Strategic Rivalry? Why Should We Care?
+      </div>
+      <div class="card-summary">
+        The states most likely to draw America into its next major crisis or war are not unknowns. They are the usual suspects: The same handful of states that have threatened the United States repeatedly across decades. Interstate rivals have caused roughly 80 percent of history’s wars and the odds of any given rivalry ending peacefully are little better than a coin toss. Yet America’s key strategy documents since the 2017 National Security Strategy have used phrases like great power competition, interstate strategic competition, and strategic competition without acknowledging the essential difference between a competition and a rivalry. Nor does the The post What is Strategic Rivalry? Why Should We Care? appeared first on War on the Rocks .
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://warontherocks.com/2026/04/what-is-strategic-rivalry-why-should-we-care/" target="_blank" class="source-link">
+          War on the Rocks →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-2-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          
+          
+          
+            GEOPOLITICA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★☆☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        Iran’s Asymmetric Counterair Campaign: Attacking the U.S. Air Force’s Nests and Eggs
+      </div>
+      <div class="card-summary">
+        On March 27, Iranian drones and missiles struck Prince Sultan Air Base in Saudi Arabia, destroying an E-3 Sentry, an airborne command center for U.S. operations in the region, and damaging multiple KC-135 tankers. It was not the first strike. Earlier in the month, an Iranian attack had already damaged five KC-135s at the same base. In the history of these aircraft, no enemy had ever achieved such a hit until Iran did both — within two weeks.These strikes are the latest in a broader pattern, part of a deliberate counterair campaign waged through asymmetric means in the U.S.-Israeli war with Iran. Prior to the The post Iran’s Asymmetric Counterair Campaign: Attacking the U.S. Air Force’s Nests and Eggs appeared first on War on the Rocks .
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://warontherocks.com/2026/04/irans-asymmetric-counterair-campaign-attacking-the-u-s-air-forces-nests-and-eggs/" target="_blank" class="source-link">
+          War on the Rocks →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-3-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          
+          
+          
+            GEOPOLITICA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★☆☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        The Campaign Ends at the Breach: Lessons from Ukraine on Why Armies Fail
+      </div>
+      <div class="card-summary">
+        Somewhere behind the Novodarivka breach point in June 2023, Ukrainian armored formations sat staged and ready. The ammunition was there. The fuel was there. The original concept of operations called for 12 brigades to push through roughly 30 kilometers of frontage, isolate Tokmak within days, and drive south before Russian forces could consolidate. They never moved. The engineers could not open the lane. Without the lane, none of the rest of it mattered.Against prepared defenses, breaching and gap-crossing capacity can decide whether a land force ever gets to test the rest of its campaign design. Much of the serious work The post The Campaign Ends at the Breach: Lessons from Ukraine on Why Armies Fail appeared first on War on the Rocks .
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://warontherocks.com/2026/04/the-campaign-ends-at-the-breach-lessons-from-ukraine-on-why-armies-fail/" target="_blank" class="source-link">
+          War on the Rocks →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-4-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          
+          
+          
+            GEOPOLITICA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★☆☆☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        China's Rokid to bring OpenClaw to AI glasses
+      </div>
+      <div class="card-summary">
+        China's Rokid to bring OpenClaw to AI glasses
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://asia.nikkei.com/business/technology/artificial-intelligence/china-s-rokid-to-bring-openclaw-to-ai-glasses" target="_blank" class="source-link">
+          Nikkei Asia →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-5-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          
+          
+          
+            GEOPOLITICA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★☆☆☆</span>
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        China's CSSC sets sail on designing own cruise ships
+      </div>
+      <div class="card-summary">
+        China's CSSC sets sail on designing own cruise ships
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://asia.nikkei.com/business/transportation/china-s-cssc-sets-sail-on-designing-own-cruise-ships" target="_blank" class="source-link">
+          Nikkei Asia →
+        </a>
+      </div>
+    </div>
+    
+
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🏛</span>
+      <span class="section-title">
+        Macro_economia
+      </span>
+      <span class="section-count">6 notizie</span>
+    </div>
+
+    
+    <div class="card" id="article-0-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          
+          
+          
+            MACROECONOMIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        Christine Lagarde: Navigare gli shock energetici
+      </div>
+      <div class="card-summary">
+        La presidente della BCE, Christine Lagarde, ha parlato degli shock energetici e delle risposte politiche. Ha sottolineato l'importanza di navigare questi shock e di trovare soluzioni adeguate.
+      </div>
+
+      
+      <div class="card-assets">
+        
+        <span class="asset-tag">Euro</span>
+        
+        <span class="asset-tag">Tassi BCE</span>
+        
+      </div>
+      
+
+      <div class="card-footer">
+        <a href="https://www.bis.org/review/r260407d.htm" target="_blank" class="source-link">
+          BIS →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-1-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          
+          
+          
+            MACROECONOMIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        La Fed discute sulla risposta all'aumento dell'energia
+      </div>
+      <div class="card-summary">
+        La Fed ha discusso sulla risposta all'aumento dell'energia causato dalla guerra tra Iran e Israele. I verbali della riunione di marzo mostrano che i policymaker hanno dibattuto se concentrarsi sull'inflazione o sui rischi del mercato del lavoro.
+      </div>
+
+      
+      <div class="card-assets">
+        
+        <span class="asset-tag">S&P 500</span>
+        
+        <span class="asset-tag">Petrolio</span>
+        
+      </div>
+      
+
+      <div class="card-footer">
+        <a href="https://www.ft.com/content/8e80cb53-eef8-4a59-a5c7-34da5c027381" target="_blank" class="source-link">
+          Financial Times (Global Economy) →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-2-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          
+          
+          
+            MACROECONOMIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        Philip R Lane: AI and the euro area economy
+      </div>
+      <div class="card-summary">
+        Keynote speech by Mr Philip R Lane, Member of the Executive Board of the European Central Bank, at the Third International Conference on the Climate-Macro-Finance Interface (3CMFI) "Emerging macroeconomic, financial, and environmental policy challenges in an era of policrisis and rising uncertainties", organised by the Rimini Centre for Economic Analysis-Europe (RCEA-Europe), the Leibniz Institute for Financial Research SAFE of the Goethe University Frankfurt, the Deutsche Bundesbank, and the European Central Bank, Frankfurt am Main, 23 March 2026.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.bis.org/review/r260407f.htm" target="_blank" class="source-link">
+          BIS →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-3-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          
+          
+          
+            MACROECONOMIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        Piero Cipollone: Building the rails for Europe's tokenised financial markets
+      </div>
+      <div class="card-summary">
+        Keynote speech by Mr Piero Cipollone, Member of the Executive Board of the European Central Bank, at an event on "Building Europe's integrated digital asset ecosystem: from vision to implementation", hosted by the House of the Euro, Brussels, 23 March 2026.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.bis.org/review/r260407g.htm" target="_blank" class="source-link">
+          BIS →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-4-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          
+          
+          
+            MACROECONOMIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        EU warns it will still face ‘stagflationary shock’
+      </div>
+      <div class="card-summary">
+        European Commission preparing to cut growth forecasts despite two-week Iran war ceasefire
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.ft.com/content/9b3a4ada-e715-4972-ac46-af94c12425ba" target="_blank" class="source-link">
+          Financial Times (Global Economy) →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-5-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          
+          
+          
+            MACROECONOMIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        Iran war has exposed the weakness of the dollar
+      </div>
+      <div class="card-summary">
+        As Opec members have long understood, it is not a good idea to give users of your product an incentive to find alternatives
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.ft.com/content/ace89a7d-39f1-4901-ab32-fdb8ab2b86aa" target="_blank" class="source-link">
+          Financial Times (Global Economy) →
+        </a>
+      </div>
+    </div>
+    
+
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">⚡</span>
+      <span class="section-title">
+        Energia
+      </span>
+      <span class="section-count">5 notizie</span>
+    </div>
+
+    
+    <div class="card" id="article-0-energia">
+      <div class="card-meta">
+        <span class="card-category cat-energia">
+          
+          
+          
+            ENERGIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Sanctioned Russian LNG Finds Buyers in Asia at Deep Discounts
+      </div>
+      <div class="card-summary">
+        Russia has offered several cargoes of liquefied natural gas from Novatek’s Arctic LNG 2 facility to South Asian buyers, Bloomberg has reported, noting the facility is under U.S., EU, and UK sanctions. Citing unnamed sources, the publication wrote today that the LNG was offered at discounts of up to 40% to spot market prices, which have surged recently because of the LNG supply disruption resulting from the U.S. and Israeli war against Iran. Also, per the Bloomberg sources, the cargoes were offered via intermediary companies from China and…
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://oilprice.com/Latest-Energy-News/World-News/Sanctioned-Russian-LNG-Finds-Buyers-in-Asia-at-Deep-Discounts.html" target="_blank" class="source-link">
+          OilPrice →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-1-energia">
+      <div class="card-meta">
+        <span class="card-category cat-energia">
+          
+          
+          
+            ENERGIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Petrostates Without Oil Export Routes Take the Hardest Hit
+      </div>
+      <div class="card-summary">
+        With fuel rationing beginning in some Asian countries and analysts warning Europe is next, talk has started about windfall profit taxes on Big Oil. The supermajors are the first target for additional taxes when oil prices surge, but they are not the only ones benefiting from such surges. This time around, the biggest winners are not just oil producers but oil producers with alternative export routes. The war that the United States and Israel started against Iran at the end of February has cost the Middle East’s petrostates some 11 million…
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://oilprice.com/Energy/Crude-Oil/Petrostates-Without-Oil-Export-Routes-Take-the-Hardest-Hit.html" target="_blank" class="source-link">
+          OilPrice →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-2-energia">
+      <div class="card-meta">
+        <span class="card-category cat-energia">
+          
+          
+          
+            ENERGIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        How China Positioned Itself to Win the Global Energy Crisis
+      </div>
+      <div class="card-summary">
+        No country was more prepared for the war in Iran than China. As the rest of Asia reels from oil and gas shortages due to the Iran War, Beijing is sitting pretty thanks to its vast stores of crude oil and its enormous clean energy infrastructure. China has been building up its domestic clean energy sector faster than any other country on Earth at the same time that it has been stockpiling massive amounts of surplus oil and gas, all in anticipation of a major geopolitical disruption just like the one we’re seeing now. As a result, China is…
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://oilprice.com/Energy/Energy-General/How-China-Positioned-Itself-to-Win-the-Global-Energy-Crisis.html" target="_blank" class="source-link">
+          OilPrice →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-3-energia">
+      <div class="card-meta">
+        <span class="card-category cat-energia">
+          
+          
+          
+            ENERGIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Exxon Mobil segnala un aumento degli utili
+      </div>
+      <div class="card-summary">
+        Exxon Mobil ha segnalato che l'aumento del prezzo del petrolio potrebbe aumentare i suoi utili del primo trimestre di fino a $2.9 miliardi.
+      </div>
+
+      
+      <div class="card-assets">
+        
+        <span class="asset-tag">Petrolio</span>
+        
+        <span class="asset-tag">Exxon Mobil</span>
+        
+      </div>
+      
+
+      <div class="card-footer">
+        <a href="https://oilprice.com/Latest-Energy-News/World-News/Exxon-Mobil-Signals-29B-Q1-Earnings-Bump-On-Higher-Oil-Prices.html" target="_blank" class="source-link">
+          OilPrice →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-4-energia">
+      <div class="card-meta">
+        <span class="card-category cat-energia">
+          
+          
+          
+            ENERGIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Goldman Cuts Oil Price Forecasts After Ceasefire Announcement
+      </div>
+      <div class="card-summary">
+        Goldman Sachs updated its price expectations for crude oil late on Wednesday following the news of a ceasefire deal between Iran and the United States, just hours before reports started coming in suggesting Iran may have closed the Strait of Hormuz again. According to Goldman, the ceasefire would push Brent crude to an average of $90 per barrel in the current quarter, with West Texas Intermediate to $87 per barrel, Reuters reported. WTI is currently trading at a premium to Brent crude, but the gap is closing. At the time of writing, Brent crude…
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://oilprice.com/Latest-Energy-News/World-News/Goldman-Cuts-Oil-Price-Forecasts-After-Ceasefire-Announcement.html" target="_blank" class="source-link">
+          OilPrice →
+        </a>
+      </div>
+    </div>
+    
+
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">₿</span>
+      <span class="section-title">
+        Crypto
+      </span>
+      <span class="section-count">5 notizie</span>
+    </div>
+
+    
+    <div class="card" id="article-0-crypto">
+      <div class="card-meta">
+        <span class="card-category cat-crypto">
+          
+          
+          
+            CRIPTO
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Fed minutes crack door to further rate cuts amid Iran war
+      </div>
+      <div class="card-summary">
+        Some officials cautiously eyed a year-end rate cut, but others warned that upward adjustments might be needed if inflation remains above target levels.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://cointelegraph.com/news/many-officials-still-see-rate-cuts-coming-in-2026-despite-war-risks-fed-minutes?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank" class="source-link">
+          Cointelegraph →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-1-crypto">
+      <div class="card-meta">
+        <span class="card-category cat-crypto">
+          
+          
+          
+            CRIPTO
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★★</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Iran weighing crypto tolls for ships using Strait of Hormuz: Report
+      </div>
+      <div class="card-summary">
+        Empty tankers will reportedly be permitted to pass through the waterway under the US-Iran deal, but certain ships will need to pay a tariff of $1 per barrel of oil in Bitcoin.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://cointelegraph.com/news/iran-crypto-ships-strait-hormuz?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank" class="source-link">
+          Cointelegraph →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-2-crypto">
+      <div class="card-meta">
+        <span class="card-category cat-crypto">
+          
+          
+          
+            CRIPTO
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★☆☆</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Bitcoin fades three-week highs as BTC price shrugs off Iran war ceasefire
+      </div>
+      <div class="card-summary">
+        Bitcoin briefly reclaimed $72,000 on ceasefire news, but fading momentum, resistance and macro risks leave traders questioning the strength of the breakout.
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://cointelegraph.com/news/bitcoin-fades-three-week-highs-btc-price-shrugs-off-iran-war-ceasefire?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank" class="source-link">
+          Cointelegraph →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-3-crypto">
+      <div class="card-meta">
+        <span class="card-category cat-crypto">
+          
+          
+          
+            CRIPTO
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★☆☆</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Iran's crypto tanker tolls are the latest step in its sanctions‑busting trade network
+      </div>
+      <div class="card-summary">
+        Iran's crypto tanker tolls are the latest step in its sanctions‑busting trade network
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://www.coindesk.com/policy/2026/04/09/crypto-payments-to-pass-strait-of-hormuz-is-the-next-logical-step-for-iran-s-sanctions-skirting-trade-network" target="_blank" class="source-link">
+          CoinDesk →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-4-crypto">
+      <div class="card-meta">
+        <span class="card-category cat-crypto">
+          
+          
+          
+            CRIPTO
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★☆☆</span>
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Iran to Accept Bitcoin for Strait of Hormuz Transit as Ceasefire Takes Hold
+      </div>
+      <div class="card-summary">
+        Bitcoin Magazine Iran to Accept Bitcoin for Strait of Hormuz Transit as Ceasefire Takes Hold Iran plans to charge ships Bitcoin tolls to pass through the Strait of Hormuz, tying the cryptocurrency to a key global energy chokepoint. This post Iran to Accept Bitcoin for Strait of Hormuz Transit as Ceasefire Takes Hold first appeared on Bitcoin Magazine and is written by Micah Zimmerman .
+      </div>
+
+      
+
+      <div class="card-footer">
+        <a href="https://bitcoinmagazine.com/news/iran-to-accept-bitcoin-for-strait" target="_blank" class="source-link">
+          Bitcoin Magazine →
+        </a>
+      </div>
+    </div>
+    
+
+  </div>
+  
+  
+
+</div>
+
+<footer class="footer">
+  <p>Price Alert&reg; - Morning Briefing Agent - All right Reserved</p>
+  <div style="margin-top: 10px;">
+    <a href="feed.xml">RSS</a> ·
+    <a href="api/today.json">JSON</a> ·
+    <a href="index.html">Archivio</a>
+  </div>
+</footer>
+</body>
+</html>
