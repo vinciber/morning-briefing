@@ -94,14 +94,28 @@ def get_stooq(symbol):
     try:
         url = f'https://stooq.com/q/d/l/?s={symbol}&i=d'
         r = requests.get(url, timeout=15, headers={'User-Agent': 'Mozilla/5.0'})
+        
+        # Check if the response is actually a CSV or an API/Captcha requirement
+        if 'apikey' in r.text.lower() or 'captcha' in r.text.lower():
+            logger.warning(f'⚠️ Stooq {symbol}: API Key or Captcha required. Format: {r.text[:50]}...')
+            return 'N/A', 'N/A'
+            
         lines = r.text.strip().split('\n')
         if len(lines) < 3:
+            logger.warning(f'⚠️ Stooq {symbol}: Not enough data lines ({len(lines)})')
             return 'N/A', 'N/A'
+            
         last = lines[-1].split(',')
         prev = lines[-2].split(',')
+        
+        if len(last) < 5 or len(prev) < 5:
+            logger.warning(f'⚠️ Stooq {symbol}: Unexpected CSV format (cols: {len(last)})')
+            return 'N/A', 'N/A'
+            
         close = float(last[4])
         prev_close = float(prev[4])
         change_pct = ((close - prev_close) / prev_close) * 100
+        
         if close > 1000:
             val = f'{close:,.0f}'
         elif close > 10:
@@ -112,6 +126,33 @@ def get_stooq(symbol):
     except Exception as e:
         logger.error(f'Stooq {symbol}: {e}')
         return 'N/A', 'N/A'
+
+def get_btp_10y_yield():
+    """Recupera il rendimento del BTP 10Y. Prova Stooq, fallback su FRED."""
+    # 1. Prova Stooq (Daily)
+    val, chg = get_stooq('10YITY.B')
+    if val != 'N/A':
+        return val, chg
+        
+    # 2. Fallback su FRED (Monthly benchmark)
+    if FRED_API_KEY:
+        logger.info('🔄 Stooq BTP 10Y failed. Falling back to FRED (IRLTLT01ITM156N)...')
+        try:
+            # IRLTLT01ITM156N: Long-Term Government Bond Yields: 10-year for Italy
+            url = (f'https://api.stlouisfed.org/fred/series/observations'
+                   f'?series_id=IRLTLT01ITM156N&api_key={FRED_API_KEY}'
+                   f'&file_type=json&sort_order=desc&limit=1')
+            r = requests.get(url, timeout=15)
+            r.raise_for_status()
+            data = r.json().get('observations', [])
+            if data and data[0]['value'] != '.':
+                yield_val = float(data[0]['value'])
+                # Nota: chg è stimato o N/A per il fallback bench
+                return f'{yield_val:.2f}', 'N/A'
+        except Exception as e:
+            logger.error(f'FRED Italy 10Y Fallback failed: {e}')
+            
+    return 'N/A', 'N/A'
 
 def get_fred_series(series_id):
     if not FRED_API_KEY:
@@ -656,7 +697,7 @@ def run():
     results['hang_seng'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'Hang Seng: {val}')
 
-    val, chg = get_stooq('10YITY.B')
+    val, chg = get_btp_10y_yield()
     results['btp_10y'] = {'value': f'{_format_market_value(val)}%' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'BTP 10Y: {val}')
 
