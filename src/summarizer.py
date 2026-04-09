@@ -134,6 +134,8 @@ REGOLA LINGUAGGIO GEOPOLITICO:
 
 REGOLA TEMPORALE: Se i mercati sono chiusi oggi o lo sono stati ieri (weekend/festività), non usare MAI il termine "ieri" o "yesterday" per riferirti ai dati dell'ultima sessione. Usa invece termini come "alla chiusura passata", "nella seduta di venerdì" o simili.
 
+REGOLA DATI MACRO (EVITA ALLUCINAZIONI): Se nel contesto vedi un dato etichettato come "DATO STORICO/CONSOLIDATO" (es. rilasciato più di 15 giorni fa), NON usare MAI espressioni come "sono stati rilasciati di recente dati" o "oggi è uscito". Trattalo esclusivamente come contesto di sfondo o base di partenza.
+
 OUTPUT JSON — struttura esatta:
 {
   "date": "YYYY-MM-DD",
@@ -188,7 +190,9 @@ VIETATO ASSOLUTO:
 - NON chiudere il podcast. Fermati dopo l'analisi macro per lasciare spazio alla sezione crypto.
 - NON fare elenchi puntati.
 
-PRONUNCIA — REGOLE SPECIALI:
+PRONUNCIA E NUMERI — REGOLE SPECIALI:
+- ARROTONDAMENTO TASSATIVO: Arrotonda sempre i grandi numeri all'intero o decina più vicina: se il valore è 78205.50 o 3995.00 devi scrivere "78.200" o "3995". Elimina sempre i decimali vuoti come ",00" o ".00".
+- PERCENTUALI: Arrotonda al massimo a un decimale (es. 2.69% diventa 2.7%).
 - ORO: Traduci sempre "/oz" con "l'oncia".
 - USA → scrivere "Usa"
 - NATO → scrivere "Nato"
@@ -209,9 +213,10 @@ STRUTTURA E REGOLE:
 2. ALTCOINS (150 parole): Ethereum, Solana, e Binance Coin (BNB).
 3. SENTIMENT & FEAR/GREED (100 parole): Indice e correlazione macro.
 
-REGOLE GRAMMATICALI:
+REGOLE GRAMMATICALI E NUMERI:
 - MAI usare l'articolo determinativo davanti a Bitcoin.
 - Sii tecnico, non ripetere dati già detti nella sezione macro se non per collegamenti diretti.
+- ARROTONDAMENTO TASSATIVO: Elimina sempre decimali inutili per prezzi grandi (es. 78205.50 diventa 78.200 dollari). Elimina sempre il ",00".
 """
 
 AUDIO_FINANCE_PROMPT_EN = """You are a senior financial radio presenter.
@@ -321,9 +326,14 @@ def run():
         logger.warning('⚠️ Nessun articolo da processare')
         return None
 
-    # Filtra articoli con score troppo basso (rumore)
-    articles = [a for a in articles if a.get('relevance_score', 0) >= 0.3]
-    logger.info(f'📰 Articoli dopo filtro quality >= 0.3: {len(articles)}')
+    # Filtra articoli con score troppo basso (rumore) salvando i protetti
+    # (PIMCO e fonti settimanali saltano il filtro del 0.3)
+    PROTECTED_SOURCES = ['BlackRock Investment Institute', 'Goldman Sachs Insights', 'PIMCO Insights']
+    articles = [a for a in articles if a.get('relevance_score', 0) >= 0.3 or a.get('source') in PROTECTED_SOURCES]
+    logger.info(f'📰 Articoli post-filtro (>= 0.3 o protetti): {len(articles)}')
+
+    # Definisci weekly sources per i check post-json
+    weekly_sources = ['BlackRock Investment Institute', 'Goldman Sachs Insights']
 
     # Costruisci contesto mercati
     market_context = ""
@@ -419,7 +429,7 @@ def run():
                         if days_ago <= 14:
                             freshness = f"rilasciato {days_ago} giorni fa ⚡ RECENTE"
                         else:
-                            freshness = f"rilasciato il {date} ({days_ago} giorni fa — DATO NON RECENTE)"
+                            freshness = f"rilasciato il {date} ({days_ago} giorni fa — DATO STORICO/CONSOLIDATO)"
                     except Exception:
                         freshness = f"rilasciato {date}"
                     
@@ -441,7 +451,7 @@ def run():
                     try:
                         release_dt = datetime.strptime(date, '%Y-%m-%d').replace(tzinfo=timezone.utc)
                         days_ago   = (datetime.now(timezone.utc) - release_dt).days
-                        freshness  = f"rilasciato il {date} ({days_ago}gg fa — DATO NON RECENTE)" \
+                        freshness  = f"rilasciato il {date} ({days_ago}gg fa — DATO STORICO/CONSOLIDATO)" \
                                      if days_ago > 14 else f"rilasciato {days_ago}gg fa ⚡ RECENTE"
                     except Exception:
                         freshness = f"rilasciato {date}"
@@ -450,6 +460,37 @@ def run():
                     lines.append(f"  {label}: NON RILASCIATO — prossima uscita {item.get('next_release')}")
 
         market_context = "DATI DI MERCATO ATTUALI:\n" + "\n".join(lines) + "\n\n"
+
+    def _clean_numbers_for_audio(text: str) -> str:
+        """Semplifica i numeri nel testo per il TTS (arrotonda grandi cifre, toglie decimali)."""
+        import re
+        
+        def replacer(match):
+            val_str = match.group(1).replace(',', '')
+            try:
+                num = float(val_str)
+                if num >= 1000:
+                    # Arrotonda alla cinquantina/centinaia più vicina (es. 78205 -> 78200)
+                    rounded = int(round(num / 100.0) * 100)
+                    return str(rounded)
+                elif num >= 10:
+                    # Rimuove decimali per numeri medi (es. 86.79 -> 87)
+                    return str(int(round(num)))
+                else:
+                    # Arrotonda al primo decimale i numeri piccoli (percentuali, rendimenti)
+                    # Toglie lo .0 finale
+                    rounded = round(num, 1)
+                    if rounded.is_integer():
+                        return str(int(rounded))
+                    return str(rounded)
+            except:
+                return match.group(0)
+                
+        # Trova numeri con o senza decimali
+        text = re.sub(r'(\d+(?:\.\d+)?)', replacer, text)
+        return text
+
+    audio_market_context = _clean_numbers_for_audio(market_context)
 
     # Carica history — solo titoli per non sprecare token
     history = {}
@@ -475,6 +516,11 @@ def run():
         }
         for a in articles
     ]
+
+    logger.info("\n=== ARTICOLI SELEZIONATI PER L'ANALISI LLM ===")
+    for idx, a in enumerate(articles_slim, 1):
+        logger.info(f"{idx:02d}. [{a['source']}] {a['title']} (Score: {a['relevance_score']})")
+    logger.info("==============================================\n")
 
     articles_json = json.dumps(articles_slim, ensure_ascii=False)
     
@@ -620,7 +666,7 @@ def run():
         sentiment_label = _safe_get(sentiment_obj, 'label', 'neutral')
         
         # Part A: Finance
-        it_finance_user = f"DATA: {today_str}\nSENTIMENT: {sentiment_label}\nMERCATI:\n{market_context}\nNOTIZIE PRINCIPALI:\n" + \
+        it_finance_user = f"DATA: {today_str}\nSENTIMENT: {sentiment_label}\nMERCATI:\n{audio_market_context}\nNOTIZIE PRINCIPALI:\n" + \
                          "\n".join(f"- {a['title']}" for a in news_it[:10])
         it_finance_user += holiday_warning_it
         it_finance = get_audio_part(AUDIO_FINANCE_PROMPT, it_finance_user, 'audio_script_it')
@@ -628,8 +674,10 @@ def run():
         # Part B: Crypto
         # Assicurati che lo split includa anche i dati ETF che sono prima di CRYPTO data ma rilevanti
         etf_flow_ctx = f"BTC ETF Daily Net Inflow: {md.get('btc_etf_flow', {}).get('value', 'N/A')}\n"
-        crypto_ctx = (market_context.split('CRYPTO MARKET DATA:')[1] if 'CRYPTO MARKET DATA:' in market_context else market_context)
-        it_crypto_user = f"DATI CRYPTO:\n{etf_flow_ctx}{crypto_ctx}\nNOTIZIE CRYPTO:\n" + \
+        etf_flow_ctx = _clean_numbers_for_audio(etf_flow_ctx)
+        
+        crypto_ctx = (audio_market_context.split('CRYPTO MARKET DATA:')[1] if 'CRYPTO MARKET DATA:' in audio_market_context else audio_market_context)
+        it_crypto_user = f"DATI CRYPTO ATTUALI (USA QUESTI VALORI):\n{etf_flow_ctx}{crypto_ctx}\nNOTIZIE CRYPTO:\n" + \
                         "\n".join(f"- {a['title']}" for a in news_it if a.get('category') == 'crypto')
         it_crypto = get_audio_part(AUDIO_CRYPTO_PROMPT, it_crypto_user, 'audio_script_it')
         
@@ -643,7 +691,7 @@ def run():
         logger.info('🎙️ Generazione Audio EN (3 segmenti)...')
         
         # Part A: Finance
-        en_finance_user = f"DATE: {today_str}\nSENTIMENT: {sentiment_label}\nMARKETS:\n{market_context}\nTOP NEWS:\n" + \
+        en_finance_user = f"DATE: {today_str}\nSENTIMENT: {sentiment_label}\nMARKETS:\n{audio_market_context}\nTOP NEWS:\n" + \
                          "\n".join(f"- {a['title']}" for a in news_it[:10])
         en_finance_user += holiday_warning_en
         en_finance = get_audio_part(AUDIO_FINANCE_PROMPT_EN, en_finance_user, 'audio_script_en')

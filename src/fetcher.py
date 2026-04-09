@@ -513,16 +513,16 @@ def run():
 
     # Filtra articoli con score troppo basso
     before = len(all_articles)
-    WEEKLY_SOURCES = ['BlackRock Investment Institute', 'Goldman Sachs Insights']
+    PROTECTED_SOURCES = ['BlackRock Investment Institute', 'Goldman Sachs Insights', 'PIMCO Insights']
     is_monday = datetime.now(timezone.utc).weekday() == 0
     logger.info(f'📅 Debug Lunedì: {is_monday} (UTC weekday: {datetime.now(timezone.utc).weekday()})')
     
     all_articles = [
         a for a in all_articles
         if a.get('relevance_score', 0) >= 0.3
-        or a.get('source') in WEEKLY_SOURCES
+        or a.get('source') in PROTECTED_SOURCES
     ]
-    logger.info(f'🗑️ Filtrati {before - len(all_articles)} articoli rumore (score < 0.3)')
+    logger.info(f'🗑️ Filtrati {before - len(all_articles)} articoli rumore (score < 0.3, fonti protette preservate)')
 
     # Smart Selection (Scoring + Dedup + Caps)
     all_articles = smart_select(all_articles)
