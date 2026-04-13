@@ -92,7 +92,7 @@ jobs:
       - name: STEP 4 — Commit & Push changes (Local)
         run: |
           git config --global user.name 'vinciber'
-          git config --global user.email 'my.price.alert.app@gmail.com'
+          git config --global user.email 'vinciberlr@gmail.com'
 
           git add docs/ data/
           git commit -m "briefing: $(date +%Y-%m-%d)" || exit 0
@@ -124,7 +124,7 @@ jobs:
 
           cd main-repo
           git config user.name 'vinciber'
-          git config user.email 'my.price.alert.app@gmail.com'
+          git config user.email 'vinciberlr@gmail.com'
 
           git add -A public/morning-update
 
@@ -132,7 +132,7 @@ jobs:
             echo "✅ Nessuna modifica da committare"
           else
             git commit -m "briefing update: $(date +%Y-%m-%d)"
-            git push origin main && echo "✅ Push completato" || echo "❌ Push fallito"
+            git push origin main
           fi
 
       - name: STEP 5 — Upload artifact
