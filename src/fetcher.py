@@ -437,8 +437,10 @@ def smart_select(articles):
         if not is_duplicate:
             deduplicated.append(candidate)
 
-    # PASSAGGIO 3 — cap per categoria
+    # PASSAGGIO 3 — cap per categoria + cap per singola fonte
+    SOURCE_CAP = 2  # Max 2 articoli per fonte (evita dominanza di una singola fonte)
     category_counts = {cat: 0 for cat in CATEGORY_CAPS}
+    source_counts = {}
     selected = []
 
     # Riserva slot per i weekly (max 6 slot totali tra BlackRock e Goldman)
@@ -446,6 +448,9 @@ def smart_select(articles):
     effective_cap = GLOBAL_CAP - weekly_slots
 
     for art in deduplicated:
+        src = art.get('source', '')
+        if source_counts.get(src, 0) >= SOURCE_CAP:
+            continue
         cat = normalize_category(art.get('category', 'mercati'))
         if cat not in category_counts:
             category_counts[cat] = 0
@@ -453,6 +458,7 @@ def smart_select(articles):
         if category_counts[cat] < cap:
             selected.append(art)
             category_counts[cat] += 1
+            source_counts[src] = source_counts.get(src, 0) + 1
         if len(selected) >= effective_cap:
             break
 

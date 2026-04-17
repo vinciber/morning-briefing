@@ -285,17 +285,34 @@ def get_macro_calendar() -> dict:
         logger.warning('⚠️ FRED_API_KEY non configurata — macro calendar skip')
         return {}
 
-    # Calendario release date 2026 (aggiornare a inizio anno)
+    # Calendario release date 2026 — tutte le date dell'anno
     # Fonte: https://www.bls.gov/schedule/ e https://www.federalreserve.gov/
-    NEXT_RELEASE = {
-        'cpi':        '2026-04-10',
-        'core_cpi':   '2026-04-10',
-        'nfp':        '2026-04-03',
-        'unemployment':'2026-04-03',
-        'pce_core':   '2026-03-28',
-        'fed_funds':  '2026-05-07',  # Prossimo FOMC
-        'gdp':        '2026-04-29',
+    RELEASE_SCHEDULE = {
+        'cpi':         ['2026-01-14', '2026-02-12', '2026-03-12', '2026-04-10', '2026-05-13', '2026-06-10',
+                        '2026-07-14', '2026-08-12', '2026-09-11', '2026-10-13', '2026-11-12', '2026-12-10'],
+        'core_cpi':    ['2026-01-14', '2026-02-12', '2026-03-12', '2026-04-10', '2026-05-13', '2026-06-10',
+                        '2026-07-14', '2026-08-12', '2026-09-11', '2026-10-13', '2026-11-12', '2026-12-10'],
+        'nfp':         ['2026-01-09', '2026-02-06', '2026-03-06', '2026-04-03', '2026-05-08', '2026-06-05',
+                        '2026-07-02', '2026-08-07', '2026-09-04', '2026-10-02', '2026-11-06', '2026-12-04'],
+        'unemployment':['2026-01-09', '2026-02-06', '2026-03-06', '2026-04-03', '2026-05-08', '2026-06-05',
+                        '2026-07-02', '2026-08-07', '2026-09-04', '2026-10-02', '2026-11-06', '2026-12-04'],
+        'pce_core':    ['2026-01-30', '2026-02-27', '2026-03-28', '2026-04-30', '2026-05-29', '2026-06-26',
+                        '2026-07-31', '2026-08-28', '2026-09-25', '2026-10-30', '2026-11-25', '2026-12-23'],
+        'fed_funds':   ['2026-01-28', '2026-03-18', '2026-05-07', '2026-06-17', '2026-07-29', '2026-09-16',
+                        '2026-11-04', '2026-12-16'],
+        'gdp':         ['2026-01-29', '2026-04-29', '2026-07-29', '2026-10-29'],
     }
+
+    def _next_release_for(key):
+        """Restituisce la prossima data di release futura per un indicatore."""
+        today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+        dates = RELEASE_SCHEDULE.get(key, [])
+        for d in dates:
+            if d >= today:
+                return d
+        return dates[-1] if dates else 'N/A'
+
+    NEXT_RELEASE = {k: _next_release_for(k) for k in RELEASE_SCHEDULE}
 
     # Serie FRED → (label, unità, decimali)
     SERIES = {
@@ -487,12 +504,25 @@ def get_macro_calendar_eu() -> dict:
     """
     FRED_API_KEY = os.environ.get('FRED_API_KEY', '')
     
-    NEXT_RELEASE_EU = {
-        'ecb_rate':        '2026-04-30',  # Prossima riunione BCE
-        'cpi_eu':          '2026-04-02',  # Flash CPI Eurozona
-        'gdp_eu':          '2026-04-30',  # PIL Eurozona 1° stima
-        'unemployment_eu': '2026-04-01',  # Disoccupazione Eurozona
+    RELEASE_SCHEDULE_EU = {
+        'ecb_rate':        ['2026-01-30', '2026-03-06', '2026-04-02', '2026-04-30', '2026-06-05', '2026-07-17',
+                            '2026-09-10', '2026-10-29', '2026-12-10'],
+        'cpi_eu':          ['2026-01-07', '2026-02-03', '2026-03-03', '2026-04-02', '2026-04-30', '2026-06-03',
+                            '2026-07-01', '2026-07-31', '2026-09-01', '2026-10-01', '2026-10-30', '2026-12-01'],
+        'gdp_eu':          ['2026-01-30', '2026-04-30', '2026-07-31', '2026-10-30'],
+        'unemployment_eu': ['2026-01-09', '2026-02-03', '2026-03-03', '2026-04-01', '2026-04-30', '2026-06-03',
+                            '2026-07-01', '2026-07-31', '2026-09-01', '2026-10-01', '2026-10-30', '2026-12-01'],
     }
+
+    def _next_eu_release(key):
+        today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+        dates = RELEASE_SCHEDULE_EU.get(key, [])
+        for d in dates:
+            if d >= today:
+                return d
+        return dates[-1] if dates else 'N/A'
+
+    NEXT_RELEASE_EU = {k: _next_eu_release(k) for k in RELEASE_SCHEDULE_EU}
 
     result = {}
     cutoff_short = datetime.now(timezone.utc) - timedelta(days=60)  # Per CPI/Unemp

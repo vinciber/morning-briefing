@@ -48,6 +48,8 @@ def normalize_for_tts(text: str) -> str:
         ('JPMorgan',    'Jay Pi Morgan'),
         ('Morgan Stanley', 'Morgan Stanley'),
         ('Citigroup',   'Citigroup'),
+        # Brand
+        ('Price Alert', 'Praiss Alert'),
         # Nomi propri e termini inglesi comuni — pronuncia naturale
         ('Trump',       'Tramp'),
         ('Biden',       'Baiden'),
@@ -212,23 +214,39 @@ def normalize_for_tts(text: str) -> str:
         return f'{sign_word}{m.group(2)} percento'
     text = re.sub(r'([+-]?)(\d+)%', replace_pct_int, text)
 
-    # 5. NUMERI CON SEPARATORE MIGLIAIA RIMASTI (es. 53,820)
-    def replace_thousands(m):
+    # 5. NUMERI CON SEPARATORE MIGLIAIA (virgola: 53,820 o punto italiano: 72.000)
+    def _thousands_to_words(val: int) -> str:
+        if val >= 1_000_000_000:
+            miliardi = val / 1_000_000_000
+            s = f"{miliardi:g}".replace('.', ' virgola ')
+            return f'{s} miliardi'
+        if val >= 1_000_000:
+            milioni = val / 1_000_000
+            s = f"{milioni:g}".replace('.', ' virgola ')
+            return f'{s} milioni'
+        if val >= 1_000:
+            thousands = val // 1000
+            remainder = val % 1000
+            word = _number_to_italian(thousands) + 'mila'
+            return f'{word} {remainder}' if remainder else word
+        return str(val)
+
+    def replace_thousands_comma(m):
         num_str = m.group(0).replace(',', '')
         try:
-            val = int(num_str)
-            if val >= 1_000_000:
-                return f'{val // 1_000_000} milioni'
-            elif val >= 10_000:
-                thousands = val // 1000
-                remainder = val % 1000
-                word = _number_to_italian(thousands) + 'mila'
-                return f'{word} {remainder}' if remainder else word
-            else:
-                return str(val)
+            return _thousands_to_words(int(num_str))
         except Exception:
             return m.group(0)
-    text = re.sub(r'\b\d{1,3}(?:,\d{3})+\b', replace_thousands, text)
+    text = re.sub(r'\b\d{1,3}(?:,\d{3})+\b', replace_thousands_comma, text)
+
+    # 5b. PUNTO COME SEPARATORE MIGLIAIA (italiano: 72.000, 3.500)
+    def replace_thousands_dot(m):
+        num_str = m.group(0).replace('.', '')
+        try:
+            return _thousands_to_words(int(num_str))
+        except Exception:
+            return m.group(0)
+    text = re.sub(r'\b\d{1,3}(?:\.\d{3})+\b', replace_thousands_dot, text)
 
     # 6. RENDIMENTI CON % (es. 4.2850%)
     text = re.sub(r'(\d+)\.(\d{2})\d*%', r'\1 virgola \2 percento', text)

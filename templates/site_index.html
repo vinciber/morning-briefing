@@ -312,16 +312,13 @@
             <div class="sentiment-banner">
                 <div class="status-dot"></div>
                 <div class="sentiment-label {% if sentiment.label == 'risk_on' %}text-risk-on{% elif sentiment.label == 'risk_off' %}text-risk-off{% else %}text-neutral{% endif %}">
-                    {% if lang == 'it' %}
-                        {% if sentiment.label == 'risk_on' %}RISK ON{% elif sentiment.label == 'risk_off' %}RISK OFF{% else %}NEUTRAL{% endif %}
-                    {% else %}
-                        {% if sentiment.label == 'risk_on' %}RISK ON{% elif sentiment.label == 'risk_off' %}RISK OFF{% else %}NEUTRAL{% endif %}
-                    {% endif %}
+                    {% if sentiment.label == 'risk_on' %}RISK ON{% elif sentiment.label == 'risk_off' %}RISK OFF{% else %}NEUTRAL{% endif %}
+                    {% if sentiment.score %}<span style="font-weight: 400; opacity: 0.7; margin-left: 0.5rem;">{{ sentiment.score }}/10</span>{% endif %}
                 </div>
             </div>
 
             <p class="sentiment-reason">
-                {{ (sentiment.get('reason_' + lang) or sentiment.get('reason_en') or sentiment.get('reason_it', '')) | truncate(250) }}
+                {{ sentiment.get('reason_' + lang) or sentiment.get('reason_en') or sentiment.get('reason_it', '') }}
             </p>
 
             {% if market_strip %}
@@ -396,7 +393,7 @@
         {% endif %}
 
         <footer>
-            <p>Price Alert&reg; - Morning Briefing Agent - All right Reserved</p>
+            <p>Price Alert&reg; - Morning Briefing Agent - All Rights Reserved</p>
             <p style="margin-top: 1.5rem;">
                 <a href="{{ rss_url }}">RSS</a> · 
                 <a href="{{ api_url }}">JSON</a> ·

@@ -120,6 +120,15 @@ FRAMEWORK MERCATI:
 - DXY forte + M2 contracting = no risk-on
 - M2: dato mensile con lag 4-6 settimane, usare solo per trend strutturale
 
+SCORING QUANTITATIVO (OBBLIGATORIO per "score" 1-10):
+Lo score deve riflettere i DATI NUMERICI, non solo il contesto narrativo/geopolitico.
+- VIX < 18 E S&P positivo → score risk_off MAX 3, label "neutral" o "risk_on"
+- VIX 18-25 → score risk_off MAX 6
+- VIX > 30 → score risk_off MIN 7
+- S&P green > +1% → score risk_off MAX 4 (a meno di VIX > 30)
+- Se VIX < 20 E S&P positivo E DXY stabile → il label DEVE essere "neutral" o "risk_on"
+Il geopolitico contribuisce al massimo 2 punti — i mercati prezzano il rischio meglio delle notizie.
+
 STILE: calmo, didattico, preciso. Cita sempre valori numerici specifici.
 Termini da usare quando pertinenti:
 compressione, debasement, stagflazione, risk-on/risk-off,
@@ -166,93 +175,94 @@ OUTPUT JSON — struttura esatta:
 
     
 
-AUDIO_FINANCE_PROMPT = """Sei un conduttore radiofonico finanziario senior italiano specializzato in analisi macroeconomica globale.
+AUDIO_FINANCE_PROMPT = """Sei un conduttore radiofonico finanziario italiano. Stile: conciso, direzionale, zero filler.
 Scrivi lo script audio per la prima parte del podcast (MERCATI TRADIZIONALI E MACRO).
-LUNGHEZZA: 500-600 parole complessive.
+LUNGHEZZA: 350-500 parole (preferisci brevità e densità. Se non ci sono eventi rilevanti per una sezione, riducila a 2-3 frasi. MAI riempire con contenuto generico o ripetitivo).
 
 STRUTTURA:
-1. APERTURA E BENVENUTO (50 parole): 
-   Inizia sempre con un unico saluto professionale e l'introduzione al briefing.
-   Esempio: "Buongiorno e benvenuti all'aggiornamento finanziario di oggi, il vostro Morning Briefing quotidiano."
-2. CONTESTO ASIATICO (100 parole): 
-   Dopo il benvenuto, cita la chiusura dei mercati asiatici (Nikkei e Shanghai) 
-   come anticipazione di quello che potrebbe succedere in Europa e USA.
-3. SENTIMENT + MERCATI OCCIDENTALI (250 parole): 
-   Analisi dell'S&P 500, DXY, VIX e tassi. Cita i valori esatti.
-   REGOLA TEMPORALE: Se i mercati sono chiusi oggi o sono stati chiusi ieri, non usare MAI il termine "ieri" per i dati. Usa invece "nella seduta di [GIORNO]" o "alla chiusura passata".
-4. GEOPOLITICA (150 parole): 
-   Analisi degli eventi in corso e impatto sui prezzi.
-5. MACRO E BANCHE CENTRALI (150 parole): 
-   Focus su tassi d'interesse e dati economici freschi.
+1. APERTURA (30 parole max): Saluto professionale secco.
+   "Buongiorno, benvenuti al Morning Briefing di Price Alert."
+2. CONTESTO ASIATICO (80 parole): Chiusura Nikkei e Shanghai — solo direzione e percentuale.
+   Esempio: "Il Nikkei ha chiuso in calo dell'1.2%, Shanghai in rialzo dello 0.5%."
+   Poi collegamento: "Questo suggerisce un'apertura debole per i mercati europei" o simile.
+3. MERCATI OCCIDENTALI (150 parole): S&P 500, VIX, DXY, oro, petrolio.
+   REGOLA CHIAVE: cita solo la DIREZIONE e la variazione percentuale.
+   Per i prezzi assoluti, menzionali SOLO quando superano una soglia psicologica significativa (es. "l'oro si mantiene sopra i 4500 dollari l'oncia", "il VIX è sceso sotto quota 20").
+   NON elencare prezzo dopo prezzo — racconta la narrativa.
+   REGOLA TEMPORALE: Se i mercati sono chiusi oggi, usa "nella seduta di [GIORNO]" o "alla chiusura passata", MAI "ieri".
+4. GEOPOLITICA (100 parole): Solo eventi con impatto concreto sui prezzi.
+5. MACRO E BANCHE CENTRALI (80 parole): Solo dati freschi o attesi a breve.
 
 VIETATO ASSOLUTO:
-- NON parlare di Bitcoin, delle Altcoin, di flussi ETF o Fear & Greed in questa sezione.
-- NON chiudere il podcast. Fermati dopo l'analisi macro per lasciare spazio alla sezione crypto.
+- NON parlare di Bitcoin, Altcoin, flussi ETF o Fear & Greed.
+- NON chiudere il podcast.
 - NON fare elenchi puntati.
+- NON ripetere lo stesso dato in più sezioni.
 
-PRONUNCIA E NUMERI — REGOLE SPECIALI:
-- ARROTONDAMENTO TASSATIVO: Arrotonda sempre i grandi numeri all'intero o decina più vicina: se il valore è 78205.50 o 3995.00 devi scrivere "78.200" o "3995". Elimina sempre i decimali vuoti come ",00" o ".00".
-- PERCENTUALI: Arrotonda al massimo a un decimale (es. 2.69% diventa 2.7%).
-- ORO: Traduci sempre "/oz" con "l'oncia".
-- USA → scrivere "Usa"
-- NATO → scrivere "Nato"
-- OPEC → scrivere "Opek"  
-- IMF → scrivere "Fondo Monetario Internazionale"
-- Price Alert → scrivere "Prais Alért"
+NUMERI — REGOLE FORMATO:
+- Usa SOLO variazioni percentuali nel parlato (es. "in calo dell'1.5%"). Evita cifre assolute a meno di soglie chiave.
+- Per grandi numeri: scrivi "settantaduemila dollari", MAI "72,000" o "72.000" (il TTS li legge male).
+- Se devi citare un prezzo, scrivi il numero in lettere o in cifre senza separatori di migliaia.
+- Percentuali: massimo un decimale (es. 2.7%, non 2.69%).
+- ORO: "l'oncia" invece di "/oz".
 """
 
-AUDIO_CRYPTO_PROMPT = """Sei un analista esperto di digital assets.
+AUDIO_CRYPTO_PROMPT = """Sei un analista di digital assets. Stile: conciso, direzionale.
 Scrivi lo script audio per la sezione CRIPTOVALUTE del podcast.
-LUNGHEZZA: 300-400 parole.
+LUNGHEZZA: 200-300 parole (preferisci brevità. Se non ci sono movimenti significativi, riduci).
 
-TRANSITION OBBLIGATORIA (in apertura): 
-"Passiamo ora al comparto degli asset digitali..."
+TRANSITION OBBLIGATORIA: "Passiamo ora al comparto degli asset digitali..."
 
-STRUTTURA E REGOLE:
-1. DEEP DIVE BITCOIN (100 parole): Analisi tecnica e flussi ETF. 
-2. ALTCOINS (150 parole): Ethereum, Solana, e Binance Coin (BNB).
-3. SENTIMENT & FEAR/GREED (100 parole): Indice e correlazione macro.
+STRUTTURA:
+1. BITCOIN (80 parole): Direzione, variazione %, flussi ETF se significativi.
+   Cita il prezzo solo per soglie psicologiche (es. "Bitcoin si mantiene sopra gli ottantamila dollari").
+2. ALTCOINS (80 parole): Ethereum, Solana, BNB — solo se ci sono movimenti rilevanti (>2%).
+3. SENTIMENT (50 parole): Fear & Greed — solo il valore e la classe (Fear, Greed, ecc.).
 
-REGOLE GRAMMATICALI E NUMERI:
-- MAI usare l'articolo determinativo davanti a Bitcoin.
-- Sii tecnico, non ripetere dati già detti nella sezione macro se non per collegamenti diretti.
-- ARROTONDAMENTO TASSATIVO: Elimina sempre decimali inutili per prezzi grandi (es. 78205.50 diventa 78.200 dollari). Elimina sempre il ",00".
+REGOLE:
+- MAI l'articolo determinativo davanti a Bitcoin.
+- NON ripetere dati della sezione macro.
+- Per grandi numeri: scrivi in lettere (es. "ottantamila dollari") o senza separatori (es. "80000 dollari"). MAI "80,000" o "80.000".
+- Percentuali: massimo un decimale.
 """
 
-AUDIO_FINANCE_PROMPT_EN = """You are a senior financial radio presenter.
+AUDIO_FINANCE_PROMPT_EN = """You are a concise financial radio presenter. Style: directional, no filler.
 Write the audio script for the first part of the podcast (TRADITIONAL MARKETS & MACRO).
-LENGTH: 400-500 words.
+LENGTH: 300-450 words (prefer brevity. If a section lacks notable events, keep it to 2-3 sentences).
 
-MANDATORY OPENING:
-Choose EXACTLY ONE: "Welcome to your daily morning market briefing." OR "Good morning and welcome to today's financial update."
+OPENING: "Good morning, welcome to the Price Alert Morning Briefing."
 
 STRUCTURE:
-1. OPENING + SENTIMENT (100 words): Global mood. 
-2. TRADITIONAL MARKETS (200 words): Equities, Bonds, Currencies, Commodities. 
-   TEMPORAL RULE: If markets were closed yesterday or are closed today, DO NOT say "yesterday". Use "at the last close" or "on [Friday/Day]".
-3. GEOPOLITICS & MACRO (150 words): Key events.
+1. ASIAN CLOSE (60 words): Nikkei, Shanghai direction + % change. Link to European/US outlook.
+2. WESTERN MARKETS (150 words): S&P 500, VIX, DXY, gold, oil — DIRECTION and % only.
+   Mention absolute prices ONLY at key thresholds (e.g. "gold holds above $4,500/oz", "VIX dropped below 20").
+   TEMPORAL RULE: If markets were closed, say "at the last close" or "on [Friday]", NEVER "yesterday".
+3. GEOPOLITICS & MACRO (100 words): Only events with direct price impact.
 
 PROHIBITED:
 - Do NOT mention Cryptocurrencies, Bitcoin, ETF flows, or Fear & Greed.
 - Do NOT close the podcast.
+- Do NOT use bullet points.
 """
 
-AUDIO_CRYPTO_PROMPT_EN = """You are a digital assets expert analyst.
+AUDIO_CRYPTO_PROMPT_EN = """You are a concise digital assets analyst.
 Write the audio script for the CRYPTO section of the podcast.
-LENGTH: 300-400 words.
+LENGTH: 200-300 words (prefer brevity).
 
-MANDATORY TRANSITION:
-"Let's pivot to the cryptocurrency markets..."
+TRANSITION: "Let's pivot to the cryptocurrency markets..."
 
 STRUCTURE:
-1. BTC DEEP DIVE (150 words).
-2. ALTCOINS (150 words).
-3. SENTIMENT & FEAR/GREED (100 words).
+1. BITCOIN (80 words): Direction, % change, ETF flows only if significant. Mention price only at key thresholds.
+2. ALTCOINS (80 words): ETH, SOL, BNB — only if notable moves (>2%).
+3. SENTIMENT (50 words): Fear & Greed value and class.
+
+RULES:
+- Write large numbers in words or without separators (e.g. "eighty thousand dollars", not "80,000").
 """
 
 AUDIO_CLOSE_PROMPT = """CHIUSURA OBBLIGATORIA:
 - Focus: outlook per domani e cosa monitorare.
-- Saluto finale professionale: "Grazie per l'attenzione e a domani", "Un saluto da Prais Alért", etc.
+- Saluto finale professionale: "Grazie per l'attenzione e a domani", "Un saluto da Price Alert", etc.
 - NON terminare MAI con "buon trading".
 """
 
@@ -461,36 +471,7 @@ def run():
 
         market_context = "DATI DI MERCATO ATTUALI:\n" + "\n".join(lines) + "\n\n"
 
-    def _clean_numbers_for_audio(text: str) -> str:
-        """Semplifica i numeri nel testo per il TTS (arrotonda grandi cifre, toglie decimali)."""
-        import re
-        
-        def replacer(match):
-            val_str = match.group(1).replace(',', '')
-            try:
-                num = float(val_str)
-                if num >= 1000:
-                    # Arrotonda alla cinquantina/centinaia più vicina (es. 78205 -> 78200)
-                    rounded = int(round(num / 100.0) * 100)
-                    return str(rounded)
-                elif num >= 10:
-                    # Rimuove decimali per numeri medi (es. 86.79 -> 87)
-                    return str(int(round(num)))
-                else:
-                    # Arrotonda al primo decimale i numeri piccoli (percentuali, rendimenti)
-                    # Toglie lo .0 finale
-                    rounded = round(num, 1)
-                    if rounded.is_integer():
-                        return str(int(rounded))
-                    return str(rounded)
-            except:
-                return match.group(0)
-                
-        # Trova numeri con o senza decimali
-        text = re.sub(r'(\d+(?:\.\d+)?)', replacer, text)
-        return text
-
-    audio_market_context = _clean_numbers_for_audio(market_context)
+    audio_market_context = market_context
 
     # Carica history — solo titoli per non sprecare token
     history = {}
@@ -722,7 +703,7 @@ def run():
         audio_words = len(briefing.get('audio_script_it', '').split())
         logger.info(f'✅ Briefing completato: {len(articles_with_impact)} articoli')
         logger.info(f'🎙️ Audio script IT: {audio_words} parole '
-                    f'{"✅" if audio_words >= 800 else "⚠️ SOTTO 800"}')
+                    f'{"✅" if audio_words >= 500 else "⚠️ SOTTO 500"}')
 
         OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
         with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
