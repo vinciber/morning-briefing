@@ -655,7 +655,7 @@ def run():
         # Part B: Crypto
         # Assicurati che lo split includa anche i dati ETF che sono prima di CRYPTO data ma rilevanti
         etf_flow_ctx = f"BTC ETF Daily Net Inflow: {md.get('btc_etf_flow', {}).get('value', 'N/A')}\n"
-        etf_flow_ctx = _clean_numbers_for_audio(etf_flow_ctx)
+        # etf_flow_ctx già in formato grezzo — nessun preprocessing necessario
         
         crypto_ctx = (audio_market_context.split('CRYPTO MARKET DATA:')[1] if 'CRYPTO MARKET DATA:' in audio_market_context else audio_market_context)
         it_crypto_user = f"DATI CRYPTO ATTUALI (USA QUESTI VALORI):\n{etf_flow_ctx}{crypto_ctx}\nNOTIZIE CRYPTO:\n" + \
