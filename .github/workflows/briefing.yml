@@ -132,6 +132,8 @@ jobs:
             echo "✅ Nessuna modifica da committare"
           else
             git commit -m "briefing update: $(date +%Y-%m-%d)"
+            git fetch origin main
+            git rebase origin/main -X theirs || (git rebase --abort && git pull --rebase origin main -X theirs)
             git push origin main
           fi
 
