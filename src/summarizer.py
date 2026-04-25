@@ -163,14 +163,18 @@ OUTPUT JSON — struttura esatta:
   "article_impacts": [
     {
       "url": "url esatto dell'articolo",
-      "title_it": "Titolo breve in italiano",
-      "summary_it": "Sintesi in italiano",
+      "title_it": "Titolo tradotto in italiano — OBBLIGATORIO anche se fonte è inglese. NON copiare l'originale inglese.",
+      "summary_it": "Sintesi in italiano (40-60 parole). OBBLIGATORIO tradurre anche se fonte è inglese.",
       "direction": "bearish | bullish | mixed",
       "magnitude": "high | medium | low",
       "assets_affected": ["S&P 500", "Brent"]
     }
   ]
 }
+
+REGOLA TRADUZIONE: Per ogni articolo in article_impacts, title_it e summary_it DEVONO essere in italiano.
+Se la fonte è in inglese, DEVI tradurre. Non è accettabile restituire title_it uguale al titolo inglese originale.
+summary_it deve contenere la sintesi del contenuto dell'articolo, non solo il titolo.
 """
 
     
@@ -185,22 +189,25 @@ STRUTTURA:
 2. CONTESTO ASIATICO (80 parole): Chiusura Nikkei e Shanghai — solo direzione e percentuale.
    Esempio: "Il Nikkei ha chiuso in calo dell'1.2%, Shanghai in rialzo dello 0.5%."
    Poi collegamento: "Questo suggerisce un'apertura debole per i mercati europei" o simile.
-3. MERCATI OCCIDENTALI (150 parole): S&P 500, VIX, DXY, oro, petrolio.
-   REGOLA CHIAVE: cita solo la DIREZIONE e la variazione percentuale.
-   Per i prezzi assoluti, menzionali SOLO quando superano una soglia psicologica significativa (es. "l'oro si mantiene sopra i 4500 dollari l'oncia", "il VIX è sceso sotto quota 20").
-   NON elencare prezzo dopo prezzo — racconta la narrativa.
+3. MERCATI OCCIDENTALI (150 parole): S&P 500, VIX, DXY, oro, petrolio, US 10Y Yield, BTP 10Y.
+   REGOLA CHIAVE: cita direzione + variazione percentuale, e AGGIUNGI una frase narrativa per contesto (es. "mossa legata ai timori sull'inflazione", "dopo i dati macro deludenti").
+   Per i prezzi assoluti: SOLO alle soglie psicologiche VERE (es. "l'oro sopra i 4500 dollari", "VIX sotto quota 20", "petrolio sotto i 100 dollari"). MAI soglie arbitrarie tipo "sotto i 101 dollari".
    REGOLA TEMPORALE: Se i mercati sono chiusi oggi, usa "nella seduta di [GIORNO]" o "alla chiusura passata", MAI "ieri".
-4. GEOPOLITICA (100 parole): Solo eventi con impatto concreto sui prezzi.
+4. GEOPOLITICA (100 parole): Solo eventi con impatto concreto sui prezzi. Aggiungi 1 frase di contesto/conseguenza.
 5. MACRO E BANCHE CENTRALI (80 parole): Solo dati freschi o attesi a breve.
+   IMPORTANTE: Se nel contesto è indicato "MACRO OGGI: nessuno" o non ci sono rilasci programmati oggi, di' "nessun dato macro rilevante in uscita oggi" — NON inventare PIL o CPI.
 
 VIETATO ASSOLUTO:
 - NON parlare di Bitcoin, Altcoin, flussi ETF o Fear & Greed.
 - NON chiudere il podcast.
 - NON fare elenchi puntati.
 - NON ripetere lo stesso dato in più sezioni.
+- NON inventare dati macro non presenti nel contesto.
 
-NUMERI — REGOLE FORMATO:
-- Usa SOLO variazioni percentuali nel parlato (es. "in calo dell'1.5%"). Evita cifre assolute a meno di soglie chiave.
+NUMERI — REGOLE FORMATO (critico per TTS):
+- Usa variazioni percentuali nel parlato (es. "in calo dell'1.5%"). Niente zeri inutili: "2%" non "2,00%", "4,3%" non "4,30%".
+- Decimali con virgola in italiano (es. "4,32%"), NON punto.
+- Soglia 0,00% → scrivi "pressoché invariato" o "stabile".
 - Per grandi numeri: scrivi "settantaduemila dollari", MAI "72,000" o "72.000" (il TTS li legge male).
 - Se devi citare un prezzo, scrivi il numero in lettere o in cifre senza separatori di migliaia.
 - Percentuali: massimo un decimale (es. 2.7%, non 2.69%).
@@ -211,19 +218,25 @@ AUDIO_CRYPTO_PROMPT = """Sei un analista di digital assets. Stile: conciso, dire
 Scrivi lo script audio per la sezione CRIPTOVALUTE del podcast.
 LUNGHEZZA: 200-300 parole (preferisci brevità. Se non ci sono movimenti significativi, riduci).
 
-TRANSITION OBBLIGATORIA: "Passiamo ora al comparto degli asset digitali..."
+FORMATO OUTPUT OBBLIGATORIO: restituisci SOLO un oggetto JSON con la chiave "audio_script_it" il cui valore è una STRINGA di testo continuo (NO liste, NO oggetti nidificati, NO dizionari).
 
-STRUTTURA:
-1. BITCOIN (80 parole): Direzione, variazione %, flussi ETF se significativi.
+TRANSITION OBBLIGATORIA (prima frase): "Passiamo ora al comparto degli asset digitali..."
+
+STRUTTURA (scrivi come testo narrativo continuo, non come lista):
+1. BITCOIN (80 parole): Direzione, variazione %, flussi ETF se significativi. Aggiungi una frase narrativa che colleghi il movimento al contesto.
    Cita il prezzo solo per soglie psicologiche (es. "Bitcoin si mantiene sopra gli ottantamila dollari").
 2. ALTCOINS (80 parole): Ethereum, Solana, BNB — solo se ci sono movimenti rilevanti (>2%).
-3. SENTIMENT (50 parole): Fear & Greed — solo il valore e la classe (Fear, Greed, ecc.).
+3. SENTIMENT (50 parole): Fear & Greed valore, classe, e 1 frase di interpretazione ("suggerisce cautela sugli investitori").
 
 REGOLE:
 - MAI l'articolo determinativo davanti a Bitcoin.
 - NON ripetere dati della sezione macro.
-- Per grandi numeri: scrivi in lettere (es. "ottantamila dollari") o senza separatori (es. "80000 dollari"). MAI "80,000" o "80.000".
-- Percentuali: massimo un decimale.
+- NON chiudere il podcast (verrà fatto nella sezione CHIUSURA).
+
+NUMERI — REGOLE FORMATO (critico per TTS):
+- Per grandi soglie tonde: scrivi in lettere (es. "ottantamila dollari"). Per prezzi specifici: usa il numero con virgola decimale ("85,49 dollari"). MAI "80,000" o "80.000".
+- Percentuali: massimo un decimale, virgola decimale italiana ("0,4%" non "0.4%").
+- Valore 0% (0,00%) → "pressoché invariato" o "stabile". NON "zero virgola zero zero percento".
 """
 
 AUDIO_FINANCE_PROMPT_EN = """You are a concise financial radio presenter. Style: directional, no filler.
@@ -234,15 +247,23 @@ OPENING: "Good morning, welcome to the Price Alert Morning Briefing."
 
 STRUCTURE:
 1. ASIAN CLOSE (60 words): Nikkei, Shanghai direction + % change. Link to European/US outlook.
-2. WESTERN MARKETS (150 words): S&P 500, VIX, DXY, gold, oil — DIRECTION and % only.
-   Mention absolute prices ONLY at key thresholds (e.g. "gold holds above $4,500/oz", "VIX dropped below 20").
+2. WESTERN MARKETS (150 words): S&P 500, VIX, DXY, gold, oil, US 10Y Yield, BTP 10Y — DIRECTION and % only.
+   Mention absolute prices ONLY at key psychological thresholds (e.g. "gold holds above $4,500/oz", "VIX dropped below 20", "oil below $100"). Use the REAL threshold, not arbitrary numbers.
    TEMPORAL RULE: If markets were closed, say "at the last close" or "on [Friday]", NEVER "yesterday".
+   ADD 1 narrative sentence per block linking move to a driver (e.g. "driven by recession fears").
 3. GEOPOLITICS & MACRO (100 words): Only events with direct price impact.
+   IMPORTANT: If the context shows "MACRO TODAY: none" or no scheduled releases for today, say "no major data releases scheduled today" — DO NOT invent macro data.
+
+NUMBERS — FORMAT (critical for TTS):
+- Use numeric form: "$4,703", "+0.41%", "98.79". Commas OK for thousands.
+- NEVER spell numbers in words (avoid "seventy-seven thousand" unless a clean round threshold).
+- Percentages: max 1 decimal. No trailing zeros ("2%" not "2.00%"). If 0.00%, say "essentially flat".
 
 PROHIBITED:
 - Do NOT mention Cryptocurrencies, Bitcoin, ETF flows, or Fear & Greed.
 - Do NOT close the podcast.
 - Do NOT use bullet points.
+- Do NOT invent macro data releases not listed in the context.
 """
 
 AUDIO_CRYPTO_PROMPT_EN = """You are a concise digital assets analyst.
@@ -254,10 +275,14 @@ TRANSITION: "Let's pivot to the cryptocurrency markets..."
 STRUCTURE:
 1. BITCOIN (80 words): Direction, % change, ETF flows only if significant. Mention price only at key thresholds.
 2. ALTCOINS (80 words): ETH, SOL, BNB — only if notable moves (>2%).
-3. SENTIMENT (50 words): Fear & Greed value and class.
+3. SENTIMENT (50 words): Fear & Greed value and class — add 1 interpretation sentence.
 
-RULES:
-- Write large numbers in words or without separators (e.g. "eighty thousand dollars", not "80,000").
+NUMBERS — FORMAT RULES (critical for TTS quality):
+- Use numeric form with decimals normally: "$85.49", "+0.41%", "$4,703" (commas OK for thousands in EN).
+- Round thousands should use words only for clean round numbers at key thresholds (e.g. "above eighty thousand dollars" if BTC crosses $80k).
+- NEVER spell out every number in words ("eighty-five point four nine dollars" — FORBIDDEN, makes TTS mumble).
+- Percentages: max 1 decimal. If value is 0.00%, say "essentially flat" instead.
+- No trailing zeros: write "2%" not "2.00%", "4.3%" not "4.30%".
 """
 
 AUDIO_CLOSE_PROMPT = """CHIUSURA OBBLIGATORIA:
@@ -471,7 +496,22 @@ def run():
 
         market_context = "DATI DI MERCATO ATTUALI:\n" + "\n".join(lines) + "\n\n"
 
-    audio_market_context = market_context
+    # Costruisci flag "MACRO OGGI" per prevenire hallucination sui dati macro
+    today_iso = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+    releases_today = []
+    for key, item in (md.get('macro_calendar', {}) or {}).items():
+        if item.get('next_release') == today_iso or item.get('release_date') == today_iso:
+            releases_today.append(f"USA {item.get('label', key)}")
+    for key, item in (md.get('macro_calendar_eu', {}) or {}).items():
+        if item.get('next_release') == today_iso or item.get('release_date') == today_iso:
+            releases_today.append(f"EU {item.get('label', key)}")
+    macro_today_line = (
+        f"\nMACRO OGGI ({today_iso}): {', '.join(releases_today)}\n"
+        if releases_today else
+        f"\nMACRO OGGI ({today_iso}): nessuno (NON inventare dati in uscita oggi)\n"
+    )
+
+    audio_market_context = market_context + macro_today_line
 
     # Carica history — solo titoli per non sprecare token
     history = {}
@@ -618,18 +658,36 @@ def run():
             return json.loads(resp.choices[0].message.content)
             
         def clean_script(script_obj, key):
-            """Estrae il testo pulito dallo script, gestendo se l'LLM ha restituito un dict invece di una stringa o una lista."""
+            """Estrae il testo pulito dallo script, gestendo strutture dict/list annidate dall'LLM."""
             if isinstance(script_obj, list) and len(script_obj) > 0:
                 script_obj = script_obj[0]
-            
+
             if not isinstance(script_obj, dict):
                 return ""
-                
+
             content = script_obj.get(key, "")
-            if isinstance(content, dict):
-                # Se è un dict, unisci i valori delle chiavi in ordine
-                return "\n\n".join(str(v) for v in content.values() if v)
-            return str(content)
+
+            def _flatten(val):
+                if isinstance(val, str):
+                    return val
+                if isinstance(val, dict):
+                    return "\n\n".join(_flatten(v) for v in val.values() if v)
+                if isinstance(val, list):
+                    return "\n\n".join(_flatten(v) for v in val if v)
+                return ""
+
+            text = _flatten(content)
+
+            # Post-process audio TTS
+            import re
+            # Rimuovi zeri decimali inutili ("2.00%" → "2%", "4.30" → "4.3")
+            text = re.sub(r'(\d+)\.0+(?=%|\b)', r'\1', text)
+            text = re.sub(r'(\d+\.\d*?)0+(?=%|\b)', r'\1', text)
+            text = re.sub(r'(\d+)\.(?=%|\s|$)', r'\1', text)
+            # Rimuovi "ieri" (violazione regola temporale)
+            text = re.sub(r'\bieri\b', 'nella seduta precedente', text, flags=re.IGNORECASE)
+            text = re.sub(r'\byesterday\b', 'at the last close', text, flags=re.IGNORECASE)
+            return text.strip()
 
         def _safe_get(obj, key, default=""):
             """Safely get a value from a dict OR a single-item list containing a dict."""
@@ -668,24 +726,27 @@ def run():
         # Merge IT
         briefing['audio_script_it'] = f"{clean_script(it_finance, 'audio_script_it')}\n\n{clean_script(it_crypto, 'audio_script_it')}\n\n{clean_script(it_close, 'audio_script_it')}"
 
-        # 2. ENGLISH
-        logger.info('🎙️ Generazione Audio EN (3 segmenti)...')
-        
-        # Part A: Finance
-        en_finance_user = f"DATE: {today_str}\nSENTIMENT: {sentiment_label}\nMARKETS:\n{audio_market_context}\nTOP NEWS:\n" + \
-                         "\n".join(f"- {a['title']}" for a in news_it[:10])
-        en_finance_user += holiday_warning_en
-        en_finance = get_audio_part(AUDIO_FINANCE_PROMPT_EN, en_finance_user, 'audio_script_en')
-        
-        # Part B: Crypto
-        en_crypto_user = it_crypto_user # Contesto è lo stesso
-        en_crypto = get_audio_part(AUDIO_CRYPTO_PROMPT_EN, en_crypto_user, 'audio_script_en')
-        
-        # Part C: Close
-        en_close = get_audio_part(AUDIO_CLOSE_PROMPT, "Generate closing for English financial podcast.", 'audio_script_en')
-        
-        # Merge EN
-        briefing['audio_script_en'] = f"{clean_script(en_finance, 'audio_script_en')}\n\n{clean_script(en_crypto, 'audio_script_en')}\n\n{clean_script(en_close, 'audio_script_en')}"
+        # 2. ENGLISH — traduzione da IT per garantire coerenza di struttura, dati e lunghezza
+        logger.info('🎙️ Generazione Audio EN (traduzione da IT)...')
+
+        translate_prompt = """You are a professional financial radio translator. Translate the Italian podcast script to English preserving:
+- Identical structure, section order, and approximate length
+- All numbers, percentages, and tickers exactly as in the source
+- Same narrative tone (concise, directional)
+
+NUMBER FORMATTING FOR EN TTS (critical):
+- Convert Italian decimal commas to EN dots ("4,32%" → "4.32%", "85,49 dollari" → "$85.49").
+- Use numeric form (e.g. "$4,703", "+0.41%"). Commas OK for thousands.
+- NEVER spell numbers in words unless it's a clean round threshold (e.g. "above eighty thousand dollars").
+- 0% / 0.00% → "essentially flat".
+- Opening must be "Good morning, welcome to the Price Alert Morning Briefing."
+- Keep the transition "Let's pivot to the cryptocurrency markets..." where the Italian has "Passiamo ora al comparto degli asset digitali..."
+
+Return ONLY a JSON object with key "audio_script_en" containing the full English translation as a single string."""
+
+        en_translate_user = f"ITALIAN SCRIPT TO TRANSLATE:\n\n{briefing['audio_script_it']}"
+        en_full = get_audio_part(translate_prompt, en_translate_user, 'audio_script_en')
+        briefing['audio_script_en'] = clean_script(en_full, 'audio_script_en')
 
         # Merge article_impacts negli articoli raw
         article_impacts = briefing.pop('article_impacts', [])

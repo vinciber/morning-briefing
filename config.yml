@@ -94,6 +94,25 @@ sources:
     - url: 'https://rss.art19.com/the-insight'
       name: 'Oaktree Capital (Memos)'
       category: 'finanza'
+    # Fonti Italiane (stampa economica IT)
+    - url: 'https://www.ilsole24ore.com/rss/finanza.xml'
+      name: 'Il Sole 24 Ore (Finanza)'
+      category: 'macro_economia'
+    - url: 'https://www.ilsole24ore.com/rss/mondo.xml'
+      name: 'Il Sole 24 Ore (Mondo)'
+      category: 'geopolitica'
+    - url: 'https://www.milanofinanza.it/rss/mercati'
+      name: 'Milano Finanza'
+      category: 'macro_economia'
+    - url: 'https://www.ansa.it/sito/notizie/economia/economia_rss.xml'
+      name: 'ANSA Economia'
+      category: 'macro_economia'
+    - url: 'https://www.repubblica.it/rss/economia/rss2.0.xml'
+      name: 'Repubblica Economia'
+      category: 'macro_economia'
+    - url: 'https://xml2.corriereobjects.it/rss/economia.xml'
+      name: 'Corriere Economia'
+      category: 'macro_economia'
 
   # TIER 3 — Analisi Finanziaria e Scraper
   tier3_webfetch:

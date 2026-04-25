@@ -75,6 +75,8 @@
   .tier-badge{font-size:10px;color:var(--text-muted);margin-left:auto;}
   .tier-1{color:#d29922;}.tier-2{color:#7d8590;}
   .stars{font-size:11px;color:var(--yellow);}
+  .lang-flag{font-size:12px;margin-left:4px;opacity:0.85;}
+  .paywall-badge{font-size:11px;margin-left:2px;opacity:0.75;cursor:help;}
   .card-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:8px;}
   .card-summary{font-size:13px;color:#b1bac4;line-height:1.7;margin-bottom:10px;}
   .card-assets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
@@ -261,11 +263,11 @@
         </div>
         <div style="text-align: center;">
           <div class="macro-label">Total AUM</div>
-          <div class="macro-value" style="font-size: 14px;">${{ etf.total_aum_bn }}B</div>
+          <div class="macro-value" style="font-size: 14px;">${{ "{:.2f}".format(etf.total_aum_bn|float) }}B</div>
         </div>
         <div style="text-align: center;">
           <div class="macro-label">% of 21M</div>
-          <div class="macro-value" style="font-size: 14px;">{{ etf.pct_of_21m }}%</div>
+          <div class="macro-value" style="font-size: 14px;">{{ "{:.2f}".format(etf.pct_of_21m|float) }}%</div>
         </div>
       </div>
       {% endif %}
@@ -347,6 +349,16 @@
         {% set score = ((raw_score * 5) | round | int) if raw_score <= 1.0 else (raw_score | int) %}
         {% set score = [[score, 1] | max, 5] | min %}
         <span class="stars">{{ '★' * score }}{{ '☆' * (5 - score) }}</span>
+        {% set _src_url = item.get('source_url', item.get('url', '')) | lower %}
+        {% set _is_translated = item.get('title_it') and item.get('title_en') and item.get('title_it') != item.get('title_en') %}
+        {% if _is_translated %}
+          <span class="lang-flag" title="Tradotto in italiano">🇮🇹</span>
+        {% else %}
+          <span class="lang-flag" title="Articolo in lingua originale">🇬🇧</span>
+        {% endif %}
+        {% if 'ft.com' in _src_url or 'bloomberg.com' in _src_url or 'wsj.com' in _src_url or 'economist.com' in _src_url %}
+          <span class="paywall-badge" title="Potrebbe richiedere abbonamento">🔒</span>
+        {% endif %}
         {% if item.get('tier') %}
         <span class="tier-badge tier-{{ item.tier }}">T{{ item.tier }}</span>
         {% endif %}

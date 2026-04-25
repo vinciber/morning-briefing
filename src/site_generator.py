@@ -95,11 +95,11 @@ def group_articles_into_sections(articles, lang):
     }
     
     articles_by_cat = defaultdict(list)
+    # Mappa categorie non previste (finanza) verso le 5 principali
+    category_remap = {'finanza': 'macro_economia'}
     for art in articles:
-        # Create a copy for template display to avoid modifying the original article
-        # The display logic for title/summary/category is now handled directly in the Jinja2 templates
-        # by checking for _en or _it suffixes, or falling back to generic fields.
         cat = art.get('category', 'mercati')
+        cat = category_remap.get(cat, cat)
         articles_by_cat[cat].append(art)
 
     sections = []
@@ -165,6 +165,13 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html)
     logger.info(f'✅ Pagina generata ({lang}): {output_path}')
+
+    # Also write a no-dash alias (e.g. 20260415.html) for backward compat with older app builds
+    nodash = date.replace('-', '')
+    nodash_path = out_dir / f'{nodash}.html'
+    with open(nodash_path, 'w', encoding='utf-8') as f:
+        f.write(html)
+    logger.info(f'✅ Alias no-dash generato ({lang}): {nodash_path}')
 
 
 def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 'it'):
