@@ -52,10 +52,24 @@ HIGH_KEYWORDS = [
 ]
 
 TITLE_BLACKLIST = [
+    # Real estate / personal finance
     'mortgage', 'heloc', 'real estate', 'housing market', 'rent',
     'credit card', 'personal loan', 'rating', 'downgrade', 'upgrade',
     'zillow', 'redfin', 'realtor', 'home prices', 'savings interest',
-    'best rates', 'how to buy', 'first-time homebuyer', 'refinance'
+    'best rates', 'how to buy', 'first-time homebuyer', 'refinance',
+    # Sports
+    'calcio', 'serie a', 'serie b', 'champions league', 'europa league',
+    'uefa', 'fifa', 'football', 'soccer', 'club tricolori', 'fuorigioco',
+    'calciomercato', 'gol', 'partita', 'scudetto', 'coppa italia',
+    'basket', 'nba', 'tennis', 'formula 1', 'f1', 'motogp', 'olimpiadi',
+    'rugby', 'ciclismo', 'giro d\'italia', 'tour de france',
+    # Entertainment / gossip
+    'celebrity', 'gossip', 'entertainment', 'movie', 'film', 'tv show',
+    'reality', 'red carpet', 'oscar', 'grammy', 'netflix', 'spotify',
+    'streaming', 'box office', 'influencer',
+    # Other noise
+    'horoscope', 'oroscopo', 'meteo', 'weather forecast', 'ricetta',
+    'recipe', 'travel tips', 'vacanze',
 ]
 
 TIER_SCORE = {1: 1.0, 2: 0.75, 3: 0.5, 4: 0.3}

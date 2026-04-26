@@ -174,7 +174,10 @@ OUTPUT JSON — struttura esatta:
 
 REGOLA TRADUZIONE: Per ogni articolo in article_impacts, title_it e summary_it DEVONO essere in italiano.
 Se la fonte è in inglese, DEVI tradurre. Non è accettabile restituire title_it uguale al titolo inglese originale.
-summary_it deve contenere la sintesi del contenuto dell'articolo, non solo il titolo.
+summary_it deve contenere la sintesi del contenuto dell'articolo IN ITALIANO, non solo il titolo.
+ATTENZIONE: summary_it DEVE essere SEMPRE in italiano, anche se la fonte è in inglese. Lo snippet originale inglese va TRADOTTO.
+Esempio SBAGLIATO: summary_it = "Globalization is not dying. It is being rebuilt."
+Esempio CORRETTO: summary_it = "La globalizzazione non sta morendo, ma si sta ricostruendo."
 """
 
     
@@ -513,6 +516,15 @@ def run():
 
     audio_market_context = market_context + macro_today_line
 
+    # Separa contesto Finance e Crypto per evitare ripetizioni nell'audio
+    if 'CRYPTO MARKET DATA:' in market_context:
+        _split = market_context.split('CRYPTO MARKET DATA:')
+        audio_finance_context = _split[0].rstrip() + macro_today_line
+        audio_crypto_context = 'CRYPTO MARKET DATA:' + _split[1]
+    else:
+        audio_finance_context = market_context + macro_today_line
+        audio_crypto_context = ''
+
     # Carica history — solo titoli per non sprecare token
     history = {}
     if HISTORY_PATH.exists():
@@ -704,19 +716,15 @@ def run():
         sentiment_obj = briefing.get('sentiment', {})
         sentiment_label = _safe_get(sentiment_obj, 'label', 'neutral')
         
-        # Part A: Finance
-        it_finance_user = f"DATA: {today_str}\nSENTIMENT: {sentiment_label}\nMERCATI:\n{audio_market_context}\nNOTIZIE PRINCIPALI:\n" + \
-                         "\n".join(f"- {a['title']}" for a in news_it[:10])
+        # Part A: Finance (SENZA dati crypto per evitare ripetizioni)
+        it_finance_user = f"DATA: {today_str}\nSENTIMENT: {sentiment_label}\nMERCATI:\n{audio_finance_context}\nNOTIZIE PRINCIPALI:\n" + \
+                         "\n".join(f"- {a['title']}" for a in news_it[:10] if a.get('category') != 'crypto')
         it_finance_user += holiday_warning_it
         it_finance = get_audio_part(AUDIO_FINANCE_PROMPT, it_finance_user, 'audio_script_it')
         
-        # Part B: Crypto
-        # Assicurati che lo split includa anche i dati ETF che sono prima di CRYPTO data ma rilevanti
+        # Part B: Crypto (SOLO dati crypto, niente dati tradizionali)
         etf_flow_ctx = f"BTC ETF Daily Net Inflow: {md.get('btc_etf_flow', {}).get('value', 'N/A')}\n"
-        # etf_flow_ctx già in formato grezzo — nessun preprocessing necessario
-        
-        crypto_ctx = (audio_market_context.split('CRYPTO MARKET DATA:')[1] if 'CRYPTO MARKET DATA:' in audio_market_context else audio_market_context)
-        it_crypto_user = f"DATI CRYPTO ATTUALI (USA QUESTI VALORI):\n{etf_flow_ctx}{crypto_ctx}\nNOTIZIE CRYPTO:\n" + \
+        it_crypto_user = f"DATI CRYPTO ATTUALI (USA QUESTI VALORI):\n{etf_flow_ctx}{audio_crypto_context}\nNOTIZIE CRYPTO:\n" + \
                         "\n".join(f"- {a['title']}" for a in news_it if a.get('category') == 'crypto')
         it_crypto = get_audio_part(AUDIO_CRYPTO_PROMPT, it_crypto_user, 'audio_script_it')
         
