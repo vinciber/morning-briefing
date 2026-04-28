@@ -359,8 +359,8 @@ def generate_api_json(briefing: dict):
         'sentiment': briefing.get('sentiment', {}).get('label', 'neutral'),
         'items_count': len(briefing.get('articles', [])),
     })
- 
-    index = index[:60] # Esteso a 60 giorni
+
+    index = index[:30] # Retention 1 mese
 
     with open(index_path, 'w', encoding='utf-8') as f:
         json.dump(index, f, ensure_ascii=False, indent=2)

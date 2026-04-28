@@ -295,7 +295,13 @@ def _number_to_italian(n: int) -> str:
 
 def normalize_for_tts_en(text: str) -> str:
     """Normalizza testo per sintesi vocale naturale in inglese."""
-    
+
+    # 0. Pulizia virgole decimali italiane residue (es. "4,32%" → "4.32%", "85,49 dollars" → "85.49 dollars")
+    # Solo se la virgola separa cifra-virgola-cifra ed è seguita da % o "dollar", o all'interno di numeri puri
+    text = re.sub(r'(\d),(\d)(?=\d*\s*(?:%|percent|dollar|USD|EUR|euro))', r'\1.\2', text, flags=re.IGNORECASE)
+    # Decimali italiani in numeri standalone (es. "+0,7%" → "+0.7%")
+    text = re.sub(r'([+-]?\d+),(\d+)(?=\s*(?:%|percent))', r'\1.\2', text, flags=re.IGNORECASE)
+
     # 1. Coppie di valute, Simboli e Acronimi fastidiosi
     replacements = [
         ("&", "and"),                      # "Fear & Greed" -> "Fear and Greed"
@@ -374,7 +380,7 @@ def run():
         suffix = f'_{lang}' if lang != 'it' else ''
         output_mp3 = OUTPUT_DIR / f'briefing_{date_str.replace("-", "")}{suffix}.mp3'
 
-        model_name = "it_IT-paola-medium.onnx" if lang == 'it' else "en_US-ryan-medium.onnx"
+        model_name = "it_IT-paola-medium.onnx" if lang == 'it' else "en_US-amy-medium.onnx"
         model_path = MODEL_DIR / model_name
         
         if not model_path.exists():
@@ -390,10 +396,14 @@ def run():
             combined = AudioSegment.empty()
             silence = AudioSegment.silent(duration=600)
 
+            # IT richiede leggero rallentamento per chiarezza dei numeri.
+            # EN-Amy è naturale a velocità nativa, length_scale 1.1 fa biascicare.
+            length_scale = 1.1 if lang == 'it' else 1.0
+
             for i, p in enumerate(paragraphs):
                 p_wav = io.BytesIO()
                 with wave.open(p_wav, "wb") as wav_file:
-                    voice.synthesize(p, wav_file, length_scale=1.1)
+                    voice.synthesize(p, wav_file, length_scale=length_scale)
                 
                 p_wav.seek(0)
                 p_segment = AudioSegment.from_wav(p_wav)

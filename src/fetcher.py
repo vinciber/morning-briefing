@@ -70,15 +70,31 @@ TITLE_BLACKLIST = [
     # Other noise
     'horoscope', 'oroscopo', 'meteo', 'weather forecast', 'ricetta',
     'recipe', 'travel tips', 'vacanze',
+    # Politica nazionale di basso impatto sui mercati (scandali, gossip politico)
+    'vip lounge', 'spese pazze', 'rimborsi', 'condannato', 'arrestato',
+    'inchiesta', 'indagato', 'dimissioni', 'scandalo', 'bufera',
+    'consigliere comunale', 'sindaco', 'assessore', 'parlamentare',
+    'al via il processo', 'processo per', 'contestazione', 'manifestazione',
+]
+
+# Titoli rifiutati nei webfetch (link nav/footer/legal di asset manager pages)
+WEBFETCH_NAV_BLACKLIST = [
+    'privacy policy', 'cookie policy', 'cookie', 'terms of use', 'terms and conditions',
+    'legal', 'sitemap', 'site map', 'careers', 'contact us', 'contact',
+    'login', 'sign in', 'register', 'subscribe', 'newsletter signup',
+    'investment stewardship', 'our company', 'our firm', 'about us',
+    'local websites', 'regional sites', 'change region', 'global home',
+    'rss feed', 'follow us', 'social media', 'help & support', 'help center',
+    'accessibility', 'disclaimer', 'modern slavery', 'do not sell',
 ]
 
 TIER_SCORE = {1: 1.0, 2: 0.75, 3: 0.5, 4: 0.3}
 CATEGORY_CAPS = {
     'mercati':        8,
-    'geopolitica':    6,
-    'macro_economia': 6,
-    'energia':        5,
-    'crypto':         5,
+    'geopolitica':    4,
+    'macro_economia': 7,
+    'energia':        4,
+    'crypto':         4,
 }
 GLOBAL_CAP = 25
 
@@ -151,8 +167,8 @@ def parse_date(entry) -> str:
 # ---------------------------------------------------------------------------
 # Fetchers
 # ---------------------------------------------------------------------------
-def _fetch_pimco(source: dict) -> list[dict]:
-    """Scraper ad hoc per PIMCO Insights (Tier 3)."""
+def _fetch_pimco(source: dict, tier: int = 2) -> list[dict]:
+    """Scraper ad hoc per PIMCO Insights."""
     url = source['url']
     name = source['name']
     
@@ -181,7 +197,7 @@ def _fetch_pimco(source: dict) -> list[dict]:
                     'title': title,
                     'url': href,
                     'source': name,
-                    'tier': 3,
+                    'tier': tier,
                     'category': 'finanza',
                     'snippet': '',
                     'date': datetime.now(timezone.utc).isoformat(),
@@ -321,8 +337,11 @@ def fetch_rss_feed(source: dict, tier: int) -> list[dict]:
         return []
 
 
-def fetch_webfetch_source(source: dict) -> list[dict]:
-    """Web-scrapes una pagina per fonti senza RSS nativo (Tier 3)."""
+def fetch_webfetch_source(source: dict, tier: int = 3) -> list[dict]:
+    """Web-scrapes una pagina per fonti senza RSS nativo.
+    Filtra link di nav/footer/legal e titoli generici per evitare spazzatura
+    (es. BlackRock raccoglieva 'Privacy Policy', 'Investment Stewardship', ...).
+    """
     url = source['url']
     name = source['name']
     category = source.get('category', 'finanza')
@@ -347,9 +366,29 @@ def fetch_webfetch_source(source: dict) -> list[dict]:
             text = link_tag.get_text(strip=True)
             href = link_tag['href']
 
-            # Filtra: solo link con titoli lunghi (almeno 20 chars) e non duplicati
-            if len(text) < 20 or text in seen:
+            # Filtra: solo link con titoli lunghi (almeno 25 chars) e non duplicati
+            if len(text) < 25 or text in seen:
                 continue
+
+            # Detect duplicato interno tipo "Our companyOur company"
+            half = len(text) // 2
+            if half >= 6 and text[:half].strip() == text[half:].strip():
+                continue
+
+            # Filtra titoli nav/footer/legal
+            text_lower = text.lower()
+            if any(term in text_lower for term in WEBFETCH_NAV_BLACKLIST):
+                continue
+
+            # Path filter: deve apparire un segmento "insight"/"research"/"article"/"publication"
+            href_lower = href.lower()
+            allowed_path_terms = ['insight', 'research', 'article', 'publication',
+                                  'commentary', 'view', 'analysis', 'perspective',
+                                  'report', 'outlook', 'paper', 'whitepaper',
+                                  'wealth-management-insights', 'learning-center']
+            if not any(term in href_lower for term in allowed_path_terms):
+                continue
+
             seen.add(text)
 
             # Normalizza URL relativo
@@ -366,14 +405,14 @@ def fetch_webfetch_source(source: dict) -> list[dict]:
                 'title': text,
                 'url': href,
                 'source': name,
-                'tier': 3,
+                'tier': tier,
                 'category': normalize_category(source.get('category', 'mercati')), # Normalize here (Problem 2)
                 'snippet': '',
                 'date': datetime.now(timezone.utc).isoformat(),
                 'relevance_score': round(score, 3),
             })
 
-            if len(articles) >= 10:
+            if len(articles) >= 5:
                 break
 
         logger.info(f'✓ {name}: {len(articles)} articoli (web_fetch)')
@@ -411,7 +450,8 @@ def smart_select(articles):
 
     # PASSAGGIO 0 — Proteggi report settimanali il lunedì
     # Questi articoli bypassano i cap di categoria ma restano nel conteggio globale
-    weekly_sources = ['BlackRock Investment Institute', 'Goldman Sachs Insights']
+    weekly_sources = ['BlackRock Investment Institute', 'Goldman Sachs Insights',
+                      'PIMCO Insights', 'Apollo Academy', 'Vanguard Insights', 'Fidelity Insights']
     weekly_protected = []
     regular_articles = []
     
@@ -476,12 +516,22 @@ def smart_select(articles):
         if len(selected) >= effective_cap:
             break
 
-    # Aggiungi weekly protetti in coda
+    # Aggiungi weekly protetti in coda — max 2 per fonte (filtro di rilievo)
     if is_monday and weekly_protected:
-        # Ordina per relevance_score
         weekly_protected.sort(key=lambda x: x.get('relevance_score', 0), reverse=True)
-        selected.extend(weekly_protected[:weekly_slots])
-        logger.info(f'✅ Aggiunti {weekly_slots} articoli settimanali al feed')
+        weekly_per_source = {}
+        weekly_to_add = []
+        for art in weekly_protected:
+            src = art.get('source', '')
+            if weekly_per_source.get(src, 0) >= 2:
+                continue
+            weekly_to_add.append(art)
+            weekly_per_source[src] = weekly_per_source.get(src, 0) + 1
+            if len(weekly_to_add) >= weekly_slots:
+                break
+        selected.extend(weekly_to_add)
+        logger.info(f'✅ Aggiunti {len(weekly_to_add)} articoli settimanali al feed '
+                    f'(max 2 per fonte tra {len(weekly_per_source)} fonti)')
 
     logger.info(f'🧠 Smart select: {len(articles)} → {len(deduplicated)} '
                 f'(dedup) → {len(selected)} (final)')
@@ -508,15 +558,20 @@ def run():
     for source in config.get('sources', {}).get('tier2', []):
         all_articles.extend(fetch_rss_feed(source, tier=2))
 
-    # Fetch Tier 3 (web_fetch e scraper)
-    for source in config.get('sources', {}).get('tier3_webfetch', []):
+    # Fetch Tier 2 webfetch / scraper (asset manager insights istituzionali)
+    is_monday_for_weekly = datetime.now(timezone.utc).weekday() == 0
+    for source in config.get('sources', {}).get('tier2_webfetch', []):
+        # Skip fonti settimanali se non è lunedì
+        if source.get('frequency') == 'weekly' and not is_monday_for_weekly:
+            logger.info(f'⏩ {source.get("name")}: fonte settimanale, skip (non è lunedì)')
+            continue
         stype = source.get('type', 'rss')
         if stype == 'rss':
-            all_articles.extend(fetch_rss_feed(source, tier=3))
+            all_articles.extend(fetch_rss_feed(source, tier=2))
         elif stype == 'scraper':
-            all_articles.extend(_fetch_pimco(source))
+            all_articles.extend(_fetch_pimco(source, tier=2))
         else:
-            all_articles.extend(fetch_webfetch_source(source))
+            all_articles.extend(fetch_webfetch_source(source, tier=2))
             
     # Task 4: Cross-Reference Scoring
     _calculate_cross_reference_score(all_articles)
@@ -533,16 +588,26 @@ def run():
 
     # Filtra articoli con score troppo basso
     before = len(all_articles)
-    PROTECTED_SOURCES = ['BlackRock Investment Institute', 'Goldman Sachs Insights', 'PIMCO Insights']
+    PROTECTED_SOURCES = ['BlackRock Investment Institute', 'Goldman Sachs Insights',
+                         'PIMCO Insights', 'Apollo Academy', 'Vanguard Insights', 'Fidelity Insights']
+    # Generaliste: soglia più alta per scartare scandali/politica locale a basso impatto
+    GENERAL_SOURCES = ['Repubblica Economia', 'Corriere Economia', 'Il Sole 24 Ore (Mondo)',
+                       'Il Sole 24 Ore (Finanza)', 'Milano Finanza', 'Teleborsa']
     is_monday = datetime.now(timezone.utc).weekday() == 0
     logger.info(f'📅 Debug Lunedì: {is_monday} (UTC weekday: {datetime.now(timezone.utc).weekday()})')
-    
-    all_articles = [
-        a for a in all_articles
-        if a.get('relevance_score', 0) >= 0.3
-        or a.get('source') in PROTECTED_SOURCES
-    ]
-    logger.info(f'🗑️ Filtrati {before - len(all_articles)} articoli rumore (score < 0.3, fonti protette preservate)')
+
+    def _passes_filter(a):
+        src = a.get('source', '')
+        score = a.get('relevance_score', 0)
+        if src in PROTECTED_SOURCES:
+            return True
+        if src in GENERAL_SOURCES:
+            return score >= 0.5
+        return score >= 0.3
+
+    all_articles = [a for a in all_articles if _passes_filter(a)]
+    logger.info(f'🗑️ Filtrati {before - len(all_articles)} articoli rumore '
+                f'(soglia 0.3 / 0.5 generaliste, fonti protette preservate)')
 
     # Smart Selection (Scoring + Dedup + Caps)
     all_articles = smart_select(all_articles)

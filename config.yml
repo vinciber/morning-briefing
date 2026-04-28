@@ -104,8 +104,8 @@ sources:
     - url: 'https://www.milanofinanza.it/rss/mercati'
       name: 'Milano Finanza'
       category: 'macro_economia'
-    - url: 'https://www.ansa.it/sito/notizie/economia/economia_rss.xml'
-      name: 'ANSA Economia'
+    - url: 'https://www.teleborsa.it/News/RSS'
+      name: 'Teleborsa'
       category: 'macro_economia'
     - url: 'https://www.repubblica.it/rss/economia/rss2.0.xml'
       name: 'Repubblica Economia'
@@ -114,8 +114,8 @@ sources:
       name: 'Corriere Economia'
       category: 'macro_economia'
 
-  # TIER 3 — Analisi Finanziaria e Scraper
-  tier3_webfetch:
+  # TIER 2 — Webfetch / Scraper (Asset Manager Insights — istituzionali settimanali)
+  tier2_webfetch:
     - url: 'https://www.blackrock.com/corporate/insights/blackrock-investment-institute'
       name: 'BlackRock Investment Institute'
       type: 'webfetch'
@@ -130,6 +130,22 @@ sources:
       name: 'PIMCO Insights'
       type: 'scraper'
       category: 'finanza'
+      frequency: 'weekly'
+    - url: 'https://www.apolloacademy.com/feed/'
+      name: 'Apollo Academy'
+      type: 'rss'
+      category: 'finanza'
+      frequency: 'weekly'
+    - url: 'https://corporate.vanguard.com/content/corporatesite/us/en/corp/articles.html'
+      name: 'Vanguard Insights'
+      type: 'webfetch'
+      category: 'finanza'
+      frequency: 'weekly'
+    - url: 'https://www.fidelity.com/learning-center/wealth-management-insights/overview'
+      name: 'Fidelity Insights'
+      type: 'webfetch'
+      category: 'finanza'
+      frequency: 'weekly'
 
   # TIER 4 — News Quotidiane Istituzionali
   tier4:

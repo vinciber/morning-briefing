@@ -163,8 +163,10 @@ OUTPUT JSON — struttura esatta:
   "article_impacts": [
     {
       "url": "url esatto dell'articolo",
-      "title_it": "Titolo tradotto in italiano — OBBLIGATORIO anche se fonte è inglese. NON copiare l'originale inglese.",
+      "title_it": "Titolo in italiano — OBBLIGATORIO. NON copiare l'originale inglese.",
+      "title_en": "Title in English — OBBLIGATORIO. NON copiare l'originale italiano.",
       "summary_it": "Sintesi in italiano (40-60 parole). OBBLIGATORIO tradurre anche se fonte è inglese.",
+      "summary_en": "Summary in English (40-60 words). MANDATORY translation even if source is Italian.",
       "direction": "bearish | bullish | mixed",
       "magnitude": "high | medium | low",
       "assets_affected": ["S&P 500", "Brent"]
@@ -172,12 +174,25 @@ OUTPUT JSON — struttura esatta:
   ]
 }
 
-REGOLA TRADUZIONE: Per ogni articolo in article_impacts, title_it e summary_it DEVONO essere in italiano.
-Se la fonte è in inglese, DEVI tradurre. Non è accettabile restituire title_it uguale al titolo inglese originale.
-summary_it deve contenere la sintesi del contenuto dell'articolo IN ITALIANO, non solo il titolo.
-ATTENZIONE: summary_it DEVE essere SEMPRE in italiano, anche se la fonte è in inglese. Lo snippet originale inglese va TRADOTTO.
+REGOLA COVERAGE — CRITICA:
+- article_impacts DEVE contenere UNA entry per OGNI URL ricevuto in input. Nessuna esclusione.
+- Per articoli con basso impatto sui mercati, usa magnitude="low" ma assegna comunque direction bullish o bearish in base al contenuto.
+
+REGOLA DIRECTION — CRITICA (evita "mixed" come default):
+- "mixed" va usato SOLO se l'articolo contiene effetti contrastanti chiari (es. dato positivo per equity ma negativo per bond).
+- Per ogni altro articolo, scegli bullish o bearish secondo questa logica:
+  • Tassi/inflazione in aumento, sanzioni, conflitti, tariffe, recessione, downgrade rating, crisi → bearish
+  • Tagli tassi, accordi commerciali, allentamento monetario, dati macro positivi, de-escalation → bullish
+  • Rapporti istituzionali (BlackRock, Goldman, etc.) sull'outlook senza chiara tesi → leggi il sentiment del testo e scegli
+- "mixed" è un'eccezione, non la regola. Se più del 30% degli articoli risulta "mixed" stai sbagliando.
+
+REGOLA TRADUZIONE: Per ogni articolo in article_impacts:
+- title_it / summary_it DEVONO essere in italiano (anche se fonte inglese)
+- title_en / summary_en DEVONO essere in inglese (anche se fonte italiana)
 Esempio SBAGLIATO: summary_it = "Globalization is not dying. It is being rebuilt."
 Esempio CORRETTO: summary_it = "La globalizzazione non sta morendo, ma si sta ricostruendo."
+Esempio SBAGLIATO: title_en = "Cina avverte l'UE su nuova legge"
+Esempio CORRETTO: title_en = "China warns EU over proposed new law"
 """
 
     
@@ -240,6 +255,8 @@ NUMERI — REGOLE FORMATO (critico per TTS):
 - Per grandi soglie tonde: scrivi in lettere (es. "ottantamila dollari"). Per prezzi specifici: usa il numero con virgola decimale ("85,49 dollari"). MAI "80,000" o "80.000".
 - Percentuali: massimo un decimale, virgola decimale italiana ("0,4%" non "0.4%").
 - Valore 0% (0,00%) → "pressoché invariato" o "stabile". NON "zero virgola zero zero percento".
+- CRYPTO IN MIGLIAIA: per ETH, BNB, SOL e altri prezzi a 3-4 cifre, scrivi SEMPRE in lettere ("duemilatrecento dollari" / "duemila trecentotrenta dollari"). MAI "2.333" né "2,333" che il TTS legge come "2 virgola 333".
+- BTC sopra i 10K: usa lettere ("ottantamila dollari", "centodiecimila dollari"). MAI "80,000" o "110.000".
 """
 
 AUDIO_FINANCE_PROMPT_EN = """You are a concise financial radio presenter. Style: directional, no filler.
@@ -315,6 +332,25 @@ def _merge_article_impacts(articles: list, article_impacts: list) -> list:
                 'assets_affected': impact.get('assets_affected', []),
             }
 
+    BEARISH_KW = ['war', 'conflict', 'sanction', 'tariff', 'recession', 'crisis',
+                  'downgrade', 'inflation surge', 'rate hike', 'hawkish', 'default',
+                  'guerra', 'conflitto', 'sanzioni', 'tariffe', 'recessione', 'crisi',
+                  'declassamento', 'rialzo tassi', 'inflazione', 'attacco', 'embargo']
+    BULLISH_KW = ['rate cut', 'easing', 'dovish', 'agreement', 'deal', 'rally',
+                  'soft landing', 'breakthrough', 'de-escalation', 'recovery',
+                  'taglio tassi', 'allentamento', 'accordo', 'rimbalzo', 'ripresa',
+                  'distensione', 'tregua']
+
+    def _infer_direction(text: str) -> str:
+        t = (text or '').lower()
+        b_score = sum(1 for kw in BEARISH_KW if kw in t)
+        g_score = sum(1 for kw in BULLISH_KW if kw in t)
+        if b_score > g_score:
+            return 'bearish'
+        if g_score > b_score:
+            return 'bullish'
+        return 'mixed'
+
     matched = 0
     for art in articles:
         url = art.get('url', '').strip()
@@ -331,14 +367,15 @@ def _merge_article_impacts(articles: list, article_impacts: list) -> list:
             }
             matched += 1
         else:
-            # Fallback rule-based per null
-            cat = art.get('category', '').lower()
+            # Fallback rule-based per null — direction inferita dal contenuto, non default 'mixed'
+            text = f"{art.get('title','')} {art.get('snippet','')}"
+            direction = _infer_direction(text)
             art['title_it'] = art.get('title')
             art['title_en'] = art.get('title')
             art['summary_it'] = art.get('snippet')
             art['summary_en'] = art.get('snippet')
             art['market_impact'] = {
-                'direction': 'bearish' if cat in ('geopolitica', 'energia', 'macro') else 'mixed',
+                'direction': direction,
                 'magnitude': 'low',
                 'assets_affected': [],
             }
@@ -366,12 +403,14 @@ def run():
 
     # Filtra articoli con score troppo basso (rumore) salvando i protetti
     # (PIMCO e fonti settimanali saltano il filtro del 0.3)
-    PROTECTED_SOURCES = ['BlackRock Investment Institute', 'Goldman Sachs Insights', 'PIMCO Insights']
+    PROTECTED_SOURCES = ['BlackRock Investment Institute', 'Goldman Sachs Insights',
+                         'PIMCO Insights', 'Apollo Academy', 'Vanguard Insights', 'Fidelity Insights']
     articles = [a for a in articles if a.get('relevance_score', 0) >= 0.3 or a.get('source') in PROTECTED_SOURCES]
     logger.info(f'📰 Articoli post-filtro (>= 0.3 o protetti): {len(articles)}')
 
     # Definisci weekly sources per i check post-json
-    weekly_sources = ['BlackRock Investment Institute', 'Goldman Sachs Insights']
+    weekly_sources = ['BlackRock Investment Institute', 'Goldman Sachs Insights',
+                      'PIMCO Insights', 'Apollo Academy', 'Vanguard Insights', 'Fidelity Insights']
 
     # Costruisci contesto mercati
     market_context = ""
@@ -582,7 +621,8 @@ def run():
     # Context variables
     now = datetime.now(timezone.utc)
     is_monday = now.weekday() == 0
-    weekly_sources = ['BlackRock Investment Institute', 'Goldman Sachs Insights']
+    weekly_sources = ['BlackRock Investment Institute', 'Goldman Sachs Insights',
+                      'PIMCO Insights', 'Apollo Academy', 'Vanguard Insights', 'Fidelity Insights']
     weekly_articles = [a for a in articles_slim if a.get('source') in weekly_sources]
 
     if is_monday and weekly_articles:

@@ -3,7 +3,7 @@ name: Morning Briefing
 
 on:
   schedule:
-    - cron: '48 6 * * *'    # Forzato per girare adessp
+    - cron: '30 6 * * *'      # 08:30 CEST ogni giorno — weekend/festivi: summarizer pivota su crypto
   workflow_dispatch:          # Esecuzione manuale da GitHub UI
 
 permissions:
@@ -58,11 +58,11 @@ jobs:
             wget -q -O models/it_IT-paola-medium.onnx.json \
               "https://huggingface.co/rhasspy/piper-voices/resolve/main/it/it_IT/paola/medium/it_IT-paola-medium.onnx.json"
           fi
-          if [ ! -f models/en_US-ryan-medium.onnx ]; then
-            wget -q -O models/en_US-ryan-medium.onnx \
-              "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/ryan/medium/en_US-ryan-medium.onnx"
-            wget -q -O models/en_US-ryan-medium.onnx.json \
-              "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/ryan/medium/en_US-ryan-medium.onnx.json"
+          if [ ! -f models/en_US-amy-medium.onnx ]; then
+            wget -q -O models/en_US-amy-medium.onnx \
+              "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/amy/medium/en_US-amy-medium.onnx"
+            wget -q -O models/en_US-amy-medium.onnx.json \
+              "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/amy/medium/en_US-amy-medium.onnx.json"
           fi
           python src/tts.py
           # Verifica che l'audio sia stato generato

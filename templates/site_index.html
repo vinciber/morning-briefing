@@ -357,19 +357,30 @@
                     <img src="{{ item.image_url }}" alt="" class="news-image" onerror="this.style.display='none'">
                     {% endif %}
                     <h3 class="news-title">
-                        {{ item.get('display_title') or item.get('title_' + lang) or item.get('title_en') or item.get('title_it') or item.get('title', '') }}
-                        {% set _src_name = (item.get('source', '') | lower) %}
-                        {% set _src_url = item.get('source_url', item.get('url', '')) | lower %}
-                        {% set _it_sources = ['il sole 24 ore', 'sole 24 ore', 'ansa', 'milano finanza', 'repubblica', 'corriere', 'banca d italia'] %}
-                        {% set _is_italian_source = _it_sources | select('in', _src_name) | list | length > 0 %}
-                        {% if not _is_italian_source %}
-                          <span style="font-size: 0.75rem; opacity: 0.8;" title="English source">🇬🇧</span>
+                        {# Strict: in pagina IT mostra title_it (se presente), in pagina EN mostra title_en. #}
+                        {# Fallback alla lingua opposta SOLO se manca completamente. #}
+                        {% if lang == 'it' %}
+                          {{ item.get('title_it') or item.get('title') or item.get('title_en', '') }}
+                        {% else %}
+                          {{ item.get('title_en') or item.get('title') or item.get('title_it', '') }}
                         {% endif %}
+                        {% set _src_url = item.get('source_url', item.get('url', '')) | lower %}
                         {% if 'ft.com' in _src_url or 'bloomberg.com' in _src_url or 'wsj.com' in _src_url or 'economist.com' in _src_url or 'ilsole24ore.com' in _src_url or 'milanofinanza.it' in _src_url %}
                           <span style="font-size: 0.75rem; opacity: 0.7;" title="{% if lang == 'it' %}Potrebbe richiedere abbonamento{% else %}May require subscription{% endif %}">🔒</span>
                         {% endif %}
                     </h3>
-                    <p class="news-summary">{{ (item.get('display_summary') or item.get('summary_' + lang) or item.get('summary_en') or item.get('summary_it') or item.get('snippet', '')) | truncate(160) }}</p>
+                    <p class="news-summary">
+                        {% if lang == 'it' %}
+                          {{ (item.get('summary_it') or item.get('snippet') or item.get('summary_en', '')) | truncate(160) }}
+                        {% else %}
+                          {{ (item.get('summary_en') or item.get('snippet') or item.get('summary_it', '')) | truncate(160) }}
+                        {% endif %}
+                    </p>
+                    {% if item.get('source') %}
+                    <p class="news-source" style="font-size: 0.7rem; color: var(--text-muted); margin: 0.5rem 0 0.4rem; text-transform: uppercase; letter-spacing: 0.04em;">
+                        {{ item.get('source') }}
+                    </p>
+                    {% endif %}
                     <a href="{{ date }}.html" style="color: var(--accent); font-size: 0.8rem; font-weight: 700; text-decoration: none;">READ MORE →</a>
                 </div>
                 {% endfor %}
