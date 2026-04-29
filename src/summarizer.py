@@ -221,6 +221,14 @@ VIETATO ASSOLUTO:
 - NON fare elenchi puntati.
 - NON ripetere lo stesso dato in più sezioni.
 - NON inventare dati macro non presenti nel contesto.
+- NON creare collegamenti causali tra fatti scorrelati. Se due eventi sono in articoli diversi, NON dire "questo movimento potrebbe essere influenzato da [altro evento]" se la fonte non lo afferma esplicitamente. Riporta i fatti separatamente.
+
+PUNTEGGIATURA — REGOLE TTS (critico):
+- Frasi BREVI: max 20-25 parole per frase. Periodi più lunghi → spezza con punto.
+- USA SEMPRE virgole tra clausole (es. "Il VIX è in calo, segnale di propensione al rischio.").
+- USA SEMPRE virgola dopo connettori iniziali ("Inoltre,", "Tuttavia,", "Sul fronte macro,").
+- TERMINA OGNI FRASE con punto (.). Mai virgola al posto del punto.
+- Inserisci doppio newline (\\n\\n) tra le sezioni per pausa naturale dell'audio.
 
 NUMERI — REGOLE FORMATO (critico per TTS):
 - Usa variazioni percentuali nel parlato (es. "in calo dell'1.5%"). Niente zeri inutili: "2%" non "2,00%", "4,3%" non "4,30%".
@@ -250,6 +258,12 @@ REGOLE:
 - MAI l'articolo determinativo davanti a Bitcoin.
 - NON ripetere dati della sezione macro.
 - NON chiudere il podcast (verrà fatto nella sezione CHIUSURA).
+- NON creare collegamenti causali tra fatti scorrelati. Se i flussi ETF e una dichiarazione di un personaggio sono in articoli separati, NON dire "il movimento è influenzato da [dichiarazione]". Riporta i due fatti separatamente.
+
+PUNTEGGIATURA — REGOLE TTS (critico):
+- Frasi BREVI: max 20-25 parole. Periodi lunghi → spezza con punto.
+- USA SEMPRE virgole tra clausole e dopo connettori ("Inoltre,", "Tuttavia,").
+- TERMINA ogni frase con punto. Mai virgola al posto del punto.
 
 NUMERI — REGOLE FORMATO (critico per TTS):
 - Per grandi soglie tonde: scrivi in lettere (es. "ottantamila dollari"). Per prezzi specifici: usa il numero con virgola decimale ("85,49 dollari"). MAI "80,000" o "80.000".
@@ -305,10 +319,23 @@ NUMBERS — FORMAT RULES (critical for TTS quality):
 - No trailing zeros: write "2%" not "2.00%", "4.3%" not "4.30%".
 """
 
-AUDIO_CLOSE_PROMPT = """CHIUSURA OBBLIGATORIA:
-- Focus: outlook per domani e cosa monitorare.
-- Saluto finale professionale: "Grazie per l'attenzione e a domani", "Un saluto da Price Alert", etc.
+AUDIO_CLOSE_PROMPT = """CHIUSURA OBBLIGATORIA per podcast finanziario italiano.
+
+STRUTTURA (50-90 parole totali):
+1. OUTLOOK BREVE (1-2 frasi): Cosa monitorare oggi/nei prossimi giorni (es. "Sui mercati attendiamo i dati ISM e l'apertura di Wall Street.").
+2. INVITO ARTICOLI (1 frase): Invita ad approfondire. Esempi:
+   "Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano."
+   "Tutti gli approfondimenti sono disponibili sul sito di Price Alert nella sezione notizie."
+3. SALUTO FINALE professionale: "Grazie per l'attenzione e a domani", "Un saluto da Price Alert".
+
+VIETATO:
 - NON terminare MAI con "buon trading".
+- NON inventare dati specifici, resta generico nell'outlook.
+
+PUNTEGGIATURA TTS:
+- Frasi brevi (max 20 parole). Virgole tra clausole. Punto a fine frase.
+
+FORMATO OUTPUT: JSON con chiave "audio_script_it" valore stringa di testo continuo.
 """
 
 

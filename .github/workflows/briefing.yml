@@ -3,7 +3,7 @@ name: Morning Briefing
 
 on:
   schedule:
-    - cron: '30 6 * * *'      # 08:30 CEST ogni giorno — weekend/festivi: summarizer pivota su crypto
+    - cron: '47 5 * * *'      # 07:47 CEST ogni giorno — orario non congestionato per assorbire delay GH Actions, consegna ~08:00-08:30 CEST
   workflow_dispatch:          # Esecuzione manuale da GitHub UI
 
 permissions:
