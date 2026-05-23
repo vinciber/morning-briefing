@@ -206,7 +206,8 @@ STRUTTURA:
    "Buongiorno, benvenuti al Morning Briefing di Price Alert."
 2. CONTESTO ASIATICO (80 parole): Chiusura Nikkei e Shanghai — solo direzione e percentuale.
    Esempio: "Il Nikkei ha chiuso in calo dell'1.2%, Shanghai in rialzo dello 0.5%."
-   Poi collegamento: "Questo suggerisce un'apertura debole per i mercati europei" o simile.
+   REGOLA APERTURA EUROPEA: Se i mercati europei sono APERTI, aggiungi "Questo suggerisce un'apertura debole per i mercati europei" o simile.
+   Se i mercati sono CHIUSI (weekend/festività), OMETTI COMPLETAMENTE questa proiezione — è inutile proiettare un'apertura che non avverrà oggi. Puoi invece dire "dati che verranno incorporati nell'apertura di lunedì" o simile.
 3. MERCATI OCCIDENTALI (150 parole): S&P 500, VIX, DXY, oro, petrolio, US 10Y Yield, BTP 10Y.
    REGOLA CHIAVE: cita direzione + variazione percentuale, e AGGIUNGI una frase narrativa per contesto (es. "mossa legata ai timori sull'inflazione", "dopo i dati macro deludenti").
    Per i prezzi assoluti: SOLO alle soglie psicologiche VERE (es. "l'oro sopra i 4500 dollari", "VIX sotto quota 20", "petrolio sotto i 100 dollari"). MAI soglie arbitrarie tipo "sotto i 101 dollari".
@@ -258,6 +259,7 @@ REGOLE:
 - MAI l'articolo determinativo davanti a Bitcoin.
 - NON ripetere dati della sezione macro.
 - NON chiudere il podcast (verrà fatto nella sezione CHIUSURA).
+- NON citare lo stesso numero due volte in forme diverse (es. "circa cento milioni... per la precisione 100,9 milioni" — scegli UNA sola forma e usala).
 - NON creare collegamenti causali tra fatti scorrelati. Se i flussi ETF e una dichiarazione di un personaggio sono in articoli separati, NON dire "il movimento è influenzato da [dichiarazione]". Riporta i due fatti separatamente.
 
 PUNTEGGIATURA — REGOLE TTS (critico):
@@ -280,7 +282,8 @@ LENGTH: 300-450 words (prefer brevity. If a section lacks notable events, keep i
 OPENING: "Good morning, welcome to the Price Alert Morning Briefing."
 
 STRUCTURE:
-1. ASIAN CLOSE (60 words): Nikkei, Shanghai direction + % change. Link to European/US outlook.
+1. ASIAN CLOSE (60 words): Nikkei, Shanghai direction + % change.
+   EUROPEAN OPENING RULE: If European markets ARE OPEN today, add "This suggests a weak/strong opening for European markets". If markets are CLOSED (weekend/holiday), OMIT this projection entirely — projecting an opening that won't happen today is meaningless. You may instead say "data that will be priced in at Monday's open".
 2. WESTERN MARKETS (150 words): S&P 500, VIX, DXY, gold, oil, US 10Y Yield, BTP 10Y — DIRECTION and % only.
    Mention absolute prices ONLY at key psychological thresholds (e.g. "gold holds above $4,500/oz", "VIX dropped below 20", "oil below $100"). Use the REAL threshold, not arbitrary numbers.
    TEMPORAL RULE: If markets were closed, say "at the last close" or "on [Friday]", NEVER "yesterday".
@@ -292,6 +295,10 @@ NUMBERS — FORMAT (critical for TTS):
 - Use numeric form: "$4,703", "+0.41%", "98.79". Commas OK for thousands.
 - NEVER spell numbers in words (avoid "seventy-seven thousand" unless a clean round threshold).
 - Percentages: max 1 decimal. No trailing zeros ("2%" not "2.00%"). If 0.00%, say "essentially flat".
+
+PUNCTUATION — TTS RULES (critical):
+- Every sentence MUST end with a period. Never end with a comma or leave two sentences joined without punctuation.
+- Each asset/data point is a separate sentence. BAD: "oil up 0.94% to $103.54 Yields: US 10Y..." GOOD: "Oil rose 0.94% to $103.54. The US 10Y yield fell 0.61% to 4.55%."
 
 PROHIBITED:
 - Do NOT mention Cryptocurrencies, Bitcoin, ETF flows, or Fear & Greed.
@@ -322,7 +329,8 @@ NUMBERS — FORMAT RULES (critical for TTS quality):
 AUDIO_CLOSE_PROMPT = """CHIUSURA OBBLIGATORIA per podcast finanziario italiano.
 
 STRUTTURA (50-90 parole totali):
-1. OUTLOOK BREVE (1-2 frasi): Cosa monitorare oggi/nei prossimi giorni (es. "Sui mercati attendiamo i dati ISM e l'apertura di Wall Street.").
+1. OUTLOOK BREVE (1-2 frasi): Cosa monitorare oggi/nei prossimi giorni.
+   CRITICO: usa SOLO i dati macro indicati nel contesto MACRO OGGI. Se il contesto dice "nessuno", di' "nessun dato macro in agenda oggi" o ometti del tutto l'outlook macro — NON inventare dati ISM, CPI, PIL o altri dati non presenti nel contesto.
 2. INVITO ARTICOLI (1 frase): Invita ad approfondire. Esempi:
    "Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano."
    "Tutti gli approfondimenti sono disponibili sul sito di Price Alert nella sezione notizie."
@@ -330,7 +338,7 @@ STRUTTURA (50-90 parole totali):
 
 VIETATO:
 - NON terminare MAI con "buon trading".
-- NON inventare dati specifici, resta generico nell'outlook.
+- NON inventare dati macro non presenti nel contesto.
 
 PUNTEGGIATURA TTS:
 - Frasi brevi (max 20 parole). Virgole tra clausole. Punto a fine frase.
@@ -489,7 +497,6 @@ def run():
             'tlt':       'TLT Bond USA 20Y',
             'us_10y':    'US 10Y Yield',
             'gold':      'GOLD',
-            'btcusd':    'Bitcoin',
             'oil_brent': 'BRENT',
             'stoxx_600': 'STOXX 600',
             'nikkei':    'NIKKEI (chiusura Asia — indicatore apertura Europa)',
@@ -686,13 +693,12 @@ def run():
         holiday_warning_it += f"Nota: Oggi le borse azionarie e obbligazionarie mondiali sono chiuse {'per il weekend' if is_weekend else 'per festività'}.\n"
         holiday_warning_it += "Nell'audio script (Parte Finance), menziona esplicitamente che i mercati tradizionali sono chiusi e passa rapidamente all'analisi degli asset digitali (Crypto) che sono aperti 24 ore su 24.\n"
         holiday_warning_it += "Esempio apertura: 'Mentre le borse mondiali osservano la consueta pausa festiva, i riflettori restano accesi sul comparto digitale...' o simili.\n"
-        holiday_warning_it += "Concentrati sulla chiusura precedente per il contesto macro, ma dai priorità assoluta ai movimenti attuali di Bitcoin e delle crypto.\n"
+        holiday_warning_it += "Concentrati sulla chiusura precedente per il contesto macro. NON menzionare Bitcoin, prezzi crypto o flussi ETF in questa sezione — verranno trattati nella sezione CRYPTO separata.\n"
 
         holiday_warning_en += f"\n\n⚠️ TODAY TRADITIONAL MARKETS ARE CLOSED FOR {reason_en}:\n"
         holiday_warning_en += f"Note: Today global stock and bond markets are closed {'for the weekend' if is_weekend else 'for a holiday'}.\n"
-        holiday_warning_en += "In the audio script (Finance Part), explicitly mention that traditional markets are closed and quickly pivot to the analysis of digital assets (Crypto) which are open 24/7.\n"
+        holiday_warning_en += "In the audio script (Finance Part), explicitly mention that traditional markets are closed and quickly transition. Do NOT mention Bitcoin prices, crypto moves, or ETF flows here — those are covered in the separate CRYPTO section.\n"
         holiday_warning_en += "Example opening: 'While traditional markets observe their holiday break, the spotlight remains on digital assets...'\n"
-        holiday_warning_en += "Focus on the previous close for macro context, but give absolute priority to current Bitcoin and crypto movements.\n"
 
         user_prompt += holiday_warning_it
 
@@ -766,6 +772,9 @@ def run():
             # Rimuovi "ieri" (violazione regola temporale)
             text = re.sub(r'\bieri\b', 'nella seduta precedente', text, flags=re.IGNORECASE)
             text = re.sub(r'\byesterday\b', 'at the last close', text, flags=re.IGNORECASE)
+            # Fix frase duplicata LLM (es. "nella seduta di nella seduta precedente")
+            text = re.sub(r'nella seduta di\s+nella seduta', 'nella seduta', text, flags=re.IGNORECASE)
+            text = re.sub(r'in the session of\s+in the (?:previous |last )?session', 'in the previous session', text, flags=re.IGNORECASE)
             return text.strip()
 
         def _safe_get(obj, key, default=""):
@@ -795,8 +804,8 @@ def run():
                         "\n".join(f"- {a['title']}" for a in news_it if a.get('category') == 'crypto')
         it_crypto = get_audio_part(AUDIO_CRYPTO_PROMPT, it_crypto_user, 'audio_script_it')
         
-        # Part C: Close
-        it_close = get_audio_part(AUDIO_CLOSE_PROMPT, "Genera chiusura per podcast finanziario italiano.", 'audio_script_it')
+        # Part C: Close (passa macro context per evitare hallucination su dati in uscita)
+        it_close = get_audio_part(AUDIO_CLOSE_PROMPT, f"Genera chiusura per podcast finanziario italiano.\n\nCONTESTO:{macro_today_line}", 'audio_script_it')
         
         # Merge IT
         briefing['audio_script_it'] = f"{clean_script(it_finance, 'audio_script_it')}\n\n{clean_script(it_crypto, 'audio_script_it')}\n\n{clean_script(it_close, 'audio_script_it')}"
