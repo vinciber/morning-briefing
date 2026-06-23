@@ -56,7 +56,12 @@ MARKET_DATA_PATH = ROOT / 'data' / 'market_data.json'
 HISTORY_PATH = ROOT / 'docs' / 'api' / 'today.json'
 OUTPUT_PATH = ROOT / 'data' / 'briefing_today.json'
 
-GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '')
+# Account 2 (NEWS) dedicato al briefing; fallback su account 1 se il secret non è settato
+GROQ_API_KEY = os.environ.get('GROQ_API_KEY_NEWS') or os.environ.get('GROQ_API_KEY', '')
+
+# Modelli Groq — scout-17b deprecato (decommission 2026-07-17). Analisi su 70B, audio su 8b-instant.
+MODEL_ANALYSIS = 'llama-3.3-70b-versatile'
+MODEL_AUDIO = 'llama-3.1-8b-instant'
 
 MACRO_GROUND_TRUTH = {
     'ECB': {
@@ -607,7 +612,7 @@ def run():
         except Exception:
             pass
 
-    client = Groq(api_key=GROQ_API_KEY)
+    client = Groq(api_key=GROQ_API_KEY, max_retries=4)  # backoff automatico SDK su 429 (free tier)
 
     # Passa solo i campi essenziali al LLM per risparmiare token
     articles_slim = [
@@ -706,7 +711,7 @@ def run():
     try:
         # CHIAMATA 1 — Sentiment, Market Impact Summary, e Article Impacts
         response = client.chat.completions.create(
-            model='meta-llama/llama-4-scout-17b-16e-instruct',
+            model=MODEL_ANALYSIS,
             messages=[
                 {'role': 'system', 'content': SYSTEM_PROMPT},
                 {'role': 'user',   'content': user_prompt},
@@ -727,7 +732,7 @@ def run():
         news_it = weekly_it + other_it
         
         # Helper per chiamate audio
-        def get_audio_part(system_p, user_p, lang_key, model='meta-llama/llama-4-scout-17b-16e-instruct'):
+        def get_audio_part(system_p, user_p, lang_key, model=MODEL_AUDIO):
             # Forza JSON nel prompt utente
             full_user_p = f"{user_p}\n\nREQUISITO CORE: Restituisci SOLO un oggetto JSON con la chiave '{lang_key}'."
             resp = client.chat.completions.create(
