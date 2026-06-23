@@ -61,7 +61,7 @@ GROQ_API_KEY = os.environ.get('GROQ_API_KEY_NEWS') or os.environ.get('GROQ_API_K
 
 # Modelli Groq — scout-17b deprecato (decommission 2026-07-17). Analisi su 70B, audio su 8b-instant.
 MODEL_ANALYSIS = 'llama-3.3-70b-versatile'
-MODEL_AUDIO = 'llama-3.1-8b-instant'
+MODEL_AUDIO = 'openai/gpt-oss-120b'  # reasoning model in batch/cron: qualità narrazione IT > 8b (no errori grammaticali/N-A/allucinazioni); latency irrilevante offline
 
 MACRO_GROUND_TRUTH = {
     'ECB': {
@@ -744,6 +744,7 @@ def run():
                 temperature=0.3,
                 max_tokens=2048,
                 response_format={'type': 'json_object'},
+                reasoning_effort='low',  # gpt-oss: minimizza i reasoning token, tiene il JSON pulito
             )
             return json.loads(resp.choices[0].message.content)
             
