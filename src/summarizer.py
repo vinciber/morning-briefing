@@ -214,7 +214,8 @@ STRUTTURA:
    REGOLA APERTURA EUROPEA: Se i mercati europei sono APERTI, aggiungi "Questo suggerisce un'apertura debole per i mercati europei" o simile.
    Se i mercati sono CHIUSI (weekend/festività), OMETTI COMPLETAMENTE questa proiezione — è inutile proiettare un'apertura che non avverrà oggi. Puoi invece dire "dati che verranno incorporati nell'apertura di lunedì" o simile.
 3. MERCATI OCCIDENTALI (150 parole): S&P 500, VIX, DXY, oro, petrolio, US 10Y Yield, BTP 10Y.
-   REGOLA CHIAVE: cita direzione + variazione percentuale, e AGGIUNGI una frase narrativa per contesto (es. "mossa legata ai timori sull'inflazione", "dopo i dati macro deludenti").
+   REGOLA CHIAVE: cita direzione + variazione percentuale. Aggiungi una frase di contesto SOLO se un driver reale è presente nelle notizie/contesto forniti (es. "dopo i dati macro deludenti citati sopra"). Se NON c'è un driver esplicito, riporta solo direzione e percentuale — NON inventare la causa di un movimento.
+   CORRETTEZZA CAUSALE: se citi una causa, deve essere direzionalmente corretta. In particolare: un rendimento obbligazionario IN CALO riflette attese di inflazione PIÙ BASSE / risk-off / aspettative di taglio tassi, MAI "pressione inflazionistica" (quella spinge i rendimenti AL RIALZO). Non scambiare causa ed effetto su tassi, dollaro e oro.
    Per i prezzi assoluti: SOLO alle soglie psicologiche VERE (es. "l'oro sopra i 4500 dollari", "VIX sotto quota 20", "petrolio sotto i 100 dollari"). MAI soglie arbitrarie tipo "sotto i 101 dollari".
    REGOLA TEMPORALE: Se i mercati sono chiusi oggi, usa "nella seduta di [GIORNO]" o "alla chiusura passata", MAI "ieri".
 4. GEOPOLITICA (100 parole): Solo eventi con impatto concreto sui prezzi. Aggiungi 1 frase di contesto/conseguenza.
@@ -255,8 +256,9 @@ FORMATO OUTPUT OBBLIGATORIO: restituisci SOLO un oggetto JSON con la chiave "aud
 TRANSITION OBBLIGATORIA (prima frase): "Passiamo ora al comparto degli asset digitali..."
 
 STRUTTURA (scrivi come testo narrativo continuo, non come lista):
-1. BITCOIN (80 parole): Direzione, variazione %, flussi ETF se significativi. Aggiungi una frase narrativa che colleghi il movimento al contesto.
+1. BITCOIN (80 parole): Direzione, variazione %, flussi ETF se significativi. Aggiungi una frase di contesto SOLO se un driver reale è nelle notizie fornite; altrimenti riporta solo il movimento.
    Cita il prezzo solo per soglie psicologiche (es. "Bitcoin si mantiene sopra gli ottantamila dollari").
+   USA SOLO I VALORI FORNITI nel contesto. NON citare massimi/minimi intraday, livelli "toccati" o qualsiasi numero non presente nei dati (es. NON dire "ha toccato 59.000 dollari" se nei dati c'è solo il prezzo corrente).
 2. ALTCOINS (80 parole): Ethereum, Solana, BNB — solo se ci sono movimenti rilevanti (>2%).
 3. SENTIMENT (50 parole): Fear & Greed valore, classe, e 1 frase di interpretazione ("suggerisce cautela sugli investitori").
 
@@ -774,7 +776,9 @@ def run():
             # Rimuovi zeri decimali inutili ("2.00%" → "2%", "4.30" → "4.3")
             text = re.sub(r'(\d+)\.0+(?=%|\b)', r'\1', text)
             text = re.sub(r'(\d+\.\d*?)0+(?=%|\b)', r'\1', text)
-            text = re.sub(r'(\d+)\.(?=%|\s|$)', r'\1', text)
+            # Solo decimale penzolante prima di "%" ("4.%"→"4%"). NON includere \s|$:
+            # mangiava il punto di fine frase dopo un numero ("...a $73.6. The" → "...a $73.6 The").
+            text = re.sub(r'(\d+)\.(?=%)', r'\1', text)
             # Rimuovi "ieri" (violazione regola temporale)
             text = re.sub(r'\bieri\b', 'nella seduta precedente', text, flags=re.IGNORECASE)
             text = re.sub(r'\byesterday\b', 'at the last close', text, flags=re.IGNORECASE)

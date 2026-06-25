@@ -75,6 +75,11 @@ TITLE_BLACKLIST = [
     'inchiesta', 'indagato', 'dimissioni', 'scandalo', 'bufera',
     'consigliere comunale', 'sindaco', 'assessore', 'parlamentare',
     'al via il processo', 'processo per', 'contestazione', 'manifestazione',
+    # Rumore accademico/eventi istituzionali (feed BCE/centrali): non sono notizie di mercato.
+    # NB: niente 'conference'/'speech' generici → catturerebbero "press conference"/speech di Lagarde/Powell.
+    'call for papers', 'call for applications', 'workshop', 'working paper',
+    'symposium', 'seminar', 'webinar', 'colloquium', 'keynote', 'lecture',
+    'conference programme', 'save the date',
 ]
 
 # Titoli rifiutati nei webfetch (link nav/footer/legal di asset manager pages)
