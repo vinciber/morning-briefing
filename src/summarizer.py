@@ -744,7 +744,7 @@ def run():
                 temperature=0.3,
                 max_tokens=2048,
                 response_format={'type': 'json_object'},
-                reasoning_effort='low',  # gpt-oss: minimizza i reasoning token, tiene il JSON pulito
+                reasoning_effort='low',  # gpt-oss: minimizza i reasoning token, tiene il JSON pulito (richiede groq>=0.18)
             )
             return json.loads(resp.choices[0].message.content)
             
@@ -867,4 +867,7 @@ Return ONLY a JSON object with key "audio_script_en" containing the full English
         return None
 
 if __name__ == '__main__':
-    run()
+    # Exit non-zero se la summarizzazione fallisce, così il job GH Actions risulta
+    # rosso invece di ripubblicare silenziosamente il briefing del giorno prima.
+    if run() is None:
+        sys.exit(1)
