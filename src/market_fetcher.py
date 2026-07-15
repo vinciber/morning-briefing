@@ -240,6 +240,26 @@ def get_fred_series(series_id):
         logger.error(f'FRED {series_id}: {e}')
         return 'N/A', 'N/A'
 
+def get_bund_10y_yield():
+    """Rendimento Bund 10Y (per lo spread BTP-Bund). Stooq, fallback FRED (mensile)."""
+    val, chg = get_stooq('10YDEY.B')
+    if val != 'N/A':
+        return val, chg
+    if FRED_API_KEY:
+        logger.info('🔄 Stooq Bund 10Y failed. Falling back to FRED (IRLTLT01DEM156N)...')
+        try:
+            url = (f'https://api.stlouisfed.org/fred/series/observations'
+                   f'?series_id=IRLTLT01DEM156N&api_key={FRED_API_KEY}'
+                   f'&file_type=json&sort_order=desc&limit=1')
+            r = requests.get(url, timeout=15)
+            r.raise_for_status()
+            data = r.json().get('observations', [])
+            if data and data[0]['value'] != '.':
+                return f'{float(data[0]["value"]):.2f}', 'N/A'
+        except Exception as e:
+            logger.error(f'FRED Germany 10Y Fallback failed: {e}')
+    return 'N/A', 'N/A'
+
 def get_fed_target_range():
     """Target range UFFICIALE Fed Funds da FRED (DFEDTARL/DFEDTARU, serie giornaliere).
     A differenza di FEDFUNDS (tasso effettivo medio mensile), è il range citato dai mercati."""
@@ -775,6 +795,14 @@ def run():
     results['sp500'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'S&P 500: {val}')
 
+    val, chg = get_yahoo_finance('^IXIC')
+    results['nasdaq'] = {'value': _format_market_value(val), 'change': chg}
+    logger.info(f'Nasdaq: {val}')
+
+    val, chg = get_yahoo_finance('^DJI')
+    results['dow'] = {'value': _format_market_value(val), 'change': chg}
+    logger.info(f'Dow Jones: {val}')
+
     val, chg = get_yahoo_finance('^VIX')
     results['vix'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'VIX: {val}')
@@ -822,6 +850,14 @@ def run():
     val, chg = get_btp_10y_yield()
     results['btp_10y'] = {'value': f'{_format_market_value(val)}%' if val != 'N/A' else 'N/A', 'change': chg}
     logger.info(f'BTP 10Y: {val}')
+
+    bund_val, _ = get_bund_10y_yield()
+    try:
+        spread_bp = (float(str(val).replace(',', '')) - float(str(bund_val).replace(',', ''))) * 100
+        results['btp_bund_spread'] = {'value': f'{spread_bp:.0f} bp', 'change': ''}
+    except (ValueError, TypeError):
+        results['btp_bund_spread'] = {'value': 'N/A', 'change': 'N/A'}
+    logger.info(f"Spread BTP-Bund: {results['btp_bund_spread']['value']}")
 
     val, chg = get_global_m2_proxy()
     results['global_m2'] = {'value': _format_market_value(val), 'change': chg}

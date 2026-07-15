@@ -37,39 +37,71 @@ def load_config() -> dict:
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
-def build_market_strip(market_data):
+def build_market_strip(market_data, lang='it'):
     order = [
         ('eur_usd',   'EUR/USD'),
         ('dxy',       'DXY'),
         ('sp500',     'S&P 500'),
+        ('nasdaq',    'NASDAQ'),
+        ('dow',       'DOW JONES'),
         ('stoxx_600', 'STOXX 600'),
+        ('ftse_mib',  'FTSE MIB'),
         ('nikkei',    'NIKKEI'),
         ('shanghai',  'SHANGHAI'),
+        ('hang_seng', 'HANG SENG'),
         ('vix',       'VIX'),
+        ('us_10y',    'US 10Y'),
+        ('btp_10y',   'BTP 10Y'),
+        ('btp_bund_spread', 'SPREAD BTP-BUND'),
         ('tlt',       'TLT'),
         ('gold',      'GOLD'),
-        ('btcusd',    'BTC'),
         ('oil_brent', 'BRENT'),
-        ('btp_10y',   'BTP 10Y'),
-        ('us_10y',    'US 10Y'),
+        ('btcusd',    'BTC'),
+        ('eth',       'ETH'),
+        ('fear_greed', 'FEAR & GREED'),
         ('btc_etf_flow', 'BTC ETF'),
         ('global_m2', 'M2 GLOBAL'),
     ]
+    # Voci derivate dalla sezione crypto (annidata)
+    data = dict(market_data)
+    crypto = market_data.get('crypto') or {}
+    eth = (crypto.get('prices') or {}).get('ETH')
+    if eth:
+        data['eth'] = eth
+    fg = crypto.get('fear_greed') or {}
+    if fg.get('value') not in (None, '', 'N/A'):
+        fg_class = str(fg.get('class', ''))
+        data['fear_greed'] = {
+            'value': f"{fg.get('value')} {fg_class}".strip(),
+            'change': '',
+            'positive': 'Greed' in fg_class,
+            'negative': 'Fear' in fg_class,
+        }
+
+    # Domenica: il blocco 'weekly' esiste solo nel run domenicale → variazioni settimanali
+    weekly = market_data.get('weekly') or {}
+    wk_suffix = ' sett.' if lang == 'it' else ' wk'
+
     strip = []
     for key, label in order:
-        item = market_data.get(key, {})
+        item = data.get(key, {})
         if isinstance(item, str):
             val = item
             chg = 'N/A'
         else:
             val = item.get('value', 'N/A')
             chg = item.get('change', 'N/A')
+        wk_chg = (weekly.get(key) or {}).get('change')
+        if wk_chg and wk_chg != 'N/A':
+            chg = f'{wk_chg}{wk_suffix}'
         if val and val != 'N/A':
             # Per BTC ETF e simili, il segno è nel valore (es. $+10.2M$ o $-5.0M$)
             # Per gli altri è nel change (es. $+0.5\%$)
             positive = (isinstance(chg, str) and '+' in chg) or (key == 'btc_etf_flow' and isinstance(val, str) and '+' in val)
             negative = (isinstance(chg, str) and '-' in chg) or (key == 'btc_etf_flow' and isinstance(val, str) and '-' in val)
-            
+            if isinstance(item, dict) and 'positive' in item:
+                positive, negative = item['positive'], item.get('negative', False)
+
             strip.append({
                 'label':    label,
                 'value':    val,
@@ -78,6 +110,64 @@ def build_market_strip(market_data):
                 'negative': negative,
             })
     return strip
+
+
+# Direzione "positiva" per l'economia/mercati di ogni indicatore macro:
+# inflazione e disoccupazione in calo = good, occupazione e PIL in crescita = good.
+LOWER_IS_GOOD  = {'cpi', 'core_cpi', 'pce_core', 'unemployment', 'cpi_eu', 'unemployment_eu'}
+HIGHER_IS_GOOD = {'nfp', 'gdp', 'gdp_eu'}
+
+
+def _num(s):
+    try:
+        return float(str(s).replace('%', '').replace('K', '').replace('+', '').replace(',', '').strip())
+    except (ValueError, TypeError):
+        return None
+
+
+def annotate_macro_tones(briefing):
+    """
+    Aggiunge item['tone'] = 'good'|'bad' ai dati macro USA/EU (valore vs previous,
+    nella direzione giusta per ogni indicatore) e alle card crypto (variazione prezzi,
+    Fear&Greed, ETF flow). Il template colora il bordo: good=verde, bad=rosso,
+    invariato/non classificabile = colore di base.
+    """
+    md = briefing.get('market_data_raw') or {}
+    for cal in ('macro_calendar', 'macro_calendar_eu'):
+        for key, item in (md.get(cal) or {}).items():
+            if item.get('status') != 'released':
+                continue
+            if key in LOWER_IS_GOOD:
+                lower_good = True
+            elif key in HIGHER_IS_GOOD:
+                lower_good = False
+            else:
+                continue  # tassi e indicatori senza direzione univoca: colore base
+            v, p = _num(item.get('value')), _num(item.get('previous'))
+            if v is None or p is None or v == p:
+                continue
+            improved = (v < p) if lower_good else (v > p)
+            item['tone'] = 'good' if improved else 'bad'
+
+    crypto = md.get('crypto') or {}
+    fg = crypto.get('fear_greed')
+    if fg:
+        cls = str(fg.get('class', ''))
+        if 'Greed' in cls:
+            fg['tone'] = 'good'
+        elif 'Fear' in cls:
+            fg['tone'] = 'bad'
+    for _, info in (crypto.get('prices') or {}).items():
+        chg = _num(info.get('change'))
+        if chg:
+            info['tone'] = 'good' if str(info.get('change', '')).startswith('+') else 'bad'
+    flow = md.get('btc_etf_flow')
+    if flow:
+        v = str(flow.get('value', ''))
+        if '+' in v:
+            flow['tone'] = 'good'
+        elif '-' in v:
+            flow['tone'] = 'bad'
 
 
 # ---------------------------------------------------------------------------
@@ -144,7 +234,7 @@ def generate_daily_page(briefing: dict, env: Environment, base_url: str, lang: s
         'lang': lang,
         'lang_info': lang_info,
         'sentiment': sentiment,
-        'market_strip': build_market_strip(briefing.get('market_data_raw', briefing.get('market_data', {}))),
+        'market_strip': build_market_strip(briefing.get('market_data_raw', briefing.get('market_data', {})), lang),
         'sections': sections,
         'all_articles': all_articles,
         'audio_url': f'audio/briefing_{date.replace("-", "")}.mp3' if lang == 'it' else f'../audio/briefing_{date.replace("-", "")}_en.mp3',
@@ -237,7 +327,7 @@ def generate_index(briefing: dict, env: Environment, base_url: str, lang: str = 
         'lang_info': lang_info,
         'sentiment': sentiment,
         'all_articles': all_articles,
-        'market_strip': build_market_strip(briefing.get('market_data_raw', briefing.get('market_data', {}))),
+        'market_strip': build_market_strip(briefing.get('market_data_raw', briefing.get('market_data', {})), lang),
         'audio_url': f'audio/briefing_{date.replace("-", "")}.mp3' if lang == 'it' else f'../audio/briefing_{date.replace("-", "")}_en.mp3',
         'rss_url': 'feed.xml' if lang == 'it' else '../feed_en.xml',
         'api_url': 'api/today.json' if lang == 'it' else '../api/today.json',
@@ -414,6 +504,9 @@ def run():
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
 
     logger.info('🌐 Generazione sito...')
+    # Bordi colorati card macro/crypto (good/bad vs previous)
+    annotate_macro_tones(briefing)
+
     # Generazione IT
     generate_daily_page(briefing, env, base_url, lang='it')
     generate_index(briefing, env, base_url, lang='it')

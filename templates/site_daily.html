@@ -23,9 +23,16 @@
   .lang-btn{padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);text-decoration:none;font-size:12px;}
   .lang-btn.active{border-color:var(--blue);color:var(--blue);}
 
-  .ticker-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 24px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
+  .ticker-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 0;overflow:hidden;white-space:nowrap;}
   .ticker-bar::-webkit-scrollbar{display:none;}
-  .ticker-items{display:inline-flex;gap:24px;}
+  .ticker-track{display:inline-flex;animation:ticker-scroll 75s linear infinite;will-change:transform;}
+  .ticker-track:hover{animation-play-state:paused;}
+  @keyframes ticker-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none;}
+    .ticker-bar{overflow-x:auto;scrollbar-width:none;}
+  }
+  .ticker-items{display:inline-flex;gap:24px;padding:0 12px;}
   .ticker-item{display:inline-flex;flex-direction:column;gap:1px;}
   .ticker-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;}
   .ticker-value{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;}
@@ -113,6 +120,11 @@
     text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px;
     padding-bottom:6px;border-bottom:1px solid var(--border);}
   .macro-item.eu{border-color:#3b82f640;}
+  .macro-item.fear-greed{border-color:#f59e0b40;position:relative;}
+  .macro-item.etf-flow{border-color:#58a6ff40;}
+  /* Tone: dato migliorato/peggiorato vs previous — devono vincere su released/eu/fear-greed (ultime regole) */
+  .macro-item.good{border-color:#3fb95090;}
+  .macro-item.bad{border-color:#f8514990;}
 </style>
 </head>
 <body>
@@ -129,12 +141,16 @@
 </header>
 
 <div class="ticker-bar">
-  <div class="ticker-items">
-    {% for item in market_strip %}
-    <div class="ticker-item">
-      <span class="ticker-label">{{ item.label }}</span>
-      <span class="ticker-value {% if item.positive %}up{% elif item.negative %}down{% else %}neu{% endif %}">{{ item.value }}</span>
-      {% if item.change %}<span class="ticker-change {% if item.positive %}up{% elif item.negative %}down{% else %}neu{% endif %}">{{ item.change }}</span>{% endif %}
+  <div class="ticker-track">
+    {% for dup in range(2) %}
+    <div class="ticker-items"{% if dup == 1 %} aria-hidden="true"{% endif %}>
+      {% for item in market_strip %}
+      <div class="ticker-item">
+        <span class="ticker-label">{{ item.label }}</span>
+        <span class="ticker-value {% if item.positive %}up{% elif item.negative %}down{% else %}neu{% endif %}">{{ item.value }}</span>
+        {% if item.change %}<span class="ticker-change {% if item.positive %}up{% elif item.negative %}down{% else %}neu{% endif %}">{{ item.change }}</span>{% endif %}
+      </div>
+      {% endfor %}
     </div>
     {% endfor %}
   </div>
@@ -167,7 +183,7 @@
     <div class="macro-region-title">🇺🇸 {% if lang == 'it' %}STATI UNITI — FED & MACRO{% else %}UNITED STATES — FED & MACRO{% endif %}</div>
     <div class="macro-grid">
       {% for key, item in briefing['market_data_raw']['macro_calendar'].items() %}
-      <div class="macro-item {% if item.status == 'upcoming' %}upcoming{% elif item.status == 'released' %}released{% endif %}">
+      <div class="macro-item {% if item.status == 'upcoming' %}upcoming{% elif item.status == 'released' %}released{% endif %}{% if item.tone %} {{ item.tone }}{% endif %}">
         <div class="macro-label">{{ item.get('label_' + lang) or item.label }}</div>
         {% if item.status == 'released' %}
           <div class="macro-value">{{ item.value }}</div>
@@ -195,7 +211,7 @@
     <div class="macro-region-title">🇪🇺 {% if lang == 'it' %}Europa{% else %}Europe{% endif %} — BCE & Macro</div>
     <div class="macro-grid">
       {% for key, item in briefing['market_data_raw']['macro_calendar_eu'].items() %}
-      <div class="macro-item eu {% if item.status == 'upcoming' %}upcoming{% else %}released{% endif %}">
+      <div class="macro-item eu {% if item.status == 'upcoming' %}upcoming{% else %}released{% endif %}{% if item.tone %} {{ item.tone }}{% endif %}">
         <div class="macro-label">{{ item.get('label_' + lang) or item.label }}</div>
         {% if item.status == 'released' %}
           <div class="macro-value">{{ item.value }}</div>
@@ -226,7 +242,7 @@
     <!-- Row 1: Fear & Greed + Prices (BTC, ETH, SOL, BNB) -->
     <div class="macro-grid">
       {% set crypto = briefing['market_data_raw']['crypto'] %}
-      <div class="macro-item fear-greed" style="border-color: #f59e0b40; position: relative;">
+      <div class="macro-item fear-greed{% if crypto.fear_greed.tone %} {{ crypto.fear_greed.tone }}{% endif %}">
         <div class="macro-label">Fear & Greed</div>
         <div class="macro-value">{{ crypto.fear_greed.value }}</div>
         <div class="macro-date">{{ crypto.fear_greed.class }}</div>
@@ -234,7 +250,7 @@
       
       {% for ticker, info in crypto.prices.items() %}
       {% if loop.index <= 4 %}
-      <div class="macro-item">
+      <div class="macro-item{% if info.tone %} {{ info.tone }}{% endif %}">
         <div class="macro-label">{{ ticker }}</div>
         <div class="macro-value">{{ info.value }}</div>
         <div class="macro-date {% if '+' in info.change %}up{% elif '-' in info.change %}down{% endif %}">{{ info.change }}</div>
@@ -247,7 +263,7 @@
     <div class="macro-grid" style="margin-top: 15px;">
       {% if briefing.get('market_data_raw', {}).get('btc_etf_flow') %}
       {% set flow = briefing['market_data_raw']['btc_etf_flow'] %}
-      <div class="macro-item etf-flow" style="border-color: #58a6ff40;">
+      <div class="macro-item etf-flow{% if flow.tone %} {{ flow.tone }}{% endif %}">
         <div class="macro-label">BTC ETF Flow</div>
         <div class="macro-value {% if '+' in flow.value %}up{% elif '-' in flow.value %}down{% endif %}">{{ flow.value }}</div>
         <div class="macro-date">{{ flow.change }}</div>
