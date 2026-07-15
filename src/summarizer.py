@@ -569,8 +569,9 @@ def _load_week_sentiment():
 
 def _build_week_ahead(md):
     """
-    Release macro previste nei prossimi 7 giorni, dai calendari
-    macro_calendar (USA) e macro_calendar_eu già presenti in market_data.
+    Release macro previste nei prossimi 7 giorni: calendari macro_calendar (USA)
+    e macro_calendar_eu + release extra dal calendario FRED live (fred_week_ahead,
+    fetchato la domenica: retail sales, PPI, UMich, JOLTS, cantieri).
     """
     today = datetime.now(timezone.utc).date()
     lines = []
@@ -586,6 +587,13 @@ def _build_week_ahead(md):
                 continue
             if today <= d <= today + timedelta(days=7):
                 lines.append((d, f"  {DAYS_IT[d.weekday()]} {d.strftime('%d/%m')} — {region} {item.get('label', key)}"))
+    for entry in md.get('fred_week_ahead') or []:
+        try:
+            d = datetime.strptime(entry.get('date', ''), '%Y-%m-%d').date()
+        except ValueError:
+            continue
+        if today <= d <= today + timedelta(days=7) and entry.get('label'):
+            lines.append((d, f"  {DAYS_IT[d.weekday()]} {d.strftime('%d/%m')} — USA {entry['label']}"))
     lines.sort(key=lambda x: x[0])
     # Dedup mantenendo l'ordine (fed_funds/ecb_rate possono comparire due volte)
     out, seen = [], set()

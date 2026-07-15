@@ -240,6 +240,55 @@ def get_fred_series(series_id):
         logger.error(f'FRED {series_id}: {e}')
         return 'N/A', 'N/A'
 
+# Release FRED per la "settimana in arrivo" domenicale — SOLO indicatori non già
+# coperti dal calendario statico del summarizer (CPI/NFP/PIL/PCE/Fed/BCE).
+FRED_WEEK_AHEAD_RELEASES = {
+    'Advance Monthly Sales for Retail and Food Services': 'Vendite al dettaglio USA',
+    'Producer Price Index': 'PPI USA',
+    'Surveys of Consumers': 'Fiducia consumatori (Univ. Michigan)',
+    'Job Openings and Labor Turnover Survey': 'JOLTS (posti vacanti USA)',
+    'New Residential Construction': 'Nuovi cantieri USA',
+}
+
+def get_fred_release_calendar(days=8):
+    """
+    Release macro USA in calendario nei prossimi `days` giorni via FRED
+    releases/dates. Whitelist FRED_WEEK_AHEAD_RELEASES + guardia anti-rumore:
+    le release senza data fissa (es. FOMC Press Release) compaiono su OGNI
+    giorno della finestra con include_release_dates_with_no_data → scartate
+    se presenti su più di 2 date distinte.
+    """
+    if not FRED_API_KEY:
+        return []
+    try:
+        start = (datetime.now(timezone.utc) + timedelta(days=1)).strftime('%Y-%m-%d')
+        end = (datetime.now(timezone.utc) + timedelta(days=days)).strftime('%Y-%m-%d')
+        r = requests.get('https://api.stlouisfed.org/fred/releases/dates', params={
+            'api_key': FRED_API_KEY, 'file_type': 'json',
+            'include_release_dates_with_no_data': 'true',
+            'realtime_start': start, 'realtime_end': end,
+            'sort_order': 'asc', 'limit': 1000}, timeout=45)
+        r.raise_for_status()
+        data = r.json().get('release_dates', [])
+
+        dates_by_release = {}
+        for d in data:
+            name = d.get('release_name')
+            if name in FRED_WEEK_AHEAD_RELEASES:
+                dates_by_release.setdefault(name, set()).add(d.get('date'))
+
+        out = []
+        for name, dates in dates_by_release.items():
+            if len(dates) > 2:
+                continue  # senza calendario fisso: rumore
+            for dt in sorted(dates):
+                out.append({'date': dt, 'label': FRED_WEEK_AHEAD_RELEASES[name]})
+        out.sort(key=lambda e: e['date'])
+        return out
+    except Exception as e:
+        logger.error(f'FRED release calendar: {e}')
+        return []
+
 def get_bund_10y_yield():
     """Rendimento Bund 10Y (per lo spread BTP-Bund). Stooq, fallback FRED (mensile)."""
     val, chg = get_stooq('10YDEY.B')
@@ -887,6 +936,9 @@ def run():
             weekly[key] = {'value': _format_market_value(w_val), 'change': w_chg}
             logger.info(f'  Weekly {key}: {w_val} ({w_chg})')
         results['weekly'] = weekly
+
+        results['fred_week_ahead'] = get_fred_release_calendar()
+        logger.info(f'📅 FRED week-ahead: {len(results["fred_week_ahead"])} release extra')
 
     # Macro calendar
     logger.info('📅 Fetching macro calendar...')
