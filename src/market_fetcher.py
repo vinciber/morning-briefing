@@ -90,6 +90,71 @@ def get_yahoo_finance(symbol):
         logger.error(f'Yahoo {symbol}: {e}')
         return 'N/A', 'N/A'
 
+def get_yahoo_weekly(symbol):
+    """
+    Variazione SETTIMANALE (ultima chiusura vs ~7 giorni prima, venerdì su venerdì).
+    Usata la domenica per il recap settimanale del briefing.
+    """
+    try:
+        url = (f'https://query1.finance.yahoo.com/v8/finance/chart/{symbol}'
+               f'?interval=1d&range=1mo')
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+            'Accept': 'application/json',
+        }
+        r = requests.get(url, headers=headers, timeout=15)
+        data = r.json()
+        result = data.get('chart', {}).get('result', [])
+        if not result:
+            return 'N/A', 'N/A'
+
+        ts = result[0].get('timestamp', [])
+        quote = result[0].get('indicators', {}).get('quote', [{}])[0]
+        closes = quote.get('close', [])
+        pairs = [(t, c) for t, c in zip(ts, closes) if c is not None]
+        if len(pairs) < 2:
+            return 'N/A', 'N/A'
+
+        last_ts, last_close = pairs[-1]
+        # Ultima chiusura con timestamp <= 6.5 giorni prima dell'ultima barra
+        # (venerdì precedente anche in presenza di festività infrasettimanali)
+        target = last_ts - int(6.5 * 86400)
+        prev_closes = [c for t, c in pairs if t <= target]
+        if not prev_closes:
+            return 'N/A', 'N/A'
+        prev_close = prev_closes[-1]
+        change_pct = ((last_close - prev_close) / prev_close) * 100
+
+        if last_close > 10000:
+            val = f'{last_close:,.0f}'
+        elif last_close > 100:
+            val = f'{last_close:.2f}'
+        elif last_close > 1:
+            val = f'{last_close:.4f}'
+        else:
+            val = f'{last_close:.6f}'
+        return val, f'{change_pct:+.2f}%'
+    except Exception as e:
+        logger.error(f'Yahoo weekly {symbol}: {e}')
+        return 'N/A', 'N/A'
+
+# Simboli per il recap settimanale della domenica (chiave → ticker Yahoo)
+WEEKLY_SYMBOLS = {
+    'sp500':     '^GSPC',
+    'nasdaq':    '^IXIC',
+    'dow':       '^DJI',
+    'vix':       '^VIX',
+    'stoxx_600': 'EXSA.DE',
+    'ftse_mib':  'FTSEMIB.MI',
+    'nikkei':    '^N225',
+    'shanghai':  '000001.SS',
+    'hang_seng': '^HSI',
+    'gold':      'GC=F',
+    'oil_brent': 'BZ=F',
+    'us_10y':    '^TNX',
+    'btcusd':    'BTC-USD',
+}
+
 def get_stooq(symbol):
     try:
         url = f'https://stooq.com/q/d/l/?s={symbol}&i=d'
@@ -174,6 +239,29 @@ def get_fred_series(series_id):
     except Exception as e:
         logger.error(f'FRED {series_id}: {e}')
         return 'N/A', 'N/A'
+
+def get_fed_target_range():
+    """Target range UFFICIALE Fed Funds da FRED (DFEDTARL/DFEDTARU, serie giornaliere).
+    A differenza di FEDFUNDS (tasso effettivo medio mensile), è il range citato dai mercati."""
+    if not FRED_API_KEY:
+        return None
+    try:
+        vals = {}
+        for sid in ('DFEDTARL', 'DFEDTARU'):
+            r = requests.get('https://api.stlouisfed.org/fred/series/observations',
+                             params={'series_id': sid, 'api_key': FRED_API_KEY, 'file_type': 'json',
+                                     'sort_order': 'desc', 'limit': 1}, timeout=15)
+            r.raise_for_status()
+            obs = r.json().get('observations', [])
+            if not obs or obs[0]['value'] == '.':
+                return None
+            vals[sid] = (float(obs[0]['value']), obs[0]['date'])
+        lower, date = vals['DFEDTARL']
+        upper, _ = vals['DFEDTARU']
+        return {'value': f'{lower:.2f}% - {upper:.2f}%', 'release_date': date}
+    except Exception as e:
+        logger.error(f'FRED Fed target range: {e}')
+        return None
 
 def get_global_m2_proxy():
     if not FRED_API_KEY:
@@ -715,6 +803,10 @@ def run():
     results['stoxx_600'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'STOXX 600: {val}')
 
+    val, chg = get_yahoo_finance('FTSEMIB.MI')
+    results['ftse_mib'] = {'value': _format_market_value(val), 'change': chg}
+    logger.info(f'FTSE MIB: {val}')
+
     val, chg = get_yahoo_finance('^N225')
     results['nikkei'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'Nikkei: {val}')
@@ -750,10 +842,25 @@ def run():
     logger.info(f'Crypto: BTC {results["crypto"]["prices"].get("BTC", {}).get("value", "N/A")}, '
                 f'F&G: {results["crypto"]["fear_greed"]["value"]}')
 
+    # Performance settimanale — solo la domenica, alimenta il recap settimanale
+    if datetime.now(timezone.utc).weekday() == 6:
+        logger.info('📆 Domenica: calcolo performance settimanali (venerdì su venerdì)...')
+        weekly = {}
+        for key, sym in WEEKLY_SYMBOLS.items():
+            w_val, w_chg = get_yahoo_weekly(sym)
+            weekly[key] = {'value': _format_market_value(w_val), 'change': w_chg}
+            logger.info(f'  Weekly {key}: {w_val} ({w_chg})')
+        results['weekly'] = weekly
+
     # Macro calendar
     logger.info('📅 Fetching macro calendar...')
     results['macro_calendar'] = get_macro_calendar()
     results['macro_calendar_eu'] = get_macro_calendar_eu()
+
+    fed_range = get_fed_target_range()
+    if fed_range:
+        results['fed_target_range'] = fed_range
+        logger.info(f'✅ Fed target range (DFEDTARL/U): {fed_range["value"]}')
     logger.info(f'🇪🇺 Macro EU: {len(results["macro_calendar_eu"])} indicatori')
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)

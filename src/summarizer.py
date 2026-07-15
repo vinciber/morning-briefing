@@ -11,7 +11,7 @@ import sys
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 import time
@@ -19,23 +19,6 @@ import time
 load_dotenv()
 
 from groq import Groq
-
-# Ground Truth Macroeconomico (Costanti aggiornate manualmente ogni 6-8 settimane)
-MACRO_GROUND_TRUTH = {
-    'ECB': {
-        'last_meeting': '19 Marzo 2026',
-        'next_meeting': '30 Aprile 2026',
-        'main_rate': '2.15%',
-        'deposit_rate': '2.00%',
-        'result': 'Tassi invariati (Main: 2.15%, Deposit: 2.00%)'
-    },
-    'FED': {
-        'last_meeting': '18 Marzo 2026',
-        'next_meeting': '07 Maggio 2026',
-        'rate_range': '3.50% - 3.75%',
-        'result': 'Tassi invariati (3.50% - 3.75%)'
-    }
-}
 
 def _format_value(val: str) -> str:
     """Tronca decimali a 2 cifre: 27.1900 → 27.19"""
@@ -63,23 +46,39 @@ GROQ_API_KEY = os.environ.get('GROQ_API_KEY_NEWS') or os.environ.get('GROQ_API_K
 MODEL_ANALYSIS = 'llama-3.3-70b-versatile'
 MODEL_AUDIO = 'openai/gpt-oss-120b'  # reasoning model in batch/cron: qualità narrazione IT > 8b (no errori grammaticali/N-A/allucinazioni); latency irrilevante offline
 
+# Ground Truth Macro — FALLBACK usato SOLO se i tassi live da FRED mancano.
+# I tassi correnti arrivano da market_fetcher: DFEDTARL/DFEDTARU (target range
+# Fed ufficiale), ECBDFR (depositi BCE), ECBMRRFR (Refi BCE) — serie giornaliere.
+# RATES_AS_OF = data ultima verifica manuale del fallback: warning in log se i
+# live divergono (fallback da aggiornare) o se mancano dopo una riunione recente.
 MACRO_GROUND_TRUTH = {
     'ECB': {
-        'main_rate': '2.15%',     # Refi (Mutui)
-        'deposit_rate': '2.00%',  # DFR (Monitorato dai mercati)
-        'last_meeting': '2026-04-02',
-        'next_meeting': '2026-04-30',
-        'stance_it': 'I tassi sono stati mantenuti invariati nell\'ultima riunione.',
-        'stance_en': 'Rates were kept unchanged in the last meeting.'
+        'main_rate': '2.40%',     # Refi (Mutui)
+        'deposit_rate': '2.25%',  # DFR (Monitorato dai mercati)
     },
     'FED': {
         'rate_range': '3.50% - 3.75%',
-        'last_meeting': '2026-03-18',
-        'next_meeting': '2026-05-07',
-        'stance_it': 'La Fed ha mantenuto i tassi fermi segnalando cautela.',
-        'stance_en': 'The Fed kept rates steady signaling caution.'
     }
 }
+RATES_AS_OF = '2026-07-15'
+
+# Calendari riunioni 2026 (fonte: federalreserve.gov / ecb.europa.eu)
+FED_MEETINGS_2026 = ['2026-01-28', '2026-03-18', '2026-05-07', '2026-06-17',
+                     '2026-07-29', '2026-09-16', '2026-11-04', '2026-12-16']
+ECB_MEETINGS_2026 = ['2026-01-30', '2026-03-06', '2026-04-02', '2026-04-30', '2026-06-05',
+                     '2026-07-17', '2026-09-10', '2026-10-29', '2026-12-10']
+
+
+def _meeting_dates(dates):
+    """(ultima, prossima) riunione rispetto a oggi, dal calendario annuale.
+    Il giorno stesso della riunione conta come 'prossima' (il briefing esce
+    la mattina, la decisione arriva nel pomeriggio/sera)."""
+    today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+    past = [d for d in dates if d < today]
+    future = [d for d in dates if d >= today]
+    if not future:
+        logger.warning('⚠️ Calendario riunioni 2026 esaurito — aggiornare FED/ECB_MEETINGS per il nuovo anno')
+    return (past[-1] if past else dates[0]), (future[0] if future else dates[-1])
 
 SYSTEM_PROMPT = """
 Sei un analyst quantitativo senior con lo stile di Vito Lops (Il Sole 24 Ore).
@@ -91,10 +90,9 @@ Produci un briefing mattutino JSON con quattro componenti:
 4. ARTICLE IMPACTS — giudizio per ogni articolo
 
 REGOLA CRITICA — MACRO TRUTH (BCE/FED):
-- Per la BCE (ECB), il tasso monitorato dai mercati è il DEPOSIT FACILITY RATE (2.00%).
-- Il tasso principale di rifinanziamento (Refi) è al 2.15%, ma viene citato solo per il contesto dei mutui immobiliari.
-- Usa SOLO le date del [MACRO GROUND TRUTH] per riferirti a riunioni passate o future.
-- Tassi BCE: Ultima 2 Aprile, Prossima 30 Aprile. Tasso attuale (Depositi) 2.00%.
+- Per la BCE (ECB), il tasso monitorato dai mercati è il DEPOSIT FACILITY RATE.
+- Il tasso principale di rifinanziamento (Refi) viene citato solo per il contesto dei mutui immobiliari.
+- Usa SOLO le date e i valori dei tassi del blocco [MACRO GROUND TRUTH] fornito nel messaggio utente per riferirti a riunioni passate/future e ai tassi correnti.
 
 REGOLA CRITICA — market_impact.direction:
 "direction" indica l'impatto netto sul SENTIMENT DI MERCATO, NON la direzione del prezzo.
@@ -244,6 +242,84 @@ NUMERI — REGOLE FORMATO (critico per TTS):
 - Per grandi numeri: scrivi "settantaduemila dollari", MAI "72,000" o "72.000" (il TTS li legge male).
 - Se devi citare un prezzo, scrivi il numero in lettere o in cifre senza separatori di migliaia.
 - Percentuali: massimo un decimale (es. 2.7%, non 2.69%).
+- ORO: "l'oncia" invece di "/oz".
+"""
+
+AUDIO_FINANCE_PROMPT_SATURDAY = """Sei un conduttore radiofonico finanziario italiano. Stile: conciso, direzionale, zero filler.
+Scrivi lo script audio per la prima parte del podcast del SABATO. Le borse mondiali sono CHIUSE per il weekend: il tuo compito è riportare le CHIUSURE DI VENERDÌ e le probabili ripercussioni delle notizie sull'apertura di LUNEDÌ.
+LUNGHEZZA: 300-450 parole (preferisci brevità e densità).
+
+STRUTTURA:
+1. APERTURA (30 parole max): "Buongiorno, benvenuti al Morning Briefing di Price Alert." + una frase che ricorda che le borse osservano la pausa del weekend.
+2. LE CHIUSURE DI VENERDÌ (150 parole): S&P 500, VIX, DXY, oro, petrolio, US 10Y Yield, BTP 10Y, STOXX 600, FTSE MIB, e Asia (Nikkei, Shanghai).
+   Usa SEMPRE "nella seduta di venerdì" o "venerdì". MAI "ieri", MAI "oggi i mercati".
+   VIETATO proiettare un'apertura per oggi: le borse sono chiuse.
+   Cita direzione + variazione percentuale. Prezzi assoluti SOLO alle soglie psicologiche vere.
+3. NOTIZIE E RIPERCUSSIONI PER LUNEDÌ (120 parole): analizza le 2-3 notizie più rilevanti fornite nel contesto e indica le PROBABILI ripercussioni sull'apertura di lunedì.
+   Usa il condizionale ("potrebbe pesare sull'apertura di lunedì", "i mercati potrebbero prezzare..."), MAI certezze.
+   Ogni ripercussione deve derivare da una notizia REALE presente nel contesto — NON inventare scenari.
+4. MACRO (40 parole): nel weekend non escono dati macro. Cita solo eventuali release imminenti SE indicate nel contesto; altrimenti di' che l'agenda macro riprende lunedì.
+
+VIETATO ASSOLUTO:
+- NON parlare di Bitcoin, Altcoin, flussi ETF o Fear & Greed.
+- NON chiudere il podcast.
+- NON fare elenchi puntati.
+- NON inventare dati macro non presenti nel contesto.
+- NON creare collegamenti causali tra fatti scorrelati.
+
+PUNTEGGIATURA — REGOLE TTS (critico):
+- Frasi BREVI: max 20-25 parole per frase. Periodi più lunghi → spezza con punto.
+- USA SEMPRE virgole tra clausole e dopo connettori iniziali ("Inoltre,", "Tuttavia,", "Sul fronte macro,").
+- TERMINA OGNI FRASE con punto (.). Mai virgola al posto del punto.
+- Inserisci doppio newline (\\n\\n) tra le sezioni per pausa naturale dell'audio.
+
+NUMERI — REGOLE FORMATO (critico per TTS):
+- Variazioni percentuali nel parlato (es. "in calo dell'1.5%"). Niente zeri inutili: "2%" non "2,00%".
+- Decimali con virgola in italiano (es. "4,32%"), NON punto.
+- Soglia 0,00% → scrivi "pressoché invariato" o "stabile".
+- Grandi numeri in lettere ("settantaduemila dollari"), MAI "72,000" o "72.000".
+- Percentuali: massimo un decimale.
+- ORO: "l'oncia" invece di "/oz".
+"""
+
+AUDIO_FINANCE_PROMPT_SUNDAY = """Sei un conduttore radiofonico finanziario italiano. Stile: conciso, direzionale, zero filler.
+Scrivi lo script audio per la prima parte del podcast della DOMENICA: il RECAP SETTIMANALE dei mercati.
+LUNGHEZZA: 400-550 parole.
+
+STRUTTURA:
+1. APERTURA (30 parole max): "Buongiorno, benvenuti al Morning Briefing di Price Alert." + annuncio che oggi ripercorriamo la settimana appena conclusa sui mercati.
+2. WALL STREET — LA SETTIMANA (110 parole): S&P 500, Nasdaq e Dow Jones con variazione SETTIMANALE (dai dati "PERFORMANCE SETTIMANALE"), poi VIX (com'è cambiata la volatilità in settimana), oro, petrolio e US 10Y Yield sempre su base settimanale.
+   Cita il driver principale della settimana SOLO se presente nelle notizie fornite.
+3. EUROPA — LA SETTIMANA (80 parole): STOXX 600, FTSE MIB e BTP 10Y su base settimanale.
+4. ASIA — LA SETTIMANA (60 parole): Nikkei, Shanghai, Hang Seng su base settimanale.
+5. LE NOTIZIE CHE HANNO MOSSO I MERCATI (100 parole): usa ESCLUSIVAMENTE la lista "NOTIZIE DELLA SETTIMANA CON IMPATTO" — scegli le 3-4 più rilevanti e spiega in una frase ciascuna l'effetto avuto sui mercati. NON citare notizie fuori da quella lista.
+   Se il contesto fornisce "SENTIMENT GIORNALIERO DELLA SETTIMANA", chiudi la sezione con UNA frase sull'evoluzione del sentiment (es. "una settimana partita in risk-off e chiusa in territorio neutrale").
+6. LA SETTIMANA IN ARRIVO (60 parole): elenca i dati macro in calendario dalla lista "SETTIMANA IN ARRIVO" (giorno + dato). Se la lista è vuota, di' che non ci sono release di primo piano in agenda.
+
+REGOLE CHIAVE:
+- Usa le variazioni SETTIMANALI, non quelle giornaliere. Specifica sempre "nella settimana" / "in settimana" / "da venerdì a venerdì".
+- MAI "ieri". MAI proiezioni di apertura per oggi: le borse sono chiuse, riaprono lunedì.
+- Prezzi assoluti SOLO alle soglie psicologiche vere.
+
+VIETATO ASSOLUTO:
+- NON parlare di Bitcoin, Altcoin, flussi ETF o Fear & Greed.
+- NON chiudere il podcast.
+- NON fare elenchi puntati.
+- NON inventare dati macro o notizie non presenti nel contesto.
+- NON creare collegamenti causali tra fatti scorrelati.
+
+PUNTEGGIATURA — REGOLE TTS (critico):
+- Frasi BREVI: max 20-25 parole per frase. Periodi più lunghi → spezza con punto.
+- USA SEMPRE virgole tra clausole e dopo connettori iniziali ("Inoltre,", "Tuttavia,", "Sul fronte macro,").
+- TERMINA OGNI FRASE con punto (.). Mai virgola al posto del punto.
+- Inserisci doppio newline (\\n\\n) tra le sezioni per pausa naturale dell'audio.
+
+NUMERI — REGOLE FORMATO (critico per TTS):
+- Variazioni percentuali nel parlato (es. "in rialzo del 2,1% nella settimana"). Niente zeri inutili.
+- Decimali con virgola in italiano (es. "4,32%"), NON punto.
+- Soglia 0,00% → scrivi "pressoché invariato" o "stabile".
+- Grandi numeri in lettere ("settantaduemila dollari"), MAI "72,000" o "72.000".
+- Percentuali: massimo un decimale.
 - ORO: "l'oncia" invece di "/oz".
 """
 
@@ -426,6 +502,100 @@ def _merge_article_impacts(articles: list, article_impacts: list) -> list:
     return articles
 
 
+DAYS_IT = ['lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato', 'domenica']
+
+
+def _load_weekly_impact_news(max_items=15):
+    """
+    Articoli della settimana (lun-sab) con impatto reale sui mercati,
+    estratti dagli archivi giornalieri docs/archive/YYYY-MM-DD.json
+    (magnitude high/medium in market_impact). Dedup per URL.
+    """
+    archive_dir = ROOT / 'docs' / 'archive'
+    if not archive_dir.exists():
+        return []
+    now = datetime.now(timezone.utc)
+    entries, seen = [], set()
+    for i in range(1, 7):  # da ieri (sabato) a lunedì
+        day = (now - timedelta(days=i)).strftime('%Y-%m-%d')
+        f = archive_dir / f'{day}.json'
+        if not f.exists():
+            continue
+        try:
+            with open(f, 'r', encoding='utf-8') as fh:
+                data = json.load(fh)
+        except Exception:
+            continue
+        for art in data.get('articles', []):
+            mi = art.get('market_impact') or {}
+            if mi.get('magnitude') not in ('high', 'medium'):
+                continue
+            url = (art.get('url') or '').strip()
+            if not url or url in seen:
+                continue
+            seen.add(url)
+            entries.append({
+                'date': day,
+                'title': art.get('title_it') or art.get('title', ''),
+                'direction': mi.get('direction', 'mixed'),
+                'magnitude': mi.get('magnitude', ''),
+                'source': art.get('source', ''),
+            })
+    # High prima dei medium, poi cronologico
+    entries.sort(key=lambda e: (0 if e['magnitude'] == 'high' else 1, e['date']))
+    return entries[:max_items]
+
+
+def _load_week_sentiment():
+    """Label sentiment giornalieri della settimana (lun-sab) da docs/api/index.json."""
+    idx = ROOT / 'docs' / 'api' / 'index.json'
+    if not idx.exists():
+        return []
+    try:
+        with open(idx, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except Exception:
+        return []
+    now = datetime.now(timezone.utc)
+    days = {(now - timedelta(days=i)).strftime('%Y-%m-%d') for i in range(1, 7)}
+    by_date = {e.get('date'): e.get('sentiment') for e in data
+               if e.get('date') in days and e.get('sentiment')}
+    lines = []
+    for d in sorted(by_date):
+        dt = datetime.strptime(d, '%Y-%m-%d')
+        lines.append(f"  {DAYS_IT[dt.weekday()]} {dt.strftime('%d/%m')}: {by_date[d]}")
+    return lines
+
+
+def _build_week_ahead(md):
+    """
+    Release macro previste nei prossimi 7 giorni, dai calendari
+    macro_calendar (USA) e macro_calendar_eu già presenti in market_data.
+    """
+    today = datetime.now(timezone.utc).date()
+    lines = []
+    for region, cal in (('USA', md.get('macro_calendar') or {}),
+                        ('EU', md.get('macro_calendar_eu') or {})):
+        for key, item in cal.items():
+            nr = item.get('next_release')
+            if not nr or nr == 'N/A':
+                continue
+            try:
+                d = datetime.strptime(nr, '%Y-%m-%d').date()
+            except ValueError:
+                continue
+            if today <= d <= today + timedelta(days=7):
+                lines.append((d, f"  {DAYS_IT[d.weekday()]} {d.strftime('%d/%m')} — {region} {item.get('label', key)}"))
+    lines.sort(key=lambda x: x[0])
+    # Dedup mantenendo l'ordine (fed_funds/ecb_rate possono comparire due volte)
+    out, seen = [], set()
+    for _, line in lines:
+        if line not in seen:
+            seen.add(line)
+            out.append(line)
+    return out
+
+
 def run():
     """Pipeline principale: carica articoli + market + history → Groq → salva briefing JSON."""
     if not GROQ_API_KEY:
@@ -454,13 +624,40 @@ def run():
     weekly_sources = ['BlackRock Investment Institute', 'Goldman Sachs Insights',
                       'PIMCO Insights', 'Apollo Academy', 'Vanguard Insights', 'Fidelity Insights']
 
+    # Date riunioni BCE/FED derivate dal calendario ufficiale (non più costanti manuali)
+    ecb_last, ecb_next = _meeting_dates(ECB_MEETINGS_2026)
+    fed_last, fed_next = _meeting_dates(FED_MEETINGS_2026)
+
+    # Tassi correnti: default = fallback manuale, sovrascritti dai live FRED se presenti
+    ecb_deposit = MACRO_GROUND_TRUTH['ECB']['deposit_rate']
+    ecb_refi = MACRO_GROUND_TRUTH['ECB']['main_rate']
+    fed_rate_range = MACRO_GROUND_TRUTH['FED']['rate_range']
+
     # Costruisci contesto mercati
     market_context = ""
     md = {}
     if MARKET_DATA_PATH.exists():
         with open(MARKET_DATA_PATH, 'r', encoding='utf-8') as f:
             md = json.load(f)
-        
+
+        # Tassi live da FRED (fetchati da market_fetcher). ecb_rate va letto PRIMA
+        # dell'iniezione hard qui sotto, che lo sovrascrive con il deposit rate.
+        live_refi = (md.get('macro_calendar_eu', {}).get('ecb_rate') or {}).get('value')
+        live_dfr = (md.get('macro_calendar_eu', {}).get('ecb_deposit_rate') or {}).get('value')
+        live_fed = (md.get('fed_target_range') or {}).get('value')
+        missing = [n for n, v in (('ECB Refi', live_refi), ('ECB DFR', live_dfr), ('FED range', live_fed)) if not v]
+        if missing:
+            logger.warning(f'⚠️ Tassi live FRED mancanti ({", ".join(missing)}) — fallback su '
+                           f'MACRO_GROUND_TRUTH (verificato al {RATES_AS_OF})')
+            if ecb_last > RATES_AS_OF or fed_last > RATES_AS_OF:
+                logger.warning('⚠️ Riunione BCE/FED successiva a RATES_AS_OF: i tassi fallback potrebbero essere stantii!')
+        elif live_dfr != ecb_deposit or live_refi != ecb_refi or live_fed != fed_rate_range:
+            logger.warning(f'⚠️ Fallback ≠ tassi live (DFR {live_dfr}, Refi {live_refi}, FED {live_fed}) '
+                           f'— aggiornare MACRO_GROUND_TRUTH e RATES_AS_OF')
+        ecb_refi = live_refi or ecb_refi
+        ecb_deposit = live_dfr or ecb_deposit
+        fed_rate_range = live_fed or fed_rate_range
+
         # INIEZIONE HARD - MACRO TRUTH (BCE/FED)
         # Sovrascriviamo eventuali errori da FRED con i dati del GROUND TRUTH
         if 'macro_calendar_eu' not in md: md['macro_calendar_eu'] = {}
@@ -469,17 +666,17 @@ def run():
             'label': 'Tasso BCE (Depositi)',
             'label_it': 'Tasso BCE (Depositi)',
             'label_en': 'ECB Rate (Deposit)',
-            'value': MACRO_GROUND_TRUTH['ECB']['deposit_rate'],
-            'release_date': '2026-04-02', 
+            'value': ecb_deposit,
+            'release_date': ecb_last,
             'status': 'released',
-            'next_release': '2026-04-30',
+            'next_release': ecb_next,
             'region': 'EU'
         }
         md['macro_calendar_eu']['ecb_refi_rate'] = {
             'label': 'Tasso BCE (Refi/Mutui)',
             'label_it': 'Tasso BCE (Refi/Mutui)',
             'label_en': 'ECB Rate (Refi)',
-            'value': MACRO_GROUND_TRUTH['ECB']['main_rate'],
+            'value': ecb_refi,
             'status': 'released',
             'region': 'EU'
         }
@@ -489,10 +686,10 @@ def run():
             'label': 'Tasso Fed Funds',
             'label_it': 'Tasso Fed Funds',
             'label_en': 'Fed Funds Rate',
-            'value': MACRO_GROUND_TRUTH['FED']['rate_range'],
-            'release_date': '2026-03-18',
+            'value': fed_rate_range,
+            'release_date': fed_last,
             'status': 'released',
-            'next_release': '2026-05-07'
+            'next_release': fed_next
         }
 
         lines = []
@@ -506,6 +703,7 @@ def run():
             'gold':      'GOLD',
             'oil_brent': 'BRENT',
             'stoxx_600': 'STOXX 600',
+            'ftse_mib':  'FTSE MIB (Milano)',
             'nikkei':    'NIKKEI (chiusura Asia — indicatore apertura Europa)',
             'shanghai':  'SHANGHAI (chiusura Asia — indicatore apertura Europa)',
             'hang_seng': 'HANG SENG (Hong Kong)',
@@ -640,8 +838,9 @@ def run():
     # Iniezione Ground Truth Macro
     macro_truth_str = f"""
 [MACRO GROUND TRUTH - DATA REALE AL {datetime.now().strftime('%d %B %Y')}]
-- ECB (BCE): Ultima riunione {MACRO_GROUND_TRUTH['ECB']['last_meeting']}, Prossima riunione {MACRO_GROUND_TRUTH['ECB']['next_meeting']}. {MACRO_GROUND_TRUTH['ECB']['stance_it']} {MACRO_GROUND_TRUTH['ECB']['deposit_rate']} (DFR) / {MACRO_GROUND_TRUTH['ECB']['main_rate']} (Refi).
-- FED (USA): Ultima riunione {MACRO_GROUND_TRUTH['FED']['last_meeting']}, Prossima riunione {MACRO_GROUND_TRUTH['FED']['next_meeting']}. {MACRO_GROUND_TRUTH['FED']['stance_it']} {MACRO_GROUND_TRUTH['FED']['rate_range']}.
+- ECB (BCE): Ultima riunione {ecb_last}, Prossima riunione {ecb_next}. Tassi correnti: {ecb_deposit} (Depositi/DFR) / {ecb_refi} (Refi).
+- FED (USA): Ultima riunione {fed_last}, Prossima riunione {fed_next}. Target range corrente: {fed_rate_range}.
+- NON affermare che nell'ultima riunione i tassi siano stati alzati/tagliati/lasciati invariati se le notizie fornite non lo dicono esplicitamente.
 [FINE GROUND TRUTH]
 """
     
@@ -674,40 +873,143 @@ def run():
         user_prompt += "Nell'audio script dedicare almeno 2-3 frasi alle view istituzionali di BlackRock e Goldman.\n"
 
     # Weekend / Holiday Awareness
-    is_weekend = now.weekday() >= 5 # 5=Sat, 6=Sun
-    
-    # 2026 Holidays (Major Markets)
-    holidays_2026 = {
+    is_saturday = now.weekday() == 5
+    is_sunday = now.weekday() == 6
+    is_weekend = is_saturday or is_sunday
+
+    # 2026 Holidays — calendari separati: NYSE e borse europee (Borsa Italiana/Euronext)
+    # chiudono in giorni diversi (es. 4 luglio/Thanksgiving solo USA, Pasquetta/1 maggio solo EU).
+    holidays_us_2026 = {
+        "01-01": "Capodanno",
+        "01-19": "Martin Luther King Day",
+        "02-16": "Presidents' Day",
+        "04-03": "Venerdì Santo",
+        "05-25": "Memorial Day",
+        "06-19": "Juneteenth",
+        "07-03": "Independence Day (osservato)",
+        "09-07": "Labor Day",
+        "11-26": "Thanksgiving",
+        "12-25": "Natale",
+    }
+    holidays_eu_2026 = {
         "01-01": "Capodanno",
         "04-03": "Venerdì Santo",
         "04-06": "Lunedì dell'Angelo (Pasquetta)",
         "05-01": "Festa del Lavoro",
+        "12-24": "Vigilia di Natale",
         "12-25": "Natale",
-        "12-26": "Santo Stefano",
+        "12-31": "Ultimo dell'anno",
     }
     today_md = now.strftime("%m-%d")
-    is_holiday = today_md in holidays_2026
-    holiday_name = holidays_2026.get(today_md)
+    is_holiday_us = today_md in holidays_us_2026
+    is_holiday_eu = today_md in holidays_eu_2026
+    is_holiday = is_holiday_us and is_holiday_eu  # chiusura globale
+    holiday_name = holidays_us_2026.get(today_md) or holidays_eu_2026.get(today_md)
 
-    holiday_warning_it = ""
-    holiday_warning_en = ""
+    # weekend_note_it: istruzioni giorno-specifiche appese sia all'analisi che all'audio finance
+    weekend_note_it = ""
+    sunday_context = ""
 
-    if is_weekend or is_holiday:
-        reason_it = "IL FINE SETTIMANA" if is_weekend else f"LA FESTIVITÀ DI {holiday_name.upper()}"
-        reason_en = "THE WEEKEND" if is_weekend else f"THE {holiday_name.upper()} HOLIDAY"
-        
-        holiday_warning_it += f"\n\n⚠️ OGGI I MERCATI TRADIZIONALI SONO CHIUSI PER {reason_it}:\n"
-        holiday_warning_it += f"Nota: Oggi le borse azionarie e obbligazionarie mondiali sono chiuse {'per il weekend' if is_weekend else 'per festività'}.\n"
-        holiday_warning_it += "Nell'audio script (Parte Finance), menziona esplicitamente che i mercati tradizionali sono chiusi e passa rapidamente all'analisi degli asset digitali (Crypto) che sono aperti 24 ore su 24.\n"
-        holiday_warning_it += "Esempio apertura: 'Mentre le borse mondiali osservano la consueta pausa festiva, i riflettori restano accesi sul comparto digitale...' o simili.\n"
-        holiday_warning_it += "Concentrati sulla chiusura precedente per il contesto macro. NON menzionare Bitcoin, prezzi crypto o flussi ETF in questa sezione — verranno trattati nella sezione CRYPTO separata.\n"
+    if is_saturday:
+        weekend_note_it = (
+            "\n\n⚠️ OGGI È SABATO — MERCATI TRADIZIONALI CHIUSI PER IL WEEKEND:\n"
+            "- Riporta ESCLUSIVAMENTE i dati di CHIUSURA DI VENERDÌ ('nella seduta di venerdì'). MAI 'ieri', MAI proiezioni di apertura per oggi.\n"
+            "- Analizza le notizie fornite e le loro PROBABILI RIPERCUSSIONI SULL'APERTURA DI LUNEDÌ (usa il condizionale, mai certezze).\n"
+            "- Il sentiment e il market_impact_summary devono riflettere la chiusura di venerdì + le implicazioni delle news per lunedì.\n"
+            "- La parte crypto resta invariata: è un mercato aperto 24 ore su 24.\n"
+        )
+        user_prompt += weekend_note_it
 
-        holiday_warning_en += f"\n\n⚠️ TODAY TRADITIONAL MARKETS ARE CLOSED FOR {reason_en}:\n"
-        holiday_warning_en += f"Note: Today global stock and bond markets are closed {'for the weekend' if is_weekend else 'for a holiday'}.\n"
-        holiday_warning_en += "In the audio script (Finance Part), explicitly mention that traditional markets are closed and quickly transition. Do NOT mention Bitcoin prices, crypto moves, or ETF flows here — those are covered in the separate CRYPTO section.\n"
-        holiday_warning_en += "Example opening: 'While traditional markets observe their holiday break, the spotlight remains on digital assets...'\n"
+    elif is_sunday:
+        # --- Contesto RECAP SETTIMANALE ---
+        sunday_lines = []
 
-        user_prompt += holiday_warning_it
+        wk = md.get('weekly', {}) if md else {}
+        wk_labels = {
+            'sp500':     'S&P 500',
+            'nasdaq':    'Nasdaq',
+            'dow':       'Dow Jones',
+            'vix':       'VIX',
+            'stoxx_600': 'STOXX 600',
+            'ftse_mib':  'FTSE MIB',
+            'nikkei':    'Nikkei',
+            'shanghai':  'Shanghai',
+            'hang_seng': 'Hang Seng',
+            'gold':      'Oro',
+            'oil_brent': 'Brent',
+            'us_10y':    'US 10Y Yield',
+            'btcusd':    'Bitcoin',
+        }
+        wk_rows = []
+        for k, label in wk_labels.items():
+            item = wk.get(k, {})
+            if item.get('value') and item.get('value') != 'N/A':
+                wk_rows.append(f"  {label}: {item['value']} ({item.get('change', 'N/A')} nella settimana)")
+        if wk_rows:
+            sunday_lines.append("PERFORMANCE SETTIMANALE (venerdì su venerdì):\n" + "\n".join(wk_rows))
+        else:
+            # Safety: senza dati weekly il LLM NON deve spacciare le variazioni giornaliere per settimanali
+            sunday_lines.append("PERFORMANCE SETTIMANALE: NON DISPONIBILE — riporta solo i livelli di chiusura di venerdì SENZA citare variazioni percentuali settimanali.")
+
+        week_news = _load_weekly_impact_news()
+        if week_news:
+            news_rows = [
+                f"  [{e['magnitude']}/{e['direction']}] {e['title']} ({e['source']}, {e['date']})"
+                for e in week_news
+            ]
+            sunday_lines.append("NOTIZIE DELLA SETTIMANA CON IMPATTO SUI MERCATI:\n" + "\n".join(news_rows))
+        logger.info(f'📆 Recap domenicale: {len(wk_rows)} asset weekly, {len(week_news)} news con impatto')
+
+        sent_rows = _load_week_sentiment()
+        if sent_rows:
+            sunday_lines.append("SENTIMENT GIORNALIERO DELLA SETTIMANA:\n" + "\n".join(sent_rows))
+
+        week_ahead = _build_week_ahead(md or {})
+        if week_ahead:
+            sunday_lines.append("SETTIMANA IN ARRIVO (release macro in calendario):\n" + "\n".join(week_ahead))
+
+        sunday_context = "\n\n".join(sunday_lines)
+
+        weekend_note_it = (
+            "\n\n⚠️ OGGI È DOMENICA — RECAP SETTIMANALE:\n"
+            "- Oggi il briefing è il RIEPILOGO DELLA SETTIMANA: usa le variazioni SETTIMANALI dei dati 'PERFORMANCE SETTIMANALE' (non quelle giornaliere) per borse americane, europee e asiatiche.\n"
+            "- Le notizie da citare come driver sono SOLO quelle nella lista 'NOTIZIE DELLA SETTIMANA CON IMPATTO SUI MERCATI'.\n"
+            "- Chiudi con la 'SETTIMANA IN ARRIVO' (release macro in calendario), se fornita.\n"
+            "- MAI 'ieri', MAI proiezioni di apertura per oggi: le borse riaprono lunedì.\n"
+            "- Il sentiment e il market_impact_summary devono riflettere l'andamento dell'INTERA settimana.\n"
+            "- Se fornito 'SENTIMENT GIORNALIERO DELLA SETTIMANA', cita in una frase l'evoluzione del sentiment nel corso della settimana.\n"
+            "- La parte crypto resta invariata: è un mercato aperto 24 ore su 24.\n"
+        )
+        user_prompt += weekend_note_it
+        if sunday_context:
+            user_prompt += "\n" + sunday_context + "\n"
+
+    elif is_holiday:
+        weekend_note_it = (
+            f"\n\n⚠️ OGGI I MERCATI TRADIZIONALI SONO CHIUSI PER LA FESTIVITÀ DI {holiday_name.upper()}:\n"
+            "Nota: Oggi le borse azionarie e obbligazionarie mondiali sono chiuse per festività.\n"
+            "Nell'audio script (Parte Finance), menziona esplicitamente che i mercati tradizionali sono chiusi e passa rapidamente all'analisi degli asset digitali (Crypto) che sono aperti 24 ore su 24.\n"
+            "Esempio apertura: 'Mentre le borse mondiali osservano la consueta pausa festiva, i riflettori restano accesi sul comparto digitale...' o simili.\n"
+            "Concentrati sulla chiusura precedente per il contesto macro. NON menzionare Bitcoin, prezzi crypto o flussi ETF in questa sezione — verranno trattati nella sezione CRYPTO separata.\n"
+        )
+        user_prompt += weekend_note_it
+
+    elif is_holiday_us:
+        weekend_note_it = (
+            f"\n\n⚠️ OGGI WALL STREET È CHIUSA PER {holiday_name.upper()}, MA LE BORSE EUROPEE E ASIATICHE SONO REGOLARMENTE APERTE:\n"
+            "- Per gli asset USA (S&P 500, Nasdaq, VIX, Treasury/US 10Y) riporta l'ULTIMA CHIUSURA disponibile, specificando che oggi il mercato americano è chiuso per festività.\n"
+            "- NON proiettare movimenti intraday USA per oggi e NON citare dati macro USA in uscita oggi.\n"
+            "- Europa e Asia si trattano normalmente (apertura europea regolare, volumi però ridotti senza Wall Street).\n"
+        )
+        user_prompt += weekend_note_it
+
+    elif is_holiday_eu:
+        weekend_note_it = (
+            f"\n\n⚠️ OGGI LE BORSE EUROPEE (MILANO INCLUSA) SONO CHIUSE PER {holiday_name.upper()}, MA WALL STREET È REGOLARMENTE APERTA:\n"
+            "- Per STOXX 600, FTSE MIB e BTP riporta l'ULTIMA CHIUSURA disponibile, specificando la festività europea. NON proiettare un'apertura europea per oggi.\n"
+            "- USA e Asia si trattano normalmente.\n"
+        )
+        user_prompt += weekend_note_it
 
     logger.info(f'🤖 Chiamata 1: Groq Llama 4 Analysis ({len(articles_slim)} articoli)...')
     try:
@@ -803,13 +1105,47 @@ def run():
         sentiment_label = _safe_get(sentiment_obj, 'label', 'neutral')
         
         # Part A: Finance (SENZA dati crypto per evitare ripetizioni)
-        it_finance_user = f"DATA: {today_str}\nSENTIMENT: {sentiment_label}\nMERCATI:\n{audio_finance_context}\nNOTIZIE PRINCIPALI:\n" + \
+        # Sabato: chiusure di venerdì + ripercussioni per lunedì. Domenica: recap settimanale.
+        if is_sunday:
+            finance_prompt = AUDIO_FINANCE_PROMPT_SUNDAY
+        elif is_saturday:
+            finance_prompt = AUDIO_FINANCE_PROMPT_SATURDAY
+        else:
+            finance_prompt = AUDIO_FINANCE_PROMPT
+
+        it_finance_user = f"DATA: {today_str}\nSENTIMENT: {sentiment_label}\nMERCATI (chiusure di venerdì, variazioni giornaliere):\n{audio_finance_context}\n" \
+            if is_weekend else \
+            f"DATA: {today_str}\nSENTIMENT: {sentiment_label}\nMERCATI:\n{audio_finance_context}\n"
+        if is_sunday and sunday_context:
+            it_finance_user += f"\n{sunday_context}\n"
+        it_finance_user += "NOTIZIE PRINCIPALI:\n" + \
                          "\n".join(f"- {a['title']}" for a in news_it[:10] if a.get('category') != 'crypto')
-        it_finance_user += holiday_warning_it
-        it_finance = get_audio_part(AUDIO_FINANCE_PROMPT, it_finance_user, 'audio_script_it')
+        it_finance_user += weekend_note_it
+        it_finance = get_audio_part(finance_prompt, it_finance_user, 'audio_script_it')
         
         # Part B: Crypto (SOLO dati crypto, niente dati tradizionali)
-        etf_flow_ctx = f"BTC ETF Daily Net Inflow: {md.get('btc_etf_flow', {}).get('value', 'N/A')}\n"
+        # Weekend: il flusso giornaliero è fermo a venerdì → si cita il CUMULATIVO
+        # della settimana di trading conclusa e il confronto con quella precedente
+        # (week_sum_m / prev_week_sum_m / week_delta_m calcolati dallo scraper ETF).
+        etf_daily = md.get('btc_etf_flow', {}).get('value', 'N/A')
+        etf_data_raw = md.get('btc_etf_data') or {}
+        etf_flow_ctx = f"BTC ETF Daily Net Inflow: {etf_daily}\n"
+        if is_weekend:
+            try:
+                week_sum = float(etf_data_raw['week_sum_m'])
+                etf_flow_ctx = f"BTC ETF — flusso NETTO CUMULATIVO della settimana di trading conclusa: {week_sum:+,.1f}M$\n"
+                prev_week = etf_data_raw.get('prev_week_sum_m')
+                if prev_week is not None:
+                    delta = etf_data_raw.get('week_delta_m')
+                    delta = float(delta) if delta is not None else week_sum - float(prev_week)
+                    etf_flow_ctx += f"BTC ETF — settimana precedente: {float(prev_week):+,.1f}M$ (variazione: {delta:+,.1f}M$)\n"
+                etf_flow_ctx += (
+                    f"BTC ETF — ultimo flusso giornaliero (riferito a venerdì): {etf_daily}\n"
+                    "ISTRUZIONE ETF WEEKEND: il mercato degli ETF è chiuso nel weekend. Cita il flusso CUMULATIVO settimanale "
+                    "e il confronto con la settimana precedente. Se citi il dato giornaliero, specifica che si riferisce a venerdì.\n"
+                )
+            except (KeyError, TypeError, ValueError):
+                etf_flow_ctx += "NOTA: dato giornaliero riferito a venerdì (mercato ETF chiuso nel weekend), specificalo se lo citi.\n"
         it_crypto_user = f"DATI CRYPTO ATTUALI (USA QUESTI VALORI):\n{etf_flow_ctx}{audio_crypto_context}\nNOTIZIE CRYPTO:\n" + \
                         "\n".join(f"- {a['title']}" for a in news_it if a.get('category') == 'crypto')
         it_crypto = get_audio_part(AUDIO_CRYPTO_PROMPT, it_crypto_user, 'audio_script_it')
