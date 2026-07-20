@@ -270,8 +270,8 @@
       </div>
       {% endif %}
 
-      {% if briefing.get('market_data_raw', {}).get('btc_etf_data') %}
-      {% set etf = briefing['market_data_raw']['btc_etf_data'] %}
+      {% set etf = briefing.get('market_data_raw', {}).get('btc_etf_data') %}
+      {% if etf and etf.get('total_btc') is not none and etf.get('total_aum_bn') is not none and etf.get('pct_of_21m') is not none %}
       <div class="macro-item" style="grid-column: span 2; display: flex; justify-content: space-around; align-items: center; border-color: #58a6ff30;">
         <div style="text-align: center;">
           <div class="macro-label">BTC ETF Holdings</div>
