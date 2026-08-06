@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Morning Briefing — 2026-07-07</title>
+<title>Morning Briefing — 2026-08-06</title>
 <style>
   :root {
     --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;
@@ -23,9 +23,16 @@
   .lang-btn{padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);text-decoration:none;font-size:12px;}
   .lang-btn.active{border-color:var(--blue);color:var(--blue);}
 
-  .ticker-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 24px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
+  .ticker-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 0;overflow:hidden;white-space:nowrap;}
   .ticker-bar::-webkit-scrollbar{display:none;}
-  .ticker-items{display:inline-flex;gap:24px;}
+  .ticker-track{display:inline-flex;animation:ticker-scroll 75s linear infinite;will-change:transform;}
+  .ticker-track:hover{animation-play-state:paused;}
+  @keyframes ticker-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none;}
+    .ticker-bar{overflow-x:auto;scrollbar-width:none;}
+  }
+  .ticker-items{display:inline-flex;gap:24px;padding:0 12px;}
   .ticker-item{display:inline-flex;flex-direction:column;gap:1px;}
   .ticker-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;}
   .ticker-value{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;}
@@ -113,6 +120,11 @@
     text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px;
     padding-bottom:6px;border-bottom:1px solid var(--border);}
   .macro-item.eu{border-color:#3b82f640;}
+  .macro-item.fear-greed{border-color:#f59e0b40;position:relative;}
+  .macro-item.etf-flow{border-color:#58a6ff40;}
+  /* Tone: dato migliorato/peggiorato vs previous — devono vincere su released/eu/fear-greed (ultime regole) */
+  .macro-item.good{border-color:#3fb95090;}
+  .macro-item.bad{border-color:#f8514990;}
 </style>
 </head>
 <body>
@@ -120,105 +132,287 @@
 <header class="header">
   <div class="header-left">
     <span class="header-title">📰 The Morning Brief</span>
-    <span class="header-date">2026-07-07 · Finance & Geopolitics</span>
+    <span class="header-date">2026-08-06 · Finance & Geopolitics</span>
   </div>
   <div class="lang-switch">
-    <a href="../2026-07-07.html" class="lang-btn ">🇮🇹 IT</a>
-    <a href="2026-07-07.html" class="lang-btn active">🇬🇧 EN</a>
+    <a href="../2026-08-06.html" class="lang-btn ">🇮🇹 IT</a>
+    <a href="2026-08-06.html" class="lang-btn active">🇬🇧 EN</a>
   </div>
 </header>
 
 <div class="ticker-bar">
-  <div class="ticker-items">
+  <div class="ticker-track">
     
-    <div class="ticker-item">
-      <span class="ticker-label">EUR/USD</span>
-      <span class="ticker-value down">1.14</span>
-      <span class="ticker-change down">-0.06%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">DXY</span>
-      <span class="ticker-value up">100.93</span>
-      <span class="ticker-change up">+0.07%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">S&P 500</span>
-      <span class="ticker-value up">7537.43</span>
-      <span class="ticker-change up">+0.72%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">STOXX 600</span>
-      <span class="ticker-value up">64.94</span>
-      <span class="ticker-change up">+0.12%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">NIKKEI</span>
-      <span class="ticker-value down">68,257</span>
-      <span class="ticker-change down">-2.12%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">SHANGHAI</span>
-      <span class="ticker-value down">3990.24</span>
-      <span class="ticker-change down">-1.26%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">VIX</span>
-      <span class="ticker-value up">15.83</span>
-      <span class="ticker-change up">+1.67%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">TLT</span>
-      <span class="ticker-value down">85.45</span>
-      <span class="ticker-change down">-0.07%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">GOLD</span>
-      <span class="ticker-value down">$4140.40/oz</span>
-      <span class="ticker-change down">-0.35%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BTC</span>
-      <span class="ticker-value down">$62,994</span>
-      <span class="ticker-change down">-1.56%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BRENT</span>
-      <span class="ticker-value up">$72.90</span>
-      <span class="ticker-change up">+1.26%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BTP 10Y</span>
-      <span class="ticker-value neu">3.82%</span>
+    <div class="ticker-items">
+      
+      <div class="ticker-item">
+        <span class="ticker-label">EUR/USD</span>
+        <span class="ticker-value up">1.15</span>
+        <span class="ticker-change up">+0.12%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">DXY</span>
+        <span class="ticker-value up">99.74</span>
+        <span class="ticker-change up">+0.06%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">S&P 500</span>
+        <span class="ticker-value down">7723.55</span>
+        <span class="ticker-change down">-0.17%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">NASDAQ</span>
+        <span class="ticker-value down">26,363</span>
+        <span class="ticker-change down">-0.83%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">DOW JONES</span>
+        <span class="ticker-value up">54,349</span>
+        <span class="ticker-change up">+0.49%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">STOXX 600</span>
+        <span class="ticker-value up">65.88</span>
+        <span class="ticker-change up">+0.50%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">FTSE MIB</span>
+        <span class="ticker-value up">53,856</span>
+        <span class="ticker-change up">+0.77%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">NIKKEI</span>
+        <span class="ticker-value down">65,683</span>
+        <span class="ticker-change down">-0.93%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">SHANGHAI</span>
+        <span class="ticker-value up">3900.35</span>
+        <span class="ticker-change up">+0.57%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">HANG SENG</span>
+        <span class="ticker-value down">25,481</span>
+        <span class="ticker-change down">-1.68%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">VIX</span>
+        <span class="ticker-value up">15.88</span>
+        <span class="ticker-change up">+0.44%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">US 10Y</span>
+        <span class="ticker-value down">4.61%</span>
+        <span class="ticker-change down">-0.22%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BTP 10Y</span>
+        <span class="ticker-value neu">3.73%</span>
+        
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">SPREAD BTP-BUND</span>
+        <span class="ticker-value neu">76 bp</span>
+        
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">TLT</span>
+        <span class="ticker-value up">83.00</span>
+        <span class="ticker-change up">+0.22%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">GOLD</span>
+        <span class="ticker-value up">$4319.20/oz</span>
+        <span class="ticker-change up">+1.73%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BRENT</span>
+        <span class="ticker-value up">$79.89</span>
+        <span class="ticker-change up">+0.55%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BTC</span>
+        <span class="ticker-value up">$64,764</span>
+        <span class="ticker-change up">+0.26%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">ETH</span>
+        <span class="ticker-value up">$1,908</span>
+        <span class="ticker-change up">+2.00%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">FEAR & GREED</span>
+        <span class="ticker-value down">25 Extreme Fear</span>
+        
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BTC ETF</span>
+        <span class="ticker-value up">$+211.5M</span>
+        <span class="ticker-change up">📈 Improving</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">M2 GLOBAL</span>
+        <span class="ticker-value up">$23.2T</span>
+        <span class="ticker-change up">expanding 📈 | US YoY: +5.5% YoY</span>
+      </div>
       
     </div>
     
-    <div class="ticker-item">
-      <span class="ticker-label">US 10Y</span>
-      <span class="ticker-value up">4.48%</span>
-      <span class="ticker-change up">+0.22%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BTC ETF</span>
-      <span class="ticker-value up">$+13.6M</span>
-      <span class="ticker-change up">📉 Declining</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">M2 GLOBAL</span>
-      <span class="ticker-value up">$23.1T</span>
-      <span class="ticker-change up">expanding 📈 | US YoY: +5.6% YoY</span>
+    <div class="ticker-items" aria-hidden="true">
+      
+      <div class="ticker-item">
+        <span class="ticker-label">EUR/USD</span>
+        <span class="ticker-value up">1.15</span>
+        <span class="ticker-change up">+0.12%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">DXY</span>
+        <span class="ticker-value up">99.74</span>
+        <span class="ticker-change up">+0.06%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">S&P 500</span>
+        <span class="ticker-value down">7723.55</span>
+        <span class="ticker-change down">-0.17%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">NASDAQ</span>
+        <span class="ticker-value down">26,363</span>
+        <span class="ticker-change down">-0.83%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">DOW JONES</span>
+        <span class="ticker-value up">54,349</span>
+        <span class="ticker-change up">+0.49%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">STOXX 600</span>
+        <span class="ticker-value up">65.88</span>
+        <span class="ticker-change up">+0.50%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">FTSE MIB</span>
+        <span class="ticker-value up">53,856</span>
+        <span class="ticker-change up">+0.77%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">NIKKEI</span>
+        <span class="ticker-value down">65,683</span>
+        <span class="ticker-change down">-0.93%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">SHANGHAI</span>
+        <span class="ticker-value up">3900.35</span>
+        <span class="ticker-change up">+0.57%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">HANG SENG</span>
+        <span class="ticker-value down">25,481</span>
+        <span class="ticker-change down">-1.68%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">VIX</span>
+        <span class="ticker-value up">15.88</span>
+        <span class="ticker-change up">+0.44%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">US 10Y</span>
+        <span class="ticker-value down">4.61%</span>
+        <span class="ticker-change down">-0.22%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BTP 10Y</span>
+        <span class="ticker-value neu">3.73%</span>
+        
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">SPREAD BTP-BUND</span>
+        <span class="ticker-value neu">76 bp</span>
+        
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">TLT</span>
+        <span class="ticker-value up">83.00</span>
+        <span class="ticker-change up">+0.22%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">GOLD</span>
+        <span class="ticker-value up">$4319.20/oz</span>
+        <span class="ticker-change up">+1.73%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BRENT</span>
+        <span class="ticker-value up">$79.89</span>
+        <span class="ticker-change up">+0.55%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BTC</span>
+        <span class="ticker-value up">$64,764</span>
+        <span class="ticker-change up">+0.26%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">ETH</span>
+        <span class="ticker-value up">$1,908</span>
+        <span class="ticker-change up">+2.00%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">FEAR & GREED</span>
+        <span class="ticker-value down">25 Extreme Fear</span>
+        
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BTC ETF</span>
+        <span class="ticker-value up">$+211.5M</span>
+        <span class="ticker-change up">📈 Improving</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">M2 GLOBAL</span>
+        <span class="ticker-value up">$23.2T</span>
+        <span class="ticker-change up">expanding 📈 | US YoY: +5.5% YoY</span>
+      </div>
+      
     </div>
     
   </div>
@@ -235,10 +429,10 @@
       <span class="sentiment-score">Intensity: 5/10</span>
       
     </div>
-    <div class="sentiment-reason">The market shows mixed signals. The VIX has increased to 15.83, while the S&P 500 has risen by 0.72% to 7537.43. The price of Brent oil has increased by 1.26% to $72.90, and the US dollar has risen by 0.07% to 100.93. The unemployment rate in the United States has fallen to 4.2%, and the GDP of the euro zone has decreased by 0.2% in the first quarter.</div>
+    <div class="sentiment-reason">The market shows mixed signals, with the VIX at 15.88 (+0.44%) and the DXY at 99.74 (+0.06%). The S&P 500 is slightly down (-0.17%) while the Brent price is rising (+0.55%). The US unemployment rate is at 4.2% and the Eurozone QoQ GDP is at 0.4%. The geopolitical situation remains tense, with the war between Russia and Ukraine and tensions in the Middle East.</div>
     
     <div class="market-impact-summary">
-      📊 The stock market has been influenced by geopolitical and macroeconomic news. The NATO meeting and tensions between the United States and Europe have had an impact on the market. The price of oil has increased due to the war in the Middle East. The exchange rate of the euro against the US dollar has fallen to 1.14.
+      📊 The stock market is influenced by geopolitical news and central bank decisions. The closure of the Strait of Hormuz has increased oil prices and had an impact on supply chains. The decision of the Indian central bank to keep interest rates unchanged had a positive impact on Indian stocks.
     </div>
     
   </div>
@@ -249,39 +443,39 @@
     <div class="macro-region-title">🇺🇸 UNITED STATES — FED & MACRO</div>
     <div class="macro-grid">
       
-      <div class="macro-item released">
+      <div class="macro-item released good">
         <div class="macro-label">CPI YoY USA</div>
         
-          <div class="macro-value">4.3%</div>
+          <div class="macro-value">3.7%</div>
           
-            <div class="macro-prev">prev. 3.9%</div>
+            <div class="macro-prev">prev. 4.3%</div>
           
-          <div class="macro-date">2026-05-01</div>
+          <div class="macro-date">2026-06-01</div>
           
             <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-07-14
+              📅 2026-08-12
             </div>
           
         
       </div>
       
-      <div class="macro-item released">
+      <div class="macro-item released good">
         <div class="macro-label">Core CPI YoY USA</div>
         
-          <div class="macro-value">3.0%</div>
+          <div class="macro-value">2.8%</div>
           
             <div class="macro-prev">prev. 3.0%</div>
           
-          <div class="macro-date">2026-05-01</div>
+          <div class="macro-date">2026-06-01</div>
           
             <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-07-14
+              📅 2026-08-12
             </div>
           
         
       </div>
       
-      <div class="macro-item released">
+      <div class="macro-item released bad">
         <div class="macro-label">Non-Farm Payrolls</div>
         
           <div class="macro-value">+57K</div>
@@ -297,7 +491,7 @@
         
       </div>
       
-      <div class="macro-item released">
+      <div class="macro-item released good">
         <div class="macro-label">Unemployment Rate USA</div>
         
           <div class="macro-value">4.2%</div>
@@ -313,17 +507,17 @@
         
       </div>
       
-      <div class="macro-item released">
+      <div class="macro-item released good">
         <div class="macro-label">PCE Core YoY</div>
         
-          <div class="macro-value">3.4%</div>
+          <div class="macro-value">3.3%</div>
           
-            <div class="macro-prev">prev. 3.3%</div>
+            <div class="macro-prev">prev. 3.4%</div>
           
-          <div class="macro-date">2026-05-01</div>
+          <div class="macro-date">2026-06-01</div>
           
             <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-07-31
+              📅 2026-08-28
             </div>
           
         
@@ -334,10 +528,10 @@
         
           <div class="macro-value">3.50% - 3.75%</div>
           
-          <div class="macro-date">2026-03-18</div>
+          <div class="macro-date">2026-07-29</div>
           
             <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-05-07
+              📅 2026-09-16
             </div>
           
         
@@ -347,7 +541,7 @@
         <div class="macro-label">GDP QoQ USA</div>
         
           <div class="macro-value upcoming-val">—</div>
-          <div class="macro-date">📅 2026-07-29</div>
+          <div class="macro-date">📅 2026-10-29</div>
         
       </div>
       
@@ -360,17 +554,17 @@
     <div class="macro-region-title">🇪🇺 Europe — BCE & Macro</div>
     <div class="macro-grid">
       
-      <div class="macro-item eu released">
+      <div class="macro-item eu released good">
         <div class="macro-label">GDP QoQ Eurozone</div>
         
-          <div class="macro-value">-0.2%</div>
+          <div class="macro-value">0.4%</div>
           
-            <div class="macro-prev">prev. 0.2%</div>
+            <div class="macro-prev">prev. 0.0%</div>
           
-          <div class="macro-date">2026-Q1</div>
+          <div class="macro-date">2026-Q2</div>
           
             <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-07-31
+              📅 2026-10-30
             </div>
           
         
@@ -379,12 +573,12 @@
       <div class="macro-item eu released">
         <div class="macro-label">ECB Rate (Deposit)</div>
         
-          <div class="macro-value">2.00%</div>
+          <div class="macro-value">2.25%</div>
           
-          <div class="macro-date">2026-04-02</div>
+          <div class="macro-date">2026-07-17</div>
           
             <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-04-30
+              📅 2026-09-10
             </div>
           
         
@@ -404,7 +598,7 @@
         <div class="macro-label">Eurozone CPI</div>
         
           <div class="macro-value upcoming-val">—</div>
-          <div class="macro-date">📅 2026-07-31</div>
+          <div class="macro-date">📅 2026-09-01</div>
         
       </div>
       
@@ -412,14 +606,14 @@
         <div class="macro-label">EU Unemployment</div>
         
           <div class="macro-value upcoming-val">—</div>
-          <div class="macro-date">📅 2026-07-31</div>
+          <div class="macro-date">📅 2026-09-01</div>
         
       </div>
       
       <div class="macro-item eu released">
         <div class="macro-label">ECB Rate (Refi)</div>
         
-          <div class="macro-value">2.15%</div>
+          <div class="macro-value">2.40%</div>
           
           <div class="macro-date"></div>
           
@@ -438,42 +632,42 @@
     <!-- Row 1: Fear & Greed + Prices (BTC, ETH, SOL, BNB) -->
     <div class="macro-grid">
       
-      <div class="macro-item fear-greed" style="border-color: #f59e0b40; position: relative;">
+      <div class="macro-item fear-greed bad">
         <div class="macro-label">Fear & Greed</div>
-        <div class="macro-value">27</div>
-        <div class="macro-date">Fear</div>
+        <div class="macro-value">25</div>
+        <div class="macro-date">Extreme Fear</div>
       </div>
       
       
       
-      <div class="macro-item">
+      <div class="macro-item good">
         <div class="macro-label">BTC</div>
-        <div class="macro-value">$62,995</div>
-        <div class="macro-date up">+0.26%</div>
+        <div class="macro-value">$64,762</div>
+        <div class="macro-date up">+1.00%</div>
       </div>
       
       
       
-      <div class="macro-item">
+      <div class="macro-item good">
         <div class="macro-label">ETH</div>
-        <div class="macro-value">$1,768</div>
-        <div class="macro-date up">+0.25%</div>
+        <div class="macro-value">$1,908</div>
+        <div class="macro-date up">+2.00%</div>
       </div>
       
       
       
-      <div class="macro-item">
+      <div class="macro-item bad">
         <div class="macro-label">SOL</div>
-        <div class="macro-value">$81.32</div>
-        <div class="macro-date up">+1.18%</div>
+        <div class="macro-value">$73.78</div>
+        <div class="macro-date down">-0.33%</div>
       </div>
       
       
       
-      <div class="macro-item">
+      <div class="macro-item bad">
         <div class="macro-label">BNB</div>
-        <div class="macro-value">$576.57</div>
-        <div class="macro-date down">-0.55%</div>
+        <div class="macro-value">$594.76</div>
+        <div class="macro-date down">-0.76%</div>
       </div>
       
       
@@ -483,10 +677,10 @@
     <div class="macro-grid" style="margin-top: 15px;">
       
       
-      <div class="macro-item etf-flow" style="border-color: #58a6ff40;">
+      <div class="macro-item etf-flow good">
         <div class="macro-label">BTC ETF Flow</div>
-        <div class="macro-value up">$+13.6M</div>
-        <div class="macro-date">📉 Declining</div>
+        <div class="macro-value up">$+211.5M</div>
+        <div class="macro-date">📈 Improving</div>
       </div>
       
 
@@ -495,15 +689,15 @@
       <div class="macro-item" style="grid-column: span 2; display: flex; justify-content: space-around; align-items: center; border-color: #58a6ff30;">
         <div style="text-align: center;">
           <div class="macro-label">BTC ETF Holdings</div>
-          <div class="macro-value" style="font-size: 14px;">1,209,106 BTC</div>
+          <div class="macro-value" style="font-size: 14px;">1,212,307 BTC</div>
         </div>
         <div style="text-align: center;">
           <div class="macro-label">Total AUM</div>
-          <div class="macro-value" style="font-size: 14px;">$77.62B</div>
+          <div class="macro-value" style="font-size: 14px;">$77.60B</div>
         </div>
         <div style="text-align: center;">
           <div class="macro-label">% of 21M</div>
-          <div class="macro-value" style="font-size: 14px;">5.76%</div>
+          <div class="macro-value" style="font-size: 14px;">5.77%</div>
         </div>
       </div>
       
@@ -533,7 +727,7 @@
       </div>
     </div>
     <audio controls preload="none">
-      <source src="../audio/briefing_20260707_en.mp3" type="audio/mpeg">
+      <source src="../audio/briefing_20260806_en.mp3" type="audio/mpeg">
     </audio>
   </div>
   
@@ -595,16 +789,24 @@
       </div>
 
       <div class="card-title">
-        What to Expect at the NATO Summit
+        War, Politics and Chauvinism in Russia and Europe
       </div>
       <div class="card-summary">
-        The NATO summit will be influenced by tensions between the US and Europe.
+        The war between Russia and Ukraine is affecting Russian politics and society.
       </div>
 
       
+      <div class="card-assets">
+        
+        <span class="asset-tag">S&P 500</span>
+        
+        <span class="asset-tag">DXY</span>
+        
+      </div>
+      
 
       <div class="card-footer">
-        <a href="https://www.crisisgroup.org/qna/europe-united-states-turkiye-ukraine/what-expect-nato-summit" target="_blank" class="source-link">
+        <a href="https://www.crisisgroup.org/pod/europe/russia/war-politics-and-chauvinism-russia-and-europe" target="_blank" class="source-link">
           International Crisis Group →
         </a>
       </div>
@@ -642,10 +844,10 @@
       </div>
 
       <div class="card-title">
-        Gathering Clouds: Building Digital Strategic Depth in the Compute Age
+        Tensions in Ukraine after Zelenskyy reshuffles war leaders
       </div>
       <div class="card-summary">
-        The war in Ukraine and the Middle East has demonstrated the importance of digital strategy.
+        The reshuffling of war leaders in Ukraine is affecting the political situation.
       </div>
 
       
@@ -653,14 +855,14 @@
         
         <span class="asset-tag">S&P 500</span>
         
-        <span class="asset-tag">STOXX 600</span>
+        <span class="asset-tag">DXY</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://warontherocks.com/cogs-of-war/gathering-clouds-building-digital-strategic-depth-in-the-compute-age/" target="_blank" class="source-link">
-          War on the Rocks →
+        <a href="https://www.crisisgroup.org/anb/europe/ukraine/ukraines-tensions-show-after-zelenskyy-reshuffles-his-war-leaders" target="_blank" class="source-link">
+          International Crisis Group →
         </a>
       </div>
     </div>
@@ -697,17 +899,25 @@
       </div>
 
       <div class="card-title">
-        Ukrainian Writers Take Aim at Government Narratives
+        India's central bank holds key rate to focus on growth momentum
       </div>
       <div class="card-summary">
-        Ukrainian writers are criticizing the narratives of the Ukrainian government.
+        India's central bank has decided to keep interest rates unchanged.
       </div>
 
       
+      <div class="card-assets">
+        
+        <span class="asset-tag">S&P 500</span>
+        
+        <span class="asset-tag">DXY</span>
+        
+      </div>
+      
 
       <div class="card-footer">
-        <a href="https://warontherocks.com/ukrainian-writers-take-aim-at-government-narratives/" target="_blank" class="source-link">
-          War on the Rocks →
+        <a href="https://asia.nikkei.com/business/markets/india-s-central-bank-holds-key-rate-to-focus-on-growth-momentum" target="_blank" class="source-link">
+          Nikkei Asia →
         </a>
       </div>
     </div>
@@ -729,7 +939,7 @@
         
         
         
-        <span class="stars">★★★☆☆</span>
+        <span class="stars">★★☆☆☆</span>
         
         
         
@@ -744,23 +954,17 @@
       </div>
 
       <div class="card-title">
-        Japanese bond yields march toward 3% as fiscal fears escalate
+        Beyond Hormuz: The Future of Maritime Chokepoints
       </div>
       <div class="card-summary">
-        Japanese bond yields are rising due to fiscal concerns.
+        Iran’s closure of the Strait of Hormuz and efforts to extract payments for safe passage — plus, more recently, the Houthis’ move to attack Saudi shipping through the Bab el-Mandeb Strait — have highlighted the risks of maritime chokepoints to global shipping and raised questions about the future for freedom of navigation. The impacts extend beyond the Persian Gulf and the Red Sea, so we asked five experts to consider the implications for several other crucial waterways: the Strait of Malacca, the Taiwan Strait, the Panama Canal, the Suez Canal, and the Turkish Straits.Read more below.Patrick M. CroninAsia-Pacific Security Chair The post Beyond Hormuz: The Future of Maritime Chokepoints appeared first on War on the Rocks .
       </div>
 
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">TLT</span>
-        
-      </div>
       
 
       <div class="card-footer">
-        <a href="https://asia.nikkei.com/business/markets/bonds/japanese-bond-yields-march-toward-3-as-fiscal-fears-escalate2" target="_blank" class="source-link">
-          Nikkei Asia →
+        <a href="https://warontherocks.com/beyond-hormuz-the-future-of-maritime-chokepoints/" target="_blank" class="source-link">
+          War on the Rocks →
         </a>
       </div>
     </div>
@@ -798,7 +1002,7 @@
         
         
         
-        <span class="stars">★★★★★</span>
+        <span class="stars">★★★★☆</span>
         
         
         
@@ -807,146 +1011,30 @@
           <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
         
         
+          <span class="paywall-badge" title="May require subscription">🔒</span>
         
-        <span class="tier-badge tier-2">T2</span>
+        
+        <span class="tier-badge tier-1">T1</span>
         
       </div>
 
       <div class="card-title">
-        NATO summit is Europe’s moment to turn crisis into opportunity
+        Wanted: Polish truck drivers
       </div>
       <div class="card-summary">
-        The NATO summit is an opportunity for Europe to strengthen its position in the world.
+        Half a million missing European truckers spell trouble for supply chains and economies, unions warn
       </div>
 
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">S&P 500</span>
-        
-        <span class="asset-tag">STOXX 600</span>
-        
-      </div>
       
 
       <div class="card-footer">
-        <a href="https://www.chathamhouse.org/2026/07/nato-summit-europes-moment-turn-crisis-opportunity" target="_blank" class="source-link">
-          Chatham House →
+        <a href="https://www.ft.com/content/75af4431-56ef-4601-a781-d29ce448a1dc?syn-25a6b1a6=1" target="_blank" class="source-link">
+          Financial Times (Global Economy) →
         </a>
       </div>
     </div>
     
     <div class="card" id="article-1-macro_economia">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          
-          
-          
-            MACRO
-          
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★★</span>
-        
-        
-        
-        
-        
-          <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Tensions between the US and Europe loom large over NATO summit
-      </div>
-      <div class="card-summary">
-        Tensions between the US and Europe could influence the NATO summit.
-      </div>
-
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">DXY</span>
-        
-        <span class="asset-tag">EUR/USD</span>
-        
-      </div>
-      
-
-      <div class="card-footer">
-        <a href="https://www.chathamhouse.org/2026/07/tensions-between-us-and-europe-loom-large-over-nato-summit" target="_blank" class="source-link">
-          Chatham House →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-2-macro_economia">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          
-          
-          
-            MACRO
-          
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★★</span>
-        
-        
-        
-        
-        
-          <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Europe Must Face the World on Its Own
-      </div>
-      <div class="card-summary">
-        The European defense union is necessary to strengthen Europe's position in the world.
-      </div>
-
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">S&P 500</span>
-        
-        <span class="asset-tag">STOXX 600</span>
-        
-      </div>
-      
-
-      <div class="card-footer">
-        <a href="https://www.project-syndicate.org/commentary/european-defense-union-should-be-franco-german-priority-by-joschka-fischer-2026-07" target="_blank" class="source-link">
-          Project Syndicate →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-3-macro_economia">
       <div class="card-meta">
         <span class="card-category cat-macro_economia">
           
@@ -972,6 +1060,59 @@
           <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
         
         
+        
+        <span class="tier-badge tier-4">T4</span>
+        
+      </div>
+
+      <div class="card-title">
+        Bank windfall tax: a history of Andy Burnham and the cost of living
+      </div>
+      <div class="card-summary">
+        The bank windfall tax is affecting the cost of living.
+      </div>
+
+      
+      <div class="card-assets">
+        
+        <span class="asset-tag">S&P 500</span>
+        
+      </div>
+      
+
+      <div class="card-footer">
+        <a href="https://www.theguardian.com/business/2026/aug/05/bank-windfall-tax-history-andy-burnham-cost-of-living" target="_blank" class="source-link">
+          Guardian Economics →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-2-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          
+          
+          
+            MACRO
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★☆☆</span>
+        
+        
+        
+        
+        
+          <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
+        
+        
           <span class="paywall-badge" title="May require subscription">🔒</span>
         
         
@@ -980,23 +1121,78 @@
       </div>
 
       <div class="card-title">
-        China steps up oil purchases from Middle East
+        GDP is not an indicator of prosperity
       </div>
       <div class="card-summary">
-        China has increased its oil purchases from the Middle East due to the decrease in price.
+        GDP is not a reliable indicator of a country's prosperity.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">Brent</span>
+        <span class="asset-tag">S&P 500</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://www.ft.com/content/09ab8bf7-07ae-4c9c-b0c5-31200659f08b" target="_blank" class="source-link">
+        <a href="https://www.ft.com/content/285bf286-07c3-49b1-9b6d-7df9664e73c0" target="_blank" class="source-link">
           Financial Times (Global Economy) →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-3-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          
+          
+          
+            MACRO
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★☆☆</span>
+        
+        
+        
+        
+        
+          <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
+        
+        
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        Energy shocks and inflation
+      </div>
+      <div class="card-summary">
+        Energy shocks can affect inflation and monetary policy.
+      </div>
+
+      
+      <div class="card-assets">
+        
+        <span class="asset-tag">S&P 500</span>
+        
+        <span class="asset-tag">DXY</span>
+        
+      </div>
+      
+
+      <div class="card-footer">
+        <a href="https://www.bis.org/publ/bisbull131.htm" target="_blank" class="source-link">
+          BIS →
         </a>
       </div>
     </div>
@@ -1018,7 +1214,7 @@
         
         
         
-        <span class="stars">★★★☆☆</span>
+        <span class="stars">★★☆☆☆</span>
         
         
         
@@ -1027,31 +1223,29 @@
           <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
         
         
-          <span class="paywall-badge" title="May require subscription">🔒</span>
         
-        
-        <span class="tier-badge tier-1">T1</span>
+        <span class="tier-badge tier-2">T2</span>
         
       </div>
 
       <div class="card-title">
-        FirstFT: How Europe would fight without America
+        Saudi Arabia still views the US as its main strategic partner
       </div>
       <div class="card-summary">
-        Europe must be able to defend itself without the help of the United States.
+        Saudi Arabia still views the US as its main strategic partner despite Trump's nuclear agreement.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">EUR/USD</span>
+        <span class="asset-tag">S&P 500</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://www.ft.com/content/5c0f1775-f3d5-4f0b-a59a-641402ac6c78" target="_blank" class="source-link">
-          Financial Times (Global Economy) →
+        <a href="https://www.chathamhouse.org/2026/08/saudi-arabia-still-views-us-its-main-strategic-partner-despite-trumps-nuclear-agreement" target="_blank" class="source-link">
+          Chatham House →
         </a>
       </div>
     </div>
@@ -1073,7 +1267,7 @@
         
         
         
-        <span class="stars">★★★☆☆</span>
+        <span class="stars">★★☆☆☆</span>
         
         
         
@@ -1088,10 +1282,10 @@
       </div>
 
       <div class="card-title">
-        How the EU Can Lead the Rest of the West
+        The Strait of Hormuz closure: What happens to trade and shipping
       </div>
       <div class="card-summary">
-        The European Union can play a leadership role among middle powers.
+        The closure of the Strait of Hormuz is affecting trade and shipping.
       </div>
 
       
@@ -1099,14 +1293,14 @@
         
         <span class="asset-tag">S&P 500</span>
         
-        <span class="asset-tag">STOXX 600</span>
+        <span class="asset-tag">DXY</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://www.project-syndicate.org/commentary/how-the-eu-can-implement-mark-carney-middle-power-vision-by-daniel-gros-2026-07" target="_blank" class="source-link">
-          Project Syndicate →
+        <a href="https://www.piie.com/events/2026/strait-hormuz-closure-what-happens-trade-and-shipping" target="_blank" class="source-link">
+          PIIE →
         </a>
       </div>
     </div>
@@ -1128,38 +1322,38 @@
         
         
         
-        <span class="stars">★★★☆☆</span>
+        <span class="stars">★★☆☆☆</span>
         
         
         
         
         
-          <span class="lang-flag" title="Fonte italiana">🇮🇹</span>
+          <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
         
         
         
-        <span class="tier-badge tier-2">T2</span>
+        <span class="tier-badge tier-1">T1</span>
         
       </div>
 
       <div class="card-title">
-        The full powers to Trump and the short circuit on privacy at risk European data in the US
+        Federal Reserve approves application of Coastal Bend Bancshares
       </div>
       <div class="card-summary">
-        The full powers to Trump could put European data in the US at risk.
+        The Federal Reserve has approved the application of Coastal Bend Bancshares.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">EUR/USD</span>
+        <span class="asset-tag">S&P 500</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://www.repubblica.it/economia/2026/07/07/news/i_pieni_poteri_a_trump_e_il_cortocircuito_sulla_privacy_a_rischio_i_dati_europei_negli_usa-425449781/?rss" target="_blank" class="source-link">
-          Repubblica Economia →
+        <a href="https://www.federalreserve.gov/newsevents/pressreleases/orders20260804c.htm" target="_blank" class="source-link">
+          Federal Reserve →
         </a>
       </div>
     </div>
@@ -1212,22 +1406,24 @@
       </div>
 
       <div class="card-title">
-        Russia’s Oil Windfall Vanishes as Urals Crashes to $42 a Barrel
+        Hormuz Crisis Is Rewriting the Global LPG Trade
       </div>
       <div class="card-summary">
-        The price of Russian oil has fallen due to the war in the Middle East.
+        The Hormuz crisis is affecting the global LPG trade.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">Brent</span>
+        <span class="asset-tag">S&P 500</span>
+        
+        <span class="asset-tag">DXY</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://oilprice.com/Latest-Energy-News/World-News/Russias-Oil-Windfall-Vanishes-as-Urals-Crashes-to-42-a-Barrel.html" target="_blank" class="source-link">
+        <a href="https://oilprice.com/Energy/Natural-Gas/Hormuz-Crisis-Is-Rewriting-the-Global-LPG-Trade.html" target="_blank" class="source-link">
           OilPrice →
         </a>
       </div>
@@ -1250,7 +1446,7 @@
         
         
         
-        <span class="stars">★★★★☆</span>
+        <span class="stars">★★★★★</span>
         
         
         
@@ -1265,10 +1461,10 @@
       </div>
 
       <div class="card-title">
-        Iran War Strengthens the Case for Renewables and Storage
+        Aramco's Record Profits Hide a Growing Cash Flow Crisis
       </div>
       <div class="card-summary">
-        The war in Iran has increased the demand for renewable energy and storage.
+        Aramco's record profits hide a growing cash flow crisis.
       </div>
 
       
@@ -1276,13 +1472,11 @@
         
         <span class="asset-tag">S&P 500</span>
         
-        <span class="asset-tag">STOXX 600</span>
-        
       </div>
       
 
       <div class="card-footer">
-        <a href="https://oilprice.com/Alternative-Energy/Renewable-Energy/Iran-War-Strengthens-the-Case-for-Renewables-and-Storage.html" target="_blank" class="source-link">
+        <a href="https://oilprice.com/Energy/Energy-General/Aramcos-Record-Profits-Hide-a-Growing-Cash-Flow-Crisis.html" target="_blank" class="source-link">
           OilPrice →
         </a>
       </div>
@@ -1336,23 +1530,23 @@
       </div>
 
       <div class="card-title">
-        Bitmine announces $74M Ether buys as chair says ‘greater chances of Clarity Act passage’
+        Strategy to help Trump employees with accounts
       </div>
       <div class="card-summary">
-        Bitmine has bought $74 million worth of Ether.
+        A strategy to help Trump employees with accounts.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">ETH</span>
+        <span class="asset-tag">BTC</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://cointelegraph.com/news/bitmine-ether-treasury-chances-clarity-act?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank" class="source-link">
-          Cointelegraph →
+        <a href="https://bitcoinmagazine.com/news/strategy-to-help-employee-trump-accounts" target="_blank" class="source-link">
+          Bitcoin Magazine →
         </a>
       </div>
     </div>
@@ -1389,10 +1583,10 @@
       </div>
 
       <div class="card-title">
-        Dubai tops Asian crypto hubs, Taiwan passes crypto laws: Asia Express
+        Cynthia Lummis urges Clarity Act speed
       </div>
       <div class="card-summary">
-        Dubai is the top Asian crypto hub and Taiwan has passed crypto laws.
+        Cynthia Lummis urges the approval of the Clarity Act.
       </div>
 
       
@@ -1400,14 +1594,12 @@
         
         <span class="asset-tag">BTC</span>
         
-        <span class="asset-tag">ETH</span>
-        
       </div>
       
 
       <div class="card-footer">
-        <a href="https://cointelegraph.com/features/asia-express?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank" class="source-link">
-          Cointelegraph →
+        <a href="https://bitcoinmagazine.com/news/cynthia-lummis-urges-clarity-act-speed" target="_blank" class="source-link">
+          Bitcoin Magazine →
         </a>
       </div>
     </div>
@@ -1444,23 +1636,17 @@
       </div>
 
       <div class="card-title">
-        Bitcoin's recent macro relief faces a challenge from Japanese interest rates
+        Fed’s Cook says she’d support rate hike if disinflation stalls
       </div>
       <div class="card-summary">
-        Japanese interest rates could influence the price of Bitcoin.
+        Federal Reserve Governor Lisa Cook said she is “prepared to act” if inflation remains too high above the Fed’s target rate.
       </div>
 
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">BTC</span>
-        
-      </div>
       
 
       <div class="card-footer">
-        <a href="https://www.coindesk.com/markets/2026/07/07/btc-s-recent-macro-relief-faces-a-challenge-from-japanese-interest-rates" target="_blank" class="source-link">
-          CoinDesk →
+        <a href="https://cointelegraph.com/markets/feds-cook-warns-persistent-inflation-could-prompt-rate-hike?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank" class="source-link">
+          Cointelegraph →
         </a>
       </div>
     </div>
@@ -1497,23 +1683,17 @@
       </div>
 
       <div class="card-title">
-        Trump-Backed American Bitcoin (ABTC) Pushes Treasury Past 8,000 BTC
+        Senator Warren questions US AI chip policy after Trump crypto investment: Report
       </div>
       <div class="card-summary">
-        American Bitcoin (ABTC) has surpassed 8,000 BTC in the treasury.
+        The lawmaker reportedly sent a letter to the Commerce Secretary demanding answers about the administration’s treatment of the UAE following investments in the Trump family’s crypto company.
       </div>
 
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">BTC</span>
-        
-      </div>
       
 
       <div class="card-footer">
-        <a href="https://bitcoinmagazine.com/news/trump-backed-american-bitcoin-abtc" target="_blank" class="source-link">
-          Bitcoin Magazine →
+        <a href="https://cointelegraph.com/news/senator-warren-us-policy-uae-ai-chips-trump-crypto-investment?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank" class="source-link">
+          Cointelegraph →
         </a>
       </div>
     </div>
