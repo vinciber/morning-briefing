@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Morning Briefing — 2026-07-09</title>
+<title>Morning Briefing — 2026-08-08</title>
 <style>
   :root {
     --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;
@@ -23,9 +23,16 @@
   .lang-btn{padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);text-decoration:none;font-size:12px;}
   .lang-btn.active{border-color:var(--blue);color:var(--blue);}
 
-  .ticker-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 24px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
+  .ticker-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 0;overflow:hidden;white-space:nowrap;}
   .ticker-bar::-webkit-scrollbar{display:none;}
-  .ticker-items{display:inline-flex;gap:24px;}
+  .ticker-track{display:inline-flex;animation:ticker-scroll 75s linear infinite;will-change:transform;}
+  .ticker-track:hover{animation-play-state:paused;}
+  @keyframes ticker-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none;}
+    .ticker-bar{overflow-x:auto;scrollbar-width:none;}
+  }
+  .ticker-items{display:inline-flex;gap:24px;padding:0 12px;}
   .ticker-item{display:inline-flex;flex-direction:column;gap:1px;}
   .ticker-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;}
   .ticker-value{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;}
@@ -113,6 +120,11 @@
     text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px;
     padding-bottom:6px;border-bottom:1px solid var(--border);}
   .macro-item.eu{border-color:#3b82f640;}
+  .macro-item.fear-greed{border-color:#f59e0b40;position:relative;}
+  .macro-item.etf-flow{border-color:#58a6ff40;}
+  /* Tone: dato migliorato/peggiorato vs previous — devono vincere su released/eu/fear-greed (ultime regole) */
+  .macro-item.good{border-color:#3fb95090;}
+  .macro-item.bad{border-color:#f8514990;}
 </style>
 </head>
 <body>
@@ -120,105 +132,287 @@
 <header class="header">
   <div class="header-left">
     <span class="header-title">📰 Morning Briefing</span>
-    <span class="header-date">2026-07-09 · Finance & Geopolitics</span>
+    <span class="header-date">2026-08-08 · Finance & Geopolitics</span>
   </div>
   <div class="lang-switch">
-    <a href="2026-07-09.html" class="lang-btn active">🇮🇹 IT</a>
-    <a href="en/2026-07-09.html" class="lang-btn ">🇬🇧 EN</a>
+    <a href="2026-08-08.html" class="lang-btn active">🇮🇹 IT</a>
+    <a href="en/2026-08-08.html" class="lang-btn ">🇬🇧 EN</a>
   </div>
 </header>
 
 <div class="ticker-bar">
-  <div class="ticker-items">
+  <div class="ticker-track">
     
-    <div class="ticker-item">
-      <span class="ticker-label">EUR/USD</span>
-      <span class="ticker-value up">1.14</span>
-      <span class="ticker-change up">+0.26%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">DXY</span>
-      <span class="ticker-value down">100.92</span>
-      <span class="ticker-change down">-0.12%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">S&P 500</span>
-      <span class="ticker-value down">7482.71</span>
-      <span class="ticker-change down">-0.28%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">STOXX 600</span>
-      <span class="ticker-value up">63.68</span>
-      <span class="ticker-change up">+0.36%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">NIKKEI</span>
-      <span class="ticker-value up">67,744</span>
-      <span class="ticker-change up">+1.38%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">SHANGHAI</span>
-      <span class="ticker-value up">4036.59</span>
-      <span class="ticker-change up">+1.65%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">VIX</span>
-      <span class="ticker-value down">16.72</span>
-      <span class="ticker-change down">-1.07%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">TLT</span>
-      <span class="ticker-value down">84.36</span>
-      <span class="ticker-change down">-0.22%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">GOLD</span>
-      <span class="ticker-value up">$4122.30/oz</span>
-      <span class="ticker-change up">+1.26%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BTC</span>
-      <span class="ticker-value up">$62,878</span>
-      <span class="ticker-change up">+1.00%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BRENT</span>
-      <span class="ticker-value down">$77.26</span>
-      <span class="ticker-change down">-0.97%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BTP 10Y</span>
-      <span class="ticker-value neu">3.82%</span>
+    <div class="ticker-items">
+      
+      <div class="ticker-item">
+        <span class="ticker-label">EUR/USD</span>
+        <span class="ticker-value up">1.15</span>
+        <span class="ticker-change up">+0.32%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">DXY</span>
+        <span class="ticker-value down">99.60</span>
+        <span class="ticker-change down">-0.37%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">S&P 500</span>
+        <span class="ticker-value up">7757.64</span>
+        <span class="ticker-change up">+0.62%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">NASDAQ</span>
+        <span class="ticker-value up">26,691</span>
+        <span class="ticker-change up">+1.30%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">DOW JONES</span>
+        <span class="ticker-value up">54,037</span>
+        <span class="ticker-change up">+0.28%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">STOXX 600</span>
+        <span class="ticker-value up">65.92</span>
+        <span class="ticker-change up">+0.33%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">FTSE MIB</span>
+        <span class="ticker-value up">53,717</span>
+        <span class="ticker-change up">+0.06%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">NIKKEI</span>
+        <span class="ticker-value down">65,607</span>
+        <span class="ticker-change down">-0.12%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">SHANGHAI</span>
+        <span class="ticker-value up">3940.04</span>
+        <span class="ticker-change up">+1.02%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">HANG SENG</span>
+        <span class="ticker-value up">25,668</span>
+        <span class="ticker-change up">+0.54%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">VIX</span>
+        <span class="ticker-value down">14.90</span>
+        <span class="ticker-change down">-1.65%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">US 10Y</span>
+        <span class="ticker-value down">4.66%</span>
+        <span class="ticker-change down">-0.21%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BTP 10Y</span>
+        <span class="ticker-value neu">3.73%</span>
+        
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">SPREAD BTP-BUND</span>
+        <span class="ticker-value neu">76 bp</span>
+        
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">TLT</span>
+        <span class="ticker-value up">82.76</span>
+        <span class="ticker-change up">+0.29%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">GOLD</span>
+        <span class="ticker-value up">$4340.70/oz</span>
+        <span class="ticker-change up">+2.33%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BRENT</span>
+        <span class="ticker-value up">$83.55</span>
+        <span class="ticker-change up">+1.29%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BTC</span>
+        <span class="ticker-value up">$64,944</span>
+        <span class="ticker-change up">+1.06%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">ETH</span>
+        <span class="ticker-value up">$1,916</span>
+        <span class="ticker-change up">+0.60%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">FEAR & GREED</span>
+        <span class="ticker-value down">30 Fear</span>
+        
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BTC ETF</span>
+        <span class="ticker-value up">$+137.6M</span>
+        <span class="ticker-change up">📉 Declining</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">M2 GLOBAL</span>
+        <span class="ticker-value up">$23.2T</span>
+        <span class="ticker-change up">expanding 📈 | US YoY: +5.5% YoY</span>
+      </div>
       
     </div>
     
-    <div class="ticker-item">
-      <span class="ticker-label">US 10Y</span>
-      <span class="ticker-value up">4.56%</span>
-      <span class="ticker-change up">+0.88%</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">BTC ETF</span>
-      <span class="ticker-value up">$+21.5M</span>
-      <span class="ticker-change up">📉 Declining</span>
-    </div>
-    
-    <div class="ticker-item">
-      <span class="ticker-label">M2 GLOBAL</span>
-      <span class="ticker-value up">$23.1T</span>
-      <span class="ticker-change up">expanding 📈 | US YoY: +5.6% YoY</span>
+    <div class="ticker-items" aria-hidden="true">
+      
+      <div class="ticker-item">
+        <span class="ticker-label">EUR/USD</span>
+        <span class="ticker-value up">1.15</span>
+        <span class="ticker-change up">+0.32%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">DXY</span>
+        <span class="ticker-value down">99.60</span>
+        <span class="ticker-change down">-0.37%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">S&P 500</span>
+        <span class="ticker-value up">7757.64</span>
+        <span class="ticker-change up">+0.62%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">NASDAQ</span>
+        <span class="ticker-value up">26,691</span>
+        <span class="ticker-change up">+1.30%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">DOW JONES</span>
+        <span class="ticker-value up">54,037</span>
+        <span class="ticker-change up">+0.28%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">STOXX 600</span>
+        <span class="ticker-value up">65.92</span>
+        <span class="ticker-change up">+0.33%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">FTSE MIB</span>
+        <span class="ticker-value up">53,717</span>
+        <span class="ticker-change up">+0.06%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">NIKKEI</span>
+        <span class="ticker-value down">65,607</span>
+        <span class="ticker-change down">-0.12%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">SHANGHAI</span>
+        <span class="ticker-value up">3940.04</span>
+        <span class="ticker-change up">+1.02%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">HANG SENG</span>
+        <span class="ticker-value up">25,668</span>
+        <span class="ticker-change up">+0.54%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">VIX</span>
+        <span class="ticker-value down">14.90</span>
+        <span class="ticker-change down">-1.65%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">US 10Y</span>
+        <span class="ticker-value down">4.66%</span>
+        <span class="ticker-change down">-0.21%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BTP 10Y</span>
+        <span class="ticker-value neu">3.73%</span>
+        
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">SPREAD BTP-BUND</span>
+        <span class="ticker-value neu">76 bp</span>
+        
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">TLT</span>
+        <span class="ticker-value up">82.76</span>
+        <span class="ticker-change up">+0.29%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">GOLD</span>
+        <span class="ticker-value up">$4340.70/oz</span>
+        <span class="ticker-change up">+2.33%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BRENT</span>
+        <span class="ticker-value up">$83.55</span>
+        <span class="ticker-change up">+1.29%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BTC</span>
+        <span class="ticker-value up">$64,944</span>
+        <span class="ticker-change up">+1.06%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">ETH</span>
+        <span class="ticker-value up">$1,916</span>
+        <span class="ticker-change up">+0.60%</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">FEAR & GREED</span>
+        <span class="ticker-value down">30 Fear</span>
+        
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">BTC ETF</span>
+        <span class="ticker-value up">$+137.6M</span>
+        <span class="ticker-change up">📉 Declining</span>
+      </div>
+      
+      <div class="ticker-item">
+        <span class="ticker-label">M2 GLOBAL</span>
+        <span class="ticker-value up">$23.2T</span>
+        <span class="ticker-change up">expanding 📈 | US YoY: +5.5% YoY</span>
+      </div>
+      
     </div>
     
   </div>
@@ -226,20 +420,20 @@
 
 <div class="container">
 
-  <div class="sentiment-card risk_off">
+  <div class="sentiment-card risk_on">
     <div class="sentiment-header">
       <span class="sentiment-badge">
-        🔴 RISK OFF
+        🟢 RISK ON
         
       </span>
       
-      <span class="sentiment-score">Intensità: 6/10</span>
+      <span class="sentiment-score">Intensità: 4/10</span>
       
     </div>
-    <div class="sentiment-reason">Il mercato mostra segnali di cautela con il VIX a 16.72 (-1.07%) e il DXY a 100.92 (-0.12%). L'S&P 500 è sceso dello 0.28% a 7482.71. Il prezzo del petrolio Brent è sceso allo 0.97% a $77.26. Il gold è salito dell'1.26% a $4122.30/oz. Il BTC è salito dell'1.41% a $62,860.</div>
+    <div class="sentiment-reason">Il mercato azionario ha chiuso in rialzo nella seduta di venerdì, con l'S&P 500 a 7757.64 (+0.62%) e il VIX in calo a 14.90 (-1.65%). Il Dollaro Index (DXY) è sceso a 99.60 (-0.37%), mentre l'oro ha guadagnato il 2.33% a $4340.70/oz. Questi segnali suggeriscono un sentiment positivo, supportato anche dal calo del tasso di disoccupazione negli Stati Uniti e dalla crescita del PIL nell'Eurozona.</div>
     
     <div class="market-impact-summary">
-      📊 Il mercato azionario è stato influenzato dalla guerra in Iran e dalle preoccupazioni sull'inflazione. Il prezzo del petrolio è sceso, mentre il gold è salito. Il BTC ha mostrato una certa resilienza. La prossima riunione della Fed è attesa per il 7 maggio.
+      📊 La chiusura di venerdì ha visto un mercato azionario in rialzo, con l'S&P 500 e il FTSE MIB in aumento. Il calo del VIX e la discesa del DXY potrebbero indicare una riduzione della volatilità e un indebolimento del dollaro, favorendo le attività a rischio. Tuttavia, le notizie geopolitiche e le sanzioni potrebbero avere un impatto negativo sui mercati.
     </div>
     
   </div>
@@ -250,81 +444,81 @@
     <div class="macro-region-title">🇺🇸 STATI UNITI — FED & MACRO</div>
     <div class="macro-grid">
       
-      <div class="macro-item released">
+      <div class="macro-item released good">
         <div class="macro-label">CPI YoY USA</div>
         
-          <div class="macro-value">4.3%</div>
-          
-            <div class="macro-prev">prec. 3.9%</div>
-          
-          <div class="macro-date">2026-05-01</div>
-          
-            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-07-14
-            </div>
-          
-        
-      </div>
-      
-      <div class="macro-item released">
-        <div class="macro-label">Core CPI YoY USA</div>
-        
-          <div class="macro-value">3.0%</div>
-          
-            <div class="macro-prev">prec. 3.0%</div>
-          
-          <div class="macro-date">2026-05-01</div>
-          
-            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-07-14
-            </div>
-          
-        
-      </div>
-      
-      <div class="macro-item released">
-        <div class="macro-label">Non-Farm Payrolls</div>
-        
-          <div class="macro-value">+57K</div>
-          
-            <div class="macro-prev">prec. +129K</div>
-          
-          <div class="macro-date">2026-06-01</div>
-          
-            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-08-07
-            </div>
-          
-        
-      </div>
-      
-      <div class="macro-item released">
-        <div class="macro-label">Tasso Disoccupazione USA</div>
-        
-          <div class="macro-value">4.2%</div>
+          <div class="macro-value">3.7%</div>
           
             <div class="macro-prev">prec. 4.3%</div>
           
           <div class="macro-date">2026-06-01</div>
           
             <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-08-07
+              📅 2026-08-12
             </div>
           
         
       </div>
       
-      <div class="macro-item released">
-        <div class="macro-label">PCE Core YoY</div>
+      <div class="macro-item released good">
+        <div class="macro-label">Core CPI YoY USA</div>
         
-          <div class="macro-value">3.4%</div>
+          <div class="macro-value">2.8%</div>
           
-            <div class="macro-prev">prec. 3.3%</div>
+            <div class="macro-prev">prec. 3.0%</div>
           
-          <div class="macro-date">2026-05-01</div>
+          <div class="macro-date">2026-06-01</div>
           
             <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-07-31
+              📅 2026-08-12
+            </div>
+          
+        
+      </div>
+      
+      <div class="macro-item released bad">
+        <div class="macro-label">Non-Farm Payrolls</div>
+        
+          <div class="macro-value">-23K</div>
+          
+            <div class="macro-prev">prec. +20K</div>
+          
+          <div class="macro-date">2026-07-01</div>
+          
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 2026-09-04
+            </div>
+          
+        
+      </div>
+      
+      <div class="macro-item released good">
+        <div class="macro-label">Tasso Disoccupazione USA</div>
+        
+          <div class="macro-value">4.1%</div>
+          
+            <div class="macro-prev">prec. 4.2%</div>
+          
+          <div class="macro-date">2026-07-01</div>
+          
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 2026-09-04
+            </div>
+          
+        
+      </div>
+      
+      <div class="macro-item released good">
+        <div class="macro-label">PCE Core YoY</div>
+        
+          <div class="macro-value">3.3%</div>
+          
+            <div class="macro-prev">prec. 3.4%</div>
+          
+          <div class="macro-date">2026-06-01</div>
+          
+            <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
+              📅 2026-08-28
             </div>
           
         
@@ -335,10 +529,10 @@
         
           <div class="macro-value">3.50% - 3.75%</div>
           
-          <div class="macro-date">2026-03-18</div>
+          <div class="macro-date">2026-07-29</div>
           
             <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-05-07
+              📅 2026-09-16
             </div>
           
         
@@ -348,7 +542,7 @@
         <div class="macro-label">PIL QoQ USA</div>
         
           <div class="macro-value upcoming-val">—</div>
-          <div class="macro-date">📅 2026-07-29</div>
+          <div class="macro-date">📅 2026-10-29</div>
         
       </div>
       
@@ -361,17 +555,17 @@
     <div class="macro-region-title">🇪🇺 Europa — BCE & Macro</div>
     <div class="macro-grid">
       
-      <div class="macro-item eu released">
+      <div class="macro-item eu released good">
         <div class="macro-label">PIL QoQ Eurozona</div>
         
-          <div class="macro-value">-0.2%</div>
+          <div class="macro-value">0.4%</div>
           
-            <div class="macro-prev">prec. 0.2%</div>
+            <div class="macro-prev">prec. 0.0%</div>
           
-          <div class="macro-date">2026-Q1</div>
+          <div class="macro-date">2026-Q2</div>
           
             <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-07-31
+              📅 2026-10-30
             </div>
           
         
@@ -380,12 +574,12 @@
       <div class="macro-item eu released">
         <div class="macro-label">Tasso BCE (Depositi)</div>
         
-          <div class="macro-value">2.00%</div>
+          <div class="macro-value">2.25%</div>
           
-          <div class="macro-date">2026-04-02</div>
+          <div class="macro-date">2026-07-17</div>
           
             <div class="macro-date" style="color: var(--blue); opacity: 0.9; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">
-              📅 2026-04-30
+              📅 2026-09-10
             </div>
           
         
@@ -405,7 +599,7 @@
         <div class="macro-label">CPI Eurozona</div>
         
           <div class="macro-value upcoming-val">—</div>
-          <div class="macro-date">📅 2026-07-31</div>
+          <div class="macro-date">📅 2026-09-01</div>
         
       </div>
       
@@ -413,14 +607,14 @@
         <div class="macro-label">Disoccupazione EU</div>
         
           <div class="macro-value upcoming-val">—</div>
-          <div class="macro-date">📅 2026-07-31</div>
+          <div class="macro-date">📅 2026-09-01</div>
         
       </div>
       
       <div class="macro-item eu released">
         <div class="macro-label">Tasso BCE (Refi/Mutui)</div>
         
-          <div class="macro-value">2.15%</div>
+          <div class="macro-value">2.40%</div>
           
           <div class="macro-date"></div>
           
@@ -439,42 +633,42 @@
     <!-- Row 1: Fear & Greed + Prices (BTC, ETH, SOL, BNB) -->
     <div class="macro-grid">
       
-      <div class="macro-item fear-greed" style="border-color: #f59e0b40; position: relative;">
+      <div class="macro-item fear-greed bad">
         <div class="macro-label">Fear & Greed</div>
-        <div class="macro-value">22</div>
-        <div class="macro-date">Extreme Fear</div>
+        <div class="macro-value">30</div>
+        <div class="macro-date">Fear</div>
       </div>
       
       
       
-      <div class="macro-item">
+      <div class="macro-item good">
         <div class="macro-label">BTC</div>
-        <div class="macro-value">$62,860</div>
-        <div class="macro-date up">+1.41%</div>
+        <div class="macro-value">$64,945</div>
+        <div class="macro-date up">+0.87%</div>
       </div>
       
       
       
-      <div class="macro-item">
+      <div class="macro-item good">
         <div class="macro-label">ETH</div>
-        <div class="macro-value">$1,753</div>
-        <div class="macro-date up">+1.10%</div>
+        <div class="macro-value">$1,916</div>
+        <div class="macro-date up">+0.60%</div>
       </div>
       
       
       
-      <div class="macro-item">
+      <div class="macro-item good">
         <div class="macro-label">SOL</div>
-        <div class="macro-value">$78.08</div>
-        <div class="macro-date up">+0.83%</div>
+        <div class="macro-value">$74.65</div>
+        <div class="macro-date up">+2.31%</div>
       </div>
       
       
       
-      <div class="macro-item">
+      <div class="macro-item good">
         <div class="macro-label">BNB</div>
-        <div class="macro-value">$572.15</div>
-        <div class="macro-date up">+1.90%</div>
+        <div class="macro-value">$593.75</div>
+        <div class="macro-date up">+1.09%</div>
       </div>
       
       
@@ -484,9 +678,9 @@
     <div class="macro-grid" style="margin-top: 15px;">
       
       
-      <div class="macro-item etf-flow" style="border-color: #58a6ff40;">
+      <div class="macro-item etf-flow good">
         <div class="macro-label">BTC ETF Flow</div>
-        <div class="macro-value up">$+21.5M</div>
+        <div class="macro-value up">$+137.6M</div>
         <div class="macro-date">📉 Declining</div>
       </div>
       
@@ -496,15 +690,15 @@
       <div class="macro-item" style="grid-column: span 2; display: flex; justify-content: space-around; align-items: center; border-color: #58a6ff30;">
         <div style="text-align: center;">
           <div class="macro-label">BTC ETF Holdings</div>
-          <div class="macro-value" style="font-size: 14px;">1,213,314 BTC</div>
+          <div class="macro-value" style="font-size: 14px;">1,222,238 BTC</div>
         </div>
         <div style="text-align: center;">
           <div class="macro-label">Total AUM</div>
-          <div class="macro-value" style="font-size: 14px;">$76.17B</div>
+          <div class="macro-value" style="font-size: 14px;">$78.56B</div>
         </div>
         <div style="text-align: center;">
           <div class="macro-label">% of 21M</div>
-          <div class="macro-value" style="font-size: 14px;">5.78%</div>
+          <div class="macro-value" style="font-size: 14px;">5.82%</div>
         </div>
       </div>
       
@@ -534,7 +728,7 @@
       </div>
     </div>
     <audio controls preload="none">
-      <source src="audio/briefing_20260709.mp3" type="audio/mpeg">
+      <source src="audio/briefing_20260808.mp3" type="audio/mpeg">
     </audio>
   </div>
   
@@ -560,64 +754,11 @@
       <span class="section-title">
         Geopolitica
       </span>
-      <span class="section-count">4 notizie</span>
+      <span class="section-count">3 notizie</span>
     </div>
 
     
     <div class="card" id="article-0-geopolitica">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          
-          
-          
-            GEOPOLITICA
-          
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★★★</span>
-        
-        
-        
-        
-        
-          <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Cosa aspettarsi dal vertice della NATO
-      </div>
-      <div class="card-summary">
-        Il vertice della NATO si terrà a breve e ci si aspetta una discussione sulla guerra in Ucraina.
-      </div>
-
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">DXY</span>
-        
-      </div>
-      
-
-      <div class="card-footer">
-        <a href="https://www.crisisgroup.org/qna/europe-united-states-turkiye-ukraine/what-expect-nato-summit" target="_blank" class="source-link">
-          International Crisis Group →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-1-geopolitica">
       <div class="card-meta">
         <span class="card-category cat-geopolitica">
           
@@ -649,22 +790,77 @@
       </div>
 
       <div class="card-title">
-        I pirati somali sono tornati, ma la coalizione che li ha sconfitti non tornerà
+        Il tasso di inflazione del Giappone scende dello 0,1% dopo la revisione dell'indice dei prezzi al consumo
       </div>
       <div class="card-summary">
-        I pirati somali sono tornati, ma la coalizione che li ha sconfitti non tornerà.
+        Il tasso di inflazione del Giappone è sceso dello 0,1% dopo la revisione dell'indice dei prezzi al consumo, segno di una possibile stabilizzazione dell'economia.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">DXY</span>
+        <span class="asset-tag">Yen giapponese</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://warontherocks.com/somali-pirates-are-back-but-the-coalition-that-beat-them-isnt-coming/" target="_blank" class="source-link">
+        <a href="https://asia.nikkei.com/economy/japan-s-inflation-rate-dips-0.1-point-after-cpi-revision" target="_blank" class="source-link">
+          Nikkei Asia →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-1-geopolitica">
+      <div class="card-meta">
+        <span class="card-category cat-geopolitica">
+          
+          
+          
+            GEOPOLITICA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★☆☆</span>
+        
+        
+        
+        
+        
+          <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
+        
+        
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        Come le forze operative speciali degli Stati Uniti possono aiutare a sconfiggere la Cina a Taiwan?
+      </div>
+      <div class="card-summary">
+        Gli autori discutono il ruolo delle forze operative speciali degli Stati Uniti nella possibile difesa di Taiwan contro la Cina.
+      </div>
+
+      
+      <div class="card-assets">
+        
+        <span class="asset-tag">Dollaro USA</span>
+        
+        <span class="asset-tag">Yuan cinese</span>
+        
+      </div>
+      
+
+      <div class="card-footer">
+        <a href="https://warontherocks.com/how-can-u-s-special-operations-forces-help-defeat-china-on-taiwan/" target="_blank" class="source-link">
           War on the Rocks →
         </a>
       </div>
@@ -702,75 +898,22 @@
       </div>
 
       <div class="card-title">
-        La strategia di intelligenza artificiale del Pentagono ha un problema di finanziamento
+        La crescita del PIL delle Filippine rallenta ulteriormente al 2,3% nel secondo trimestre a causa dell'inflazione
       </div>
       <div class="card-summary">
-        La strategia di intelligenza artificiale del Pentagono ha un problema di finanziamento.
+        La crescita del PIL delle Filippine ha rallentato ulteriormente nel secondo trimestre a causa dell'inflazione, segno di una possibile stabilizzazione dell'economia.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">DXY</span>
+        <span class="asset-tag">Peso filippino</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://warontherocks.com/cogs-of-war/the-pentagons-ai-strategy-has-a-funding-problem/" target="_blank" class="source-link">
-          War on the Rocks →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-3-geopolitica">
-      <div class="card-meta">
-        <span class="card-category cat-geopolitica">
-          
-          
-          
-            GEOPOLITICA
-          
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★★☆☆</span>
-        
-        
-        
-        
-        
-          <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
-        
-        
-        
-        <span class="tier-badge tier-2">T2</span>
-        
-      </div>
-
-      <div class="card-title">
-        Il primo ministro giapponese perde l'opportunità per la diplomazia europea saltando il vertice della NATO
-      </div>
-      <div class="card-summary">
-        Il primo ministro giapponese ha perso l'opportunità per la diplomazia europea saltando il vertice della NATO.
-      </div>
-
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">NIKKEI</span>
-        
-      </div>
-      
-
-      <div class="card-footer">
-        <a href="https://asia.nikkei.com/politics/international-relations/japan-pm-misses-chance-for-european-diplomacy-by-skipping-nato-summit" target="_blank" class="source-link">
+        <a href="https://asia.nikkei.com/economy/philippine-gdp-growth-slows-further-to-2.3-in-q2-as-inflation-bites" target="_blank" class="source-link">
           Nikkei Asia →
         </a>
       </div>
@@ -818,33 +961,31 @@
           <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
         
         
-          <span class="paywall-badge" title="Potrebbe richiedere abbonamento">🔒</span>
         
-        
-        <span class="tier-badge tier-1">T1</span>
+        <span class="tier-badge tier-2">T2</span>
         
       </div>
 
       <div class="card-title">
-        I prezzi alle porte di fabbrica cinesi aumentano a causa della guerra in Iran
+        La crisi del mercato immobiliare cinese si sta estendendo oltre i suoi confini
       </div>
       <div class="card-summary">
-        I prezzi alle porte di fabbrica cinesi sono aumentati per il quarto mese consecutivo a causa della guerra in Iran.
+        La crisi del mercato immobiliare cinese sta avendo un impatto significativo sull'economia globale, in particolare sui paesi asiatici e europei.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">S&P 500</span>
+        <span class="asset-tag">Merci cinesi</span>
         
-        <span class="asset-tag">Brent</span>
+        <span class="asset-tag">Borse asiatiche</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://www.ft.com/content/0be6ad24-1f91-4b5a-96cd-36d390cb22c7" target="_blank" class="source-link">
-          Financial Times (Global Economy) →
+        <a href="https://www.piie.com/blogs/realtime-economics/2026/chinas-property-bust-spilling-across-its-borders" target="_blank" class="source-link">
+          PIIE →
         </a>
       </div>
     </div>
@@ -883,10 +1024,10 @@
       </div>
 
       <div class="card-title">
-        La crisi dell'inflazione globale non si verifica nonostante la guerra
+        Rapporto sui salari di luglio misto, riduce la pressione sulla Fed di inasprire la politica monetaria
       </div>
       <div class="card-summary">
-        Nonostante la guerra in Iran, la crisi dell'inflazione globale non si è verificata.
+        Il rapporto sui salari di luglio è stato misto, riducendo la pressione sulla Fed di inasprire la politica monetaria.
       </div>
 
       
@@ -894,19 +1035,74 @@
         
         <span class="asset-tag">S&P 500</span>
         
-        <span class="asset-tag">gold</span>
+        <span class="asset-tag">Dollaro USA</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://www.ft.com/content/f31c0582-aa7f-4435-88af-197028041822" target="_blank" class="source-link">
+        <a href="https://www.ft.com/content/dba784cb-a197-4576-b533-597d5eb12a51" target="_blank" class="source-link">
           Financial Times (Global Economy) →
         </a>
       </div>
     </div>
     
     <div class="card" id="article-2-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          
+          
+          
+            MACROECONOMIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        
+        
+        
+        
+          <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
+        
+        
+        
+        <span class="tier-badge tier-2">T2</span>
+        
+      </div>
+
+      <div class="card-title">
+        Le tariffe doganali degli Stati Uniti non hanno ridotto la dipendenza dalla Cina
+      </div>
+      <div class="card-summary">
+        Le tariffe doganali degli Stati Uniti non hanno avuto l'effetto desiderato di ridurre la dipendenza dalla Cina, anzi hanno portato a una maggiore complessità delle catene di approvvigionamento.
+      </div>
+
+      
+      <div class="card-assets">
+        
+        <span class="asset-tag">Dollaro USA</span>
+        
+        <span class="asset-tag">Yuan cinese</span>
+        
+      </div>
+      
+
+      <div class="card-footer">
+        <a href="https://www.piie.com/newsroom/short-videos/2026/mary-e-lovely-how-us-tariffs-have-failed-reduce-dependence-china" target="_blank" class="source-link">
+          PIIE →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-3-macro_economia">
       <div class="card-meta">
         <span class="card-category cat-macro_economia">
           
@@ -938,28 +1134,91 @@
       </div>
 
       <div class="card-title">
-        Le PMI italiane restano indietro nella digitalizzazione
+        Gli Stati Uniti vendono euro per difendere lo yen, la BCE resta all'oscuro
       </div>
       <div class="card-summary">
-        Le PMI italiane hanno bisogno di un voucher per aiutarle nella transizione digitale.
+        La vendita di euro da parte degli Stati Uniti per difendere lo yen ha creato tensioni tra le autorità monetarie, in particolare con la BCE.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">STOXX 600</span>
+        <span class="asset-tag">Euro</span>
+        
+        <span class="asset-tag">Dollaro USA</span>
+        
+        <span class="asset-tag">Yen</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://www.repubblica.it/economia/2026/07/09/news/digitale_pmi_software_voucher_legge_bilancio-425459737/?rss" target="_blank" class="source-link">
+        <a href="https://www.repubblica.it/economia/2026/08/07/news/usa_vende_euro_per_difendere_lo_yen_bce-425517459/?rss" target="_blank" class="source-link">
           Repubblica Economia →
         </a>
       </div>
     </div>
     
-    <div class="card" id="article-3-macro_economia">
+    <div class="card" id="article-4-macro_economia">
+      <div class="card-meta">
+        <span class="card-category cat-macro_economia">
+          
+          
+          
+            MACROECONOMIA
+          
+        </span>
+        
+        <span class="impact-badge impact-mixed">
+          ↔ mixed
+        </span>
+
+        
+        
+        
+        <span class="stars">★★★★☆</span>
+        
+        
+        
+        
+        
+          <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
+        
+        
+          <span class="paywall-badge" title="Potrebbe richiedere abbonamento">🔒</span>
+        
+        
+        <span class="tier-badge tier-1">T1</span>
+        
+      </div>
+
+      <div class="card-title">
+        La vendita di euro da parte degli Stati Uniti per sostenere lo yen ha colto la BCE di sorpresa
+      </div>
+      <div class="card-summary">
+        La vendita di euro da parte degli Stati Uniti per sostenere lo yen ha colto la BCE di sorpresa, creando tensioni tra le autorità monetarie.
+      </div>
+
+      
+      <div class="card-assets">
+        
+        <span class="asset-tag">Euro</span>
+        
+        <span class="asset-tag">Dollaro USA</span>
+        
+        <span class="asset-tag">Yen</span>
+        
+      </div>
+      
+
+      <div class="card-footer">
+        <a href="https://www.ft.com/content/d9922d0b-51a0-48be-811b-42e08f90985a?syn-25a6b1a6=1" target="_blank" class="source-link">
+          Financial Times (Global Economy) →
+        </a>
+      </div>
+    </div>
+    
+    <div class="card" id="article-5-macro_economia">
       <div class="card-meta">
         <span class="card-category cat-macro_economia">
           
@@ -991,129 +1250,25 @@
       </div>
 
       <div class="card-title">
-        Le politiche dell'amministrazione Trump stanno catalizzando l'unità europea?
+        La crescita dell'AI: boom o bust?
       </div>
       <div class="card-summary">
-        Le politiche dell'amministrazione Trump stanno catalizzando l'unità europea?
+        Gli esperti discutono se la crescita dell'AI sia un boom o un bust, e quali saranno le conseguenze per l'economia globale.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">EUR/USD</span>
+        <span class="asset-tag">Tecnologie</span>
+        
+        <span class="asset-tag">Mercati finanziari</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://www.piie.com/events/2026/are-trump-administration-policies-catalyzing-european-unity" target="_blank" class="source-link">
-          PIIE →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-4-macro_economia">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          
-          
-          
-            MACROECONOMIA
-          
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★☆☆☆</span>
-        
-        
-        
-        
-        
-          <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
-        
-        
-        
-        <span class="tier-badge tier-1">T1</span>
-        
-      </div>
-
-      <div class="card-title">
-        Verbali del Comitato federale del mercato aperto
-      </div>
-      <div class="card-summary">
-        I verbali del Comitato federale del mercato aperto sono stati pubblicati.
-      </div>
-
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">US 10Y Yield</span>
-        
-      </div>
-      
-
-      <div class="card-footer">
-        <a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260708a.htm" target="_blank" class="source-link">
-          Federal Reserve →
-        </a>
-      </div>
-    </div>
-    
-    <div class="card" id="article-5-macro_economia">
-      <div class="card-meta">
-        <span class="card-category cat-macro_economia">
-          
-          
-          
-            MACROECONOMIA
-          
-        </span>
-        
-        <span class="impact-badge impact-mixed">
-          ↔ mixed
-        </span>
-
-        
-        
-        
-        <span class="stars">★★☆☆☆</span>
-        
-        
-        
-        
-        
-          <span class="lang-flag" title="Fonte in inglese">🇬🇧</span>
-        
-        
-        
-        <span class="tier-badge tier-1">T1</span>
-        
-      </div>
-
-      <div class="card-title">
-        Progetto Insight: comprendere le complessità delle catene di valore globali
-      </div>
-      <div class="card-summary">
-        Il progetto Insight ha sviluppato un cruscotto per aiutare i responsabili delle politiche a comprendere le catene di valore globali.
-      </div>
-
-      
-      <div class="card-assets">
-        
-        <span class="asset-tag">Global M2 Liquidity</span>
-        
-      </div>
-      
-
-      <div class="card-footer">
-        <a href="https://www.bis.org/publ/othp112.htm" target="_blank" class="source-link">
-          BIS →
+        <a href="https://www.chathamhouse.org/2026/08/ai-boom-about-bust-independent-thinking-podcast" target="_blank" class="source-link">
+          Chatham House →
         </a>
       </div>
     </div>
@@ -1145,28 +1300,28 @@
         
         
         
-        <span class="tier-badge tier-2">T2</span>
+        <span class="tier-badge tier-1">T1</span>
         
       </div>
 
       <div class="card-title">
-        Il governo Burnham può rendere la Gran Bretagna un leader globale nella scienza e nella tecnologia?
+        La BCE pubblica i dati bancari consolidati al 31 marzo 2026
       </div>
       <div class="card-summary">
-        Il governo Burnham può rendere la Gran Bretagna un leader globale nella scienza e nella tecnologia?
+        La BCE ha pubblicato i dati bancari consolidati al 31 marzo 2026, fornendo informazioni sulla stabilità del sistema finanziario europeo.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">STOXX 600</span>
+        <span class="asset-tag">Euro</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://www.chathamhouse.org/2026/07/can-burnham-government-make-britain-global-leader-science-and-technology" target="_blank" class="source-link">
-          Chatham House →
+        <a href="https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr260807~58eb5109ce.en.html" target="_blank" class="source-link">
+          BCE →
         </a>
       </div>
     </div>
@@ -1204,7 +1359,7 @@
         
         
         
-        <span class="stars">★★★★☆</span>
+        <span class="stars">★★★★★</span>
         
         
         
@@ -1219,22 +1374,22 @@
       </div>
 
       <div class="card-title">
-        L'esportatore di GNL degli Stati Uniti ottiene un guadagno grazie ai disordini in Medio Oriente
+        I trader di petrolio rimangono bearish nonostante le crescenti interruzioni in Medio Oriente
       </div>
       <div class="card-summary">
-        L'esportatore di GNL degli Stati Uniti ha ottenuto un guadagno grazie ai disordini in Medio Oriente.
+        I trader di petrolio rimangono bearish nonostante le crescenti interruzioni in Medio Oriente, a causa della possibile riduzione della produzione di petrolio.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">Brent</span>
+        <span class="asset-tag">Petrolio</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://oilprice.com/Latest-Energy-News/World-News/US-LNG-Exporter-Reaps-Windfall-as-Middle-East-Turmoil-Drives-Fees-Higher.html" target="_blank" class="source-link">
+        <a href="https://oilprice.com/Energy/Oil-Prices/Oil-Traders-Stay-Bearish-Despite-Deepening-Middle-East-Disruptions.html" target="_blank" class="source-link">
           OilPrice →
         </a>
       </div>
@@ -1257,7 +1412,7 @@
         
         
         
-        <span class="stars">★★★☆☆</span>
+        <span class="stars">★★★★☆</span>
         
         
         
@@ -1272,22 +1427,22 @@
       </div>
 
       <div class="card-title">
-        I produttori di petrolio del Golfo riavviano la lotta per la quota di mercato in Asia
+        L'UE blocca il piano per triplicare la capacità di stoccaggio dell'energia entro il 2030
       </div>
       <div class="card-summary">
-        I produttori di petrolio del Golfo hanno riavviato la lotta per la quota di mercato in Asia.
+        L'UE ha bloccato il piano per triplicare la capacità di stoccaggio dell'energia entro il 2030, per ridurre la dipendenza dalle fonti di energia fossile.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">Brent</span>
+        <span class="asset-tag">Energia rinnovabile</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://oilprice.com/Energy/Oil-Prices/Gulf-Oil-Producers-Relaunch-Fight-for-Market-Share-in-Asia.html" target="_blank" class="source-link">
+        <a href="https://oilprice.com/Energy/Energy-General/EU-Locks-In-Plan-To-Triple-Energy-Storage-Capacity-By-2030.html" target="_blank" class="source-link">
           OilPrice →
         </a>
       </div>
@@ -1326,7 +1481,7 @@
         
         
         
-        <span class="stars">★★★★★</span>
+        <span class="stars">★★★★☆</span>
         
         
         
@@ -1341,16 +1496,22 @@
       </div>
 
       <div class="card-title">
-        Bitcoin peels back to $62K as Fed-wary futures traders cut risk: Is the BTC rally over?
+        La società di media di Donald Trump annulla l'accordo di criptovaluta
       </div>
       <div class="card-summary">
-        Bitcoin hovered around the $62,000 mark following a spike in oil prices, escalating hot war in Iran and traders’ move to cut risk ahead of a Federal Reserve policy statement.
+        La società di media di Donald Trump ha annullato l'accordo di criptovaluta con Crypto.com, a causa della possibile riduzione della domanda di criptovalute.
       </div>
 
       
+      <div class="card-assets">
+        
+        <span class="asset-tag">Criptovalute</span>
+        
+      </div>
+      
 
       <div class="card-footer">
-        <a href="https://cointelegraph.com/markets/bitcoin-peels-back-to-62k-as-fed-wary-futures-traders-cut-risk-is-the-btc-rally-over?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank" class="source-link">
+        <a href="https://cointelegraph.com/news/donald-trump-media-company-crypto-deal?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank" class="source-link">
           Cointelegraph →
         </a>
       </div>
@@ -1388,16 +1549,22 @@
       </div>
 
       <div class="card-title">
-        AI boom fuels inflation fears, complicating Fed’s next rate move
+        Il Tesoro degli Stati Uniti sanziona le borse di criptovaluta iraniane
       </div>
       <div class="card-summary">
-        Ongoing strong demand for AI infrastructure “would likely sustain upward pressure on prices for technology products and electricity,” Federal Reserve policymakers said.
+        Il Tesoro degli Stati Uniti ha sanzionato due borse di criptovaluta iraniane, a causa della possibile violazione delle sanzioni internazionali.
       </div>
 
       
+      <div class="card-assets">
+        
+        <span class="asset-tag">Criptovalute</span>
+        
+      </div>
+      
 
       <div class="card-footer">
-        <a href="https://cointelegraph.com/news/ai-boom-fuels-inflation-fears-complicating-feds-next-move?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank" class="source-link">
+        <a href="https://cointelegraph.com/news/us-treasury-sanctions-iran-crypto-exchanges?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound" target="_blank" class="source-link">
           Cointelegraph →
         </a>
       </div>
@@ -1420,7 +1587,7 @@
         
         
         
-        <span class="stars">★★★★☆</span>
+        <span class="stars">★★★☆☆</span>
         
         
         
@@ -1435,22 +1602,22 @@
       </div>
 
       <div class="card-title">
-        Il mercato live: il yen giapponese in caduta sta spingendo le aziende verso Bitcoin e XRP
+        Gli Stati Uniti allargano la repressione delle criptovalute iraniane con sanzioni su due borse
       </div>
       <div class="card-summary">
-        Il prezzo del Bitcoin è sceso a $62.000 mentre il prezzo del petrolio e i rendimenti dei bond sono aumentati a causa del crollo della tregua in Iran.
+        Gli Stati Uniti hanno allargato la repressione delle criptovalute iraniane con sanzioni su due borse, a causa della possibile violazione delle sanzioni internazionali.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">BTC</span>
+        <span class="asset-tag">Criptovalute</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://www.coindesk.com/tech/2026/07/08/live-markets-japan-s-collapsing-yen-is-pushing-companies-into-bitcoin-and-xrp" target="_blank" class="source-link">
+        <a href="https://www.coindesk.com/policy/2026/08/07/u-s-widens-iran-crypto-crackdown-with-sanctions-on-two-exchanges" target="_blank" class="source-link">
           CoinDesk →
         </a>
       </div>
@@ -1488,22 +1655,22 @@
       </div>
 
       <div class="card-title">
-        L'inflazione del Bitcoin diventa più complicata a causa del conflitto in Medio Oriente
+        La Russia reprime le borse di criptovaluta non autorizzate che afferma essere collegate all'Ucraina
       </div>
       <div class="card-summary">
-        L'inflazione del Bitcoin diventa più complicata a causa del conflitto in Medio Oriente.
+        La Russia ha represso le borse di criptovaluta non autorizzate che afferma essere collegate all'Ucraina, a causa della possibile violazione delle sanzioni internazionali.
       </div>
 
       
       <div class="card-assets">
         
-        <span class="asset-tag">BTC</span>
+        <span class="asset-tag">Criptovalute</span>
         
       </div>
       
 
       <div class="card-footer">
-        <a href="https://www.coindesk.com/daybook-us/2026/07/08/bitcoin-s-inflation-quagmire-gets-stickier-as-renewed-mideast-conflict-sends-oil-price-soaring" target="_blank" class="source-link">
+        <a href="https://www.coindesk.com/policy/2026/08/07/russia-cracks-down-on-unlicensed-crypto-exchanges-it-claims-are-linked-to-ukraine" target="_blank" class="source-link">
           CoinDesk →
         </a>
       </div>
