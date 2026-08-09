@@ -91,8 +91,7 @@
     },
     "btc_etf_flow": {
       "value": "$+101.7M",
-      "change": "📉 Declining",
-      "tone": "good"
+      "change": "📉 Declining"
     },
     "btc_etf_data": {
       "last_update": "2026-08-07",
@@ -115,14 +114,12 @@
     "crypto": {
       "fear_greed": {
         "value": "31",
-        "class": "Fear",
-        "tone": "bad"
+        "class": "Fear"
       },
       "prices": {
         "BTC": {
           "value": "$64,800",
-          "change": "-0.21%",
-          "tone": "bad"
+          "change": "-0.21%"
         },
         "ETH": {
           "value": "$1,915",
@@ -130,13 +127,11 @@
         },
         "SOL": {
           "value": "$76.15",
-          "change": "+1.96%",
-          "tone": "good"
+          "change": "+1.96%"
         },
         "BNB": {
           "value": "$602.29",
-          "change": "+1.43%",
-          "tone": "good"
+          "change": "+1.43%"
         }
       }
     },
@@ -213,8 +208,7 @@
         "previous": "4.3%",
         "release_date": "2026-06-01",
         "status": "released",
-        "next_release": "2026-08-12",
-        "tone": "good"
+        "next_release": "2026-08-12"
       },
       "core_cpi": {
         "label": "Core CPI YoY USA",
@@ -224,8 +218,7 @@
         "previous": "3.0%",
         "release_date": "2026-06-01",
         "status": "released",
-        "next_release": "2026-08-12",
-        "tone": "good"
+        "next_release": "2026-08-12"
       },
       "nfp": {
         "label": "Non-Farm Payrolls",
@@ -235,8 +228,7 @@
         "previous": "+20K",
         "release_date": "2026-07-01",
         "status": "released",
-        "next_release": "2026-09-04",
-        "tone": "bad"
+        "next_release": "2026-09-04"
       },
       "unemployment": {
         "label": "Tasso Disoccupazione USA",
@@ -246,8 +238,7 @@
         "previous": "4.2%",
         "release_date": "2026-07-01",
         "status": "released",
-        "next_release": "2026-09-04",
-        "tone": "good"
+        "next_release": "2026-09-04"
       },
       "pce_core": {
         "label": "PCE Core YoY",
@@ -257,8 +248,7 @@
         "previous": "3.4%",
         "release_date": "2026-06-01",
         "status": "released",
-        "next_release": "2026-08-28",
-        "tone": "good"
+        "next_release": "2026-08-28"
       },
       "fed_funds": {
         "label": "Tasso Fed Funds",
@@ -289,8 +279,7 @@
         "release_date": "2026-Q2",
         "status": "released",
         "next_release": "2026-10-30",
-        "region": "EU",
-        "tone": "good"
+        "region": "EU"
       },
       "ecb_rate": {
         "label": "Tasso BCE (Depositi)",
