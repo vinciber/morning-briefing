@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-summarizer.py — AI Processing con Groq Llama 4
+summarizer.py — AI Processing con Groq GPT-OSS e Qwen
 Legge data/fetched_articles.json, invia batch a Groq,
 produce briefing strutturato JSON bilingue con sentiment.
 Output: data/briefing_today.json
@@ -39,12 +39,27 @@ MARKET_DATA_PATH = ROOT / 'data' / 'market_data.json'
 HISTORY_PATH = ROOT / 'docs' / 'api' / 'today.json'
 OUTPUT_PATH = ROOT / 'data' / 'briefing_today.json'
 
-# Account 2 (NEWS) dedicato al briefing; fallback su account 1 se il secret non è settato
-GROQ_API_KEY = os.environ.get('GROQ_API_KEY_NEWS') or os.environ.get('GROQ_API_KEY', '')
+def _configured_groq_keys():
+    """News → secondary → main, deduplicating identical secret values."""
+    keys = []
+    seen = set()
+    for env_name in ('GROQ_API_KEY_NEWS', 'GROQ_API_KEY_2', 'GROQ_API_KEY'):
+        value = os.environ.get(env_name, '').strip()
+        if value and value not in seen:
+            keys.append((env_name, value))
+            seen.add(value)
+    return keys
 
-# Modelli Groq — scout-17b deprecato (decommission 2026-07-17). Analisi su 70B, audio su 8b-instant.
-MODEL_ANALYSIS = 'llama-3.3-70b-versatile'
-MODEL_AUDIO = 'openai/gpt-oss-120b'  # reasoning model in batch/cron: qualità narrazione IT > 8b (no errori grammaticali/N-A/allucinazioni); latency irrilevante offline
+
+GROQ_API_KEYS = _configured_groq_keys()
+
+# Modelli Groq — GPT-OSS sostituisce Llama 3.3 70B (shutdown 2026-08-16).
+MODEL_ANALYSIS = 'openai/gpt-oss-120b'
+MODEL_ARTICLES = 'qwen/qwen3.6-27b'
+MODEL_AUDIO_FINANCE = 'openai/gpt-oss-120b'
+MODEL_AUDIO_CRYPTO = 'openai/gpt-oss-20b'
+MODEL_AUDIO_CLOSE = 'llama-3.1-8b-instant'
+MODEL_TRANSLATION = 'llama-3.1-8b-instant'  # non coinvolto nel decommission del 70B; pool 14.4K RPD / 6K TPM
 
 # Ground Truth Macro — FALLBACK usato SOLO se i tassi live da FRED mancano.
 # I tassi correnti arrivano da market_fetcher: DFEDTARL/DFEDTARU (target range
@@ -160,16 +175,19 @@ OUTPUT JSON — struttura esatta:
   "market_impact_summary": {
     "it": "4-5 righe. Almeno 3 asset class con variazioni numeriche. Usa il framework di lettura mercati. RISPETTA LA REGOLA TEMPORALE.",
     "en": "Same in English. RESPECT TEMPORAL RULE."
-  },
-  "audio_script_it": "Script completo gestito in segmenti (A, B, C).",
-  "audio_script_en": "Script completo gestito in segmenti (A, B, C).",
+  }
+}
+"""
+
+ARTICLE_IMPACT_PROMPT = """Analizza tutti gli articoli ricevuti e restituisci SOLO JSON valido:
+{
   "article_impacts": [
     {
-      "url": "url esatto dell'articolo",
+      "id": "id numerico esatto ricevuto in input",
       "title_it": "Titolo in italiano — OBBLIGATORIO. NON copiare l'originale inglese.",
       "title_en": "Title in English — OBBLIGATORIO. NON copiare l'originale italiano.",
-      "summary_it": "Sintesi in italiano (40-60 parole). OBBLIGATORIO tradurre anche se fonte è inglese.",
-      "summary_en": "Summary in English (40-60 words). MANDATORY translation even if source is Italian.",
+      "summary_it": "Sintesi in italiano (12-20 parole). OBBLIGATORIO tradurre anche se fonte è inglese.",
+      "summary_en": "Summary in English (12-20 words). MANDATORY translation even if source is Italian.",
       "direction": "bearish | bullish | mixed",
       "magnitude": "high | medium | low",
       "assets_affected": ["S&P 500", "Brent"]
@@ -178,7 +196,7 @@ OUTPUT JSON — struttura esatta:
 }
 
 REGOLA COVERAGE — CRITICA:
-- article_impacts DEVE contenere UNA entry per OGNI URL ricevuto in input. Nessuna esclusione.
+- article_impacts DEVE contenere UNA entry per OGNI id ricevuto in input. Nessuna esclusione.
 - Per articoli con basso impatto sui mercati, usa magnitude="low" ma assegna comunque direction bullish o bearish in base al contenuto.
 
 REGOLA DIRECTION — CRITICA (evita "mixed" come default):
@@ -432,23 +450,32 @@ FORMATO OUTPUT: JSON con chiave "audio_script_it" valore stringa di testo contin
 
 def _merge_article_impacts(articles: list, article_impacts: list) -> list:
     """
-    Merge article_impacts dal LLM negli articoli raw per URL.
+    Merge article_impacts dal LLM negli articoli raw per id posizionale.
+    Accetta ancora URL per compatibilità con output generati prima della
+    migrazione GPT-OSS, ma i nuovi prompt non ripetono URL lunghi.
     Aggiunge market_impact a ogni articolo che ha un match.
     """
-    # Costruisci lookup per URL
+    impacts_by_id = {}
     impacts_by_url = {}
     for impact in article_impacts:
+        try:
+            impact_id = int(impact.get('id'))
+        except (TypeError, ValueError):
+            impact_id = None
         url = impact.get('url', '').strip()
+        normalized = {
+            'title_it': impact.get('title_it'),
+            'title_en': impact.get('title_en'),
+            'summary_it': impact.get('summary_it'),
+            'summary_en': impact.get('summary_en'),
+            'direction': impact.get('direction', 'mixed'),
+            'magnitude': impact.get('magnitude', 'low'),
+            'assets_affected': impact.get('assets_affected', []),
+        }
+        if impact_id is not None:
+            impacts_by_id[impact_id] = normalized
         if url:
-            impacts_by_url[url] = {
-                'title_it': impact.get('title_it'),
-                'title_en': impact.get('title_en'),
-                'summary_it': impact.get('summary_it'),
-                'summary_en': impact.get('summary_en'),
-                'direction': impact.get('direction', 'mixed'),
-                'magnitude': impact.get('magnitude', 'low'),
-                'assets_affected': impact.get('assets_affected', []),
-            }
+            impacts_by_url[url] = normalized
 
     BEARISH_KW = ['war', 'conflict', 'sanction', 'tariff', 'recession', 'crisis',
                   'downgrade', 'inflation surge', 'rate hike', 'hawkish', 'default',
@@ -470,10 +497,10 @@ def _merge_article_impacts(articles: list, article_impacts: list) -> list:
         return 'mixed'
 
     matched = 0
-    for art in articles:
+    for article_id, art in enumerate(articles, 1):
         url = art.get('url', '').strip()
-        if url in impacts_by_url:
-            impact = impacts_by_url[url]
+        impact = impacts_by_id.get(article_id) or impacts_by_url.get(url)
+        if impact:
             art['title_it'] = impact.get('title_it') or art.get('title')
             art['title_en'] = impact.get('title_en') or art.get('title')
             art['summary_it'] = impact.get('summary_it') or art.get('snippet')
@@ -498,7 +525,7 @@ def _merge_article_impacts(articles: list, article_impacts: list) -> list:
                 'assets_affected': [],
             }
 
-    logger.info(f'🎯 market_impact: {matched}/{len(articles)} articoli matchati via URL, {len(articles)-matched} via fallback')
+    logger.info(f'🎯 market_impact: {matched}/{len(articles)} articoli matchati via id/URL, {len(articles)-matched} via fallback')
     return articles
 
 
@@ -606,8 +633,8 @@ def _build_week_ahead(md):
 
 def run():
     """Pipeline principale: carica articoli + market + history → Groq → salva briefing JSON."""
-    if not GROQ_API_KEY:
-        logger.error('❌ GROQ_API_KEY non configurata!')
+    if not GROQ_API_KEYS:
+        logger.error('❌ Nessuna chiave Groq configurata!')
         sys.exit(1)
 
     if not INPUT_PATH.exists():
@@ -820,20 +847,41 @@ def run():
         except Exception:
             pass
 
-    client = Groq(api_key=GROQ_API_KEY, max_retries=4)  # backoff automatico SDK su 429 (free tier)
+    clients = [
+        (key_env, Groq(api_key=api_key, max_retries=0))
+        for key_env, api_key in GROQ_API_KEYS
+    ]
+
+    def _groq_completion(**kwargs):
+        """Rotate key slots only for auth, billing and quota exhaustion."""
+        last_error = None
+        for key_index, (key_env, groq_client) in enumerate(clients):
+            try:
+                response = groq_client.chat.completions.create(**kwargs)
+                logger.info('🤖 Groq key_slot=%s model=%s', key_env, kwargs.get('model'))
+                return response
+            except Exception as exc:
+                last_error = exc
+                status = getattr(exc, 'status_code', None)
+                if status is None:
+                    status = getattr(getattr(exc, 'response', None), 'status_code', None)
+                if status in {401, 402, 403, 429} and key_index + 1 < len(clients):
+                    logger.warning('⚠️ Groq key_slot=%s HTTP %s, provo la successiva', key_env, status)
+                    continue
+                raise
+        raise last_error or RuntimeError('Nessuna chiave Groq disponibile')
 
     # Passa solo i campi essenziali al LLM per risparmiare token
     articles_slim = [
         {
-            'url':             a.get('url', ''),
+            'id':              idx,
             'title':           a.get('title', ''),
-            'snippet':         a.get('snippet', '')[:300],  # Max 300 chars
+            'snippet':         a.get('snippet', '')[:180],  # Max 180 chars
             'category':        a.get('category', ''),
             'source':          a.get('source', ''),
-            'tier':            a.get('tier', 4),
             'relevance_score': a.get('relevance_score', 0),
         }
-        for a in articles
+        for idx, a in enumerate(articles, 1)
     ]
 
     logger.info("\n=== ARTICOLI SELEZIONATI PER L'ANALISI LLM ===")
@@ -1019,21 +1067,50 @@ def run():
         )
         user_prompt += weekend_note_it
 
-    logger.info(f'🤖 Chiamata 1: Groq Llama 4 Analysis ({len(articles_slim)} articoli)...')
+    logger.info(
+        '🤖 Chiamata 1: Groq GPT-OSS 120B Analysis '
+        f'({len(articles_slim)} articoli, input_chars={len(SYSTEM_PROMPT) + len(user_prompt)})...'
+    )
     try:
-        # CHIAMATA 1 — Sentiment, Market Impact Summary, e Article Impacts
-        response = client.chat.completions.create(
+        # CHIAMATA 1 — Sentiment e Market Impact Summary. Gli impatti articolo
+        # usano un pool modello separato sotto, evitando il limite TPM condiviso.
+        response = _groq_completion(
             model=MODEL_ANALYSIS,
             messages=[
                 {'role': 'system', 'content': SYSTEM_PROMPT},
                 {'role': 'user',   'content': user_prompt},
             ],
             temperature=0.2,
-            max_tokens=4096,
+            max_tokens=1200,
             response_format={'type': 'json_object'},
+            reasoning_effort='low',
         )
         raw_text = response.choices[0].message.content.strip()
         briefing = json.loads(raw_text)
+
+        logger.info(
+            '🤖 Chiamata 2: Groq Qwen 3.6 Article Impacts '
+            f'({len(articles_slim)} articoli, input_chars={len(ARTICLE_IMPACT_PROMPT) + len(articles_json)})...'
+        )
+        try:
+            impacts_response = _groq_completion(
+                model=MODEL_ARTICLES,
+                messages=[
+                    {'role': 'system', 'content': ARTICLE_IMPACT_PROMPT},
+                    {'role': 'user', 'content': articles_json},
+                ],
+                temperature=0.1,
+                max_tokens=5000,
+                response_format={'type': 'json_object'},
+                reasoning_effort='none',
+            )
+            impacts_payload = json.loads(impacts_response.choices[0].message.content.strip())
+            briefing['article_impacts'] = impacts_payload.get('article_impacts', [])
+        except Exception as impact_error:
+            # Il merge successivo ha un fallback deterministico per ogni
+            # articolo: il briefing resta pubblicabile anche se Qwen è saturo.
+            logger.warning(f'⚠️ Article impacts LLM non disponibili: {impact_error}')
+            briefing['article_impacts'] = []
 
         # --- GENERAZIONE AUDIO SCRIPT ---
         today_str = datetime.now(timezone.utc).strftime('%d %B %Y')
@@ -1044,20 +1121,23 @@ def run():
         news_it = weekly_it + other_it
         
         # Helper per chiamate audio
-        def get_audio_part(system_p, user_p, lang_key, model=MODEL_AUDIO):
+        def get_audio_part(system_p, user_p, lang_key, model, max_tokens):
             # Forza JSON nel prompt utente
             full_user_p = f"{user_p}\n\nREQUISITO CORE: Restituisci SOLO un oggetto JSON con la chiave '{lang_key}'."
-            resp = client.chat.completions.create(
+            completion_args = dict(
                 model=model,
                 messages=[
                     {'role': 'system', 'content': system_p},
                     {'role': 'user',   'content': full_user_p},
                 ],
                 temperature=0.3,
-                max_tokens=2048,
+                max_tokens=max_tokens,
                 response_format={'type': 'json_object'},
-                reasoning_effort='low',  # gpt-oss: minimizza i reasoning token, tiene il JSON pulito (richiede groq>=0.18)
             )
+            if model.startswith('openai/gpt-oss'):
+                # Minimizza i reasoning token e mantiene il JSON pulito.
+                completion_args['reasoning_effort'] = 'low'
+            resp = _groq_completion(**completion_args)
             return json.loads(resp.choices[0].message.content)
             
         def clean_script(script_obj, key):
@@ -1129,7 +1209,13 @@ def run():
         it_finance_user += "NOTIZIE PRINCIPALI:\n" + \
                          "\n".join(f"- {a['title']}" for a in news_it[:10] if a.get('category') != 'crypto')
         it_finance_user += weekend_note_it
-        it_finance = get_audio_part(finance_prompt, it_finance_user, 'audio_script_it')
+        it_finance = get_audio_part(
+            finance_prompt,
+            it_finance_user,
+            'audio_script_it',
+            model=MODEL_AUDIO_FINANCE,
+            max_tokens=1000,
+        )
         
         # Part B: Crypto (SOLO dati crypto, niente dati tradizionali)
         # Weekend: il flusso giornaliero è fermo a venerdì → si cita il CUMULATIVO
@@ -1156,10 +1242,22 @@ def run():
                 etf_flow_ctx += "NOTA: dato giornaliero riferito a venerdì (mercato ETF chiuso nel weekend), specificalo se lo citi.\n"
         it_crypto_user = f"DATI CRYPTO ATTUALI (USA QUESTI VALORI):\n{etf_flow_ctx}{audio_crypto_context}\nNOTIZIE CRYPTO:\n" + \
                         "\n".join(f"- {a['title']}" for a in news_it if a.get('category') == 'crypto')
-        it_crypto = get_audio_part(AUDIO_CRYPTO_PROMPT, it_crypto_user, 'audio_script_it')
+        it_crypto = get_audio_part(
+            AUDIO_CRYPTO_PROMPT,
+            it_crypto_user,
+            'audio_script_it',
+            model=MODEL_AUDIO_CRYPTO,
+            max_tokens=1000,
+        )
         
         # Part C: Close (passa macro context per evitare hallucination su dati in uscita)
-        it_close = get_audio_part(AUDIO_CLOSE_PROMPT, f"Genera chiusura per podcast finanziario italiano.\n\nCONTESTO:{macro_today_line}", 'audio_script_it')
+        it_close = get_audio_part(
+            AUDIO_CLOSE_PROMPT,
+            f"Genera chiusura per podcast finanziario italiano.\n\nCONTESTO:{macro_today_line}",
+            'audio_script_it',
+            model=MODEL_AUDIO_CLOSE,
+            max_tokens=300,
+        )
         
         # Merge IT
         briefing['audio_script_it'] = f"{clean_script(it_finance, 'audio_script_it')}\n\n{clean_script(it_crypto, 'audio_script_it')}\n\n{clean_script(it_close, 'audio_script_it')}"
@@ -1183,7 +1281,13 @@ NUMBER FORMATTING FOR EN TTS (critical):
 Return ONLY a JSON object with key "audio_script_en" containing the full English translation as a single string."""
 
         en_translate_user = f"ITALIAN SCRIPT TO TRANSLATE:\n\n{briefing['audio_script_it']}"
-        en_full = get_audio_part(translate_prompt, en_translate_user, 'audio_script_en')
+        en_full = get_audio_part(
+            translate_prompt,
+            en_translate_user,
+            'audio_script_en',
+            model=MODEL_TRANSLATION,
+            max_tokens=1600,
+        )
         briefing['audio_script_en'] = clean_script(en_full, 'audio_script_en')
 
         # Merge article_impacts negli articoli raw
