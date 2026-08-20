@@ -46,9 +46,8 @@ jobs:
       - name: STEP 2 — AI Summarize
         run: python src/summarizer.py
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          GROQ_API_KEY_2: ${{ secrets.GROQ_API_KEY_2 }}
           GROQ_API_KEY_NEWS: ${{ secrets.GROQ_API_KEY_NEWS }}
+          GROQ_API_KEY_NEWS_2: ${{ secrets.GROQ_API_KEY_NEWS_2 }}
 
       - name: STEP 3a — Generate Audio (Piper TTS)
         run: |

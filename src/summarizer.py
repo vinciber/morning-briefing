@@ -19,6 +19,7 @@ import time
 load_dotenv()
 
 from groq import Groq
+from llm_routing import complete_with_fallback, configured_news_keys
 
 def _format_value(val: str) -> str:
     """Tronca decimali a 2 cifre: 27.1900 → 27.19"""
@@ -39,27 +40,17 @@ MARKET_DATA_PATH = ROOT / 'data' / 'market_data.json'
 HISTORY_PATH = ROOT / 'docs' / 'api' / 'today.json'
 OUTPUT_PATH = ROOT / 'data' / 'briefing_today.json'
 
-def _configured_groq_keys():
-    """News → secondary → main, deduplicating identical secret values."""
-    keys = []
-    seen = set()
-    for env_name in ('GROQ_API_KEY_NEWS', 'GROQ_API_KEY_2', 'GROQ_API_KEY'):
-        value = os.environ.get(env_name, '').strip()
-        if value and value not in seen:
-            keys.append((env_name, value))
-            seen.add(value)
-    return keys
+GROQ_API_KEYS = configured_news_keys()
 
-
-GROQ_API_KEYS = _configured_groq_keys()
-
-# Modelli Groq — GPT-OSS sostituisce Llama 3.3 70B (shutdown 2026-08-16).
-MODEL_ANALYSIS = 'openai/gpt-oss-120b'
-MODEL_ARTICLES = 'qwen/qwen3.6-27b'
-MODEL_AUDIO_FINANCE = 'openai/gpt-oss-120b'
-MODEL_AUDIO_CRYPTO = 'openai/gpt-oss-20b'
-MODEL_AUDIO_CLOSE = 'llama-3.1-8b-instant'
-MODEL_TRANSLATION = 'llama-3.1-8b-instant'  # non coinvolto nel decommission del 70B; pool 14.4K RPD / 6K TPM
+# Model chains are ordered by the intended pool.  Llama 3.1 8B was retired;
+# each fallback is an active model that has already been used by this job.
+# A fallback is used only after a real failure, never as a quota-consuming probe.
+MODEL_ANALYSIS = ('openai/gpt-oss-120b', 'qwen/qwen3.6-27b')
+MODEL_ARTICLES = ('qwen/qwen3.6-27b', 'openai/gpt-oss-120b')
+MODEL_AUDIO_FINANCE = ('openai/gpt-oss-120b', 'openai/gpt-oss-20b')
+MODEL_AUDIO_CRYPTO = ('openai/gpt-oss-20b', 'openai/gpt-oss-120b')
+MODEL_AUDIO_CLOSE = ('openai/gpt-oss-20b', 'openai/gpt-oss-120b')
+MODEL_TRANSLATION = ('openai/gpt-oss-20b', 'openai/gpt-oss-120b')
 
 # Ground Truth Macro — FALLBACK usato SOLO se i tassi live da FRED mancano.
 # I tassi correnti arrivano da market_fetcher: DFEDTARL/DFEDTARU (target range
@@ -852,25 +843,6 @@ def run():
         for key_env, api_key in GROQ_API_KEYS
     ]
 
-    def _groq_completion(**kwargs):
-        """Rotate key slots only for auth, billing and quota exhaustion."""
-        last_error = None
-        for key_index, (key_env, groq_client) in enumerate(clients):
-            try:
-                response = groq_client.chat.completions.create(**kwargs)
-                logger.info('🤖 Groq key_slot=%s model=%s', key_env, kwargs.get('model'))
-                return response
-            except Exception as exc:
-                last_error = exc
-                status = getattr(exc, 'status_code', None)
-                if status is None:
-                    status = getattr(getattr(exc, 'response', None), 'status_code', None)
-                if status in {401, 402, 403, 429} and key_index + 1 < len(clients):
-                    logger.warning('⚠️ Groq key_slot=%s HTTP %s, provo la successiva', key_env, status)
-                    continue
-                raise
-        raise last_error or RuntimeError('Nessuna chiave Groq disponibile')
-
     # Passa solo i campi essenziali al LLM per risparmiare token
     articles_slim = [
         {
@@ -1074,8 +1046,9 @@ def run():
     try:
         # CHIAMATA 1 — Sentiment e Market Impact Summary. Gli impatti articolo
         # usano un pool modello separato sotto, evitando il limite TPM condiviso.
-        response = _groq_completion(
-            model=MODEL_ANALYSIS,
+        response = complete_with_fallback(
+            clients, MODEL_ANALYSIS, logger,
+            purpose='analysis',
             messages=[
                 {'role': 'system', 'content': SYSTEM_PROMPT},
                 {'role': 'user',   'content': user_prompt},
@@ -1093,8 +1066,9 @@ def run():
             f'({len(articles_slim)} articoli, input_chars={len(ARTICLE_IMPACT_PROMPT) + len(articles_json)})...'
         )
         try:
-            impacts_response = _groq_completion(
-                model=MODEL_ARTICLES,
+            impacts_response = complete_with_fallback(
+                clients, MODEL_ARTICLES, logger,
+                purpose='article_impacts',
                 messages=[
                     {'role': 'system', 'content': ARTICLE_IMPACT_PROMPT},
                     {'role': 'user', 'content': articles_json},
@@ -1121,11 +1095,10 @@ def run():
         news_it = weekly_it + other_it
         
         # Helper per chiamate audio
-        def get_audio_part(system_p, user_p, lang_key, model, max_tokens):
+        def get_audio_part(system_p, user_p, lang_key, models, max_tokens, purpose):
             # Forza JSON nel prompt utente
             full_user_p = f"{user_p}\n\nREQUISITO CORE: Restituisci SOLO un oggetto JSON con la chiave '{lang_key}'."
             completion_args = dict(
-                model=model,
                 messages=[
                     {'role': 'system', 'content': system_p},
                     {'role': 'user',   'content': full_user_p},
@@ -1134,10 +1107,9 @@ def run():
                 max_tokens=max_tokens,
                 response_format={'type': 'json_object'},
             )
-            if model.startswith('openai/gpt-oss'):
-                # Minimizza i reasoning token e mantiene il JSON pulito.
-                completion_args['reasoning_effort'] = 'low'
-            resp = _groq_completion(**completion_args)
+            # Tutti i fallback supportano una risposta JSON; il router applica
+            # reasoning_effort=low solo al modello GPT-OSS realmente scelto.
+            resp = complete_with_fallback(clients, models, logger, purpose=purpose, **completion_args)
             return json.loads(resp.choices[0].message.content)
             
         def clean_script(script_obj, key):
@@ -1213,8 +1185,9 @@ def run():
             finance_prompt,
             it_finance_user,
             'audio_script_it',
-            model=MODEL_AUDIO_FINANCE,
+            models=MODEL_AUDIO_FINANCE,
             max_tokens=1000,
+            purpose='audio_it_finance',
         )
         
         # Part B: Crypto (SOLO dati crypto, niente dati tradizionali)
@@ -1246,8 +1219,9 @@ def run():
             AUDIO_CRYPTO_PROMPT,
             it_crypto_user,
             'audio_script_it',
-            model=MODEL_AUDIO_CRYPTO,
+            models=MODEL_AUDIO_CRYPTO,
             max_tokens=1000,
+            purpose='audio_it_crypto',
         )
         
         # Part C: Close (passa macro context per evitare hallucination su dati in uscita)
@@ -1255,8 +1229,9 @@ def run():
             AUDIO_CLOSE_PROMPT,
             f"Genera chiusura per podcast finanziario italiano.\n\nCONTESTO:{macro_today_line}",
             'audio_script_it',
-            model=MODEL_AUDIO_CLOSE,
+            models=MODEL_AUDIO_CLOSE,
             max_tokens=300,
+            purpose='audio_it_close',
         )
         
         # Merge IT
@@ -1285,8 +1260,9 @@ Return ONLY a JSON object with key "audio_script_en" containing the full English
             translate_prompt,
             en_translate_user,
             'audio_script_en',
-            model=MODEL_TRANSLATION,
+            models=MODEL_TRANSLATION,
             max_tokens=1600,
+            purpose='audio_en_translation',
         )
         briefing['audio_script_en'] = clean_script(en_full, 'audio_script_en')
 
