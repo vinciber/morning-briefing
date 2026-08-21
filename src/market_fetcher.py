@@ -2,6 +2,7 @@
 import json, logging, os, requests
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from zoneinfo import ZoneInfo
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -39,6 +40,107 @@ else:
 
 ETF_STATUS_PATH = ROOT / 'public' / 'data' / 'etf_status.json'
 FRED_API_KEY = os.environ.get('FRED_API_KEY', '')
+
+# Yahoo non pubblica un contratto Eurex continuo affidabile per ogni listino
+# europeo. Questo indice "roll" segue il future EURO STOXX 50 ed è usato solo
+# come indicatore di pre-apertura, mai come quotazione del future cash.
+EUROPE_FUTURES_YAHOO_SYMBOL = os.environ.get('EUROPE_FUTURES_YAHOO_SYMBOL', '03V9.Z')
+EUROPE_FUTURES_LABEL = 'EURO STOXX 50 Futures Roll Index'
+EUROPE_PREOPEN_MAX_AGE_MINUTES = 20
+
+
+def _europe_preopen_window(now):
+    """True solo quando il briefing può descrivere l'avvio dei mercati UE."""
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=timezone.utc)
+    local_now = now.astimezone(ZoneInfo('Europe/Rome'))
+    minutes = local_now.hour * 60 + local_now.minute
+    # Il workflow gira alle 05:47 UTC: 06:47 CET / 07:47 CEST.
+    return local_now.weekday() < 5 and 6 * 60 + 30 <= minutes < 9 * 60
+
+
+def _opening_direction_text(change_pct):
+    """Restituisce una frase deterministica, senza deduzioni dall'Asia."""
+    magnitude = abs(change_pct)
+    if magnitude < 0.05:
+        return 'I futures sull’EURO STOXX 50 sono pressoché invariati: nessun segnale direzionale per l’avvio europeo.'
+    direction = 'positivo' if change_pct > 0 else 'negativo'
+    qualifier = 'moderatamente ' if magnitude < 0.25 else ''
+    return f'I futures sull’EURO STOXX 50 indicano un avvio europeo {qualifier}{direction}.'
+
+
+def get_yahoo_intraday_quote(symbol):
+    """Legge una quotazione intraday Yahoo con prezzo, chiusura e timestamp."""
+    try:
+        url = f'https://query1.finance.yahoo.com/v8/finance/chart/{symbol}'
+        response = requests.get(
+            url,
+            params={'interval': '5m', 'range': '1d'},
+            headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)', 'Accept': 'application/json'},
+            timeout=15,
+        )
+        response.raise_for_status()
+        result = response.json().get('chart', {}).get('result', [])
+        if not result:
+            return None
+
+        meta = result[0].get('meta', {})
+        price = meta.get('regularMarketPrice')
+        previous_close = meta.get('regularMarketPreviousClose') or meta.get('previousClose')
+        quote_timestamp = meta.get('regularMarketTime')
+        if not all(isinstance(value, (int, float)) for value in (price, previous_close, quote_timestamp)) or previous_close == 0:
+            return None
+
+        return {
+            'price': float(price),
+            'previous_close': float(previous_close),
+            'quote_timestamp': int(quote_timestamp),
+            'name': meta.get('longName') or meta.get('shortName') or symbol,
+            'delayed_by_minutes': meta.get('exchangeDataDelayedBy'),
+        }
+    except Exception as error:
+        logger.warning(f'⚠️ Yahoo intraday {symbol}: {error}')
+        return None
+
+
+def get_europe_futures_signal(now=None):
+    """Produce un segnale di pre-apertura solo da una quotazione futures fresca."""
+    now = now or datetime.now(timezone.utc)
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=timezone.utc)
+
+    unavailable = {
+        'status': 'unavailable',
+        'instrument': EUROPE_FUTURES_LABEL,
+        'source': 'Yahoo Finance',
+        'source_symbol': EUROPE_FUTURES_YAHOO_SYMBOL,
+    }
+    if not _europe_preopen_window(now):
+        return {**unavailable, 'reason': 'outside_europe_preopen'}
+
+    quote = get_yahoo_intraday_quote(EUROPE_FUTURES_YAHOO_SYMBOL)
+    if not quote:
+        return {**unavailable, 'reason': 'quote_unavailable'}
+
+    quote_time = datetime.fromtimestamp(quote['quote_timestamp'], tz=timezone.utc)
+    age_minutes = (now - quote_time).total_seconds() / 60
+    if age_minutes < -1 or age_minutes > EUROPE_PREOPEN_MAX_AGE_MINUTES:
+        return {**unavailable, 'reason': 'stale_quote', 'quote_time_utc': quote_time.isoformat()}
+
+    change_pct = ((quote['price'] - quote['previous_close']) / quote['previous_close']) * 100
+    return {
+        'status': 'available',
+        'instrument': EUROPE_FUTURES_LABEL,
+        'source': 'Yahoo Finance',
+        'source_symbol': EUROPE_FUTURES_YAHOO_SYMBOL,
+        'price': round(quote['price'], 3),
+        'previous_close': round(quote['previous_close'], 3),
+        'change_pct': round(change_pct, 3),
+        'quote_time_utc': quote_time.isoformat(),
+        'age_minutes': round(max(age_minutes, 0), 1),
+        'delayed_by_minutes': quote['delayed_by_minutes'],
+        'summary_it': _opening_direction_text(change_pct),
+    }
 
 def get_yahoo_finance(symbol):
     """
@@ -895,6 +997,16 @@ def run():
     val, chg = get_yahoo_finance('^HSI')
     results['hang_seng'] = {'value': _format_market_value(val), 'change': chg}
     logger.info(f'Hang Seng: {val}')
+
+    results['europe_futures'] = get_europe_futures_signal()
+    futures = results['europe_futures']
+    if futures['status'] == 'available':
+        logger.info(
+            'EURO STOXX 50 futures roll: %+.3f%% (%s min fa)',
+            futures['change_pct'], futures['age_minutes'],
+        )
+    else:
+        logger.info('EURO STOXX 50 futures roll non usato: %s', futures['reason'])
 
     val, chg = get_btp_10y_yield()
     results['btp_10y'] = {'value': f'{_format_market_value(val)}%' if val != 'N/A' else 'N/A', 'change': chg}

@@ -218,8 +218,8 @@ STRUTTURA:
    "Buongiorno, benvenuti al Morning Briefing di Price Alert."
 2. CONTESTO ASIATICO (80 parole): Chiusura Nikkei e Shanghai — solo direzione e percentuale.
    Esempio: "Il Nikkei ha chiuso in calo dell'1.2%, Shanghai in rialzo dello 0.5%."
-   REGOLA APERTURA EUROPEA: Se i mercati europei sono APERTI, aggiungi "Questo suggerisce un'apertura debole per i mercati europei" o simile.
-   Se i mercati sono CHIUSI (weekend/festività), OMETTI COMPLETAMENTE questa proiezione — è inutile proiettare un'apertura che non avverrà oggi. Puoi invece dire "dati che verranno incorporati nell'apertura di lunedì" o simile.
+   Non dedurre MAI l'apertura europea dalla chiusura asiatica. Sono dati separati.
+   APERTURA EUROPEA: cita una direzione SOLO se il contesto contiene la riga "FUTURES EUROPA — FORMULAZIONE APPROVATA". In quel caso riportala senza cambiarne direzione, intensità o fonte. Se la riga non c'è, OMETTI completamente qualsiasi previsione di apertura europea.
 3. MERCATI OCCIDENTALI (150 parole): S&P 500, VIX, DXY, oro, petrolio, US 10Y Yield, BTP 10Y.
    REGOLA CHIAVE: cita direzione + variazione percentuale. Aggiungi una frase di contesto SOLO se un driver reale è presente nelle notizie/contesto forniti (es. "dopo i dati macro deludenti citati sopra"). Se NON c'è un driver esplicito, riporta solo direzione e percentuale — NON inventare la causa di un movimento.
    CORRETTEZZA CAUSALE: se citi una causa, deve essere direzionalmente corretta. In particolare: un rendimento obbligazionario IN CALO riflette attese di inflazione PIÙ BASSE / risk-off / aspettative di taglio tassi, MAI "pressione inflazionistica" (quella spinge i rendimenti AL RIALZO). Non scambiare causa ed effetto su tassi, dollaro e oro.
@@ -730,8 +730,8 @@ def run():
             'oil_brent': 'BRENT',
             'stoxx_600': 'STOXX 600',
             'ftse_mib':  'FTSE MIB (Milano)',
-            'nikkei':    'NIKKEI (chiusura Asia — indicatore apertura Europa)',
-            'shanghai':  'SHANGHAI (chiusura Asia — indicatore apertura Europa)',
+            'nikkei':    'NIKKEI (chiusura Asia)',
+            'shanghai':  'SHANGHAI (chiusura Asia)',
             'hang_seng': 'HANG SENG (Hong Kong)',
             'btp_10y':   'BTP 10Y',
             'global_m2': 'Global M2 Liquidity (proxy mensile)',
@@ -743,6 +743,13 @@ def run():
             chg = _format_value(item.get('change', 'N/A'))
             if val and val != 'N/A':
                 lines.append(f"  {label}: {val} ({chg})")
+
+        europe_futures = md.get('europe_futures') or {}
+        if europe_futures.get('status') == 'available' and europe_futures.get('summary_it'):
+            lines.append(
+                '\nFUTURES EUROPA — FORMULAZIONE APPROVATA (riporta testualmente, non dedurre dall’Asia):\n'
+                f"  {europe_futures['summary_it']}"
+            )
 
         # Aggiungi Crypto Data
         crypto = md.get('crypto', {})
