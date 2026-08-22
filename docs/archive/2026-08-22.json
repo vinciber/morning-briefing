@@ -98,8 +98,7 @@
     },
     "btc_etf_flow": {
       "value": "$+103.3M",
-      "change": "📉 Declining",
-      "tone": "good"
+      "change": "📉 Declining"
     },
     "btc_etf_data": {
       "last_update": "2026-08-20",
@@ -122,29 +121,24 @@
     "crypto": {
       "fear_greed": {
         "value": "71",
-        "class": "Greed",
-        "tone": "good"
+        "class": "Greed"
       },
       "prices": {
         "BTC": {
           "value": "$77,371",
-          "change": "+2.66%",
-          "tone": "good"
+          "change": "+2.66%"
         },
         "ETH": {
           "value": "$2,440",
-          "change": "+3.14%",
-          "tone": "good"
+          "change": "+3.14%"
         },
         "SOL": {
           "value": "$94.27",
-          "change": "+4.12%",
-          "tone": "good"
+          "change": "+4.12%"
         },
         "BNB": {
           "value": "$698.66",
-          "change": "+5.19%",
-          "tone": "good"
+          "change": "+5.19%"
         }
       }
     },
@@ -157,8 +151,7 @@
         "previous": "3.7%",
         "release_date": "2026-07-01",
         "status": "released",
-        "next_release": "2026-09-11",
-        "tone": "good"
+        "next_release": "2026-09-11"
       },
       "core_cpi": {
         "label": "Core CPI YoY USA",
@@ -178,8 +171,7 @@
         "previous": "+20K",
         "release_date": "2026-07-01",
         "status": "released",
-        "next_release": "2026-09-04",
-        "tone": "bad"
+        "next_release": "2026-09-04"
       },
       "unemployment": {
         "label": "Tasso Disoccupazione USA",
@@ -189,8 +181,7 @@
         "previous": "4.2%",
         "release_date": "2026-07-01",
         "status": "released",
-        "next_release": "2026-09-04",
-        "tone": "good"
+        "next_release": "2026-09-04"
       },
       "pce_core": {
         "label": "PCE Core YoY",
@@ -200,8 +191,7 @@
         "previous": "3.4%",
         "release_date": "2026-06-01",
         "status": "released",
-        "next_release": "2026-08-28",
-        "tone": "good"
+        "next_release": "2026-08-28"
       },
       "gdp": {
         "label": "PIL QoQ USA",
@@ -232,8 +222,7 @@
         "release_date": "2026-Q2",
         "status": "released",
         "next_release": "2026-10-30",
-        "region": "EU",
-        "tone": "good"
+        "region": "EU"
       },
       "ecb_deposit_rate": {
         "label": "Tasso Depositi BCE",
