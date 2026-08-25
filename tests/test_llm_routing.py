@@ -16,8 +16,9 @@ class FakeLogger:
 
 
 class ApiError(Exception):
-    def __init__(self, status_code):
+    def __init__(self, status_code, message=""):
         self.status_code = status_code
+        super().__init__(message)
 
 
 class FakeClient:
@@ -78,3 +79,32 @@ def test_exhausted_model_pool_uses_next_model_on_the_same_dedicated_key():
         ("preferred-model", "fallback-model"), FakeLogger(), purpose="test", messages=[],
     ) == "ok"
     assert calls == ["preferred-model", "fallback-model"]
+
+
+def test_json_generation_validation_is_retried_once():
+    calls = []
+    primary = FakeClient([
+        ApiError(400, "json_validate_failed"),
+        "ok",
+    ], calls)
+
+    assert complete_with_fallback(
+        [("GROQ_API_KEY_NEWS", primary)],
+        ("working-model",), FakeLogger(), purpose="test", messages=[],
+    ) == "ok"
+    assert calls == ["working-model", "working-model"]
+
+
+def test_persistent_json_generation_validation_uses_next_model():
+    calls = []
+    primary = FakeClient([
+        ApiError(400, "Failed to validate JSON"),
+        ApiError(400, "Failed to validate JSON"),
+        "ok",
+    ], calls)
+
+    assert complete_with_fallback(
+        [("GROQ_API_KEY_NEWS", primary)],
+        ("preferred-model", "fallback-model"), FakeLogger(), purpose="test", messages=[],
+    ) == "ok"
+    assert calls == ["preferred-model", "preferred-model", "fallback-model"]

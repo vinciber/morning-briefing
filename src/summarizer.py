@@ -1102,7 +1102,7 @@ def run():
         news_it = weekly_it + other_it
         
         # Helper per chiamate audio
-        def get_audio_part(system_p, user_p, lang_key, models, max_tokens, purpose):
+        def get_audio_part(system_p, user_p, lang_key, models, max_tokens, purpose, fallback_text=None):
             # Forza JSON nel prompt utente
             full_user_p = f"{user_p}\n\nREQUISITO CORE: Restituisci SOLO un oggetto JSON con la chiave '{lang_key}'."
             completion_args = dict(
@@ -1116,8 +1116,17 @@ def run():
             )
             # Tutti i fallback supportano una risposta JSON; il router applica
             # reasoning_effort=low solo al modello GPT-OSS realmente scelto.
-            resp = complete_with_fallback(clients, models, logger, purpose=purpose, **completion_args)
-            return json.loads(resp.choices[0].message.content)
+            try:
+                resp = complete_with_fallback(clients, models, logger, purpose=purpose, **completion_args)
+                return json.loads(resp.choices[0].message.content)
+            except Exception as error:
+                if fallback_text is None:
+                    raise
+                logger.warning(
+                    '⚠️ Audio purpose=%s non disponibile dopo retry e fallback: %s. Uso chiusura deterministica.',
+                    purpose, error,
+                )
+                return {lang_key: fallback_text}
             
         def clean_script(script_obj, key):
             """Estrae il testo pulito dallo script, gestendo strutture dict/list annidate dall'LLM."""
@@ -1239,6 +1248,11 @@ def run():
             models=MODEL_AUDIO_CLOSE,
             max_tokens=300,
             purpose='audio_it_close',
+            fallback_text=(
+                'Nei prossimi giorni sarà importante seguire l’evoluzione dei mercati e le notizie di maggiore rilievo. '
+                'Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. '
+                'Grazie per l’attenzione e a domani.'
+            ),
         )
         
         # Merge IT
