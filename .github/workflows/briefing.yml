@@ -46,6 +46,9 @@ jobs:
       - name: STEP 2 — AI Summarize
         run: python src/summarizer.py
         env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
           GROQ_API_KEY_NEWS: ${{ secrets.GROQ_API_KEY_NEWS }}
           GROQ_API_KEY_NEWS_2: ${{ secrets.GROQ_API_KEY_NEWS_2 }}
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-summarizer.py — AI Processing con Groq GPT-OSS e Qwen
-Legge data/fetched_articles.json, invia batch a Groq,
+summarizer.py — AI Processing con Groq NEWS e fallback Gemini
+Legge data/fetched_articles.json, invia batch al router LLM,
 produce briefing strutturato JSON bilingue con sentiment.
 Output: data/briefing_today.json
 """
@@ -19,7 +19,12 @@ import time
 load_dotenv()
 
 from groq import Groq
-from llm_routing import complete_with_fallback, configured_news_keys
+from llm_routing import (
+    GeminiHTTPClient,
+    complete_with_morning_fallback,
+    configured_gemini_keys,
+    configured_news_keys,
+)
 
 def _format_value(val: str) -> str:
     """Tronca decimali a 2 cifre: 27.1900 → 27.19"""
@@ -41,6 +46,8 @@ HISTORY_PATH = ROOT / 'docs' / 'api' / 'today.json'
 OUTPUT_PATH = ROOT / 'data' / 'briefing_today.json'
 
 GROQ_API_KEYS = configured_news_keys()
+GEMINI_API_KEYS = configured_gemini_keys()
+GEMINI_MODEL = os.environ.get('MORNING_BRIEFING_GEMINI_MODEL', 'gemini-3.1-flash-lite')
 
 # Model chains are ordered by the intended pool.  Llama 3.1 8B was retired;
 # each fallback is an active model that has already been used by this job.
@@ -623,9 +630,9 @@ def _build_week_ahead(md):
 
 
 def run():
-    """Pipeline principale: carica articoli + market + history → Groq → salva briefing JSON."""
-    if not GROQ_API_KEYS:
-        logger.error('❌ Nessuna chiave Groq configurata!')
+    """Pipeline: Groq NEWS → Gemini → Groq NEWS_2 → salva briefing JSON."""
+    if not (GEMINI_API_KEYS or GROQ_API_KEYS):
+        logger.error('❌ Nessuna chiave Gemini o Groq NEWS configurata!')
         sys.exit(1)
 
     if not INPUT_PATH.exists():
@@ -849,6 +856,10 @@ def run():
         (key_env, Groq(api_key=api_key, max_retries=0))
         for key_env, api_key in GROQ_API_KEYS
     ]
+    gemini_clients = [
+        (key_env, GeminiHTTPClient(api_key))
+        for key_env, api_key in GEMINI_API_KEYS
+    ]
 
     # Passa solo i campi essenziali al LLM per risparmiare token
     articles_slim = [
@@ -1047,14 +1058,14 @@ def run():
         user_prompt += weekend_note_it
 
     logger.info(
-        '🤖 Chiamata 1: Groq GPT-OSS 120B Analysis '
+        '🤖 Chiamata 1: LLM Analysis (Groq NEWS → Gemini → NEWS_2) '
         f'({len(articles_slim)} articoli, input_chars={len(SYSTEM_PROMPT) + len(user_prompt)})...'
     )
     try:
         # CHIAMATA 1 — Sentiment e Market Impact Summary. Gli impatti articolo
         # usano un pool modello separato sotto, evitando il limite TPM condiviso.
-        response = complete_with_fallback(
-            clients, MODEL_ANALYSIS, logger,
+        response = complete_with_morning_fallback(
+            gemini_clients, GEMINI_MODEL, clients, MODEL_ANALYSIS, logger,
             purpose='analysis',
             messages=[
                 {'role': 'system', 'content': SYSTEM_PROMPT},
@@ -1069,12 +1080,12 @@ def run():
         briefing = json.loads(raw_text)
 
         logger.info(
-            '🤖 Chiamata 2: Groq Qwen 3.6 Article Impacts '
+            '🤖 Chiamata 2: LLM Article Impacts (Groq NEWS → Gemini → NEWS_2) '
             f'({len(articles_slim)} articoli, input_chars={len(ARTICLE_IMPACT_PROMPT) + len(articles_json)})...'
         )
         try:
-            impacts_response = complete_with_fallback(
-                clients, MODEL_ARTICLES, logger,
+            impacts_response = complete_with_morning_fallback(
+                gemini_clients, GEMINI_MODEL, clients, MODEL_ARTICLES, logger,
                 purpose='article_impacts',
                 messages=[
                     {'role': 'system', 'content': ARTICLE_IMPACT_PROMPT},
@@ -1117,7 +1128,10 @@ def run():
             # Tutti i fallback supportano una risposta JSON; il router applica
             # reasoning_effort=low solo al modello GPT-OSS realmente scelto.
             try:
-                resp = complete_with_fallback(clients, models, logger, purpose=purpose, **completion_args)
+                resp = complete_with_morning_fallback(
+                    gemini_clients, GEMINI_MODEL, clients, models, logger,
+                    purpose=purpose, **completion_args,
+                )
                 return json.loads(resp.choices[0].message.content)
             except Exception as error:
                 if fallback_text is None:
