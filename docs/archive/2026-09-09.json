@@ -98,8 +98,7 @@
     },
     "btc_etf_flow": {
       "value": "$+174.6M",
-      "change": "📉 Declining",
-      "tone": "good"
+      "change": "📉 Declining"
     },
     "btc_etf_data": {
       "last_update": "2026-09-04",
@@ -122,29 +121,24 @@
     "crypto": {
       "fear_greed": {
         "value": "66",
-        "class": "Greed",
-        "tone": "good"
+        "class": "Greed"
       },
       "prices": {
         "BTC": {
           "value": "$79,010",
-          "change": "+0.36%",
-          "tone": "good"
+          "change": "+0.36%"
         },
         "ETH": {
           "value": "$2,493",
-          "change": "+0.14%",
-          "tone": "good"
+          "change": "+0.14%"
         },
         "SOL": {
           "value": "$103.86",
-          "change": "+0.20%",
-          "tone": "good"
+          "change": "+0.20%"
         },
         "BNB": {
           "value": "$751.57",
-          "change": "-0.46%",
-          "tone": "bad"
+          "change": "-0.46%"
         }
       }
     },
@@ -157,8 +151,7 @@
         "previous": "3.7%",
         "release_date": "2026-07-01",
         "status": "released",
-        "next_release": "2026-09-11",
-        "tone": "good"
+        "next_release": "2026-09-11"
       },
       "core_cpi": {
         "label": "Core CPI YoY USA",
@@ -178,8 +171,7 @@
         "previous": "+21K",
         "release_date": "2026-08-01",
         "status": "released",
-        "next_release": "2026-10-02",
-        "tone": "good"
+        "next_release": "2026-10-02"
       },
       "unemployment": {
         "label": "Tasso Disoccupazione USA",
@@ -230,8 +222,7 @@
         "release_date": "2026-Q2",
         "status": "released",
         "next_release": "2026-10-30",
-        "region": "EU",
-        "tone": "good"
+        "region": "EU"
       },
       "ecb_rate": {
         "label": "Tasso BCE (Depositi)",
