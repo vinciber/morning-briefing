@@ -3,7 +3,7 @@ name: Morning Briefing
 
 on:
   schedule:
-    - cron: '47 5 * * *'      # 07:47 CEST ogni giorno — orario non congestionato per assorbire delay GH Actions, consegna ~08:00-08:30 CEST
+    - cron: '47 5 * * *'      # UTC backup; primary trigger is the bounded Railway watchdog
   workflow_dispatch:          # Esecuzione manuale da GitHub UI
 
 permissions:
@@ -14,13 +14,40 @@ permissions:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
+concurrency:
+  group: briefing_daily
+  cancel-in-progress: false
+
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      already_run: ${{ steps.check_run.outputs.already_run }}
+      content_ready: ${{ steps.check_run.outputs.content_ready }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check already run
+        id: check_run
+        run: pip install requests && python src/check_run.py
+
   briefing:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
+    needs: check
+    if: needs.check.outputs.already_run != 'true'
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Setup Python 3.11
         uses: actions/setup-python@v5
@@ -35,15 +62,18 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
       - name: STEP 1 — Fetch sources
+        if: needs.check.outputs.content_ready != 'true'
         run: python src/fetcher.py
 
       - name: STEP 1b — Fetch Market Data
+        if: needs.check.outputs.content_ready != 'true'
         run: python src/market_fetcher.py
         env:
           ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
 
       - name: STEP 2 — AI Summarize
+        if: needs.check.outputs.content_ready != 'true'
         run: python src/summarizer.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -53,6 +83,7 @@ jobs:
           GROQ_API_KEY_NEWS_2: ${{ secrets.GROQ_API_KEY_NEWS_2 }}
 
       - name: STEP 3a — Generate Audio (Piper TTS)
+        if: needs.check.outputs.content_ready != 'true'
         run: |
           mkdir -p models
           # Download modelli da Hugging Face (Italiano + Inglese)
@@ -70,22 +101,7 @@ jobs:
           fi
           python src/tts.py
           # Verifica che l'audio sia stato generato
-          ls docs/audio/*.mp3 && echo "✅ Audio generato" || echo "⚠️ Nessun file audio"
-        continue-on-error: true
-
-#      - name: STEP 3b — Send Email
-#        run: python src/email_sender.py
-#        continue-on-error: true
-#        env:
-#          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-#          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
-
-      - name: STEP 3c — Telegram
-        run: python src/telegram_bot.py
-        continue-on-error: true
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          python src/check_run.py
 
       - name: STEP 3d — Update GitHub Pages
         run: python src/site_generator.py
@@ -99,9 +115,11 @@ jobs:
           git config --global user.email 'vinciberlr@gmail.com'
 
           git add docs/ data/
-          git commit -m "briefing: $(date +%Y-%m-%d)" || exit 0
+          if ! git diff --cached --quiet; then
+            git commit -m "briefing: $(date +%Y-%m-%d)"
+          fi
           git fetch origin main
-          git rebase origin/main -X theirs || (git rebase --abort && git pull --rebase origin main -X theirs)
+          git rebase origin/main
           git push origin main
 
       - name: STEP 5 — Upload artifact
@@ -119,3 +137,22 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  notify:
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests python-dotenv
+      - name: Verify publication and deliver once
+        run: python src/telegram_bot.py --send
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

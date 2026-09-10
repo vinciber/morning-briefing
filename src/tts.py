@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import json, logging, yaml, wave, io, os, re
+import json, logging, yaml, wave, io, os, re, hashlib
+from audio_chapters import validate_narrative
 from datetime import datetime, timezone
 from pathlib import Path
 from piper.voice import PiperVoice
@@ -73,7 +74,7 @@ def normalize_for_tts(text: str) -> str:
         suffix = m.group(2)
         try:
             val = float(num_str)
-            
+
             # Gestione suffissi espliciti (es. $45.1M, $1.2B)
             if suffix:
                 s = suffix.lower()
@@ -116,9 +117,9 @@ def normalize_for_tts(text: str) -> str:
             return m.group(0)
 
     text = re.sub(
-        r'\$(-?[0-9,]+(?:\.[0-9]+)?)(?:\s*(million|billion|milioni|miliardi|M|B)(?!\w))?', 
-        replace_usd, 
-        text, 
+        r'\$(-?[0-9,]+(?:\.[0-9]+)?)(?:\s*(million|billion|milioni|miliardi|M|B)(?!\w))?',
+        replace_usd,
+        text,
         flags=re.IGNORECASE
     )
 
@@ -334,7 +335,7 @@ def normalize_for_tts_en(text: str) -> str:
 
     # 3. Gestione dei dollari semplici (es. $112.57 -> 112.57 dollars)
     text = re.sub(r'\$([0-9.,]+)', r'\1 dollars', text)
-    
+
     # 4. Percentuali (es. 2.16% -> 2.16 percent) - Vitale per le sequenze!
     text = re.sub(r'([0-9.,]+)%', r'\1 percent', text)
 
@@ -346,7 +347,7 @@ def normalize_for_tts_en(text: str) -> str:
     text = re.sub(r'\s+', ' ', text).strip()
 
     return text
-    
+
 
 def briefing_to_text(briefing, lang='it'):
     """Recupera lo script audio pre-generato dall'AI."""
@@ -359,68 +360,85 @@ def briefing_to_text(briefing, lang='it'):
     return text
 
 
+def assemble_audio(voice, sections, lang):
+    """Normalize each paragraph, preserving paragraph and chapter pauses."""
+    combined = AudioSegment.empty()
+    markers = []
+    for index, chapter in enumerate(sections):
+        start_ms = len(combined)
+        paragraphs = [p.strip() for p in chapter['text'].split('\n\n') if p.strip()]
+        for paragraph_index, paragraph in enumerate(paragraphs):
+            normalized = briefing_to_text({f'audio_script_{lang}': paragraph}, lang)
+            p_wav = io.BytesIO()
+            with wave.open(p_wav, 'wb') as wav_file:
+                voice.synthesize(normalized, wav_file, length_scale=1.1 if lang == 'it' else 1.0)
+            p_wav.seek(0)
+            combined += AudioSegment.from_wav(p_wav)
+            if paragraph_index < len(paragraphs) - 1 or index < len(sections) - 1:
+                combined += AudioSegment.silent(duration=600)
+        if len(combined) <= start_ms:
+            raise ValueError('Empty audio chapter')
+        markers.append({'id': chapter['id'], 'title': chapter['title'],
+                        'start_ms': start_ms, 'end_ms': len(combined)})
+    return combined, markers
+
+
 def run():
     if not INPUT_PATH.exists():
-        logger.error(f'❌ File non trovato: {INPUT_PATH}')
-        return None
-
-    with open(INPUT_PATH, 'r', encoding='utf-8') as f:
-        briefing = json.load(f)
-
-    date_str = briefing.get('date', datetime.now(timezone.utc).strftime('%Y-%m-%d'))
+        raise FileNotFoundError(INPUT_PATH)
+    briefing = json.loads(INPUT_PATH.read_text(encoding='utf-8'))
+    date_str = briefing['date']
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
     generated_files = []
-    
     for lang in ['it', 'en']:
-        text = briefing_to_text(briefing, lang=lang)
-        temp_wav = OUTPUT_DIR / f"temp_{lang}.wav"
-        
-        # Nome file: briefing_YYYYMMDD.mp3 per IT, briefing_YYYYMMDD_en.mp3 per EN
-        suffix = f'_{lang}' if lang != 'it' else ''
+        manifest_key = f'audio_manifest_{lang}'
+        briefing.pop(manifest_key, None)
+        # Legacy intermediate files may contain narrative under audio_chapters.
+        legacy = briefing.pop(f'audio_chapters_{lang}', None)
+        sections = validate_narrative(briefing.get(f'audio_narrative_{lang}', legacy), lang)
+        if sections:
+            briefing[f'audio_narrative_{lang}'] = sections
+        text = briefing.get(f'audio_script_{lang}', '')
+        if not sections and isinstance(text, str) and text.strip():
+            sections_for_audio = [{'id': 'legacy', 'title': '', 'text': text}]
+        else:
+            sections_for_audio = sections
+        suffix = '_en' if lang == 'en' else ''
         output_mp3 = OUTPUT_DIR / f'briefing_{date_str.replace("-", "")}{suffix}.mp3'
-
-        model_name = "it_IT-paola-medium.onnx" if lang == 'it' else "en_US-amy-medium.onnx"
-        model_path = MODEL_DIR / model_name
-        
-        if not model_path.exists():
-            logger.warning(f'⚠️ Modello {lang} non trovato in {model_path}, skip.')
-            continue
-
-        logger.info(f'🎙️ Generazione audio ({lang}) con Piper TTS...')
+        temporary = output_mp3.with_suffix('.tmp.mp3')
+        model_path = MODEL_DIR / ('it_IT-paola-medium.onnx' if lang == 'it' else 'en_US-amy-medium.onnx')
         try:
-            voice = PiperVoice.load(str(model_path))
-            
-            # Dividi in paragrafi per inserire silenzi naturali
-            paragraphs = [p.strip() for p in text.split('\n\n') if p.strip()]
-            combined = AudioSegment.empty()
-            silence = AudioSegment.silent(duration=600)
-
-            # IT richiede leggero rallentamento per chiarezza dei numeri.
-            # EN-Amy è naturale a velocità nativa, length_scale 1.1 fa biascicare.
-            length_scale = 1.1 if lang == 'it' else 1.0
-
-            for i, p in enumerate(paragraphs):
-                p_wav = io.BytesIO()
-                with wave.open(p_wav, "wb") as wav_file:
-                    voice.synthesize(p, wav_file, length_scale=length_scale)
-                
-                p_wav.seek(0)
-                p_segment = AudioSegment.from_wav(p_wav)
-                combined += p_segment
-                
-                if i < len(paragraphs) - 1:
-                    combined += silence
-            
-            combined.export(str(output_mp3), format="mp3", bitrate="128k")
-            
-            size_kb = output_mp3.stat().st_size / 1024
-            logger.info(f'✅ Audio {lang} generato: {output_mp3} ({size_kb:.0f} KB)')
+            if not model_path.exists() or not sections_for_audio:
+                raise ValueError('Missing voice model or narration')
+            combined, markers = assemble_audio(PiperVoice.load(str(model_path)), sections_for_audio, lang)
+            combined.export(str(temporary), format='mp3', bitrate='128k')
+            if temporary.stat().st_size == 0:
+                raise ValueError('Empty MP3 export')
+            # Decode the exported artifact: report container duration, not an estimate.
+            duration_ms = len(AudioSegment.from_mp3(str(temporary)))
+            if duration_ms <= 0 or abs(duration_ms - len(combined)) > 500:
+                raise ValueError('MP3 duration does not match assembled audio')
+            if markers:
+                markers[-1]['end_ms'] = min(markers[-1]['end_ms'], duration_ms)
+                if any(m['start_ms'] >= m['end_ms'] or m['end_ms'] > duration_ms for m in markers):
+                    raise ValueError('Chapter outside exported audio')
+            digest = hashlib.sha256(temporary.read_bytes()).hexdigest()
+            temporary.replace(output_mp3)
+            briefing[manifest_key] = {
+                'schema_version': 1, 'date': date_str, 'language': lang,
+                'audio_url': f'audio/{output_mp3.name}', 'duration_ms': duration_ms,
+                'sha256': digest, 'chapters': markers if sections else [],
+            }
             generated_files.append(str(output_mp3))
-        except Exception as e:
-            logger.error(f'❌ Errore Piper ({lang}): {e}')
-
+        except Exception as error:
+            temporary.unlink(missing_ok=True)
+            logger.error('Audio %s generation failed: %s', lang, type(error).__name__)
+    temporary_json = INPUT_PATH.with_suffix('.tmp.json')
+    temporary_json.write_text(json.dumps(briefing, ensure_ascii=False, indent=2), encoding='utf-8')
+    temporary_json.replace(INPUT_PATH)
     return generated_files
 
+
 if __name__ == '__main__':
-    run()
+    import sys
+    sys.exit(0 if len(run()) == 2 else 1)

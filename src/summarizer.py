@@ -18,6 +18,7 @@ import time
 
 load_dotenv()
 
+from audio_chapters import make_it_chapters, translated_chapters
 from groq import Groq
 from llm_routing import (
     GeminiHTTPClient,
@@ -151,7 +152,7 @@ compressione, debasement, stagflazione, risk-on/risk-off,
 soft landing disinflazionistico, repressione finanziaria, mean reverting.
 
 REGOLA LINGUAGGIO GEOPOLITICO:
-- Usare il linguaggio dei fatti, non diplomatico. 
+- Usare il linguaggio dei fatti, non diplomatico.
 - Se gli articoli parlano di "war", "bombing", "conflict" → scrivere "guerra", "conflitto in corso", "bombardamenti"
 - MAI attenuare con "potenziale", "possibile", "rischio di" se l'evento è già in corso
 - Esempio SBAGLIATO: "Iran e Israele coinvolti in un potenziale conflitto"
@@ -214,11 +215,13 @@ Esempio SBAGLIATO: title_en = "Cina avverte l'UE su nuova legge"
 Esempio CORRETTO: title_en = "China warns EU over proposed new law"
 """
 
-    
+
 
 AUDIO_FINANCE_PROMPT = """Sei un conduttore radiofonico finanziario italiano. Stile: conciso, direzionale, zero filler.
 Scrivi lo script audio per la prima parte del podcast (MERCATI TRADIZIONALI E MACRO).
 LUNGHEZZA: 350-500 parole (preferisci brevità e densità. Se non ci sono eventi rilevanti per una sezione, riducila a 2-3 frasi. MAI riempire con contenuto generico o ripetitivo).
+
+FORMATO OUTPUT OBBLIGATORIO: restituisci un oggetto JSON con le seguenti chiavi (tutte stringhe contenenti SOLO il testo narrativo di quella sezione): "apertura", "asia", "occidente", "geopolitica", "macro". Ometti le chiavi se non hai nulla da dire. Niente liste o dizionari annidati.
 
 STRUTTURA:
 1. APERTURA (30 parole max): Saluto professionale secco.
@@ -265,6 +268,8 @@ AUDIO_FINANCE_PROMPT_SATURDAY = """Sei un conduttore radiofonico finanziario ita
 Scrivi lo script audio per la prima parte del podcast del SABATO. Le borse mondiali sono CHIUSE per il weekend: il tuo compito è riportare le CHIUSURE DI VENERDÌ e le probabili ripercussioni delle notizie sull'apertura di LUNEDÌ.
 LUNGHEZZA: 300-450 parole (preferisci brevità e densità).
 
+FORMATO OUTPUT OBBLIGATORIO: restituisci un oggetto JSON con le seguenti chiavi (tutte stringhe): "apertura", "chiusure", "notizie", "macro". Ometti le chiavi se non hai nulla da dire. Niente liste o dizionari annidati.
+
 STRUTTURA:
 1. APERTURA (30 parole max): "Buongiorno, benvenuti al Morning Briefing di Price Alert." + una frase che ricorda che le borse osservano la pausa del weekend.
 2. LE CHIUSURE DI VENERDÌ (150 parole): S&P 500, VIX, DXY, oro, petrolio, US 10Y Yield, BTP 10Y, STOXX 600, FTSE MIB, e Asia (Nikkei, Shanghai).
@@ -301,6 +306,8 @@ NUMERI — REGOLE FORMATO (critico per TTS):
 AUDIO_FINANCE_PROMPT_SUNDAY = """Sei un conduttore radiofonico finanziario italiano. Stile: conciso, direzionale, zero filler.
 Scrivi lo script audio per la prima parte del podcast della DOMENICA: il RECAP SETTIMANALE dei mercati.
 LUNGHEZZA: 400-550 parole.
+
+FORMATO OUTPUT OBBLIGATORIO: restituisci un oggetto JSON con le seguenti chiavi (tutte stringhe): "apertura", "wall_street", "europa", "asia", "commodities", "macro". Ometti le chiavi se non hai nulla da dire. Niente liste o dizionari annidati.
 
 STRUTTURA:
 1. APERTURA (30 parole max): "Buongiorno, benvenuti al Morning Briefing di Price Alert." + annuncio che oggi ripercorriamo la settimana appena conclusa sui mercati.
@@ -343,7 +350,7 @@ AUDIO_CRYPTO_PROMPT = """Sei un analista di digital assets. Stile: conciso, dire
 Scrivi lo script audio per la sezione CRIPTOVALUTE del podcast.
 LUNGHEZZA: 200-300 parole (preferisci brevità. Se non ci sono movimenti significativi, riduci).
 
-FORMATO OUTPUT OBBLIGATORIO: restituisci SOLO un oggetto JSON con la chiave "audio_script_it" il cui valore è una STRINGA di testo continuo (NO liste, NO oggetti nidificati, NO dizionari).
+FORMATO OUTPUT OBBLIGATORIO: restituisci un oggetto JSON con un'unica chiave "crypto" contenente SOLO il testo narrativo della sezione. Niente liste o dizionari annidati.
 
 TRANSITION OBBLIGATORIA (prima frase): "Passiamo ora al comparto degli asset digitali..."
 
@@ -442,7 +449,7 @@ VIETATO:
 PUNTEGGIATURA TTS:
 - Frasi brevi (max 20 parole). Virgole tra clausole. Punto a fine frase.
 
-FORMATO OUTPUT: JSON con chiave "audio_script_it" valore stringa di testo continuo.
+FORMATO OUTPUT: JSON con chiave "close" valore stringa contenente SOLO il testo della chiusura.
 """
 
 
@@ -713,7 +720,7 @@ def run():
             'status': 'released',
             'region': 'EU'
         }
-        
+
         if 'macro_calendar' not in md: md['macro_calendar'] = {}
         md['macro_calendar']['fed_funds'] = {
             'label': 'Tasso Fed Funds',
@@ -778,7 +785,7 @@ def run():
                     val = _format_value(item.get('value', 'N/A'))
                     prev = _format_value(item.get('previous', 'N/A'))
                     date = item.get('release_date', '')
-                    
+
                     try:
                         release_dt = datetime.strptime(date, '%Y-%m-%d').replace(tzinfo=timezone.utc)
                         days_ago = (datetime.now(timezone.utc) - release_dt).days
@@ -788,7 +795,7 @@ def run():
                             freshness = f"rilasciato il {date} ({days_ago} giorni fa — DATO STORICO/CONSOLIDATO)"
                     except Exception:
                         freshness = f"rilasciato {date}"
-                    
+
                     lines.append(f"  {label}: {val} (prec. {prev}) — {freshness}")
                 elif item.get('status') == 'upcoming':
                     next_rel = item.get('next_release', 'N/A')
@@ -880,7 +887,7 @@ def run():
     logger.info("==============================================\n")
 
     articles_json = json.dumps(articles_slim, ensure_ascii=False)
-    
+
     # Iniezione Ground Truth Macro
     macro_truth_str = f"""
 [MACRO GROUND TRUTH - DATA REALE AL {datetime.now().strftime('%d %B %Y')}]
@@ -889,7 +896,7 @@ def run():
 - NON affermare che nell'ultima riunione i tassi siano stati alzati/tagliati/lasciati invariati se le notizie fornite non lo dicono esplicitamente.
 [FINE GROUND TRUTH]
 """
-    
+
     user_prompt = f"{macro_truth_str}\n\n{market_context}ARTICOLI DA ANALIZZARE ({len(articles_slim)} totali):\n{articles_json}"
 
     if history:
@@ -903,7 +910,7 @@ def run():
                 f"\n\nHISTORY TITOLI GIÀ PUBBLICATI (EVITA RIPETIZIONI):\n"
                 + "\n".join(f"- {t}" for t in history_titles[:20])
             )
-    
+
     # Context variables
     now = datetime.now(timezone.utc)
     is_monday = now.weekday() == 0
@@ -1106,16 +1113,18 @@ def run():
 
         # --- GENERAZIONE AUDIO SCRIPT ---
         today_str = datetime.now(timezone.utc).strftime('%d %B %Y')
-        
+
         # Filtro articoli per weekly
         weekly_it = [a for a in articles_slim if a.get('source') in weekly_sources]
         other_it = [a for a in articles_slim if a.get('source') not in weekly_sources]
         news_it = weekly_it + other_it
-        
+
         # Helper per chiamate audio
-        def get_audio_part(system_p, user_p, lang_key, models, max_tokens, purpose, fallback_text=None):
-            # Forza JSON nel prompt utente
-            full_user_p = f"{user_p}\n\nREQUISITO CORE: Restituisci SOLO un oggetto JSON con la chiave '{lang_key}'."
+        def get_audio_part(system_p, user_p, models, max_tokens, purpose, fallback_text=None, enforce_key=None):
+            req = "\n\nREQUISITO CORE: Restituisci SOLO un oggetto JSON."
+            if enforce_key:
+                req = f"\n\nREQUISITO CORE: Restituisci SOLO un oggetto JSON con la chiave '{enforce_key}'."
+            full_user_p = f"{user_p}{req}"
             completion_args = dict(
                 messages=[
                     {'role': 'system', 'content': system_p},
@@ -1140,8 +1149,10 @@ def run():
                     '⚠️ Audio purpose=%s non disponibile dopo retry e fallback: %s. Uso chiusura deterministica.',
                     purpose, error,
                 )
-                return {lang_key: fallback_text}
-            
+                if enforce_key:
+                    return {enforce_key: fallback_text}
+                return {"text": fallback_text}
+
         def clean_script(script_obj, key):
             """Estrae il testo pulito dallo script, gestendo strutture dict/list annidate dall'LLM."""
             if isinstance(script_obj, list) and len(script_obj) > 0:
@@ -1189,11 +1200,11 @@ def run():
 
         # 1. ITALIANO
         logger.info('🎙️ Generazione Audio IT (3 segmenti)...')
-        
+
         # Access sentiment safely
         sentiment_obj = briefing.get('sentiment', {})
         sentiment_label = _safe_get(sentiment_obj, 'label', 'neutral')
-        
+
         # Part A: Finance (SENZA dati crypto per evitare ripetizioni)
         # Sabato: chiusure di venerdì + ripercussioni per lunedì. Domenica: recap settimanale.
         if is_sunday:
@@ -1214,12 +1225,11 @@ def run():
         it_finance = get_audio_part(
             finance_prompt,
             it_finance_user,
-            'audio_script_it',
             models=MODEL_AUDIO_FINANCE,
             max_tokens=1000,
             purpose='audio_it_finance',
         )
-        
+
         # Part B: Crypto (SOLO dati crypto, niente dati tradizionali)
         # Weekend: il flusso giornaliero è fermo a venerdì → si cita il CUMULATIVO
         # della settimana di trading conclusa e il confronto con quella precedente
@@ -1248,35 +1258,37 @@ def run():
         it_crypto = get_audio_part(
             AUDIO_CRYPTO_PROMPT,
             it_crypto_user,
-            'audio_script_it',
             models=MODEL_AUDIO_CRYPTO,
             max_tokens=1000,
             purpose='audio_it_crypto',
+            enforce_key='crypto'
         )
-        
+
         # Part C: Close (passa macro context per evitare hallucination su dati in uscita)
         it_close = get_audio_part(
             AUDIO_CLOSE_PROMPT,
             f"Genera chiusura per podcast finanziario italiano.\n\nCONTESTO:{macro_today_line}",
-            'audio_script_it',
             models=MODEL_AUDIO_CLOSE,
             max_tokens=300,
             purpose='audio_it_close',
+            enforce_key='close',
             fallback_text=(
                 'Nei prossimi giorni sarà importante seguire l’evoluzione dei mercati e le notizie di maggiore rilievo. '
                 'Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. '
                 'Grazie per l’attenzione e a domani.'
             ),
         )
-        
-        # Merge IT
-        briefing['audio_script_it'] = f"{clean_script(it_finance, 'audio_script_it')}\n\n{clean_script(it_crypto, 'audio_script_it')}\n\n{clean_script(it_close, 'audio_script_it')}"
+
+        chapters_it = make_it_chapters(it_finance, it_crypto, it_close,
+                                       saturday=is_saturday, sunday=is_sunday)
+        briefing['audio_narrative_it'] = chapters_it
+        briefing['audio_script_it'] = "\n\n".join(c['text'] for c in chapters_it)
 
         # 2. ENGLISH — traduzione da IT per garantire coerenza di struttura, dati e lunghezza
         logger.info('🎙️ Generazione Audio EN (traduzione da IT)...')
 
-        translate_prompt = """You are a professional financial radio translator. Translate the Italian podcast script to English preserving:
-- Identical structure, section order, and approximate length
+        translate_prompt = """You are a professional financial radio translator. Translate the JSON array of Italian podcast chapters to English.
+Preserve the exact array structure. For each object in the array, keep the 'id' identical, translate the 'title' and the 'text' to English preserving:
 - All numbers, percentages, and tickers exactly as in the source
 - Same narrative tone (concise, directional)
 
@@ -1288,18 +1300,22 @@ NUMBER FORMATTING FOR EN TTS (critical):
 - Opening must be "Good morning, welcome to the Price Alert Morning Briefing."
 - Keep the transition "Let's pivot to the cryptocurrency markets..." where the Italian has "Passiamo ora al comparto degli asset digitali..."
 
-Return ONLY a JSON object with key "audio_script_en" containing the full English translation as a single string."""
+FORMATO OUTPUT OBBLIGATORIO: restituisci SOLO un oggetto JSON con la chiave "audio_chapters_en" contenente l'array di oggetti JSON tradotti. Niente liste nidificate fuori da quella chiave."""
 
-        en_translate_user = f"ITALIAN SCRIPT TO TRANSLATE:\n\n{briefing['audio_script_it']}"
+        en_translate_user = f"ITALIAN CHAPTERS TO TRANSLATE:\n\n{json.dumps(chapters_it, ensure_ascii=False, indent=2)}"
         en_full = get_audio_part(
             translate_prompt,
             en_translate_user,
-            'audio_script_en',
             models=MODEL_TRANSLATION,
             max_tokens=1600,
             purpose='audio_en_translation',
+            enforce_key='audio_chapters_en'
         )
-        briefing['audio_script_en'] = clean_script(en_full, 'audio_script_en')
+        chapters_en, english_text = translated_chapters(en_full, chapters_it)
+        if not english_text:
+            raise ValueError('English audio translation is empty')
+        briefing['audio_narrative_en'] = chapters_en
+        briefing['audio_script_en'] = english_text
 
         # Merge article_impacts negli articoli raw
         article_impacts = briefing.pop('article_impacts', [])
