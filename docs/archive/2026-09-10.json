@@ -2,13 +2,13 @@
   "date": "2026-09-10",
   "sentiment": {
     "label": "risk_off",
-    "score": 3,
-    "reason_it": "Il VIX a 16,49 indica un mercato poco difensivo, ma l'S&P 500 è sceso del -0,48% e il DXY è leggermente più forte a 98,81 (+0,04%). Il TLT 20Y è in calo del -0,57% (tassi in rialzo) e il rendimento del 10Y USA è salito al 4,83% (+0,65%). L'aumento del Brent a $102,35 (+1,13%) e la pressione geopolitica in Ucraina e sull'Iran confermano un bias bearish, spingendo il sentiment verso risk‑off.",
-    "reason_en": "The VIX at 16.49 signals low defensive posture, yet the S&P 500 fell by -0.48% and the DXY edged higher to 98.81 (+0.04%). The 20‑year TLT dropped by -0.57% (rates rising) and the US 10Y yield rose to 4.83% (+0.65%). Brent climbed to $102.35 (+1.13%) while geopolitical tension in Ukraine and Iran adds bearish pressure, steering sentiment to risk‑off."
+    "score": 5,
+    "reason_it": "Il VIX a 17,25 (sotto 18) indica un mercato poco difensivo, ma l'S&P 500 è sceso del 0,48% e il DXY è in rialzo del 0,39%, segnale di pressione sui risk assets. Il Brent è in forte spike (+4,28%) e il TLT è in calo (-0,57%), fattori che rinforzano il bias bearish. Inoltre la guerra in Ucraina e le tensioni sullo shipping mediorientale aggiungono due punti di rischio geopolitico, portando lo score a 5.",
+    "reason_en": "The VIX at 17.25 (below 18) suggests a non‑defensive market, yet the S&P 500 fell 0.48% and the DXY rose 0.39%, pressuring risk assets. Brent crude is spiking (+4.28%) and the 20‑yr TLT slipped (-0.57%), both reinforcing a bearish bias. Ongoing war in Ukraine and heightened Middle‑East shipping risks add two geopolitics points, bringing the score to 5."
   },
   "market_impact_summary": {
-    "it": "Equity: S&P 500 -0,48%, STOXX 600 -1,69% e FTSE MIB +0,25% mostrano divergenza tra US e Europa. Fixed income: TLT -0,57% e US 10Y a 4,83% (+0,65%) indicano compressione dei rendimenti. Commodities: Brent $102,35 (+1,13%) spinge il rischio inflazionistico, mentre l'oro a $4.437,90 (+0,50%) resta in salita con tono misto. Crypto: BTC -1,34% e ETH -1,02% riflettono pressione dal rialzo del petrolio e dalle tensioni geopolitiche.",
-    "en": "Equities: S&P 500 -0.48%, STOXX 600 -1.69% and FTSE MIB +0.25% show a US‑Europe split. Fixed income: TLT -0.57% and US 10Y at 4.83% (+0.65%) signal yield compression. Commodities: Brent $102.35 (+1.13%) adds inflationary risk, while gold at $4,437.90 (+0.50%) stays higher with a mixed tone. Crypto: BTC -1.34% and ETH -1.02% reflect pressure from rising oil and geopolitical tensions."
+    "it": "Equity europee sono in ribasso: STOXX 600 -2,09% e FTSE MIB -0,20%. Il mercato obbligazionario USA mostra compressione con TLT -0,57% e rendimento 10Y a 4,88% (+1,03%). Il Brent sale a $105,54 (+4,28%) mentre il gold scende a $4.377 (-0,88%). Il DXY a 99,15 (+0,39%) indica forza del dollaro, penalizzando le valute emergenti e gli asset rischiosi.",
+    "en": "European equities are down: STOXX 600 -2.09% and FTSE MIB -0.20%. US bonds show compression with TLT -0.57% and the 10‑yr yield at 4.88% (+1.03%). Brent climbs to $105.54 (+4.28%) while gold falls to $4,377 (-0.88%). The DXY at 99.15 (+0.39%) signals a strong dollar, hurting emerging‑market currencies and risk assets."
   },
   "audio_narrative_it": [
     {
@@ -24,30 +24,30 @@
     {
       "id": "occidente",
       "title": "Mercati Occidentali",
-      "text": "L'S&P 500 è in calo dello 0,48%. Il VIX è in rialzo dello 0,18%. Il Dollar Index (DXY) è in rialzo dello 0,04%. L'oro è in rialzo dello 0,50%, sopra i quattro mila quattrocentotrenta sette dollari l'oncia. Il Brent è in rialzo dell'1,13%, sopra i cento due dollari al barile. Il rendimento US 10Y è in rialzo dello 0,65%, a quattro virgola ottantatré percento."
+      "text": "L'S&P 500 è in calo dello 0,48%. Il VIX è in rialzo del 4,80%, segnale di volatilità. Il Dollar Index (DXY) è in rialzo dello 0,39%. L'oro è in calo dello 0,88%. Il Brent è in rialzo del 4,28%. Il rendimento US 10Y è in rialzo dell'1,03%."
     },
     {
       "id": "geopolitica",
       "title": "Geopolitica",
-      "text": "L'avvertimento di Eurasia Group su una \"recessione geopolitica\" in Asia alimenta il sentiment risk‑off. La crescente tensione legata al surplus commerciale cinese aggiunge pressione sui mercati emergenti."
+      "text": "La crescita del surplus commerciale cinese assume una sfumatura geopolitica, aumentando le pressioni sui flussi commerciali globali. L'Eurasia Group avverte di una \"recessione geopolitica\" in Asia, con potenziali ripercussioni sui mercati emergenti."
     },
     {
       "id": "macro",
       "title": "Macro ed Economia",
-      "text": "È previsto l'annuncio del tasso BCE sui depositi; nessun dato macro rilevante in uscita oggi."
+      "text": "EU Tasso BCE (Depositi) è l'unico dato macro in uscita oggi; nessun altro rilascio previsto."
     },
     {
       "id": "crypto",
       "title": "Criptovalute",
-      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si muove al -1,34%, rimanendo sopra gli ottantamila dollari. I flussi ETF giornalieri mostrano un ingresso netto di 174,6 milioni di dollari, confermando interesse istituzionale. Ethereum scende al -1,02%, Solana al -2,52% e BNB al -4,54%, tutti oltre il 2% di variazione. Il sentimento di mercato è in fase di “Greed” con un indice di 69, suggerendo cautela sugli investitori."
+      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si muove in ribasso, con una variazione di -3,08% e un flusso ETF di +174,6 milioni di dollari. Il prezzo si mantiene sotto gli ottantamila dollari, non riuscendo a recuperare la soglia di ottantamila. Ethereum scende di -3,01%, raggiungendo duemilatrecentocinquanta dollari. Solana registra una perdita di -4,53%, a novanta nove virgola novanta tre dollari. BNB diminuisce di -5,16%, a settecentonovantuno virgola ottantasei dollari. Fear & Greed Index è a 69, classificato come Greed, suggerendo cautela sugli investitori."
     },
     {
       "id": "close",
       "title": "Chiusura",
-      "text": "Oggi monitoriamo il tasso BCE sui depositi. Attenzione all’andamento dei tassi di interesse. Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert"
+      "text": "Oggi monitoriamo il tasso BCE sui depositi. L’andamento di questa misura è cruciale per le politiche monetarie europee. Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert"
     }
   ],
-  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert.\n\nIl Nikkei ha chiuso in rialzo dello 0,20%, Shanghai in calo dello 0,43%.\n\nL'S&P 500 è in calo dello 0,48%. Il VIX è in rialzo dello 0,18%. Il Dollar Index (DXY) è in rialzo dello 0,04%. L'oro è in rialzo dello 0,50%, sopra i quattro mila quattrocentotrenta sette dollari l'oncia. Il Brent è in rialzo dell'1,13%, sopra i cento due dollari al barile. Il rendimento US 10Y è in rialzo dello 0,65%, a quattro virgola ottantatré percento.\n\nL'avvertimento di Eurasia Group su una \"recessione geopolitica\" in Asia alimenta il sentiment risk‑off. La crescente tensione legata al surplus commerciale cinese aggiunge pressione sui mercati emergenti.\n\nÈ previsto l'annuncio del tasso BCE sui depositi; nessun dato macro rilevante in uscita oggi.\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si muove al -1,34%, rimanendo sopra gli ottantamila dollari. I flussi ETF giornalieri mostrano un ingresso netto di 174,6 milioni di dollari, confermando interesse istituzionale. Ethereum scende al -1,02%, Solana al -2,52% e BNB al -4,54%, tutti oltre il 2% di variazione. Il sentimento di mercato è in fase di “Greed” con un indice di 69, suggerendo cautela sugli investitori.\n\nOggi monitoriamo il tasso BCE sui depositi. Attenzione all’andamento dei tassi di interesse. Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert",
+  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert.\n\nIl Nikkei ha chiuso in rialzo dello 0,20%, Shanghai in calo dello 0,43%.\n\nL'S&P 500 è in calo dello 0,48%. Il VIX è in rialzo del 4,80%, segnale di volatilità. Il Dollar Index (DXY) è in rialzo dello 0,39%. L'oro è in calo dello 0,88%. Il Brent è in rialzo del 4,28%. Il rendimento US 10Y è in rialzo dell'1,03%.\n\nLa crescita del surplus commerciale cinese assume una sfumatura geopolitica, aumentando le pressioni sui flussi commerciali globali. L'Eurasia Group avverte di una \"recessione geopolitica\" in Asia, con potenziali ripercussioni sui mercati emergenti.\n\nEU Tasso BCE (Depositi) è l'unico dato macro in uscita oggi; nessun altro rilascio previsto.\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si muove in ribasso, con una variazione di -3,08% e un flusso ETF di +174,6 milioni di dollari. Il prezzo si mantiene sotto gli ottantamila dollari, non riuscendo a recuperare la soglia di ottantamila. Ethereum scende di -3,01%, raggiungendo duemilatrecentocinquanta dollari. Solana registra una perdita di -4,53%, a novanta nove virgola novanta tre dollari. BNB diminuisce di -5,16%, a settecentonovantuno virgola ottantasei dollari. Fear & Greed Index è a 69, classificato come Greed, suggerendo cautela sugli investitori.\n\nOggi monitoriamo il tasso BCE sui depositi. L’andamento di questa misura è cruciale per le politiche monetarie europee. Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert",
   "audio_narrative_en": [
     {
       "id": "intro",
@@ -62,38 +62,38 @@
     {
       "id": "occidente",
       "title": "Western Markets",
-      "text": "The S&P 500 is down 0.48%. The VIX is up 0.18%. The Dollar Index (DXY) is up 0.04%. Gold is up 0.50%, above $4,407 per ounce. Brent is up 1.13%, above $102 per barrel. The US 10Y yield is up 0.65%, at 4.83%."
+      "text": "The S&P 500 is down 0.48%. The VIX is up 4.80%, a volatility signal. The Dollar Index (DXY) is up 0.39%. Gold is down 0.88%. Brent is up 4.28%. The US 10Y yield is up 1.03%."
     },
     {
       "id": "geopolitica",
       "title": "Geopolitics",
-      "text": "Eurasia Group’s warning of a \"geopolitical recession\" in Asia fuels risk‑off sentiment. Rising tension over China’s trade surplus adds pressure on emerging markets."
+      "text": "The growth of China’s trade surplus takes on a geopolitical hue, increasing pressure on global trade flows. The Eurasia Group warns of a \"geopolitical recession\" in Asia, with potential repercussions for emerging markets."
     },
     {
       "id": "macro",
       "title": "Macroeconomics",
-      "text": "The ECB deposit rate announcement is expected; no major macro data releases today."
+      "text": "EU BCE Deposit Rate is the only macro data released today; no other releases are scheduled."
     },
     {
       "id": "crypto",
       "title": "Cryptocurrencies",
-      "text": "Let's pivot to the cryptocurrency markets. Bitcoin is down 1.34%, staying above $80,000. Daily ETF flows show a net inflow of $174.6 million, confirming institutional interest. Ethereum is down 1.02%, Solana down 2.52% and BNB down 4.54%, all over 2% change. Market sentiment is in a “Greed” phase with an index of 69, suggesting investor caution."
+      "text": "Let's pivot to the cryptocurrency markets. Bitcoin is down 3.08% with an ETF flow of +$174.6 million. The price stays below $80,000, failing to recover the $80,000 threshold. Ethereum falls 3.01%, reaching $2,345. Solana drops 4.53%, at $99.93. BNB declines 5.16%, to $781.86. The Fear & Greed Index is at 69, classified as Greed, suggesting caution for investors."
     },
     {
       "id": "close",
       "title": "Closing",
-      "text": "Today we monitor the ECB deposit rate. Watch the interest rate trend. For deeper coverage of today’s topics, find the full articles in the Spotlight Stories section on our platform. A greeting from Price Alert"
+      "text": "Today we monitor the BCE deposit rate. The trend of this measure is crucial for European monetary policy. To delve deeper into today’s topics, find the full articles in the Featured Stories section on our platform. A greeting from Price Alert"
     }
   ],
-  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing.\n\nThe Nikkei closed up 0.20%, Shanghai down 0.43%.\n\nThe S&P 500 is down 0.48%. The VIX is up 0.18%. The Dollar Index (DXY) is up 0.04%. Gold is up 0.50%, above $4,407 per ounce. Brent is up 1.13%, above $102 per barrel. The US 10Y yield is up 0.65%, at 4.83%.\n\nEurasia Group’s warning of a \"geopolitical recession\" in Asia fuels risk‑off sentiment. Rising tension over China’s trade surplus adds pressure on emerging markets.\n\nThe ECB deposit rate announcement is expected; no major macro data releases today.\n\nLet's pivot to the cryptocurrency markets. Bitcoin is down 1.34%, staying above $80,000. Daily ETF flows show a net inflow of $174.6 million, confirming institutional interest. Ethereum is down 1.02%, Solana down 2.52% and BNB down 4.54%, all over 2% change. Market sentiment is in a “Greed” phase with an index of 69, suggesting investor caution.\n\nToday we monitor the ECB deposit rate. Watch the interest rate trend. For deeper coverage of today’s topics, find the full articles in the Spotlight Stories section on our platform. A greeting from Price Alert",
+  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing.\n\nThe Nikkei closed up 0.20%, Shanghai down 0.43%.\n\nThe S&P 500 is down 0.48%. The VIX is up 4.80%, a volatility signal. The Dollar Index (DXY) is up 0.39%. Gold is down 0.88%. Brent is up 4.28%. The US 10Y yield is up 1.03%.\n\nThe growth of China’s trade surplus takes on a geopolitical hue, increasing pressure on global trade flows. The Eurasia Group warns of a \"geopolitical recession\" in Asia, with potential repercussions for emerging markets.\n\nEU BCE Deposit Rate is the only macro data released today; no other releases are scheduled.\n\nLet's pivot to the cryptocurrency markets. Bitcoin is down 3.08% with an ETF flow of +$174.6 million. The price stays below $80,000, failing to recover the $80,000 threshold. Ethereum falls 3.01%, reaching $2,345. Solana drops 4.53%, at $99.93. BNB declines 5.16%, to $781.86. The Fear & Greed Index is at 69, classified as Greed, suggesting caution for investors.\n\nToday we monitor the BCE deposit rate. The trend of this measure is crucial for European monetary policy. To delve deeper into today’s topics, find the full articles in the Featured Stories section on our platform. A greeting from Price Alert",
   "market_data_raw": {
     "dxy": {
-      "value": "98.81",
-      "change": "+0.04%"
+      "value": "99.15",
+      "change": "+0.39%"
     },
     "eur_usd": {
       "value": "1.16",
-      "change": "+0.11%"
+      "change": "-0.17%"
     },
     "sp500": {
       "value": "7636.36",
@@ -108,36 +108,36 @@
       "change": "-0.77%"
     },
     "vix": {
-      "value": "16.49",
-      "change": "+0.18%"
+      "value": "17.25",
+      "change": "+4.80%"
     },
     "tlt": {
       "value": "81.73",
       "change": "-0.57%"
     },
     "us_10y": {
-      "value": "4.83%",
-      "change": "+0.65%"
+      "value": "4.88%",
+      "change": "+1.03%"
     },
     "gold": {
-      "value": "$4437.90/oz",
-      "change": "+0.50%"
+      "value": "$4377.00/oz",
+      "change": "-0.88%"
     },
     "btcusd": {
-      "value": "$77,979",
-      "change": "-0.36%"
+      "value": "$77,093",
+      "change": "-1.49%"
     },
     "oil_brent": {
-      "value": "$102.35",
-      "change": "+1.13%"
+      "value": "$105.54",
+      "change": "+4.28%"
     },
     "stoxx_600": {
-      "value": "63.83",
-      "change": "-1.69%"
+      "value": "63.57",
+      "change": "-2.09%"
     },
     "ftse_mib": {
-      "value": "52,005",
-      "change": "+0.25%"
+      "value": "51,772",
+      "change": "-0.20%"
     },
     "nikkei": {
       "value": "65,271",
@@ -199,20 +199,20 @@
       },
       "prices": {
         "BTC": {
-          "value": "$77,940",
-          "change": "-1.34%"
+          "value": "$77,110",
+          "change": "-3.08%"
         },
         "ETH": {
-          "value": "$2,467",
-          "change": "-1.02%"
+          "value": "$2,435",
+          "change": "-3.01%"
         },
         "SOL": {
-          "value": "$101.04",
-          "change": "-2.52%"
+          "value": "$99.93",
+          "change": "-4.53%"
         },
         "BNB": {
-          "value": "$717.56",
-          "change": "-4.54%"
+          "value": "$711.86",
+          "change": "-5.16%"
         }
       }
     },
@@ -350,6 +350,28 @@
   },
   "articles": [
     {
+      "title": "Can the UK escape the public debt trap?",
+      "url": "https://www.chathamhouse.org/2026/09/can-uk-escape-public-debt-trap",
+      "source": "Chatham House",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Can the UK escape the public debt trap? Expert comment jon.wallace 10 September 2026 The UK’s mix of high fiscal deficits, rising bond yields, anaemic growth, high taxes and an impatient electorate can only be solved with politically brave choices. All major advanced economies have seen rising long-term bond yields over the past year. But with the ten-year gilt yield at 5.2 per cent on 9 Sept 2026, the UK’s long-term rates are the highest in the G7. US ten-year yields are 4.8 per cent, Germany’s are 3.4 per cent and Japan’s 2.9 per cent. Reasons for the UK’s relative weakness The UK’s relatively high long-term interest rate reflects in part its lack of other economies’ advantages. Sterling does not enjoy the US dollar’s global reserve asset role. Gilts do not benefit from the strong home c",
+      "date": "2026-09-10T09:11:37+00:00",
+      "relevance_score": 1.0,
+      "title_it": "Il Regno Unito può sfuggire alla trappola del debito pubblico?",
+      "title_en": "Can the UK escape the public debt trap?",
+      "summary_it": "Il Regno Unito affronta deficit fiscali elevati, rendimenti obbligazionari in aumento e crescita economica debole, creando rischi significativi per la stabilità finanziaria.",
+      "summary_en": "The UK faces high fiscal deficits, rising bond yields, and weak growth, creating significant risks for financial stability.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "UK Gilts",
+          "GBP"
+        ]
+      }
+    },
+    {
       "title": "Canada's retaliatory tariffs put Trump's trade strategy to the test",
       "url": "https://www.chathamhouse.org/2026/09/canadas-retaliatory-tariffs-put-trumps-trade-strategy-test",
       "source": "Chatham House",
@@ -359,15 +381,16 @@
       "date": "2026-09-09T15:25:33+00:00",
       "relevance_score": 1.0,
       "title_it": "Le tariffe ritorsive del Canada mettono alla prova la strategia commerciale di Trump",
-      "title_en": "Canada's retaliatory tariffs test Trump's trade strategy",
-      "summary_it": "Le tariffe ritorsive canadesi sfidano la strategia commerciale di Trump, testando la forza economica e politica.",
-      "summary_en": "Canadian retaliatory tariffs challenge Trump's trade strategy, testing economic and political strength.",
+      "title_en": "Canada's retaliatory tariffs put Trump's trade strategy to the test",
+      "summary_it": "La guerra commerciale USA-Canada mette a dura prova la forza economica e politica, con tariffe ritorsive che minacciano la stabilità dei mercati nordamericani.",
+      "summary_en": "The US-Canada trade war tests economic and political strength, with retaliatory tariffs threatening North American market stability.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "high",
         "assets_affected": [
           "S&P 500",
-          "USD/CAD"
+          "CAD",
+          "USD"
         ]
       }
     },
@@ -382,14 +405,14 @@
       "relevance_score": 1.0,
       "title_it": "Lo stato del partenariato di sicurezza transatlantico",
       "title_en": "The state of the transatlantic security partnership",
-      "summary_it": "Le politiche della seconda amministrazione Trump hanno creato tensioni nelle relazioni transatlantiche, influenzando gli alleati degli Stati Uniti.",
-      "summary_en": "Second Trump administration policies have strained transatlantic relations, affecting US allies and security cooperation.",
+      "summary_it": "Le politiche della seconda amministrazione Trump hanno creato tensioni nelle relazioni transatlantiche, influenzando negativamente gli alleati degli Stati Uniti e la stabilità geopolitica.",
+      "summary_en": "Second Trump administration policies have strained transatlantic relations, negatively impacting US allies and geopolitical stability.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "medium",
         "assets_affected": [
-          "EUR/USD",
-          "European Equities"
+          "EUR",
+          "US Defense Stocks"
         ]
       }
     },
@@ -402,10 +425,10 @@
       "snippet": "Trade wonks like to say that trade is like water; it always finds new ways. Is that really true? The last several years have been particularly challenging for global trade, beset by tariffs, wars, subsidies, export restrictions, and new versions of industrial policy. At the same time, new trade agreements have been signed. Robert Staiger, chief economist at the World Trade Organization (WTO), will present the WTO's 2026 World Trade Report, followed by a discussion with trade practitioners from the United States, China, and the European Union. What are the most important trends and…",
       "date": "2026-09-16T13:45:00+00:00",
       "relevance_score": 1.0,
-      "title_it": "Lo stato del commercio globale: tendenze e sfide",
-      "title_en": "The state of global trade: trends and challenges",
-      "summary_it": "Il commercio globale affronta sfide significative negli ultimi anni, nonostante la capacità di trovare nuove vie.",
-      "summary_en": "Global trade faces significant challenges in recent years, despite its ability to find new ways.",
+      "title_it": "Lo stato del commercio globale: individuare tendenze e sfide",
+      "title_en": "The state of play for global trade: Spotting trends and challenges",
+      "summary_it": "Il commercio globale affronta sfide significative negli ultimi anni, con barriere protezioniste e tensioni geopolitiche che ostacolano la crescita economica internazionale.",
+      "summary_en": "Global trade faces significant challenges in recent years, with protectionist barriers and geopolitical tensions hindering international economic growth.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "medium",
@@ -424,15 +447,15 @@
       "snippet": "Partners are faced with a model that combines export-led growth with tech supremacy",
       "date": "2026-09-09T10:00:08+00:00",
       "relevance_score": 0.6000000000000001,
-      "title_it": "L'enorme surplus commerciale della Cina ha una svolta geopolitica",
-      "title_en": "China's giant trade surplus has an increasingly geopolitical twist",
-      "summary_it": "Il modello cinese combina crescita esportativa e supremazia tecnologica, creando tensioni geopolitiche con i partner commerciali.",
-      "summary_en": "China's model combines export-led growth with tech supremacy, creating geopolitical tensions with trading partners.",
+      "title_it": "L'enorme surplus commerciale della Cina ha una svolta sempre più geopolitica",
+      "title_en": "China’s giant trade surplus has an increasingly geopolitical twist",
+      "summary_it": "Il modello cinese combina crescita esportatrice e supremazia tecnologica, creando tensioni geopolitiche che potrebbero portare a ulteriori sanzioni e instabilità nei mercati globali.",
+      "summary_en": "China's model combines export-led growth and tech supremacy, creating geopolitical tensions that could lead to further sanctions and global market instability.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "medium",
         "assets_affected": [
-          "USD/CNY",
+          "CNY",
           "Tech Stocks"
         ]
       }
@@ -448,36 +471,15 @@
       "relevance_score": 0.6,
       "title_it": "Il Giappone deve alzare i tassi, dice il banchiere centrale",
       "title_en": "Japan must raise rates, central banker says",
-      "summary_it": "I commenti falchi della BoJ seguono le pressioni di Bessent e la volatilità nei mercati valutarie e obbligazionari.",
-      "summary_en": "Hawkish BoJ comments follow Bessent's pressure and volatility in currency and bond markets.",
+      "summary_it": "I commenti falchi della Banca del Giappone seguono le pressioni di Scott Bessent e la volatilità nei mercati delle valute e dei bond.",
+      "summary_en": "Hawkish BoJ comments follow pressure from Scott Bessent and volatility in currency and bond markets.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "high",
         "assets_affected": [
-          "USD/JPY",
-          "Japanese Bonds"
-        ]
-      }
-    },
-    {
-      "title": "What to learn from Russia's State Duma elections",
-      "url": "https://www.chathamhouse.org/events/all/standard-event/what-learn-russias-state-duma-elections",
-      "source": "Chatham House",
-      "tier": 2,
-      "category": "macro_economia",
-      "snippet": "What to learn from Russia's State Duma elections 22 September 2026 — 17:00 TO 18:00 BST Anonymous (not verified) 9 September 2026 Chatham House and Online Following Russia’s parliamentary vote, experts assess what the results reveal about Russia’s future direction and the durability of President Putin’s system. Following Russia’s parliamentary vote, experts assess what the results reveal about Russia’s future direction and the durability of President Putin’s system. Russia’s September State Duma elections will take place as the war against Ukraine continues to reshape the country’s politics, institutions and elite structures. The elections are unlikely to produce major political change, but they offer a valuable window into the evolution of Vladimir Putin’s system, revealing important tren",
-      "date": "2026-09-09T09:52:15+00:00",
-      "relevance_score": 0.8,
-      "title_it": "Cosa imparare dalle elezioni della Duma di Stato russa",
-      "title_en": "What to learn from Russia's State Duma elections",
-      "summary_it": "Le elezioni della Duma russa offrono spunti sulla stabilità politica interna e le implicazioni geopolitiche future.",
-      "summary_en": "Russia's State Duma elections offer insights into internal political stability and future geopolitical implications.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "low",
-        "assets_affected": [
-          "RUB",
-          "Russian Equities"
+          "JPY",
+          "Japanese Bonds",
+          "Nikkei 225"
         ]
       }
     },
@@ -488,18 +490,18 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "Asia faces 'geopolitical recession,' Eurasia Group warns",
-      "date": "2026-09-10T10:04:25.899500+00:00",
+      "date": "2026-09-10T12:47:01.962277+00:00",
       "relevance_score": 0.8,
       "title_it": "L'Asia affronta una 'recessione geopolitica', avverte Eurasia Group",
       "title_en": "Asia faces 'geopolitical recession,' Eurasia Group warns",
-      "summary_it": "Eurasia Group avverte che l'Asia affronta una recessione geopolitica, con rischi crescenti per la crescita economica regionale.",
-      "summary_en": "Eurasia Group warns Asia faces a geopolitical recession, with growing risks to regional economic growth.",
+      "summary_it": "Eurasia Group avverte che l'Asia affronta una recessione geopolitica, con tensioni regionali che minacciano la crescita economica e la stabilità dei mercati finanziari asiatici.",
+      "summary_en": "Eurasia Group warns Asia faces a geopolitical recession, with regional tensions threatening economic growth and Asian financial market stability.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "high",
         "assets_affected": [
           "Asian Equities",
-          "USD/JPY"
+          "Gold"
         ]
       }
     },
@@ -512,16 +514,16 @@
       "snippet": "Christine Lagarde: The choice facing Europeans",
       "date": "2026-09-09T17:00:00+00:00",
       "relevance_score": 0.4,
-      "title_it": "Christine Lagarde: La scelta che si pone agli europei",
+      "title_it": "Christine Lagarde: la scelta che si pone agli europei",
       "title_en": "Christine Lagarde: The choice facing Europeans",
-      "summary_it": "Christine Lagarde discute le scelte critiche per l'Europa in un contesto economico e politico complesso.",
-      "summary_en": "Christine Lagarde discusses critical choices for Europe in a complex economic and political context.",
+      "summary_it": "Christine Lagarde discute le scelte critiche per l'Europa, sottolineando l'importanza della stabilità monetaria e delle politiche fiscali per affrontare le sfide economiche attuali.",
+      "summary_en": "Christine Lagarde discusses critical choices for Europe, emphasizing the importance of monetary stability and fiscal policies to address current economic challenges.",
       "market_impact": {
         "direction": "mixed",
         "magnitude": "low",
         "assets_affected": [
-          "EUR/USD",
-          "European Bonds"
+          "EUR",
+          "Eurozone Bonds"
         ]
       }
     },
@@ -536,14 +538,14 @@
       "relevance_score": 0.6,
       "title_it": "La strana trasformazione della linea del fronte in Ucraina",
       "title_en": "The Strange Transformation of the Front Line in Ukraine",
-      "summary_it": "Un volontario descrive l'ingresso in una linea di alberi strategica, evidenziando le dinamiche del conflitto in Ucraina.",
-      "summary_en": "A volunteer describes entering a strategic tree line, highlighting dynamics of the conflict in Ukraine.",
+      "summary_it": "Un volontario descrive l'ingresso in una linea di alberi chiamata CHAI, evidenziando le dure condizioni e le dinamiche cambiate del conflitto in Ucraina.",
+      "summary_en": "A volunteer describes entering a tree line called CHAI, highlighting harsh conditions and changed dynamics of the conflict in Ukraine.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "low",
         "assets_affected": [
-          "Brent",
-          "Gold"
+          "Defense Stocks",
+          "Energy"
         ]
       }
     },
@@ -554,18 +556,18 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "Israel’s new settlement construction plans threaten to split the occupied West Bank, poking a finger in the eye of those who support Palestinian statehood. With the Trump administration largely keeping mum, responsibility to try stopping this project falls most heavily on European governments.",
-      "date": "2026-09-10T10:04:23.798112+00:00",
+      "date": "2026-09-10T12:46:58.320571+00:00",
       "relevance_score": 0.4,
       "title_it": "Gli attori israeliani dovrebbero affrontare una scelta: costruire in E1 o fare affari con l'Europa",
       "title_en": "Israeli Actors Should Face a Choice: Building in E1 or Business with Europe",
-      "summary_it": "I piani di costruzione di insediamenti israeliani minacciano di dividere la Cisgiordania, creando tensioni con l'Europa.",
-      "summary_en": "Israeli settlement construction plans threaten to split the West Bank, creating tensions with Europe.",
+      "summary_it": "I nuovi piani di costruzione di insediamenti israeliani minacciano di dividere la Cisgiordania, creando tensioni con l'Europa e potenziali ripercussioni economiche per gli affari israeliani.",
+      "summary_en": "New Israeli settlement construction plans threaten to divide the West Bank, creating tensions with Europe and potential economic repercussions for Israeli business.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "low",
         "assets_affected": [
-          "EUR/USD",
-          "Israeli Shekel"
+          "ILS",
+          "Israeli Equities"
         ]
       }
     },
@@ -576,62 +578,64 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "Crisis Group expert Fulbert Ngodji sheds light on an air raid in Chad that is believed to have destroyed trucks carrying supplies for one of the main belligerents in the Sudanese civil war",
-      "date": "2026-09-10T10:04:23.799822+00:00",
+      "date": "2026-09-10T12:46:58.321967+00:00",
       "relevance_score": 0.4,
       "title_it": "Il Ciad accusa l'esercito del Sudan per i colpi al convoglio",
       "title_en": "Chad Blames Sudan’s Army for Strikes on Convoy",
-      "summary_it": "Il Ciad accusa l'esercito sudanese di un raid aereo che ha distrutto camion con rifornimenti per il conflitto sudanese.",
-      "summary_en": "Chad blames Sudanese army for an air raid that destroyed trucks with supplies for the Sudanese conflict.",
+      "summary_it": "Il Ciad accusa l'esercito sudanese di un raid aereo che ha distrutto camion con rifornimenti, aggravando la crisi umanitaria e l'instabilità regionale in Africa.",
+      "summary_en": "Chad blames Sudanese army for an air raid destroying supply trucks, worsening the humanitarian crisis and regional instability in Africa.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "low",
         "assets_affected": [
-          "Brent",
-          "Regional Equities"
+          "Commodities",
+          "Regional Stability"
         ]
       }
     },
     {
-      "title": "Oil Breaks $100—and This Rally Has Legs",
-      "url": "https://oilprice.com/Energy/Crude-Oil/Oil-Breaks-100and-This-Rally-Has-Legs.html",
+      "title": "Oil Tanker Rates Hit Record Highs as Middle East Shipping Risks Soar",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Tanker-Rates-Hit-Record-Highs-as-Middle-East-Shipping-Risks-Soar.html",
       "source": "OilPrice",
       "tier": 4,
       "category": "energia",
-      "snippet": "For months, crude oil prices have been constrained by reports of improving tanker traffic in the Strait of Hormuz. Even after the June ceasefire between Iran and the United States collapsed, tankers moving in and out of Hormuz have been moving at rates higher than in the spring. This has now changed with the latest escalation in the chokepoint, sending Brent crude above $100 per barrel on Wednesday morning. For months, analysts have been warning that Brent crude could surge to over $100 per barrel and stay there for an extended period of time.…",
+      "snippet": "Oil tanker rates have jumped to record highs as escalating risks to shipping in and out of the Middle East are prompting traders and tanker operators to undertake inefficient and more expensive trade routes. While the crude oil supply is actually there, shipping it through the Strait of Hormuz remains a very risky endeavor, especially in light of the escalating U.S.-Iran tanker war in the Persian Gulf and the Gulf of Oman, while Saudi Arabia has started to move crude cargoes out of the region through the north of the Red Sea and from Egypt’s…",
+      "date": "2026-09-10T10:30:00+00:00",
+      "relevance_score": 1.0,
+      "title_it": "Le tariffe delle petroliere raggiungono massimi storici mentre i rischi di spedizione nel Medio Oriente aumentano",
+      "title_en": "Oil Tanker Rates Hit Record Highs as Middle East Shipping Risks Soar",
+      "summary_it": "Le tariffe delle petroliere salgono a massimi storici a causa dei crescenti rischi di spedizione nel Medio Oriente, spingendo gli operatori a rotte inefficienti e costose.",
+      "summary_en": "Oil tanker rates rise to record highs due to increasing shipping risks in the Middle East, pushing operators to inefficient and costly routes.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "Brent",
+          "WTI",
+          "Shipping Stocks"
+        ]
+      }
+    },
+    {
+      "title": "WTI Breaks $100—and This Rally Has Legs",
+      "url": "https://oilprice.com/Energy/Energy-General/Oil-Breaks-100and-This-Rally-Has-Legs.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "For months, crude oil prices have been constrained by reports of improving tanker traffic in the Strait of Hormuz. Even after the June ceasefire between Iran and the United States collapsed, tankers moving in and out of Hormuz have been moving at rates higher than in the spring. This has now changed with the latest escalation in the chokepoint, sending Brent crude above $100 per barrel on Wednesday morning and WTI crude breaking $100 on Thursday morning. For months, analysts have warned that Brent crude could surge to over $100 per barrel…",
       "date": "2026-09-10T00:00:00+00:00",
       "relevance_score": 1.0,
-      "title_it": "Il petrolio supera i 100 dollari e questo rally ha gambe",
-      "title_en": "Oil Breaks $100—and This Rally Has Legs",
-      "summary_it": "I prezzi del petrolio grezzo superano i 100 dollari, sostenuti da tensioni geopolitiche e miglioramenti nel traffico di petroliere.",
-      "summary_en": "Crude oil prices break $100, supported by geopolitical tensions and improvements in tanker traffic.",
+      "title_it": "Il WTI supera i 100 dollari e questa rally ha gambe",
+      "title_en": "WTI Breaks $100—and This Rally Has Legs",
+      "summary_it": "I prezzi del petrolio grezzo superano i 100 dollari, sostenuti da tensioni geopolitiche e interruzioni dell'offerta, indicando un rally duraturo nei mercati energetici.",
+      "summary_en": "Crude oil prices break $100, supported by geopolitical tensions and supply disruptions, indicating a sustained rally in energy markets.",
       "market_impact": {
         "direction": "bullish",
         "magnitude": "high",
         "assets_affected": [
+          "WTI",
           "Brent",
-          "WTI"
-        ]
-      }
-    },
-    {
-      "title": "Negative Power Prices Are Piling Up Across Europe",
-      "url": "https://oilprice.com/Energy/Energy-General/Negative-Power-Prices-Are-Piling-Up-Across-Europe.html",
-      "source": "OilPrice",
-      "tier": 4,
-      "category": "energia",
-      "snippet": "Europe desperately needs to ramp up its energy storage capacity if it wants to avoid another energy crisis. In the wake of Vladimir Putin's invasion of Ukraine back in 2022, the European Union made major strides in building up its own energy production capacities in an effort to wean itself off of Russian oil and gas. Much of this buildout has been in the form of wind and solar energy, which is great news for energy independence and the bloc's climate goals, but poses key challenges in terms of energy security. As more and more of Europe's energy…",
-      "date": "2026-09-09T21:00:00+00:00",
-      "relevance_score": 1.0,
-      "title_it": "I prezzi negativi dell'energia si accumulano in tutta Europa",
-      "title_en": "Negative Power Prices Are Piling Up Across Europe",
-      "summary_it": "L'Europa deve aumentare la capacità di stoccaggio energetico per evitare una nuova crisi energetica.",
-      "summary_en": "Europe must increase energy storage capacity to avoid another energy crisis amid negative power prices.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "European Equities",
-          "Natural Gas"
+          "Energy Stocks"
         ]
       }
     },
@@ -644,16 +648,16 @@
       "snippet": "Exporters can now fund imports with overseas earnings without first selling their foreign currency at official rates, the Financial Times reported.",
       "date": "2026-09-09T07:36:39+00:00",
       "relevance_score": 1.0,
-      "title_it": "L'Iran allenta le regole valutarie per eludere le sanzioni USA con le criptovalute",
-      "title_en": "Iran eases currency rules to bypass US sanctions with crypto",
-      "summary_it": "L'Iran permette agli esportatori di finanziare le importazioni con guadagni esteri senza vendere valuta ufficiale.",
-      "summary_en": "Iran allows exporters to fund imports with overseas earnings without selling official currency.",
+      "title_it": "L'Iran allenta le regole valutarie per eludere le sanzioni USA con le criptovalute: rapporto",
+      "title_en": "Iran eases currency rules to bypass US sanctions with crypto: Report",
+      "summary_it": "L'Iran permette agli esportatori di finanziare le importazioni con guadagni esteri senza vendere valuta estera ai tassi ufficiali, utilizzando le criptovalute per eludere le sanzioni.",
+      "summary_en": "Iran allows exporters to fund imports with overseas earnings without selling foreign currency at official rates, using crypto to bypass sanctions.",
       "market_impact": {
         "direction": "bullish",
         "magnitude": "medium",
         "assets_affected": [
           "Bitcoin",
-          "USD/IRR"
+          "Crypto Markets"
         ]
       }
     },
@@ -668,14 +672,38 @@
       "relevance_score": 0.8,
       "title_it": "Bitcoin non riesce a riconquistare gli 80.000 dollari mentre Bessent alimenta la forza dello yen",
       "title_en": "Bitcoin fails to reclaim $80K as Bessent fuels yen strength around 153 per dollar",
-      "summary_it": "Bitcoin scende con le azioni USA a causa dell'escalation in Iran e delle paure per lo yen carry trade.",
-      "summary_en": "Bitcoin drops with US stocks due to Iran escalation and fears of yen carry trade unwind.",
+      "summary_it": "Bitcoin scende con le azioni USA a causa dell'escalation in Iran, mentre Scott Bessent alimenta timori di uno smantellamento del carry trade dello yen.",
+      "summary_en": "Bitcoin drops with US stocks due to Iran escalation, while Scott Bessent fuels fears of a yen carry-trade unwind.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "high",
         "assets_affected": [
           "Bitcoin",
-          "USD/JPY"
+          "JPY",
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Live updates: Bitcoin slumps as ECB hikes rates and U.S. core PPI eases, but remains hot",
+      "url": "https://www.coindesk.com/business/2026/09/10/live-updates-bitcoin-etfs-post-a-second-straight-outflow-while-every-other-fund-turns-green",
+      "source": "CoinDesk",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Live updates: Bitcoin slumps as ECB hikes rates and U.S. core PPI eases, but remains hot",
+      "date": "2026-09-10T07:45:46+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Aggiornamenti in diretta: Bitcoin crolla mentre la BCE alza i tassi e il PPI core USA si attenua",
+      "title_en": "Live updates: Bitcoin slumps as ECB hikes rates and U.S. core PPI eases, but remains hot",
+      "summary_it": "Bitcoin crolla mentre la BCE alza i tassi e il PPI core USA si attenua, ma rimane caldo, influenzando negativamente i mercati delle criptovalute.",
+      "summary_en": "Bitcoin slumps as ECB hikes rates and U.S. core PPI eases, but remains hot, negatively impacting cryptocurrency markets.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Bitcoin",
+          "EUR",
+          "USD"
         ]
       }
     },
@@ -688,38 +716,17 @@
       "snippet": "Crypto Long & Short: Inside the 300-to-1 onchain gap between the dollar and euro",
       "date": "2026-09-09T14:58:07+00:00",
       "relevance_score": 0.8,
-      "title_it": "Crypto Long & Short: Il divario onchain 300 a 1 tra dollaro ed euro",
+      "title_it": "Crypto Long & Short: dentro il divario onchain 300 a 1 tra dollaro ed euro",
       "title_en": "Crypto Long & Short: Inside the 300-to-1 onchain gap between the dollar and euro",
-      "summary_it": "Analisi del divario onchain tra dollaro ed euro, evidenziando le dinamiche di mercato delle criptovalute.",
-      "summary_en": "Analysis of the onchain gap between dollar and euro, highlighting cryptocurrency market dynamics.",
+      "summary_it": "Analisi del divario onchain tra dollaro ed euro, evidenziando le dinamiche di mercato delle criptovalute e le implicazioni per gli investitori istituzionali.",
+      "summary_en": "Analysis of the onchain gap between dollar and euro, highlighting cryptocurrency market dynamics and implications for institutional investors.",
       "market_impact": {
         "direction": "mixed",
         "magnitude": "low",
         "assets_affected": [
-          "EUR/USD",
-          "Bitcoin"
-        ]
-      }
-    },
-    {
-      "title": "US Treasury Secretary Scott Bessent ‘Strongly Urges’ Senate To Pass Clarity Act",
-      "url": "https://bitcoinmagazine.com/news/scott-bessent-urges-clarity-act-action",
-      "source": "Bitcoin Magazine",
-      "tier": 4,
-      "category": "crypto",
-      "snippet": "Bitcoin Magazine US Treasury Secretary Scott Bessent ‘Strongly Urges’ Senate To Pass Clarity Act Senators will vote on the long-awaited crypto Clarity Act next week. This post US Treasury Secretary Scott Bessent ‘Strongly Urges’ Senate To Pass Clarity Act first appeared on Bitcoin Magazine and is written by Mathew Di Salvo .",
-      "date": "2026-09-09T21:20:51+00:00",
-      "relevance_score": 0.8,
-      "title_it": "Il Segretario al Tesoro USA Scott Bessent 'esorta fortemente' il Senato ad approvare il Clarity Act",
-      "title_en": "US Treasury Secretary Scott Bessent ‘Strongly Urges’ Senate To Pass Clarity Act",
-      "summary_it": "Scott Bessent esorta il Senato ad approvare il Clarity Act, una legge attesa per le criptovalute.",
-      "summary_en": "Scott Bessent urges Senate to pass Clarity Act, a long-awaited law for cryptocurrencies.",
-      "market_impact": {
-        "direction": "bullish",
-        "magnitude": "medium",
-        "assets_affected": [
           "Bitcoin",
-          "Crypto Equities"
+          "EUR",
+          "USD"
         ]
       }
     }
@@ -729,50 +736,50 @@
     "date": "2026-09-10",
     "language": "it",
     "audio_url": "audio/briefing_20260910.mp3",
-    "duration_ms": 102586,
-    "sha256": "eb6b1a11f43c742d75f7b0f3424bd5329f199520c74defc3cb235c985ede1431",
+    "duration_ms": 109123,
+    "sha256": "13ac3df5d62d388e7767f54bf81a83d5df59e98fed3b9be86af37c1a7417615b",
     "chapters": [
       {
         "id": "intro",
         "title": "Apertura",
         "start_ms": 0,
-        "end_ms": 3619
+        "end_ms": 3630
       },
       {
         "id": "asia",
         "title": "Mercati Asiatici",
-        "start_ms": 3619,
-        "end_ms": 10418
+        "start_ms": 3630,
+        "end_ms": 10256
       },
       {
         "id": "occidente",
         "title": "Mercati Occidentali",
-        "start_ms": 10418,
-        "end_ms": 39788
+        "start_ms": 10256,
+        "end_ms": 34215
       },
       {
         "id": "geopolitica",
         "title": "Geopolitica",
-        "start_ms": 39788,
-        "end_ms": 50790
+        "start_ms": 34215,
+        "end_ms": 48491
       },
       {
         "id": "macro",
         "title": "Macro ed Economia",
-        "start_ms": 50790,
-        "end_ms": 57509
+        "start_ms": 48491,
+        "end_ms": 55256
       },
       {
         "id": "crypto",
         "title": "Criptovalute",
-        "start_ms": 57509,
-        "end_ms": 89142
+        "start_ms": 55256,
+        "end_ms": 94866
       },
       {
         "id": "close",
         "title": "Chiusura",
-        "start_ms": 89142,
-        "end_ms": 102586
+        "start_ms": 94866,
+        "end_ms": 109123
       }
     ]
   },
@@ -781,50 +788,50 @@
     "date": "2026-09-10",
     "language": "en",
     "audio_url": "audio/briefing_20260910_en.mp3",
-    "duration_ms": 106545,
-    "sha256": "e3f076db16d12b71076f7aa777d00df13028c7e1e36ffbb598b627558faab4a3",
+    "duration_ms": 112385,
+    "sha256": "2d640016dcd80b46d962dc07a177efa6a2cb4b8a1eb31c042dbba57f2714811d",
     "chapters": [
       {
         "id": "intro",
         "title": "Opening",
         "start_ms": 0,
-        "end_ms": 4304
+        "end_ms": 4222
       },
       {
         "id": "asia",
         "title": "Asian Markets",
-        "start_ms": 4304,
+        "start_ms": 4222,
         "end_ms": 10790
       },
       {
         "id": "occidente",
         "title": "Western Markets",
         "start_ms": 10790,
-        "end_ms": 41030
+        "end_ms": 34679
       },
       {
         "id": "geopolitica",
         "title": "Geopolitics",
-        "start_ms": 41030,
-        "end_ms": 52346
+        "start_ms": 34679,
+        "end_ms": 49002
       },
       {
         "id": "macro",
         "title": "Macroeconomics",
-        "start_ms": 52346,
-        "end_ms": 59192
+        "start_ms": 49002,
+        "end_ms": 56173
       },
       {
         "id": "crypto",
         "title": "Cryptocurrencies",
-        "start_ms": 59192,
-        "end_ms": 92370
+        "start_ms": 56173,
+        "end_ms": 96387
       },
       {
         "id": "close",
         "title": "Closing",
-        "start_ms": 92370,
-        "end_ms": 106545
+        "start_ms": 96387,
+        "end_ms": 112385
       }
     ]
   }
