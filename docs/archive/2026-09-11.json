@@ -1,14 +1,14 @@
 {
   "date": "2026-09-11",
   "sentiment": {
-    "label": "risk_off",
+    "label": "neutral",
     "score": 3,
-    "reason_it": "Il VIX a 17,84 (<18) indica un mercato poco difensivo, ma l'S&P 500 è sceso del -0,58% e il DXY è leggermente in calo a 99,06 (-0,03%). Il Brent è in ribasso del -1,97% a $105,51, segnale di pressione sui prezzi dell'energia, mentre il TLT 20Y è sceso dell'1,16% a 80,78, confermando l'aspettativa di tassi più alti. La guerra in corso nello stretto di Hormuz alimenta l'incertezza geopolitica, aggiungendo un fattore bearish. Il risultato è un sentiment risk‑off con score 3.",
-    "reason_en": "The VIX at 17.84 (<18) suggests low defensive positioning, yet the S&P 500 fell -0.58% and the DXY slipped slightly to 99.06 (-0.03%). Brent dropped -1.97% to $105.51, indicating oil pressure, and the 20Y TLT fell -1.16% to 80.78, reinforcing expectations of higher rates. Ongoing war in the Hormuz Strait adds geopolitical risk, a bearish factor. The net outcome is a risk‑off sentiment with a score of 3."
+    "reason_it": "Il VIX a 17,2 (-3,59%) indica un mercato difensivo ma non in panico; l'S&P 500 è sceso del 0,58% e il DXY è leggermente più alto (+0,05%), segnalando pressione sui risk assets. Il Brent è in calo del 3,34% dopo le tensioni nell'Hormuz, mentre l'oro guadagna lo 0,48% in un contesto di tassi reali ancora elevati. La combinazione di VIX sotto 18 e performance negative azionarie porta a un sentiment neutro con score 3.",
+    "reason_en": "The VIX at 17.2 (-3.59%) shows a defensive market without panic; the S&P 500 is down 0.58% and the DXY is marginally higher (+0.05%), indicating pressure on risk assets. Brent fell 3.34% after Hormuz tensions, while gold rose 0.48% amid still‑elevated real rates. The mix of sub‑18 VIX and negative equity performance yields a neutral sentiment with a score of 3."
   },
   "market_impact_summary": {
-    "it": "Equity: S&P 500 -0,58% e STOXX 600 -0,52% mostrano pressione ribassista. Fixed Income: TLT 20Y -1,16% e US 10Y Yield +2,21% a 4,94% indicano un rialzo dei tassi. Commodities: Brent -1,97% a $105,51, mentre l'oro sale +0,65% a $4.392,70, segnale misto. Il DXY in lieve calo (-0,03%) sostiene le valute emergenti, ma la tensione in Hormuz mantiene il rischio geopolitico elevato.",
-    "en": "Equities: S&P 500 -0.58% and STOXX 600 -0.52% signal bearish pressure. Fixed Income: 20Y TLT -1.16% and US 10Y Yield +2.21% at 4.94% reflect rising rates. Commodities: Brent -1.97% at $105.51, while gold up +0.65% at $4,392.70, a mixed signal. The DXY's slight dip (-0.03%) aids emerging currencies, yet Hormuz tensions keep geopolitical risk high."
+    "it": "Le azioni globali mostrano debolezza: S&P 500 -0,58% e STOXX 600 -0,31%, mentre il FTSE MIB è l'unico a guadagnare (+0,69%). I titoli di Stato USA subiscono pressione: TLT -1,16% e il rendimento 10Y sale del 2,21%, segnale di tassi in rialzo (bearish). Il DXY è stabile a 99,13 (+0,05%), penalizzando gli asset rischiosi. Il Brent è in forte ribasso (-3,34%) a seguito delle ostilità nello Stretto di Hormuz, riducendo l'inflazione importata (bullish per equity). L'oro registra un leggero rialzo (+0,48%), risultato misto data la compressione dei tassi.",
+    "en": "Global equities are weak: S&P 500 -0.58% and STOXX 600 -0.31%, with the FTSE MIB the only positive (+0.69%). US Treasuries face pressure: TLT -1.16% and the 10Y yield up 2.21%, indicating higher rates (bearish). The DXY is flat at 99.13 (+0.05%), a drag on risk assets. Brent drops sharply (-3.34%) after Hormuz hostilities, easing imported inflation (bullish for equities). Gold edges higher (+0.48%), a mixed signal given the current rate compression."
   },
   "audio_narrative_it": [
     {
@@ -19,35 +19,35 @@
     {
       "id": "asia",
       "title": "Mercati Asiatici",
-      "text": "Il Nikkei ha chiuso in calo dell'1,93%. Shanghai ha chiuso in calo dell'1,18%. Hong Kong ha chiuso in calo dello 0,65%."
+      "text": "Il Nikkei ha chiuso in calo dell'1,93%, Shanghai in calo dell'1,18%."
     },
     {
       "id": "occidente",
       "title": "Mercati Occidentali",
-      "text": "L'S&P 500 ha chiuso in calo dello 0,58%. Il VIX è in rialzo dell'8,38%, segnale di avversione al rischio. Il Dollar Index (DXY) è in calo dello 0,03%. L'oro è in rialzo dello 0,65% e si attesta sopra i quattro mila trecentonovantadue dollari l'oncia. Il Brent è in calo dell'1,97% e scende sotto i cento cinque dollari al barile. Il rendimento dei titoli USA a 10 anni è in rialzo del 2,21% a quattro virgola novantaquattro percento. Il BTP a 10 anni è stabile al 3,73%."
+      "text": "Lo S&P 500 è in calo dell'0,58%, il VIX in calo del 3,59%, l'oro in rialzo dello 0,48%, il Brent in calo del 3,34%. Il DXY è in rialzo dello 0,05%, l'US 10Y Yield è in rialzo del 2,21%, il TLT Bond USA 20Y è in calo dell'1,16%. Il BTP 10Y è stabile. Il mercato europeo è in chiusura leggera, con il FTSE MIB in rialzo dello 0,69%."
     },
     {
       "id": "geopolitica",
       "title": "Geopolitica",
-      "text": "La riapertura della Cina al mercato petrolifero, combinata con le tensioni a Hormuz, ha spinto i prezzi del greggio verso l'alto. La situazione geopolitica in Ucraina, con nuove gare per il 5G, non ha ancora generato impatti immediati sui mercati. Le dichiarazioni di H.R. McMaster sul futuro della sicurezza americana mantengono alta l'attenzione su potenziali rischi geopolitici."
+      "text": "L'ECB ha alzato i tassi a 2,5%, segnalando una politica più dura. La BCE ha risposto alzando i tassi, mentre la Cina è tornata al mercato del greggio a causa delle hostilità a Hormuz. Il conflitto in Ucraina continua a influenzare i prezzi del petrolio."
     },
     {
       "id": "macro",
       "title": "Macro ed Economia",
-      "text": "Oggi sono in programma i dati CPI YoY e Core CPI YoY degli Stati Uniti. Nessun altro dato macro è previsto per la giornata."
+      "text": "Nessun dato macro rilevante in uscita oggi."
     },
     {
       "id": "crypto",
       "title": "Criptovalute",
-      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si mantiene sopra i settantamila dollari, registrando una variazione di -1,0%. I flussi netti degli ETF Bitcoin hanno raggiunto +174,6 milioni di dollari, indicando un interesse continuo da parte degli investitori istituzionali. Ethereum, Solana e BNB hanno mostrato movimenti inferiori al 2%, quindi non sono stati menzionati nella sezione altcoin. Solana ha perso -1,42% ma non supera la soglia di rilevanza. Il sentiment del mercato è in stato di Greed con un indice di 56, suggerendo cautela per gli investitori che cercano opportunità di ingresso. In sintesi, Bitcoin mostra resistenza sopra la soglia psicologica di settantamila dollari, con flussi ETF positivi, mentre gli altcoin non hanno evidenziato movimenti significativi. Il sentiment di Greed indica una possibile pressione di vendita in futuro, ma la posizione di Bitcoin rimane stabile."
+      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si muove in calo, con una variazione di -1,18%. Il prezzo si mantiene sopra gli ottantamila dollari. I flussi ETF sono positivi, con un ingresso netto di 174,6 milioni di dollari. Ethereum mostra un movimento minimo, con +0,07%. Solana registra una diminuzione di -1,75%, mentre BNB scende di -0,67%. Il sentiment è di Greed, con un indice di 56. Questo valore suggerisce cautela sugli investitori, poiché la paura è moderata ma la voglia di guadagno è presente."
     },
     {
       "id": "close",
       "title": "Chiusura",
-      "text": "Oggi monitoriamo l’inflazione negli Stati Uniti: il CPI YoY e il Core CPI YoY. Questi indicatori guideranno le decisioni di politica monetaria. Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Grazie per l’attenzione e a domani."
+      "text": "Oggi i riflettori sono puntati sui dati CPI e Core CPI su base annua negli Stati Uniti. Questi indicatori saranno cruciali per valutare le prossime mosse della Federal Reserve. Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Grazie per l'attenzione e a domani. Un saluto da Price Alert."
     }
   ],
-  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert.\n\nIl Nikkei ha chiuso in calo dell'1,93%. Shanghai ha chiuso in calo dell'1,18%. Hong Kong ha chiuso in calo dello 0,65%.\n\nL'S&P 500 ha chiuso in calo dello 0,58%. Il VIX è in rialzo dell'8,38%, segnale di avversione al rischio. Il Dollar Index (DXY) è in calo dello 0,03%. L'oro è in rialzo dello 0,65% e si attesta sopra i quattro mila trecentonovantadue dollari l'oncia. Il Brent è in calo dell'1,97% e scende sotto i cento cinque dollari al barile. Il rendimento dei titoli USA a 10 anni è in rialzo del 2,21% a quattro virgola novantaquattro percento. Il BTP a 10 anni è stabile al 3,73%.\n\nLa riapertura della Cina al mercato petrolifero, combinata con le tensioni a Hormuz, ha spinto i prezzi del greggio verso l'alto. La situazione geopolitica in Ucraina, con nuove gare per il 5G, non ha ancora generato impatti immediati sui mercati. Le dichiarazioni di H.R. McMaster sul futuro della sicurezza americana mantengono alta l'attenzione su potenziali rischi geopolitici.\n\nOggi sono in programma i dati CPI YoY e Core CPI YoY degli Stati Uniti. Nessun altro dato macro è previsto per la giornata.\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si mantiene sopra i settantamila dollari, registrando una variazione di -1,0%. I flussi netti degli ETF Bitcoin hanno raggiunto +174,6 milioni di dollari, indicando un interesse continuo da parte degli investitori istituzionali. Ethereum, Solana e BNB hanno mostrato movimenti inferiori al 2%, quindi non sono stati menzionati nella sezione altcoin. Solana ha perso -1,42% ma non supera la soglia di rilevanza. Il sentiment del mercato è in stato di Greed con un indice di 56, suggerendo cautela per gli investitori che cercano opportunità di ingresso. In sintesi, Bitcoin mostra resistenza sopra la soglia psicologica di settantamila dollari, con flussi ETF positivi, mentre gli altcoin non hanno evidenziato movimenti significativi. Il sentiment di Greed indica una possibile pressione di vendita in futuro, ma la posizione di Bitcoin rimane stabile.\n\nOggi monitoriamo l’inflazione negli Stati Uniti: il CPI YoY e il Core CPI YoY. Questi indicatori guideranno le decisioni di politica monetaria. Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Grazie per l’attenzione e a domani.",
+  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert.\n\nIl Nikkei ha chiuso in calo dell'1,93%, Shanghai in calo dell'1,18%.\n\nLo S&P 500 è in calo dell'0,58%, il VIX in calo del 3,59%, l'oro in rialzo dello 0,48%, il Brent in calo del 3,34%. Il DXY è in rialzo dello 0,05%, l'US 10Y Yield è in rialzo del 2,21%, il TLT Bond USA 20Y è in calo dell'1,16%. Il BTP 10Y è stabile. Il mercato europeo è in chiusura leggera, con il FTSE MIB in rialzo dello 0,69%.\n\nL'ECB ha alzato i tassi a 2,5%, segnalando una politica più dura. La BCE ha risposto alzando i tassi, mentre la Cina è tornata al mercato del greggio a causa delle hostilità a Hormuz. Il conflitto in Ucraina continua a influenzare i prezzi del petrolio.\n\nNessun dato macro rilevante in uscita oggi.\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si muove in calo, con una variazione di -1,18%. Il prezzo si mantiene sopra gli ottantamila dollari. I flussi ETF sono positivi, con un ingresso netto di 174,6 milioni di dollari. Ethereum mostra un movimento minimo, con +0,07%. Solana registra una diminuzione di -1,75%, mentre BNB scende di -0,67%. Il sentiment è di Greed, con un indice di 56. Questo valore suggerisce cautela sugli investitori, poiché la paura è moderata ma la voglia di guadagno è presente.\n\nOggi i riflettori sono puntati sui dati CPI e Core CPI su base annua negli Stati Uniti. Questi indicatori saranno cruciali per valutare le prossime mosse della Federal Reserve. Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Grazie per l'attenzione e a domani. Un saluto da Price Alert.",
   "audio_narrative_en": [
     {
       "id": "intro",
@@ -57,43 +57,43 @@
     {
       "id": "asia",
       "title": "Asian Markets",
-      "text": "The Nikkei closed down 1.93%. Shanghai closed down 1.18%. Hong Kong closed down 0.65%."
+      "text": "The Nikkei closed down 1.93%, Shanghai down 1.18%."
     },
     {
       "id": "occidente",
       "title": "Western Markets",
-      "text": "The S&P 500 closed down 0.58%. The VIX rose 8.38%, a risk‑aversion signal. The Dollar Index (DXY) fell 0.03%. Gold rose 0.65% and sits above $4,392 per ounce. Brent fell 1.97% and dipped below $105 per barrel. The U.S. 10‑year Treasury yield rose 2.21% to 4.94%. The 10‑year BTP is stable at 3.73%."
+      "text": "The S&P 500 is down 0.58%, the VIX down 3.59%, gold up 0.48%, Brent down 3.34%. The DXY is up 0.05%, the US 10Y Yield up 2.21%, the TLT Bond USA 20Y down 1.16%. The 10Y BTP is flat. The European market closed lightly, with the FTSE MIB up 0.69%."
     },
     {
       "id": "geopolitica",
       "title": "Geopolitics",
-      "text": "China’s reopening to the oil market, combined with tensions at Hormuz, has pushed crude prices higher. The geopolitical situation in Ukraine, with new 5G races, has yet to generate immediate market impacts. H.R. McMaster’s statements on the future of U.S. security keep attention high on potential geopolitical risks."
+      "text": "The ECB raised rates to 2.5%, signalling a tougher policy. The ECB responded by raising rates, while China returned to the oil market due to hostilities at Hormuz. The conflict in Ukraine continues to influence oil prices."
     },
     {
       "id": "macro",
       "title": "Macroeconomics",
-      "text": "Today’s schedule includes U.S. CPI YoY and Core CPI YoY data. No other macro data is expected for the day."
+      "text": "No significant macro data released today."
     },
     {
       "id": "crypto",
       "title": "Cryptocurrencies",
-      "text": "Let's pivot to the cryptocurrency markets. Bitcoin stays above $70,000, recording a change of -1.0%. Bitcoin ETF net flows reached +$174.6 million, indicating continued institutional interest. Ethereum, Solana, and BNB moved less than 2%, so they were not mentioned in the altcoin section. Solana fell -1.42% but does not exceed the relevance threshold. Market sentiment is in Greed mode with an index of 56, suggesting caution for investors seeking entry opportunities. In summary, Bitcoin shows resistance above the psychological threshold of $70,000, with positive ETF flows, while altcoins did not show significant moves. The Greed sentiment indicates possible future selling pressure, but Bitcoin’s position remains stable."
+      "text": "Let's pivot to the cryptocurrency markets. Bitcoin is down 1.18%. The price remains above $80,000. ETF flows are positive, with a net inflow of $174.6 million. Ethereum shows a minimal move, +0.07%. Solana down 1.75%, while BNB down 0.67%. Sentiment is Greed, with an index of 56. This value suggests caution for investors, as fear is moderate but the desire for profit is present."
     },
     {
       "id": "close",
       "title": "Closing",
-      "text": "Today we monitor U.S. inflation: CPI YoY and Core CPI YoY. These indicators will guide monetary policy decisions. For deeper coverage of today’s topics, find the full articles in the Featured Stories section on our platform. Thank you for your attention and see you tomorrow."
+      "text": "Today the focus is on the CPI and Core CPI year‑over‑year data in the United States. These indicators will be crucial for assessing the Fed's next moves. For deeper coverage of today's topics, find the full articles in the Spotlight Stories section on our platform. Thank you for your attention and see you tomorrow. A greeting from Price Alert."
     }
   ],
-  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing.\n\nThe Nikkei closed down 1.93%. Shanghai closed down 1.18%. Hong Kong closed down 0.65%.\n\nThe S&P 500 closed down 0.58%. The VIX rose 8.38%, a risk‑aversion signal. The Dollar Index (DXY) fell 0.03%. Gold rose 0.65% and sits above $4,392 per ounce. Brent fell 1.97% and dipped below $105 per barrel. The U.S. 10‑year Treasury yield rose 2.21% to 4.94%. The 10‑year BTP is stable at 3.73%.\n\nChina’s reopening to the oil market, combined with tensions at Hormuz, has pushed crude prices higher. The geopolitical situation in Ukraine, with new 5G races, has yet to generate immediate market impacts. H.R. McMaster’s statements on the future of U.S. security keep attention high on potential geopolitical risks.\n\nToday’s schedule includes U.S. CPI YoY and Core CPI YoY data. No other macro data is expected for the day.\n\nLet's pivot to the cryptocurrency markets. Bitcoin stays above $70,000, recording a change of -1.0%. Bitcoin ETF net flows reached +$174.6 million, indicating continued institutional interest. Ethereum, Solana, and BNB moved less than 2%, so they were not mentioned in the altcoin section. Solana fell -1.42% but does not exceed the relevance threshold. Market sentiment is in Greed mode with an index of 56, suggesting caution for investors seeking entry opportunities. In summary, Bitcoin shows resistance above the psychological threshold of $70,000, with positive ETF flows, while altcoins did not show significant moves. The Greed sentiment indicates possible future selling pressure, but Bitcoin’s position remains stable.\n\nToday we monitor U.S. inflation: CPI YoY and Core CPI YoY. These indicators will guide monetary policy decisions. For deeper coverage of today’s topics, find the full articles in the Featured Stories section on our platform. Thank you for your attention and see you tomorrow.",
+  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing.\n\nThe Nikkei closed down 1.93%, Shanghai down 1.18%.\n\nThe S&P 500 is down 0.58%, the VIX down 3.59%, gold up 0.48%, Brent down 3.34%. The DXY is up 0.05%, the US 10Y Yield up 2.21%, the TLT Bond USA 20Y down 1.16%. The 10Y BTP is flat. The European market closed lightly, with the FTSE MIB up 0.69%.\n\nThe ECB raised rates to 2.5%, signalling a tougher policy. The ECB responded by raising rates, while China returned to the oil market due to hostilities at Hormuz. The conflict in Ukraine continues to influence oil prices.\n\nNo significant macro data released today.\n\nLet's pivot to the cryptocurrency markets. Bitcoin is down 1.18%. The price remains above $80,000. ETF flows are positive, with a net inflow of $174.6 million. Ethereum shows a minimal move, +0.07%. Solana down 1.75%, while BNB down 0.67%. Sentiment is Greed, with an index of 56. This value suggests caution for investors, as fear is moderate but the desire for profit is present.\n\nToday the focus is on the CPI and Core CPI year‑over‑year data in the United States. These indicators will be crucial for assessing the Fed's next moves. For deeper coverage of today's topics, find the full articles in the Spotlight Stories section on our platform. Thank you for your attention and see you tomorrow. A greeting from Price Alert.",
   "market_data_raw": {
     "dxy": {
-      "value": "99.06",
-      "change": "-0.03%"
+      "value": "99.13",
+      "change": "+0.05%"
     },
     "eur_usd": {
       "value": "1.16",
-      "change": "-0.18%"
+      "change": "-0.29%"
     },
     "sp500": {
       "value": "7591.70",
@@ -108,8 +108,8 @@
       "change": "-0.60%"
     },
     "vix": {
-      "value": "17.84",
-      "change": "+8.38%"
+      "value": "17.20",
+      "change": "-3.59%"
     },
     "tlt": {
       "value": "80.78",
@@ -120,24 +120,24 @@
       "change": "+2.21%"
     },
     "gold": {
-      "value": "$4392.70/oz",
-      "change": "+0.65%"
+      "value": "$4385.60/oz",
+      "change": "+0.48%"
     },
     "btcusd": {
-      "value": "$77,283",
-      "change": "-1.25%"
+      "value": "$76,986",
+      "change": "+0.55%"
     },
     "oil_brent": {
-      "value": "$105.51",
-      "change": "-1.97%"
+      "value": "$104.03",
+      "change": "-3.34%"
     },
     "stoxx_600": {
-      "value": "63.68",
-      "change": "-0.52%"
+      "value": "63.81",
+      "change": "-0.31%"
     },
     "ftse_mib": {
-      "value": "52,206",
-      "change": "+0.77%"
+      "value": "52,166",
+      "change": "+0.69%"
     },
     "nikkei": {
       "value": "64,011",
@@ -148,8 +148,8 @@
       "change": "-1.18%"
     },
     "hang_seng": {
-      "value": "24,793",
-      "change": "-0.65%"
+      "value": "24,806",
+      "change": "-0.60%"
     },
     "europe_futures": {
       "status": "unavailable",
@@ -199,20 +199,20 @@
       },
       "prices": {
         "BTC": {
-          "value": "$77,318",
-          "change": "-1.00%"
+          "value": "$77,021",
+          "change": "-1.18%"
         },
         "ETH": {
           "value": "$2,469",
-          "change": "-0.01%"
+          "change": "+0.07%"
         },
         "SOL": {
-          "value": "$99.94",
-          "change": "-1.42%"
+          "value": "$99.38",
+          "change": "-1.75%"
         },
         "BNB": {
-          "value": "$715.28",
-          "change": "-0.31%"
+          "value": "$712.75",
+          "change": "-0.67%"
         }
       }
     },
@@ -358,17 +358,16 @@
       "snippet": "Central bank president Christine Lagarde warns price shock driven by Middle East conflict will persist well into 2027",
       "date": "2026-09-10T16:59:07+00:00",
       "relevance_score": 1.0,
-      "title_it": "La BCE prepara il terreno per un'inflazione persistente alzando i tassi al 2,5%",
-      "title_en": "ECB prepares for persistent inflation as it raises interest rates to 2.5%",
-      "summary_it": "Lagarde avverte che lo shock dei prezzi dovuto al conflitto in Medio Oriente durerà fino al 2027.",
-      "summary_en": "Lagarde warns that price shocks from the Middle East conflict will persist well into 2027.",
+      "title_it": "BCE prevede inflazione più persistente e alza i tassi al 2,5%",
+      "title_en": "ECB prepares for longer-lasting inflation as it lifts rates to 2.5%",
+      "summary_it": "La BCE alza i tassi per combattere un’inflazione prolungata, segnale di politica restrittiva.",
+      "summary_en": "ECB raises rates to combat prolonged inflation, indicating tighter monetary policy.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "high",
         "assets_affected": [
-          "EUR",
-          "Brent",
-          "S&P 500"
+          "Eurozone bonds",
+          "Eurozone equities"
         ]
       }
     },
@@ -381,16 +380,16 @@
       "snippet": "Widely expected move comes with slightly stronger growth and inflation forecasts despite a higher market-implied rate path",
       "date": "2026-09-10T14:14:12+00:00",
       "relevance_score": 1.0,
-      "title_it": "La BCE alza i tassi con una guida hawkish",
+      "title_it": "BCE aumenta i tassi con indicazioni restrittive",
       "title_en": "European Central Bank raises interest rates with hawkish guidance",
-      "summary_it": "La mossa attesa include previsioni di crescita e inflazione leggermente più forti nonostante un percorso dei tassi più alto.",
-      "summary_en": "The expected move includes slightly stronger growth and inflation forecasts despite a higher market-implied rate path.",
+      "summary_it": "La BCE aumenta i tassi e fornisce indicazioni rialziste, rafforzando la pressione sui mercati.",
+      "summary_en": "ECB raises rates and offers hawkish guidance, adding pressure on markets.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "high",
         "assets_affected": [
-          "EUR",
-          "Euro Stoxx 50"
+          "Eurozone bonds",
+          "Eurozone equities"
         ]
       }
     },
@@ -405,14 +404,14 @@
       "relevance_score": 1.0,
       "title_it": "Il Regno Unito può sfuggire alla trappola del debito pubblico?",
       "title_en": "Can the UK escape the public debt trap?",
-      "summary_it": "Il mix di alti deficit fiscali, rendimenti obbligazionari in aumento e crescita anemica preoccupa gli esperti economici britannici.",
-      "summary_en": "The mix of high fiscal deficits, rising bond yields, and anaemic growth worries UK economic experts.",
+      "summary_it": "Analisi dei rischi di debito elevato nel Regno Unito, con prospettive di crescita debole.",
+      "summary_en": "Analysis of UK's high debt risks and weak growth outlook.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "medium",
         "assets_affected": [
-          "GBP",
-          "UK Gilts"
+          "UK gilts",
+          "UK equities"
         ]
       }
     },
@@ -425,16 +424,16 @@
       "snippet": "Senator Sheldon Whitehouse (D-RI) joins PIIE nonresident senior fellow Kimberly Clausing for a fireside conversation examining the United States' debt and deficit situation, the key policy challenges ahead, and the implications of persistent fiscal imbalances for the US economy. A panel discussion moderated by PIIE C. Fred Bergsten Senior Fellow Maurice Obstfeld, featuring Aviva Aron-Dine, Jason Furman, and Oya Celasun, follows. Aron-Dine is director of the Hamilton Project and former acting assistant secretary for tax policy at the US Treasury, Furman is nonresident senior fellow at PIIE and…",
       "date": "2026-09-24T14:00:00+00:00",
       "relevance_score": 1.0,
-      "title_it": "Affrontare i deficit fiscali e il debito degli USA: implicazioni domestiche e internazionali",
-      "title_en": "Grappling with US fiscal deficits and debt: Understanding implications at home and abroad",
-      "summary_it": "Una conversazione esamina la situazione del debito e dei deficit degli Stati Uniti e le sue conseguenze globali.",
-      "summary_en": "A conversation examines the United States' debt and deficit situation and its global consequences.",
+      "title_it": "Deficit e debito statunitense: implicazioni globali",
+      "title_en": "Grappling with US fiscal deficits and debt: Understanding the implications at home and abroad",
+      "summary_it": "Discussione sui deficit e sul debito USA, evidenziando pressioni inflazionistiche e di mercato.",
+      "summary_en": "Discussion on US deficits and debt, highlighting inflationary and market pressures.",
       "market_impact": {
         "direction": "bearish",
-        "magnitude": "medium",
+        "magnitude": "high",
         "assets_affected": [
-          "USD",
-          "US Treasuries"
+          "US Treasury",
+          "US equities"
         ]
       }
     },
@@ -447,16 +446,16 @@
       "snippet": "The policies and pronouncements of the second Trump administration have, to say the least, created strain in the transatlantic relationship, affecting the United States, its allies in the North Atlantic Treaty Organization (NATO), and the European Union. In parallel to unprecedented trade, investment, and regulatory developments, the security aspects of the relationship have been put into sharp relief by Russia's continued war in Ukraine and increasingly aggressive actions against other European countries. Is the damage reparable, and if so, under what conditions? How does the current strain…",
       "date": "2026-09-17T13:00:00+00:00",
       "relevance_score": 1.0,
-      "title_it": "Lo stato del partenariato di sicurezza transatlantico",
+      "title_it": "Stato della partnership di sicurezza transatlantica",
       "title_en": "The state of the transatlantic security partnership",
-      "summary_it": "Le politiche della seconda amministrazione Trump hanno creato tensioni nelle relazioni transatlantiche, influenzando gli alleati degli Stati Uniti.",
-      "summary_en": "Policies of the second Trump administration have created strain in transatlantic relations, affecting US allies.",
+      "summary_it": "Le tensioni politiche tra USA e alleati aumentano, potenziale impatto negativo su fiducia geopolitica.",
+      "summary_en": "Political tensions between the US and allies rise, potentially harming geopolitical confidence.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "medium",
         "assets_affected": [
-          "EUR",
-          "USD"
+          "Eurozone equities",
+          "US equities"
         ]
       }
     },
@@ -469,15 +468,15 @@
       "snippet": "H.R. McMaster, President Trump's former National Security Advisor, discusses America's future security challenges 10 December 2026 — 09:00 TO 10:00 GMT Anonymous (not verified) 10 September 2026 Chatham House and Online Hear from one of America’s leading security and military thinkers on China, Europe, Iran and the future of US global leadership in an increasingly contested world. Hear from one of America’s leading security and military thinkers on China, Europe, Iran and the future of US global leadership in an increasingly contested world. Lieut. Gen. (Ret.) H.R. McMaster commanded in Afghanistan and Iraq, oversaw training and modernization for the US Army’s infantry, armor, and cavalry force, and was an assistant professor of history at the US Military Academy. Hear one of America’s lea",
       "date": "2026-09-10T09:57:19+00:00",
       "relevance_score": 0.8,
-      "title_it": "H.R. McMaster discute le future sfide di sicurezza dell'America",
+      "title_it": "H.R. McMaster analizza le future sfide di sicurezza americana",
       "title_en": "H.R. McMaster discusses America's future security challenges",
-      "summary_it": "L'ex consigliere per la sicurezza nazionale Trump analizza le sfide future per la sicurezza nazionale degli Stati Uniti.",
-      "summary_en": "Former National Security Advisor Trump analyzes future challenges for US national security.",
+      "summary_it": "Il ex consigliere di sicurezza avverte di nuove minacce, aumentando l’incertezza geopolitica.",
+      "summary_en": "Former security adviser warns of new threats, raising geopolitical uncertainty.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "low",
         "assets_affected": [
-          "USD"
+          "US equities"
         ]
       }
     },
@@ -490,17 +489,16 @@
       "snippet": "Secondo aumento per contrastare l’inflazione, i mercati scommettono che non sarà l’ultimo. Lagarde: “Europa resiliente, ma lo shock potrebbe intensificarsi ancora”",
       "date": "2026-09-10T23:00:00+00:00",
       "relevance_score": 0.8,
-      "title_it": "Salgono prezzi di greggio e gas, la Bce risponde alzando i tassi",
-      "title_en": "Oil and gas prices rise, ECB responds by raising rates",
-      "summary_it": "Secondo aumento dei tassi per contrastare l'inflazione; i mercati scommettono che non sarà l'ultimo intervento.",
-      "summary_en": "Second rate hike to combat inflation; markets bet this will not be the last intervention.",
+      "title_it": "BCE alza i tassi per contenere l’inflazione, i prezzi di greggio e gas salgono",
+      "title_en": "Oil and gas prices rise as ECB raises rates",
+      "summary_it": "La BCE aumenta i tassi, spingendo al rialzo i prezzi energetici e creando pressione inflazionistica.",
+      "summary_en": "ECB rate hike pushes oil and gas prices higher, adding inflationary pressure.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "high",
         "assets_affected": [
-          "EUR",
           "Brent",
-          "Natural Gas"
+          "Eurozone equities"
         ]
       }
     },
@@ -511,18 +509,18 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "China dips back into oil market as Hormuz hostilities stoke prices",
-      "date": "2026-09-11T07:25:26.586391+00:00",
-      "relevance_score": 0.7000000000000001,
-      "title_it": "La Cina torna sul mercato del petrolio mentre le ostilità nello Stretto di Hormuz alzano i prezzi",
+      "date": "2026-09-11T10:01:58.181807+00:00",
+      "relevance_score": 0.75,
+      "title_it": "La Cina ritorna al mercato petrolifero a causa delle tensioni nello Stretto di Hormuz",
       "title_en": "China dips back into oil market as Hormuz hostilities stoke prices",
-      "summary_it": "Le tensioni nello Stretto di Hormuz spingono i prezzi del petrolio, mentre la Cina aumenta gli acquisti.",
-      "summary_en": "Tensions in the Strait of Hormuz push oil prices up as China increases purchases.",
+      "summary_it": "Le ostilità nello Stretto di Hormuz spingono i prezzi del petrolio, la Cina aumenta gli acquisti.",
+      "summary_en": "Hormuz tensions lift oil prices, prompting China to increase purchases.",
       "market_impact": {
-        "direction": "bearish",
-        "magnitude": "high",
+        "direction": "bullish",
+        "magnitude": "medium",
         "assets_affected": [
           "Brent",
-          "WTI"
+          "Asian equities"
         ]
       }
     },
@@ -533,17 +531,38 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "Ukraine set for 5G bids but legal gap invites China risks, critics say",
-      "date": "2026-09-11T07:25:26.586869+00:00",
+      "date": "2026-09-11T10:01:58.182046+00:00",
       "relevance_score": 0.6000000000000001,
-      "title_it": "L'Ucraina pronta per le offerte 5G, ma il vuoto legale invita i rischi cinesi",
+      "title_it": "Ucraina avvia gare 5G, ma lacune legali aprono a rischi cinesi",
       "title_en": "Ukraine set for 5G bids but legal gap invites China risks",
-      "summary_it": "Critici avvertono che un vuoto legale nelle aste 5G ucraine potrebbe esporre il paese a rischi cinesi.",
-      "summary_en": "Critics warn that a legal gap in Ukrainian 5G auctions could expose the country to Chinese risks.",
+      "summary_it": "Le incertezze legali nelle gare 5G ucraine aumentano i rischi di influenza cinese.",
+      "summary_en": "Legal gaps in Ukraine's 5G bids raise risk of Chinese influence.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "low",
         "assets_affected": [
-          "UAH"
+          "European tech equities"
+        ]
+      }
+    },
+    {
+      "title": "The War’s Last Generation Is Still Holding America’s Moral Debt",
+      "url": "https://warontherocks.com/the-wars-last-generation-is-still-holding-americas-moral-debt/",
+      "source": "War on the Rocks",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "On the first night of the evacuation of Kabul, Aug. 15, 2021, a young mother found me in the crowd at Hamid Karzai International Airport. She had marked me, correctly, as someone who spoke her language. By the end of the night, she was pressing the body of her dead child into my chest and telling me, “You did this.” I have spent five years with that sentence.In a way, she was wrong about me. I had done nothing to her son. But the decisions that delivered her to that night were made an ocean away, and their consequences needed The post The War’s Last Generation Is Still Holding America’s Moral Debt appeared first on War on the Rocks .",
+      "date": "2026-09-11T07:30:36+00:00",
+      "relevance_score": 0.55,
+      "title_it": "L’ultima generazione di guerra mantiene il debito morale americano",
+      "title_en": "The War’s Last Generation Is Still Holding America’s Moral Debt",
+      "summary_it": "Riflessione sul peso morale della guerra per gli Stati Uniti, con implicazioni di lungo termine.",
+      "summary_en": "Reflection on America's moral debt from war, with long‑term implications.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "US equities"
         ]
       }
     },
@@ -554,39 +573,17 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "Israel’s new settlement construction plans threaten to split the occupied West Bank, poking a finger in the eye of those who support Palestinian statehood. With the Trump administration largely keeping mum, responsibility to try stopping this project falls most heavily on European governments.",
-      "date": "2026-09-11T07:25:24.202575+00:00",
+      "date": "2026-09-11T10:01:55.212990+00:00",
       "relevance_score": 0.4,
-      "title_it": "Gli attori israeliani dovrebbero scegliere: costruire in E1 o fare affari con l'Europa",
+      "title_it": "Attori israeliani: scegliere tra costruzione a E1 o affari con l’Europa",
       "title_en": "Israeli Actors Should Face a Choice: Building in E1 or Business with Europe",
-      "summary_it": "I piani di costruzione di insediamenti israeliani minacciano di dividere la Cisgiordania, creando tensioni con l'Europa.",
-      "summary_en": "Israeli settlement construction plans threaten to split the West Bank, creating tensions with Europe.",
+      "summary_it": "Le nuove costruzioni israeliane rischiano di complicare i rapporti commerciali con l’Europa.",
+      "summary_en": "New Israeli settlements could complicate trade relations with Europe.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "low",
         "assets_affected": [
-          "EUR",
-          "ILS"
-        ]
-      }
-    },
-    {
-      "title": "Chad Blames Sudan’s Army for Strikes on Convoy",
-      "url": "https://www.crisisgroup.org/anb/africa/chad-sudan/chad-blames-sudans-army-strikes-convoy",
-      "source": "International Crisis Group",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "Crisis Group expert Fulbert Ngodji sheds light on an air raid in Chad that is believed to have destroyed trucks carrying supplies for one of the main belligerents in the Sudanese civil war",
-      "date": "2026-09-11T07:25:24.204387+00:00",
-      "relevance_score": 0.4,
-      "title_it": "Il Ciad accusa l'esercito sudanese per i colpi su un convoglio",
-      "title_en": "Chad Blames Sudan’s Army for Strikes on Convoy",
-      "summary_it": "Un raid aereo in Ciad ha distrutto camion con rifornimenti per i belligeranti nella crisi sudanese.",
-      "summary_en": "An air raid in Chad destroyed trucks with supplies for belligerents in the Sudanese crisis.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "low",
-        "assets_affected": [
-          "XOF"
+          "European equities"
         ]
       }
     },
@@ -599,16 +596,16 @@
       "snippet": "U.S. President Donald Trump has undertaken the most aggressive federal intervention in the critical minerals and rare earth sectors ever since he returned to the Oval Office, announcing a flurry of deals as Washington desperately tries to counter China’s dominance in minerals that are powering the energy transition and AI boom. The deals included a hodgepodge of equity and debt packages with dozens of rare earths companies, with MP Materials (NYSE:MP) and U.S. Rare Earths (NASDAQ:USAR) some of the key beneficiaries. Last month, Trump unveiled…",
       "date": "2026-09-10T23:00:00+00:00",
       "relevance_score": 1.0,
-      "title_it": "Perché la mossa tardiva degli USA sui minerali critici non fermerà la Cina",
+      "title_it": "Gli Stati Uniti tardano a intervenire sui minerali critici, la Cina resta dominante",
       "title_en": "Why The United States’ Belated Critical Minerals Gambit Won’t Stop China",
-      "summary_it": "L'intervento aggressivo di Trump sui minerali critici è considerato insufficiente per contrastare il dominio cinese.",
-      "summary_en": "Trump's aggressive intervention in critical minerals is considered insufficient to counter Chinese dominance.",
+      "summary_it": "L’intervento tardivo USA sui minerali critici non riesce a contenere la leadership cinese.",
+      "summary_en": "US delayed action on critical minerals fails to curb China's dominance.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "medium",
         "assets_affected": [
-          "USD",
-          "CNY"
+          "Mining stocks",
+          "Commodities"
         ]
       }
     },
@@ -621,16 +618,16 @@
       "snippet": "More Top Reads From Oilprice.com Diesel Crunch Set to Worsen as Refining Capacity Falls Short, Industry Warns Russia Strikes Moldova Border as Ukraine Hits Black Sea Port Permian Gas Has Been Worth Less Than Nothing for 118 Days This Year",
       "date": "2026-09-10T21:00:00+00:00",
       "relevance_score": 1.0,
-      "title_it": "Come la Cina è diventata il primo 'Elettro-Stato' del mondo",
+      "title_it": "La Cina diventa la prima “elettrostatica” del mondo",
       "title_en": "How China Became the World's First Electrostate",
-      "summary_it": "La Cina consolida il suo ruolo dominante nella produzione elettrica e nelle tecnologie verdi globali.",
-      "summary_en": "China consolidates its dominant role in global electricity production and green technologies.",
+      "summary_it": "La Cina guida la transizione elettrica globale, rafforzando il suo ruolo energetico.",
+      "summary_en": "China leads the global electricity transition, strengthening its energy role.",
       "market_impact": {
-        "direction": "bearish",
+        "direction": "bullish",
         "magnitude": "medium",
         "assets_affected": [
-          "CNY",
-          "Renewable Energy Stocks"
+          "Chinese equities",
+          "Renewable energy"
         ]
       }
     },
@@ -643,39 +640,16 @@
       "snippet": "Bitcoin fell with US stocks as high inflation and a further surge in oil prices coincided with another multidecade high for US bond yields.",
       "date": "2026-09-10T14:52:15+00:00",
       "relevance_score": 0.8,
-      "title_it": "Il Bitcoin scende sul superamento del PPI USA mentre il rendimento del bond a 30 anni tocca un massimo di 19 anni",
+      "title_it": "Bitcoin scende per l’overshoot del PPI USA e il rialzo dei rendimenti obbligazionari",
       "title_en": "Bitcoin falls on US PPI overshoot as 30-year bond yield hits new 19-year high",
-      "summary_it": "Bitcoin e azioni USA scendono a causa dell'alta inflazione, del petrolio in rialzo e dei rendimenti obbligazionari record.",
-      "summary_en": "Bitcoin and US stocks fall due to high inflation, rising oil, and record bond yields.",
+      "summary_it": "Il PPI USA supera le attese e i rendimenti obbligazionari salgono, facendo crollare Bitcoin.",
+      "summary_en": "US PPI overshoot and rising bond yields push Bitcoin lower.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "high",
         "assets_affected": [
           "Bitcoin",
-          "S&P 500",
-          "US Treasuries"
-        ]
-      }
-    },
-    {
-      "title": "US Treasury Secretary Scott Bessent ‘Strongly Urges’ Senate To Pass Clarity Act",
-      "url": "https://bitcoinmagazine.com/news/scott-bessent-urges-clarity-act-action",
-      "source": "Bitcoin Magazine",
-      "tier": 4,
-      "category": "crypto",
-      "snippet": "Bitcoin Magazine US Treasury Secretary Scott Bessent ‘Strongly Urges’ Senate To Pass Clarity Act Senators will vote on the long-awaited crypto Clarity Act next week. This post US Treasury Secretary Scott Bessent ‘Strongly Urges’ Senate To Pass Clarity Act first appeared on Bitcoin Magazine and is written by Mathew Di Salvo .",
-      "date": "2026-09-09T21:20:51+00:00",
-      "relevance_score": 0.8,
-      "title_it": "Il Segretario al Tesoro Bessent 'esorta fortemente' il Senato ad approvare il Clarity Act",
-      "title_en": "US Treasury Secretary Bessent ‘Strongly Urges’ Senate To Pass Clarity Act",
-      "summary_it": "Il Segretario al Tesoro USA spinge per l'approvazione del Clarity Act, portando chiarezza normativa per le criptovalute.",
-      "summary_en": "US Treasury Secretary pushes for Clarity Act approval, bringing regulatory clarity for cryptocurrencies.",
-      "market_impact": {
-        "direction": "bullish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "Bitcoin",
-          "Ethereum"
+          "US Treasury yields"
         ]
       }
     },
@@ -688,16 +662,16 @@
       "snippet": "Shareholders of Bitcoin treasury company Metaplanet are seething over equity allocations for insiders, while new figures cement Singapore’s role as the top Asian crypto hub.",
       "date": "2026-09-10T23:21:26+00:00",
       "relevance_score": 0.6,
-      "title_it": "Reazione negativa alle azioni di Metaplanet, il finanziamento crypto nel Sud-est asiatico raddoppia",
+      "title_it": "Reazione di Metaplanet e raddoppio dei finanziamenti crypto in SE Asia",
       "title_en": "Metaplanet equity backlash, SE Asia crypto funding doubles",
-      "summary_it": "I soci di Metaplanet sono arrabbiati per le allocazioni interne, mentre Singapore si conferma hub crypto asiatico.",
-      "summary_en": "Metaplanet shareholders are angry over insider allocations, while Singapore cements its role as top Asian crypto hub.",
+      "summary_it": "Controversie su Metaplanet e crescita dei fondi crypto in Asia, segnale misto per il settore.",
+      "summary_en": "Metaplanet equity dispute and doubled crypto funding in SE Asia present mixed signals.",
       "market_impact": {
         "direction": "mixed",
-        "magnitude": "low",
+        "magnitude": "medium",
         "assets_affected": [
           "Bitcoin",
-          "Metaplanet Stock"
+          "SE Asian crypto firms"
         ]
       }
     },
@@ -710,16 +684,38 @@
       "snippet": "Bitcoin below $77,000, Zcash leads losses as traders bet on a Fed rate hike",
       "date": "2026-09-11T04:46:15+00:00",
       "relevance_score": 0.6,
-      "title_it": "Bitcoin sotto i 77.000 dollari, Zcash guida le perdite mentre i trader scommettono su un rialzo dei tassi della Fed",
+      "title_it": "Bitcoin sotto i 77.000 dollari, Zcash in perdita, gli operatori puntano su un rialzo dei tassi Fed",
       "title_en": "Bitcoin below $77,000, Zcash leads losses as traders bet on a Fed rate hike",
-      "summary_it": "Bitcoin scende sotto i 77.000 dollari e Zcash perde terreno mentre i trader anticipano un ulteriore rialzo dei tassi.",
-      "summary_en": "Bitcoin drops below $77,000 and Zcash loses ground as traders anticipate a further rate hike.",
+      "summary_it": "Le aspettative di un rialzo dei tassi Fed spingono Bitcoin e Zcash verso il basso.",
+      "summary_en": "Fed rate hike expectations push Bitcoin and Zcash lower.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "medium",
         "assets_affected": [
           "Bitcoin",
           "Zcash"
+        ]
+      }
+    },
+    {
+      "title": "Europe’s top regulator questions Polymarket and Kalshi’s EU access, warns of authorization gaps",
+      "url": "https://www.coindesk.com/business/2026/09/10/europe-s-top-regulator-questions-polymarket-and-kalshi-s-eu-access-warns-of-authorization-gaps",
+      "source": "CoinDesk",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Europe’s top regulator questions Polymarket and Kalshi’s EU access, warns of authorization gaps",
+      "date": "2026-09-10T17:03:34+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Regolatore europeo mette in guardia Polymarket e Kalshi sull’accesso UE",
+      "title_en": "Europe’s top regulator questions Polymarket and Kalshi’s EU access",
+      "summary_it": "Le autorità UE sollevano dubbi sull’accesso di piattaforme crypto, creando incertezza normativa.",
+      "summary_en": "EU regulator raises concerns over crypto platform access, creating regulatory uncertainty.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Crypto exchanges",
+          "European equities"
         ]
       }
     }
@@ -729,50 +725,50 @@
     "date": "2026-09-11",
     "language": "it",
     "audio_url": "audio/briefing_20260911.mp3",
-    "duration_ms": 149909,
-    "sha256": "9cd0dc65036a2783a9d2674a3c097bff02a564852a932f50fb055e3d366af6ef",
+    "duration_ms": 123287,
+    "sha256": "4f7536b00f4b2f2290fe1918014ce7bdb5f17f9d0b3442a97dc5da2d9cb0980d",
     "chapters": [
       {
         "id": "intro",
         "title": "Apertura",
         "start_ms": 0,
-        "end_ms": 3711
+        "end_ms": 3816
       },
       {
         "id": "asia",
         "title": "Mercati Asiatici",
-        "start_ms": 3711,
-        "end_ms": 14331
+        "start_ms": 3816,
+        "end_ms": 10302
       },
       {
         "id": "occidente",
         "title": "Mercati Occidentali",
-        "start_ms": 14331,
-        "end_ms": 49679
+        "start_ms": 10302,
+        "end_ms": 46266
       },
       {
         "id": "geopolitica",
         "title": "Geopolitica",
-        "start_ms": 49679,
-        "end_ms": 70666
+        "start_ms": 46266,
+        "end_ms": 63782
       },
       {
         "id": "macro",
         "title": "Macro ed Economia",
-        "start_ms": 70666,
-        "end_ms": 79777
+        "start_ms": 63782,
+        "end_ms": 66866
       },
       {
         "id": "crypto",
         "title": "Criptovalute",
-        "start_ms": 79777,
-        "end_ms": 132575
+        "start_ms": 66866,
+        "end_ms": 103237
       },
       {
         "id": "close",
         "title": "Chiusura",
-        "start_ms": 132575,
-        "end_ms": 149909
+        "start_ms": 103237,
+        "end_ms": 123287
       }
     ]
   },
@@ -781,50 +777,50 @@
     "date": "2026-09-11",
     "language": "en",
     "audio_url": "audio/briefing_20260911_en.mp3",
-    "duration_ms": 161147,
-    "sha256": "ecc2097c6676fcafead5e6fe8e07139c58c5499dfab01c3ce39ef1de426cdb9b",
+    "duration_ms": 122532,
+    "sha256": "07e984fbeb0e053da04c743ca1a43a3da28e8b2489430db9ed7602bc67d2a606",
     "chapters": [
       {
         "id": "intro",
         "title": "Opening",
         "start_ms": 0,
-        "end_ms": 4164
+        "end_ms": 4176
       },
       {
         "id": "asia",
         "title": "Asian Markets",
-        "start_ms": 4164,
-        "end_ms": 15016
+        "start_ms": 4176,
+        "end_ms": 10534
       },
       {
         "id": "occidente",
         "title": "Western Markets",
-        "start_ms": 15016,
-        "end_ms": 52733
+        "start_ms": 10534,
+        "end_ms": 43073
       },
       {
         "id": "geopolitica",
         "title": "Geopolitics",
-        "start_ms": 52733,
-        "end_ms": 74939
+        "start_ms": 43073,
+        "end_ms": 60020
       },
       {
         "id": "macro",
         "title": "Macroeconomics",
-        "start_ms": 74939,
-        "end_ms": 85431
+        "start_ms": 60020,
+        "end_ms": 63906
       },
       {
         "id": "crypto",
         "title": "Cryptocurrencies",
-        "start_ms": 85431,
-        "end_ms": 142014
+        "start_ms": 63906,
+        "end_ms": 100334
       },
       {
         "id": "close",
         "title": "Closing",
-        "start_ms": 142014,
-        "end_ms": 161147
+        "start_ms": 100334,
+        "end_ms": 122532
       }
     ]
   }
