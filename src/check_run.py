@@ -1,11 +1,11 @@
 import json, os
 from pathlib import Path
-from delivery_state import ready, today
+from delivery_state import archived_ready, today
 
 
 def check(root):
     date = today()
-    content_ready = ready(root, date)
+    content_ready = archived_ready(root, date)
     try:
         state = json.loads((Path(root) / f'data/delivery-state/{date}.json').read_text())
     except (OSError, ValueError):

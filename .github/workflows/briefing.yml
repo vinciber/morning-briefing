@@ -132,14 +132,21 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: briefing
+    needs: [check, briefing]
+    if: >-
+      needs.check.outputs.content_ready != 'true' &&
+      needs.briefing.result == 'success'
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
   notify:
-    needs: deploy
+    needs: [check, briefing, deploy]
+    if: >-
+      always() && needs.check.result == 'success' &&
+      (needs.check.outputs.content_ready == 'true' ||
+      (needs.briefing.result == 'success' && needs.deploy.result == 'success'))
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -156,7 +163,7 @@ jobs:
       - name: Verify publication and deliver once (best effort)
         id: telegram_delivery
         continue-on-error: true
-        run: python src/telegram_bot.py --send
+        run: python src/telegram_bot.py --send --published
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

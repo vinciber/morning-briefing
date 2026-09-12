@@ -203,22 +203,29 @@ def send_audio(audio_path: Path) -> bool:
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
-def run(*, send=False):
-    from delivery_state import Ledger, ready, today, verify_publication
+def run(*, send=False, published=False, session=requests):
+    from delivery_state import (Ledger, fetch_published_audio, load_published_briefing,
+                                ready, today, verify_publication)
     import hashlib
-    if not ready(ROOT, today()):
-        raise RuntimeError('Current briefing/audio unavailable')
-    briefing = json.loads(INPUT_PATH.read_text())
+    date = today()
+    if published:
+        briefing = load_published_briefing(date, session)
+    else:
+        if not ready(ROOT, date):
+            raise RuntimeError('Current briefing/audio unavailable')
+        briefing = json.loads(INPUT_PATH.read_text())
     if not send:
         logger.info('Dry run: validated briefing; no delivery performed')
         return True
     if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
         raise RuntimeError('Telegram configuration missing')
-    verify_publication(briefing)
-    ledger = Ledger(briefing['date'])
+    verify_publication(briefing, session)
+    ledger = Ledger(briefing['date'], session)
     if ledger.state.get('complete'):
         return True
-    fingerprint = hashlib.sha256(INPUT_PATH.read_bytes()).hexdigest()
+    fingerprint = hashlib.sha256(json.dumps(
+        briefing, sort_keys=True, ensure_ascii=False, separators=(',', ':')
+    ).encode()).hexdigest()
     if ledger.state.get('fingerprint', fingerprint) != fingerprint:
         raise RuntimeError('Daily content changed after delivery began')
     ledger.state.update(published=True, fingerprint=fingerprint)
@@ -236,16 +243,24 @@ def run(*, send=False):
     recipient = hashlib.sha256(TELEGRAM_CHAT_ID.encode()).hexdigest()[:16]
     for index, part in enumerate(parts):
         key = f'{recipient}:text:{index}'
-        ledger.deliver(key, lambda part=part: requests.post(
+        ledger.deliver(key, lambda part=part: session.post(
             f'{BASE_URL}{TELEGRAM_BOT_TOKEN}/sendMessage',
             json={'chat_id': TELEGRAM_CHAT_ID, 'text': part, 'parse_mode': 'HTML',
                   'disable_web_page_preview': True}, timeout=20))
-    audio = AUDIO_DIR / f"briefing_{briefing['date'].replace('-', '')}.mp3"
-    with audio.open('rb') as handle:
-        ledger.deliver(f'{recipient}:audio:it', lambda: requests.post(
+    if published:
+        audio_content = fetch_published_audio(briefing, 'it', session)
+        audio_file = (f"briefing_{briefing['date'].replace('-', '')}.mp3", audio_content, 'audio/mpeg')
+        ledger.deliver(f'{recipient}:audio:it', lambda: session.post(
             f'{BASE_URL}{TELEGRAM_BOT_TOKEN}/sendAudio',
             data={'chat_id': TELEGRAM_CHAT_ID, 'title': f"Morning Briefing {briefing['date']}"},
-            files={'audio': handle}, timeout=60))
+            files={'audio': audio_file}, timeout=60))
+    else:
+        audio = AUDIO_DIR / f"briefing_{briefing['date'].replace('-', '')}.mp3"
+        with audio.open('rb') as handle:
+            ledger.deliver(f'{recipient}:audio:it', lambda: session.post(
+                f'{BASE_URL}{TELEGRAM_BOT_TOKEN}/sendAudio',
+                data={'chat_id': TELEGRAM_CHAT_ID, 'title': f"Morning Briefing {briefing['date']}"},
+                files={'audio': handle}, timeout=60))
     ledger.state['complete'] = True
     ledger.save()
     return True
@@ -264,9 +279,11 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--send', action='store_true')
+    parser.add_argument('--published', action='store_true',
+                        help='load the deployed daily archive instead of runner-local temporary data')
     args = parser.parse_args()
     try:
-        run(send=args.send)
+        run(send=args.send, published=args.published)
     except Exception as error:
         logger.error('Delivery failed: %s; inspect the delivery ledger', delivery_error_detail(error))
         raise SystemExit(1)

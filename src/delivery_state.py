@@ -13,29 +13,89 @@ from zoneinfo import ZoneInfo
 
 import requests
 
+PAGES_BASE_URL = 'https://vinciber.github.io/morning-briefing/'
+
 
 def today():
     return datetime.now(ZoneInfo('Europe/Rome')).date().isoformat()
+
+
+def valid_briefing(briefing, date):
+    """Validate the immutable metadata shared by local and published output."""
+    try:
+        if briefing['date'] != date:
+            return False
+        for lang in ('it', 'en'):
+            manifest = briefing[f'audio_manifest_{lang}']
+            name = f"audio/briefing_{date.replace('-', '')}{'_en' if lang == 'en' else ''}.mp3"
+            if (manifest['schema_version'] != 1 or manifest['date'] != date or
+                    manifest['language'] != lang or manifest['audio_url'] != name or
+                    manifest['duration_ms'] <= 0 or not manifest['sha256']):
+                return False
+        return True
+    except (KeyError, TypeError):
+        return False
 
 
 def ready(root, date):
     try:
         root = Path(root)
         briefing = json.loads((root / 'data/briefing_today.json').read_text())
-        if briefing['date'] != date:
+        if not valid_briefing(briefing, date):
             return False
         for lang in ('it', 'en'):
             m = briefing[f'audio_manifest_{lang}']
-            name = f"audio/briefing_{date.replace('-', '')}{'_en' if lang == 'en' else ''}.mp3"
-            if (m['schema_version'] != 1 or m['date'] != date or
-                    m['language'] != lang or m['audio_url'] != name or
-                    m['duration_ms'] <= 0):
-                return False
-            if hashlib.sha256((root / 'docs' / name).read_bytes()).hexdigest() != m['sha256']:
+            if hashlib.sha256((root / 'docs' / m['audio_url']).read_bytes()).hexdigest() != m['sha256']:
                 return False
         return True
     except (KeyError, ValueError, TypeError, OSError):
         return False
+
+
+def archived_ready(root, date):
+    """Check the versioned archive used by clean workflow checkouts."""
+    try:
+        root = Path(root)
+        briefing = json.loads((root / f'docs/archive/{date}.json').read_text())
+        if not valid_briefing(briefing, date):
+            return False
+        for lang in ('it', 'en'):
+            manifest = briefing[f'audio_manifest_{lang}']
+            if hashlib.sha256((root / 'docs' / manifest['audio_url']).read_bytes()).hexdigest() != manifest['sha256']:
+                return False
+        return True
+    except (KeyError, ValueError, TypeError, OSError):
+        return False
+
+
+def load_published_briefing(date, session=requests):
+    """Load the full, immutable daily archive from the already deployed site.
+
+    The workflow deliberately does not version `data/briefing_today.json`.
+    A downstream runner must therefore use this archive rather than assuming
+    that its clean checkout contains another job's temporary output.
+    """
+    response = session.get(f'{PAGES_BASE_URL}archive/{date}.json', timeout=20)
+    response.raise_for_status()
+    try:
+        briefing = response.json()
+    except ValueError as error:
+        raise RuntimeError('Published briefing is not valid JSON') from error
+    if not valid_briefing(briefing, date):
+        raise RuntimeError('Published briefing is incomplete or not current')
+    return briefing
+
+
+def fetch_published_audio(briefing, lang='it', session=requests):
+    """Fetch one published MP3 and verify it against the briefing manifest."""
+    manifest = briefing[f'audio_manifest_{lang}']
+    response = session.get(
+        f"{PAGES_BASE_URL}{manifest['audio_url']}",
+        params={'v': manifest['sha256']}, timeout=30)
+    response.raise_for_status()
+    if hashlib.sha256(response.content).hexdigest() != manifest['sha256']:
+        raise RuntimeError('Published audio differs')
+    return response.content
 
 
 class Ledger:
@@ -94,8 +154,7 @@ class Ledger:
 
 
 def verify_publication(briefing, session=requests):
-    base = 'https://vinciber.github.io/morning-briefing/'
-    response = session.get(base + 'api/today.json', params={'date': briefing['date']}, timeout=20)
+    response = session.get(PAGES_BASE_URL + 'api/today.json', params={'date': briefing['date']}, timeout=20)
     response.raise_for_status()
     remote = response.json()
     if remote.get('date') != briefing['date']:
@@ -104,7 +163,4 @@ def verify_publication(briefing, session=requests):
         expected = briefing[f'audio_manifest_{lang}']
         if remote.get(f'audio_manifest_{lang}') != expected:
             raise RuntimeError('Published manifest differs')
-        audio = session.get(base + expected['audio_url'], params={'v': expected['sha256']}, timeout=30)
-        audio.raise_for_status()
-        if hashlib.sha256(audio.content).hexdigest() != expected['sha256']:
-            raise RuntimeError('Published audio differs')
+        fetch_published_audio(briefing, lang, session)
