@@ -150,9 +150,24 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install requests python-dotenv
-      - name: Verify publication and deliver once
+      # Publication is the delivery gate for the briefing itself. Telegram is
+      # retried by the bounded watchdog, so a transient notification failure
+      # must not turn a successfully published briefing into a failed workflow.
+      - name: Verify publication and deliver once (best effort)
+        id: telegram_delivery
+        continue-on-error: true
         run: python src/telegram_bot.py --send
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+      - name: Report pending Telegram retry
+        if: steps.telegram_delivery.outcome == 'failure'
+        run: |
+          echo "::warning title=Telegram delivery pending::The Morning Briefing was published. The Railway watchdog will retry Telegram delivery during its bounded morning window."
+          {
+            echo '### Telegram delivery pending'
+            echo 'The Morning Briefing and GitHub Pages deployment succeeded; only Telegram delivery failed.'
+            echo 'The bounded Railway watchdog will retry delivery. Inspect this step for the concrete error.'
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -251,6 +251,15 @@ def run(*, send=False):
     return True
 
 
+def delivery_error_detail(error: Exception) -> str:
+    """Return a useful diagnostic without ever placing a Bot API URL in logs."""
+    if isinstance(error, requests.RequestException):
+        return 'network_or_http_error_url_redacted'
+    if isinstance(error, (RuntimeError, ValueError)):
+        return str(error)
+    return type(error).__name__
+
+
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
@@ -259,5 +268,5 @@ if __name__ == '__main__':
     try:
         run(send=args.send)
     except Exception as error:
-        logger.error('Delivery failed (%s); inspect the delivery ledger', type(error).__name__)
+        logger.error('Delivery failed: %s; inspect the delivery ledger', delivery_error_detail(error))
         raise SystemExit(1)
