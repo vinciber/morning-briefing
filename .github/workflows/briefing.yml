@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     needs: check
-    if: needs.check.outputs.already_run != 'true'
+    if: needs.check.outputs.content_ready != 'true'
 
     steps:
       - name: Checkout

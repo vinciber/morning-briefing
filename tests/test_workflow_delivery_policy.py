@@ -18,6 +18,6 @@ def test_telegram_delivery_does_not_gate_a_published_briefing():
     assert delivery['continue-on-error'] is True
     assert delivery['run'] == 'python src/telegram_bot.py --send --published'
     assert report['if'] == "steps.telegram_delivery.outcome == 'failure'"
-    assert workflow['jobs']['briefing']['if'] == "needs.check.outputs.already_run != 'true'"
+    assert workflow['jobs']['briefing']['if'] == "needs.check.outputs.content_ready != 'true'"
     assert workflow['jobs']['deploy']['if'].startswith("needs.check.outputs.content_ready != 'true'")
     assert 'always()' in workflow['jobs']['notify']['if']
