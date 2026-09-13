@@ -262,6 +262,7 @@ NUMERI — REGOLE FORMATO (critico per TTS):
 - Se devi citare un prezzo, scrivi il numero in lettere o in cifre senza separatori di migliaia.
 - Percentuali: massimo un decimale (es. 2.7%, non 2.69%).
 - ORO: "l'oncia" invece di "/oz".
+- DATE DEL CALENDARIO: scrivi sempre il mese in lettere (es. "16 settembre"), mai la forma "16/09".
 """
 
 AUDIO_FINANCE_PROMPT_SATURDAY = """Sei un conduttore radiofonico finanziario italiano. Stile: conciso, direzionale, zero filler.
@@ -301,6 +302,7 @@ NUMERI — REGOLE FORMATO (critico per TTS):
 - Grandi numeri in lettere ("settantaduemila dollari"), MAI "72,000" o "72.000".
 - Percentuali: massimo un decimale.
 - ORO: "l'oncia" invece di "/oz".
+- DATE DEL CALENDARIO: scrivi sempre il mese in lettere (es. "16 settembre"), mai la forma "16/09".
 """
 
 AUDIO_FINANCE_PROMPT_SUNDAY = """Sei un conduttore radiofonico finanziario italiano. Stile: conciso, direzionale, zero filler.
@@ -344,6 +346,7 @@ NUMERI — REGOLE FORMATO (critico per TTS):
 - Grandi numeri in lettere ("settantaduemila dollari"), MAI "72,000" o "72.000".
 - Percentuali: massimo un decimale.
 - ORO: "l'oncia" invece di "/oz".
+- DATE DEL CALENDARIO: scrivi sempre il mese in lettere (es. "16 settembre"), mai la forma "16/09".
 """
 
 AUDIO_CRYPTO_PROMPT = """Sei un analista di digital assets. Stile: conciso, direzionale.
@@ -1299,6 +1302,7 @@ NUMBER FORMATTING FOR EN TTS (critical):
 - 0% / 0.00% → "essentially flat".
 - Opening must be "Good morning, welcome to the Price Alert Morning Briefing."
 - Keep the transition "Let's pivot to the cryptocurrency markets..." where the Italian has "Passiamo ora al comparto degli asset digitali..."
+- Dates must use the month name, never slash notation: "September 16", not "16/09".
 
 FORMATO OUTPUT OBBLIGATORIO: restituisci SOLO un oggetto JSON con la chiave "audio_chapters_en" contenente l'array di oggetti JSON tradotti. Niente liste nidificate fuori da quella chiave."""
 

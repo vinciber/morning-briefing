@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import json, logging, yaml, wave, io, os, re, hashlib
-from audio_chapters import validate_narrative
+from audio_chapters import sanitize_audio_text, validate_narrative
 from datetime import datetime, timezone
 from pathlib import Path
 from piper.voice import PiperVoice
@@ -352,6 +352,7 @@ def normalize_for_tts_en(text: str) -> str:
 def briefing_to_text(briefing, lang='it'):
     """Recupera lo script audio pre-generato dall'AI."""
     text = briefing.get(f'audio_script_{lang}', '')
+    text = sanitize_audio_text(text, lang)
     if lang == 'it':
         text = text.replace('$/oz', '/oz')  # Prevents "$45/oz" from breaking IT regex
         text = normalize_for_tts(text)

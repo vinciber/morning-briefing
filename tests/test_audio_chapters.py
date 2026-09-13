@@ -9,7 +9,30 @@ from pathlib import Path
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
-from audio_chapters import make_it_chapters, translated_chapters
+from audio_chapters import make_it_chapters, sanitize_audio_text, translated_chapters
+
+
+def test_sanitize_audio_text_fixes_gold_and_calendar_dates():
+    italian = "L’orologio di oro è in calo. Mercoledì 16/09 – Tasso Fed Funds."
+    assert sanitize_audio_text(italian) == "L'oro è in calo. Mercoledì 16 settembre – Tasso Fed Funds."
+    assert sanitize_audio_text("The gold clock is down on 16/09.", 'en') == \
+        "The gold is down on September 16."
+
+
+def test_make_and_translate_chapters_keep_sanitized_audio_text():
+    chapters = make_it_chapters(
+        {'chapters_it': {'apertura': 'Buongiorno', 'asia': 'L’orologio di oro, 16/09.'}},
+        {'crypto': 'Cripto'},
+        {'close': 'Fine'},
+    )
+    asia = next(chapter for chapter in chapters if chapter['id'] == 'asia')
+    assert asia['text'] == "L'oro, 16 settembre."
+
+    translated, _ = translated_chapters({
+        'audio_chapters_en': [dict(chapter, text='The gold clock, 16/09.') for chapter in chapters]
+    }, chapters)
+    translated_asia = next(chapter for chapter in translated if chapter['id'] == 'asia')
+    assert translated_asia['text'] == 'The gold, September 16.'
 
 
 def test_wrapped_finance_and_deterministic_translation_identity():
