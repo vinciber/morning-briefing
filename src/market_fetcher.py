@@ -417,19 +417,43 @@ def get_fed_target_range():
     if not FRED_API_KEY:
         return None
     try:
-        vals = {}
+        histories = {}
         for sid in ('DFEDTARL', 'DFEDTARU'):
             r = requests.get('https://api.stlouisfed.org/fred/series/observations',
                              params={'series_id': sid, 'api_key': FRED_API_KEY, 'file_type': 'json',
-                                     'sort_order': 'desc', 'limit': 1}, timeout=15)
+                                     'sort_order': 'desc', 'limit': 2000}, timeout=15)
             r.raise_for_status()
-            obs = r.json().get('observations', [])
-            if not obs or obs[0]['value'] == '.':
+            obs = [item for item in r.json().get('observations', [])
+                   if item.get('value') not in (None, '.') and item.get('date')]
+            if not obs:
                 return None
-            vals[sid] = (float(obs[0]['value']), obs[0]['date'])
-        lower, date = vals['DFEDTARL']
-        upper, _ = vals['DFEDTARU']
-        return {'value': f'{lower:.2f}% - {upper:.2f}%', 'release_date': date}
+            histories[sid] = {item['date']: float(item['value']) for item in obs}
+
+        common_dates = sorted(
+            set(histories['DFEDTARL']) & set(histories['DFEDTARU']),
+            reverse=True,
+        )
+        if not common_dates:
+            return None
+
+        latest_date = common_dates[0]
+        current = (
+            histories['DFEDTARL'][latest_date],
+            histories['DFEDTARU'][latest_date],
+        )
+        previous = next((
+            (histories['DFEDTARL'][date], histories['DFEDTARU'][date])
+            for date in common_dates[1:]
+            if (histories['DFEDTARL'][date], histories['DFEDTARU'][date]) != current
+        ), None)
+
+        result = {
+            'value': f'{current[0]:.2f}% - {current[1]:.2f}%',
+            'release_date': latest_date,
+        }
+        if previous:
+            result['previous'] = f'{previous[0]:.2f}% - {previous[1]:.2f}%'
+        return result
     except Exception as e:
         logger.error(f'FRED Fed target range: {e}')
         return None
@@ -868,13 +892,18 @@ def get_macro_calendar_eu() -> dict:
     if FRED_API_KEY:
         # Recuperiamo il tasso principale (Refinancing Rate)
         try:
-            params = {'series_id': 'ECBMRRFR', 'api_key': FRED_API_KEY, 'file_type': 'json', 'sort_order': 'desc', 'limit': 2}
+            params = {'series_id': 'ECBMRRFR', 'api_key': FRED_API_KEY, 'file_type': 'json', 'sort_order': 'desc', 'limit': 2000}
             r = requests.get('https://api.stlouisfed.org/fred/series/observations', params=params, timeout=15)
             r.raise_for_status()
             obs = r.json().get('observations', [])
             if obs and obs[0]['value'] != '.':
-                val_bce = float(obs[0]['value'])
-                date_bce = obs[0]['date']
+                clean_obs = [item for item in obs if item.get('value') not in (None, '.')]
+                val_bce = float(clean_obs[0]['value'])
+                date_bce = clean_obs[0]['date']
+                prev_bce = next((
+                    float(item['value']) for item in clean_obs[1:]
+                    if float(item['value']) != val_bce
+                ), None)
                 result['ecb_rate'] = {
                     'label': 'Tasso BCE (Refi)',
                     'label_it': 'Tasso BCE (Refi)',
@@ -886,18 +915,25 @@ def get_macro_calendar_eu() -> dict:
                     'region': 'EU',
                     'is_main_rate': True
                 }
+                if prev_bce is not None:
+                    result['ecb_rate']['previous'] = f'{prev_bce:.2f}%'
                 logger.info(f'✅ EU Tasso BCE (Refi): {val_bce:.2f}% ({date_bce})')
         except Exception as e:
             logger.error(f'✗ FRED ECB Main Rate: {e}')
 
         # Aggiungiamo anche il tasso sui depositi per completezza
         try:
-            params = {'series_id': 'ECBDFR', 'api_key': FRED_API_KEY, 'file_type': 'json', 'sort_order': 'desc', 'limit': 2}
+            params = {'series_id': 'ECBDFR', 'api_key': FRED_API_KEY, 'file_type': 'json', 'sort_order': 'desc', 'limit': 2000}
             r = requests.get('https://api.stlouisfed.org/fred/series/observations', params=params, timeout=15)
             r.raise_for_status()
             obs = r.json().get('observations', [])
             if obs and obs[0]['value'] != '.':
-                val_dep = float(obs[0]['value'])
+                clean_obs = [item for item in obs if item.get('value') not in (None, '.')]
+                val_dep = float(clean_obs[0]['value'])
+                prev_dep = next((
+                    float(item['value']) for item in clean_obs[1:]
+                    if float(item['value']) != val_dep
+                ), None)
                 result['ecb_deposit_rate'] = {
                     'label': 'Tasso Depositi BCE',
                     'label_it': 'Tasso Depositi BCE',
@@ -906,6 +942,8 @@ def get_macro_calendar_eu() -> dict:
                     'status': 'released',
                     'region': 'EU'
                 }
+                if prev_dep is not None:
+                    result['ecb_deposit_rate']['previous'] = f'{prev_dep:.2f}%'
         except Exception as e:
             logger.error(f'✗ FRED ECB Deposit Rate: {e}')
 

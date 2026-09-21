@@ -639,6 +639,57 @@ def _build_week_ahead(md):
     return out
 
 
+def _set_policy_rate_cards(md, *, ecb_deposit, ecb_refi, fed_rate_range,
+                           ecb_last, ecb_next, fed_last, fed_next,
+                           source_dfr=None, source_refi=None, source_fed=None):
+    """Normalizza i tassi ufficiali in tre card, preservando i precedenti."""
+    source_dfr = source_dfr or {}
+    source_refi = source_refi or {}
+    source_fed = source_fed or {}
+    macro_eu = md.setdefault('macro_calendar_eu', {})
+    macro = md.setdefault('macro_calendar', {})
+
+    # Il deposito è il tasso BCE primario mostrato ai mercati.
+    macro_eu['ecb_rate'] = {
+        'label': 'Tasso BCE (Depositi)',
+        'label_it': 'Tasso BCE (Depositi)',
+        'label_en': 'ECB Rate (Deposit)',
+        'value': ecb_deposit,
+        'release_date': ecb_last,
+        'status': 'released',
+        'next_release': ecb_next,
+        'region': 'EU',
+    }
+    if source_dfr.get('previous'):
+        macro_eu['ecb_rate']['previous'] = source_dfr['previous']
+
+    macro_eu['ecb_refi_rate'] = {
+        'label': 'Tasso BCE (Refi/Mutui)',
+        'label_it': 'Tasso BCE (Refi/Mutui)',
+        'label_en': 'ECB Rate (Refi)',
+        'value': ecb_refi,
+        'status': 'released',
+        'region': 'EU',
+    }
+    if source_refi.get('previous'):
+        macro_eu['ecb_refi_rate']['previous'] = source_refi['previous']
+
+    # La voce sorgente è già rappresentata dalla card canonica ecb_rate.
+    macro_eu.pop('ecb_deposit_rate', None)
+
+    macro['fed_funds'] = {
+        'label': 'Tasso Fed Funds',
+        'label_it': 'Tasso Fed Funds',
+        'label_en': 'Fed Funds Rate',
+        'value': fed_rate_range,
+        'release_date': fed_last,
+        'status': 'released',
+        'next_release': fed_next,
+    }
+    if source_fed.get('previous'):
+        macro['fed_funds']['previous'] = source_fed['previous']
+
+
 def run():
     """Pipeline: Groq NEWS → Gemini → Groq NEWS_2 → salva briefing JSON."""
     if not (GEMINI_API_KEYS or GROQ_API_KEYS):
@@ -685,9 +736,12 @@ def run():
 
         # Tassi live da FRED (fetchati da market_fetcher). ecb_rate va letto PRIMA
         # dell'iniezione hard qui sotto, che lo sovrascrive con il deposit rate.
-        live_refi = (md.get('macro_calendar_eu', {}).get('ecb_rate') or {}).get('value')
-        live_dfr = (md.get('macro_calendar_eu', {}).get('ecb_deposit_rate') or {}).get('value')
-        live_fed = (md.get('fed_target_range') or {}).get('value')
+        source_refi = md.get('macro_calendar_eu', {}).get('ecb_rate') or {}
+        source_dfr = md.get('macro_calendar_eu', {}).get('ecb_deposit_rate') or {}
+        source_fed = md.get('fed_target_range') or {}
+        live_refi = source_refi.get('value')
+        live_dfr = source_dfr.get('value')
+        live_fed = source_fed.get('value')
         missing = [n for n, v in (('ECB Refi', live_refi), ('ECB DFR', live_dfr), ('FED range', live_fed)) if not v]
         if missing:
             logger.warning(f'⚠️ Tassi live FRED mancanti ({", ".join(missing)}) — fallback su '
@@ -702,38 +756,21 @@ def run():
         fed_rate_range = live_fed or fed_rate_range
 
         # INIEZIONE HARD - MACRO TRUTH (BCE/FED)
-        # Sovrascriviamo eventuali errori da FRED con i dati del GROUND TRUTH
-        if 'macro_calendar_eu' not in md: md['macro_calendar_eu'] = {}
-        # Usiamo il DEPOSIT RATE come tasso primario perché è quello che monitorano i mercati
-        md['macro_calendar_eu']['ecb_rate'] = {
-            'label': 'Tasso BCE (Depositi)',
-            'label_it': 'Tasso BCE (Depositi)',
-            'label_en': 'ECB Rate (Deposit)',
-            'value': ecb_deposit,
-            'release_date': ecb_last,
-            'status': 'released',
-            'next_release': ecb_next,
-            'region': 'EU'
-        }
-        md['macro_calendar_eu']['ecb_refi_rate'] = {
-            'label': 'Tasso BCE (Refi/Mutui)',
-            'label_it': 'Tasso BCE (Refi/Mutui)',
-            'label_en': 'ECB Rate (Refi)',
-            'value': ecb_refi,
-            'status': 'released',
-            'region': 'EU'
-        }
-
-        if 'macro_calendar' not in md: md['macro_calendar'] = {}
-        md['macro_calendar']['fed_funds'] = {
-            'label': 'Tasso Fed Funds',
-            'label_it': 'Tasso Fed Funds',
-            'label_en': 'Fed Funds Rate',
-            'value': fed_rate_range,
-            'release_date': fed_last,
-            'status': 'released',
-            'next_release': fed_next
-        }
+        # Sovrascriviamo eventuali errori da FRED con i dati verificati, senza
+        # perdere il precedente livello/range ottenuto dalla serie ufficiale.
+        _set_policy_rate_cards(
+            md,
+            ecb_deposit=ecb_deposit,
+            ecb_refi=ecb_refi,
+            fed_rate_range=fed_rate_range,
+            ecb_last=ecb_last,
+            ecb_next=ecb_next,
+            fed_last=fed_last,
+            fed_next=fed_next,
+            source_dfr=source_dfr,
+            source_refi=source_refi,
+            source_fed=source_fed,
+        )
 
         lines = []
         labels = {
