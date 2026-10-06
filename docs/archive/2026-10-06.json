@@ -178,8 +178,7 @@
     },
     "btc_etf_flow": {
       "value": "$+3.8M",
-      "change": "📈 Reversal Up",
-      "tone": "good"
+      "change": "📈 Reversal Up"
     },
     "btc_etf_data": {
       "last_update": "2026-09-11",
@@ -202,29 +201,24 @@
     "crypto": {
       "fear_greed": {
         "value": "73",
-        "class": "Greed",
-        "tone": "good"
+        "class": "Greed"
       },
       "prices": {
         "BTC": {
           "value": "$85,598",
-          "change": "-0.12%",
-          "tone": "bad"
+          "change": "-0.12%"
         },
         "ETH": {
           "value": "$2,702",
-          "change": "-0.01%",
-          "tone": "bad"
+          "change": "-0.01%"
         },
         "SOL": {
           "value": "$120.04",
-          "change": "-0.30%",
-          "tone": "bad"
+          "change": "-0.30%"
         },
         "BNB": {
           "value": "$781.60",
-          "change": "-1.19%",
-          "tone": "bad"
+          "change": "-1.19%"
         }
       }
     },
@@ -237,8 +231,7 @@
         "previous": "3.5%",
         "release_date": "2026-08-01",
         "status": "released",
-        "next_release": "2026-10-13",
-        "tone": "bad"
+        "next_release": "2026-10-13"
       },
       "core_cpi": {
         "label": "Core CPI YoY USA",
@@ -258,8 +251,7 @@
         "previous": "+133K",
         "release_date": "2026-09-01",
         "status": "released",
-        "next_release": "2026-11-06",
-        "tone": "bad"
+        "next_release": "2026-11-06"
       },
       "unemployment": {
         "label": "Tasso Disoccupazione USA",
@@ -269,8 +261,7 @@
         "previous": "4.1%",
         "release_date": "2026-09-01",
         "status": "released",
-        "next_release": "2026-11-06",
-        "tone": "bad"
+        "next_release": "2026-11-06"
       },
       "pce_core": {
         "label": "PCE Core YoY",
@@ -312,8 +303,7 @@
         "release_date": "2026-Q2",
         "status": "released",
         "next_release": "2026-10-30",
-        "region": "EU",
-        "tone": "good"
+        "region": "EU"
       },
       "ecb_rate": {
         "label": "Tasso BCE (Depositi)",
