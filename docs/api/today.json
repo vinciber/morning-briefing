@@ -1,14 +1,14 @@
 {
-  "date": "2026-11-04",
+  "date": "2026-11-05",
   "sentiment": {
     "label": "risk_on",
-    "score": 4,
-    "reason_it": "Il VIX è a 20.83, in lieve calo (-1.51%) e sotto la soglia 25, mentre l'S&P 500 registra +0.36% a 7,568.92, segnale di un mercato difensivo ma con propensione al rischio. Il DXY è a 101.51, in ribasso (-0.35%), favorendo le commodity e gli asset emergenti. La guerra in Ucraina rimane attiva, aggiungendo un fattore di pressione (max +2 punti). Con questi elementi il sentiment si orienta verso un leggero risk‑on, con uno score di 4 su 10.",
-    "reason_en": "The VIX sits at 20.83, down 1.51% and below the 25 threshold, while the S&P 500 is up 0.36% at 7,568.92, indicating a defensive market with a tilt toward risk. The DXY is at 101.51, down 0.35%, which supports commodities and emerging assets. The ongoing war in Ukraine adds a bearish pressure factor (max +2 points). Overall, the sentiment leans slightly risk‑on, yielding a score of 4 out of 10."
+    "score": 3,
+    "reason_it": "Il VIX a 16,61 (-20,26%) indica un mercato difensivo limitato; il S&P 500 è +1,58% a 7.688,62, segnale di forte risk‑on. Il DXY a 101,26 (-0,24%) è in debolezza, favorendo le commodity e gli EM. Il Brent a $94,06 (-0,59%) e il petrolio in calo rafforzano l’appetito per le azioni, mentre l’oro a $4.131,90 (+1,45%) resta in rialzo misto. In sintesi, la compressione del TLT (+0,80%) e il calo dei rendimenti USA (4,89% -1,17%) confermano la pressione al ribasso sui tassi reali, spingendo verso un contesto di risk‑on.",
+    "reason_en": "The VIX at 16.61 (-20.26%) signals limited defensive positioning; the S&P 500 is up +1.58% at 7,688.62, a clear risk‑on cue. The DXY at 101.26 (-0.24%) is weakening, which benefits commodities and emerging markets. Brent at $94.06 (-0.59%) and falling oil support equity appetite, while gold at $4,131.90 (+1.45%) shows a mixed rise. Overall, the TLT rise (+0.80%) and the drop in US 10‑year yields (4.89% -1.17%) confirm real‑rate compression, steering the market toward risk‑on."
   },
   "market_impact_summary": {
-    "it": "Equity: S&P 500 +0.36% e STOXX 600 +0.45% mostrano un trend positivo, sostenuti dal DXY in calo (-0.35%) e da un VIX in diminuzione (-1.51%). Fixed Income: TLT 20Y -0.76% e US 10Y Yield +1.19% indicano un rialzo dei tassi, confermando la compressione del mercato obbligazionario. Commodity: Gold +2.15% a $4,025/oz e Brent +0.55% a $104.17 riflettono la debasement e la leggera pressione inflazionistica, mentre il DXY debole favorisce le materie prime.",
-    "en": "Equities: S&P 500 +0.36% and STOXX 600 +0.45% are on a modest upside, backed by a falling DXY (-0.35%) and a declining VIX (-1.51%). Fixed Income: 20Y TLT -0.76% and US 10Y Yield +1.19% signal higher rates, confirming bond market compression. Commodities: Gold +2.15% at $4,025/oz and Brent +0.55% at $104.17 reflect debasement dynamics and mild inflation pressure, while a weaker DXY supports commodities."
+    "it": "Equity: S&P 500 +1,58% e FTSE MIB +2,18% spingono verso un rally azionario; Euro STOXX 600 -0,61% resta più debole. Fixed Income: TLT +0,80% e US 10Y Yield -1,17% indicano tassi reali in calo, favorendo il debasement. Commodity: Brent -0,59% e DXY -0,24% creano un contesto bullish per le materie prime, mentre l’oro +1,45% resta neutro. Crypto: BTC +3,47% e ETH +5,87% riflettono un rinnovato interesse, sostenuto dal flusso netto +3,8 M di BTC ETF.",
+    "en": "Equities: S&P 500 +1.58% and FTSE MIB +2.18% drive a stock rally; Euro STOXX 600 -0.61% lags. Fixed Income: TLT +0.80% and US 10Y Yield -1.17% signal falling real rates, supporting debasement. Commodities: Brent -0.59% and DXY -0.24% create a bullish backdrop for raw materials, while gold +1.45% stays mixed. Crypto: BTC +3.47% and ETH +5.87% show renewed appetite, bolstered by a +$3.8 M net inflow into BTC ETFs."
   },
   "audio_narrative_it": [
     {
@@ -19,17 +19,17 @@
     {
       "id": "asia",
       "title": "Mercati Asiatici",
-      "text": "Il Nikkei ha chiuso in calo dell’1,42%, Shanghai in rialzo del 2,02%, Hang Seng in rialzo dell’1,05%."
+      "text": "Il Nikkei ha chiuso in calo dell'1,79%, Shanghai in calo dello 0,13%, Hang Seng in rialzo del 3,40%."
     },
     {
       "id": "occidente",
       "title": "Mercati Occidentali",
-      "text": "Lo S&P 500 è in rialzo dello 0,36%, il VIX è in calo dell’1,51%, il DXY è in calo dello 0,35%, l’oro è in rialzo del 2,15% a 4025 dollari l’oncia, il Brent è in rialzo dello 0,55%, il rendimento US 10Y è in rialzo del 1,19%, il BTP 10Y è stabile a 3,99%."
+      "text": "Il S&P 500 è in rialzo dell'1,58%. Il VIX è in calo del 20,26%. Il DXY è in calo dello 0,24%. L'oro è in rialzo del 1,45%. Il Brent è in calo dello 0,59%. Il rendimento US 10Y è in calo dell'1,17%. Il BTP 10Y è stabile al 3,99%."
     },
     {
       "id": "geopolitica",
       "title": "Geopolitica",
-      "text": "L’Australia ha aumentato i tassi al livello più alto dal 2008, Bruxelles impone una scadenza stringente per le nomine del presidente della BCE, la Cina e i partner commerciali si avvicinano a una pace economica fragile, la guerra in Ucraina continua a influenzare gli sforzi di sanzioni, la Polonia vive una guerra civile costituzionale, e le compagnie aeree taiwanesi mantengono voli sopra la Russia, preoccupando gli europei."
+      "text": "L'inflazione in Eurozona è salita al 4%, confermando la politica di stretta dell'ECB. La Cina sta riducendo l'influenza del dollaro, non sconfiggendolo. Le sanzioni contro la Russia e la guerra in Ucraina continuano a influenzare i mercati."
     },
     {
       "id": "macro",
@@ -39,15 +39,15 @@
     {
       "id": "crypto",
       "title": "Criptovalute",
-      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si muove al 1,6 % in rialzo, con un inflow netto di ETF di tre milioni e ottantamila dollari. Ethereum cresce del 1,9 %, Solana del 1,2 %, BNB resta stabile al 0,8 %. Fear & Greed Index è a 34, classificato come Fear. Il valore suggerisce cautela sugli investitori."
+      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si mantiene sopra ottantamila dollari, con un incremento del 3,47%. I flussi netti degli ETF Bitcoin sono positivi, con +3,8 milioni di dollari. Ethereum sale del 5,87%, raggiungendo duemilatrecentocinquanta dollari. Solana cresce del 3,57%, arrivando a novecentotrentadue dollari. BNB aumenta del 2,05%, raggiungendo settecentoquattordici dollari. Il Fear & Greed Index è a 50, classificato come neutro, suggerendo cautela sugli investitori."
     },
     {
       "id": "close",
       "title": "Chiusura",
-      "text": "Oggi monitoriamo il tasso Fed Funds, che guida i mercati. Per approfondire, consultate la sezione Storie in Primo Piano. Grazie per l'attenzione e a domani."
+      "text": "Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Grazie per l'attenzione e a domani."
     }
   ],
-  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert.\n\nIl Nikkei ha chiuso in calo dell’1,42%, Shanghai in rialzo del 2,02%, Hang Seng in rialzo dell’1,05%.\n\nLo S&P 500 è in rialzo dello 0,36%, il VIX è in calo dell’1,51%, il DXY è in calo dello 0,35%, l’oro è in rialzo del 2,15% a 4025 dollari l’oncia, il Brent è in rialzo dello 0,55%, il rendimento US 10Y è in rialzo del 1,19%, il BTP 10Y è stabile a 3,99%.\n\nL’Australia ha aumentato i tassi al livello più alto dal 2008, Bruxelles impone una scadenza stringente per le nomine del presidente della BCE, la Cina e i partner commerciali si avvicinano a una pace economica fragile, la guerra in Ucraina continua a influenzare gli sforzi di sanzioni, la Polonia vive una guerra civile costituzionale, e le compagnie aeree taiwanesi mantengono voli sopra la Russia, preoccupando gli europei.\n\nnessun dato macro rilevante in uscita oggi.\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si muove al 1,6 % in rialzo, con un inflow netto di ETF di tre milioni e ottantamila dollari. Ethereum cresce del 1,9 %, Solana del 1,2 %, BNB resta stabile al 0,8 %. Fear & Greed Index è a 34, classificato come Fear. Il valore suggerisce cautela sugli investitori.\n\nOggi monitoriamo il tasso Fed Funds, che guida i mercati. Per approfondire, consultate la sezione Storie in Primo Piano. Grazie per l'attenzione e a domani.",
+  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert.\n\nIl Nikkei ha chiuso in calo dell'1,79%, Shanghai in calo dello 0,13%, Hang Seng in rialzo del 3,40%.\n\nIl S&P 500 è in rialzo dell'1,58%. Il VIX è in calo del 20,26%. Il DXY è in calo dello 0,24%. L'oro è in rialzo del 1,45%. Il Brent è in calo dello 0,59%. Il rendimento US 10Y è in calo dell'1,17%. Il BTP 10Y è stabile al 3,99%.\n\nL'inflazione in Eurozona è salita al 4%, confermando la politica di stretta dell'ECB. La Cina sta riducendo l'influenza del dollaro, non sconfiggendolo. Le sanzioni contro la Russia e la guerra in Ucraina continuano a influenzare i mercati.\n\nnessun dato macro rilevante in uscita oggi.\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si mantiene sopra ottantamila dollari, con un incremento del 3,47%. I flussi netti degli ETF Bitcoin sono positivi, con +3,8 milioni di dollari. Ethereum sale del 5,87%, raggiungendo duemilatrecentocinquanta dollari. Solana cresce del 3,57%, arrivando a novecentotrentadue dollari. BNB aumenta del 2,05%, raggiungendo settecentoquattordici dollari. Il Fear & Greed Index è a 50, classificato come neutro, suggerendo cautela sugli investitori.\n\nPer approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Grazie per l'attenzione e a domani.",
   "audio_narrative_en": [
     {
       "id": "intro",
@@ -57,17 +57,17 @@
     {
       "id": "asia",
       "title": "Asian Markets",
-      "text": "The Nikkei closed down 1.42%, Shanghai up 2.02%, Hang Seng up 1.05%."
+      "text": "The Nikkei closed down 1.79%, Shanghai down 0.13%, Hang Seng up 3.40%."
     },
     {
       "id": "occidente",
       "title": "Western Markets",
-      "text": "The S&P 500 is up 0.36%, the VIX down 1.51%, the DXY down 0.35%, gold up 2.15% at $4,025 an ounce, Brent up 0.55%, the US 10Y yield up 1.19%, the 10Y BTP is stable at 3.99%."
+      "text": "The S&P 500 is up 1.58%. The VIX is down 20.26%. The DXY is down 0.24%. Gold is up 1.45%. Brent is down 0.59%. The US 10Y yield is down 1.17%. The 10Y BTP is flat at 3.99%."
     },
     {
       "id": "geopolitica",
       "title": "Geopolitics",
-      "text": "Australia has raised rates to the highest level since 2008, Brussels imposes a tight deadline for ECB president nominations, China and trade partners approach a fragile economic peace, the war in Ukraine continues to affect sanctions efforts, Poland is experiencing a constitutional civil war, and Taiwanese airlines maintain flights over Russia, worrying Europeans."
+      "text": "Eurozone inflation rose to 4%, confirming the ECB’s tightening policy. China is reducing the dollar’s influence, not defeating it. Sanctions against Russia and the war in Ukraine continue to affect markets."
     },
     {
       "id": "macro",
@@ -77,92 +77,92 @@
     {
       "id": "crypto",
       "title": "Cryptocurrencies",
-      "text": "Let's pivot to the cryptocurrency markets. Bitcoin is up 1.6% with a net ETF inflow of $3,080,000. Ethereum up 1.9%, Solana up 1.2%, BNB stable at 0.8%. Fear & Greed Index is 34, classified as Fear. The value suggests caution for investors."
+      "text": "Let's pivot to the cryptocurrency markets. Bitcoin stays above $80,000, up 3.47%. Bitcoin ETF net flows are positive, at +$3.8 million. Ethereum rises 5.87%, reaching $2,345. Solana grows 3.57%, reaching $932. BNB rises 2.05%, reaching $714. The Fear & Greed Index is 50, classified as neutral, suggesting caution for investors."
     },
     {
       "id": "close",
       "title": "Closing",
-      "text": "Today we monitor the Fed Funds rate, which drives the markets. For deeper insight, consult the Spotlight Stories section. Thank you for your attention and see you tomorrow."
+      "text": "For deeper coverage of today’s topics, find the full articles in the Spotlight Stories section on our platform. Thank you for listening and see you tomorrow."
     }
   ],
-  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing.\n\nThe Nikkei closed down 1.42%, Shanghai up 2.02%, Hang Seng up 1.05%.\n\nThe S&P 500 is up 0.36%, the VIX down 1.51%, the DXY down 0.35%, gold up 2.15% at $4,025 an ounce, Brent up 0.55%, the US 10Y yield up 1.19%, the 10Y BTP is stable at 3.99%.\n\nAustralia has raised rates to the highest level since 2008, Brussels imposes a tight deadline for ECB president nominations, China and trade partners approach a fragile economic peace, the war in Ukraine continues to affect sanctions efforts, Poland is experiencing a constitutional civil war, and Taiwanese airlines maintain flights over Russia, worrying Europeans.\n\nNo significant macro data released today.\n\nLet's pivot to the cryptocurrency markets. Bitcoin is up 1.6% with a net ETF inflow of $3,080,000. Ethereum up 1.9%, Solana up 1.2%, BNB stable at 0.8%. Fear & Greed Index is 34, classified as Fear. The value suggests caution for investors.\n\nToday we monitor the Fed Funds rate, which drives the markets. For deeper insight, consult the Spotlight Stories section. Thank you for your attention and see you tomorrow.",
+  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing.\n\nThe Nikkei closed down 1.79%, Shanghai down 0.13%, Hang Seng up 3.40%.\n\nThe S&P 500 is up 1.58%. The VIX is down 20.26%. The DXY is down 0.24%. Gold is up 1.45%. Brent is down 0.59%. The US 10Y yield is down 1.17%. The 10Y BTP is flat at 3.99%.\n\nEurozone inflation rose to 4%, confirming the ECB’s tightening policy. China is reducing the dollar’s influence, not defeating it. Sanctions against Russia and the war in Ukraine continue to affect markets.\n\nNo significant macro data released today.\n\nLet's pivot to the cryptocurrency markets. Bitcoin stays above $80,000, up 3.47%. Bitcoin ETF net flows are positive, at +$3.8 million. Ethereum rises 5.87%, reaching $2,345. Solana grows 3.57%, reaching $932. BNB rises 2.05%, reaching $714. The Fear & Greed Index is 50, classified as neutral, suggesting caution for investors.\n\nFor deeper coverage of today’s topics, find the full articles in the Spotlight Stories section on our platform. Thank you for listening and see you tomorrow.",
   "market_data_raw": {
     "dxy": {
-      "value": "101.51",
-      "change": "-0.35%"
+      "value": "101.26",
+      "change": "-0.24%"
     },
     "eur_usd": {
       "value": "1.12",
-      "change": "+0.40%"
+      "change": "+0.52%"
     },
     "sp500": {
-      "value": "7568.92",
-      "change": "+0.36%"
+      "value": "7688.62",
+      "change": "+1.58%"
     },
     "nasdaq": {
-      "value": "25,372",
-      "change": "+0.83%"
+      "value": "25,737",
+      "change": "+1.44%"
     },
     "dow": {
-      "value": "51,787",
-      "change": "-0.38%"
+      "value": "53,356",
+      "change": "+3.03%"
     },
     "vix": {
-      "value": "20.83",
-      "change": "-1.51%"
+      "value": "16.61",
+      "change": "-20.26%"
     },
     "tlt": {
-      "value": "81.11",
-      "change": "-0.76%"
+      "value": "81.76",
+      "change": "+0.80%"
     },
     "us_10y": {
-      "value": "4.95%",
-      "change": "+1.19%"
+      "value": "4.89%",
+      "change": "-1.17%"
     },
     "gold": {
-      "value": "$4025.00/oz",
-      "change": "+2.15%"
+      "value": "$4131.90/oz",
+      "change": "+1.45%"
     },
     "btcusd": {
-      "value": "$77,776",
-      "change": "+1.43%"
+      "value": "$80,565",
+      "change": "+4.16%"
     },
     "oil_brent": {
-      "value": "$104.17",
-      "change": "+0.55%"
+      "value": "$94.06",
+      "change": "-0.59%"
     },
     "stoxx_600": {
-      "value": "64.37",
-      "change": "+0.45%"
+      "value": "63.98",
+      "change": "-0.61%"
     },
     "ftse_mib": {
-      "value": "49,942",
-      "change": "-0.01%"
+      "value": "51,031",
+      "change": "+2.18%"
     },
     "nikkei": {
-      "value": "62,189",
-      "change": "-1.42%"
+      "value": "61,078",
+      "change": "-1.79%"
     },
     "shanghai": {
-      "value": "3680.95",
-      "change": "+2.02%"
+      "value": "3681.26",
+      "change": "-0.13%"
     },
     "hang_seng": {
-      "value": "23,773",
-      "change": "+1.05%"
+      "value": "24,732",
+      "change": "+3.40%"
     },
     "europe_futures": {
       "status": "available",
       "instrument": "EURO STOXX 50 Futures Roll Index",
       "source": "Yahoo Finance",
       "source_symbol": "03V9.Z",
-      "price": 2081.809,
-      "previous_close": 2089.913,
-      "change_pct": -0.388,
-      "quote_time_utc": "2026-11-04T06:30:04+00:00",
+      "price": 2122.668,
+      "previous_close": 2081.809,
+      "change_pct": 1.963,
+      "quote_time_utc": "2026-11-05T06:37:23+00:00",
       "age_minutes": 15.0,
       "delayed_by_minutes": null,
-      "summary_it": "I futures sull’EURO STOXX 50 indicano un avvio europeo negativo."
+      "summary_it": "I futures sull’EURO STOXX 50 indicano un avvio europeo positivo."
     },
     "btp_10y": {
       "value": "3.99%",
@@ -201,29 +201,28 @@
     },
     "crypto": {
       "fear_greed": {
-        "value": "34",
-        "class": "Fear",
-        "tone": "bad"
+        "value": "50",
+        "class": "Neutral"
       },
       "prices": {
         "BTC": {
-          "value": "$77,831",
-          "change": "+1.63%",
+          "value": "$80,615",
+          "change": "+3.47%",
           "tone": "good"
         },
         "ETH": {
-          "value": "$2,291",
-          "change": "+1.92%",
+          "value": "$2,430",
+          "change": "+5.87%",
           "tone": "good"
         },
         "SOL": {
-          "value": "$92.78",
-          "change": "+1.20%",
+          "value": "$96.24",
+          "change": "+3.57%",
           "tone": "good"
         },
         "BNB": {
-          "value": "$699.40",
-          "change": "+0.81%",
+          "value": "$714.17",
+          "change": "+2.05%",
           "tone": "good"
         }
       }
@@ -288,9 +287,9 @@
         "label_it": "Tasso Fed Funds",
         "label_en": "Fed Funds Rate",
         "value": "3.75% - 4.00%",
-        "release_date": "2026-09-16",
+        "release_date": "2026-11-04",
         "status": "released",
-        "next_release": "2026-11-04",
+        "next_release": "2026-12-16",
         "previous": "3.50% - 3.75%"
       },
       "gdp": {
@@ -357,74 +356,96 @@
     },
     "fed_target_range": {
       "value": "3.75% - 4.00%",
-      "release_date": "2026-11-03",
+      "release_date": "2026-11-04",
       "previous": "3.50% - 3.75%"
     }
   },
   "articles": [
     {
-      "title": "Australia raises rates to highest level since 2008 financial crisis",
-      "url": "https://www.ft.com/content/60283bdf-e45d-4723-a68e-5a857a5b949e?syn-25a6b1a6=1",
+      "title": "October inflation in the Eurozone keeps ECB on course for another tightening",
+      "url": "https://www.ft.com/content/a3da6c3a-4ab3-413c-bbeb-490d7cde34dc",
       "source": "Financial Times (Global Economy)",
       "tier": 1,
       "category": "macro_economia",
-      "snippet": "Central bank’s fifth increase this year comes as inflation remains above target",
-      "date": "2026-11-03T06:40:16+00:00",
+      "snippet": "Headline price pressures accelerate and core inflation remains well above the ECB’s 2% target",
+      "date": "2026-11-04T11:25:47+00:00",
       "relevance_score": 1.0,
-      "title_it": "Australia aumenta i tassi al livello più alto dalla crisi finanziaria del 2008",
-      "title_en": "Australia raises rates to highest level since 2008 financial crisis",
-      "summary_it": "La Banca centrale australiana alza i tassi per la quinta volta, segnalando inflazione sopra l'obiettivo.",
-      "summary_en": "Australia's central bank hikes rates for the fifth time, citing inflation above target.",
+      "title_it": "L'inflazione di ottobre nell'Eurozona spinge la BCE verso un nuovo inasprimento",
+      "title_en": "October inflation in the Eurozone keeps ECB on course for another tightening",
+      "summary_it": "L'inflazione accelerata costringe la BCE a considerare ulteriori aumenti dei tassi.",
+      "summary_en": "Rising inflation forces the ECB to contemplate further rate hikes.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "Eurozone bonds",
+          "EUR"
+        ]
+      }
+    },
+    {
+      "title": "Eurozone inflation rises to 4% in October",
+      "url": "https://www.ft.com/content/23cedd6f-e550-4869-aee1-e0ec10ae7e51?syn-25a6b1a6=1",
+      "source": "Financial Times (Global Economy)",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "Consumer prices accelerate at fastest pace in three years",
+      "date": "2026-11-04T10:25:26+00:00",
+      "relevance_score": 1.0,
+      "title_it": "L'inflazione nell'Eurozona sale al 4% a ottobre",
+      "title_en": "Eurozone inflation rises to 4% in October",
+      "summary_it": "I prezzi al consumo aumentano al ritmo più veloce degli ultimi tre anni.",
+      "summary_en": "Consumer prices rise at the fastest pace in three years.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "Eurozone bonds",
+          "EUR"
+        ]
+      }
+    },
+    {
+      "title": "China Is Defanging the Dollar, Not Dethroning It",
+      "url": "https://www.project-syndicate.org/commentary/china-trade-with-russia-iran-is-not-de-dollarizing-global-economy-by-ho-fung-hung-2026-11?utm_source=rss&utm_medium=feed&utm_campaign=main&utm_content=en",
+      "source": "Project Syndicate",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "China offers Iran and Russia a way to circumvent US sanctions and continue doing business. But this comes at an elevated cost, because these countries are paid in onshore, non-convertible renminbi, which they must then convert into dollars using underground financial networks—tacitly reinforcing the greenback’s dominance.",
+      "date": "2026-11-04T15:47:56+00:00",
+      "relevance_score": 1.0,
+      "title_it": "La Cina aggira il dollaro, ma non lo sostituisce",
+      "title_en": "China Is Defanging the Dollar, Not Dethroning It",
+      "summary_it": "Pechino offre a Iran e Russia vie alternative al dollaro, ma a costi elevati.",
+      "summary_en": "Beijing provides Iran and Russia alternatives to the dollar, but at high cost.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "medium",
         "assets_affected": [
-          "S&P 500",
-          "AUD"
+          "USD",
+          "RUB"
         ]
       }
     },
     {
-      "title": "Brussels sets tight deadline for ECB president nominations",
-      "url": "https://www.ft.com/content/c5c430f5-e9b7-434b-851a-565cc43ccb94?syn-25a6b1a6=1",
-      "source": "Financial Times (Global Economy)",
-      "tier": 1,
-      "category": "macro_economia",
-      "snippet": "Eurozone leaders need to submit nominees to succeed Christine Lagarde by Friday as contest for top central banking job heats up",
-      "date": "2026-11-03T10:14:00+00:00",
-      "relevance_score": 0.9,
-      "title_it": "Bruxelles fissa una scadenza rigida per le nomine del presidente della BCE",
-      "title_en": "Brussels sets tight deadline for ECB president nominations",
-      "summary_it": "I leader dell'Eurozona devono presentare i candidati per succedere a Lagarde entro venerdì.",
-      "summary_en": "Eurozone leaders must submit ECB president nominees by Friday, intensifying the selection race.",
-      "market_impact": {
-        "direction": "mixed",
-        "magnitude": "low",
-        "assets_affected": [
-          "Euro",
-          "Euro Stoxx 50"
-        ]
-      }
-    },
-    {
-      "title": "China and its trading partners are moving towards an economic peace. But it is a fragile one",
-      "url": "https://www.chathamhouse.org/2026/11/china-and-its-trading-partners-are-moving-towards-economic-peace-it-fragile-one",
-      "source": "Chatham House",
+      "title": "The ECB Must Bail Out France",
+      "url": "https://www.project-syndicate.org/commentary/ecb-should-waive-its-rules-to-bail-france-out-and-protect-the-euro-by-desmond-lachman-2026-11?utm_source=rss&utm_medium=feed&utm_campaign=main&utm_content=en",
+      "source": "Project Syndicate",
       "tier": 2,
       "category": "macro_economia",
-      "snippet": "China and its trading partners are moving towards an economic peace. But it is a fragile one Expert comment thilton.drupal 3 November 2026 Beijing appears to have embraced economic stability in its relations with the US and the EU. But serious challenges over its currency and export model remain. In a world full of geopolitical tension and war, it is worth pausing to consider the few signs of hope that have emerged these last few months in China’s relations with the US and the EU. Last month’s deal between Beijing and the EU to limit Europe’s imports of plug-in hybrid electric vehicles (PHEVs) is the most recent notable example. It represents an easing of trade tension and could help to defuse the threat of some very hostile trade tools that the French and German governments are now willin",
-      "date": "2026-11-03T13:04:48+00:00",
+      "snippet": "If France is to avoid default, the European Central Bank will need to buy large amounts of its government’s bonds through the Transmission Protection Instrument. But meeting this need—and preventing a potentially disastrous eurozone sovereign-debt-crisis—will require the ECB to waive its own rules.",
+      "date": "2026-11-04T13:02:36+00:00",
       "relevance_score": 1.0,
-      "title_it": "Cina e i suoi partner commerciali avvicinano una pace economica fragile",
-      "title_en": "China and its trading partners are moving towards an economic peace. But it is a fragile one",
-      "summary_it": "La Cina cerca una stabilità commerciale, ma la pace economica rimane vulnerabile.",
-      "summary_en": "China seeks commercial stability, yet the economic peace remains fragile.",
+      "title_it": "La BCE deve salvare la Francia",
+      "title_en": "The ECB Must Bail Out France",
+      "summary_it": "Per evitare il default francese, la BCE dovrebbe acquistare massicciamente obbligazioni francesi.",
+      "summary_en": "To prevent a French default, the ECB may need to buy large amounts of French bonds.",
       "market_impact": {
-        "direction": "bullish",
-        "magnitude": "low",
+        "direction": "bearish",
+        "magnitude": "high",
         "assets_affected": [
-          "S&P 500",
-          "China A‑shares"
+          "Eurozone bonds",
+          "EUR"
         ]
       }
     },
@@ -437,16 +458,16 @@
       "snippet": "The Peterson Institute for International Economics presents its post 2026 midterm election briefing on what the election results and incoming Congress could mean for US and international economic policy. Cullen S. Hendrix discusses the geopolitical stakes of the midterms, including whether the new Congress will check or extend the executive's use of economic levers in the name of national security, from tariffs and sanctions to critical minerals and industrial policy. Mary E. Lovely examines the role of tariffs and trade wars on voter sentiment and implications for the new Congress. Adam S.…",
       "date": "2026-11-12T18:00:00+00:00",
       "relevance_score": 1.0,
-      "title_it": "Analisi post elezioni di medio termine 2026 del Peterson Institute",
+      "title_it": "Analisi post-elezioni di medio termine 2026",
       "title_en": "2026 midterm election debrief",
-      "summary_it": "Il PIIE valuta le implicazioni delle elezioni di medio termine per l'economia statunitense.",
-      "summary_en": "PIIE assesses the US economic implications of the 2026 midterm election results.",
+      "summary_it": "Il PIIE valuta le implicazioni elettorali per l'economia statunitense e globale.",
+      "summary_en": "PIIE assesses the election's implications for the US and global economy.",
       "market_impact": {
         "direction": "mixed",
         "magnitude": "medium",
         "assets_affected": [
-          "S&P 500",
-          "US Treasury"
+          "US equities",
+          "USD"
         ]
       }
     },
@@ -459,37 +480,60 @@
       "snippet": "Russia's war in Ukraine has now been going on for almost five years, with no end in sight. Western sanctions have hurt the Russian war economy, and it is suffering from growing structural fatigue, but the country is accelerating its attacks on Ukraine. The sanctions imposed by the US Congress under the Lindsey O. Graham Sanctioning Russia Act have recently been rolled back by President Donald Trump's decision to buy Russian diesel and waive sanctions. The European Union is increasing its military, economic, and humanitarian support for Ukraine, but will it be enough? What is the actual state…",
       "date": "2026-11-04T14:00:00+00:00",
       "relevance_score": 1.0,
-      "title_it": "Guerra in Ucraina, sanzioni e l'economia di guerra russa",
+      "title_it": "Guerra in Ucraina, sanzioni e economia di guerra russa",
       "title_en": "The war in Ukraine, sanctions, and the Russian war economy",
-      "summary_it": "Le sanzioni occidentali continuano a gravare sull'economia di guerra russa.",
-      "summary_en": "Western sanctions keep weighing on Russia's war economy.",
+      "summary_it": "Le sanzioni occidentali indeboliscono l'economia di guerra russa, prolungando il conflitto.",
+      "summary_en": "Western sanctions weaken Russia's war economy, extending the conflict.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "high",
         "assets_affected": [
-          "Brent",
-          "Euro"
+          "RUB",
+          "EUR"
         ]
       }
     },
     {
-      "title": "Eurocoin indicator: October 2026 [pdf, 290.9 KB]",
-      "url": "https://www.bancaditalia.it/media/comunicati/documenti/2026-02/cs-EuroCOIN-October-2026.pdf?language_id=1",
-      "source": "Banca d Italia",
-      "tier": 1,
+      "title": "Midterm to long-term analysis of US election. What’s next?",
+      "url": "https://www.chathamhouse.org/2026/11/midterm-long-term-analysis-us-election-whats-next",
+      "source": "Chatham House",
+      "tier": 2,
       "category": "macro_economia",
-      "snippet": "Eurocoin indicator: October 2026 [pdf, 290.9 KB]",
-      "date": "2026-11-03T08:30:00+00:00",
-      "relevance_score": 0.4,
-      "title_it": "Indicatore Eurocoin ottobre 2026",
-      "title_en": "Eurocoin indicator: October 2026 [pdf, 290.9 KB]",
-      "summary_it": "Pubblicazione dell'indicatore Eurocoin con dati macro per ottobre 2026.",
-      "summary_en": "Release of the Eurocoin indicator containing macro data for October 2026.",
+      "snippet": "Midterm to long-term analysis of US election. What’s next? News release sfarrell.drupa… 4 November 2026 As voting was under way, Chatham House analysts on Tuesday looked ahead to how the US midterm elections could reshape the US political system, and the next two years of President Donald Trump’s administration. On US midterm election day Chatham House convened a panel of experts to discuss what they were seeing, and what lies ahead for US domestic and foreign policy. The in-person and online event – one of many convened by the Royal Institute of International Affairs – was part of its ongoing coverage of the US and its relationships with Europe, China and the rest of the world. You can watch the full discussion panel here: US midterm elections 2026: What happens next? Here are some key ta",
+      "date": "2026-11-04T08:32:34+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Analisi a lungo termine delle elezioni statunitensi",
+      "title_en": "Midterm to long-term analysis of US election. What’s next?",
+      "summary_it": "Chatham House prevede impatti prolungati delle elezioni su politica e mercati USA.",
+      "summary_en": "Chatham House forecasts prolonged election impacts on US policy and markets.",
       "market_impact": {
-        "direction": "bullish",
-        "magnitude": "low",
+        "direction": "mixed",
+        "magnitude": "medium",
         "assets_affected": [
-          "Euro"
+          "US equities",
+          "USD"
+        ]
+      }
+    },
+    {
+      "title": "Rates",
+      "url": "https://rss.art19.com/the-insight",
+      "source": "Oaktree Capital (Memos)",
+      "tier": 2,
+      "category": "mercati",
+      "snippet": "In September, the U.S. Federal Reserve increased interest rates for the first time in three years, defying expectations for rate decreases in 2026. In our latest episode of The Insight podcast, Wayne Dahl, co-Portfolio Manager of Oaktree’s Global Credit strategy, discusses what’s behind the rise in rates, how it’s reshaping the opportunity set in credit markets and where to find value today. Recorded on October 20, 2026.",
+      "date": "2026-11-05T05:00:00+00:00",
+      "relevance_score": 0.7,
+      "title_it": "Aumento dei tassi negli Stati Uniti a settembre",
+      "title_en": "Rates",
+      "summary_it": "La Fed alza i tassi per la prima volta in tre anni, sorprendendo le aspettative di riduzione.",
+      "summary_en": "The Fed raises rates for the first time in three years, defying expectations of cuts.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "USD",
+          "US bonds"
         ]
       }
     },
@@ -500,319 +544,277 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "The Folly of a Hawkish Restoration",
-      "date": "2026-11-04T06:44:54.195445+00:00",
+      "date": "2026-11-05T06:52:15.219080+00:00",
       "relevance_score": 0.6000000000000001,
       "title_it": "Non tornare indietro sulla politica verso la Cina",
       "title_en": "Don’t Go Backward on China Policy",
-      "summary_it": "L'articolo avverte contro un ritorno a politiche più dure verso la Cina.",
-      "summary_en": "The piece warns against reverting to harsher policies toward China.",
+      "summary_it": "L'articolo avverte contro un ritorno a una politica più aggressiva verso Pechino.",
+      "summary_en": "The piece warns against reverting to a more hawkish China policy.",
       "market_impact": {
-        "direction": "bearish",
-        "magnitude": "medium",
+        "direction": "bullish",
+        "magnitude": "low",
         "assets_affected": [
-          "S&P 500",
-          "China A‑shares"
+          "CNY",
+          "global equities"
         ]
       }
     },
     {
-      "title": "Corruption in the Crosshairs: The Debate Over Transparency and Saving Face",
-      "url": "https://warontherocks.com/corruption-in-the-crosshairs-the-debate-over-transparency-and-saving-face/",
+      "title": "China's curbs on tungsten used in drill bits squeeze AI supply chain",
+      "url": "https://asia.nikkei.com/spotlight/supply-chain/china-s-curbs-on-tungsten-used-in-drill-bits-squeeze-ai-supply-chain",
+      "source": "Nikkei Asia",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "China's curbs on tungsten used in drill bits squeeze AI supply chain",
+      "date": "2026-11-05T06:52:16.949953+00:00",
+      "relevance_score": 0.6000000000000001,
+      "title_it": "Le restrizioni cinesi al tungsteno comprimono la catena AI",
+      "title_en": "China's curbs on tungsten used in drill bits squeeze AI supply chain",
+      "summary_it": "Le limitazioni al tungsteno aumentano i costi dei componenti per l'IA.",
+      "summary_en": "Tungsten restrictions raise costs for AI component supply chains.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Tungsten",
+          "AI sector stocks"
+        ]
+      }
+    },
+    {
+      "title": "The UAE in Sudan",
+      "url": "https://www.crisisgroup.org/pod/africa/sudan/uae-sudan",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "This week on Hold Your Fire!, Richard is joined by Crisis Group experts Shewit Woldemichael and Alan Boswell to discuss how the UAE and other foreign powers are sustaining Sudan’s war, deepening the suffering of Sudanese civilians and complicating diplomatic efforts to end the fighting.",
+      "date": "2026-11-05T06:52:15.218103+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Il ruolo degli Emirati negli interventi in Sudan",
+      "title_en": "The UAE in Sudan",
+      "summary_it": "Gli Emirati, insieme ad altre potenze, sostengono il conflitto sudanese, aggravando le tensioni.",
+      "summary_en": "The UAE, alongside other powers, sustains the Sudan conflict, heightening tensions.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Emerging market bonds"
+        ]
+      }
+    },
+    {
+      "title": "Why Are Wars Increasingly Difficult to End?",
+      "url": "https://warontherocks.com/why-are-wars-increasingly-difficult-to-end/",
       "source": "War on the Rocks",
       "tier": 2,
       "category": "geopolitica",
-      "snippet": "Welcome to The Ukraine Compass, a weekly digest of Ukrainian commentary and analysis from across the political spectrum, only for War on the Rocks members. Each week, we bring you a curated selection of articles from Ukrainian media offering insight into how Ukrainians themselves debate the issues shaping their country.Western coverage often narrows the view to the battlefield — these pieces widen it, revealing the texture of daily life, politics, and public argument in a nation at war. The perspectives gathered here are varied, candid, and often surprising, together forming a more complete picture of Ukraine as it really is.Frontline The post Corruption in the Crosshairs: The Debate Over Transparency and Saving Face appeared first on War on the Rocks .",
-      "date": "2026-11-02T19:15:33+00:00",
-      "relevance_score": 0.6,
-      "title_it": "Corruzione sotto i riflettori: dibattito su trasparenza e facciata",
-      "title_en": "Corruption in the Crosshairs: The Debate Over Transparency and Saving Face",
-      "summary_it": "Analisi delle tensioni tra trasparenza e protezione dell'immagine politica in Ucraina.",
-      "summary_en": "Analysis of tensions between transparency and image protection in Ukrainian politics.",
+      "snippet": "The number of armed conflicts has increased in recent years, and researchers have warned that many wars are lasting longer and have become more difficult to end. We asked five experts if the 21st-century trend of more intractable wars is continuing, and if so, why.Read more below.Dafna H. Rand Senior Fellow at Brookings Former U.S. Assistant Secretary of State Wars are not ending definitively in the 21st century, and the United States is likely to see the same pattern in Iran. Whereas peace settlements or victory by one side was once the culmination of war, today the more likely scenarios The post Why Are Wars Increasingly Difficult to End? appeared first on War on the Rocks .",
+      "date": "2026-11-04T18:30:43+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Perché le guerre sono sempre più difficili da concludere?",
+      "title_en": "Why Are Wars Increasingly Difficult to End?",
+      "summary_it": "Gli studi mostrano che i conflitti durano più a lungo e sono più complessi da risolvere.",
+      "summary_en": "Studies show conflicts are lasting longer and becoming harder to resolve.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "low",
         "assets_affected": [
-          "Ukrainian hryvnia"
+          "Defence stocks"
         ]
       }
     },
     {
-      "title": "Poland’s Constitutional Civil War",
-      "url": "https://www.project-syndicate.org/commentary/poland-right-wing-judicial-coup-attempt-by-slawomir-sierakowski-2026-10?utm_source=rss&utm_medium=feed&utm_campaign=main&utm_content=en",
-      "source": "Project Syndicate",
-      "tier": 2,
-      "category": "macro_economia",
-      "snippet": "Polish right-wing populists recently stormed the country's Constitutional Tribunal, winning applause from the Kremlin and far-right fellow-travelers across Europe. As in other countries, the constitutional tribunal is the institution that distinguishes a proper democracy from a dictatorship making it a target for authoritarians.",
-      "date": "2026-11-03T16:23:14+00:00",
-      "relevance_score": 0.6,
-      "title_it": "Guerra civile costituzionale in Polonia",
-      "title_en": "Poland’s Constitutional Civil War",
-      "summary_it": "I populisti di destra polacchi hanno preso il controllo del Tribunale Costituzionale, suscitando preoccupazioni europee.",
-      "summary_en": "Polish right‑wing populists seized the Constitutional Tribunal, raising European concerns.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "Polish zloty",
-          "Euro Stoxx 50"
-        ]
-      }
-    },
-    {
-      "title": "Taiwan airlines continue flights over Russia, rattling Europeans",
-      "url": "https://asia.nikkei.com/politics/international-relations/taiwan-airlines-continue-flights-over-russia-rattling-europeans",
-      "source": "Nikkei Asia",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "Taiwan airlines continue flights over Russia, rattling Europeans",
-      "date": "2026-11-04T06:44:56.076896+00:00",
-      "relevance_score": 0.6,
-      "title_it": "Le compagnie aeree di Taiwan continuano i voli sopra la Russia, allarmando l'Europa",
-      "title_en": "Taiwan airlines continue flights over Russia, rattling Europeans",
-      "summary_it": "Le rotte aeree taiwanesi sopra la Russia suscitano preoccupazioni tra i paesi europei.",
-      "summary_en": "Taiwanese flight routes over Russia raise concerns among European nations.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "low",
-        "assets_affected": [
-          "Airline stocks"
-        ]
-      }
-    },
-    {
-      "title": "China's Temu, JD.com revamp business models amid tariff headwinds",
-      "url": "https://asia.nikkei.com/business/retail/china-s-temu-jd.com-revamp-business-models-amid-tariff-headwinds",
-      "source": "Nikkei Asia",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "China's Temu, JD.com revamp business models amid tariff headwinds",
-      "date": "2026-11-04T06:44:56.077080+00:00",
-      "relevance_score": 0.6000000000000001,
-      "title_it": "Temu e JD.com ristrutturano i modelli di business di fronte a tariffe",
-      "title_en": "China's Temu, JD.com revamp business models amid tariff headwinds",
-      "summary_it": "Le piattaforme cinesi adeguano le loro strategie a causa delle pressioni tariffarie.",
-      "summary_en": "Chinese platforms adjust strategies due to tariff pressures.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "China A‑shares",
-          "E‑commerce stocks"
-        ]
-      }
-    },
-    {
-      "title": "Oil Prices Rebound as Middle East Supply Fears Return",
-      "url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Rebound-as-Middle-East-Supply-Fears-Return.html",
+      "title": "Butane’s Perfect Storm Sends Prices to Decade Highs",
+      "url": "https://oilprice.com/Energy/Natural-Gas/Butanes-Perfect-Storm-Sends-Prices-to-Decade-Highs.html",
       "source": "OilPrice",
       "tier": 4,
       "category": "energia",
-      "snippet": "Crude oil prices, which fell to their lowest in four weeks, staged a rebound earlier today, as traders shifted their attention from the U.S. midterms to the Middle East, awaiting the next step in the war. Benchmarks dropped sharply on Tuesday on reports that Iran may be open to discussions on previously non-negotiable issues, but at the time of writing, Brent crude was trading at $103.60 per barrel, with West Texas Intermediate at $95.98 per barrel, after two energy consultancies warned against too much Gulf oil supply rebound optimism. Rystad…",
-      "date": "2026-11-04T06:15:00+00:00",
+      "snippet": "Butane prices are surging across the world. Northwest European November butane prices have reached $1,125/t by early November, their highest level in 30 years, having exceeded even the peaks following Russia’s invasion of Ukraine. In Asia, the AFEI butane index stood at $1,180/t on November 3. US butane Belvieu prices have climbed to a 14-year high $920/t. This surge in prices reflects several overlapping trends, with the most significant being a reorientation of global propane/butane trade flows since the US-Iran war kicked off in March.…",
+      "date": "2026-11-05T00:00:00+00:00",
       "relevance_score": 1.0,
-      "title_it": "I prezzi del petrolio rimbalzano per timori di fornitura in Medio Oriente",
-      "title_en": "Oil Prices Rebound as Middle East Supply Fears Return",
-      "summary_it": "Il petrolio risale dopo che gli investitori temono interruzioni di fornitura mediorientale.",
-      "summary_en": "Oil rebounds as investors fear renewed Middle East supply disruptions.",
+      "title_it": "Il prezzo del butano tocca i massimi decennali",
+      "title_en": "Butane’s Perfect Storm Sends Prices to Decade Highs",
+      "summary_it": "Il butano raggiunge prezzi record, spingendo al rialzo i costi energetici.",
+      "summary_en": "Butane hits record prices, pushing energy costs higher.",
       "market_impact": {
         "direction": "bullish",
         "magnitude": "high",
         "assets_affected": [
-          "Brent",
-          "WTI"
+          "Energy commodities",
+          "Butane"
         ]
       }
     },
     {
-      "title": "Big Oil Puts Debt Reduction Ahead of New Investments",
-      "url": "https://oilprice.com/Energy/Crude-Oil/Big-Oil-Puts-Debt-Reduction-Ahead-of-New-Investments.html",
+      "title": "Iran War and AI Boom Drive Global Gas Supply Crunch",
+      "url": "https://oilprice.com/Energy/Natural-Gas/Iran-War-and-AI-Boom-Drive-Global-Gas-Supply-Crunch.html",
       "source": "OilPrice",
       "tier": 4,
       "category": "energia",
-      "snippet": "The world’s biggest oil and gas companies have posted another strong quarter, with just Europe’s top six majors booking a collective $38 billion for the July-to-September quarter. Adding Exxon and Chevron, the figure swells considerably. But the supermajors are in no rush to start spending that windfall. The oil and gas industry is having the exact opposite year to 2020. The war between the United States and Israel, and Iran has pushed oil and gas prices to the highest in years. The war between Russia and Ukraine, meanwhile, has driven…",
-      "date": "2026-11-03T23:00:00+00:00",
-      "relevance_score": 1.0,
-      "title_it": "Le grandi compagnie petrolifere puntano alla riduzione del debito prima di nuovi investimenti",
-      "title_en": "Big Oil Puts Debt Reduction Ahead of New Investments",
-      "summary_it": "Le major energetiche concentrano i profitti sulla riduzione del debito, preparando nuovi investimenti.",
-      "summary_en": "Oil majors focus on debt reduction before embarking on new investments.",
+      "snippet": "LNG spot market prices in Asia have tripled since the start of the year. Asia and Europe are locked in a race for a limited number of cargoes. The U.S. is exporting record volumes of the fuel. And QatarEnergy just extended a force majeure on its own LNG exports. The world is short on gas—and will remain so for a while. The Japan-Korea Marker, the Asian LNG benchmark, topped $31 per million British thermal units this month. In fact, the benchmark briefly rose above $33 per mmBtu, compared with a little over $9 per mmBtu in January this year.…",
+      "date": "2026-11-04T21:00:00+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Guerra in Iran e boom dell'IA comprimono l'offerta globale di gas",
+      "title_en": "Iran War and AI Boom Drive Global Gas Supply Crunch",
+      "summary_it": "Il conflitto iraniano e la domanda IA aumentano la pressione sul mercato del gas.",
+      "summary_en": "Iranian conflict and AI demand tighten the global gas market.",
       "market_impact": {
         "direction": "bullish",
         "magnitude": "medium",
         "assets_affected": [
-          "Brent",
-          "Energy stocks"
+          "LNG",
+          "Natural gas"
         ]
       }
     },
     {
-      "title": "Bitcoin Price Trades Near $77,500 as Midterm Voting Begins",
-      "url": "https://bitcoinmagazine.com/markets/bitcoin-price-trades-near-77500-midterm",
-      "source": "Bitcoin Magazine",
-      "tier": 4,
-      "category": "crypto",
-      "snippet": "Bitcoin Magazine Bitcoin Price Trades Near $77,500 as Midterm Voting Begins Bitcoin price trades near $77,500 as midterm voting begins, pressured by a record $6.3 billion Binance hack, ETF outflows, a Fed leaning toward a December hike and oil above $100 on Iran tensions. This post Bitcoin Price Trades Near $77,500 as Midterm Voting Begins first appeared on Bitcoin Magazine and is written by Micah Zimmerman .",
-      "date": "2026-11-03T13:46:39+00:00",
-      "relevance_score": 1.0,
-      "title_it": "Il prezzo di Bitcoin si aggira intorno a 77.500$ con l'inizio delle votazioni di medio termine",
-      "title_en": "Bitcoin Price Trades Near $77,500 as Midterm Voting Begins",
-      "summary_it": "Il Bitcoin resta stabile vicino a 77.500$ mentre le elezioni di medio termine cominciano.",
-      "summary_en": "Bitcoin holds near $77,500 as midterm elections commence.",
-      "market_impact": {
-        "direction": "mixed",
-        "magnitude": "low",
-        "assets_affected": [
-          "Bitcoin"
-        ]
-      }
-    },
-    {
-      "title": "Moscow Exchange to launch Bitcoin, Ether and USDT trading in December",
-      "url": "https://cointelegraph.com/news/moscow-exchange-bitcoin-ether-usdt-trading-december?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "title": "BitMart founder says security team ‘severely understaffed’ after new hack",
+      "url": "https://cointelegraph.com/news/bitmart-hack-security-staffing-crypto-exchange-restructuring?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
       "tier": 4,
       "category": "crypto",
-      "snippet": "Moscow Exchange plans to launch crypto trading on Dec. 1 under Russia’s new law, with annual purchase limits for non-qualified investors.",
-      "date": "2026-11-03T13:15:47+00:00",
+      "snippet": "The crypto exchange’s founder warned of security staffing shortages amid restructuring as analysts flagged suspicious transfers potentially linked to the Mercado Bitcoin hack.",
+      "date": "2026-11-04T22:31:58+00:00",
       "relevance_score": 0.8,
-      "title_it": "Moscow Exchange lancerà Bitcoin, Ether e USDT a dicembre",
-      "title_en": "Moscow Exchange to launch Bitcoin, Ether and USDT trading in December",
-      "summary_it": "La Borsa di Mosca introdurrà il trading di criptovalute a dicembre, con limiti per investitori non qualificati.",
-      "summary_en": "Moscow Exchange will introduce crypto trading in December, with limits for non‑qualified investors.",
-      "market_impact": {
-        "direction": "bullish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "Bitcoin",
-          "Ether",
-          "USDT"
-        ]
-      }
-    },
-    {
-      "title": "Andrew Hohns: Why Bitcoin Can Fix America’s Debt Spiral",
-      "url": "https://bitcoinmagazine.com/videos/andrew-hohns-why-bitcoin-can-fix-americas-debt-spiral",
-      "source": "Bitcoin Magazine",
-      "tier": 4,
-      "category": "crypto",
-      "snippet": "▶ Bitcoin Magazine Andrew Hohns: Why Bitcoin Can Fix America’s Debt Spiral Battery Finance’s Andrew Hohns explains why taxes won’t fix the $40T debt, how a Bitcoin reserve defeases it, and why Treasury should pilot BitBonds. This post Andrew Hohns: Why Bitcoin Can Fix America’s Debt Spiral first appeared on Bitcoin Magazine and is written by Patrick Green .",
-      "date": "2026-11-03T15:17:11+00:00",
-      "relevance_score": 0.8,
-      "title_it": "Perché Bitcoin può risolvere la spirale del debito americano, secondo Andrew Hohns",
-      "title_en": "Andrew Hohns: Why Bitcoin Can Fix America’s Debt Spiral",
-      "summary_it": "L'autore sostiene che Bitcoin potrebbe fungere da riserva per contenere il debito pubblico USA.",
-      "summary_en": "The author argues Bitcoin could serve as a reserve to curb US public debt.",
-      "market_impact": {
-        "direction": "bullish",
-        "magnitude": "low",
-        "assets_affected": [
-          "Bitcoin"
-        ]
-      }
-    },
-    {
-      "title": "Australia lifts rates to 18-year high as AI boom, energy costs fuel inflation",
-      "url": "https://cointelegraph.com/markets/australia-lifts-rates-as-ai-boom-energy-costs-fuel-inflation?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "tier": 4,
-      "category": "crypto",
-      "snippet": "The Reserve Bank of Australia raised its benchmark rate to 4.85% on rising technology costs from AI investment and higher energy prices.",
-      "date": "2026-11-03T04:14:32+00:00",
-      "relevance_score": 0.6,
-      "title_it": "Australia alza i tassi al massimo degli ultimi 18 anni per l'impulso dell'IA e i costi energetici",
-      "title_en": "Australia lifts rates to 18-year high as AI boom, energy costs fuel inflation",
-      "summary_it": "La RBA aumenta i tassi a 4,85% a causa dei costi legati all'IA e all'energia.",
-      "summary_en": "RBA raises rates to 4.85% driven by AI and energy cost inflation.",
+      "title_it": "Fondatore di BitMart denuncia carenza di personale di sicurezza dopo hack",
+      "title_en": "BitMart founder says security team ‘severely understaffed’ after new hack",
+      "summary_it": "Il nuovo attacco evidenzia vulnerabilità e carenze di staff nella sicurezza crypto.",
+      "summary_en": "The new hack highlights security vulnerabilities and understaffing in crypto.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "medium",
         "assets_affected": [
-          "AUD",
-          "S&P 500"
+          "Crypto exchanges",
+          "BitMart"
         ]
       }
     },
     {
-      "title": "FSB Regional Consultative Group for Europe meets in Bern",
-      "url": "https://www.fsb.org/2026/11/fsb-regional-consultative-group-for-europe-meets-in-bern/",
-      "source": "Financial Stability Board",
+      "title": "Circle’s ARC token sale lifts earnings as lower yields weigh on USDC income",
+      "url": "https://cointelegraph.com/news/circles-arc-token-sale-earnings-yields-usdc-income?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
       "tier": 4,
-      "category": "mercati",
-      "snippet": "Swiss National Bank hosts the FSB Europe group in Bern.",
-      "date": "2026-11-03T15:00:00+00:00",
-      "relevance_score": 0.4,
-      "title_it": "Il Gruppo Consultivo Regionale del FSB per l'Europa si riunisce a Berna",
-      "title_en": "FSB Regional Consultative Group for Europe meets in Bern",
-      "summary_it": "La Banca Nazionale Svizzera ospita il gruppo consultivo del FSB in Svizzera.",
-      "summary_en": "Swiss National Bank hosts the FSB Europe consultative group in Bern.",
+      "category": "crypto",
+      "snippet": "Circle is looking to payments fees and future staking rewards to diversify revenue as its core stablecoin business faces pressure from lower yields and growing competition.",
+      "date": "2026-11-04T18:02:42+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Circle vede cali nei ricavi USDC per rendimenti più bassi",
+      "title_en": "Circle’s ARC token sale lifts earnings as lower yields weigh on USDC income",
+      "summary_it": "Meno rendimenti riducono i guadagni di USDC, nonostante la vendita di token ARC.",
+      "summary_en": "Lower yields depress USDC income despite ARC token sale boosting earnings.",
       "market_impact": {
-        "direction": "bullish",
+        "direction": "bearish",
         "magnitude": "low",
         "assets_affected": [
-          "CHF"
+          "USDC",
+          "Stablecoins"
+        ]
+      }
+    },
+    {
+      "title": "Bitcoin holds above $80,000 as Zcash jumps 12% in post-election crypto rebound",
+      "url": "https://www.coindesk.com/markets/2026/11/05/bitcoin-holds-above-usd80-000-as-zcash-jumps-12-in-post-election-crypto-rebound",
+      "source": "CoinDesk",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Bitcoin holds above $80,000 as Zcash jumps 12% in post-election crypto rebound",
+      "date": "2026-11-05T05:13:45+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Bitcoin resta sopra gli 80.000 dollari, Zcash sale del 12%",
+      "title_en": "Bitcoin holds above $80,000 as Zcash jumps 12% in post-election crypto rebound",
+      "summary_it": "Il Bitcoin mantiene livelli record, spingendo al rialzo anche Zcash.",
+      "summary_en": "Bitcoin holds record levels, lifting Zcash in post‑election crypto rally.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "high",
+        "assets_affected": [
+          "Bitcoin",
+          "Zcash"
+        ]
+      }
+    },
+    {
+      "title": "Trump Media moves $342 million in bitcoin to Crypto.com, blockchain data show",
+      "url": "https://www.coindesk.com/markets/2026/11/05/trump-media-moves-usd434-million-in-bitcoin-to-crypto-com-blockchain-data-show",
+      "source": "CoinDesk",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Trump Media moves $342 million in bitcoin to Crypto.com, blockchain data show",
+      "date": "2026-11-05T04:11:33+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Trump Media trasferisce 342 milioni di bitcoin a Crypto.com",
+      "title_en": "Trump Media moves $342 million in bitcoin to Crypto.com, blockchain data show",
+      "summary_it": "Il trasferimento di grandi quantità di BTC solleva dubbi sulla stabilità di Trump Media.",
+      "summary_en": "The massive BTC transfer raises concerns about Trump Media's stability.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Bitcoin",
+          "Trump Media"
         ]
       }
     }
   ],
   "audio_manifest_it": {
     "schema_version": 1,
-    "date": "2026-11-04",
+    "date": "2026-11-05",
     "language": "it",
-    "audio_url": "audio/briefing_20261104.mp3",
-    "duration_ms": 101785,
-    "sha256": "338ceab66b3c69ec024e2501177d3cf9dfdd4d68fc40a8a7b88f4efa592e80b8",
+    "audio_url": "audio/briefing_20261105.mp3",
+    "duration_ms": 99069,
+    "sha256": "8125b7796c04bb640789b6856c152622fb71006bbfc89b591fd5d65550e1bfe1",
     "chapters": [
       {
         "id": "intro",
         "title": "Apertura",
         "start_ms": 0,
-        "end_ms": 3746
+        "end_ms": 3642
       },
       {
         "id": "asia",
         "title": "Mercati Asiatici",
-        "start_ms": 3746,
-        "end_ms": 13460
+        "start_ms": 3642,
+        "end_ms": 13147
       },
       {
         "id": "occidente",
         "title": "Mercati Occidentali",
-        "start_ms": 13460,
-        "end_ms": 41773
+        "start_ms": 13147,
+        "end_ms": 39428
       },
       {
         "id": "geopolitica",
         "title": "Geopolitica",
-        "start_ms": 41773,
-        "end_ms": 66150
+        "start_ms": 39428,
+        "end_ms": 54087
       },
       {
         "id": "macro",
         "title": "Macro ed Economia",
-        "start_ms": 66150,
-        "end_ms": 69165
+        "start_ms": 54087,
+        "end_ms": 57137
       },
       {
         "id": "crypto",
         "title": "Criptovalute",
-        "start_ms": 69165,
-        "end_ms": 92962
+        "start_ms": 57137,
+        "end_ms": 91267
       },
       {
         "id": "close",
         "title": "Chiusura",
-        "start_ms": 92962,
-        "end_ms": 101785
+        "start_ms": 91267,
+        "end_ms": 99069
       }
     ]
   },
   "audio_manifest_en": {
     "schema_version": 1,
-    "date": "2026-11-04",
+    "date": "2026-11-05",
     "language": "en",
-    "audio_url": "audio/briefing_20261104_en.mp3",
-    "duration_ms": 102517,
-    "sha256": "3ad52fbb4c94bfe08e2b69e6c811aa018f05df0d9dc0aad457e7cfb74eeb7f2e",
+    "audio_url": "audio/briefing_20261105_en.mp3",
+    "duration_ms": 104165,
+    "sha256": "ff13663c22e1cae5533e1fcb41d64f640e82929e7a0fef217c5badf26309449b",
     "chapters": [
       {
         "id": "intro",
@@ -824,37 +826,37 @@
         "id": "asia",
         "title": "Asian Markets",
         "start_ms": 4164,
-        "end_ms": 13332
+        "end_ms": 13402
       },
       {
         "id": "occidente",
         "title": "Western Markets",
-        "start_ms": 13332,
-        "end_ms": 39242
+        "start_ms": 13402,
+        "end_ms": 39381
       },
       {
         "id": "geopolitica",
         "title": "Geopolitics",
-        "start_ms": 39242,
-        "end_ms": 63596
+        "start_ms": 39381,
+        "end_ms": 54738
       },
       {
         "id": "macro",
         "title": "Macroeconomics",
-        "start_ms": 63596,
-        "end_ms": 67435
+        "start_ms": 54738,
+        "end_ms": 58507
       },
       {
         "id": "crypto",
         "title": "Cryptocurrencies",
-        "start_ms": 67435,
-        "end_ms": 91487
+        "start_ms": 58507,
+        "end_ms": 94343
       },
       {
         "id": "close",
         "title": "Closing",
-        "start_ms": 91487,
-        "end_ms": 102517
+        "start_ms": 94343,
+        "end_ms": 104165
       }
     ]
   }
