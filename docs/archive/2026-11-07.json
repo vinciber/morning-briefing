@@ -1,0 +1,789 @@
+{
+  "date": "2026-11-07",
+  "sentiment": {
+    "label": "risk_off",
+    "score": 7,
+    "reason_it": "Nella seduta di venerdì il VIX è sceso del 9,01% a 25,64, segnale di volatilità moderata ma ancora al di sopra della soglia di 20, mentre il DXY è salito dello 0,74% a 102,30, indicando un dollaro forte e pressione sui risk assets. L'S&P 500 ha guadagnato lo 0,31% a 7.376,86, ma il rialzo è contenuto dal contesto di tassi Fed al 3,75%-4,00% e da un US 10Y Yield al 4,85% (+0,45%). L'oro è in calo dello 0,94% a $4.074,90, segno di debasement limitato, e il Brent è quasi stabile (+0,03%). La guerra tra USA e Iran continua a influenzare i mercati energetici, aggiungendo un fattore di rischio geopolitico (max +2 punti). L'insieme di questi dati porta a un sentiment risk‑off con score 7/10.",
+    "reason_en": "In Friday's session the VIX fell 9.01% to 25.64, indicating moderate volatility but still above the 20 threshold, while the DXY rose 0.74% to 102.30, signaling a strong dollar and pressure on risk assets. The S&P 500 gained 0.31% to 7,376.86, yet the upside is limited by Fed funds at 3.75%-4.00% and a US 10Y yield at 4.85% (+0.45%). Gold slipped 0.94% to $4,074.90, showing limited debasement, and Brent was flat (+0.03%). Ongoing US‑Iran war continues to affect energy markets, adding a geopolitical risk factor (max +2 points). Together these data point to a risk‑off sentiment with a score of 7 out of 10."
+  },
+  "market_impact_summary": {
+    "it": "Nella chiusura di venerdì il DXY è +0,74% (102,30), spingendo gli asset rischiosi verso il ribasso; il VIX è -9,01% a 25,64, segnale di una leggera riduzione della paura ma ancora in zona risk‑off. L'S&P 500 è +0,31% a 7.376,86, mentre il TLT è -0,01% a 81,92, riflettendo tassi in rialzo (US 10Y a 4,85% +0,45%). L'oro è -0,94% a $4.074,90 (mixed), il Brent è +0,03% a $98,32 (stabile) e il Bitcoin +0,45% a $75.975. La combinazione di dollaro forte, rendimenti alti e conflitto USA‑Iran suggerisce un impatto bearish su equity e commodities, con un leggero supporto per il risk‑on dal VIX in calo.",
+    "en": "In Friday's close the DXY rose 0.74% to 102.30, pressuring risk assets lower; the VIX fell 9.01% to 25.64, indicating a modest drop in fear but still in a risk‑off zone. The S&P 500 gained 0.31% to 7,376.86, while the TLT slipped 0.01% to 81.92, reflecting higher rates (US 10Y at 4.85% +0.45%). Gold declined 0.94% to $4,074.90 (mixed), Brent was flat +0.03% at $98.32, and Bitcoin rose 0.45% to $75,975. The mix of a strong dollar, rising yields, and the ongoing US‑Iran war points to a bearish impact on equities and commodities, with a slight risk‑on nuance from the falling VIX."
+  },
+  "audio_narrative_it": [
+    {
+      "id": "intro",
+      "title": "Apertura",
+      "text": "Buongiorno, benvenuti al Morning Briefing di Price Alert. Le borse osservano la pausa del weekend."
+    },
+    {
+      "id": "chiusure",
+      "title": "Chiusure",
+      "text": "Nella seduta di venerdì l'S&P 500 chiuso in rialzo dell'0,3% a settantatremilaseiottantasei e ottanta‑sei. Il VIX scende del 9,0% a venticinque virgola sessanta‑quattro. Il DXY sale dello 0,7% a cento due virgola trenta. L'oncia d’oro scende dello 0,9% a quattro mille zero settanta‑quattro dollari. Il Brent è in rialzo dello 0,03% a novantotto virgola trenta‑due dollari. Il US 10Y Yield aumenta dello 0,45% a quattro virgola ottanta‑cinque percento. Il BTP 10Y è a tre virgola novanta‑quattro percento. Il STOXX 600 scende dello 0,23% a sessantacinque virgola zero‑cinque. Il FTSE MIB scende dello 0,9% a cinquanta‑mille cinquecentodici‑tre. Il Nikkei è in calo del 5,96% a cinquanta‑sette‑mille quattrocentocinquanta‑cinque. Il Shanghai è in calo dell’1,1% a tre‑mille seicento‑quarantanove‑cento‑ottanta‑due. Il Hang Seng scende dello 1,27% a ventiquattro‑mille quattrocentottantadue."
+    },
+    {
+      "id": "notizie",
+      "title": "Notizie e Outlook",
+      "text": "Il risultato dei mid‑term americani potrebbe pesare sull’apertura di lunedì, con i mercati che potrebbero prezzare un possibile indebolimento del Trumpismo. L’avvertimento degli Stati Uniti a Cina sul rispetto del trattato di Busan potrebbe pesare sull’apertura, con i mercati che potrebbero prezzare tensioni commerciali. La crescita occupazionale superiore alle previsioni, con 165.000 posti di lavoro aggiunti in ottobre, potrebbe pesare sull’apertura, con i mercati che potrebbero prezzare un rafforzamento del dollaro."
+    },
+    {
+      "id": "macro",
+      "title": "Macro ed Economia",
+      "text": "Nel weekend non escono dati macro. L’agenda macro riprende lunedì."
+    },
+    {
+      "id": "crypto",
+      "title": "Criptovalute",
+      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si mantiene sopra i settantacinquemila dollari, con una variazione di 0,45%. Il flusso ETF cumulativo settimanale è di -445,7 milioni di dollari, rispetto a +986,7 milioni di dollari la settimana precedente, un calo di 1,432,4 milioni di dollari. L’ultimo flusso giornaliero, riferito a venerdì, è stato di +3,8 milioni di dollari. Ethereum, Solana e BNB hanno registrato movimenti inferiori al 2%, quindi non vengono menzionati. Il Fear & Greed Index è a 25, classificato come Extreme Fear, suggerendo cautela agli investitori."
+    },
+    {
+      "id": "close",
+      "title": "Chiusura",
+      "text": "Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert"
+    }
+  ],
+  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert. Le borse osservano la pausa del weekend.\n\nNella seduta di venerdì l'S&P 500 chiuso in rialzo dell'0,3% a settantatremilaseiottantasei e ottanta‑sei. Il VIX scende del 9,0% a venticinque virgola sessanta‑quattro. Il DXY sale dello 0,7% a cento due virgola trenta. L'oncia d’oro scende dello 0,9% a quattro mille zero settanta‑quattro dollari. Il Brent è in rialzo dello 0,03% a novantotto virgola trenta‑due dollari. Il US 10Y Yield aumenta dello 0,45% a quattro virgola ottanta‑cinque percento. Il BTP 10Y è a tre virgola novanta‑quattro percento. Il STOXX 600 scende dello 0,23% a sessantacinque virgola zero‑cinque. Il FTSE MIB scende dello 0,9% a cinquanta‑mille cinquecentodici‑tre. Il Nikkei è in calo del 5,96% a cinquanta‑sette‑mille quattrocentocinquanta‑cinque. Il Shanghai è in calo dell’1,1% a tre‑mille seicento‑quarantanove‑cento‑ottanta‑due. Il Hang Seng scende dello 1,27% a ventiquattro‑mille quattrocentottantadue.\n\nIl risultato dei mid‑term americani potrebbe pesare sull’apertura di lunedì, con i mercati che potrebbero prezzare un possibile indebolimento del Trumpismo. L’avvertimento degli Stati Uniti a Cina sul rispetto del trattato di Busan potrebbe pesare sull’apertura, con i mercati che potrebbero prezzare tensioni commerciali. La crescita occupazionale superiore alle previsioni, con 165.000 posti di lavoro aggiunti in ottobre, potrebbe pesare sull’apertura, con i mercati che potrebbero prezzare un rafforzamento del dollaro.\n\nNel weekend non escono dati macro. L’agenda macro riprende lunedì.\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si mantiene sopra i settantacinquemila dollari, con una variazione di 0,45%. Il flusso ETF cumulativo settimanale è di -445,7 milioni di dollari, rispetto a +986,7 milioni di dollari la settimana precedente, un calo di 1,432,4 milioni di dollari. L’ultimo flusso giornaliero, riferito a venerdì, è stato di +3,8 milioni di dollari. Ethereum, Solana e BNB hanno registrato movimenti inferiori al 2%, quindi non vengono menzionati. Il Fear & Greed Index è a 25, classificato come Extreme Fear, suggerendo cautela agli investitori.\n\nPer approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert",
+  "audio_narrative_en": [
+    {
+      "id": "intro",
+      "title": "Opening",
+      "text": "Good morning, welcome to the Price Alert Morning Briefing. The markets are observing the weekend pause."
+    },
+    {
+      "id": "chiusure",
+      "title": "Market Closes",
+      "text": "In Friday's session the S&P 500 closed up 0.3% at 73,326.86 and 80‑six. The VIX fell 9.0% to 25.64. The DXY rose 0.7% to 102.30. The gold ounce fell 0.9% to $4,007.4. Brent is up 0.03% at $98.32. The US 10Y Yield rises 0.45% to 4.85%. The BTP 10Y is at 3.94%. The STOXX 600 falls 0.23% to 65.05. The FTSE MIB falls 0.9% to 50,153. The Nikkei is down 5.96% to 57,045. The Shanghai is down 1.1% to 3,649‑082. The Hang Seng falls 1.27% to 24,482."
+    },
+    {
+      "id": "notizie",
+      "title": "News and Outlook",
+      "text": "The U.S. mid‑term results could weigh on Monday's opening, with markets potentially pricing a possible weakening of Trumpism. The U.S. warning to China on the Busan treaty could weigh on the opening, with markets potentially pricing trade tensions. Higher-than‑expected job growth, with 165,000 jobs added in October, could weigh on the opening, with markets potentially pricing a strengthening of the dollar."
+    },
+    {
+      "id": "macro",
+      "title": "Macroeconomics",
+      "text": "No macro data is released over the weekend. The macro agenda resumes on Monday."
+    },
+    {
+      "id": "crypto",
+      "title": "Cryptocurrencies",
+      "text": "Let's pivot to the cryptocurrency markets. Bitcoin stays above $75,000, with a 0.45% change. The weekly cumulative ETF flow is -$445.7 million, versus +$986.7 million the previous week, a drop of $1,432.4 million. The latest daily flow, for Friday, was +$3.8 million. Ethereum, Solana and BNB moved less than 2%, so they are not mentioned. The Fear & Greed Index is at 25, classified as Extreme Fear, suggesting caution for investors."
+    },
+    {
+      "id": "close",
+      "title": "Closing",
+      "text": "For deeper coverage of today's topics, find the full articles in the Spotlight Stories section on our platform. A greeting from Price Alert"
+    }
+  ],
+  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing. The markets are observing the weekend pause.\n\nIn Friday's session the S&P 500 closed up 0.3% at 73,326.86 and 80‑six. The VIX fell 9.0% to 25.64. The DXY rose 0.7% to 102.30. The gold ounce fell 0.9% to $4,007.4. Brent is up 0.03% at $98.32. The US 10Y Yield rises 0.45% to 4.85%. The BTP 10Y is at 3.94%. The STOXX 600 falls 0.23% to 65.05. The FTSE MIB falls 0.9% to 50,153. The Nikkei is down 5.96% to 57,045. The Shanghai is down 1.1% to 3,649‑082. The Hang Seng falls 1.27% to 24,482.\n\nThe U.S. mid‑term results could weigh on Monday's opening, with markets potentially pricing a possible weakening of Trumpism. The U.S. warning to China on the Busan treaty could weigh on the opening, with markets potentially pricing trade tensions. Higher-than‑expected job growth, with 165,000 jobs added in October, could weigh on the opening, with markets potentially pricing a strengthening of the dollar.\n\nNo macro data is released over the weekend. The macro agenda resumes on Monday.\n\nLet's pivot to the cryptocurrency markets. Bitcoin stays above $75,000, with a 0.45% change. The weekly cumulative ETF flow is -$445.7 million, versus +$986.7 million the previous week, a drop of $1,432.4 million. The latest daily flow, for Friday, was +$3.8 million. Ethereum, Solana and BNB moved less than 2%, so they are not mentioned. The Fear & Greed Index is at 25, classified as Extreme Fear, suggesting caution for investors.\n\nFor deeper coverage of today's topics, find the full articles in the Spotlight Stories section on our platform. A greeting from Price Alert",
+  "market_data_raw": {
+    "dxy": {
+      "value": "102.30",
+      "change": "+0.74%"
+    },
+    "eur_usd": {
+      "value": "1.12",
+      "change": "-0.06%"
+    },
+    "sp500": {
+      "value": "7376.86",
+      "change": "+0.31%"
+    },
+    "nasdaq": {
+      "value": "24,579",
+      "change": "+1.09%"
+    },
+    "dow": {
+      "value": "51,286",
+      "change": "-0.46%"
+    },
+    "vix": {
+      "value": "25.64",
+      "change": "-9.01%"
+    },
+    "tlt": {
+      "value": "81.92",
+      "change": "-0.01%"
+    },
+    "us_10y": {
+      "value": "4.85%",
+      "change": "+0.45%"
+    },
+    "gold": {
+      "value": "$4074.90/oz",
+      "change": "-0.94%"
+    },
+    "btcusd": {
+      "value": "$75,942",
+      "change": "+0.00%"
+    },
+    "oil_brent": {
+      "value": "$98.32",
+      "change": "+0.03%"
+    },
+    "stoxx_600": {
+      "value": "65.05",
+      "change": "-0.23%"
+    },
+    "ftse_mib": {
+      "value": "50,053",
+      "change": "-0.90%"
+    },
+    "nikkei": {
+      "value": "57,435",
+      "change": "-5.96%"
+    },
+    "shanghai": {
+      "value": "3649.18",
+      "change": "-1.10%"
+    },
+    "hang_seng": {
+      "value": "24,482",
+      "change": "-1.27%"
+    },
+    "europe_futures": {
+      "status": "unavailable",
+      "instrument": "EURO STOXX 50 Futures Roll Index",
+      "source": "Yahoo Finance",
+      "source_symbol": "03V9.Z",
+      "reason": "outside_europe_preopen"
+    },
+    "btp_10y": {
+      "value": "3.99%",
+      "change": "N/A"
+    },
+    "btp_bund_spread": {
+      "value": "52 bp",
+      "change": ""
+    },
+    "global_m2": {
+      "value": "$23.4T",
+      "change": "expanding 📈 | US YoY: +5.7% YoY"
+    },
+    "btc_etf_flow": {
+      "value": "$+3.8M",
+      "change": "📈 Reversal Up"
+    },
+    "btc_etf_data": {
+      "last_update": "2026-09-11",
+      "net_flow_usd_m": 3.8,
+      "status": "POSITIVE",
+      "trend_indicator": "📈 Reversal Up",
+      "prev_flow_usd_m": -282.7,
+      "week_sum_m": -445.7,
+      "prev_week_sum_m": 986.7,
+      "week_delta_m": -1432.4,
+      "scraped_at": "2026-09-11T23:53:48.299311Z",
+      "source": "Farside",
+      "message": "🟢 Inflow: +3.8M$",
+      "total_btc": 1268341.0,
+      "total_aum_bn": 97.879407715,
+      "pct_of_21m": 6.04,
+      "btc_dominance": 58.27128197298697,
+      "total_market_cap": 2655030309791.596
+    },
+    "crypto": {
+      "fear_greed": {
+        "value": "25",
+        "class": "Extreme Fear"
+      },
+      "prices": {
+        "BTC": {
+          "value": "$75,975",
+          "change": "+0.45%"
+        },
+        "ETH": {
+          "value": "$2,245",
+          "change": "+0.74%"
+        },
+        "SOL": {
+          "value": "$90.16",
+          "change": "+0.56%"
+        },
+        "BNB": {
+          "value": "$694.41",
+          "change": "+0.68%"
+        }
+      }
+    },
+    "macro_calendar": {
+      "cpi": {
+        "label": "CPI YoY USA",
+        "label_it": "CPI YoY USA",
+        "label_en": "CPI YoY USA",
+        "value": "4.0%",
+        "previous": "3.7%",
+        "release_date": "2026-09-01",
+        "status": "released",
+        "next_release": "2026-11-12"
+      },
+      "core_cpi": {
+        "label": "Core CPI YoY USA",
+        "label_it": "Core CPI YoY USA",
+        "label_en": "Core CPI YoY USA",
+        "value": "2.8%",
+        "previous": "2.8%",
+        "release_date": "2026-09-01",
+        "status": "released",
+        "next_release": "2026-11-12"
+      },
+      "nfp": {
+        "label": "Non-Farm Payrolls",
+        "label_it": "Non-Farm Payrolls",
+        "label_en": "Non-Farm Payrolls",
+        "value": "+165K",
+        "previous": "+60K",
+        "release_date": "2026-10-01",
+        "status": "released",
+        "next_release": "2026-12-04"
+      },
+      "unemployment": {
+        "label": "Tasso Disoccupazione USA",
+        "label_it": "Tasso Disoccupazione USA",
+        "label_en": "Unemployment Rate USA",
+        "value": "4.1%",
+        "previous": "4.2%",
+        "release_date": "2026-10-01",
+        "status": "released",
+        "next_release": "2026-12-04"
+      },
+      "pce_core": {
+        "label": "PCE Core YoY",
+        "label_it": "PCE Core YoY",
+        "label_en": "PCE Core YoY",
+        "value": "3.1%",
+        "previous": "3.0%",
+        "release_date": "2026-09-01",
+        "status": "released",
+        "next_release": "2026-11-25"
+      },
+      "fed_funds": {
+        "label": "Tasso Fed Funds",
+        "label_it": "Tasso Fed Funds",
+        "label_en": "Fed Funds Rate",
+        "value": "3.75% - 4.00%",
+        "release_date": "2026-11-04",
+        "status": "released",
+        "next_release": "2026-12-16",
+        "previous": "3.50% - 3.75%"
+      },
+      "gdp": {
+        "label": "PIL QoQ USA",
+        "label_it": "PIL QoQ USA",
+        "label_en": "GDP QoQ USA",
+        "value": "3.4%",
+        "previous": "2.2%",
+        "status": "upcoming",
+        "next_release": "2026-10-29"
+      }
+    },
+    "macro_calendar_eu": {
+      "gdp_eu": {
+        "label": "PIL QoQ Eurozona",
+        "label_it": "PIL QoQ Eurozona",
+        "label_en": "GDP QoQ Eurozone",
+        "value": "0.4%",
+        "previous": "0.6%",
+        "release_date": "2026-Q3",
+        "status": "released",
+        "next_release": "2026-10-30",
+        "region": "EU"
+      },
+      "ecb_rate": {
+        "label": "Tasso BCE (Depositi)",
+        "label_it": "Tasso BCE (Depositi)",
+        "label_en": "ECB Rate (Deposit)",
+        "value": "2.50%",
+        "release_date": "2026-10-29",
+        "status": "released",
+        "next_release": "2026-12-10",
+        "region": "EU",
+        "previous": "2.25%"
+      },
+      "cpi_eu": {
+        "label": "CPI Eurozona",
+        "label_it": "CPI Eurozona",
+        "label_en": "Eurozone CPI",
+        "value": null,
+        "status": "upcoming",
+        "next_release": "2026-12-01",
+        "region": "EU"
+      },
+      "unemployment_eu": {
+        "label": "Disoccupazione EU",
+        "label_it": "Disoccupazione EU",
+        "label_en": "EU Unemployment",
+        "value": null,
+        "status": "upcoming",
+        "next_release": "2026-12-01",
+        "region": "EU"
+      },
+      "ecb_refi_rate": {
+        "label": "Tasso BCE (Refi/Mutui)",
+        "label_it": "Tasso BCE (Refi/Mutui)",
+        "label_en": "ECB Rate (Refi)",
+        "value": "2.65%",
+        "status": "released",
+        "region": "EU",
+        "previous": "2.40%"
+      }
+    },
+    "fed_target_range": {
+      "value": "3.75% - 4.00%",
+      "release_date": "2026-11-06",
+      "previous": "3.50% - 3.75%"
+    }
+  },
+  "articles": [
+    {
+      "title": "US midterms: The beginning of the end for Trumpism?",
+      "url": "https://www.chathamhouse.org/2026/11/us-midterms-beginning-end-trumpism-independent-thinking-podcast",
+      "source": "Chatham House",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "US midterms: The beginning of the end for Trumpism? Audio sseth.drupal@c… 6 November 2026 On this week’s episode of Independent Thinking, our experts discuss the result of the US midterms and what it means for US foreign and domestic policy. American voters inflicted a crushing defeat on the Republican Party in the US midterm elections, signalling clear dissatisfaction with President Trump’s agenda. Now many issues in US politics are up in the air – from the use of tariffs to policy on Iran, Ukraine and beyond. How will the Democrats use their new powers? What will the result mean for Trump’s war on Iran and the stability of global energy supplies? And how will the repudiation of Trump’s second term echo around the world? Bronwen Maddox is joined by Laurel Rapp, Lindsay Newman and Andrew P",
+      "date": "2026-11-06T11:24:14+00:00",
+      "relevance_score": 1.0,
+      "title_it": "Le elezioni di medio termine negli USA segnano l'inizio della fine del trumpismo?",
+      "title_en": "US midterms: The beginning of the end for Trumpism?",
+      "summary_it": "Le elezioni di medio termine potrebbero indebolire l'influenza di Trump, favorendo politiche più moderate.",
+      "summary_en": "Midterm elections may weaken Trumpism, paving the way for more moderate policies.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Talks, Attacks, and a Heist",
+      "url": "https://warontherocks.com/talks-attacks-and-a-heist/",
+      "source": "War on the Rocks",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "Welcome to The Adversarial. Every other week, we’ll provide you with expert analysis on America’s greatest challengers: China, Russia, Iran, North Korea, and jihadists. Read more below.***IranNow that the U.S. midterms are over, the looming question is how and when one side or the other will seek to break through the current impasse. In the short term, the ball appears to be in Washington’s court to determine the next move. The Trump administration might take a more patient approach of continuing to squeeze Iran’s economy through the blockade and sanctions. The argument is that there’s no particular rush, as Iran would The post Talks, Attacks, and a Heist appeared first on War on the Rocks .",
+      "date": "2026-11-06T16:45:14+00:00",
+      "relevance_score": 1.0,
+      "title_it": "Dialoghi, attacchi e una rapina",
+      "title_en": "Talks, Attacks, and a Heist",
+      "summary_it": "Analisi delle tensioni geopolitiche con focus su Cina, Russia, Iran e gruppi jihadisti.",
+      "summary_en": "Analysis of geopolitical tensions focusing on China, Russia, Iran and jihadist groups.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "2026 midterm election debrief",
+      "url": "https://www.piie.com/events/2026/2026-midterm-election-debrief",
+      "source": "PIIE",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "The Peterson Institute for International Economics presents its post 2026 midterm election briefing on what the election results and incoming Congress could mean for US and international economic policy. Cullen S. Hendrix discusses the geopolitical stakes of the midterms, including whether the new Congress will check or extend the executive's use of economic levers in the name of national security, from tariffs and sanctions to critical minerals and industrial policy. Mary E. Lovely examines the role of tariffs and trade wars on voter sentiment and implications for the new Congress. Adam S.…",
+      "date": "2026-11-12T18:00:00+00:00",
+      "relevance_score": 1.0,
+      "title_it": "Resoconto elezioni di medio termine 2026",
+      "title_en": "2026 midterm election debrief",
+      "summary_it": "Il briefing del PIIE esamina le implicazioni delle elezioni per l'economia statunitense e globale.",
+      "summary_en": "PIIE briefing examines election implications for the US and global economy.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "US warns China it must ‘immediately’ meet terms of Busan trade deal",
+      "url": "https://www.ft.com/content/391bb785-0247-4c39-b53b-35007187d603?syn-25a6b1a6=1",
+      "source": "Financial Times (Global Economy)",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "Washington says Beijing is not fulfilling commitments to increase supply of rare earths and other critical products",
+      "date": "2026-11-06T22:53:51+00:00",
+      "relevance_score": 0.6000000000000001,
+      "title_it": "USA avverte la Cina di rispettare immediatamente i termini dell'accordo di Busan",
+      "title_en": "US warns China it must ‘immediately’ meet terms of Busan trade deal",
+      "summary_it": "Washington critica la Cina per il mancato aumento delle forniture di terre rare, creando tensioni commerciali.",
+      "summary_en": "Washington criticises China for not increasing rare‑earth supplies, heightening trade tensions.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "S&P 500",
+          "Brent"
+        ]
+      }
+    },
+    {
+      "title": "US economy outstrips forecasts to add 165,000 jobs in October",
+      "url": "https://www.ft.com/content/f84c722c-99a9-4628-84dc-c42a192cb35c?syn-25a6b1a6=1",
+      "source": "Financial Times (Global Economy)",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "Hiring rebound reinforces expectations Federal Reserve will raise interest rates",
+      "date": "2026-11-06T22:16:13+00:00",
+      "relevance_score": 0.6,
+      "title_it": "L'economia USA supera le previsioni aggiungendo 165.000 posti di lavoro a ottobre",
+      "title_en": "US economy outstrips forecasts to add 165,000 jobs in October",
+      "summary_it": "Il forte mercato del lavoro rafforza le aspettative di ulteriori rialzi dei tassi da parte della Fed.",
+      "summary_en": "Strong job growth strengthens expectations of further Fed rate hikes.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Bce, lo spagnolo de Cos e l’olandese Knot in corsa per la successione a Lagarde: chi sono i due sfidanti",
+      "url": "https://www.ilsole24ore.com/art/bce-spagnolo-de-cos-e-l-olandese-knot-corsa-la-successione-lagarde-chi-sono-due-sfidanti-AJcuQc7B",
+      "source": "Il Sole 24 Ore (Mondo)",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "Alla scadenza dei termini per la presentazione delle candidature, fissata alle 17 di oggi, l’Eurogruppo ha ricevuto soltanto i nomi dei due ex governatori delle rispettive banche centrali nazionali, entrambi ampiamente attesi",
+      "date": "2026-11-06T17:04:00+00:00",
+      "relevance_score": 0.9,
+      "title_it": "BCE, il candidato spagnolo De Cos e quello olandese Knot in corsa per la successione a Lagarde",
+      "title_en": "ECB, Spanish De Cos and Dutch Knot in race for Lagarde succession: who are the two contenders",
+      "summary_it": "Due candidati con visioni diverse sulla politica monetaria si contendono la guida della BCE, creando incertezza sui tassi.",
+      "summary_en": "Two candidates with differing monetary views vie for ECB leadership, creating rate‑policy uncertainty.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Can Washington and China Build Confidence Around AI and Stability?",
+      "url": "https://warontherocks.com/can-washington-and-china-build-confidence-around-ai-and-stability/",
+      "source": "War on the Rocks",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "In the lead-up to General Secretary Xi Jinping’s September 2026 visit to the White House to discuss, among other topics, AI, U.S. Treasury Secretary Scott Bessent met with Chinese Vice Premier He Lifeng at JPMorgan Chase’s New York City offices. At the meeting, U.S. officials proposed establishing a dialogue between the United States and China, which would serve as a mechanism for notification of AI-related national security incidents. Bessent clarified the intent as: “We think that just like with any cross-border activity, that moving from opaque to more transparency between the No. 1 and the No. 2 AI powers in The post Can Washington and China Build Confidence Around AI and Stability? appeared first on War on the Rocks .",
+      "date": "2026-11-06T08:30:05+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Washington e Cina possono costruire fiducia su IA e stabilità?",
+      "title_en": "Can Washington and China Build Confidence Around AI and Stability?",
+      "summary_it": "Il dialogo sull'IA tra USA e Cina mira a ridurre le tensioni, ma resta incerto il risultato.",
+      "summary_en": "US‑China AI dialogue aims to ease tensions, but outcomes remain uncertain.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Bce, per il dopo Lagarde è sfida Knot-de Cos. Resta l’incognita Berlino. E l’Italia prende tempo",
+      "url": "https://www.repubblica.it/economia/2026/11/07/news/bce_successione_lagarde_sfida_knot_de_cos_berlino_italia-425705810/?rss",
+      "source": "Repubblica Economia",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Lunedì, in occasione dell’Eurogruppo, scade il termine per la presentazione delle candidature. Sarà scontro tra falchi e colombe",
+      "date": "2026-11-07T00:00:00+00:00",
+      "relevance_score": 0.7,
+      "title_it": "BCE, la sfida Knot‑De Cos per il post‑Lagarde: incognita Berlino, Italia prende tempo",
+      "title_en": "ECB, post‑Lagarde challenge Knot‑De Cos. Berlin unknown, Italy buys time",
+      "summary_it": "La lotta tra falchi e colombe per la BCE mantiene alta l'incertezza sui futuri tassi europei.",
+      "summary_en": "Falcon‑dove battle for ECB keeps future European rates highly uncertain.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Don’t Go Backward on China Policy",
+      "url": "https://www.crisisgroup.org/opd/united-states/united-states-china/dont-go-backward-china-policy",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "The Folly of a Hawkish Restoration",
+      "date": "2026-11-07T06:45:11.827589+00:00",
+      "relevance_score": 0.6000000000000001,
+      "title_it": "Non tornare indietro sulla politica verso la Cina",
+      "title_en": "Don’t Go Backward on China Policy",
+      "summary_it": "L'articolo avverte contro un ritorno a politiche più dure verso la Cina, suggerendo continuità.",
+      "summary_en": "The piece warns against reverting to harsher China policies, urging continuity.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "The Economic Toll of Israel’s Wars",
+      "url": "https://www.project-syndicate.org/commentary/israel-economic-resilience-is-an-illusion-by-joseph-zeira-2026-11?utm_source=rss&utm_medium=feed&utm_campaign=main&utm_content=en",
+      "source": "Project Syndicate",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Israel’s economy may look strong, but three years of war have inflicted far greater damage than its robust stock market and appreciating currency suggest. Defense spending and government borrowing have risen sharply, while falling output and investment point to a prolonged recession.",
+      "date": "2026-11-06T16:32:04+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Il costo economico delle guerre di Israele",
+      "title_en": "The Economic Toll of Israel’s Wars",
+      "summary_it": "Le guerre hanno gravato sull'economia israeliana, nonostante un mercato azionario robusto.",
+      "summary_en": "Wars have weighed on Israel's economy despite a robust stock market.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "The upcoming 2027 French election cycle and political discontent",
+      "url": "https://www.piie.com/events/2026/upcoming-2027-french-election-cycle-and-political-discontent",
+      "source": "PIIE",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Elections in France since 2022 have ended in minority governments and hung parliaments. Now, with its deteriorating fiscal position raising concerns among investors, France enters another election cycle this coming spring: a two-round presidential election on April 18 and May 2, with a parliamentary election likely following a few weeks later. How has the French political landscape evolved, and how might the 2027 election cycle reshape it further? What are the scenarios for the presidency, parliament, and future prime minister? How might these influence France's medium-term fiscal trajectory…",
+      "date": "2026-11-19T14:00:00+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Il ciclo elettorale francese 2027 e il malcontento politico",
+      "title_en": "The upcoming 2027 French election cycle and political discontent",
+      "summary_it": "Le elezioni francesi potrebbero portare a governi instabili, aumentando l'incertezza fiscale.",
+      "summary_en": "French elections may yield unstable governments, raising fiscal uncertainty.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "The Iran War Isn't Over, but Oil Traders Are Already Pricing In Peace",
+      "url": "https://oilprice.com/Energy/Energy-General/The-Iran-War-Isnt-Over-but-Oil-Traders-Are-Already-Pricing-In-Peace.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Oil prices plunged 15% this week as hopes of a U.S.-Iran peace deal fueled bearish sentiment, despite continued attacks in the Strait of Hormuz. Friday, November 06, 2026 Oil prices are set to record one of the steepest weekly losses in recent memory, with ICE Brent sliding a hefty 15% week-on-week to $99 per barrel on expectations of US-Iran diplomatic progress and a weakening window of opportunity for the Trump administration to continue hostilities in the Middle East. Whilst talk of a global supply glut might be a little premature –…",
+      "date": "2026-11-06T15:28:00+00:00",
+      "relevance_score": 1.0,
+      "title_it": "La guerra in Iran non è finita, ma i trader petrolieri già prezzano la pace",
+      "title_en": "The Iran War Isn't Over, but Oil Traders Are Already Pricing In Peace",
+      "summary_it": "I prezzi del petrolio sono crollati del 15% in attesa di un possibile accordo di pace tra USA e Iran.",
+      "summary_en": "Oil prices fell 15% as traders price in a potential US‑Iran peace deal.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "high",
+        "assets_affected": [
+          "Brent"
+        ]
+      }
+    },
+    {
+      "title": "Oil Prices Plunge as U.S. Elections Shake Up the Iran War",
+      "url": "https://oilprice.com/Energy/Energy-General/Oil-Prices-Plunge-as-US-Elections-Shake-Up-the-Iran-War.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "December WTI crude oil is headed for one of its roughest weekly losses in months after the market shed $11.37, or 11.10%, from its opening price of $102.39. Prices posted a weekly high at $102.75 before breaking sharply to $86.65. Early Friday, the contract was trading near $91.58, still down heavily for the week. The decline was not driven by a sudden collapse in demand or a surprise rise in inventories. Traders began stripping out a portion of the war premium that lifted prices toward the October highs as U.S. midterm results raised hopes for…",
+      "date": "2026-11-06T12:30:00+00:00",
+      "relevance_score": 0.8,
+      "title_it": "I prezzi del petrolio crollano mentre le elezioni USA agitano la guerra in Iran",
+      "title_en": "Oil Prices Plunge as U.S. Elections Shake Up the Iran War",
+      "summary_it": "Le elezioni statunitensi hanno spinto il WTI a perdere più dell'11% in una settimana turbolenta.",
+      "summary_en": "US elections drove WTI down over 11% in a turbulent week.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "high",
+        "assets_affected": [
+          "Brent"
+        ]
+      }
+    },
+    {
+      "title": "Russia finalizes crypto trading rules ahead of Nov. 17 rollout",
+      "url": "https://cointelegraph.com/news/russia-finalizes-crypto-trading-rules-november-rollout?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "The rules allow retail investors to trade BTC, ETH and USDT through regulated intermediaries, with Moscow Exchange planning to launch crypto trading in December.",
+      "date": "2026-11-06T18:47:45+00:00",
+      "relevance_score": 0.6,
+      "title_it": "La Russia finalizza le regole per il trading di criptovalute prima del lancio del 17 novembre",
+      "title_en": "Russia finalizes crypto trading rules ahead of Nov. 17 rollout",
+      "summary_it": "Le nuove norme permettono agli investitori retail di scambiare BTC, ETH e USDT tramite intermediari regolamentati.",
+      "summary_en": "New rules allow retail investors to trade BTC, ETH and USDT via regulated intermediaries.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Bitcoin"
+        ]
+      }
+    },
+    {
+      "title": "Bitcoin price dips under $75K as crypto markets miss tech-stock rebound",
+      "url": "https://cointelegraph.com/markets/bitcoin-price-under-75k-crypto-markets-tech-stock?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "BTC price action stayed weak after US nonfarm payrolls data significantly beat forecasts, increasing bets of a December interest-rate hike.",
+      "date": "2026-11-06T17:49:33+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Il prezzo di Bitcoin scende sotto i 75 000 dollari mentre i mercati crypto non seguono il rimbalzo delle azioni tecnologiche",
+      "title_en": "Bitcoin price dips under $75K as crypto markets miss tech‑stock rebound",
+      "summary_it": "Il calo di Bitcoin è alimentato da dati occupazionali USA più forti, che aumentano le aspettative di un rialzo dei tassi.",
+      "summary_en": "Bitcoin fell as strong US jobs data raised expectations of a rate hike.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Bitcoin"
+        ]
+      }
+    },
+    {
+      "title": "U.S. Treasury Cuts Off MEXC From U.S. Financial System Over Alleged $16 Billion in Illicit Flows",
+      "url": "https://bitcoinmagazine.com/news/fincen-cuts-off-mexc-us-financial-system",
+      "source": "Bitcoin Magazine",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Bitcoin Magazine U.S. Treasury Cuts Off MEXC From U.S. Financial System Over Alleged $16 Billion in Illicit Flows FinCEN issued a final order under section 9714(a) that will bar U.S. financial institutions from sending or receiving funds with MEXC Global 30 days after Federal Register publication, citing at least $16 billion in alleged illicit activity. This post U.S. Treasury Cuts Off MEXC From U.S. Financial System Over Alleged $16 Billion in Illicit Flows first appeared on Bitcoin Magazine and is written by Micah Zimmerman .",
+      "date": "2026-11-06T21:28:56+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Il Tesoro USA esclude MEXC dal sistema finanziario per presunti 16 miliardi di flussi illeciti",
+      "title_en": "U.S. Treasury Cuts Off MEXC From U.S. Financial System Over Alleged $16 Billion in Illicit Flows",
+      "summary_it": "Il provvedimento aumenta la pressione regolamentare sul settore crypto, potenzialmente riducendo la liquidità.",
+      "summary_en": "The action heightens regulatory pressure on crypto, potentially reducing liquidity.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Bitcoin"
+        ]
+      }
+    },
+    {
+      "title": "Bitcoin Price Holds Near $75,000 After Hot October Jobs Report",
+      "url": "https://bitcoinmagazine.com/markets/bitcoin-price-holds-near-75800-jobs",
+      "source": "Bitcoin Magazine",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Bitcoin Magazine Bitcoin Price Holds Near $75,000 After Hot October Jobs Report Bitcoin price held near $75,800 Friday after U.S. employers added 165,000 jobs in October, far above the 59,000 forecast, as December Fed hike odds climbed toward 80%. This post Bitcoin Price Holds Near $75,000 After Hot October Jobs Report first appeared on Bitcoin Magazine and is written by Micah Zimmerman .",
+      "date": "2026-11-06T14:30:11+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Il prezzo di Bitcoin resta vicino a 75 000 dollari dopo il forte rapporto occupazionale di ottobre",
+      "title_en": "Bitcoin Price Holds Near $75,000 After Hot October Jobs Report",
+      "summary_it": "Il mercato crypto mantiene la stabilità nonostante il rapporto occupazionale USA molto positivo.",
+      "summary_en": "Crypto market holds steady despite a very positive US jobs report.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Bitcoin"
+        ]
+      }
+    }
+  ],
+  "audio_manifest_it": {
+    "schema_version": 1,
+    "date": "2026-11-07",
+    "language": "it",
+    "audio_url": "audio/briefing_20261107.mp3",
+    "duration_ms": 145570,
+    "sha256": "0275590b4d187466b9b93cc74fef52c3714c335db907bd0c5334d32c1f64f427",
+    "chapters": [
+      {
+        "id": "intro",
+        "title": "Apertura",
+        "start_ms": 0,
+        "end_ms": 6091
+      },
+      {
+        "id": "chiusure",
+        "title": "Chiusure",
+        "start_ms": 6091,
+        "end_ms": 66843
+      },
+      {
+        "id": "notizie",
+        "title": "Notizie e Outlook",
+        "start_ms": 66843,
+        "end_ms": 94459
+      },
+      {
+        "id": "macro",
+        "title": "Macro ed Economia",
+        "start_ms": 94459,
+        "end_ms": 98797
+      },
+      {
+        "id": "crypto",
+        "title": "Criptovalute",
+        "start_ms": 98797,
+        "end_ms": 138349
+      },
+      {
+        "id": "close",
+        "title": "Chiusura",
+        "start_ms": 138349,
+        "end_ms": 145570
+      }
+    ]
+  },
+  "audio_manifest_en": {
+    "schema_version": 1,
+    "date": "2026-11-07",
+    "language": "en",
+    "audio_url": "audio/briefing_20261107_en.mp3",
+    "duration_ms": 159746,
+    "sha256": "d7b08c5c97ba597f68349b6c96106de2b6469e94fb82b05608fed5b05aa3f5bd",
+    "chapters": [
+      {
+        "id": "intro",
+        "title": "Opening",
+        "start_ms": 0,
+        "end_ms": 6881
+      },
+      {
+        "id": "chiusure",
+        "title": "Market Closes",
+        "start_ms": 6881,
+        "end_ms": 75469
+      },
+      {
+        "id": "notizie",
+        "title": "News and Outlook",
+        "start_ms": 75469,
+        "end_ms": 101576
+      },
+      {
+        "id": "macro",
+        "title": "Macroeconomics",
+        "start_ms": 101576,
+        "end_ms": 108074
+      },
+      {
+        "id": "crypto",
+        "title": "Cryptocurrencies",
+        "start_ms": 108074,
+        "end_ms": 150655
+      },
+      {
+        "id": "close",
+        "title": "Closing",
+        "start_ms": 150655,
+        "end_ms": 159746
+      }
+    ]
+  }
+}
