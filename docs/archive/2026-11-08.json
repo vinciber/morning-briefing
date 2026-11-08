@@ -1,0 +1,840 @@
+{
+  "date": "2026-11-08",
+  "sentiment": {
+    "label": "risk_off",
+    "score": 7,
+    "reason_it": "Il VIX è salito del 32,03% nella settimana, segnalando un mercato difensivo (VIX >20). L'S&P 500 ha chiuso la settimana in -2,68% e il Nasdaq in -3,37%, confermando la pressione ribassista. Parallelamente, il DXY è più forte (+0,74%) e il Brent è sceso del 16,42%, entrambi fattori bearish per i risk assets. La combinazione di volatilità elevata, performance negativa delle azioni e tensioni geopolitiche (Trump‑Putin, BoE al 4%) rafforza il sentiment risk_off.",
+    "reason_en": "The VIX jumped 32.03% over the week, indicating a defensive market (VIX >20). The S&P 500 fell 2.68% and the Nasdaq 3.37%, confirming bearish pressure. At the same time, the DXY is stronger (+0.74%) and Brent down 16.42%, both bearish for risk assets. The mix of high volatility, negative equity performance and geopolitical stress (Trump‑Putin, BoE at 4%) pushes sentiment to risk_off."
+  },
+  "market_impact_summary": {
+    "it": "Equity: S&P 500 -2,68% e Nasdaq -3,37% (risk_off). Fixed income: il rendimento del US 10Y è sceso dell'1,42% a 4,85% (TLT stabile). Commodities: Brent -16,42% (bearish) mentre l'oro è +4,51% (mixed). Valute: DXY +0,74% (bearish per risk assets). La forte volatilità (VIX +32%) e le notizie geopolitiche bearish hanno spinto gli investitori verso la difesa.",
+    "en": "Equities: S&P 500 -2.68% and Nasdaq -3.37% (risk_off). Fixed income: US 10Y yield down 1.42% to 4.85% (TLT flat). Commodities: Brent -16.42% (bearish) while gold is +4.51% (mixed). FX: DXY +0.74% (bearish for risk assets). Elevated volatility (VIX +32%) and bearish geopolitical headlines drove investors into defensive positioning."
+  },
+  "audio_narrative_it": [
+    {
+      "id": "intro",
+      "title": "Apertura",
+      "text": "Buongiorno, benvenuti al Morning Briefing di Price Alert. Oggi ripercorriamo la settimana appena conclusa sui mercati."
+    },
+    {
+      "id": "wall_street",
+      "title": "Wall Street",
+      "text": "Il S&P 500 chiude in ribasso del 2,7% nella settimana, il Nasdaq perde il 3,4% e il Dow Jones scende dello 0,9%. Il VIX è salito del 32,0% segnalando maggiore volatilità. L'oro registra un rialzo del 4,5% su base settimanale, mentre il Brent è in forte calo del 16,4%. Il rendimento del Treasury a 10 anni è sceso dell'1,4% nella settimana. Il driver principale è stato il calo del petrolio, alimentato da segnali di diplomazia USA‑Iran e da una pressione sui prezzi dovuta alle recenti notizie di riduzione della domanda."
+    },
+    {
+      "id": "europa",
+      "title": "Europa",
+      "text": "Il STOXX 600 è leggermente in rialzo dello 0,3% nella settimana, il FTSE MIB guadagna l'1,1% e il BTP a 10 anni resta stabile intorno al 4,0%."
+    },
+    {
+      "id": "asia",
+      "title": "Mercati Asiatici",
+      "text": "Il Nikkei registra una perdita del 9,3% nella settimana, lo Shanghai guadagna l'1,4% e l'Hang Seng sale del 5,1% su base settimanale."
+    },
+    {
+      "id": "macro",
+      "title": "Macro ed Economia",
+      "text": "Le notizie più impattanti hanno spinto i mercati: la BoE ha alzato i tassi al 4%, rafforzando il sentiment risk‑off; la Fed ha aumentato i tassi negli USA, contribuendo al calo del Brent del 7% dopo segnali di diplomazia USA‑Iran; l'inflazione eurozona al 4% ha spinto la BCE verso un nuovo inasprimento, alimentando la pressione sui titoli europei. Il sentiment è partito in risk‑off, si è moderato a metà settimana, per poi chiudere nuovamente in territorio risk‑off."
+    },
+    {
+      "id": "crypto",
+      "title": "Criptovalute",
+      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si mantiene sopra i settantacinquemiladollari, con una variazione di -0,34%. Il flusso ETF cumulativo della settimana è stato di -445,7 milioni di dollari, rispetto a +986,7 milioni la settimana precedente, un calo di 1,432,4 milioni. L’ultimo flusso giornaliero, riferito a venerdì, è stato di +3,8 milioni. Ethereum ha registrato una diminuzione di 0,62%, rimanendo a duemilatrecentodue dollari. Solana ha sceso di 1,38%, a ottantotto virgola novadollari. BNB è leggermente in rialzo, +0,30%, a seicento novantasei virgola cinquantatré dollari. Il Fear & Greed Index è a 28, classificato come Fear, suggerendo cautela agli investitori. Le notizie di oggi evidenziano la finalizzazione delle regole di trading in Russia, l’ordine di Binance di chiudere conti in alcuni paesi europei e l’espulsione di MEXC dal sistema finanziario statunitense per presunti flussi illeciti. Questi sviluppi indicano un contesto regolamentare più stringente e un possibile impatto sui flussi di capitali digitali."
+    },
+    {
+      "id": "close",
+      "title": "Chiusura",
+      "text": "Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Tutti gli approfondimenti sono disponibili sul sito di Price Alert nella sezione notizie. Grazie per l'attenzione e a domani. Un saluto da Price Alert"
+    }
+  ],
+  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert. Oggi ripercorriamo la settimana appena conclusa sui mercati.\n\nIl S&P 500 chiude in ribasso del 2,7% nella settimana, il Nasdaq perde il 3,4% e il Dow Jones scende dello 0,9%. Il VIX è salito del 32,0% segnalando maggiore volatilità. L'oro registra un rialzo del 4,5% su base settimanale, mentre il Brent è in forte calo del 16,4%. Il rendimento del Treasury a 10 anni è sceso dell'1,4% nella settimana. Il driver principale è stato il calo del petrolio, alimentato da segnali di diplomazia USA‑Iran e da una pressione sui prezzi dovuta alle recenti notizie di riduzione della domanda.\n\nIl STOXX 600 è leggermente in rialzo dello 0,3% nella settimana, il FTSE MIB guadagna l'1,1% e il BTP a 10 anni resta stabile intorno al 4,0%.\n\nIl Nikkei registra una perdita del 9,3% nella settimana, lo Shanghai guadagna l'1,4% e l'Hang Seng sale del 5,1% su base settimanale.\n\nLe notizie più impattanti hanno spinto i mercati: la BoE ha alzato i tassi al 4%, rafforzando il sentiment risk‑off; la Fed ha aumentato i tassi negli USA, contribuendo al calo del Brent del 7% dopo segnali di diplomazia USA‑Iran; l'inflazione eurozona al 4% ha spinto la BCE verso un nuovo inasprimento, alimentando la pressione sui titoli europei. Il sentiment è partito in risk‑off, si è moderato a metà settimana, per poi chiudere nuovamente in territorio risk‑off.\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si mantiene sopra i settantacinquemiladollari, con una variazione di -0,34%. Il flusso ETF cumulativo della settimana è stato di -445,7 milioni di dollari, rispetto a +986,7 milioni la settimana precedente, un calo di 1,432,4 milioni. L’ultimo flusso giornaliero, riferito a venerdì, è stato di +3,8 milioni. Ethereum ha registrato una diminuzione di 0,62%, rimanendo a duemilatrecentodue dollari. Solana ha sceso di 1,38%, a ottantotto virgola novadollari. BNB è leggermente in rialzo, +0,30%, a seicento novantasei virgola cinquantatré dollari. Il Fear & Greed Index è a 28, classificato come Fear, suggerendo cautela agli investitori. Le notizie di oggi evidenziano la finalizzazione delle regole di trading in Russia, l’ordine di Binance di chiudere conti in alcuni paesi europei e l’espulsione di MEXC dal sistema finanziario statunitense per presunti flussi illeciti. Questi sviluppi indicano un contesto regolamentare più stringente e un possibile impatto sui flussi di capitali digitali.\n\nPer approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Tutti gli approfondimenti sono disponibili sul sito di Price Alert nella sezione notizie. Grazie per l'attenzione e a domani. Un saluto da Price Alert",
+  "audio_narrative_en": [
+    {
+      "id": "intro",
+      "title": "Opening",
+      "text": "Good morning, welcome to the Price Alert Morning Briefing. Today we recap the just concluded week in the markets."
+    },
+    {
+      "id": "wall_street",
+      "title": "Wall Street",
+      "text": "The S&P 500 closed down 2.7% this week, the Nasdaq fell 3.4% and the Dow Jones dropped 0.9%. The VIX rose 32.0%, signalling higher volatility. Gold recorded a 4.5% weekly gain, while Brent plunged 16.4%. The 10‑year Treasury yield fell 1.4% this week. The main driver was the drop in oil, fueled by U.S.–Iran diplomacy signals and price pressure from recent demand‑reduction news."
+    },
+    {
+      "id": "europa",
+      "title": "Europe",
+      "text": "The STOXX 600 is slightly up 0.3% this week, the FTSE MIB gains 1.1% and the 10‑year BTP remains stable around 4.0%."
+    },
+    {
+      "id": "asia",
+      "title": "Asian Markets",
+      "text": "The Nikkei lost 9.3% this week, Shanghai gained 1.4% and the Hang Seng rose 5.1% on a weekly basis."
+    },
+    {
+      "id": "macro",
+      "title": "Macroeconomics",
+      "text": "The most impactful news pushed markets: the BoE raised rates to 4%, strengthening risk‑off sentiment; the Fed raised rates in the U.S., contributing to Brent’s 7% fall after U.S.–Iran diplomacy signals; euro‑zone inflation at 4% pushed the ECB toward a new tightening, adding pressure on European bonds. Sentiment started risk‑off, moderated mid‑week, then closed again in risk‑off territory."
+    },
+    {
+      "id": "crypto",
+      "title": "Cryptocurrencies",
+      "text": "Let's pivot to the cryptocurrency markets. Bitcoin stays above $75,000, with a change of -0.34%. The cumulative ETF flow for the week was -$445.7 million, versus +$986.7 million the previous week, a decline of $1,432.4 million. The latest daily flow, reported on Friday, was +$3.8 million. Ethereum fell 0.62%, remaining at $2,302. Solana dropped 1.38%, to $88.9. BNB is slightly up 0.30%, at $636.53. The Fear & Greed Index is at 28, classified as Fear, suggesting caution for investors. Today’s news highlight the finalization of trading rules in Russia, Binance’s order to close accounts in some European countries, and MEXC’s removal from the U.S. financial system for alleged illicit flows. These developments indicate a tighter regulatory environment and a potential impact on digital capital flows."
+    },
+    {
+      "id": "close",
+      "title": "Closing",
+      "text": "For deeper coverage of today’s topics, find the full articles in the Featured Stories section on our platform. All in‑depth pieces are available on the Price Alert website under news. Thank you for your attention and see you tomorrow. A greeting from Price Alert"
+    }
+  ],
+  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing. Today we recap the just concluded week in the markets.\n\nThe S&P 500 closed down 2.7% this week, the Nasdaq fell 3.4% and the Dow Jones dropped 0.9%. The VIX rose 32.0%, signalling higher volatility. Gold recorded a 4.5% weekly gain, while Brent plunged 16.4%. The 10‑year Treasury yield fell 1.4% this week. The main driver was the drop in oil, fueled by U.S.–Iran diplomacy signals and price pressure from recent demand‑reduction news.\n\nThe STOXX 600 is slightly up 0.3% this week, the FTSE MIB gains 1.1% and the 10‑year BTP remains stable around 4.0%.\n\nThe Nikkei lost 9.3% this week, Shanghai gained 1.4% and the Hang Seng rose 5.1% on a weekly basis.\n\nThe most impactful news pushed markets: the BoE raised rates to 4%, strengthening risk‑off sentiment; the Fed raised rates in the U.S., contributing to Brent’s 7% fall after U.S.–Iran diplomacy signals; euro‑zone inflation at 4% pushed the ECB toward a new tightening, adding pressure on European bonds. Sentiment started risk‑off, moderated mid‑week, then closed again in risk‑off territory.\n\nLet's pivot to the cryptocurrency markets. Bitcoin stays above $75,000, with a change of -0.34%. The cumulative ETF flow for the week was -$445.7 million, versus +$986.7 million the previous week, a decline of $1,432.4 million. The latest daily flow, reported on Friday, was +$3.8 million. Ethereum fell 0.62%, remaining at $2,302. Solana dropped 1.38%, to $88.9. BNB is slightly up 0.30%, at $636.53. The Fear & Greed Index is at 28, classified as Fear, suggesting caution for investors. Today’s news highlight the finalization of trading rules in Russia, Binance’s order to close accounts in some European countries, and MEXC’s removal from the U.S. financial system for alleged illicit flows. These developments indicate a tighter regulatory environment and a potential impact on digital capital flows.\n\nFor deeper coverage of today’s topics, find the full articles in the Featured Stories section on our platform. All in‑depth pieces are available on the Price Alert website under news. Thank you for your attention and see you tomorrow. A greeting from Price Alert",
+  "market_data_raw": {
+    "dxy": {
+      "value": "102.30",
+      "change": "+0.74%"
+    },
+    "eur_usd": {
+      "value": "1.12",
+      "change": "-0.06%"
+    },
+    "sp500": {
+      "value": "7376.86",
+      "change": "+0.31%"
+    },
+    "nasdaq": {
+      "value": "24,579",
+      "change": "+1.09%"
+    },
+    "dow": {
+      "value": "51,286",
+      "change": "-0.46%"
+    },
+    "vix": {
+      "value": "25.64",
+      "change": "-9.01%"
+    },
+    "tlt": {
+      "value": "81.92",
+      "change": "-0.01%"
+    },
+    "us_10y": {
+      "value": "4.85%",
+      "change": "+0.45%"
+    },
+    "gold": {
+      "value": "$4074.90/oz",
+      "change": "-0.94%"
+    },
+    "btcusd": {
+      "value": "$75,669",
+      "change": "-0.10%"
+    },
+    "oil_brent": {
+      "value": "$98.32",
+      "change": "+0.03%"
+    },
+    "stoxx_600": {
+      "value": "64.24",
+      "change": "-1.25%"
+    },
+    "ftse_mib": {
+      "value": "50,053",
+      "change": "-0.90%"
+    },
+    "nikkei": {
+      "value": "57,435",
+      "change": "-5.96%"
+    },
+    "shanghai": {
+      "value": "3649.18",
+      "change": "-1.10%"
+    },
+    "hang_seng": {
+      "value": "24,482",
+      "change": "-1.27%"
+    },
+    "europe_futures": {
+      "status": "unavailable",
+      "instrument": "EURO STOXX 50 Futures Roll Index",
+      "source": "Yahoo Finance",
+      "source_symbol": "03V9.Z",
+      "reason": "outside_europe_preopen"
+    },
+    "btp_10y": {
+      "value": "3.99%",
+      "change": "N/A"
+    },
+    "btp_bund_spread": {
+      "value": "52 bp",
+      "change": ""
+    },
+    "global_m2": {
+      "value": "$23.4T",
+      "change": "expanding 📈 | US YoY: +5.7% YoY"
+    },
+    "btc_etf_flow": {
+      "value": "$+3.8M",
+      "change": "📈 Reversal Up"
+    },
+    "btc_etf_data": {
+      "last_update": "2026-09-11",
+      "net_flow_usd_m": 3.8,
+      "status": "POSITIVE",
+      "trend_indicator": "📈 Reversal Up",
+      "prev_flow_usd_m": -282.7,
+      "week_sum_m": -445.7,
+      "prev_week_sum_m": 986.7,
+      "week_delta_m": -1432.4,
+      "scraped_at": "2026-09-11T23:53:48.299311Z",
+      "source": "Farside",
+      "message": "🟢 Inflow: +3.8M$",
+      "total_btc": 1268341.0,
+      "total_aum_bn": 97.879407715,
+      "pct_of_21m": 6.04,
+      "btc_dominance": 58.27128197298697,
+      "total_market_cap": 2655030309791.596
+    },
+    "crypto": {
+      "fear_greed": {
+        "value": "28",
+        "class": "Fear"
+      },
+      "prices": {
+        "BTC": {
+          "value": "$75,719",
+          "change": "-0.34%"
+        },
+        "ETH": {
+          "value": "$2,231",
+          "change": "-0.62%"
+        },
+        "SOL": {
+          "value": "$88.92",
+          "change": "-1.38%"
+        },
+        "BNB": {
+          "value": "$696.53",
+          "change": "+0.30%"
+        }
+      }
+    },
+    "weekly": {
+      "sp500": {
+        "value": "7376.86",
+        "change": "-2.68%"
+      },
+      "nasdaq": {
+        "value": "24,579",
+        "change": "-3.37%"
+      },
+      "dow": {
+        "value": "51,286",
+        "change": "-0.94%"
+      },
+      "vix": {
+        "value": "25.64",
+        "change": "+32.03%"
+      },
+      "stoxx_600": {
+        "value": "64.24",
+        "change": "+0.25%"
+      },
+      "ftse_mib": {
+        "value": "50,053",
+        "change": "+1.12%"
+      },
+      "nikkei": {
+        "value": "57,435",
+        "change": "-9.25%"
+      },
+      "shanghai": {
+        "value": "3649.18",
+        "change": "+1.39%"
+      },
+      "hang_seng": {
+        "value": "24,482",
+        "change": "+5.10%"
+      },
+      "gold": {
+        "value": "4074.90",
+        "change": "+4.51%"
+      },
+      "oil_brent": {
+        "value": "98.32",
+        "change": "-16.42%"
+      },
+      "us_10y": {
+        "value": "4.85",
+        "change": "-1.42%"
+      },
+      "btcusd": {
+        "value": "75,669",
+        "change": "-3.30%"
+      }
+    },
+    "fred_week_ahead": [
+      {
+        "date": "2026-11-13",
+        "label": "PPI USA"
+      }
+    ],
+    "macro_calendar": {
+      "cpi": {
+        "label": "CPI YoY USA",
+        "label_it": "CPI YoY USA",
+        "label_en": "CPI YoY USA",
+        "value": "4.0%",
+        "previous": "3.7%",
+        "release_date": "2026-09-01",
+        "status": "released",
+        "next_release": "2026-11-12"
+      },
+      "core_cpi": {
+        "label": "Core CPI YoY USA",
+        "label_it": "Core CPI YoY USA",
+        "label_en": "Core CPI YoY USA",
+        "value": "2.8%",
+        "previous": "2.8%",
+        "release_date": "2026-09-01",
+        "status": "released",
+        "next_release": "2026-11-12"
+      },
+      "nfp": {
+        "label": "Non-Farm Payrolls",
+        "label_it": "Non-Farm Payrolls",
+        "label_en": "Non-Farm Payrolls",
+        "value": "+165K",
+        "previous": "+60K",
+        "release_date": "2026-10-01",
+        "status": "released",
+        "next_release": "2026-12-04"
+      },
+      "unemployment": {
+        "label": "Tasso Disoccupazione USA",
+        "label_it": "Tasso Disoccupazione USA",
+        "label_en": "Unemployment Rate USA",
+        "value": "4.1%",
+        "previous": "4.2%",
+        "release_date": "2026-10-01",
+        "status": "released",
+        "next_release": "2026-12-04"
+      },
+      "pce_core": {
+        "label": "PCE Core YoY",
+        "label_it": "PCE Core YoY",
+        "label_en": "PCE Core YoY",
+        "value": "3.1%",
+        "previous": "3.0%",
+        "release_date": "2026-09-01",
+        "status": "released",
+        "next_release": "2026-11-25"
+      },
+      "fed_funds": {
+        "label": "Tasso Fed Funds",
+        "label_it": "Tasso Fed Funds",
+        "label_en": "Fed Funds Rate",
+        "value": "3.75% - 4.00%",
+        "release_date": "2026-11-04",
+        "status": "released",
+        "next_release": "2026-12-16",
+        "previous": "3.50% - 3.75%"
+      },
+      "gdp": {
+        "label": "PIL QoQ USA",
+        "label_it": "PIL QoQ USA",
+        "label_en": "GDP QoQ USA",
+        "value": "3.4%",
+        "previous": "2.2%",
+        "status": "upcoming",
+        "next_release": "2026-10-29"
+      }
+    },
+    "macro_calendar_eu": {
+      "gdp_eu": {
+        "label": "PIL QoQ Eurozona",
+        "label_it": "PIL QoQ Eurozona",
+        "label_en": "GDP QoQ Eurozone",
+        "value": "0.4%",
+        "previous": "0.6%",
+        "release_date": "2026-Q3",
+        "status": "released",
+        "next_release": "2026-10-30",
+        "region": "EU"
+      },
+      "ecb_rate": {
+        "label": "Tasso BCE (Depositi)",
+        "label_it": "Tasso BCE (Depositi)",
+        "label_en": "ECB Rate (Deposit)",
+        "value": "2.50%",
+        "release_date": "2026-10-29",
+        "status": "released",
+        "next_release": "2026-12-10",
+        "region": "EU",
+        "previous": "2.25%"
+      },
+      "cpi_eu": {
+        "label": "CPI Eurozona",
+        "label_it": "CPI Eurozona",
+        "label_en": "Eurozone CPI",
+        "value": null,
+        "status": "upcoming",
+        "next_release": "2026-12-01",
+        "region": "EU"
+      },
+      "unemployment_eu": {
+        "label": "Disoccupazione EU",
+        "label_it": "Disoccupazione EU",
+        "label_en": "EU Unemployment",
+        "value": null,
+        "status": "upcoming",
+        "next_release": "2026-12-01",
+        "region": "EU"
+      },
+      "ecb_refi_rate": {
+        "label": "Tasso BCE (Refi/Mutui)",
+        "label_it": "Tasso BCE (Refi/Mutui)",
+        "label_en": "ECB Rate (Refi)",
+        "value": "2.65%",
+        "status": "released",
+        "region": "EU",
+        "previous": "2.40%"
+      }
+    },
+    "fed_target_range": {
+      "value": "3.75% - 4.00%",
+      "release_date": "2026-11-07",
+      "previous": "3.50% - 3.75%"
+    }
+  },
+  "articles": [
+    {
+      "title": "2026 midterm election debrief",
+      "url": "https://www.piie.com/events/2026/2026-midterm-election-debrief",
+      "source": "PIIE",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "The Peterson Institute for International Economics presents its post 2026 midterm election briefing on what the election results and incoming Congress could mean for US and international economic policy. Cullen S. Hendrix discusses the geopolitical stakes of the midterms, including whether the new Congress will check or extend the executive's use of economic levers in the name of national security, from tariffs and sanctions to critical minerals and industrial policy. Mary E. Lovely examines the role of tariffs and trade wars on voter sentiment and implications for the new Congress. Adam S.…",
+      "date": "2026-11-12T18:00:00+00:00",
+      "relevance_score": 1.0,
+      "title_it": "Analisi post-elezioni di metà mandato 2026",
+      "title_en": "2026 midterm election debrief",
+      "summary_it": "Il PIIE analizza le conseguenze dei risultati elettorali e del nuovo Congresso per l'economia statunitense e internazionale.",
+      "summary_en": "PIIE analyzes the consequences of election results and the new Congress for the US and international economy.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500",
+          "USD"
+        ]
+      }
+    },
+    {
+      "title": "US warns China it must ‘immediately’ meet terms of Busan trade deal",
+      "url": "https://www.ft.com/content/391bb785-0247-4c39-b53b-35007187d603?syn-25a6b1a6=1",
+      "source": "Financial Times (Global Economy)",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "Washington says Beijing is not fulfilling commitments to increase supply of rare earths and other critical products",
+      "date": "2026-11-06T22:53:51+00:00",
+      "relevance_score": 0.6000000000000001,
+      "title_it": "Gli USA avvertono la Cina sul rispetto dell'accordo commerciale di Busan",
+      "title_en": "US warns China it must ‘immediately’ meet terms of Busan trade deal",
+      "summary_it": "Washington accusa Pechino di non rispettare gli impegni sulla fornitura di terre rare e prodotti critici.",
+      "summary_en": "Washington accuses Beijing of failing to meet commitments on the supply of rare earths and critical products.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500",
+          "Tech Stocks"
+        ]
+      }
+    },
+    {
+      "title": "US economy outstrips forecasts to add 165,000 jobs in October",
+      "url": "https://www.ft.com/content/f84c722c-99a9-4628-84dc-c42a192cb35c?syn-25a6b1a6=1",
+      "source": "Financial Times (Global Economy)",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "Hiring rebound reinforces expectations Federal Reserve will raise interest rates",
+      "date": "2026-11-06T22:16:13+00:00",
+      "relevance_score": 0.6,
+      "title_it": "L'economia USA supera le previsioni con 165.000 nuovi posti di lavoro",
+      "title_en": "US economy outstrips forecasts to add 165,000 jobs in October",
+      "summary_it": "Il rimbalzo delle assunzioni rafforza le aspettative di un aumento dei tassi di interesse da parte della Fed.",
+      "summary_en": "The hiring rebound reinforces expectations that the Federal Reserve will raise interest rates.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "S&P 500",
+          "Treasury Bonds"
+        ]
+      }
+    },
+    {
+      "title": "Don’t Go Backward on China Policy",
+      "url": "https://www.crisisgroup.org/opd/united-states/united-states-china/dont-go-backward-china-policy",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "The Folly of a Hawkish Restoration",
+      "date": "2026-11-08T06:44:07.621937+00:00",
+      "relevance_score": 0.6000000000000001,
+      "title_it": "Non tornare indietro sulla politica verso la Cina",
+      "title_en": "Don’t Go Backward on China Policy",
+      "summary_it": "Un'analisi critica sulla follia di un approccio eccessivamente aggressivo nelle relazioni diplomatiche con la Cina.",
+      "summary_en": "A critical analysis of the folly of an overly aggressive approach in diplomatic relations with China.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500",
+          "Emerging Markets"
+        ]
+      }
+    },
+    {
+      "title": "Bce, per il dopo Lagarde è sfida Knot-de Cos. Resta l’incognita Berlino. E l’Italia prende tempo",
+      "url": "https://www.repubblica.it/economia/2026/11/07/news/bce_successione_lagarde_sfida_knot_de_cos_berlino_italia-425705810/?rss",
+      "source": "Repubblica Economia",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Lunedì, in occasione dell’Eurogruppo, scade il termine per la presentazione delle candidature. Sarà scontro tra falchi e colombe",
+      "date": "2026-11-07T00:00:00+00:00",
+      "relevance_score": 0.6,
+      "title_it": "BCE, sfida Knot-de Cos per il dopo Lagarde",
+      "title_en": "ECB, Knot-de Cos challenge for the post-Lagarde era",
+      "summary_it": "Scade il termine per le candidature alla BCE, con uno scontro previsto tra falchi e colombe.",
+      "summary_en": "The deadline for ECB nominations expires, with a clash expected between hawks and doves.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "medium",
+        "assets_affected": [
+          "EUR/USD",
+          "Euro Stoxx 50"
+        ]
+      }
+    },
+    {
+      "title": "The UAE in Sudan",
+      "url": "https://www.crisisgroup.org/pod/africa/sudan/uae-sudan",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "This week on Hold Your Fire!, Richard is joined by Crisis Group experts Shewit Woldemichael and Alan Boswell to discuss how the UAE and other foreign powers are sustaining Sudan’s war, deepening the suffering of Sudanese civilians and complicating diplomatic efforts to end the fighting.",
+      "date": "2026-11-08T06:44:07.621317+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Gli Emirati Arabi Uniti in Sudan",
+      "title_en": "The UAE in Sudan",
+      "summary_it": "Esperti discutono di come gli Emirati e altre potenze straniere stiano alimentando il conflitto in Sudan.",
+      "summary_en": "Experts discuss how the UAE and other foreign powers are sustaining the conflict in Sudan.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Brent",
+          "Gold"
+        ]
+      }
+    },
+    {
+      "title": "The upcoming 2027 French election cycle and political discontent",
+      "url": "https://www.piie.com/events/2026/upcoming-2027-french-election-cycle-and-political-discontent",
+      "source": "PIIE",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Elections in France since 2022 have ended in minority governments and hung parliaments. Now, with its deteriorating fiscal position raising concerns among investors, France enters another election cycle this coming spring: a two-round presidential election on April 18 and May 2, with a parliamentary election likely following a few weeks later. How has the French political landscape evolved, and how might the 2027 election cycle reshape it further? What are the scenarios for the presidency, parliament, and future prime minister? How might these influence France's medium-term fiscal trajectory…",
+      "date": "2026-11-19T14:00:00+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Il ciclo elettorale francese del 2027 e il malcontento politico",
+      "title_en": "The upcoming 2027 French election cycle and political discontent",
+      "summary_it": "Il deterioramento della posizione fiscale francese solleva preoccupazioni tra gli investitori in vista delle elezioni.",
+      "summary_en": "France's deteriorating fiscal position raises concerns among investors ahead of the upcoming elections.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "CAC 40",
+          "EUR"
+        ]
+      }
+    },
+    {
+      "title": "Astellas employee jailed in China on spy charge set for December release",
+      "url": "https://asia.nikkei.com/politics/international-relations/astellas-employee-jailed-in-china-on-spy-charge-set-for-december-release",
+      "source": "Nikkei Asia",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "Astellas employee jailed in China on spy charge set for December release",
+      "date": "2026-11-08T06:44:09.671958+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Dipendente Astellas incarcerato in Cina sarà rilasciato a dicembre",
+      "title_en": "Astellas employee jailed in China on spy charge set for December release",
+      "summary_it": "Il dipendente di Astellas, accusato di spionaggio in Cina, è previsto in libertà entro la fine dell'anno.",
+      "summary_en": "The Astellas employee, jailed in China on spy charges, is scheduled for release by the end of the year.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Nikkei 225"
+        ]
+      }
+    },
+    {
+      "title": "Seres, Li Auto join Chinese EVs' charge into Europe",
+      "url": "https://asia.nikkei.com/business/automobiles/electric-vehicles/seres-li-auto-join-chinese-evs-charge-into-europe",
+      "source": "Nikkei Asia",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "Seres, Li Auto join Chinese EVs' charge into Europe",
+      "date": "2026-11-08T06:44:09.672303+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Seres e Li Auto guidano l'espansione dei veicoli elettrici cinesi in Europa",
+      "title_en": "Seres, Li Auto join Chinese EVs' charge into Europe",
+      "summary_it": "I produttori cinesi di veicoli elettrici Seres e Li Auto accelerano la loro espansione nel mercato europeo.",
+      "summary_en": "Chinese EV manufacturers Seres and Li Auto are accelerating their expansion into the European market.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Automotive Stocks"
+        ]
+      }
+    },
+    {
+      "title": "Wars May Spur Faster Electrification",
+      "url": "https://oilprice.com/Energy/Energy-General/Wars-May-Spur-Faster-Electrification.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "The wars in Ukraine and the Middle East have prompted an increase in EV sales to avoid retail fuel inflation and gas demand destruction in favor of other power generation sources. With COP31 starting next week, some participants have signaled that faster electrification could become the focus of the event. “I would like to see a strong outcome on electrification in our presidency-led decision,” this year’s COP’s head of negotiations, Australian climate change minister Chris Bowen, told Bloomberg. Bowen also said he would…",
+      "date": "2026-11-08T00:00:00+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Le guerre potrebbero accelerare l'elettrificazione",
+      "title_en": "Wars May Spur Faster Electrification",
+      "summary_it": "I conflitti globali spingono le vendite di veicoli elettrici per evitare l'inflazione dei carburanti e la dipendenza.",
+      "summary_en": "Global conflicts are driving EV sales to avoid fuel inflation and dependence on traditional energy sources.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Lithium",
+          "EV Stocks"
+        ]
+      }
+    },
+    {
+      "title": "Oil Traders Want U.S. to Release Sanctioned Tankers as Freight Costs Soar",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Traders-Want-US-to-Release-Sanctioned-Tankers-as-Freight-Costs-Soar.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Some of the world's biggest oil traders are asking Washington for permission to put sanctioned tankers back to work, as a global vessel shortage pushes oil transportation costs to extraordinary levels. Trafigura, Vitol, Mercuria and Abu Dhabi National Oil Co. are negotiating with U.S. officials for licenses to purchase or lease blacklisted oil tankers, Bloomberg reported Friday, citing people familiar with the discussions. The talks involve approximately 50 vessels currently under U.S. sanctions. Treasury officials are considering approvals on…",
+      "date": "2026-11-06T20:30:00+00:00",
+      "relevance_score": 0.6,
+      "title_it": "I trader petroliferi chiedono agli USA di sbloccare le petroliere sanzionate",
+      "title_en": "Oil Traders Want U.S. to Release Sanctioned Tankers as Freight Costs Soar",
+      "summary_it": "La carenza globale di navi spinge i costi di trasporto, spingendo i trader a chiedere la revoca delle sanzioni.",
+      "summary_en": "A global vessel shortage is driving up transport costs, leading traders to request the lifting of sanctions.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Brent",
+          "WTI"
+        ]
+      }
+    },
+    {
+      "title": "Russia finalizes crypto trading rules ahead of Nov. 17 rollout",
+      "url": "https://cointelegraph.com/news/russia-finalizes-crypto-trading-rules-november-rollout?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "The rules allow retail investors to trade BTC, ETH and USDT through regulated intermediaries, with Moscow Exchange planning to launch crypto trading in December.",
+      "date": "2026-11-06T18:47:45+00:00",
+      "relevance_score": 0.6,
+      "title_it": "La Russia finalizza le regole per il trading di criptovalute",
+      "title_en": "Russia finalizes crypto trading rules ahead of Nov. 17 rollout",
+      "summary_it": "Le nuove regole consentiranno agli investitori russi di negoziare BTC ed ETH tramite intermediari regolamentati.",
+      "summary_en": "New rules will allow Russian investors to trade BTC and ETH through regulated intermediaries.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Bitcoin",
+          "Ethereum"
+        ]
+      }
+    },
+    {
+      "title": "Binance users in some European countries told to pull crypto before fees kick in, with accounts closing by year end",
+      "url": "https://www.coindesk.com/business/2026/11/07/binance-users-in-some-european-countries-told-to-pull-crypto-before-fees-kick-in-with-accounts-closing-by-year-end",
+      "source": "CoinDesk",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Binance users in some European countries told to pull crypto before fees kick in, with accounts closing by year end",
+      "date": "2026-11-07T19:13:16+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Binance chiude i conti in alcuni paesi europei",
+      "title_en": "Binance users in some European countries told to pull crypto before fees kick in",
+      "summary_it": "Gli utenti di Binance in diversi paesi europei devono prelevare i fondi prima della chiusura dei conti.",
+      "summary_en": "Binance users in several European countries are required to withdraw funds before accounts are closed.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "BNB",
+          "Crypto Market"
+        ]
+      }
+    },
+    {
+      "title": "U.S. Treasury Cuts Off MEXC From U.S. Financial System Over Alleged $16 Billion in Illicit Flows",
+      "url": "https://bitcoinmagazine.com/news/fincen-cuts-off-mexc-us-financial-system",
+      "source": "Bitcoin Magazine",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Bitcoin Magazine U.S. Treasury Cuts Off MEXC From U.S. Financial System Over Alleged $16 Billion in Illicit Flows FinCEN issued a final order under section 9714(a) that will bar U.S. financial institutions from sending or receiving funds with MEXC Global 30 days after Federal Register publication, citing at least $16 billion in alleged illicit activity. This post U.S. Treasury Cuts Off MEXC From U.S. Financial System Over Alleged $16 Billion in Illicit Flows first appeared on Bitcoin Magazine and is written by Micah Zimmerman .",
+      "date": "2026-11-06T21:28:56+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Il Tesoro USA taglia fuori MEXC dal sistema finanziario",
+      "title_en": "U.S. Treasury Cuts Off MEXC From U.S. Financial System Over Alleged $16 Billion in Illicit Flows",
+      "summary_it": "Il FinCEN ha emesso un ordine contro MEXC per presunti flussi illeciti di 16 miliardi di dollari.",
+      "summary_en": "FinCEN has issued an order against MEXC for alleged illicit flows totaling 16 billion dollars.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "Crypto Market"
+        ]
+      }
+    },
+    {
+      "title": "Here’s what happened in crypto today",
+      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Need to know what happened in crypto today? Here is the latest news on daily trends and events impacting Bitcoin price, blockchain, DeFi, Web3 and crypto regulation.",
+      "date": "2026-11-07T14:22:00+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Le ultime notizie dal mondo delle criptovalute",
+      "title_en": "Here’s what happened in crypto today",
+      "summary_it": "Un riepilogo quotidiano sulle tendenze di mercato, Bitcoin, DeFi e le ultime novità normative nel settore crypto.",
+      "summary_en": "A daily summary of market trends, Bitcoin, DeFi, and the latest regulatory news in the crypto sector.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "low",
+        "assets_affected": [
+          "Bitcoin",
+          "Altcoins"
+        ]
+      }
+    }
+  ],
+  "audio_manifest_it": {
+    "schema_version": 1,
+    "date": "2026-11-08",
+    "language": "it",
+    "audio_url": "audio/briefing_20261108.mp3",
+    "duration_ms": 180038,
+    "sha256": "7ee1769df770664e26978ab4077d908c0e85a9e7fb7c49fc84615e9a25ea2c7b",
+    "chapters": [
+      {
+        "id": "intro",
+        "title": "Apertura",
+        "start_ms": 0,
+        "end_ms": 6904
+      },
+      {
+        "id": "wall_street",
+        "title": "Wall Street",
+        "start_ms": 6904,
+        "end_ms": 44319
+      },
+      {
+        "id": "europa",
+        "title": "Europa",
+        "start_ms": 44319,
+        "end_ms": 56831
+      },
+      {
+        "id": "asia",
+        "title": "Mercati Asiatici",
+        "start_ms": 56831,
+        "end_ms": 67950
+      },
+      {
+        "id": "macro",
+        "title": "Macro ed Economia",
+        "start_ms": 67950,
+        "end_ms": 97691
+      },
+      {
+        "id": "crypto",
+        "title": "Criptovalute",
+        "start_ms": 97691,
+        "end_ms": 166337
+      },
+      {
+        "id": "close",
+        "title": "Chiusura",
+        "start_ms": 166337,
+        "end_ms": 180037
+      }
+    ]
+  },
+  "audio_manifest_en": {
+    "schema_version": 1,
+    "date": "2026-11-08",
+    "language": "en",
+    "audio_url": "audio/briefing_20261108_en.mp3",
+    "duration_ms": 182718,
+    "sha256": "23e33bade0228f91c3754ed924c2bafe260a1ca2f54e26a87e0c787ccb280fb1",
+    "chapters": [
+      {
+        "id": "intro",
+        "title": "Opening",
+        "start_ms": 0,
+        "end_ms": 7891
+      },
+      {
+        "id": "wall_street",
+        "title": "Wall Street",
+        "start_ms": 7891,
+        "end_ms": 42264
+      },
+      {
+        "id": "europa",
+        "title": "Europe",
+        "start_ms": 42264,
+        "end_ms": 54776
+      },
+      {
+        "id": "asia",
+        "title": "Asian Markets",
+        "start_ms": 54776,
+        "end_ms": 64827
+      },
+      {
+        "id": "macro",
+        "title": "Macroeconomics",
+        "start_ms": 64827,
+        "end_ms": 92687
+      },
+      {
+        "id": "crypto",
+        "title": "Cryptocurrencies",
+        "start_ms": 92687,
+        "end_ms": 165896
+      },
+      {
+        "id": "close",
+        "title": "Closing",
+        "start_ms": 165896,
+        "end_ms": 182718
+      }
+    ]
+  }
+}
