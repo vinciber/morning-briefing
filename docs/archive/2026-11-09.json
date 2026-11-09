@@ -1,0 +1,907 @@
+{
+  "date": "2026-11-09",
+  "sentiment": {
+    "label": "risk_off",
+    "score": 7,
+    "reason_it": "Il VIX è a 25,64, in calo del 9,01% (segnale di riduzione della paura ma ancora nella zona 18‑30), il DXY scende a 102,08 (-0.22%) e il Brent è a $96,79 (-1,56%). L'S&P 500 guadagna +0,31% ma la pressione rialzista è contenuta da un US 10Y Yield al 4,85% (+0,45%) e da un TLT quasi stabile (81,92, -0,01%). La guerra in Ucraina e in Medio Oriente aggiunge un punto di rischio geopolitico. Le view settimanali di BlackRock (outlook su liquidità globale) e Goldman Sachs (AI e impatti sui mercati) confermano un contesto di moderata cautela, spingendo il sentiment verso risk‑off.",
+    "reason_en": "The VIX sits at 25.64, down 9.01% (still in the 18‑30 range), the DXY falls to 102.08 (-0.22%) and Brent trades at $96.79 (-1.56%). The S&P 500 is up +0.31% but upside pressure is limited by a US 10Y yield of 4.85% (+0.45%) and a virtually flat TLT (81.92, -0.01%). Ongoing wars in Ukraine and the Middle East add one point of geopolitical risk. Weekly outlooks from BlackRock (global liquidity) and Goldman Sachs (AI implications) reinforce a moderately cautious backdrop, nudging market sentiment to risk‑off."
+  },
+  "market_impact_summary": {
+    "it": "Equity: l'S&P 500 (+0,31%) e il Nikkei (+2,29%) mostrano resilienza, ma il STOXX 600 (-1,25%) e il FTSE MIB (-0,90%) sono in ribasso, riflettendo la pressione sui risk assets. Fixed Income: il rendimento del US 10Y sale a 4,85% (+0,45%) mentre il TLT è quasi invariato, segnale di compressione della curva e di un possibile inizio di repressione finanziaria. Commodities: il Brent scende a $96,79 (-1,56%) a seguito del segnale di non escalation da parte degli USA su Iran; l'oro sale a $4.120,60 (+1,12%) in un contesto di inflazione ancora sopra le attese (CPI USA 4,0%). Le note istituzionali di BlackRock (liquidità M2 in espansione ma con trend di contrazione a medio termine) e Goldman Sachs (AI come driver di crescita ma con rischio di volatilità) confermano un outlook misto, ma con prevalenza di fattori bearish sul risk‑on.",
+    "en": "Equities: the S&P 500 (+0.31%) and Nikkei (+2.29%) hold up, while the STOXX 600 (-1.25%) and FTSE MIB (-0.90%) retreat, indicating pressure on risk assets. Fixed Income: the US 10Y yield climbs to 4.85% (+0.45%) with TLT virtually flat, signalling curve compression and the start of financial repression. Commodities: Brent falls to $96.79 (-1.56%) after the US signaled no new attacks on Iran; gold rises to $4,120.60 (+1.12%) amid still‑elevated inflation (US CPI 4.0%). BlackRock's weekly liquidity outlook (expanding M2 but medium‑term contraction) and Goldman Sachs' AI commentary (growth driver with volatility risk) reinforce a mixed view but with a bias toward bearish factors for risk‑on."
+  },
+  "audio_narrative_it": [
+    {
+      "id": "intro",
+      "title": "Apertura",
+      "text": "Buongiorno, benvenuti al Morning Briefing di Price Alert."
+    },
+    {
+      "id": "asia",
+      "title": "Mercati Asiatici",
+      "text": "Il Nikkei ha chiuso in rialzo del 2,29%, Shanghai in rialzo dello 0,43%."
+    },
+    {
+      "id": "occidente",
+      "title": "Mercati Occidentali",
+      "text": "Il S&P 500 è in rialzo dello 0,31%, il VIX è in calo del 9,01%, il DXY è in calo dello 0,22%, l’oro è in rialzo dell’1,12%, il Brent è in calo del 1,56%, il rendimento US 10Y è in rialzo del 0,45%, il BTP 10Y è stabile."
+    },
+    {
+      "id": "geopolitica",
+      "title": "Geopolitica",
+      "text": "La produzione di beni in Cina ha raggiunto il massimo in quattro anni, segnalando una ripresa della domanda interna. Il trionfo democratico negli Stati Uniti apre a una politica più favorevole all’IA in Cina, potenziando la competitività tecnologica del paese. Tali sviluppi potrebbero rafforzare la fiducia degli investitori nei mercati emergenti."
+    },
+    {
+      "id": "macro",
+      "title": "Macro ed Economia",
+      "text": "nessun dato macro rilevante in uscita oggi."
+    },
+    {
+      "id": "crypto",
+      "title": "Criptovalute",
+      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si è ridotto del 2,13%, rimanendo sopra gli ottantamila dollari. I flussi ETF giornalieri sono positivi, con un ingresso netto di tre milioni e ottocento migliaia dollari. Ethereum è sceso del 5,22%, Solana del 3,20% e BNB del 2,33%. Nessun altro altcoin presenta variazioni superiori al 2%. Il Fear & Greed Index è a 29, classificato come Fear; questo suggerisce cautela agli investitori."
+    },
+    {
+      "id": "close",
+      "title": "Chiusura",
+      "text": "Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert"
+    }
+  ],
+  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert.\n\nIl Nikkei ha chiuso in rialzo del 2,29%, Shanghai in rialzo dello 0,43%.\n\nIl S&P 500 è in rialzo dello 0,31%, il VIX è in calo del 9,01%, il DXY è in calo dello 0,22%, l’oro è in rialzo dell’1,12%, il Brent è in calo del 1,56%, il rendimento US 10Y è in rialzo del 0,45%, il BTP 10Y è stabile.\n\nLa produzione di beni in Cina ha raggiunto il massimo in quattro anni, segnalando una ripresa della domanda interna. Il trionfo democratico negli Stati Uniti apre a una politica più favorevole all’IA in Cina, potenziando la competitività tecnologica del paese. Tali sviluppi potrebbero rafforzare la fiducia degli investitori nei mercati emergenti.\n\nnessun dato macro rilevante in uscita oggi.\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si è ridotto del 2,13%, rimanendo sopra gli ottantamila dollari. I flussi ETF giornalieri sono positivi, con un ingresso netto di tre milioni e ottocento migliaia dollari. Ethereum è sceso del 5,22%, Solana del 3,20% e BNB del 2,33%. Nessun altro altcoin presenta variazioni superiori al 2%. Il Fear & Greed Index è a 29, classificato come Fear; questo suggerisce cautela agli investitori.\n\nPer approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert",
+  "audio_narrative_en": [
+    {
+      "id": "intro",
+      "title": "Opening",
+      "text": "Good morning, welcome to the Price Alert Morning Briefing."
+    },
+    {
+      "id": "asia",
+      "title": "Asian Markets",
+      "text": "The Nikkei closed up 2.29%, Shanghai up 0.43%."
+    },
+    {
+      "id": "occidente",
+      "title": "Western Markets",
+      "text": "The S&P 500 is up 0.31%, the VIX is down 9.01%, the DXY is down 0.22%, gold is up 1.12%, Brent is down 1.56%, the US 10Y yield is up 0.45%, the 10Y BTP is flat."
+    },
+    {
+      "id": "geopolitica",
+      "title": "Geopolitics",
+      "text": "China's goods production hit a four‑year high, signalling a rebound in domestic demand. The democratic triumph in the United States opens the door to a more AI‑friendly policy in China, boosting the country’s technological competitiveness. These developments could strengthen investor confidence in emerging markets."
+    },
+    {
+      "id": "macro",
+      "title": "Macroeconomics",
+      "text": "No significant macro data released today."
+    },
+    {
+      "id": "crypto",
+      "title": "Cryptocurrencies",
+      "text": "Let’s pivot to the cryptocurrency markets. Bitcoin fell 2.13%, staying above $80,000. Daily ETF flows are positive, with a net inflow of $3.8 million. Ethereum down 5.22%, Solana down 3.20% and BNB down 2.33%. No other altcoin shows moves above 2%. The Fear & Greed Index is at 29, classified as Fear; this signals caution for investors."
+    },
+    {
+      "id": "close",
+      "title": "Closing",
+      "text": "For deeper coverage of today’s topics, find the full articles in the Spotlight Stories section on our platform. A greeting from Price Alert."
+    }
+  ],
+  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing.\n\nThe Nikkei closed up 2.29%, Shanghai up 0.43%.\n\nThe S&P 500 is up 0.31%, the VIX is down 9.01%, the DXY is down 0.22%, gold is up 1.12%, Brent is down 1.56%, the US 10Y yield is up 0.45%, the 10Y BTP is flat.\n\nChina's goods production hit a four‑year high, signalling a rebound in domestic demand. The democratic triumph in the United States opens the door to a more AI‑friendly policy in China, boosting the country’s technological competitiveness. These developments could strengthen investor confidence in emerging markets.\n\nNo significant macro data released today.\n\nLet’s pivot to the cryptocurrency markets. Bitcoin fell 2.13%, staying above $80,000. Daily ETF flows are positive, with a net inflow of $3.8 million. Ethereum down 5.22%, Solana down 3.20% and BNB down 2.33%. No other altcoin shows moves above 2%. The Fear & Greed Index is at 29, classified as Fear; this signals caution for investors.\n\nFor deeper coverage of today’s topics, find the full articles in the Spotlight Stories section on our platform. A greeting from Price Alert.",
+  "market_data_raw": {
+    "dxy": {
+      "value": "102.08",
+      "change": "-0.22%"
+    },
+    "eur_usd": {
+      "value": "1.11",
+      "change": "-0.53%"
+    },
+    "sp500": {
+      "value": "7376.86",
+      "change": "+0.31%"
+    },
+    "nasdaq": {
+      "value": "24,579",
+      "change": "+1.09%"
+    },
+    "dow": {
+      "value": "51,286",
+      "change": "-0.46%"
+    },
+    "vix": {
+      "value": "25.64",
+      "change": "-9.01%"
+    },
+    "tlt": {
+      "value": "81.92",
+      "change": "-0.01%"
+    },
+    "us_10y": {
+      "value": "4.85%",
+      "change": "+0.45%"
+    },
+    "gold": {
+      "value": "$4120.60/oz",
+      "change": "+1.12%"
+    },
+    "btcusd": {
+      "value": "$74,053",
+      "change": "-2.24%"
+    },
+    "oil_brent": {
+      "value": "$96.79",
+      "change": "-1.56%"
+    },
+    "stoxx_600": {
+      "value": "64.24",
+      "change": "-1.25%"
+    },
+    "ftse_mib": {
+      "value": "50,053",
+      "change": "-0.90%"
+    },
+    "nikkei": {
+      "value": "58,750",
+      "change": "+2.29%"
+    },
+    "shanghai": {
+      "value": "3664.90",
+      "change": "+0.43%"
+    },
+    "hang_seng": {
+      "value": "24,545",
+      "change": "+0.26%"
+    },
+    "europe_futures": {
+      "status": "available",
+      "instrument": "EURO STOXX 50 Futures Roll Index",
+      "source": "Yahoo Finance",
+      "source_symbol": "03V9.Z",
+      "price": 2082.822,
+      "previous_close": 2106.46,
+      "change_pct": -1.122,
+      "quote_time_utc": "2026-11-09T06:27:54+00:00",
+      "age_minutes": 15.0,
+      "delayed_by_minutes": null,
+      "summary_it": "I futures sull’EURO STOXX 50 indicano un avvio europeo negativo."
+    },
+    "btp_10y": {
+      "value": "3.99%",
+      "change": "N/A"
+    },
+    "btp_bund_spread": {
+      "value": "52 bp",
+      "change": ""
+    },
+    "global_m2": {
+      "value": "$23.4T",
+      "change": "expanding 📈 | US YoY: +5.7% YoY"
+    },
+    "btc_etf_flow": {
+      "value": "$+3.8M",
+      "change": "📈 Reversal Up"
+    },
+    "btc_etf_data": {
+      "last_update": "2026-09-11",
+      "net_flow_usd_m": 3.8,
+      "status": "POSITIVE",
+      "trend_indicator": "📈 Reversal Up",
+      "prev_flow_usd_m": -282.7,
+      "week_sum_m": -445.7,
+      "prev_week_sum_m": 986.7,
+      "week_delta_m": -1432.4,
+      "scraped_at": "2026-09-11T23:53:48.299311Z",
+      "source": "Farside",
+      "message": "🟢 Inflow: +3.8M$",
+      "total_btc": 1268341.0,
+      "total_aum_bn": 97.879407715,
+      "pct_of_21m": 6.04,
+      "btc_dominance": 58.27128197298697,
+      "total_market_cap": 2655030309791.596
+    },
+    "crypto": {
+      "fear_greed": {
+        "value": "29",
+        "class": "Fear"
+      },
+      "prices": {
+        "BTC": {
+          "value": "$74,131",
+          "change": "-2.13%"
+        },
+        "ETH": {
+          "value": "$2,115",
+          "change": "-5.22%"
+        },
+        "SOL": {
+          "value": "$86.09",
+          "change": "-3.20%"
+        },
+        "BNB": {
+          "value": "$680.39",
+          "change": "-2.33%"
+        }
+      }
+    },
+    "macro_calendar": {
+      "cpi": {
+        "label": "CPI YoY USA",
+        "label_it": "CPI YoY USA",
+        "label_en": "CPI YoY USA",
+        "value": "4.0%",
+        "previous": "3.7%",
+        "release_date": "2026-09-01",
+        "status": "released",
+        "next_release": "2026-11-12"
+      },
+      "core_cpi": {
+        "label": "Core CPI YoY USA",
+        "label_it": "Core CPI YoY USA",
+        "label_en": "Core CPI YoY USA",
+        "value": "2.8%",
+        "previous": "2.8%",
+        "release_date": "2026-09-01",
+        "status": "released",
+        "next_release": "2026-11-12"
+      },
+      "nfp": {
+        "label": "Non-Farm Payrolls",
+        "label_it": "Non-Farm Payrolls",
+        "label_en": "Non-Farm Payrolls",
+        "value": "+165K",
+        "previous": "+60K",
+        "release_date": "2026-10-01",
+        "status": "released",
+        "next_release": "2026-12-04"
+      },
+      "unemployment": {
+        "label": "Tasso Disoccupazione USA",
+        "label_it": "Tasso Disoccupazione USA",
+        "label_en": "Unemployment Rate USA",
+        "value": "4.1%",
+        "previous": "4.2%",
+        "release_date": "2026-10-01",
+        "status": "released",
+        "next_release": "2026-12-04"
+      },
+      "pce_core": {
+        "label": "PCE Core YoY",
+        "label_it": "PCE Core YoY",
+        "label_en": "PCE Core YoY",
+        "value": "3.1%",
+        "previous": "3.0%",
+        "release_date": "2026-09-01",
+        "status": "released",
+        "next_release": "2026-11-25"
+      },
+      "fed_funds": {
+        "label": "Tasso Fed Funds",
+        "label_it": "Tasso Fed Funds",
+        "label_en": "Fed Funds Rate",
+        "value": "3.75% - 4.00%",
+        "release_date": "2026-11-04",
+        "status": "released",
+        "next_release": "2026-12-16",
+        "previous": "3.50% - 3.75%"
+      },
+      "gdp": {
+        "label": "PIL QoQ USA",
+        "label_it": "PIL QoQ USA",
+        "label_en": "GDP QoQ USA",
+        "value": "3.4%",
+        "previous": "2.2%",
+        "status": "upcoming",
+        "next_release": "2026-10-29"
+      }
+    },
+    "macro_calendar_eu": {
+      "gdp_eu": {
+        "label": "PIL QoQ Eurozona",
+        "label_it": "PIL QoQ Eurozona",
+        "label_en": "GDP QoQ Eurozone",
+        "value": "0.4%",
+        "previous": "0.6%",
+        "release_date": "2026-Q3",
+        "status": "released",
+        "next_release": "2026-10-30",
+        "region": "EU"
+      },
+      "ecb_rate": {
+        "label": "Tasso BCE (Depositi)",
+        "label_it": "Tasso BCE (Depositi)",
+        "label_en": "ECB Rate (Deposit)",
+        "value": "2.50%",
+        "release_date": "2026-10-29",
+        "status": "released",
+        "next_release": "2026-12-10",
+        "region": "EU",
+        "previous": "2.25%"
+      },
+      "cpi_eu": {
+        "label": "CPI Eurozona",
+        "label_it": "CPI Eurozona",
+        "label_en": "Eurozone CPI",
+        "value": null,
+        "status": "upcoming",
+        "next_release": "2026-12-01",
+        "region": "EU"
+      },
+      "unemployment_eu": {
+        "label": "Disoccupazione EU",
+        "label_it": "Disoccupazione EU",
+        "label_en": "EU Unemployment",
+        "value": null,
+        "status": "upcoming",
+        "next_release": "2026-12-01",
+        "region": "EU"
+      },
+      "ecb_refi_rate": {
+        "label": "Tasso BCE (Refi/Mutui)",
+        "label_it": "Tasso BCE (Refi/Mutui)",
+        "label_en": "ECB Rate (Refi)",
+        "value": "2.65%",
+        "status": "released",
+        "region": "EU",
+        "previous": "2.40%"
+      }
+    },
+    "fed_target_range": {
+      "value": "3.75% - 4.00%",
+      "release_date": "2026-11-08",
+      "previous": "3.50% - 3.75%"
+    }
+  },
+  "articles": [
+    {
+      "title": "2026 midterm election debrief",
+      "url": "https://www.piie.com/events/2026/2026-midterm-election-debrief",
+      "source": "PIIE",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "The Peterson Institute for International Economics presents its post 2026 midterm election briefing on what the election results and incoming Congress could mean for US and international economic policy. Cullen S. Hendrix discusses the geopolitical stakes of the midterms, including whether the new Congress will check or extend the executive's use of economic levers in the name of national security, from tariffs and sanctions to critical minerals and industrial policy. Mary E. Lovely examines the role of tariffs and trade wars on voter sentiment and implications for the new Congress. Adam S.…",
+      "date": "2026-11-12T18:00:00+00:00",
+      "relevance_score": 1.0,
+      "title_it": "Debrief elezioni di medio termine 2026",
+      "title_en": "2026 Midterm Election Debrief",
+      "summary_it": "Analisi delle implicazioni elettorali per l'economia statunitense e i mercati globali.",
+      "summary_en": "Analysis of election outcomes and their impact on the US economy and global markets.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500",
+          "US Treasury"
+        ]
+      }
+    },
+    {
+      "title": "China’s producer prices hit four-year high",
+      "url": "https://www.ft.com/content/085c4610-143a-47ad-b546-0587695294b5?syn-25a6b1a6=1",
+      "source": "Financial Times (Global Economy)",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "Weak domestic demand weighs on the world’s second-largest economy even as energy crisis drives up costs",
+      "date": "2026-11-09T05:09:46+00:00",
+      "relevance_score": 0.6000000000000001,
+      "title_it": "I prezzi dei produttori cinesi toccano il massimo di quattro anni",
+      "title_en": "China’s Producer Prices Hit Four-Year High",
+      "summary_it": "I prezzi dei produttori salgono, segnale di pressioni inflazionistiche nonostante la debole domanda interna.",
+      "summary_en": "Producer prices rise, indicating inflationary pressure despite weak domestic demand.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Brent",
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Democrat triumph offers China ‘window to catch up’ on AI",
+      "url": "https://www.ft.com/content/ff0e9974-b855-4b9a-a8c9-0782e7af16ff?syn-25a6b1a6=1",
+      "source": "Financial Times (Global Economy)",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "Analysts warn of impact on exporters if newly elected politicians take tougher line on US data centre construction",
+      "date": "2026-11-09T05:00:48+00:00",
+      "relevance_score": 0.6000000000000001,
+      "title_it": "Il trionfo democratico offre alla Cina una “finestra” sull'IA",
+      "title_en": "Democrat Triumph Offers China ‘Window to Catch Up’ on AI",
+      "summary_it": "Gli USA potrebbero adottare politiche più restrittive sull'IA, creando opportunità per la Cina.",
+      "summary_en": "US may tighten AI policies, creating a window of opportunity for China.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "NASDAQ",
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Don’t Go Backward on China Policy",
+      "url": "https://www.crisisgroup.org/opd/united-states/united-states-china/dont-go-backward-china-policy",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "The Folly of a Hawkish Restoration",
+      "date": "2026-11-09T06:42:39.311789+00:00",
+      "relevance_score": 0.6000000000000001,
+      "title_it": "Non retrocedere sulla politica verso la Cina",
+      "title_en": "Don’t Go Backward on China Policy",
+      "summary_it": "Avverte contro un ritorno a una politica più aggressiva verso Pechino, suggerendo stabilità geopolitica.",
+      "summary_en": "Warns against reverting to a more aggressive China policy, suggesting geopolitical stability.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Philippine GDP growth further slows to 2.1% in Q3, dragged by inflation",
+      "url": "https://asia.nikkei.com/economy/philippine-gdp-growth-further-slows-to-2.1-in-q3-dragged-by-inflation",
+      "source": "Nikkei Asia",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "Philippine GDP growth further slows to 2.1% in Q3, dragged by inflation",
+      "date": "2026-11-09T06:42:41.810684+00:00",
+      "relevance_score": 0.6000000000000001,
+      "title_it": "Il PIL filippino rallenta al 2,1% nel terzo trimestre, spinto dall'inflazione",
+      "title_en": "Philippine GDP Growth Slows to 2.1% in Q3, Dragged by Inflation",
+      "summary_it": "Crescita economica debole a causa dell'inflazione, segnale di pressione sui mercati emergenti.",
+      "summary_en": "Weak economic growth due to inflation, signaling pressure on emerging markets.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Emerging Markets ETF"
+        ]
+      }
+    },
+    {
+      "title": "The UAE in Sudan",
+      "url": "https://www.crisisgroup.org/pod/africa/sudan/uae-sudan",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "This week on Hold Your Fire!, Richard is joined by Crisis Group experts Shewit Woldemichael and Alan Boswell to discuss how the UAE and other foreign powers are sustaining Sudan’s war, deepening the suffering of Sudanese civilians and complicating diplomatic efforts to end the fighting.",
+      "date": "2026-11-09T06:42:39.310898+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Gli Emirati negli Sudan",
+      "title_en": "The UAE in Sudan",
+      "summary_it": "Analisi del ruolo degli Emirati nel conflitto sudanese, con potenziali ripercussioni geopolitiche.",
+      "summary_en": "Analysis of the UAE's role in the Sudan conflict with potential geopolitical repercussions.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "The upcoming 2027 French election cycle and political discontent",
+      "url": "https://www.piie.com/events/2026/upcoming-2027-french-election-cycle-and-political-discontent",
+      "source": "PIIE",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Elections in France since 2022 have ended in minority governments and hung parliaments. Now, with its deteriorating fiscal position raising concerns among investors, France enters another election cycle this coming spring: a two-round presidential election on April 18 and May 2, with a parliamentary election likely following a few weeks later. How has the French political landscape evolved, and how might the 2027 election cycle reshape it further? What are the scenarios for the presidency, parliament, and future prime minister? How might these influence France's medium-term fiscal trajectory…",
+      "date": "2026-11-19T14:00:00+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Ciclo elettorale francese 2027 e malcontento politico",
+      "title_en": "Upcoming 2027 French Election Cycle and Political Discontent",
+      "summary_it": "Instabilità politica in Francia potrebbe pesare sui mercati europei.",
+      "summary_en": "Political instability in France could weigh on European markets.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Euro Stoxx 50"
+        ]
+      }
+    },
+    {
+      "title": "Nvidia probes CEO Jensen Huang's affair amid China security concerns",
+      "url": "https://asia.nikkei.com/business/tech/semiconductors/nvidia-probes-ceo-jensen-huang-s-affair-amid-china-security-concerns",
+      "source": "Nikkei Asia",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "Nvidia probes CEO Jensen Huang's affair amid China security concerns",
+      "date": "2026-11-09T06:42:41.810779+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Nvidia indaga su presunta relazione di Jensen Huang con la Cina",
+      "title_en": "Nvidia Probes CEO Jensen Huang's Affair Amid China Security Concerns",
+      "summary_it": "Possibile scandalo legato a questioni di sicurezza cinese, potrebbe influire sul titolo Nvidia.",
+      "summary_en": "Potential scandal involving Chinese security concerns may affect Nvidia's stock.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "NASDAQ"
+        ]
+      }
+    },
+    {
+      "title": "Wars May Spur Faster Electrification",
+      "url": "https://oilprice.com/Energy/Energy-General/Wars-May-Spur-Faster-Electrification.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "The wars in Ukraine and the Middle East have prompted an increase in EV sales to avoid retail fuel inflation and gas demand destruction in favor of other power generation sources. With COP31 starting next week, some participants have signaled that faster electrification could become the focus of the event. “I would like to see a strong outcome on electrification in our presidency-led decision,” this year’s COP’s head of negotiations, Australian climate change minister Chris Bowen, told Bloomberg. Bowen also said he would…",
+      "date": "2026-11-08T00:00:00+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Le guerre accelerano l'elettrificazione",
+      "title_en": "Wars May Spur Faster Electrification",
+      "summary_it": "Conflitti spingono le vendite di veicoli elettrici, favorendo il settore dell'energia pulita.",
+      "summary_en": "Conflicts boost EV sales, favoring the clean energy sector.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Brent",
+          "Clean Energy ETF"
+        ]
+      }
+    },
+    {
+      "title": "1-0 to humankind? US midterms vote puts AI, datacentres and the broligarchy back in their box | Heather Stewart",
+      "url": "https://www.theguardian.com/business/2026/nov/08/us-midterms-ai-datacentres-broligarchy-voter-backlash",
+      "source": "Guardian Economics",
+      "tier": 4,
+      "category": "macro_economia",
+      "snippet": "Election results appear to have turbo-charged an already growing social, political and financial market rethink about AI ‘AI clog’: UK battles onslaught of chatbot-generated complaints Editorial: the AI backlash – Silicon Valley’s political power is cracking Last week’s midterms may not have cowed Donald Trump, but they should be a wake-up call for the grinning tech broligarchs who lined up at his inauguration two chaotic years ago. Clearly, the cost of living squeeze unleashed by Trump’s war in Iran was a big driver of the Democrat wave. But AI was also on the ballot – in many places, literally. Continue reading...",
+      "date": "2026-11-08T12:05:58+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Le elezioni di medio termine USA e il ritorno dell'IA",
+      "title_en": "US Midterms Vote Puts AI, Data Centres Back in Focus",
+      "summary_it": "Risultati elettorali alimentano dibattiti su regolamentazione IA, potenziale impatto sui titoli tech.",
+      "summary_en": "Election results fuel debate on AI regulation, potentially impacting tech stocks.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "medium",
+        "assets_affected": [
+          "NASDAQ",
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Oil Prices Fall as Trump Signals No New Attacks on Iran",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Fall-as-Trump-Signals-No-New-Attacks-on-Iran.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Crude oil prices began the week with a decline, after President Trump signaled he had no immediate plans for further attacks on Iran. The decline comes despite fresh reports of attacks on tankers in the Strait of Hormuz and new strikes by the Yemeni Houthis on Saudi targets. At the time of writing, Brent crude was trading at $98.28 per barrel, with West Texas Intermediate at $91.24 per barrel, both higher from the opening of trade in Asia but lower than last Monday. “It depends on whether or not they sign a very strong agreement,” Trump…",
+      "date": "2026-11-09T05:45:00+00:00",
+      "relevance_score": 0.6,
+      "title_it": "I prezzi del petrolio scendono dopo le dichiarazioni di Trump sull'Iran",
+      "title_en": "Oil Prices Fall as Trump Signals No New Attacks on Iran",
+      "summary_it": "Meno tensioni in Medio Oriente riducono i prezzi del petrolio, favore per i consumatori.",
+      "summary_en": "Reduced Middle East tensions lower oil prices, benefiting consumers.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Brent"
+        ]
+      }
+    },
+    {
+      "title": "Vitalik ‘pivots’ ETH to store of value, crypto suffers after US midterms: Hodler’s Digest",
+      "url": "https://cointelegraph.com/magazine/vitaliks-pivots-to-eth-as-a-store-of-value-us-election-weighs-on-crypto-hodlers-digest?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Vitalik Buterin wants Ethereum to embrace a store of value narrative, upsetting Bitcoin maxis. The crypto industry faces an uncertain future following the US elections.",
+      "date": "2026-11-08T22:59:06+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Vitalik sposta Ethereum verso valore di riserva, crypto in calo dopo le elezioni USA",
+      "title_en": "Vitalik ‘Pivots’ ETH to Store of Value, Crypto Suffers After US Midterms",
+      "summary_it": "Cambio di strategia di Ethereum e incertezza post-elettorale deprimono il mercato crypto.",
+      "summary_en": "Ethereum's strategic shift and post-election uncertainty depress the crypto market.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Ethereum",
+          "Bitcoin"
+        ]
+      }
+    },
+    {
+      "title": "Binance users in some European countries told to pull crypto before fees kick in, with accounts closing by year end",
+      "url": "https://www.coindesk.com/business/2026/11/07/binance-users-in-some-european-countries-told-to-pull-crypto-before-fees-kick-in-with-accounts-closing-by-year-end",
+      "source": "CoinDesk",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Binance users in some European countries told to pull crypto before fees kick in, with accounts closing by year end",
+      "date": "2026-11-07T19:13:16+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Binance avvisa gli utenti europei di ritirare crypto prima delle nuove commissioni",
+      "title_en": "Binance Users in Europe Told to Pull Crypto Before Fees Kick In",
+      "summary_it": "Avviso di chiusura conti spinge gli investitori a vendere, creando pressione al ribasso su crypto.",
+      "summary_en": "Account closure warning pushes investors to sell, creating downward pressure on crypto.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Bitcoin",
+          "Ethereum"
+        ]
+      }
+    },
+    {
+      "title": "Here’s what happened in crypto today",
+      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Need to know what happened in crypto today? Here is the latest news on daily trends and events impacting Bitcoin price, blockchain, DeFi, Web3 and crypto regulation.",
+      "date": "2026-11-09T05:44:53+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Riepilogo quotidiano delle notizie crypto",
+      "title_en": "Here’s What Happened in Crypto Today",
+      "summary_it": "Panoramica delle principali notizie crypto, senza impatto significativo sui prezzi.",
+      "summary_en": "Overview of key crypto news, with no significant price impact.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Cryptocurrency Index"
+        ]
+      }
+    },
+    {
+      "title": "Bitcoin drops, then pops as Nvidia cheating scandal and failed Iran talks trigger volatility",
+      "url": "https://www.coindesk.com/markets/2026/11/09/bitcoin-drops-then-pops-as-nvidia-cheating-scandal-and-failed-iran-talks-trigger-volatility",
+      "source": "CoinDesk",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Bitcoin drops, then pops as Nvidia cheating scandal and failed Iran talks trigger volatility",
+      "date": "2026-11-09T03:21:49+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Bitcoin scende, poi risale a causa di scandalo Nvidia e fallimento negoziati Iran",
+      "title_en": "Bitcoin Drops, Then Pops as Nvidia Scandal and Failed Iran Talks Trigger Volatility",
+      "summary_it": "Volatilità derivante da scandalo Nvidia e tensioni Iran spinge Bitcoin a movimenti contrastanti.",
+      "summary_en": "Volatility from Nvidia scandal and Iran talks failure drives Bitcoin's swing.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Bitcoin"
+        ]
+      }
+    },
+    {
+      "title": "Direct Lending: Strong Fundamentals, Shifting Dynamics",
+      "url": "https://www.apolloacademy.com/direct-lending-strong-fundamentals-shifting-dynamics/",
+      "source": "Apollo Academy",
+      "tier": 2,
+      "category": "mercati",
+      "snippet": "Credit fundamentals remain strong, but rising interest rates, AI disruption and growing dispersion across sectors are reshaping the direct-lending landscape.... The post Direct Lending: Strong Fundamentals, Shifting Dynamics appeared first on Apollo Academy .",
+      "date": "2026-11-09T06:42:50.558349+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Direct Lending: fondamentali solidi, dinamiche in evoluzione",
+      "title_en": "Direct Lending: Strong Fundamentals, Shifting Dynamics",
+      "summary_it": "Il credito diretto rimane robusto, ma l'aumento dei tassi crea nuove sfide.",
+      "summary_en": "Direct lending remains robust, but rising rates pose new challenges.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Corporate Bonds"
+        ]
+      }
+    },
+    {
+      "title": "ExchangesGoldman Sachs Chairman and CEO David Solomon on AI: Implementation, Accountability, and JobsPodcast|Oct 27, 2026",
+      "url": "https://www.goldmansachs.com/insights/goldman-sachs-exchanges/goldman-sachs-chairman-and-ceo-david-solomon-on-ai-implementation-accountability-and-jobs",
+      "source": "Goldman Sachs Insights",
+      "tier": 2,
+      "category": "mercati",
+      "snippet": "",
+      "date": "2026-11-09T06:42:48.648723+00:00",
+      "relevance_score": 0.2,
+      "title_it": "Goldman Sachs su AI: implementazione, responsabilità e posti di lavoro",
+      "title_en": "Goldman Sachs Chairman on AI: Implementation, Accountability, and Jobs",
+      "summary_it": "Discussione su come l'AI influenzerà l'occupazione e la responsabilità aziendale.",
+      "summary_en": "Discussion on AI's impact on employment and corporate accountability.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "When Duration Stops Working: How the Rate Cycle Has Rewritten the Fixed Income Playbook",
+      "url": "https://www.apolloacademy.com/when-duration-stops-working-how-the-rate-cycle-has-rewritten-the-fixed-income-playbook/",
+      "source": "Apollo Academy",
+      "tier": 2,
+      "category": "mercati",
+      "snippet": "For most of the past decade, fixed income did its job. It gave portfolios steady income, low volatility and a... The post When Duration Stops Working: How the Rate Cycle Has Rewritten the Fixed Income Playbook appeared first on Apollo Academy .",
+      "date": "2026-11-09T06:42:50.559711+00:00",
+      "relevance_score": 0.2,
+      "title_it": "Quando la duration non funziona più: il nuovo ciclo dei tassi",
+      "title_en": "When Duration Stops Working: How the Rate Cycle Has Rewritten the Fixed Income Playbook",
+      "summary_it": "Il ciclo dei tassi rende obsoleta la duration tradizionale, spingendo verso strategie alternative.",
+      "summary_en": "Rate cycle renders traditional duration obsolete, pushing toward alternative strategies.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "US Treasury"
+        ]
+      }
+    },
+    {
+      "title": "Artificial IntelligenceHow Small Business Owners Are Using AI to Help Propel GrowthOct 22, 2026",
+      "url": "https://www.goldmansachs.com/insights/articles/how-small-business-owners-are-using-ai-to-help-propel-growth",
+      "source": "Goldman Sachs Insights",
+      "tier": 2,
+      "category": "mercati",
+      "snippet": "",
+      "date": "2026-11-09T06:42:48.648815+00:00",
+      "relevance_score": 0.1,
+      "title_it": "Intelligenza artificiale: come le PMI la usano per crescere",
+      "title_en": "Artificial Intelligence: How Small Business Owners Are Using AI to Propel Growth",
+      "summary_it": "Le PMI adottano l'AI per migliorare produttività, segnale positivo per l'economia reale.",
+      "summary_en": "SMEs adopt AI to boost productivity, a positive signal for the real economy.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Our approach to sustainability",
+      "url": "https://www.blackrock.com/corporate/insights/thought-leadership/our-approach-to-sustainability",
+      "source": "BlackRock Investment Institute",
+      "tier": 2,
+      "category": "mercati",
+      "snippet": "",
+      "date": "2026-11-09T06:42:48.434638+00:00",
+      "relevance_score": 0.0,
+      "title_it": "Il nostro approccio alla sostenibilità",
+      "title_en": "Our Approach to Sustainability",
+      "summary_it": "Presentazione della strategia di sostenibilità, senza impatto immediato sui mercati.",
+      "summary_en": "Presentation of sustainability strategy, with no immediate market impact.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "ESG ETFs"
+        ]
+      }
+    },
+    {
+      "title": "Global investment outlook",
+      "url": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/outlook",
+      "source": "BlackRock Investment Institute",
+      "tier": 2,
+      "category": "mercati",
+      "snippet": "",
+      "date": "2026-11-09T06:42:48.434675+00:00",
+      "relevance_score": 0.0,
+      "title_it": "Prospettive globali di investimento",
+      "title_en": "Global Investment Outlook",
+      "summary_it": "Analisi delle prospettive di investimento globale, tono neutro‑positivo.",
+      "summary_en": "Analysis of global investment outlook, with a neutral‑positive tone.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Global Equity Index"
+        ]
+      }
+    }
+  ],
+  "audio_manifest_it": {
+    "schema_version": 1,
+    "date": "2026-11-09",
+    "language": "it",
+    "audio_url": "audio/briefing_20261109.mp3",
+    "duration_ms": 94587,
+    "sha256": "13dcfe17b41c58172e0a547a72b2fb423edb9c0e4b6f26772809fe2eaa6dae64",
+    "chapters": [
+      {
+        "id": "intro",
+        "title": "Apertura",
+        "start_ms": 0,
+        "end_ms": 3572
+      },
+      {
+        "id": "asia",
+        "title": "Mercati Asiatici",
+        "start_ms": 3572,
+        "end_ms": 10383
+      },
+      {
+        "id": "occidente",
+        "title": "Mercati Occidentali",
+        "start_ms": 10383,
+        "end_ms": 35701
+      },
+      {
+        "id": "geopolitica",
+        "title": "Geopolitica",
+        "start_ms": 35701,
+        "end_ms": 53542
+      },
+      {
+        "id": "macro",
+        "title": "Macro ed Economia",
+        "start_ms": 53542,
+        "end_ms": 56568
+      },
+      {
+        "id": "crypto",
+        "title": "Criptovalute",
+        "start_ms": 56568,
+        "end_ms": 87192
+      },
+      {
+        "id": "close",
+        "title": "Chiusura",
+        "start_ms": 87192,
+        "end_ms": 94587
+      }
+    ]
+  },
+  "audio_manifest_en": {
+    "schema_version": 1,
+    "date": "2026-11-09",
+    "language": "en",
+    "audio_url": "audio/briefing_20261109_en.mp3",
+    "duration_ms": 97791,
+    "sha256": "f5173f92dfac227c45723082fe4c32972dac440693e538ff21283cb356d54df6",
+    "chapters": [
+      {
+        "id": "intro",
+        "title": "Opening",
+        "start_ms": 0,
+        "end_ms": 4292
+      },
+      {
+        "id": "asia",
+        "title": "Asian Markets",
+        "start_ms": 4292,
+        "end_ms": 10476
+      },
+      {
+        "id": "occidente",
+        "title": "Western Markets",
+        "start_ms": 10476,
+        "end_ms": 32636
+      },
+      {
+        "id": "geopolitica",
+        "title": "Geopolitics",
+        "start_ms": 32636,
+        "end_ms": 52880
+      },
+      {
+        "id": "macro",
+        "title": "Macroeconomics",
+        "start_ms": 52880,
+        "end_ms": 56766
+      },
+      {
+        "id": "crypto",
+        "title": "Cryptocurrencies",
+        "start_ms": 56766,
+        "end_ms": 88654
+      },
+      {
+        "id": "close",
+        "title": "Closing",
+        "start_ms": 88654,
+        "end_ms": 97791
+      }
+    ]
+  }
+}
