@@ -1,81 +1,93 @@
 {
-  "date": "2026-11-14",
+  "date": "2026-11-15",
   "sentiment": {
     "label": "risk_off",
-    "score": 7,
-    "reason_it": "Il VIX a 19,30 (tra 18‑25) indica un mercato difensivo; il DXY a 103,41 (+0,23%) segnala un dollaro forte, penalizzante per gli asset rischiosi; il TLT a 79,38 (-0,43%) e il rendimento 10Y a 5,15% (+1,00%) mostrano pressione sui titoli obbligazionari. L'S&P 500 chiude a 7.561,67 (-0,40%) e il Brent a $95,84 (+0,02%). La guerra in corso tra Iran e USA‑Israele, evidenziata negli articoli energetici, aggiunge ulteriore avversione al rischio. Questi fattori convergono in un sentiment risk‑off.",
-    "reason_en": "The VIX at 19.30 (within 18‑25) signals a defensive market; the DXY at 103.41 (+0.23%) reflects a strong dollar, hurting risk assets; TLT at 79.38 (-0.43%) and the 10Y yield at 5.15% (+1.00%) show bond pressure. The S&P 500 closed at 7,561.67 (-0.40%) and Brent at $95.84 (+0.02%). The ongoing Iran‑USA/Israel war, highlighted in energy articles, adds further risk aversion. These factors converge into a risk‑off sentiment."
+    "score": 5,
+    "reason_it": "Il VIX è sceso del 24,73% a 19,30, ma resta sopra 18, segnalando un mercato difensivo. Il DXY è in rialzo (+0,23%) e i Treasury USA hanno registrato la peggiore settimana dal \"giorno della liberazione\" di Trump, spingendo il rendimento 10Y al 5,15% (+6,07%). La combinazione di tensioni geopolitiche (guerra USA-Iran, conflitto in Sudan, rischio di corruzione russo‑ucraino) e l'aspettativa di un nuovo aumento di mezzo punto della Fed a dicembre rafforza il bias bearish, nonostante i principali indici azionari abbiano chiuso la settimana in +2,5% circa.",
+    "reason_en": "The VIX fell 24.73% to 19.30, staying above 18 and indicating a defensive stance. The DXY rose modestly (+0.23%) and US Treasuries posted their worst week since Trump’s \"liberation day,\" pushing the 10Y yield to 5.15% (+6.07%). Combined with heightened geopolitical risks (US‑Iran war, Sudan civil war, Russian‑Ukrainian corruption threat) and expectations of a 0.5‑point Fed hike in December, the bias remains bearish despite equity indices gaining roughly +2.5% for the week.",
+    "direction": "bearish"
   },
   "market_impact_summary": {
-    "it": "Nella seduta di venerdì gli equity globali hanno mostrato segnali misti: l'S&P 500 è sceso del 0,40% mentre il STOXX 600 è leggermente in rialzo (+0,11%) e il FTSE MIB +0,10%. I titoli obbligazionari USA hanno subito pressione (TLT -0,43%) con il rendimento 10Y al 5,15% (+1,00%). Il dollaro è più forte (DXY 103,41, +0,23%) e l'oro è stabile a $3.886,30 (+0,03%). Il Brent è quasi invariato a $95,84 (+0,02%). Nel settore crypto, il Bitcoin è -2,22% a $67.281, l'ETH -1,52% e il Fear & Greed Index a 13 (Extreme Fear), indicando forte avversione al rischio. L'impatto combinato suggerisce un'apertura di lunedì orientata al risk‑off, con potenziali ulteriori ribassi azionari e continui flussi verso il dollaro.",
-    "en": "In Friday's close global equities displayed mixed signals: the S&P 500 fell 0.40% while the STOXX 600 edged up (+0.11%) and the FTSE MIB rose +0.10%. US bonds faced pressure (TLT -0.43%) as the 10Y yield reached 5.15% (+1.00%). The dollar strengthened (DXY 103.41, +0.23%) and gold remained flat at $3,886.30 (+0.03%). Brent barely moved to $95.84 (+0.02%). In crypto, Bitcoin dropped 2.22% to $67,281, ETH fell 1.52%, and the Fear & Greed Index sits at 13 (Extreme Fear), underscoring strong risk aversion. The combined impact points to a risk‑off opening on Monday, with possible further equity declines and continued dollar inflows."
+    "it": "Equity: S&P 500 (+2,51%), STOXX 600 (+2,51%) e FTSE MIB (+3,61%) hanno registrato guadagni settimanali, ma il rialzo è stato contenuto dal VIX in calo (19,30, -24,73%) e dal DXY in forza (+0,23%). Fixed Income: i Treasury USA sono scesi, con il rendimento 10Y al 5,15% (+6,07%) e il prezzo del TLT a 79,38 (-0,43%). Commodities: Brent è sceso del 2,52% a 95,84$ e l'oro è in ribasso del 4,63% a 3.886,30$, riflettendo l'ottimismo di pace in Iran e Ucraina ma anche la pressione inflazionistica. Crypto: Bitcoin ha perso il 13,56% a 64.471$, con l'indice Fear & Greed a 10 (Extreme Fear), confermando un forte sentiment di rischio.",
+    "en": "Equities: S&P 500 (+2.51%), STOXX 600 (+2.51%) and FTSE MIB (+3.61%) posted weekly gains, yet the rally was capped by a falling VIX (19.30, -24.73%) and a firm DXY (+0.23%). Fixed Income: US Treasuries fell, 10Y yield at 5.15% (+6.07%) and TLT price at 79.38 (-0.43%). Commodities: Brent dropped 2.52% to $95.84 and gold fell 4.63% to $3,886.30, reflecting Iran‑Ukrainian peace optimism but lingering inflation pressure. Crypto: Bitcoin slid 13.56% to $64,471, with the Fear & Greed Index at 10 (Extreme Fear), underscoring a strong risk‑off mood.",
+    "direction": "bearish"
   },
   "audio_narrative_it": [
     {
       "id": "intro",
       "title": "Apertura",
-      "text": "Buongiorno, benvenuti al Morning Briefing di Price Alert. Le borse osservano la pausa del weekend."
+      "text": "Buongiorno, benvenuti al Morning Briefing di Price Alert. Oggi ripercorriamo la settimana appena conclusa sui mercati."
     },
     {
-      "id": "chiusure",
-      "title": "Chiusure",
-      "text": "Nella seduta di venerdì, l'S&P 500 è sceso dell'0,4% a settantaseimilasettecento e sessantuno, il VIX è salito del 3,2% a diciannove virgola tre, il DXY è in rialzo dello 0,2% a cento e tre virgola quattro, l'oro è stabile a trecentottantotto virgola tre, il Brent è in rialzo dello 0,02% a novanta e cinque virgola ottanta quattro, il STOXX 600 è in rialzo dello 0,1% a sessantacinque virgola ottanta due, il FTSE MIB è in rialzo dello 0,1% a cinquantun migliaia ottocentocinquantinove, il Nikkei è in rialzo dello 0,5% a sessantunoventiquattro, il Shanghai è in calo dell'0,6% a trecentosessantquattro virgola tre cinque, l'Hang Seng è in calo dell'1,5% a ventitremilasei, il BTP 10Y è al 3,99%, il US 10Y Yield è in rialzo dell'1,0% a cinque virgola quindici."
+      "id": "wall_street",
+      "title": "Wall Street",
+      "text": "S&P 500 in rialzo del 2,5% nella settimana, Nasdaq in rialzo del 2,3%, Dow Jones in rialzo del 2,1%. VIX è sceso del 24,7% nella settimana, oro è in ribasso del 4,6%, petrolio Brent è in ribasso del 2,5% e il rendimento US 10Y è in rialzo del 6,1%."
     },
     {
-      "id": "notizie",
-      "title": "Notizie e Outlook",
-      "text": "Il potenziale ritiro delle tariffe di Trump potrebbe pesare sull'apertura di lunedì, i mercati potrebbero prezzare una riduzione delle tensioni commerciali. La dichiarazione di Trichet sulla pace con l'Iran potrebbe far crescere la fiducia nei mercati europei, i mercati potrebbero prezzare un rallentamento dell'inflazione. L'annuncio del BoE che richiede ulteriori aumenti di tasso potrebbe pesare sull'apertura di lunedì, i mercati potrebbero prezzare un ulteriore rafforzamento del DXY."
+      "id": "europa",
+      "title": "Europa",
+      "text": "STOXX 600 è in rialzo del 2,5% nella settimana, FTSE MIB in rialzo del 3,6% e BTP 10Y è stabile."
+    },
+    {
+      "id": "asia",
+      "title": "Mercati Asiatici",
+      "text": "Nikkei è in rialzo del 6,5% nella settimana, Shanghai è leggermente in ribasso del 0,4% e Hang Seng è in ribasso del 3,5%."
     },
     {
       "id": "macro",
       "title": "Macro ed Economia",
-      "text": "Nel weekend non escono dati macro. L'agenda macro riprende lunedì."
+      "text": "Martedì 17 novembre – USA Vendite al dettaglio USA; Mercoledì 18 novembre – USA Nuovi cantieri USA; Venerdì 20 novembre – USA Fiducia consumatori (Univ. Michigan)."
     },
     {
       "id": "crypto",
       "title": "Criptovalute",
-      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si mantiene sopra i sessantosettantadue mila dollari, con una variazione di -2,22%. Il flusso ETF cumulativo della settimana è stato -445,7 milioni di dollari, rispetto a +986,7 milioni di dollari la settimana precedente, con un flusso giornaliero di +3,8 milioni di dollari riferito a venerdì. Ethereum ha registrato una diminuzione di -1,52%, Solana -5,32% e BNB -2,33%. Questi movimenti superano il 2% di variazione, quindi sono rilevanti. Il Fear & Greed Index è a 13, classificato come Extreme Fear, suggerendo cautela agli investitori."
+      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si muove al -4,32%, rimanendo sopra gli ottantamila dollari. Il flusso ETF cumulativo settimanale è di -445,7 milioni di dollari, rispetto a +986,7 milioni la settimana precedente, con una variazione di -1,432,4 milioni. L’ultimo flusso giornaliero, riferito a venerdì, è di +3,8 milioni. Ethereum scende al -5,89%, Solana al -6,81% e BNB al -4,36%, tutti oltre il 2% di variazione. Il Fear & Greed Index è a 10, classificato come Extreme Fear, suggerendo cautela agli investitori."
     },
     {
       "id": "close",
       "title": "Chiusura",
-      "text": "Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert."
+      "text": "Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Grazie per l'attenzione e a domani."
     }
   ],
-  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert. Le borse osservano la pausa del weekend.\n\nNella seduta di venerdì, l'S&P 500 è sceso dell'0,4% a settantaseimilasettecento e sessantuno, il VIX è salito del 3,2% a diciannove virgola tre, il DXY è in rialzo dello 0,2% a cento e tre virgola quattro, l'oro è stabile a trecentottantotto virgola tre, il Brent è in rialzo dello 0,02% a novanta e cinque virgola ottanta quattro, il STOXX 600 è in rialzo dello 0,1% a sessantacinque virgola ottanta due, il FTSE MIB è in rialzo dello 0,1% a cinquantun migliaia ottocentocinquantinove, il Nikkei è in rialzo dello 0,5% a sessantunoventiquattro, il Shanghai è in calo dell'0,6% a trecentosessantquattro virgola tre cinque, l'Hang Seng è in calo dell'1,5% a ventitremilasei, il BTP 10Y è al 3,99%, il US 10Y Yield è in rialzo dell'1,0% a cinque virgola quindici.\n\nIl potenziale ritiro delle tariffe di Trump potrebbe pesare sull'apertura di lunedì, i mercati potrebbero prezzare una riduzione delle tensioni commerciali. La dichiarazione di Trichet sulla pace con l'Iran potrebbe far crescere la fiducia nei mercati europei, i mercati potrebbero prezzare un rallentamento dell'inflazione. L'annuncio del BoE che richiede ulteriori aumenti di tasso potrebbe pesare sull'apertura di lunedì, i mercati potrebbero prezzare un ulteriore rafforzamento del DXY.\n\nNel weekend non escono dati macro. L'agenda macro riprende lunedì.\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si mantiene sopra i sessantosettantadue mila dollari, con una variazione di -2,22%. Il flusso ETF cumulativo della settimana è stato -445,7 milioni di dollari, rispetto a +986,7 milioni di dollari la settimana precedente, con un flusso giornaliero di +3,8 milioni di dollari riferito a venerdì. Ethereum ha registrato una diminuzione di -1,52%, Solana -5,32% e BNB -2,33%. Questi movimenti superano il 2% di variazione, quindi sono rilevanti. Il Fear & Greed Index è a 13, classificato come Extreme Fear, suggerendo cautela agli investitori.\n\nPer approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert.",
+  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert. Oggi ripercorriamo la settimana appena conclusa sui mercati.\n\nS&P 500 in rialzo del 2,5% nella settimana, Nasdaq in rialzo del 2,3%, Dow Jones in rialzo del 2,1%. VIX è sceso del 24,7% nella settimana, oro è in ribasso del 4,6%, petrolio Brent è in ribasso del 2,5% e il rendimento US 10Y è in rialzo del 6,1%.\n\nSTOXX 600 è in rialzo del 2,5% nella settimana, FTSE MIB in rialzo del 3,6% e BTP 10Y è stabile.\n\nNikkei è in rialzo del 6,5% nella settimana, Shanghai è leggermente in ribasso del 0,4% e Hang Seng è in ribasso del 3,5%.\n\nMartedì 17 novembre – USA Vendite al dettaglio USA; Mercoledì 18 novembre – USA Nuovi cantieri USA; Venerdì 20 novembre – USA Fiducia consumatori (Univ. Michigan).\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si muove al -4,32%, rimanendo sopra gli ottantamila dollari. Il flusso ETF cumulativo settimanale è di -445,7 milioni di dollari, rispetto a +986,7 milioni la settimana precedente, con una variazione di -1,432,4 milioni. L’ultimo flusso giornaliero, riferito a venerdì, è di +3,8 milioni. Ethereum scende al -5,89%, Solana al -6,81% e BNB al -4,36%, tutti oltre il 2% di variazione. Il Fear & Greed Index è a 10, classificato come Extreme Fear, suggerendo cautela agli investitori.\n\nPer approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Grazie per l'attenzione e a domani.",
   "audio_narrative_en": [
     {
       "id": "intro",
       "title": "Opening",
-      "text": "Good morning, welcome to the Price Alert Morning Briefing. Markets are observing the weekend pause."
+      "text": "Good morning, welcome to the Price Alert Morning Briefing. Today we recap the just‑finished week in the markets."
     },
     {
-      "id": "chiusure",
-      "title": "Market Closes",
-      "text": "In Friday's session, the S&P 500 fell 0.4% to 76,761, the VIX rose 3.2% to 19.3, the DXY is up 0.2% to 103.4, gold is stable at 388.3, Brent is up 0.02% to $95.84, the STOXX 600 is up 0.1% to 65.82, the FTSE MIB is up 0.1% to 51,859, the Nikkei is up 0.5% to 6,924, the Shanghai is down 0.6% to 364.35, the Hang Seng is down 1.5% to 23,600, the BTP 10Y is at 3.99%, and the US 10Y Yield is up 1.0% to 5.15."
+      "id": "wall_street",
+      "title": "Wall Street",
+      "text": "S&P 500 up 2.5% this week, Nasdaq up 2.3%, Dow Jones up 2.1%. VIX fell 24.7% this week, gold down 4.6%, Brent crude down 2.5% and the US 10‑year yield up 6.1%."
     },
     {
-      "id": "notizie",
-      "title": "News and Outlook",
-      "text": "The potential withdrawal of Trump's tariffs could weigh on Monday's opening, as markets may price in a reduction in trade tensions. Trichet's statement on peace with Iran could boost confidence in European markets, as markets may price in an inflation slowdown. The BoE's announcement requiring further rate hikes could weigh on Monday's opening, as markets may price in a further strengthening of the DXY."
+      "id": "europa",
+      "title": "Europe",
+      "text": "STOXX 600 up 2.5% this week, FTSE MIB up 3.6% and 10‑year BTP stable."
+    },
+    {
+      "id": "asia",
+      "title": "Asian Markets",
+      "text": "Nikkei up 6.5% this week, Shanghai slightly down 0.4% and Hang Seng down 3.5%."
     },
     {
       "id": "macro",
       "title": "Macroeconomics",
-      "text": "No macro data is released over the weekend. The macro agenda resumes on Monday."
+      "text": "Tuesday, November 17 – US Retail Sales; Wednesday, November 18 – US New Home Sales; Friday, November 20 – US Consumer Confidence (University of Michigan)."
     },
     {
       "id": "crypto",
       "title": "Cryptocurrencies",
-      "text": "Let's pivot to the cryptocurrency markets. Bitcoin remains above $67,000, with a change of -2.22%. The cumulative weekly ETF flow was -$445.7 million, compared to +$986.7 million the previous week, with a daily flow of +$3.8 million reported on Friday. Ethereum recorded a decrease of -1.52%, Solana -5.32%, and BNB -2.33%. These movements exceed a 2% change, so they are significant. The Fear & Greed Index is at 13, classified as Extreme Fear, suggesting caution to investors."
+      "text": "Let's pivot to the cryptocurrency markets. Bitcoin is down 4.32%, staying above $80,000. The weekly cumulative ETF flow is -$445.7 million, compared to +$986.7 million the previous week, a change of -$1,432.4 million. The latest daily flow, for Friday, is +$3.8 million. Ethereum down 5.89%, Solana down 6.81% and BNB down 4.36%, all over 2% change. The Fear & Greed Index is at 10, classified as Extreme Fear, suggesting caution for investors."
     },
     {
       "id": "close",
       "title": "Closing",
-      "text": "To delve deeper into today's topics, you can find the full articles on our platform in the Featured Stories section. Greetings from Price Alert."
+      "text": "For deeper coverage of today’s topics, find the full articles in the Spotlight Stories section on our platform. Thank you for listening and see you tomorrow."
     }
   ],
-  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing. Markets are observing the weekend pause.\n\nIn Friday's session, the S&P 500 fell 0.4% to 76,761, the VIX rose 3.2% to 19.3, the DXY is up 0.2% to 103.4, gold is stable at 388.3, Brent is up 0.02% to $95.84, the STOXX 600 is up 0.1% to 65.82, the FTSE MIB is up 0.1% to 51,859, the Nikkei is up 0.5% to 6,924, the Shanghai is down 0.6% to 364.35, the Hang Seng is down 1.5% to 23,600, the BTP 10Y is at 3.99%, and the US 10Y Yield is up 1.0% to 5.15.\n\nThe potential withdrawal of Trump's tariffs could weigh on Monday's opening, as markets may price in a reduction in trade tensions. Trichet's statement on peace with Iran could boost confidence in European markets, as markets may price in an inflation slowdown. The BoE's announcement requiring further rate hikes could weigh on Monday's opening, as markets may price in a further strengthening of the DXY.\n\nNo macro data is released over the weekend. The macro agenda resumes on Monday.\n\nLet's pivot to the cryptocurrency markets. Bitcoin remains above $67,000, with a change of -2.22%. The cumulative weekly ETF flow was -$445.7 million, compared to +$986.7 million the previous week, with a daily flow of +$3.8 million reported on Friday. Ethereum recorded a decrease of -1.52%, Solana -5.32%, and BNB -2.33%. These movements exceed a 2% change, so they are significant. The Fear & Greed Index is at 13, classified as Extreme Fear, suggesting caution to investors.\n\nTo delve deeper into today's topics, you can find the full articles on our platform in the Featured Stories section. Greetings from Price Alert.",
+  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing. Today we recap the just‑finished week in the markets.\n\nS&P 500 up 2.5% this week, Nasdaq up 2.3%, Dow Jones up 2.1%. VIX fell 24.7% this week, gold down 4.6%, Brent crude down 2.5% and the US 10‑year yield up 6.1%.\n\nSTOXX 600 up 2.5% this week, FTSE MIB up 3.6% and 10‑year BTP stable.\n\nNikkei up 6.5% this week, Shanghai slightly down 0.4% and Hang Seng down 3.5%.\n\nTuesday, November 17 – US Retail Sales; Wednesday, November 18 – US New Home Sales; Friday, November 20 – US Consumer Confidence (University of Michigan).\n\nLet's pivot to the cryptocurrency markets. Bitcoin is down 4.32%, staying above $80,000. The weekly cumulative ETF flow is -$445.7 million, compared to +$986.7 million the previous week, a change of -$1,432.4 million. The latest daily flow, for Friday, is +$3.8 million. Ethereum down 5.89%, Solana down 6.81% and BNB down 4.36%, all over 2% change. The Fear & Greed Index is at 10, classified as Extreme Fear, suggesting caution for investors.\n\nFor deeper coverage of today’s topics, find the full articles in the Spotlight Stories section on our platform. Thank you for listening and see you tomorrow.",
   "market_data_raw": {
     "dxy": {
       "value": "103.41",
@@ -114,16 +126,16 @@
       "change": "+0.03%"
     },
     "btcusd": {
-      "value": "$67,262",
-      "change": "-5.72%"
+      "value": "$64,446",
+      "change": "-5.57%"
     },
     "oil_brent": {
       "value": "$95.84",
       "change": "+0.02%"
     },
     "stoxx_600": {
-      "value": "65.82",
-      "change": "+0.11%"
+      "value": "65.85",
+      "change": "+0.05%"
     },
     "ftse_mib": {
       "value": "51,859",
@@ -185,33 +197,101 @@
     },
     "crypto": {
       "fear_greed": {
-        "value": "13",
+        "value": "10",
         "class": "Extreme Fear",
         "tone": "bad"
       },
       "prices": {
         "BTC": {
-          "value": "$67,281",
-          "change": "-2.22%",
+          "value": "$64,378",
+          "change": "-4.32%",
           "tone": "bad"
         },
         "ETH": {
-          "value": "$1,903",
-          "change": "-1.52%",
+          "value": "$1,791",
+          "change": "-5.89%",
           "tone": "bad"
         },
         "SOL": {
-          "value": "$75.54",
-          "change": "-5.32%",
+          "value": "$70.39",
+          "change": "-6.81%",
           "tone": "bad"
         },
         "BNB": {
-          "value": "$617.99",
-          "change": "-2.33%",
+          "value": "$591.01",
+          "change": "-4.36%",
           "tone": "bad"
         }
       }
     },
+    "weekly": {
+      "sp500": {
+        "value": "7561.67",
+        "change": "+2.51%"
+      },
+      "nasdaq": {
+        "value": "25,136",
+        "change": "+2.27%"
+      },
+      "dow": {
+        "value": "52,348",
+        "change": "+2.07%"
+      },
+      "vix": {
+        "value": "19.30",
+        "change": "-24.73%"
+      },
+      "stoxx_600": {
+        "value": "65.85",
+        "change": "+2.51%"
+      },
+      "ftse_mib": {
+        "value": "51,859",
+        "change": "+3.61%"
+      },
+      "nikkei": {
+        "value": "61,142",
+        "change": "+6.46%"
+      },
+      "shanghai": {
+        "value": "3634.35",
+        "change": "-0.41%"
+      },
+      "hang_seng": {
+        "value": "23,638",
+        "change": "-3.45%"
+      },
+      "gold": {
+        "value": "3886.30",
+        "change": "-4.63%"
+      },
+      "oil_brent": {
+        "value": "95.84",
+        "change": "-2.52%"
+      },
+      "us_10y": {
+        "value": "5.15",
+        "change": "+6.07%"
+      },
+      "btcusd": {
+        "value": "64,471",
+        "change": "-13.56%"
+      }
+    },
+    "fred_week_ahead": [
+      {
+        "date": "2026-11-17",
+        "label": "Vendite al dettaglio USA"
+      },
+      {
+        "date": "2026-11-18",
+        "label": "Nuovi cantieri USA"
+      },
+      {
+        "date": "2026-11-20",
+        "label": "Fiducia consumatori (Univ. Michigan)"
+      }
+    ],
     "macro_calendar": {
       "cpi": {
         "label": "CPI YoY USA",
@@ -342,11 +422,55 @@
     },
     "fed_target_range": {
       "value": "3.75% - 4.00%",
-      "release_date": "2026-11-13",
+      "release_date": "2026-11-14",
       "previous": "3.50% - 3.75%"
     }
   },
   "articles": [
+    {
+      "title": "The long and winding road to Dubai’s supermarket shelves",
+      "url": "https://www.ft.com/content/8e13baf8-fce7-4ebd-ac05-5692181f6d7e?syn-25a6b1a6=1",
+      "source": "Financial Times (Global Economy)",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "The United Arab Emirates’ shipping woes stemming from Iran war stoke dreams of farming in the desert",
+      "date": "2026-11-15T05:00:04+00:00",
+      "relevance_score": 0.8,
+      "title_it": "La difficile strada verso gli scaffali dei supermercati di Dubai",
+      "title_en": "The long and winding road to Dubai’s supermarket shelves",
+      "summary_it": "Le difficoltà logistiche negli Emirati Arabi Uniti alimentano ambiziosi progetti di agricoltura nel deserto locale.",
+      "summary_en": "Logistical difficulties in the United Arab Emirates fuel ambitious plans for local desert farming projects.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Brent",
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Hawkward timing",
+      "url": "https://www.ft.com/content/8c2639dc-e5d5-430d-a641-11776ac26f9c",
+      "source": "Financial Times (Global Economy)",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "Federal Reserve policymakers have floated the idea of a bigger rate increase in December following strong jobs, growth and inflation data",
+      "date": "2026-11-14T10:05:05+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Tempismo aggressivo della Federal Reserve",
+      "title_en": "Hawkward timing for the Federal Reserve",
+      "summary_it": "Dati macroeconomici solidi spingono la Fed a considerare un aumento dei tassi più marcato a dicembre.",
+      "summary_en": "Strong macroeconomic data push the Fed to consider a more significant rate hike in December.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "S&P 500",
+          "Nasdaq"
+        ]
+      }
+    },
     {
       "title": "Next steps for the USMCA and US trade laws: A post-election review",
       "url": "https://www.piie.com/events/2026/next-steps-usmca-and-us-trade-laws-post-election-review",
@@ -356,144 +480,38 @@
       "snippet": "What are the implications of the November 2026 US election results on the ongoing review of the United States-Mexico-Canada Agreement (USMCA), US trade policy toward Canada and Mexico, as well as congressional changes to US trade authorities? Join PIIE experts Chad P. Bown, Inu Manak, and Alejandro Werner for an update on the state of the trade and economic relationships among the three countries as well as potential US legislative initiatives in the new Congress. PIIE's Monica de Bolle moderates the discussion. Be sure to read Chad P. Bown's related articles, \"The Real Risk of a Trade War…",
       "date": "2026-11-24T17:00:00+00:00",
       "relevance_score": 0.8,
-      "title_it": "Prossimi passi per USMCA e leggi commerciali statunitensi: una revisione post-elettorale",
-      "title_en": "Next steps for the USMCA and US trade laws: A post‑election review",
-      "summary_it": "L'esito elettorale del 2026 potrebbe rallentare la revisione dell’USMCA e le politiche commerciali verso Canada e Messico.",
-      "summary_en": "The 2026 election outcome may slow the USMCA review and trade policies toward Canada and Mexico.",
+      "title_it": "Prossimi passi per l'USMCA e le leggi commerciali statunitensi",
+      "title_en": "Next steps for the USMCA and US trade laws: A post-election review",
+      "summary_it": "Analisi delle implicazioni elettorali statunitensi sulla revisione dell'accordo commerciale USMCA e sulle politiche future.",
+      "summary_en": "Analysis of US election implications on the USMCA trade agreement review and future trade policies.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "medium",
         "assets_affected": [
-          "S&P 500"
+          "S&P 500",
+          "CAD"
         ]
       }
     },
     {
-      "title": "How Congress might take back its trade powers and limit Trump's tariffs",
-      "url": "https://www.piie.com/blogs/realtime-economics/2026/how-congress-might-take-back-its-trade-powers-and-limit-trumps",
-      "source": "PIIE",
+      "title": "Ucraina, nel team negoziale istituzioni Ue, Nato e cinque Paesi (con l’Italia)",
+      "url": "https://www.ilsole24ore.com/art/ucraina-team-negoziale-istituzioni-ue-nato-e-cinque-paesi-con-l-italia-AJUieeGC",
+      "source": "Il Sole 24 Ore (Mondo)",
       "tier": 2,
-      "category": "macro_economia",
-      "snippet": "Americans are unhappy with the direction the country is headed and are ready for change. That was the core message from the stunning defeat of the president's party in the midterm elections in November, where the accumulation of unpopular policies—including immigration enforcement, the war in Iran, and tariffs—was thoroughly rebuked. The contribution of those policies to dissatisfaction with the economy is quite clear, and voters expect the incoming Congress to come prepared to tackle them. Congress may want to start with trade policy. An NBC News exit poll from 45 states showed that 66…",
-      "date": "2026-11-13T17:00:00+00:00",
+      "category": "geopolitica",
+      "snippet": "DUBLINO - Dopo molti tira-e-molla l’Unione europea ha deciso che nelle prossime trattative diplomatiche tra l’Ucraina e la Russia per tentare di trovare una soluzione alla guerra scoppiata nel 2022...",
+      "date": "2026-11-14T05:19:00+00:00",
       "relevance_score": 0.8,
-      "title_it": "Come il Congresso potrebbe riprendere i poteri commerciali e limitare le tariffe di Trump",
-      "title_en": "How Congress might take back its trade powers and limit Trump's tariffs",
-      "summary_it": "Il Congresso potrebbe ristabilire il controllo sul commercio, riducendo le tariffe imposte da Trump, favorendo un clima più favorevole al mercato.",
-      "summary_en": "Congress may regain trade authority and cut Trump‑era tariffs, creating a more market‑friendly environment.",
+      "title_it": "Ucraina, nel team negoziale istituzioni Ue, Nato e cinque Paesi",
+      "title_en": "Ukraine, EU institutions, NATO and five countries in the negotiation team",
+      "summary_it": "L'Unione Europea definisce la composizione del team diplomatico per i futuri negoziati di pace in Ucraina.",
+      "summary_en": "The European Union defines the composition of the diplomatic team for future peace negotiations in Ukraine.",
       "market_impact": {
         "direction": "bullish",
-        "magnitude": "low",
-        "assets_affected": [
-          "S&P 500"
-        ]
-      }
-    },
-    {
-      "title": "Trichet: “Soltanto la pace con l’Iran può spegnere l’inflazione, la Bce sta reagendo bene”",
-      "url": "https://www.repubblica.it/economia/2026/11/14/news/intervista_trichet_inflazione_bce-425722103/?rss",
-      "source": "Repubblica Economia",
-      "tier": 2,
-      "category": "macro_economia",
-      "snippet": "L’ex presidente della Banca centrale europea considera fondamentale la trattativa con Teheran per riportare stabilità. Le dimissioni di Lagarde: “La posta in gioco in Francia è altissima”",
-      "date": "2026-11-14T00:00:00+00:00",
-      "relevance_score": 0.8,
-      "title_it": "Trichet: solo la pace con l’Iran può spegnere l’inflazione, la BCE reagisce bene",
-      "title_en": "Trichet: only peace with Iran can curb inflation, the ECB is responding well",
-      "summary_it": "Trichet ritiene che la risoluzione del conflitto con l’Iran sia cruciale per ridurre l’inflazione, elogiando la risposta della BCE.",
-      "summary_en": "Trichet believes peace with Iran is crucial to lower inflation and praises the ECB's response.",
-      "market_impact": {
-        "direction": "mixed",
         "magnitude": "medium",
         "assets_affected": [
-          "Euro",
-          "S&P 500"
-        ]
-      }
-    },
-    {
-      "title": "Isabel Schnabel: Made in Europe",
-      "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261113~3883f1f187.en.html",
-      "source": "BCE",
-      "tier": 1,
-      "category": "macro_economia",
-      "snippet": "Isabel Schnabel: Made in Europe",
-      "date": "2026-11-13T07:20:00+00:00",
-      "relevance_score": 0.4,
-      "title_it": "Isabel Schnabel: Made in Europe",
-      "title_en": "Isabel Schnabel: Made in Europe",
-      "summary_it": "Schnabel sottolinea l’importanza di una produzione europea autonoma per rafforzare la competitività globale.",
-      "summary_en": "Schnabel emphasizes the importance of autonomous European production to boost global competitiveness.",
-      "market_impact": {
-        "direction": "bullish",
-        "magnitude": "low",
-        "assets_affected": [
-          "Euro Stoxx 50"
-        ]
-      }
-    },
-    {
-      "title": "BoE chief economist says further rate rises needed to combat inflation",
-      "url": "https://www.ft.com/content/806b0158-41c5-4db2-ac33-93621f72297b?syn-25a6b1a6=1",
-      "source": "Financial Times (Global Economy)",
-      "tier": 1,
-      "category": "macro_economia",
-      "snippet": "Huw Pill calls last week’s quarter-point increase to 4% a ‘significant step’ but that there was ‘further to go’ with borrowing costs",
-      "date": "2026-11-14T05:00:46+00:00",
-      "relevance_score": 0.4,
-      "title_it": "Il capo economista della BoE prevede ulteriori aumenti dei tassi per combattere l’inflazione",
-      "title_en": "BoE chief economist says further rate rises needed to combat inflation",
-      "summary_it": "Huw Pill avverte che, nonostante l’ultimo rialzo, saranno necessari ulteriori aumenti dei tassi per domare l’inflazione.",
-      "summary_en": "Huw Pill warns that further rate hikes will be needed to tame inflation despite the recent increase.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "high",
-        "assets_affected": [
-          "GBP",
-          "S&P 500"
-        ]
-      }
-    },
-    {
-      "title": "US Treasuries record worst week since Trump’s ‘liberation day’",
-      "url": "https://www.ft.com/content/7bebace2-dc87-410a-ae29-ffd9f3176def?syn-25a6b1a6=1",
-      "source": "Financial Times (Global Economy)",
-      "tier": 1,
-      "category": "macro_economia",
-      "snippet": "Higher than expected inflation and hawkish remarks by Fed officials have stung investors who bet a global bond rout was over",
-      "date": "2026-11-13T22:12:03+00:00",
-      "relevance_score": 0.4,
-      "title_it": "I Treasury USA registrano la peggiore settimana dal ‘giorno della liberazione’ di Trump",
-      "title_en": "US Treasuries record worst week since Trump’s ‘liberation day’",
-      "summary_it": "Inflazione più alta del previsto e commenti hawkish della Fed spingono i Treasury a registrare la peggiore performance settimanale.",
-      "summary_en": "Higher‑than‑expected inflation and hawkish Fed comments drive US Treasuries to their worst week since Trump’s “liberation day.”",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "high",
-        "assets_affected": [
-          "US Treasuries"
-        ]
-      }
-    },
-    {
-      "title": "China has the APEC stage. But Japan may have the momentum",
-      "url": "https://www.chathamhouse.org/2026/11/china-has-apec-stage-japan-may-have-momentum",
-      "source": "Chatham House",
-      "tier": 2,
-      "category": "macro_economia",
-      "snippet": "China has the APEC stage. But Japan may have the momentum Expert comment jon.wallace 13 November 2026 Tokyo cannot compete with Beijing’s economic firepower. But it offers Indo-Pacific countries a diplomatic and economic partner that delivers tangible gains without demanding allegiance in return. The Asian Century is upon us with China as its visionary leader. That will be the message Beijing will hope to drive home when it hosts the Asia-Pacific Economic Cooperation (APEC) summit on 18 to 19 November. The summit is billed as a forum to address ‘building an Asia-Pacific community to prosper together’. But it will take place as the world’s most populous region grapples with challenges of energy insecurity, supply chain disruption, AI governance, and technological upheaval – and as growing g",
-      "date": "2026-11-13T15:37:13+00:00",
-      "relevance_score": 0.6000000000000001,
-      "title_it": "La Cina domina l’APEC, ma il Giappone guadagna slancio",
-      "title_en": "China has the APEC stage. But Japan may have the momentum",
-      "summary_it": "Mentre la Cina resta protagonista all’APEC, il Giappone sta guadagnando terreno grazie a politiche economiche più aggressive.",
-      "summary_en": "While China remains the APEC star, Japan is gaining momentum with more aggressive economic policies.",
-      "market_impact": {
-        "direction": "mixed",
-        "magnitude": "medium",
-        "assets_affected": [
-          "Nikkei",
-          "S&P 500"
+          "S&P 500",
+          "Euro"
         ]
       }
     },
@@ -504,38 +522,39 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "The Folly of a Hawkish Restoration",
-      "date": "2026-11-14T06:43:00.201328+00:00",
+      "date": "2026-11-15T06:44:16.684030+00:00",
       "relevance_score": 0.6000000000000001,
-      "title_it": "Non retrocedere sulla politica verso la Cina",
+      "title_it": "Non tornare indietro sulla politica verso la Cina",
       "title_en": "Don’t Go Backward on China Policy",
-      "summary_it": "L’autore avverte che un allentamento della politica verso la Cina potrebbe compromettere gli interessi strategici occidentali.",
-      "summary_en": "The author warns that easing China policy could jeopardize Western strategic interests.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "S&P 500"
-        ]
-      }
-    },
-    {
-      "title": "Toyota rewires China supply chain to fight back in EV race",
-      "url": "https://asia.nikkei.com/business/automobiles/toyota-rewires-china-supply-chain-to-fight-back-in-ev-race",
-      "source": "Nikkei Asia",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "Toyota rewires China supply chain to fight back in EV race",
-      "date": "2026-11-14T06:43:02.203986+00:00",
-      "relevance_score": 0.6000000000000001,
-      "title_it": "Toyota riorganizza la catena di fornitura cinese per competere nella corsa alle EV",
-      "title_en": "Toyota rewires China supply chain to fight back in EV race",
-      "summary_it": "Toyota sta ristrutturando la sua supply chain in Cina per rafforzare la competitività nel mercato delle auto elettriche.",
-      "summary_en": "Toyota is restructuring its China supply chain to boost competitiveness in the EV market.",
+      "summary_it": "Critica alla restaurazione di politiche aggressive verso la Cina, suggerendo un approccio diplomatico più equilibrato.",
+      "summary_en": "Critique of the restoration of hawkish policies toward China, suggesting a more balanced diplomatic approach.",
       "market_impact": {
         "direction": "bullish",
         "magnitude": "low",
         "assets_affected": [
-          "Toyota",
+          "S&P 500",
+          "Hang Seng"
+        ]
+      }
+    },
+    {
+      "title": "Tfs, la manovra lascia in coda chi va in pensione anticipata. L’attesa può costare oltre 10mila euro",
+      "url": "https://www.repubblica.it/economia/dossier/manovra-finanziaria-legge-di-bilancio/2026/11/14/news/manovra_tfs_studio_cgil_perdite_pensione_anticipata-425723056/?rss",
+      "source": "Repubblica Economia",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Accelerati rate e pagamenti solo per chi esce per limiti di età. Lo studio Cgil sui dipendenti pubblici misura la perdita di potere d’acquisto e il divario crescente con la vecchiaia",
+      "date": "2026-11-14T10:40:41+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Tfs, la manovra penalizza chi va in pensione anticipata",
+      "title_en": "Tfs, the budget penalizes those retiring early",
+      "summary_it": "I ritardi nei pagamenti del Tfs per i pensionati anticipati causano una significativa perdita di potere d'acquisto.",
+      "summary_en": "Delays in Tfs payments for early retirees cause a significant loss of purchasing power for citizens.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "BTP",
           "S&P 500"
         ]
       }
@@ -547,165 +566,191 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "This week on Hold Your Fire!, Richard is joined by Crisis Group experts Shewit Woldemichael and Alan Boswell to discuss how the UAE and other foreign powers are sustaining Sudan’s war, deepening the suffering of Sudanese civilians and complicating diplomatic efforts to end the fighting.",
-      "date": "2026-11-14T06:43:00.200548+00:00",
+      "date": "2026-11-15T06:44:16.683459+00:00",
       "relevance_score": 0.4,
-      "title_it": "Gli Emirati negli affari del Sudan",
+      "title_it": "Il ruolo degli Emirati Arabi Uniti in Sudan",
       "title_en": "The UAE in Sudan",
-      "summary_it": "Il ruolo degli Emirati nel conflitto sudanese è analizzato, evidenziando il loro sostegno a fazioni armate e le implicazioni geopolitiche.",
-      "summary_en": "The UAE's involvement in Sudan's conflict is examined, highlighting support for armed factions and geopolitical implications.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "Emerging Markets"
-        ]
-      }
-    },
-    {
-      "title": "China sees Nvidia chief Huang's swift downfall as political hit",
-      "url": "https://asia.nikkei.com/business/tech/semiconductors/china-sees-nvidia-chief-huang-s-swift-downfall-as-political-hit",
-      "source": "Nikkei Asia",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "China sees Nvidia chief Huang's swift downfall as political hit",
-      "date": "2026-11-14T06:43:02.202660+00:00",
-      "relevance_score": 0.4,
-      "title_it": "La Cina vede la caduta di Huang di Nvidia come colpo politico",
-      "title_en": "China sees Nvidia chief Huang's swift downfall as political hit",
-      "summary_it": "La rapida rimozione di Jensen Huang è percepita dalla Cina come un attacco politico al settore tecnologico.",
-      "summary_en": "China views Jensen Huang’s swift removal as a political blow to the tech sector.",
+      "summary_it": "Analisi del coinvolgimento degli Emirati Arabi Uniti e di altre potenze straniere nel conflitto in Sudan.",
+      "summary_en": "Analysis of the involvement of the UAE and other foreign powers in the ongoing Sudan conflict.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "low",
         "assets_affected": [
-          "Nvidia",
+          "Brent",
           "S&P 500"
         ]
       }
     },
     {
-      "title": "Germany Is Dismantling a Nord Stream Power Plant for Ukraine",
-      "url": "https://oilprice.com/Energy/Energy-General/Germany-Is-Dismantling-a-Nord-Stream-Power-Plant-for-Ukraine.html",
-      "source": "OilPrice",
-      "tier": 4,
-      "category": "energia",
-      "snippet": "A power plant built at the landfall of the Nord Stream gas pipelines in northeastern Germany was shut down after the pipelines were sabotaged. Now the facility is being dismantled and sent to Ukraine. The Greifswald industrial power plant in Lubmin is majority owned by Germany’s Securing Energy for Europe (SEFE). Adrianne Montgobert, a spokesperson for the state-owned company, confirmed to RFE/RL that dismantling of the plant is currently under way, with its transfer being managed by a team from Naftogaz, Ukraine’s oil and gas giant.…",
-      "date": "2026-11-13T16:10:00+00:00",
-      "relevance_score": 0.8,
-      "title_it": "Germania smantella una centrale Nord Stream per l’Ucraina",
-      "title_en": "Germany Is Dismantling a Nord Stream Power Plant for Ukraine",
-      "summary_it": "Una centrale costruita vicino al punto di atterraggio del Nord Stream è stata chiusa e smantellata per sostenere l’Ucraina.",
-      "summary_en": "A power plant near the Nord Stream landing site has been shut down and dismantled to support Ukraine.",
-      "market_impact": {
-        "direction": "bullish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "European Energy"
-        ]
-      }
-    },
-    {
-      "title": "How Global Energy Markets Survived Eight Months of Iran War Disruptions",
-      "url": "https://oilprice.com/Energy/Energy-General/How-Global-Energy-Markets-Survived-Eight-Months-of-Iran-War-Disruptions.html",
-      "source": "OilPrice",
-      "tier": 4,
-      "category": "energia",
-      "snippet": "Six months ago, I wrote that Americans were experiencing the Iran war primarily through higher prices, while much of the rest of the world was confronting something more serious: actual shortages of fuel and other critical products. In “The U.S. Feels Higher Prices While The World Is Facing Fuel Shortages,” I highlighted several pressure points created by the disruption of traffic through the Strait of Hormuz. India was struggling to secure liquefied petroleum gas, or LPG, fertilizer markets were tightening, Europe faced potential…",
-      "date": "2026-11-13T14:30:00+00:00",
-      "relevance_score": 0.8,
-      "title_it": "Come i mercati energetici globali hanno superato otto mesi di interruzioni dovute alla guerra in Iran",
-      "title_en": "How Global Energy Markets Survived Eight Months of Iran War Disruptions",
-      "summary_it": "I mercati energetici hanno mostrato resilienza nonostante le interruzioni prolungate causate dal conflitto iraniano.",
-      "summary_en": "Energy markets have shown resilience despite prolonged disruptions from the Iran war.",
-      "market_impact": {
-        "direction": "bullish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "Oil",
-          "Gas"
-        ]
-      }
-    },
-    {
-      "title": "Bitcoin slides below $70K amid thin liquidity, ETF outflows",
-      "url": "https://cointelegraph.com/markets/bitcoin-falls-below-70k-crypto-extreme-fear?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "tier": 4,
-      "category": "crypto",
-      "snippet": "Bitcoin fell below $70,000 as crypto sentiment hit its lowest level in more than four months, with analysts warning of institutional outflows, thinning liquidity and elevated leverage.",
-      "date": "2026-11-13T06:00:15+00:00",
-      "relevance_score": 0.6,
-      "title_it": "Bitcoin scende sotto i 70.000 dollari per scarsa liquidità e deflussi dagli ETF",
-      "title_en": "Bitcoin slides below $70K amid thin liquidity, ETF outflows",
-      "summary_it": "La mancanza di liquidità e i deflussi dagli ETF spingono Bitcoin sotto i 70.000 dollari.",
-      "summary_en": "Thin liquidity and ETF outflows push Bitcoin below $70,000.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "high",
-        "assets_affected": [
-          "Bitcoin"
-        ]
-      }
-    },
-    {
-      "title": "Strategy stock sheds 5% amid MSCI index removal, Bitcoin sell-off",
-      "url": "https://cointelegraph.com/markets/strategy-shares-fall-5-msci-index-removal-bitcoin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "tier": 4,
-      "category": "crypto",
-      "snippet": "Strategy shares declined Thursday following MSCI’s decision to remove the company from its indexes, as Bitcoin also fell amid a broader crypto market decline.",
-      "date": "2026-11-12T21:52:04+00:00",
-      "relevance_score": 0.6,
-      "title_it": "Le azioni di Strategy scendono del 5% dopo la rimozione dall’indice MSCI e il calo di Bitcoin",
-      "title_en": "Strategy stock sheds 5% amid MSCI index removal, Bitcoin sell‑off",
-      "summary_it": "La rimozione di Strategy dall’indice MSCI e il calo di Bitcoin hanno provocato una perdita del 5% del titolo.",
-      "summary_en": "Strategy’s removal from MSCI and Bitcoin’s sell‑off cause a 5% stock drop.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "Strategy",
-          "Bitcoin"
-        ]
-      }
-    },
-    {
-      "title": "Bitcoin hits 12-week low as dollar rallies on interest-rate outlook, liquidations top $1.6 billion",
-      "url": "https://www.coindesk.com/markets/2026/11/13/bitcoin-hits-12-week-low-as-dollar-rallies-on-interest-rate-outlook-liquidations-top-usd1-6-billion",
-      "source": "CoinDesk",
-      "tier": 4,
-      "category": "crypto",
-      "snippet": "Bitcoin hits 12-week low as dollar rallies on interest-rate outlook, liquidations top $1.6 billion",
-      "date": "2026-11-13T11:52:25+00:00",
-      "relevance_score": 0.6,
-      "title_it": "Bitcoin tocca il minimo di 12 settimane mentre il dollaro sale per le aspettative sui tassi",
-      "title_en": "Bitcoin hits 12‑week low as dollar rallies on interest‑rate outlook, liquidations top $1.6 bn",
-      "summary_it": "Il dollaro in rialzo per le aspettative di tassi più alti spinge Bitcoin al minimo di 12 settimane, con liquidazioni superiori a 1,6 miliardi di dollari.",
-      "summary_en": "A rallying dollar on rate outlook drives Bitcoin to a 12‑week low, with liquidations over $1.6 bn.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "high",
-        "assets_affected": [
-          "Bitcoin"
-        ]
-      }
-    },
-    {
-      "title": "Bitcoin dips below $70,000 as Dollar Index hits 19-month high",
-      "url": "https://www.coindesk.com/markets/2026/11/13/bitcoin-dips-below-usd70-000-as-selloff-gathers-pace",
-      "source": "CoinDesk",
-      "tier": 4,
-      "category": "crypto",
-      "snippet": "Bitcoin dips below $70,000 as Dollar Index hits 19-month high",
-      "date": "2026-11-13T03:37:00+00:00",
+      "title": "The upcoming 2027 French election cycle and political discontent",
+      "url": "https://www.piie.com/events/2026/upcoming-2027-french-election-cycle-and-political-discontent",
+      "source": "PIIE",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Elections in France since 2022 have ended in minority governments and hung parliaments. Now, with its deteriorating fiscal position raising concerns among investors, France enters another election cycle this coming spring: a two-round presidential election on April 18 and May 2, with a parliamentary election likely following a few weeks later. How has the French political landscape evolved, and how might the 2027 election cycle reshape it further? What are the scenarios for the presidency, parliament, and future prime minister? How might these influence France's medium-term fiscal trajectory…",
+      "date": "2026-11-19T14:00:00+00:00",
       "relevance_score": 0.4,
-      "title_it": "Bitcoin scende sotto i 70.000 dollari mentre l’indice del dollaro raggiunge il massimo di 19 mesi",
-      "title_en": "Bitcoin dips below $70,000 as Dollar Index hits 19‑month high",
-      "summary_it": "L’indice del dollaro al massimo di 19 mesi spinge Bitcoin sotto i 70.000 dollari, segnalando pressione ribassista.",
-      "summary_en": "A 19‑month high Dollar Index pushes Bitcoin below $70,000, indicating bearish pressure.",
+      "title_it": "Il ciclo elettorale francese del 2027 e il malcontento politico",
+      "title_en": "The upcoming 2027 French election cycle and political discontent",
+      "summary_it": "L'instabilità politica e la precaria posizione fiscale francese destano crescenti preoccupazioni tra gli investitori internazionali.",
+      "summary_en": "Political instability and France's precarious fiscal position are raising growing concerns among international investors.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "CAC 40",
+          "Euro"
+        ]
+      }
+    },
+    {
+      "title": "China's century-old 'porcelain capital' eyes global luxury",
+      "url": "https://asia.nikkei.com/life-arts/arts/china-s-century-old-porcelain-capital-eyes-global-luxury",
+      "source": "Nikkei Asia",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "China's century-old 'porcelain capital' eyes global luxury",
+      "date": "2026-11-15T06:44:18.033230+00:00",
+      "relevance_score": 0.4,
+      "title_it": "La capitale della porcellana cinese punta al lusso globale",
+      "title_en": "China's century-old 'porcelain capital' eyes global luxury",
+      "summary_it": "La storica città cinese della porcellana cerca di espandere il proprio marchio nel mercato globale del lusso.",
+      "summary_en": "The historic Chinese porcelain city seeks to expand its brand into the global luxury market.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500",
+          "Hang Seng"
+        ]
+      }
+    },
+    {
+      "title": "Interest rate rises likely in coming months, Bank of England’s chief economist says",
+      "url": "https://www.theguardian.com/business/2026/nov/14/interest-rate-rises-inflation-bank-of-england-chief-economist",
+      "source": "Guardian Economics",
+      "tier": 4,
+      "category": "macro_economia",
+      "snippet": "‘We have further to go,’ says Huw Pill after increase to 4% this month as Bank seeks to tackle rising inflation The Bank of England will probably need to raise interest rates next month and again in early 2027 to combat rising inflation, its chief economist has said. Signalling a sharp rise in mortgage payments for an estimated 2.3 million homeowners who will have to refinance their loans next year, Huw Pill said that while the decision to nudge interest rates from 3.75% to 4% earlier this month was a “significant step” towards getting monetary policy into a better place, “we ⁠have further to go”. Continue reading...",
+      "date": "2026-11-14T14:42:27+00:00",
+      "relevance_score": 1.0,
+      "title_it": "Probabili rialzi dei tassi nei prossimi mesi, dice la Bank of England",
+      "title_en": "Interest rate rises likely in coming months, Bank of England’s chief economist says",
+      "summary_it": "La Bank of England conferma la necessità di ulteriori rialzi dei tassi per contrastare l'inflazione persistente.",
+      "summary_en": "The Bank of England confirms the need for further interest rate hikes to combat persistent inflation.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "high",
+        "assets_affected": [
+          "GBP",
+          "FTSE 100"
+        ]
+      }
+    },
+    {
+      "title": "Iran War Accelerates Southeast Asia’s Renewable Energy Push",
+      "url": "https://oilprice.com/Energy/Energy-General/Iran-War-Accelerates-Southeast-Asias-Renewable-Energy-Push.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Several countries in Asia have recognised the need to accelerate the deployment of renewable energy to reduce reliance on fossil fuel imports and support energy diversification. The ongoing conflict in the Middle East has significantly reduced fuel trade in recent months, leading to fears of shortages as countries worldwide scramble to find different suppliers and switch to alternative energy sources. The International Energy Agency (IEA) has previously pointed out the significant potential Asia has to increase its renewable energy capacity, and…",
+      "date": "2026-11-14T20:00:00+00:00",
+      "relevance_score": 1.0,
+      "title_it": "La guerra in Iran accelera la transizione energetica nel Sud-est asiatico",
+      "title_en": "Iran War Accelerates Southeast Asia’s Renewable Energy Push",
+      "summary_it": "I paesi asiatici accelerano sulle rinnovabili per ridurre la dipendenza dalle importazioni di combustibili fossili.",
+      "summary_en": "Asian countries are accelerating renewable energy adoption to reduce reliance on fossil fuel imports.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Brent",
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "A rapid interest rate rise seems inevitable – and households are expected to pick up the tab",
+      "url": "https://www.theguardian.com/business/2026/nov/14/interest-rate-rise-phillip-inman-inflation-economy",
+      "source": "Guardian Economics",
+      "tier": 4,
+      "category": "macro_economia",
+      "snippet": "Raising borrowing costs too far risks laying waste to whatever growth there is in the economy A head of steam is building up behind the Bank of England raising interest rates again. With the latest forecasts by the central bank showing inflation rising to 5% next spring, another increase in the cost of borrowing seems inevitable, and may come as soon as next month. A growing number of analysts predict the Bank’s policymakers will don Scrooge masks when they meet on 17 December to deliver a message of austerity and sacrifice. Continue reading...",
+      "date": "2026-11-14T16:00:48+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Un rapido aumento dei tassi sembra inevitabile per le famiglie",
+      "title_en": "A rapid interest rate rise seems inevitable – and households are expected to pick up the tab",
+      "summary_it": "L'aumento dei tassi di interesse rischia di soffocare la crescita economica, gravando pesantemente sulle famiglie britanniche.",
+      "summary_en": "Rising interest rates risk stifling economic growth, placing a heavy burden on British households.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "GBP",
+          "FTSE 100"
+        ]
+      }
+    },
+    {
+      "title": "Iran Braces for a Budget Without Oil Revenue",
+      "url": "https://oilprice.com/Energy/Energy-General/Iran-Braces-for-a-Budget-Without-Oil-Revenue.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Iran is drafting next year’s budget under the premise that oil revenue could fall to zero, with senior budget official Mohammad Ghasemi telling the government on Monday to prepare for that scenario, as the country appears to be weeks away from that eventuality. Iran has loaded no crude since August 25, according to the US Treasury, and the oil it held at sea outside the US blockade fell from 88.8 million barrels in mid-July to zero by mid-October. Chinese buyers pay one to two months after delivery, so Kpler expects that revenue could stop…",
+      "date": "2026-11-13T23:00:00+00:00",
+      "relevance_score": 0.6,
+      "title_it": "L'Iran prepara un bilancio senza entrate petrolifere",
+      "title_en": "Iran Braces for a Budget Without Oil Revenue",
+      "summary_it": "Il governo iraniano pianifica un bilancio nazionale ipotizzando un azzeramento delle entrate derivanti dal petrolio.",
+      "summary_en": "The Iranian government is planning a national budget assuming a total loss of oil-related revenues.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Brent",
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Here’s what happened in crypto today",
+      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Need to know what happened in crypto today? Here is the latest news on daily trends and events impacting Bitcoin price, blockchain, DeFi, Web3 and crypto regulation.",
+      "date": "2026-11-14T11:28:12+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Le ultime notizie dal mondo delle criptovalute",
+      "title_en": "Here’s what happened in crypto today",
+      "summary_it": "Panoramica quotidiana sui trend di mercato, regolamentazione e sviluppi tecnologici nel settore delle criptovalute.",
+      "summary_en": "Daily overview of market trends, regulation, and technological developments in the cryptocurrency sector.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "low",
+        "assets_affected": [
+          "Bitcoin",
+          "Ethereum"
+        ]
+      }
+    },
+    {
+      "title": "Adam Back makes case for simpler security as Blockstream launches Bitcoin custody system",
+      "url": "https://cointelegraph.com/news/adam-back-simpler-security-blockstream-bitcoin-custody-system?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Blockstream’s new custody system, developed with Thales, uses dedicated hardware for transaction signing as Adam Back advocates for offline security to reduce cyber risks.",
+      "date": "2026-11-13T21:49:27+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Adam Back promuove la sicurezza con il nuovo sistema di custodia Bitcoin",
+      "title_en": "Adam Back makes case for simpler security as Blockstream launches Bitcoin custody system",
+      "summary_it": "Blockstream lancia un sistema di custodia Bitcoin basato su hardware dedicato per migliorare la sicurezza informatica.",
+      "summary_en": "Blockstream launches a Bitcoin custody system based on dedicated hardware to improve cybersecurity.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
         "assets_affected": [
           "Bitcoin"
         ]
@@ -714,93 +759,105 @@
   ],
   "audio_manifest_it": {
     "schema_version": 1,
-    "date": "2026-11-14",
+    "date": "2026-11-15",
     "language": "it",
-    "audio_url": "audio/briefing_20261114.mp3",
-    "duration_ms": 150076,
-    "sha256": "433165257a17410908a1d5af6dba1f4e37cc332857586d5f025ea06b1a47b34c",
+    "audio_url": "audio/briefing_20261115.mp3",
+    "duration_ms": 116251,
+    "sha256": "91ab17e3a8dde0d9843c78da5f453a5970b608c5906447ba72911296e3bf5937",
     "chapters": [
       {
         "id": "intro",
         "title": "Apertura",
         "start_ms": 0,
-        "end_ms": 6138
+        "end_ms": 7171
       },
       {
-        "id": "chiusure",
-        "title": "Chiusure",
-        "start_ms": 6138,
-        "end_ms": 66251
+        "id": "wall_street",
+        "title": "Wall Street",
+        "start_ms": 7171,
+        "end_ms": 31908
       },
       {
-        "id": "notizie",
-        "title": "Notizie e Outlook",
-        "start_ms": 66251,
-        "end_ms": 91673
+        "id": "europa",
+        "title": "Europa",
+        "start_ms": 31908,
+        "end_ms": 41634
+      },
+      {
+        "id": "asia",
+        "title": "Mercati Asiatici",
+        "start_ms": 41634,
+        "end_ms": 52265
       },
       {
         "id": "macro",
         "title": "Macro ed Economia",
-        "start_ms": 91673,
-        "end_ms": 96266
+        "start_ms": 52265,
+        "end_ms": 63569
       },
       {
         "id": "crypto",
         "title": "Criptovalute",
-        "start_ms": 96266,
-        "end_ms": 142285
+        "start_ms": 63569,
+        "end_ms": 107950
       },
       {
         "id": "close",
         "title": "Chiusura",
-        "start_ms": 142285,
-        "end_ms": 150075
+        "start_ms": 107950,
+        "end_ms": 116251
       }
     ]
   },
   "audio_manifest_en": {
     "schema_version": 1,
-    "date": "2026-11-14",
+    "date": "2026-11-15",
     "language": "en",
-    "audio_url": "audio/briefing_20261114_en.mp3",
-    "duration_ms": 148984,
-    "sha256": "2c179aff69561b3b10288cd0cef381e6a2493c0b6a04ec39012ec82b45e3faca",
+    "audio_url": "audio/briefing_20261115_en.mp3",
+    "duration_ms": 112851,
+    "sha256": "6724280cbaa41f05e3f49fc9c910ba693b7c51f2215c1461c7c656781f9da825",
     "chapters": [
       {
         "id": "intro",
         "title": "Opening",
         "start_ms": 0,
-        "end_ms": 7566
+        "end_ms": 8564
       },
       {
-        "id": "chiusure",
-        "title": "Market Closes",
-        "start_ms": 7566,
-        "end_ms": 60213
+        "id": "wall_street",
+        "title": "Wall Street",
+        "start_ms": 8564,
+        "end_ms": 27764
       },
       {
-        "id": "notizie",
-        "title": "News and Outlook",
-        "start_ms": 60213,
-        "end_ms": 86251
+        "id": "europa",
+        "title": "Europe",
+        "start_ms": 27764,
+        "end_ms": 36630
+      },
+      {
+        "id": "asia",
+        "title": "Asian Markets",
+        "start_ms": 36630,
+        "end_ms": 45426
       },
       {
         "id": "macro",
         "title": "Macroeconomics",
-        "start_ms": 86251,
-        "end_ms": 93120
+        "start_ms": 45426,
+        "end_ms": 58356
       },
       {
         "id": "crypto",
         "title": "Cryptocurrencies",
-        "start_ms": 93120,
-        "end_ms": 139672
+        "start_ms": 58356,
+        "end_ms": 103155
       },
       {
         "id": "close",
         "title": "Closing",
-        "start_ms": 139672,
-        "end_ms": 148984
+        "start_ms": 103155,
+        "end_ms": 112850
       }
     ]
   }
