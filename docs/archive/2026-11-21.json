@@ -1,0 +1,789 @@
+{
+  "date": "2026-11-21",
+  "sentiment": {
+    "label": "risk_off",
+    "score": 9,
+    "reason_it": "Il VIX a 35.89 (+26.20%) indica panico (VIX>30) e il S&P 500 ha chiuso a 6,910.39 (-3.70%) nella seduta di venerdì, segnale di forte risk-off. Il DXY è a 103.81 (-0.09%) ma resta elevato, penalizzando gli asset rischiosi, mentre il Brent è in leggera ripresa (+0.64%) ma non basta a compensare l'inflazione da \"virus\". L'onda di guerra in Ucraina e le tensioni sul Golfo mantengono un contesto geopolitico bearish (+2 punti). Questi fattori convergono in uno score 9/10, con label risk_off.",
+    "reason_en": "The VIX at 35.89 (+26.20%) signals panic (VIX>30) and the S&P 500 closed at 6,910.39 (-3.70%) on Friday, a clear risk-off sign. The DXY sits at 103.81 (-0.09%) but remains high, weighing on risk assets, while Brent is only modestly up (+0.64%) and cannot offset the inflation \"virus\" narrative. Ongoing war in Ukraine and Gulf tensions keep the geopolitical backdrop bearish (+2 points). These drivers yield a 9/10 score with a risk_off label."
+  },
+  "market_impact_summary": {
+    "it": "Equity: S&P 500 -3.70% e STOXX 600 -0.77% mostrano pressione ribassista; il Nasdaq è sceso del 5.8% secondo la stampa italiana. Fixed Income: TLT +1.37% e US 10Y Yield a 4.91% (+0.02% rispetto a ieri) indicano un mercato obbligazionario in rialzo, coerente con il tasso Fed al 3.75-4.00% e la compressione TLT. Commodities: Brent +0.64% non riesce a sostenere i mercati, mentre l'oro a $3,515.40 (-4.62%) segnala debasement. DXY -0.09% resta forte, rafforzando il bias bearish su risk assets. Crypto: Fear & Greed a 12 (Extreme Fear) e BTC -7.93% confermano la fuga verso liquidità.",
+    "en": "Equities: S&P 500 -3.70% and STOXX 600 -0.77% indicate bearish pressure; Nasdaq fell 5.8% per Italian reports. Fixed Income: TLT +1.37% and US 10Y Yield at 4.91% (+0.02% vs. Friday) reflect a rising bond market, aligned with the Fed Funds range 3.75-4.00% and TLT compression. Commodities: Brent +0.64% fails to buoy markets, while gold at $3,515.40 (-4.62%) points to debasement. DXY -0.09% stays elevated, reinforcing a bearish bias on risk assets. Crypto: Fear & Greed at 12 (Extreme Fear) and BTC -7.93% confirm a flight to cash."
+  },
+  "audio_narrative_it": [
+    {
+      "id": "intro",
+      "title": "Apertura",
+      "text": "Buongiorno, benvenuti al Morning Briefing di Price Alert. Le borse osservano la pausa del weekend."
+    },
+    {
+      "id": "chiusure",
+      "title": "Chiusure",
+      "text": "Nella seduta di venerdì, l'S&P 500 scende di 3,7% a settantasei‑nove‑cento‑dieci‑quattro‑punto‑trenta‑nove. Il VIX sale di 26,2% a trentacinque‑ottanta‑nove. Il DXY scende di 0,09% a cento‑tre‑ottanta‑uno‑punto‑ottanta‑uno. L’oncia d’oro cala di 4,6% a tre‑cinque‑cento‑cinque‑punto‑quattro‑diez. Il Brent aumenta di 0,6% a novanta‑due‑punto‑cinquanta‑sette. Il US 10Y Yield scende di 2,8% a quattro‑punto‑novantuno‑percento. Il BTP 10Y resta stabile a quattro‑punto‑sessantotto‑percento. Il STOXX 600 scende di 0,8% a sessantatré‑punto‑tredici. Il FTSE MIB scende di 2,5% a quarantotto‑mille‑sette‑cento‑quaranta‑quattro. Il Nikkei scende di 5,1% a cinquanta‑sei‑mille‑quattro‑cento‑trenta‑sette. Il Shanghai scende di 1,2% a tre‑mille‑cinquecento‑tre‑punto‑ottanta‑nove."
+    },
+    {
+      "id": "notizie",
+      "title": "Notizie e Outlook",
+      "text": "La perdita di influenza del petrolio sui mercati obbligazionari potrebbe pesare sull’apertura di lunedì, facendo temere una ripresa della volatilità. Il rapporto della Fed sui bilanci delle banche suggerisce che i tassi potrebbero rimanere stabili, ma la percezione di un’elevata liquidità potrebbe spingere i mercati a cercare rendimenti più alti. Le discussioni sul futuro del chip war e sulla stabilità US‑Cina potrebbero far temere tensioni geopolitiche, facendo oscillare i titoli tecnologici all’apertura."
+    },
+    {
+      "id": "macro",
+      "title": "Macro ed Economia",
+      "text": "Nel weekend non escono dati macro. L’agenda macro riprende lunedì."
+    },
+    {
+      "id": "crypto",
+      "title": "Criptovalute",
+      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si muove in calo, con un ribasso del sette virgola nove percento, e si mantiene sopra gli ottantamila dollari. Il flusso ETF cumulativo settimanale è di meno quattrocentocinquanta milioni di dollari, rispetto a più novecento ottanta milioni di dollari la settimana precedente, con un flusso giornaliero di tre virgola otto milioni di dollari riferito a venerdì. Ethereum, Solana e BNB registrano cali superiori al due percento: Ethereum a un euro e cinquantunove, Solana a sessantasei virgola novanta, BNB a cinquecentosessantasei virgola cinquantuno. Il Fear & Greed Index è a dodici, classificato come paura estrema, suggerendo cautela sugli investitori."
+    },
+    {
+      "id": "close",
+      "title": "Chiusura",
+      "text": "Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert"
+    }
+  ],
+  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert. Le borse osservano la pausa del weekend.\n\nNella seduta di venerdì, l'S&P 500 scende di 3,7% a settantasei‑nove‑cento‑dieci‑quattro‑punto‑trenta‑nove. Il VIX sale di 26,2% a trentacinque‑ottanta‑nove. Il DXY scende di 0,09% a cento‑tre‑ottanta‑uno‑punto‑ottanta‑uno. L’oncia d’oro cala di 4,6% a tre‑cinque‑cento‑cinque‑punto‑quattro‑diez. Il Brent aumenta di 0,6% a novanta‑due‑punto‑cinquanta‑sette. Il US 10Y Yield scende di 2,8% a quattro‑punto‑novantuno‑percento. Il BTP 10Y resta stabile a quattro‑punto‑sessantotto‑percento. Il STOXX 600 scende di 0,8% a sessantatré‑punto‑tredici. Il FTSE MIB scende di 2,5% a quarantotto‑mille‑sette‑cento‑quaranta‑quattro. Il Nikkei scende di 5,1% a cinquanta‑sei‑mille‑quattro‑cento‑trenta‑sette. Il Shanghai scende di 1,2% a tre‑mille‑cinquecento‑tre‑punto‑ottanta‑nove.\n\nLa perdita di influenza del petrolio sui mercati obbligazionari potrebbe pesare sull’apertura di lunedì, facendo temere una ripresa della volatilità. Il rapporto della Fed sui bilanci delle banche suggerisce che i tassi potrebbero rimanere stabili, ma la percezione di un’elevata liquidità potrebbe spingere i mercati a cercare rendimenti più alti. Le discussioni sul futuro del chip war e sulla stabilità US‑Cina potrebbero far temere tensioni geopolitiche, facendo oscillare i titoli tecnologici all’apertura.\n\nNel weekend non escono dati macro. L’agenda macro riprende lunedì.\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si muove in calo, con un ribasso del sette virgola nove percento, e si mantiene sopra gli ottantamila dollari. Il flusso ETF cumulativo settimanale è di meno quattrocentocinquanta milioni di dollari, rispetto a più novecento ottanta milioni di dollari la settimana precedente, con un flusso giornaliero di tre virgola otto milioni di dollari riferito a venerdì. Ethereum, Solana e BNB registrano cali superiori al due percento: Ethereum a un euro e cinquantunove, Solana a sessantasei virgola novanta, BNB a cinquecentosessantasei virgola cinquantuno. Il Fear & Greed Index è a dodici, classificato come paura estrema, suggerendo cautela sugli investitori.\n\nPer approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert",
+  "audio_narrative_en": [
+    {
+      "id": "intro",
+      "title": "Opening",
+      "text": "Good morning, welcome to the Price Alert Morning Briefing. The markets are observing the weekend pause."
+    },
+    {
+      "id": "chiusure",
+      "title": "Market Closes",
+      "text": "In Friday's session, the S&P 500 fell 3.7% to 1690.49. The VIX rose 26.2% to 3589. The DXY fell 0.09% to 1381.81. The gold ounce dropped 4.6% to 305.4. Brent rose 0.6% to 92.57. The US 10Y Yield fell 2.8% to 4.91%. The BTP 10Y stayed stable at 4.68%. The STOXX 600 fell 0.8% to 63.13. The FTSE MIB fell 2.5% to 48,704. The Nikkei fell 5.1% to 56,407. The Shanghai fell 1.2% to 3,503.89."
+    },
+    {
+      "id": "notizie",
+      "title": "News and Outlook",
+      "text": "The waning influence of oil on bond markets could weigh on Monday's opening, raising fears of a volatility rebound. The Fed's bank balance sheet report suggests rates may stay stable, but the perception of high liquidity could push markets to seek higher yields. Discussions on the future of the chip war and US‑China stability could spark geopolitical tensions, causing tech stocks to wobble at the open."
+    },
+    {
+      "id": "macro",
+      "title": "Macroeconomics",
+      "text": "No macro data were released over the weekend. The macro agenda resumes on Monday."
+    },
+    {
+      "id": "crypto",
+      "title": "Cryptocurrencies",
+      "text": "Let's pivot to the cryptocurrency markets. Bitcoin is down 7.9% and remains above $80,000. The weekly cumulative ETF flow is minus $450 million, compared to plus $980 million the previous week, with a daily flow of $3.8 million on Friday. Ethereum, Solana and BNB see declines over 2%: Ethereum at €1.49, Solana at 66.9, BNB at 566.51. The Fear & Greed Index is 12, classified as extreme fear, suggesting caution for investors."
+    },
+    {
+      "id": "close",
+      "title": "Closing",
+      "text": "For deeper coverage of today's topics, find the full articles in the Spotlight Stories section on our platform. A greeting from Price Alert"
+    }
+  ],
+  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing. The markets are observing the weekend pause.\n\nIn Friday's session, the S&P 500 fell 3.7% to 1690.49. The VIX rose 26.2% to 3589. The DXY fell 0.09% to 1381.81. The gold ounce dropped 4.6% to 305.4. Brent rose 0.6% to 92.57. The US 10Y Yield fell 2.8% to 4.91%. The BTP 10Y stayed stable at 4.68%. The STOXX 600 fell 0.8% to 63.13. The FTSE MIB fell 2.5% to 48,704. The Nikkei fell 5.1% to 56,407. The Shanghai fell 1.2% to 3,503.89.\n\nThe waning influence of oil on bond markets could weigh on Monday's opening, raising fears of a volatility rebound. The Fed's bank balance sheet report suggests rates may stay stable, but the perception of high liquidity could push markets to seek higher yields. Discussions on the future of the chip war and US‑China stability could spark geopolitical tensions, causing tech stocks to wobble at the open.\n\nNo macro data were released over the weekend. The macro agenda resumes on Monday.\n\nLet's pivot to the cryptocurrency markets. Bitcoin is down 7.9% and remains above $80,000. The weekly cumulative ETF flow is minus $450 million, compared to plus $980 million the previous week, with a daily flow of $3.8 million on Friday. Ethereum, Solana and BNB see declines over 2%: Ethereum at €1.49, Solana at 66.9, BNB at 566.51. The Fear & Greed Index is 12, classified as extreme fear, suggesting caution for investors.\n\nFor deeper coverage of today's topics, find the full articles in the Spotlight Stories section on our platform. A greeting from Price Alert",
+  "market_data_raw": {
+    "dxy": {
+      "value": "103.81",
+      "change": "-0.09%"
+    },
+    "eur_usd": {
+      "value": "1.09",
+      "change": "-0.02%"
+    },
+    "sp500": {
+      "value": "6910.39",
+      "change": "-3.70%"
+    },
+    "nasdaq": {
+      "value": "22,618",
+      "change": "-5.28%"
+    },
+    "dow": {
+      "value": "48,147",
+      "change": "-1.93%"
+    },
+    "vix": {
+      "value": "35.89",
+      "change": "+26.20%"
+    },
+    "tlt": {
+      "value": "81.45",
+      "change": "+1.37%"
+    },
+    "us_10y": {
+      "value": "4.91%",
+      "change": "-2.77%"
+    },
+    "gold": {
+      "value": "$3515.40/oz",
+      "change": "-4.62%"
+    },
+    "btcusd": {
+      "value": "$56,849",
+      "change": "-8.16%"
+    },
+    "oil_brent": {
+      "value": "$92.57",
+      "change": "+0.64%"
+    },
+    "stoxx_600": {
+      "value": "63.33",
+      "change": "-0.77%"
+    },
+    "ftse_mib": {
+      "value": "48,704",
+      "change": "-2.48%"
+    },
+    "nikkei": {
+      "value": "56,437",
+      "change": "-5.06%"
+    },
+    "shanghai": {
+      "value": "3533.79",
+      "change": "-1.22%"
+    },
+    "hang_seng": {
+      "value": "22,411",
+      "change": "-1.89%"
+    },
+    "europe_futures": {
+      "status": "unavailable",
+      "instrument": "EURO STOXX 50 Futures Roll Index",
+      "source": "Yahoo Finance",
+      "source_symbol": "03V9.Z",
+      "reason": "outside_europe_preopen"
+    },
+    "btp_10y": {
+      "value": "4.68%",
+      "change": "N/A"
+    },
+    "btp_bund_spread": {
+      "value": "126 bp",
+      "change": ""
+    },
+    "global_m2": {
+      "value": "$23.4T",
+      "change": "expanding 📈 | US YoY: +5.7% YoY"
+    },
+    "btc_etf_flow": {
+      "value": "$+3.8M",
+      "change": "📈 Reversal Up"
+    },
+    "btc_etf_data": {
+      "last_update": "2026-09-11",
+      "net_flow_usd_m": 3.8,
+      "status": "POSITIVE",
+      "trend_indicator": "📈 Reversal Up",
+      "prev_flow_usd_m": -282.7,
+      "week_sum_m": -445.7,
+      "prev_week_sum_m": 986.7,
+      "week_delta_m": -1432.4,
+      "scraped_at": "2026-09-11T23:53:48.299311Z",
+      "source": "Farside",
+      "message": "🟢 Inflow: +3.8M$",
+      "total_btc": 1268341.0,
+      "total_aum_bn": 97.879407715,
+      "pct_of_21m": 6.04,
+      "btc_dominance": 58.27128197298697,
+      "total_market_cap": 2655030309791.596
+    },
+    "crypto": {
+      "fear_greed": {
+        "value": "12",
+        "class": "Extreme Fear"
+      },
+      "prices": {
+        "BTC": {
+          "value": "$56,805",
+          "change": "-7.93%"
+        },
+        "ETH": {
+          "value": "$1,591",
+          "change": "-8.49%"
+        },
+        "SOL": {
+          "value": "$66.99",
+          "change": "-7.43%"
+        },
+        "BNB": {
+          "value": "$516.51",
+          "change": "-9.33%"
+        }
+      }
+    },
+    "macro_calendar": {
+      "cpi": {
+        "label": "CPI YoY USA",
+        "label_it": "CPI YoY USA",
+        "label_en": "CPI YoY USA",
+        "value": "4.1%",
+        "previous": "4.0%",
+        "release_date": "2026-10-01",
+        "status": "released",
+        "next_release": "2026-12-10"
+      },
+      "core_cpi": {
+        "label": "Core CPI YoY USA",
+        "label_it": "Core CPI YoY USA",
+        "label_en": "Core CPI YoY USA",
+        "value": "2.9%",
+        "previous": "2.8%",
+        "release_date": "2026-10-01",
+        "status": "released",
+        "next_release": "2026-12-10"
+      },
+      "nfp": {
+        "label": "Non-Farm Payrolls",
+        "label_it": "Non-Farm Payrolls",
+        "label_en": "Non-Farm Payrolls",
+        "value": "+165K",
+        "previous": "+60K",
+        "release_date": "2026-10-01",
+        "status": "released",
+        "next_release": "2026-12-04"
+      },
+      "unemployment": {
+        "label": "Tasso Disoccupazione USA",
+        "label_it": "Tasso Disoccupazione USA",
+        "label_en": "Unemployment Rate USA",
+        "value": "4.1%",
+        "previous": "4.2%",
+        "release_date": "2026-10-01",
+        "status": "released",
+        "next_release": "2026-12-04"
+      },
+      "pce_core": {
+        "label": "PCE Core YoY",
+        "label_it": "PCE Core YoY",
+        "label_en": "PCE Core YoY",
+        "value": "3.1%",
+        "previous": "3.0%",
+        "release_date": "2026-09-01",
+        "status": "released",
+        "next_release": "2026-11-25"
+      },
+      "fed_funds": {
+        "label": "Tasso Fed Funds",
+        "label_it": "Tasso Fed Funds",
+        "label_en": "Fed Funds Rate",
+        "value": "3.75% - 4.00%",
+        "release_date": "2026-11-04",
+        "status": "released",
+        "next_release": "2026-12-16",
+        "previous": "3.50% - 3.75%"
+      },
+      "gdp": {
+        "label": "PIL QoQ USA",
+        "label_it": "PIL QoQ USA",
+        "label_en": "GDP QoQ USA",
+        "value": "3.4%",
+        "previous": "2.2%",
+        "status": "upcoming",
+        "next_release": "2026-10-29"
+      }
+    },
+    "macro_calendar_eu": {
+      "gdp_eu": {
+        "label": "PIL QoQ Eurozona",
+        "label_it": "PIL QoQ Eurozona",
+        "label_en": "GDP QoQ Eurozone",
+        "value": "0.4%",
+        "previous": "0.6%",
+        "release_date": "2026-Q3",
+        "status": "released",
+        "next_release": "2026-10-30",
+        "region": "EU"
+      },
+      "ecb_rate": {
+        "label": "Tasso BCE (Depositi)",
+        "label_it": "Tasso BCE (Depositi)",
+        "label_en": "ECB Rate (Deposit)",
+        "value": "2.50%",
+        "release_date": "2026-10-29",
+        "status": "released",
+        "next_release": "2026-12-10",
+        "region": "EU",
+        "previous": "2.25%"
+      },
+      "cpi_eu": {
+        "label": "CPI Eurozona",
+        "label_it": "CPI Eurozona",
+        "label_en": "Eurozone CPI",
+        "value": null,
+        "status": "upcoming",
+        "next_release": "2026-12-01",
+        "region": "EU"
+      },
+      "unemployment_eu": {
+        "label": "Disoccupazione EU",
+        "label_it": "Disoccupazione EU",
+        "label_en": "EU Unemployment",
+        "value": null,
+        "status": "upcoming",
+        "next_release": "2026-12-01",
+        "region": "EU"
+      },
+      "ecb_refi_rate": {
+        "label": "Tasso BCE (Refi/Mutui)",
+        "label_it": "Tasso BCE (Refi/Mutui)",
+        "label_en": "ECB Rate (Refi)",
+        "value": "2.65%",
+        "status": "released",
+        "region": "EU",
+        "previous": "2.40%"
+      }
+    },
+    "fed_target_range": {
+      "value": "3.75% - 4.00%",
+      "release_date": "2026-11-20",
+      "previous": "3.50% - 3.75%"
+    }
+  },
+  "articles": [
+    {
+      "title": "Oil loses grip on bond markets as inflation ‘virus’ spreads",
+      "url": "https://www.ft.com/content/562e278e-1e12-49d2-b7f7-91a289ffd660?syn-25a6b1a6=1",
+      "source": "Financial Times (Global Economy)",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "Tight correlation between crude prices and borrowing costs has broken down",
+      "date": "2026-11-20T05:00:26+00:00",
+      "relevance_score": 0.7,
+      "title_it": "Il petrolio perde terreno sui mercati obbligazionari mentre il virus dell'inflazione si diffonde",
+      "title_en": "Oil loses grip on bond markets as inflation ‘virus’ spreads",
+      "summary_it": "La correlazione tra prezzi del petrolio e costi di finanziamento si è rotta, segnale negativo per i mercati.",
+      "summary_en": "Breakdown of oil‑bond correlation signals bearish pressure on markets.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500",
+          "Brent"
+        ]
+      }
+    },
+    {
+      "title": "Handshakes Without Headway",
+      "url": "https://warontherocks.com/handshakes-without-headway/",
+      "source": "War on the Rocks",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "Welcome to The Adversarial. Every other week, we’ll provide you with expert analysis on America’s greatest challengers: China, Russia, Iran, North Korea, and jihadists. Read more below.***Iran Washington and Tehran are stuck in a loop, with no indication that they are engaged in talks — although Iran has continued meeting with mediators. Following a G7 meeting, Secretary of State Marco Rubio said that the U.S. economic pressure campaign — including sanctions, an ongoing naval blockade, and newer efforts to block Iran from transporting weapons and sanctioned items by land — is “working so well that the president really doesn’t have any The post Handshakes Without Headway appeared first on War on the Rocks .",
+      "date": "2026-11-19T20:17:57+00:00",
+      "relevance_score": 1.0,
+      "title_it": "Stretta di mano senza progressi",
+      "title_en": "Handshakes Without Headway",
+      "summary_it": "Analisi geopolitica evidenzia tensioni persistenti con Cina, Russia e altri attori, senza prospettive di miglioramento.",
+      "summary_en": "Geopolitical analysis highlights ongoing tensions with no clear improvement.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "The chip war’s next battleground",
+      "url": "https://www.ft.com/content/cd4ecaf3-0ded-4830-94a8-4d9c24098c07?syn-25a6b1a6=1",
+      "source": "Financial Times (Global Economy)",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "As the US and China’s AI rivalry intensifies, focus is moving to supply chains",
+      "date": "2026-11-21T05:00:36+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Il prossimo campo di battaglia della guerra dei chip",
+      "title_en": "The chip war’s next battleground",
+      "summary_it": "La rivalità USA‑Cina nell'AI spinge verso nuove catene di approvvigionamento, creando incertezza per i mercati tecnologici.",
+      "summary_en": "US‑China AI rivalry shifts supply‑chain focus, adding tech market uncertainty.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Federal Reserve Board releases results from survey of senior financial officers at banks about their strategies and practices for managing reserve balances",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/other20261120a.htm",
+      "source": "Federal Reserve",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "Federal Reserve Board releases results from survey of senior financial officers at banks about their strategies and practices for managing reserve balances",
+      "date": "2026-11-20T15:00:00+00:00",
+      "relevance_score": 0.5,
+      "title_it": "La Fed pubblica i risultati del sondaggio sui dirigenti bancari senior",
+      "title_en": "Federal Reserve Board releases results from survey of senior financial officers at banks about their strategies and practices for managing reserve balances",
+      "summary_it": "Il sondaggio mostra cautela delle banche nella gestione delle riserve, segnale di possibile restrizione creditizia.",
+      "summary_en": "Survey reveals banks' cautious reserve management, hinting at tighter credit.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "What Ukraine Hath Wrought: Lessons for War, If We’re Listening",
+      "url": "https://warontherocks.com/what-ukraine-hath-wrought-lessons-for-war-if-were-listening/",
+      "source": "War on the Rocks",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "Four years into Russia’s war against Ukraine, what should the U.S. military have learned by now? Michael Kofman (Carnegie Endowment), Dara Massicot (Carnegie Endowment), and Amos Fox (Arizona State University) join Ryan to discuss. The easy answer is drones and AI, but our guests argue the harder truths lie elsewhere: “Old-fashioned” ideas like campaigning, holding territory, mass, and attrition still decide wars. And, as they discuss, based on U.S. performance in the war with Iran, it may be that not much learning has happened at all.Image: ArmyInform The post What Ukraine Hath Wrought: Lessons for War, If We’re Listening appeared first on War on the Rocks .",
+      "date": "2026-11-20T17:18:04+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Cosa ha insegnato l'Ucraina: lezioni per la guerra",
+      "title_en": "What Ukraine Hath Wrought: Lessons for War, If We’re Listening",
+      "summary_it": "Le lezioni dalla guerra in Ucraina suggeriscono una maggiore spesa militare per gli USA, ma con rischi di escalation.",
+      "summary_en": "Ukraine war lessons imply higher US defense spending, yet escalation risks remain.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Next steps for the USMCA and US trade laws: A post-election review",
+      "url": "https://www.piie.com/events/2026/next-steps-usmca-and-us-trade-laws-post-election-review",
+      "source": "PIIE",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "What are the implications of the November 2026 US election results on the ongoing review of the United States-Mexico-Canada Agreement (USMCA), US trade policy toward Canada and Mexico, as well as congressional changes to US trade authorities? Join PIIE experts Chad P. Bown, Inu Manak, and Alejandro Werner for an update on the state of the trade and economic relationships among the three countries as well as potential US legislative initiatives in the new Congress. PIIE's Monica de Bolle moderates the discussion. Be sure to read Chad P. Bown's related articles, \"The Real Risk of a Trade War…",
+      "date": "2026-11-24T17:00:00+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Prossimi passi per USMCA e leggi commerciali USA dopo le elezioni del 2026",
+      "title_en": "Next steps for the USMCA and US trade laws: A post-election review",
+      "summary_it": "La revisione post‑elettorale potrebbe introdurre nuove barriere commerciali, impattando negativamente le esportazioni.",
+      "summary_en": "Post‑election review may raise trade barriers, negatively affecting exports.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Federal Reserve announces College Fed Challenge winners",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/other20261120b.htm",
+      "source": "Federal Reserve",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "Federal Reserve announces College Fed Challenge winners",
+      "date": "2026-11-20T21:15:00+00:00",
+      "relevance_score": 0.30000000000000004,
+      "title_it": "La Fed annuncia i vincitori del College Fed Challenge",
+      "title_en": "Federal Reserve announces College Fed Challenge winners",
+      "summary_it": "Evento istituzionale senza impatto diretto sui mercati, ma indica continui sforzi di formazione economica.",
+      "summary_en": "Institutional event with no direct market impact, indicating ongoing economic education.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "The resilience gap: Are Europe’s societies ready for the next crisis?",
+      "url": "https://www.chathamhouse.org/2026/11/resilience-gap-are-europes-societies-ready-next-crisis-independent-thinking-podcast",
+      "source": "Chatham House",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "The resilience gap: Are Europe’s societies ready for the next crisis? Audio sseth.drupal@c… 20 November 2026 In this week’s episode of Independent Thinking, our experts discuss how prepared Europe’s leaders, economies and societies are for disaster, confrontation and conflict. From hacked refrigerators and arson attacks to drone incursions on airfields, a wave of low-level sabotage and digital disruption has focused minds across Europe on the question of resilient societies. Are European countries sufficiently prepared for covert action by hostile states and their proxies? Can citizens’ trust in government and information be improved? And how does a ‘whole of society’ approach to resilience relate to military rearmament? To discuss this, Bronwen Maddox is joined by General Sir Richard Barr",
+      "date": "2026-11-20T11:22:17+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Il divario di resilienza: le società europee pronte alla prossima crisi?",
+      "title_en": "The resilience gap: Are Europe’s societies ready for the next crisis?",
+      "summary_it": "Analisi evidenzia vulnerabilità europee, suggerendo potenziali turbolenze economiche future.",
+      "summary_en": "Analysis highlights European vulnerabilities, suggesting possible future economic turbulence.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "US-China stability can't rely on bilateral summits, warns AmCham head",
+      "url": "https://asia.nikkei.com/editor-s-picks/interview/us-china-stability-can-t-rely-on-bilateral-summits-warns-amcham-head",
+      "source": "Nikkei Asia",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "US-China stability can't rely on bilateral summits, warns AmCham head",
+      "date": "2026-11-21T06:43:22.923446+00:00",
+      "relevance_score": 0.6000000000000001,
+      "title_it": "Stabilità USA‑Cina non può dipendere da summit bilaterali, avverte il capo di AmCham",
+      "title_en": "US-China stability can't rely on bilateral summits, warns AmCham head",
+      "summary_it": "Avvertimento di instabilità geopolitica senza progressi diplomatici, pressione al ribasso sui mercati.",
+      "summary_en": "Warning of geopolitical instability without diplomatic progress, bearish pressure on markets.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "La settimana nera delle Borse: fuga dal tech, Anthropic crolla",
+      "url": "https://www.repubblica.it/economia/2026/11/20/news/quotazione_anthropic_mercati_bolla_ai_titoli-425739269/?rss",
+      "source": "Repubblica Economia",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Il Nasdaq perde il 5,8% e l’Asia paga l’esposizione sui chip, in Europa bruciati 370 miliardi. Nvidia a picco con tutti i titoli legati all’IA, si salva solo Apple",
+      "date": "2026-11-20T21:53:51+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Settimana nera per le Borse: fuga dal tech, crollo di Anthropic",
+      "title_en": "Black week for stocks: tech flight, Anthropic collapses",
+      "summary_it": "Il Nasdaq perde quasi il 6%, le azioni legate all'IA subiscono forte pressione, segnali ribassisti.",
+      "summary_en": "Nasdaq drops nearly 6%, AI‑linked stocks under heavy pressure, bearish signals.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "The Shell of the Scam: A Journey through Cambodia’s Empty Crime Compounds",
+      "url": "https://www.crisisgroup.org/phe/asia-pacific/cambodia/shell-scam-journey-through-cambodias-empty-crime-compounds",
+      "source": "International Crisis Group",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "In August 2026, the Cambodian government announced it had eliminated the country’s notorious online scam centres. Crisis Group visited Sihanoukville, where the industry took root, and found that while the declaration is largely accurate, the industry for criminal services is intact.",
+      "date": "2026-11-21T06:43:21.458281+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Il guscio della truffa: viaggio nei campi di crimine vuoti della Cambogia",
+      "title_en": "The Shell of the Scam: A Journey through Cambodia’s Empty Crime Compounds",
+      "summary_it": "Report evidenzia la chiusura di centri di truffa, ma indica rischi residui per la sicurezza regionale.",
+      "summary_en": "Report shows closure of scam centers but indicates lingering regional security risks.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Tankers Are Being Hit Daily. So Why Is Oil Falling?",
+      "url": "https://oilprice.com/Energy/Crude-Oil/Tankers-Are-Being-Hit-Daily-So-Why-Is-Oil-Falling.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Brent tumbled 5% to $91 this week, as recovering Gulf oil flows outweigh tanker attacks, Houthi threats and escalating geopolitical tensions. Friday, November 20, 2026 Oil prices are set to post a 5% weekly drop as sentiment is still swayed by ample Middle Eastern barrels flowing to Asian customers. That said, none of the bullish factors of the past months have lost their relevance – Iranian drone strikes on tankers in the Hormuz are running at one clear hit per day; the Russia-Ukraine war is as frenzied as it could be and the Houthis…",
+      "date": "2026-11-20T17:11:05+00:00",
+      "relevance_score": 1.0,
+      "title_it": "I petroliere subiscono attacchi quotidiani: perché il petrolio scende?",
+      "title_en": "Tankers Are Being Hit Daily. So Why Is Oil Falling?",
+      "summary_it": "Nonostante gli attacchi ai petroliere, il Brent scende del 5% grazie a flussi di petrolio più stabili, segnale misto.",
+      "summary_en": "Despite tanker attacks, Brent falls 5% as oil flows stabilize, presenting mixed signals.",
+      "market_impact": {
+        "direction": "mixed",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Brent"
+        ]
+      }
+    },
+    {
+      "title": "China’s Oil Imports from Persian Gulf Jump to Wartime High",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Chinas-Oil-Imports-from-Persian-Gulf-Jump-to-Wartime-High.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "China’s crude oil imports from the Persian Gulf surged by 42.4% in October from September, to the highest level since the Iran war began, as supply via the Strait of Hormuz rebounded and Gulf producers slashed prices for their crude to attract buyers amid record-high freight rates. China imported 19.7 million tons of crude oil from the Persian Gulf producers, excluding Iran, in October, a 42.4% jump from the previous month, per calculations by the South China Morning Post based on Chinese customs data released on Friday. October…",
+      "date": "2026-11-20T15:36:00+00:00",
+      "relevance_score": 1.0,
+      "title_it": "Le importazioni di petrolio cinese dal Golfo Persico raggiungono picchi di guerra",
+      "title_en": "China’s Oil Imports from Persian Gulf Jump to Wartime High",
+      "summary_it": "L'aumento delle importazioni cinesi spinge la domanda globale, supportando i prezzi del petrolio.",
+      "summary_en": "China's surge in Gulf oil imports boosts global demand, supporting oil prices.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "high",
+        "assets_affected": [
+          "Brent"
+        ]
+      }
+    },
+    {
+      "title": "Lagarde warns Europe could miss chance to unify tokenized markets",
+      "url": "https://cointelegraph.com/news/lagarde-europe-limited-window-tokenization-rules?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "The ECB president said Europe’s market for tokenized securities could split into platforms that cannot settle trades with one another.",
+      "date": "2026-11-20T13:21:39+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Lagarde avverte l'Europa sul rischio di frammentazione dei mercati tokenizzati",
+      "title_en": "Lagarde warns Europe could miss chance to unify tokenized markets",
+      "summary_it": "L'avvertimento della BCE indica possibili inefficienze di mercato, pressione al ribasso per gli asset digitali.",
+      "summary_en": "ECB warning signals potential market inefficiencies, bearish pressure on digital assets.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "ECB’s Lagarde warns Europe could lose control of growing tokenized asset market",
+      "url": "https://www.coindesk.com/policy/2026/11/20/ecb-s-largarde-warns-europe-could-lose-control-of-growing-tokenized-asset-market",
+      "source": "CoinDesk",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "ECB’s Lagarde warns Europe could lose control of growing tokenized asset market",
+      "date": "2026-11-20T13:11:49+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Lagarde avverte l'Europa sulla perdita di controllo del mercato tokenizzato",
+      "title_en": "ECB’s Lagarde warns Europe could lose control of growing tokenized asset market",
+      "summary_it": "Allarme su perdita di controllo del mercato tokenizzato, impatto negativo per le criptovalute.",
+      "summary_en": "Alert on losing control of tokenized market, negative impact on cryptocurrencies.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "U.S. Treasury Secretary Pushes Back on Bigger Fed Hike",
+      "url": "https://bitcoinmagazine.com/markets/bessent-fed-bigger-rate-hike-bitcoin",
+      "source": "Bitcoin Magazine",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Bitcoin Magazine U.S. Treasury Secretary Pushes Back on Bigger Fed Hike Treasury Secretary Scott Bessent urged the Fed not to embrace a bigger rate hike as Citi and traders still see a quarter-point move in December and bitcoin fell below $60,000. This post U.S. Treasury Secretary Pushes Back on Bigger Fed Hike first appeared on Bitcoin Magazine and is written by Micah Zimmerman .",
+      "date": "2026-11-20T16:22:32+00:00",
+      "relevance_score": 0.8,
+      "title_it": "Il Segretario al Tesoro USA si oppone a un ulteriore rialzo dei tassi della Fed",
+      "title_en": "U.S. Treasury Secretary Pushes Back on Bigger Fed Hike",
+      "summary_it": "Il Tesoro chiede di non aumentare ulteriormente i tassi, segnale di possibile allentamento monetario.",
+      "summary_en": "Treasury urges against further Fed rate hikes, indicating possible monetary easing.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    },
+    {
+      "title": "Tracy Schuchart: Bitcoin Trading “Like a Risk Asset” as Fed Hikes Loom",
+      "url": "https://bitcoinmagazine.com/videos/tracy-schuchart-bitcoin-trading-like-a-risk-asset-as-fed-hikes-loom",
+      "source": "Bitcoin Magazine",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "▶ Bitcoin Magazine Tracy Schuchart: Bitcoin Trading “Like a Risk Asset” as Fed Hikes Loom Tracy Shuchart says Bitcoin's biggest long-term argument is its monetary scarcity, but investors need to separate the long-term thesis from how it's trading today. This post Tracy Schuchart: Bitcoin Trading “Like a Risk Asset” as Fed Hikes Loom first appeared on Bitcoin Magazine and is written by Patrick Green .",
+      "date": "2026-11-20T22:10:11+00:00",
+      "relevance_score": 0.6,
+      "title_it": "Bitcoin trattato come asset rischioso in vista di nuovi rialzi della Fed",
+      "title_en": "Tracy Schuchart: Bitcoin Trading “Like a Risk Asset” as Fed Hikes Loom",
+      "summary_it": "L'analisi collega Bitcoin a un asset rischioso con l'anticipazione di ulteriori rialzi dei tassi, prospettiva ribassista.",
+      "summary_en": "Analysis links Bitcoin to a risk asset amid anticipated Fed hikes, bearish outlook.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "S&P 500"
+        ]
+      }
+    }
+  ],
+  "audio_manifest_it": {
+    "schema_version": 1,
+    "date": "2026-11-21",
+    "language": "it",
+    "audio_url": "audio/briefing_20261121.mp3",
+    "duration_ms": 142366,
+    "sha256": "ae804a66b8254f0aef34f7bf20dc44b8a7ccaf03f28c11e1ef96a7647f39922b",
+    "chapters": [
+      {
+        "id": "intro",
+        "title": "Apertura",
+        "start_ms": 0,
+        "end_ms": 6115
+      },
+      {
+        "id": "chiusure",
+        "title": "Chiusure",
+        "start_ms": 6115,
+        "end_ms": 61537
+      },
+      {
+        "id": "notizie",
+        "title": "Notizie e Outlook",
+        "start_ms": 61537,
+        "end_ms": 89502
+      },
+      {
+        "id": "macro",
+        "title": "Macro ed Economia",
+        "start_ms": 89502,
+        "end_ms": 94049
+      },
+      {
+        "id": "crypto",
+        "title": "Criptovalute",
+        "start_ms": 94049,
+        "end_ms": 134634
+      },
+      {
+        "id": "close",
+        "title": "Chiusura",
+        "start_ms": 134634,
+        "end_ms": 142366
+      }
+    ]
+  },
+  "audio_manifest_en": {
+    "schema_version": 1,
+    "date": "2026-11-21",
+    "language": "en",
+    "audio_url": "audio/briefing_20261121_en.mp3",
+    "duration_ms": 149622,
+    "sha256": "c803e4ec2a357201675ca9b1d04c06bc232b7647b922184a4365481288e07325",
+    "chapters": [
+      {
+        "id": "intro",
+        "title": "Opening",
+        "start_ms": 0,
+        "end_ms": 7589
+      },
+      {
+        "id": "chiusure",
+        "title": "Market Closes",
+        "start_ms": 7589,
+        "end_ms": 69501
+      },
+      {
+        "id": "notizie",
+        "title": "News and Outlook",
+        "start_ms": 69501,
+        "end_ms": 95016
+      },
+      {
+        "id": "macro",
+        "title": "Macroeconomics",
+        "start_ms": 95016,
+        "end_ms": 101932
+      },
+      {
+        "id": "crypto",
+        "title": "Cryptocurrencies",
+        "start_ms": 101932,
+        "end_ms": 140381
+      },
+      {
+        "id": "close",
+        "title": "Closing",
+        "start_ms": 140381,
+        "end_ms": 149622
+      }
+    ]
+  }
+}
