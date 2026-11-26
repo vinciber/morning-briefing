@@ -1,14 +1,14 @@
 {
-  "date": "2026-11-25",
+  "date": "2026-11-26",
   "sentiment": {
     "label": "risk_off",
-    "score": 4,
-    "reason_it": "Il VIX è a 26,36, in lieve calo (-0,98%) – segnale bullish, ma il DXY è a 104,05 (+0,23%) indicando un dollaro forte, fattore bearish per gli asset a rischio. L'S&P 500 è a 7.201,09 con -0,50% di perdita, confermando un contesto risk‑off. Con il VIX nella fascia 18‑25 il punteggio massimo è 6, ma la pressione ribassista dell'S&P e il dollaro forte riducono il valore a 4. Il risultato è un sentiment risk_off.",
-    "reason_en": "VIX stands at 26.36, down 0.98% – a bullish cue, yet the DXY at 104.05 (+0.23%) signals a strong dollar, which is bearish for risk assets. The S&P 500 is at 7,201.09, down 0.50%, confirming a risk‑off backdrop. With VIX in the 18‑25 band the maximum score is 6, but the S&P weakness and firm dollar pull the score down to 4. The overall sentiment is risk_off."
+    "score": 6,
+    "reason_it": "Il VIX a 28,29 (+7,32%) indica un mercato difensivo, avvicinandosi al livello di panico (>30). L'S&P 500 chiude a 7.182,78 (-0,25%) e il DXY è a 103,80 (+0,12%), segnali tipici di risk-off. Il Brent scende a $90,57 (-4,27%) e il gold sale a $3.597,60 (+1,75%) in un contesto di inflazione ancora sopra le attese (CPI USA 4,1%). La guerra in Ucraina continua a pesare, aggiungendo un punto al rischio percepito.",
+    "reason_en": "The VIX at 28.29 (+7.32%) signals a defensive market, nearing panic levels. The S&P 500 closed at 7,182.78 (-0.25%) and the DXY is at 103.80 (+0.12%), classic risk-off cues. Brent fell to $90.57 (-4.27%) while gold rose to $3,597.60 (+1.75%) amid inflation still above expectations (US CPI 4.1%). The ongoing war in Ukraine adds to perceived risk."
   },
   "market_impact_summary": {
-    "it": "Equity europee mostrano resilienza: lo STOXX 600 è +1,98% mentre il FTSE MIB scende -1,84% e il Nikkei -2,60%, riflettendo una divergenza regionale. Il Brent è a $87,68 (-4,07%) e il petrolio in calo spinge verso un outlook bullish per le azioni. Il TLT 20Y è a 81,49 (-0,24%) con il rendimento US 10Y a 4,90% (-0,28%), segnale di compressione dei titoli a lungo termine, quindi bearish per il mercato obbligazionario. L'oro a $3.525,30 (-1,03%) resta in zona mixed, mentre il DXY forte (+0,23%) penalizza gli asset rischiosi.",
-    "en": "European equities are mixed: the STOXX 600 is up +1.98% while Italy's FTSE MIB falls -1.84% and Japan's Nikkei drops -2.60%, showing regional divergence. Brent crude sits at $87.68 (-4.07%) and the oil price decline supports a bullish view for equities. The 20Y TLT is at 81.49 (-0.24%) with the US 10Y yield at 4.90% (-0.28%), indicating compression in long‑dated bonds, a bearish signal for fixed income. Gold at $3,525.30 (-1.03%) remains mixed, and a strong DXY (+0.23%) weighs on risk assets."
+    "it": "Equity europee sono in calo: STOXX 600 a 62,82 (-0,63%) e FTSE MIB a 47.249 (-1,81%). I Treasury US a 20 anni (TLT) salgono a 82,24 (+0,92%) mentre il rendimento a 10 anni scende a 4,84% (-1,14%), riflettendo la fuga verso la sicurezza. Il petrolio è in forte ribasso (-4,27%) a $90,57, rafforzando il bias bearish per le commodity, mentre l'oro registra un rialzo moderato (+1,75%) con un outlook misto.",
+    "en": "European equities are slipping: STOXX 600 at 62.82 (-0.63%) and FTSE MIB at 47,249 (-1.81%). US 20‑year Treasuries (TLT) rise to 82.24 (+0.92%) as the 10‑year yield falls to 4.84% (-1.14%), indicating a flight to safety. Oil is sharply down (-4.27%) at $90.57, reinforcing a bearish bias for commodities, while gold posts a modest gain (+1.75%) with a mixed outlook."
   },
   "audio_narrative_it": [
     {
@@ -19,17 +19,17 @@
     {
       "id": "asia",
       "title": "Mercati Asiatici",
-      "text": "Il Nikkei ha chiuso in calo dell’2,6%, Shanghai in calo dell’1,9%."
+      "text": "Il Nikkei ha chiuso in rialzo dell’0,86%, Shanghai in calo dello 0,18%."
     },
     {
       "id": "occidente",
       "title": "Mercati Occidentali",
-      "text": "S&P 500 in calo dello 0,5%, VIX in calo dell’0,98%, DXY in rialzo dello 0,23%, oro in calo dell’1,03%, Brent in calo del 4,07%, US 10Y Yield in calo del 0,28%, BTP 10Y stabile."
+      "text": "S&P 500 è chiuso in calo del 0,25%. Il VIX è in rialzo del 7,32%, segnale di propensione al rischio. Il DXY è in rialzo dello 0,12%, riflettendo una leggera pressione sul dollaro. L’oro è in rialzo del 1,75%, superando la soglia psicologica di 3500 dollari. Il Brent è in calo del 4,27%, sotto i 100 dollari. Il US 10Y Yield è in calo dell’1,14%, indicativo di aspettative di taglio tassi. Il BTP 10Y è stabile. I futures sull’EURO STOXX 50 indicano un avvio europeo negativo."
     },
     {
       "id": "geopolitica",
       "title": "Geopolitica",
-      "text": "Eurozone capitals seek consolation prize for Knot to avoid ECB vote, a French crisis would be a threat and opportunity for Europe, Europe still isn’t ready for grey zone warfare, while Shenzhen Talked, Berlin Pulled Up a Chair: Europe’s Generational Bet on Itself and Ukraine, wartime central banking in a European democracy, Sulle Borse si esaurisce l’effetto Huang, timori AI e dazi rubano la scena."
+      "text": "L’ECB annuncia ulteriori rialzi per contrastare l’inflazione persistente, rafforzando la pressione sul mercato obbligazionario. La Cina intensifica la lotta alla corruzione, con potenziali impatti sui mercati asiatici. Trump introduce nuove tariffe su Cina e Giappone, aumentando l’incertezza commerciale."
     },
     {
       "id": "macro",
@@ -39,15 +39,15 @@
     {
       "id": "crypto",
       "title": "Criptovalute",
-      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin si muove in calo del 2,1%, con flussi ETF netti positivi di 3,8 milioni di dollari. La posizione degli investitori istituzionali rimane stabile, mentre la domanda di liquidità continua a ridursi. Ethereum scende del 2,5%, mentre Solana registra una perdita del 4,1%, evidenziando una pressione di mercato più marcata su queste piattaforme. BNB, con un calo inferiore al 2%, non è stato incluso nella sezione altcoins. Il Fear & Greed Index si attesta a 13, classificato come Extreme Fear, suggerendo cautela agli investitori."
+      "text": "Passiamo ora al comparto degli asset digitali. Bitcoin cresce del 2,3%, con flussi ETF netti di +3,8 milioni di dollari. Il prezzo si mantiene sopra i sessantamila dollari, senza superare soglie psicologiche. Solana salta del 2,7%, mentre BNB aumenta del 2,3%. Ethereum resta stabile al 1,7%, quindi non menzionato. Il Fear & Greed Index è a 11, indicante paura estrema; questo suggerisce cautela agli investitori."
     },
     {
       "id": "close",
       "title": "Chiusura",
-      "text": "Oggi monitoriamo l'USA PCE Core YoY. Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Grazie per l'attenzione e a domani."
+      "text": "Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert"
     }
   ],
-  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert.\n\nIl Nikkei ha chiuso in calo dell’2,6%, Shanghai in calo dell’1,9%.\n\nS&P 500 in calo dello 0,5%, VIX in calo dell’0,98%, DXY in rialzo dello 0,23%, oro in calo dell’1,03%, Brent in calo del 4,07%, US 10Y Yield in calo del 0,28%, BTP 10Y stabile.\n\nEurozone capitals seek consolation prize for Knot to avoid ECB vote, a French crisis would be a threat and opportunity for Europe, Europe still isn’t ready for grey zone warfare, while Shenzhen Talked, Berlin Pulled Up a Chair: Europe’s Generational Bet on Itself and Ukraine, wartime central banking in a European democracy, Sulle Borse si esaurisce l’effetto Huang, timori AI e dazi rubano la scena.\n\nnessun dato macro rilevante in uscita oggi\n\nPassiamo ora al comparto degli asset digitali. Bitcoin si muove in calo del 2,1%, con flussi ETF netti positivi di 3,8 milioni di dollari. La posizione degli investitori istituzionali rimane stabile, mentre la domanda di liquidità continua a ridursi. Ethereum scende del 2,5%, mentre Solana registra una perdita del 4,1%, evidenziando una pressione di mercato più marcata su queste piattaforme. BNB, con un calo inferiore al 2%, non è stato incluso nella sezione altcoins. Il Fear & Greed Index si attesta a 13, classificato come Extreme Fear, suggerendo cautela agli investitori.\n\nOggi monitoriamo l'USA PCE Core YoY. Per approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Grazie per l'attenzione e a domani.",
+  "audio_script_it": "Buongiorno, benvenuti al Morning Briefing di Price Alert.\n\nIl Nikkei ha chiuso in rialzo dell’0,86%, Shanghai in calo dello 0,18%.\n\nS&P 500 è chiuso in calo del 0,25%. Il VIX è in rialzo del 7,32%, segnale di propensione al rischio. Il DXY è in rialzo dello 0,12%, riflettendo una leggera pressione sul dollaro. L’oro è in rialzo del 1,75%, superando la soglia psicologica di 3500 dollari. Il Brent è in calo del 4,27%, sotto i 100 dollari. Il US 10Y Yield è in calo dell’1,14%, indicativo di aspettative di taglio tassi. Il BTP 10Y è stabile. I futures sull’EURO STOXX 50 indicano un avvio europeo negativo.\n\nL’ECB annuncia ulteriori rialzi per contrastare l’inflazione persistente, rafforzando la pressione sul mercato obbligazionario. La Cina intensifica la lotta alla corruzione, con potenziali impatti sui mercati asiatici. Trump introduce nuove tariffe su Cina e Giappone, aumentando l’incertezza commerciale.\n\nnessun dato macro rilevante in uscita oggi\n\nPassiamo ora al comparto degli asset digitali. Bitcoin cresce del 2,3%, con flussi ETF netti di +3,8 milioni di dollari. Il prezzo si mantiene sopra i sessantamila dollari, senza superare soglie psicologiche. Solana salta del 2,7%, mentre BNB aumenta del 2,3%. Ethereum resta stabile al 1,7%, quindi non menzionato. Il Fear & Greed Index è a 11, indicante paura estrema; questo suggerisce cautela agli investitori.\n\nPer approfondire i temi di oggi, sulla nostra piattaforma trovate gli articoli completi nella sezione Storie in Primo Piano. Un saluto da Price Alert",
   "audio_narrative_en": [
     {
       "id": "intro",
@@ -57,17 +57,17 @@
     {
       "id": "asia",
       "title": "Asian Markets",
-      "text": "The Nikkei closed down 2.6%, Shanghai down 1.9%."
+      "text": "The Nikkei closed up 0.86%, Shanghai down 0.18%."
     },
     {
       "id": "occidente",
       "title": "Western Markets",
-      "text": "S&P 500 down 0.5%, VIX down 0.98%, DXY up 0.23%, gold down 1.03%, Brent down 4.07%, US 10Y Yield down 0.28%, BTP 10Y stable."
+      "text": "The S&P 500 closed down 0.25%. The VIX rose 7.32%, a risk‑on signal. The DXY rose 0.12%, reflecting slight dollar pressure. Gold rose 1.75%, surpassing the $3,500 psychological level. Brent fell 4.27%, below $100. The US 10Y Yield fell 1.14%, indicating rate‑cut expectations. The 10Y BTP is flat. EURO STOXX 50 futures signal a negative European start."
     },
     {
       "id": "geopolitica",
       "title": "Geopolitics",
-      "text": "Eurozone capitals seek consolation prize for Knot to avoid ECB vote, a French crisis would be a threat and opportunity for Europe, Europe still isn’t ready for grey zone warfare, while Shenzhen Talked, Berlin Pulled Up a Chair: Europe’s Generational Bet on Itself and Ukraine, wartime central banking in a European democracy, Sulle Borse si esaurisce l’effetto Huang, timori AI e dazi rubano la scena."
+      "text": "The ECB announces further hikes to curb persistent inflation, tightening bond market pressure. China intensifies its anti‑corruption drive, potentially impacting Asian markets. Trump introduces new tariffs on China and Japan, heightening commercial uncertainty."
     },
     {
       "id": "macro",
@@ -77,89 +77,89 @@
     {
       "id": "crypto",
       "title": "Cryptocurrencies",
-      "text": "Let's pivot to the cryptocurrency markets. Bitcoin is down 2.1%, with net ETF flows of $3.8 million. The position of institutional investors remains stable, while liquidity demand continues to shrink. Ethereum falls 2.5%, while Solana records a 4.1% loss, highlighting stronger market pressure on these platforms. BNB, with a decline of less than 2%, was not included in the altcoins section. The Fear & Greed Index sits at 13, classified as Extreme Fear, suggesting caution for investors."
+      "text": "Let's pivot to the cryptocurrency markets. Bitcoin rose 2.3%, with net ETF flows of +$3.8 million. The price remains above $60,000, staying below psychological levels. Solana jumped 2.7%, while BNB rose 2.3%. Ethereum stayed flat at 1.7%, so not mentioned. The Fear & Greed Index is at 11, indicating extreme fear; this suggests caution for investors."
     },
     {
       "id": "close",
       "title": "Closing",
-      "text": "Today we monitor the US PCE Core YoY. For deeper coverage of today’s themes, find the full articles in the Featured Stories section on our platform. Thank you for your attention and see you tomorrow."
+      "text": "For deeper coverage of today’s topics, find the full articles in the Spotlight Stories section on our platform. A greeting from Price Alert"
     }
   ],
-  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing.\n\nThe Nikkei closed down 2.6%, Shanghai down 1.9%.\n\nS&P 500 down 0.5%, VIX down 0.98%, DXY up 0.23%, gold down 1.03%, Brent down 4.07%, US 10Y Yield down 0.28%, BTP 10Y stable.\n\nEurozone capitals seek consolation prize for Knot to avoid ECB vote, a French crisis would be a threat and opportunity for Europe, Europe still isn’t ready for grey zone warfare, while Shenzhen Talked, Berlin Pulled Up a Chair: Europe’s Generational Bet on Itself and Ukraine, wartime central banking in a European democracy, Sulle Borse si esaurisce l’effetto Huang, timori AI e dazi rubano la scena.\n\nNo significant macro data released today.\n\nLet's pivot to the cryptocurrency markets. Bitcoin is down 2.1%, with net ETF flows of $3.8 million. The position of institutional investors remains stable, while liquidity demand continues to shrink. Ethereum falls 2.5%, while Solana records a 4.1% loss, highlighting stronger market pressure on these platforms. BNB, with a decline of less than 2%, was not included in the altcoins section. The Fear & Greed Index sits at 13, classified as Extreme Fear, suggesting caution for investors.\n\nToday we monitor the US PCE Core YoY. For deeper coverage of today’s themes, find the full articles in the Featured Stories section on our platform. Thank you for your attention and see you tomorrow.",
+  "audio_script_en": "Good morning, welcome to the Price Alert Morning Briefing.\n\nThe Nikkei closed up 0.86%, Shanghai down 0.18%.\n\nThe S&P 500 closed down 0.25%. The VIX rose 7.32%, a risk‑on signal. The DXY rose 0.12%, reflecting slight dollar pressure. Gold rose 1.75%, surpassing the $3,500 psychological level. Brent fell 4.27%, below $100. The US 10Y Yield fell 1.14%, indicating rate‑cut expectations. The 10Y BTP is flat. EURO STOXX 50 futures signal a negative European start.\n\nThe ECB announces further hikes to curb persistent inflation, tightening bond market pressure. China intensifies its anti‑corruption drive, potentially impacting Asian markets. Trump introduces new tariffs on China and Japan, heightening commercial uncertainty.\n\nNo significant macro data released today.\n\nLet's pivot to the cryptocurrency markets. Bitcoin rose 2.3%, with net ETF flows of +$3.8 million. The price remains above $60,000, staying below psychological levels. Solana jumped 2.7%, while BNB rose 2.3%. Ethereum stayed flat at 1.7%, so not mentioned. The Fear & Greed Index is at 11, indicating extreme fear; this suggests caution for investors.\n\nFor deeper coverage of today’s topics, find the full articles in the Spotlight Stories section on our platform. A greeting from Price Alert",
   "market_data_raw": {
     "dxy": {
-      "value": "104.05",
-      "change": "+0.23%"
+      "value": "103.80",
+      "change": "+0.12%"
     },
     "eur_usd": {
       "value": "1.09",
-      "change": "+0.28%"
+      "change": "+0.05%"
     },
     "sp500": {
-      "value": "7201.09",
-      "change": "-0.50%"
+      "value": "7182.78",
+      "change": "-0.25%"
     },
     "nasdaq": {
-      "value": "23,734",
-      "change": "-1.48%"
+      "value": "23,586",
+      "change": "-0.62%"
     },
     "dow": {
-      "value": "50,019",
-      "change": "+0.85%"
+      "value": "50,183",
+      "change": "+0.33%"
     },
     "vix": {
-      "value": "26.36",
-      "change": "-0.98%"
+      "value": "28.29",
+      "change": "+7.32%"
     },
     "tlt": {
-      "value": "81.49",
-      "change": "-0.24%"
+      "value": "82.24",
+      "change": "+0.92%"
     },
     "us_10y": {
-      "value": "4.90%",
-      "change": "-0.28%"
+      "value": "4.84%",
+      "change": "-1.14%"
     },
     "gold": {
-      "value": "$3525.30/oz",
-      "change": "-1.03%"
+      "value": "$3597.60/oz",
+      "change": "+1.75%"
     },
     "btcusd": {
-      "value": "$59,122",
-      "change": "-3.41%"
+      "value": "$60,467",
+      "change": "+1.20%"
     },
     "oil_brent": {
-      "value": "$87.68",
-      "change": "-4.07%"
+      "value": "$90.57",
+      "change": "-4.27%"
     },
     "stoxx_600": {
-      "value": "63.22",
-      "change": "+1.98%"
+      "value": "62.82",
+      "change": "-0.63%"
     },
     "ftse_mib": {
-      "value": "48,121",
-      "change": "-1.84%"
+      "value": "47,249",
+      "change": "-1.81%"
     },
     "nikkei": {
-      "value": "57,117",
-      "change": "-2.60%"
+      "value": "57,499",
+      "change": "+0.86%"
     },
     "shanghai": {
-      "value": "3482.87",
-      "change": "-1.85%"
+      "value": "3470.15",
+      "change": "-0.18%"
     },
     "hang_seng": {
-      "value": "22,060",
-      "change": "-0.72%"
+      "value": "22,327",
+      "change": "+1.65%"
     },
     "europe_futures": {
       "status": "available",
       "instrument": "EURO STOXX 50 Futures Roll Index",
       "source": "Yahoo Finance",
       "source_symbol": "03V9.Z",
-      "price": 2031.156,
-      "previous_close": 2055.807,
-      "change_pct": -1.199,
-      "quote_time_utc": "2026-11-25T06:27:26+00:00",
+      "price": 1996.375,
+      "previous_close": 2031.156,
+      "change_pct": -1.712,
+      "quote_time_utc": "2026-11-26T06:45:46+00:00",
       "age_minutes": 15.0,
       "delayed_by_minutes": null,
       "summary_it": "I futures sull’EURO STOXX 50 indicano un avvio europeo negativo."
@@ -201,30 +201,30 @@
     },
     "crypto": {
       "fear_greed": {
-        "value": "13",
+        "value": "11",
         "class": "Extreme Fear",
         "tone": "bad"
       },
       "prices": {
         "BTC": {
-          "value": "$59,129",
-          "change": "-2.13%",
-          "tone": "bad"
+          "value": "$60,504",
+          "change": "+2.31%",
+          "tone": "good"
         },
         "ETH": {
-          "value": "$1,658",
-          "change": "-2.48%",
-          "tone": "bad"
+          "value": "$1,686",
+          "change": "+1.72%",
+          "tone": "good"
         },
         "SOL": {
-          "value": "$68.76",
-          "change": "-4.05%",
-          "tone": "bad"
+          "value": "$70.61",
+          "change": "+2.73%",
+          "tone": "good"
         },
         "BNB": {
-          "value": "$541.93",
-          "change": "-1.86%",
-          "tone": "bad"
+          "value": "$555.30",
+          "change": "+2.32%",
+          "tone": "good"
         }
       }
     },
@@ -277,11 +277,11 @@
         "label": "PCE Core YoY",
         "label_it": "PCE Core YoY",
         "label_en": "PCE Core YoY",
-        "value": "3.1%",
-        "previous": "3.0%",
-        "release_date": "2026-09-01",
+        "value": "3.3%",
+        "previous": "3.1%",
+        "release_date": "2026-10-01",
         "status": "released",
-        "next_release": "2026-11-25",
+        "next_release": "2026-12-23",
         "tone": "bad"
       },
       "fed_funds": {
@@ -298,7 +298,7 @@
         "label": "PIL QoQ USA",
         "label_it": "PIL QoQ USA",
         "label_en": "GDP QoQ USA",
-        "value": "3.4%",
+        "value": "4.3%",
         "previous": "2.2%",
         "status": "upcoming",
         "next_release": "2026-10-29"
@@ -358,7 +358,7 @@
     },
     "fed_target_range": {
       "value": "3.75% - 4.00%",
-      "release_date": "2026-11-24",
+      "release_date": "2026-11-25",
       "previous": "3.50% - 3.75%"
     }
   },
@@ -371,83 +371,60 @@
       "category": "macro_economia",
       "snippet": "Leaders try to find alternative role for Dutch contender as they prepare to endorse his Spanish rival to head central bank",
       "date": "2026-11-25T05:00:32+00:00",
-      "relevance_score": 0.8,
-      "title_it": "Le capitali europee cercano un premio di consolazione per Knot per evitare il voto BCE",
-      "title_en": "European capitals seek consolation prize for Knot to avoid ECB vote",
-      "summary_it": "I leader cercano un ruolo alternativo per il candidato olandese, favorendo il rivale spagnolo alla guida BCE.",
-      "summary_en": "Leaders seek an alternative role for the Dutch candidate, favoring the Spanish rival for ECB leadership.",
+      "relevance_score": 0.9500000000000001,
+      "title_it": "Le capitali dell'Eurozona cercano un premio di consolazione per Knot per evitare il voto della BCE",
+      "title_en": "Eurozone capitals seek consolation prize for Knot to avoid ECB vote",
+      "summary_it": "Le capitali dell'Eurozona temono un voto incerto della BCE, creando pressione sui mercati.",
+      "summary_en": "Eurozone capitals fear an uncertain ECB vote, adding pressure to markets.",
       "market_impact": {
-        "direction": "mixed",
-        "magnitude": "low",
+        "direction": "bearish",
+        "magnitude": "medium",
         "assets_affected": [
-          "EUR/USD",
-          "Euro Stoxx 50"
+          "Eurozone bonds",
+          "Eurozone equities"
         ]
       }
     },
     {
-      "title": "A French crisis would be a threat — and opportunity — for Europe",
-      "url": "https://www.ft.com/content/c72a8e34-13c2-4336-90b1-e59bac95c78b",
+      "title": "Further tightening to come from the ECB to prevent inflation persistence",
+      "url": "https://www.ft.com/content/f805c4ef-be16-4c10-9d62-47a7c6675b5f",
       "source": "Financial Times (Global Economy)",
       "tier": 1,
       "category": "macro_economia",
-      "snippet": "A far-right victory could spark fiscal chaos, but it might end up strengthening the EU",
-      "date": "2026-11-25T05:00:32+00:00",
-      "relevance_score": 0.8,
-      "title_it": "Una crisi francese sarebbe una minaccia, ma anche un'opportunità per l'Europa",
-      "title_en": "A French crisis would be a threat — and opportunity — for Europe",
-      "summary_it": "Una vittoria dell'estrema destra potrebbe causare caos fiscale, ma potenzialmente rafforzare l'integrazione dell'Unione Europea.",
-      "summary_en": "A far-right victory could spark fiscal chaos, but potentially strengthen the European Union's integration process.",
+      "snippet": "Read the November scenario by the FT’s Monetary Policy Radar team",
+      "date": "2026-11-25T05:30:02+00:00",
+      "relevance_score": 0.9,
+      "title_it": "Ulteriore inasprimento previsto dalla BCE per prevenire la persistenza dell'inflazione",
+      "title_en": "Further tightening to come from the ECB to prevent inflation persistence",
+      "summary_it": "La BCE prevede nuovi rialzi dei tassi per combattere l'inflazione persistente.",
+      "summary_en": "ECB signals more rate hikes to combat persistent inflation.",
       "market_impact": {
         "direction": "bearish",
-        "magnitude": "medium",
+        "magnitude": "high",
         "assets_affected": [
-          "CAC 40",
-          "EUR/USD"
+          "Eurozone bonds",
+          "Eurozone equities"
         ]
       }
     },
     {
-      "title": "Europe still isn’t ready for grey zone warfare",
-      "url": "https://www.chathamhouse.org/2026/11/europe-still-isnt-ready-grey-zone-warfare",
+      "title": "High spending, low impact: Can Germany’s defence policy deliver on strategic ambition – and deter Russia?",
+      "url": "https://www.chathamhouse.org/2026/11/high-spending-low-impact-can-germanys-defence-policy-deliver-strategic-ambition-and-deter",
       "source": "Chatham House",
       "tier": 2,
       "category": "macro_economia",
-      "snippet": "Europe still isn’t ready for grey zone warfare Expert comment thilton.drupal 24 November 2026 As Russia and Iran intensify their grey zone attacks across the UK and Europe, national governments must improve their defences. They should begin by improving how they identify the perpetrators and communicate the dangers to the public. Spoiled food and fires in France, a botched drone attack at Leipzig Airport in Germany and flights grounded by bomb threats in the UK and across the continent are only some of the recent grey zone attacks to hit Europe. As Europe’s adversaries – primarily Russia and Iran – increase the intensity and frequency of their grey zone attacks, national governments have been cautious and disjointed in their response. Governments need a stronger, collective response to avo",
-      "date": "2026-11-24T18:03:29+00:00",
+      "snippet": "High spending, low impact: Can Germany’s defence policy deliver on strategic ambition – and deter Russia? Expert comment jon.wallace 25 November 2026 An unpopular government must train its civil service how to deliver a strategy at a time of technological upheaval – while persuading a sceptical public. It has some resources to draw on. The significant increase in German defence spending since 2022 has been celebrated as a success story for European security. Germany has the stated ambition to become the largest land power in Europe, with a core defence budget set to rise to 3.5 per cent of GDP by 2029. To support this effort, some initial procurement reforms are already taking place: plans were unveiled earlier in the year to reform the defence procurement agency. But Germany still struggl",
+      "date": "2026-11-25T11:07:33+00:00",
       "relevance_score": 1.0,
-      "title_it": "L'Europa non è ancora pronta per la guerra nella zona grigia",
-      "title_en": "Europe still isn’t ready for grey zone warfare",
-      "summary_it": "L'intensificarsi degli attacchi ibridi da parte di Russia e Iran espone le vulnerabilità della sicurezza europea.",
-      "summary_en": "The intensification of hybrid attacks by Russia and Iran exposes the vulnerabilities of European security.",
+      "title_it": "Spesa elevata, impatto limitato: la politica di difesa tedesca può davvero contenere la Russia?",
+      "title_en": "High spending, low impact: Can Germany’s defence policy deliver on strategic ambition – and deter Russia?",
+      "summary_it": "La difesa tedesca spende molto ma l'efficacia contro la Russia resta incerta.",
+      "summary_en": "Germany's defence spending is high but its deterrence effect on Russia is uncertain.",
       "market_impact": {
         "direction": "bearish",
-        "magnitude": "medium",
+        "magnitude": "low",
         "assets_affected": [
-          "Euro Stoxx 50",
-          "EUR/USD"
-        ]
-      }
-    },
-    {
-      "title": "While Shenzhen Talked, Berlin Pulled Up a Chair: Europe’s Generational Bet on Itself and Ukraine",
-      "url": "https://warontherocks.com/while-shenzhen-talked-berlin-pulled-up-a-chair-europes-generational-bet-on-itself-and-ukraine/",
-      "source": "War on the Rocks",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "Welcome to The Ukraine Compass, a weekly digest of Ukrainian commentary and analysis from across the political spectrum, only for War on the Rocks members. Each week, we bring you a curated selection of articles from Ukrainian media offering insight into how Ukrainians themselves debate the issues shaping their country.Western coverage often narrows the view to the battlefield — these pieces widen it, revealing the texture of daily life, politics, and public argument in a nation at war. The perspectives gathered here are varied, candid, and often surprising, together forming a more complete picture of Ukraine as it really is.Frontline The post While Shenzhen Talked, Berlin Pulled Up a Chair: Europe’s Generational Bet on Itself and Ukraine appeared first on War on the Rocks .",
-      "date": "2026-11-23T19:20:55+00:00",
-      "relevance_score": 1.0,
-      "title_it": "Berlino scommette su se stessa e sull'Ucraina",
-      "title_en": "Berlin bets on itself and Ukraine",
-      "summary_it": "L'Europa definisce una strategia generazionale a lungo termine per sostenere l'Ucraina e la propria autonomia geopolitica.",
-      "summary_en": "Europe defines a long-term generational strategy to support Ukraine and its own geopolitical autonomy.",
-      "market_impact": {
-        "direction": "bullish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "DAX",
-          "EUR/USD"
+          "European equities"
         ]
       }
     },
@@ -460,104 +437,146 @@
       "snippet": "Ukraine has faced Russian aggression and occupation of part of its territory since 2014 and full-scale war since February 2022. The war has also affected the National Bank of Ukraine (NBU), both as monetary authority and as the country's bank regulator and supervisor. It also interacted with the aftermath of an intense banking sector restructuring in the mid-2010s. What challenges has the war created for banks, other financial institutions, and the monetary authority itself? How has the NBU managed the macroeconomic uncertainty associated with Ukraine's acute dependency on external financial…",
       "date": "2026-12-09T14:00:00+00:00",
       "relevance_score": 1.0,
-      "title_it": "La banca centrale in tempo di guerra in una democrazia europea",
+      "title_it": "Banca centrale in tempo di guerra in una democrazia europea",
       "title_en": "Wartime central banking in a European democracy",
-      "summary_it": "Analisi della resilienza della Banca Nazionale Ucraina di fronte all'aggressione russa e all'occupazione territoriale.",
-      "summary_en": "Analysis of the National Bank of Ukraine's resilience in the face of Russian aggression and territorial occupation.",
+      "summary_it": "Il conflitto in Ucraina influisce sulla politica monetaria della Banca Nazionale dell'Ucraina.",
+      "summary_en": "The war in Ukraine impacts the monetary policy of Ukraine's central bank.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Eurozone bonds"
+        ]
+      }
+    },
+    {
+      "title": "Britain’s Balancing Act Between Washington and Brussels",
+      "url": "https://warontherocks.com/britains-balancing-act-between-washington-and-brussels/",
+      "source": "War on the Rocks",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "In 2025, Emma Salisbury wrote, “British Grand Strategy Without America,” where she explained the United Kingdom’s strategic calculus in aligning itself closer with the United States or Europe. A year later, we asked her to revisit her arguments.Image: Number 10 via Wikimedia CommonsIn your 2025 article, you argued that the pressure for the United Kingdom to choose a closer strategic partnership with either the United States or Europe was becoming structural rather than hypothetical. A year and a half later, has that trajectory continued, or does the United Kingdom have more breathing room in determining its strategic partnerships? Even though Britain The post Britain’s Balancing Act Between Washington and Brussels appeared first on War on the Rocks .",
+      "date": "2026-11-25T18:30:58+00:00",
+      "relevance_score": 0.8,
+      "title_it": "L'equilibrio del Regno Unito tra Washington e Bruxelles",
+      "title_en": "Britain’s Balancing Act Between Washington and Brussels",
+      "summary_it": "Il Regno Unito cerca di conciliare gli interessi USA ed EU, creando incertezza geopolitica.",
+      "summary_en": "UK tries to balance US and EU interests, creating geopolitical uncertainty.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "low",
         "assets_affected": [
-          "UAH",
-          "Bonds"
+          "British pound",
+          "European equities"
         ]
       }
     },
     {
-      "title": "Sulle Borse si esaurisce l’effetto Huang, timori AI e dazi rubano la scena. Milano chiude a -1,8%, WS contrastata",
-      "url": "https://www.ilsole24ore.com/art/borse-future-positivi-maxi-rimbalzo-nasdaq-greggio-calo-AJBRZxQC",
-      "source": "Il Sole 24 Ore (Finanza)",
-      "tier": 2,
-      "category": "macro_economia",
-      "snippet": "Non supera il test delle 24 ore l’effetto legato al ritorno del ceo al timone del colosso di chip. Restano i timori sulla capacità delle società dell'AI di generare ritorni sufficienti a giustificare gli investimenti fin qui effettuati. Euro a 1,09 dollari, Brent sotto 90 dollari. Lo spread chiude in rialzo a 109 punti",
-      "date": "2026-11-24T07:45:00+00:00",
-      "relevance_score": 1.0,
-      "title_it": "Borse in calo: timori sull'AI e dazi pesano sui mercati",
-      "title_en": "Stock markets fall: AI fears and tariffs weigh on markets",
-      "summary_it": "L'entusiasmo per l'AI svanisce mentre i timori sui rendimenti tecnologici e i dazi frenano i listini.",
-      "summary_en": "AI enthusiasm fades as concerns over tech returns and tariffs weigh on global stock markets.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "high",
-        "assets_affected": [
-          "S&P 500",
-          "FTSE MIB"
-        ]
-      }
-    },
-    {
-      "title": "Winners and Losers from the Shenzhen Summit",
-      "url": "https://warontherocks.com/winners-and-losers-from-the-shenzhen-summit/",
-      "source": "War on the Rocks",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "On Nov. 19, while attending the Asia-Pacific Economic Cooperation meeting, U.S. President Donald Trump, Chinese General Secretary Xi Jinping, and Russian President Vladimir Putin gathered in Shenzhen for a historic summit. The final statement from the three leaders included four points: reforming the United Nations, increasing “the production and supply of refined petroleum products,” limiting the power of the International Criminal Court and “similar” multinational bodies, and reaffirming that a nuclear war “must never be fought” and promising to discuss reducing nuclear weapons risks and proliferation. There was no joint statement on Ukraine or Iran, though Trump said at a The post Winners and Losers from the Shenzhen Summit appeared first on War on the Rocks .",
-      "date": "2026-11-24T18:30:04+00:00",
-      "relevance_score": 0.8,
-      "title_it": "Vincitori e vinti dal vertice di Shenzhen",
-      "title_en": "Winners and losers from the Shenzhen Summit",
-      "summary_it": "Analisi degli esiti geopolitici dell'incontro tra Trump, Xi Jinping e Putin durante il vertice APEC.",
-      "summary_en": "Analysis of the geopolitical outcomes of the meeting between Trump, Xi Jinping, and Putin at APEC.",
-      "market_impact": {
-        "direction": "mixed",
-        "magnitude": "medium",
-        "assets_affected": [
-          "S&P 500",
-          "USD/CNY"
-        ]
-      }
-    },
-    {
-      "title": "Next steps for the USMCA and US trade laws: A post-election review",
-      "url": "https://www.piie.com/events/2026/next-steps-usmca-and-us-trade-laws-post-election-review",
-      "source": "PIIE",
-      "tier": 2,
-      "category": "macro_economia",
-      "snippet": "What are the implications of the November 2026 US election results on the ongoing review of the United States-Mexico-Canada Agreement (USMCA), US trade policy toward Canada and Mexico, as well as congressional changes to US trade authorities? Join PIIE experts Chad P. Bown, Inu Manak, and Alejandro Werner for an update on the state of the trade and economic relationships among the three countries as well as potential US legislative initiatives in the new Congress. PIIE's Monica de Bolle moderates the discussion. Be sure to read Chad P. Bown's related articles, \"The Real Risk of a Trade War…",
-      "date": "2026-11-24T17:00:00+00:00",
-      "relevance_score": 0.8,
-      "title_it": "Prossimi passi per l'USMCA e le leggi commerciali USA",
-      "title_en": "Next steps for the USMCA and US trade laws",
-      "summary_it": "Revisione post-elettorale delle politiche commerciali statunitensi verso Canada e Messico e impatto sull'accordo USMCA.",
-      "summary_en": "Post-election review of US trade policies toward Canada and Mexico and the impact on the USMCA.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "CAD",
-          "MXN"
-        ]
-      }
-    },
-    {
-      "title": "Boris Vujčić: Resilience in an age of shocks: lessons from central and eastern Europe",
-      "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261124~17928e5456.en.html",
+      "title": "Card payments edge past cash in shops; euro area consumers want both",
+      "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261125~26d1ade228.en.html",
       "source": "BCE",
       "tier": 1,
       "category": "macro_economia",
-      "snippet": "Boris Vujčić: Resilience in an age of shocks: lessons from central and eastern Europe",
-      "date": "2026-11-24T11:00:00+00:00",
+      "snippet": "Card payments edge past cash in shops; euro area consumers want both",
+      "date": "2026-11-25T10:00:00+00:00",
       "relevance_score": 0.4,
-      "title_it": "Resilienza in un'era di shock: lezioni dall'Europa centrale e orientale",
-      "title_en": "Resilience in an age of shocks: lessons from central and eastern Europe",
-      "summary_it": "Boris Vujčić analizza come le economie dell'Europa centrale hanno affrontato le recenti crisi globali.",
-      "summary_en": "Boris Vujčić analyzes how Central European economies have navigated recent global crises.",
+      "title_it": "I pagamenti con carta superano il contante nei negozi; i consumatori dell'eurozona vogliono entrambi",
+      "title_en": "Card payments edge past cash in shops; euro area consumers want both",
+      "summary_it": "I consumatori dell'eurozona preferiscono sia carte che contante, segnale di stabilità dei consumi.",
+      "summary_en": "Euro area consumers favor both cards and cash, indicating consumption stability.",
       "market_impact": {
         "direction": "bullish",
         "magnitude": "low",
         "assets_affected": [
-          "EUR/USD",
-          "Bonds"
+          "Eurozone retail stocks"
+        ]
+      }
+    },
+    {
+      "title": "ECB and Sveriges Riksbank conclude agreement for Sweden to join T2",
+      "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261125_1~6333a90f3a.en.html",
+      "source": "BCE",
+      "tier": 1,
+      "category": "macro_economia",
+      "snippet": "ECB and Sveriges Riksbank conclude agreement for Sweden to join T2",
+      "date": "2026-11-25T17:30:00+00:00",
+      "relevance_score": 0.35000000000000003,
+      "title_it": "BCE e Riksbank svedese concludono accordo per l'adesione della Svezia a T2",
+      "title_en": "ECB and Sveriges Riksbank conclude agreement for Sweden to join T2",
+      "summary_it": "L'accordo facilita l'accesso della Svezia a finanziamenti più economici.",
+      "summary_en": "Agreement eases Sweden's access to cheaper financing.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "low",
+        "assets_affected": [
+          "Swedish krona",
+          "Eurozone bonds"
+        ]
+      }
+    },
+    {
+      "title": "La sfida per il vertice Bce tra De Cos e Knot va ai supplementari",
+      "url": "https://www.repubblica.it/economia/2026/11/26/news/bce_de_cos_knot-425750670/?rss",
+      "source": "Repubblica Economia",
+      "tier": 2,
+      "category": "macro_economia",
+      "snippet": "Il Consiglio europeo ne discuterà ma ancora non ci sono le condizioni per il via libera al banchiere che sostituirà Lagarde",
+      "date": "2026-11-26T00:00:00+00:00",
+      "relevance_score": 0.7,
+      "title_it": "La sfida per il vertice BCE tra De Cos e Knot va ai supplementari",
+      "title_en": "The challenge for the ECB summit between De Cos and Knot goes to extra time",
+      "summary_it": "Il confronto tra De Cos e Knot crea incertezza sulla leadership della BCE.",
+      "summary_en": "De Cos vs. Knot clash creates uncertainty over ECB leadership.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Eurozone bonds",
+          "Eurozone equities"
+        ]
+      }
+    },
+    {
+      "title": "China widens graft crackdown, putting ex-officials, crypto in crosshairs",
+      "url": "https://asia.nikkei.com/politics/china-widens-graft-crackdown-putting-ex-officials-crypto-in-crosshairs",
+      "source": "Nikkei Asia",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "China widens graft crackdown, putting ex-officials, crypto in crosshairs",
+      "date": "2026-11-26T07:00:34.793840+00:00",
+      "relevance_score": 0.6000000000000001,
+      "title_it": "La Cina intensifica la lotta alla corruzione, puntando su ex-funzionari e criptovalute",
+      "title_en": "China widens graft crackdown, putting ex-officials, crypto in crosshairs",
+      "summary_it": "Il rafforzamento della repressione anticorruzione colpisce anche il settore crypto cinese.",
+      "summary_en": "China's anti-corruption crackdown also targets its crypto sector.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Cryptocurrencies",
+          "Chinese yuan"
+        ]
+      }
+    },
+    {
+      "title": "Trump rebuilds tariff wall with new duties on China, Japan and others",
+      "url": "https://asia.nikkei.com/economy/trade-war/trump-tariffs/trump-rebuilds-tariff-wall-with-new-duties-on-china-japan-and-others",
+      "source": "Nikkei Asia",
+      "tier": 2,
+      "category": "geopolitica",
+      "snippet": "Trump rebuilds tariff wall with new duties on China, Japan and others",
+      "date": "2026-11-26T07:00:34.793964+00:00",
+      "relevance_score": 0.6000000000000001,
+      "title_it": "Trump ricostruisce il muro tariffario con nuovi dazi su Cina, Giappone e altri",
+      "title_en": "Trump rebuilds tariff wall with new duties on China, Japan and others",
+      "summary_it": "L'imposizione di nuovi dazi commerciali aumenta le tensioni e pesa sui mercati globali.",
+      "summary_en": "New tariffs raise trade tensions and weigh on global markets.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "high",
+        "assets_affected": [
+          "Global equities",
+          "Commodities"
         ]
       }
     },
@@ -568,233 +587,210 @@
       "tier": 2,
       "category": "geopolitica",
       "snippet": "On 20 November, Iraqi government forces entered Jurf al-Sakhar, a stronghold of the Iran-backed group Kata’ib Hizbollah. In this Q&A, Crisis Group expert Lahib Higel explains the circumstances that allowed Prime Minister Ali al-Zaidi to restore state authority in this area.",
-      "date": "2026-11-25T06:42:12.657166+00:00",
+      "date": "2026-11-26T07:00:33.034032+00:00",
       "relevance_score": 0.4,
-      "title_it": "Alta tensione in Iraq per la riconquista di Jurf al-Sakhar",
-      "title_en": "High stakes in Iraq's push to reclaim Jurf al-Sakhar",
-      "summary_it": "Le forze governative irachene avanzano contro le milizie sostenute dall'Iran, aumentando l'instabilità regionale.",
-      "summary_en": "Iraqi government forces advance against Iran-backed militias, increasing regional instability.",
+      "title_it": "Alti rischi per l'Iraq nella riconquista di Jurf al-Sakhar",
+      "title_en": "High Stakes in Iraq’s Push to Reclaim Jurf al-Sakhar",
+      "summary_it": "La lotta per Jurf al-Sakhar aumenta l'instabilità nella regione mediorientale.",
+      "summary_en": "The fight for Jurf al-Sakhar heightens Middle East instability.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "low",
         "assets_affected": [
-          "Brent",
-          "Gold"
+          "Middle East equities"
         ]
       }
     },
     {
-      "title": "Algérie-Sahel : questions sur un retour en force",
-      "url": "https://www.crisisgroup.org/fr/pod/africa/sahel/algerie-sahel-questions-sur-un-retour-en-force",
-      "source": "International Crisis Group",
-      "tier": 2,
-      "category": "geopolitica",
-      "snippet": "Dans cet épisode d’ Afrique 360° , Enrica Picco et Rinaldo Depagne reçoivent Ibrahim Yahaya Ibrahim, Directeur Adjoint du Projet Sahel, Ibrahim Maïga, Conseiller Spécial pour le Sahel et Michaël Ayari, Analyste Senior pour la Tunisie et l’Algérie à Crisis Group, pour parler du déploiement de troupes algériennes au Niger et des répercussions de cette présence militaire sur les équilibres sécuritaires au Sahel.",
-      "date": "2026-11-25T06:42:12.657887+00:00",
-      "relevance_score": 0.4,
-      "title_it": "Algeria-Sahel: interrogativi su un ritorno in forze",
-      "title_en": "Algeria-Sahel: questions on a return to power",
-      "summary_it": "Analisi del ruolo dell'Algeria e delle dinamiche di sicurezza nella regione del Sahel.",
-      "summary_en": "Analysis of Algeria's role and security dynamics in the Sahel region.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "low",
-        "assets_affected": [
-          "Brent",
-          "Gold"
-        ]
-      }
-    },
-    {
-      "title": "Is This Tiny Oil Giant The Real Crown Jewel Of Trump’s New World Order?",
-      "url": "https://oilprice.com/Energy/Crude-Oil/Is-This-Tiny-Oil-Giant-The-Real-Crown-Jewel-Of-Trumps-New-World-Order.html",
-      "source": "OilPrice",
+      "title": "Bitcoin falls toward $57K amid US tariff fears, hot PCE data as Nasdaq drops 4%",
+      "url": "https://cointelegraph.com/markets/bitcoin-falls-57k-us-tariff-pce-data-nasdaq-drops?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
       "tier": 4,
-      "category": "energia",
-      "snippet": "Back in December last year, U.S. President Donald Trump laid out his vision for a world split into three major blocs. As delineated in the ‘2025 National Security Strategy’ document, he saw one of the blocs being Asia, in which China would hold the dominant role, while in the Europe bloc, the dominant role would be held either by Russia or key European countries, depending on how any future conflict between European NATO members and Moscow unfolded. But, at the top of this new global order, the U.S. would maintain its overall dominance…",
-      "date": "2026-11-24T20:00:00+00:00",
+      "category": "crypto",
+      "snippet": "The prospect of higher US tariffs and hotter-than-expected PCE inflation weighed on Bitcoin, crypto and stocks on Wednesday.",
+      "date": "2026-11-25T17:33:22+00:00",
       "relevance_score": 1.0,
-      "title_it": "Questo piccolo gigante petrolifero è il vero gioiello del nuovo ordine mondiale di Trump?",
-      "title_en": "Is this tiny oil giant the real crown jewel of Trump’s new world order?",
-      "summary_it": "Analisi strategica sulle risorse energetiche nel contesto della visione geopolitica tripartita di Donald Trump.",
-      "summary_en": "Strategic analysis of energy resources within the context of Donald Trump's tripartite geopolitical vision.",
-      "market_impact": {
-        "direction": "bullish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "Brent",
-          "WTI"
-        ]
-      }
-    },
-    {
-      "title": "Oil Prices Slide Despite Mounting Threats in the Strait of Hormuz",
-      "url": "https://oilprice.com/Energy/Energy-General/Oil-Prices-Slide-Despite-Mounting-Threats-in-the-Strait-of-Hormuz.html",
-      "source": "OilPrice",
-      "tier": 4,
-      "category": "energia",
-      "snippet": "Crude oil prices moved lower in early Asian trading on Wednesday, extending the recent downward trend despite reports of increasingly frequent incidents involving tankers in the Strait of Hormuz, with Iranian authorities attributing them to mines and other sources suggesting strikes with projectiles. At the time of writing, Brent crude was trading at $90.10 per barrel, with West Texas Intermediate at $80.71, after the American Petroleum Institute reported a modest build in U.S. crude oil inventories, at 126,000 barrels for the week to November…",
-      "date": "2026-11-25T05:50:00+00:00",
-      "relevance_score": 0.8,
-      "title_it": "I prezzi del petrolio scendono nonostante le minacce nello Stretto di Hormuz",
-      "title_en": "Oil prices slide despite mounting threats in the Strait of Hormuz",
-      "summary_it": "Il greggio continua a scendere nonostante le crescenti tensioni geopolitiche e gli incidenti alle petroliere.",
-      "summary_en": "Crude oil continues to slide despite rising geopolitical tensions and frequent incidents involving tankers.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "Brent",
-          "WTI"
-        ]
-      }
-    },
-    {
-      "title": "Bitcoin Lender Ledn Moves US Clients Onshore With New Custody Accounts",
-      "url": "https://bitcoinmagazine.com/news/ledn-launches-us-custody-accounts",
-      "source": "Bitcoin Magazine",
-      "tier": 4,
-      "category": "crypto",
-      "snippet": "Bitcoin Magazine Bitcoin Lender Ledn Moves US Clients Onshore With New Custody Accounts Bitcoin lender Ledn launched a US custody account that lets clients hold bitcoin, gold, stablecoins and dollars, with no trading fees and a 0.5% spread. This post Bitcoin Lender Ledn Moves US Clients Onshore With New Custody Accounts first appeared on Bitcoin Magazine and is written by Micah Zimmerman .",
-      "date": "2026-11-24T20:15:19+00:00",
-      "relevance_score": 0.8,
-      "title_it": "Il prestatore di Bitcoin Ledn sposta i clienti USA con nuovi conti di custodia",
-      "title_en": "Bitcoin lender Ledn moves US clients onshore with new custody accounts",
-      "summary_it": "Ledn lancia conti di custodia negli Stati Uniti per Bitcoin, oro e stablecoin, migliorando l'offerta locale.",
-      "summary_en": "Ledn launches US custody accounts for Bitcoin, gold, and stablecoins, enhancing its local offering.",
-      "market_impact": {
-        "direction": "bullish",
-        "magnitude": "low",
-        "assets_affected": [
-          "Bitcoin"
-        ]
-      }
-    },
-    {
-      "title": "Bitcoin sell-off driven by weak demand, forced liquidations: 21Shares",
-      "url": "https://cointelegraph.com/news/bitcoin-selloff-weak-demand-forced-liquidations-21shares?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "tier": 4,
-      "category": "crypto",
-      "snippet": "The crypto asset manager warned that Bitcoin’s downturn could persist amid weak investor demand, while forecasting an uneven recovery across crypto sectors.",
-      "date": "2026-11-24T19:44:23+00:00",
-      "relevance_score": 0.6,
-      "title_it": "Vendite di Bitcoin guidate da domanda debole e liquidazioni forzate",
-      "title_en": "Bitcoin sell-off driven by weak demand, forced liquidations",
-      "summary_it": "21Shares avverte che il calo di Bitcoin potrebbe persistere a causa della scarsa domanda degli investitori.",
-      "summary_en": "21Shares warns that Bitcoin's downturn could persist due to weak investor demand.",
-      "market_impact": {
-        "direction": "bearish",
-        "magnitude": "medium",
-        "assets_affected": [
-          "Bitcoin"
-        ]
-      }
-    },
-    {
-      "title": "USDT buyers face 22% VAT when Moscow Exchange opens crypto trading",
-      "url": "https://cointelegraph.com/news/russia-usdt-buyer-face-22-tax-december-launch?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "tier": 4,
-      "category": "crypto",
-      "snippet": "Buyers will pay VAT on top of the trade price in December because Russia’s tax code has no explicit exemption for foreign digital instruments.",
-      "date": "2026-11-24T14:10:23+00:00",
-      "relevance_score": 0.6,
-      "title_it": "Gli acquirenti di USDT affronteranno il 22% di IVA con l'apertura del trading crypto a Mosca",
-      "title_en": "USDT buyers face 22% VAT when Moscow Exchange opens crypto trading",
-      "summary_it": "La Russia imporrà l'IVA sugli strumenti digitali esteri, penalizzando gli scambi di stablecoin sul mercato locale.",
-      "summary_en": "Russia will impose VAT on foreign digital instruments, penalizing stablecoin trading on the local market.",
+      "title_it": "Bitcoin scende verso i 57.000 dollari per timori di tariffe USA e dati PCE caldi",
+      "title_en": "Bitcoin falls toward $57K amid US tariff fears, hot PCE data as Nasdaq drops 4%",
+      "summary_it": "Timori di nuove tariffe USA e inflazione più alta spingono Bitcoin al ribasso.",
+      "summary_en": "US tariff fears and hotter inflation data push Bitcoin lower.",
       "market_impact": {
         "direction": "bearish",
         "magnitude": "medium",
         "assets_affected": [
           "Bitcoin",
-          "USDT"
+          "Nasdaq"
         ]
       }
     },
     {
-      "title": "Crypto traders can now hedge Nvidia, Anthropic and oil bets on Derive",
-      "url": "https://www.coindesk.com/markets/2026/11/25/crypto-traders-can-now-hedge-nvidia-and-oil-bets-on-derive",
+      "title": "US inflation rises to 3.8% ahead of December Fed meeting, clouding crypto outlook",
+      "url": "https://cointelegraph.com/news/us-inflation-rises-december-fed-meeting-clouding-crypto-outlook?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "US core inflation rose more than expected in October as markets anticipate a December interest rate hike, which could slow a crypto market recovery.",
+      "date": "2026-11-25T17:53:10+00:00",
+      "relevance_score": 0.8,
+      "title_it": "L'inflazione statunitense sale al 3,8% prima della riunione della Fed di dicembre",
+      "title_en": "US inflation rises to 3.8% ahead of December Fed meeting, clouding crypto outlook",
+      "summary_it": "L'inflazione più alta suggerisce ulteriori rialzi dei tassi, frenando le criptovalute.",
+      "summary_en": "Higher inflation hints at more rate hikes, dampening crypto outlook.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Cryptocurrencies",
+          "US equities"
+        ]
+      }
+    },
+    {
+      "title": "EU bank watchdog seeks European Commission rules for crypto firms offering DeFi lending",
+      "url": "https://www.coindesk.com/policy/2026/11/25/eu-bank-watchdog-seeks-european-commission-rules-for-crypto-firms-offering-defi-lending",
       "source": "CoinDesk",
       "tier": 4,
       "category": "crypto",
-      "snippet": "Crypto traders can now hedge Nvidia, Anthropic and oil bets on Derive",
-      "date": "2026-11-25T04:57:22+00:00",
+      "snippet": "EU bank watchdog seeks European Commission rules for crypto firms offering DeFi lending",
+      "date": "2026-11-25T16:02:31+00:00",
+      "relevance_score": 0.6,
+      "title_it": "L'organo di vigilanza bancario UE cerca regole per le imprese crypto che offrono prestiti DeFi",
+      "title_en": "EU bank watchdog seeks European Commission rules for crypto firms offering DeFi lending",
+      "summary_it": "Regolamentazione più severa per il DeFi potrebbe limitare la crescita del settore crypto.",
+      "summary_en": "Stricter regulation for DeFi lending could curb crypto sector growth.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "low",
+        "assets_affected": [
+          "DeFi platforms",
+          "Cryptocurrencies"
+        ]
+      }
+    },
+    {
+      "title": "Fed’s preferred inflation gauge lands with a December rate increase already priced in",
+      "url": "https://www.coindesk.com/daybook-us/2026/11/25/fed-s-preferred-inflation-gauge-lands-with-a-december-rate-increase-already-priced-in",
+      "source": "CoinDesk",
+      "tier": 4,
+      "category": "crypto",
+      "snippet": "Fed’s preferred inflation gauge lands with a December rate increase already priced in",
+      "date": "2026-11-25T12:18:46+00:00",
+      "relevance_score": 0.6,
+      "title_it": "L'indicatore preferito dalla Fed prevede già un aumento dei tassi a dicembre",
+      "title_en": "Fed’s preferred inflation gauge lands with a December rate increase already priced in",
+      "summary_it": "Il dato inflazionistico indica un rialzo dei tassi a dicembre, pressando i mercati.",
+      "summary_en": "Inflation gauge signals a December rate hike, pressuring markets.",
+      "market_impact": {
+        "direction": "bearish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "US bonds",
+          "US equities"
+        ]
+      }
+    },
+    {
+      "title": "Oil Rallies as Hormuz Mine Strikes Rattle Global Markets",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Rallies-as-Hormuz-Mine-Strikes-Rattle-Global-Markets.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "Crude oil prices bounced back in early Asian trade on Thursday, climbing higher after fresh reports of tankers hitting mines in the Strait of Hormuz and the latest Yemeni Houthi attack on Saudi Arabia, which targeted a refinery. At the time of writing, Brent crude was trading at $95.30 per barrel, with West Texas Intermediate at $84.36 per barrel. The rise follows several days of losses as traders focused on predictions of a supply overhang, ignoring the mine strike reports. However, the frequency of these reports, coupled with data showing the…",
+      "date": "2026-11-26T05:18:59+00:00",
       "relevance_score": 0.4,
-      "title_it": "I trader di criptovalute possono ora coprire le scommesse su Nvidia, Anthropic e petrolio",
-      "title_en": "Crypto traders can now hedge Nvidia, Anthropic and oil bets on Derive",
-      "summary_it": "La piattaforma Derive permette di utilizzare le criptovalute per coprire posizioni su asset tecnologici ed energetici.",
-      "summary_en": "Derive platform allows using cryptocurrencies to hedge positions on tech and energy assets.",
+      "title_it": "Il petrolio rimbalza dopo gli attacchi alle navi nella zona di Hormuz",
+      "title_en": "Oil Rallies as Hormuz Mine Strikes Rattle Global Markets",
+      "summary_it": "Le notizie di mine a Hormuz spingono al rialzo i prezzi del petrolio Brent.",
+      "summary_en": "Hormuz mine reports lift Brent oil prices.",
+      "market_impact": {
+        "direction": "bullish",
+        "magnitude": "medium",
+        "assets_affected": [
+          "Brent"
+        ]
+      }
+    },
+    {
+      "title": "South Africa Eyeing SMRs to Supply 5.2 GW of Nuclear Capacity",
+      "url": "https://oilprice.com/Alternative-Energy/Nuclear-Power/South-Africa-Eyeing-SMRs-to-Supply-52-GW-of-Nuclear-Capacity.html",
+      "source": "OilPrice",
+      "tier": 4,
+      "category": "energia",
+      "snippet": "South Africa is moving forward on plans to install 5.2 gigawatts of nuclear capacity, adding to its two nuclear reactors at Koeberg with a capacity of 1.85 GW. The units, which entered commercial service in 1984 and 1985 respectively, generate about 5% of the country’s electricity. Coal-fired power stations, mostly concentrated near coalfields in Mpumalanga, supply roughly three-quarters of South Africa’s power. Pulverized coal is burned to heat water into high-pressure steam, driving turbines connected to electrical generators. The…",
+      "date": "2026-11-26T00:00:00+00:00",
+      "relevance_score": 0.4,
+      "title_it": "Il Sudafrica punta ai piccoli reattori per aggiungere 5,2 GW di capacità nucleare",
+      "title_en": "South Africa Eyeing SMRs to Supply 5.2 GW of Nuclear Capacity",
+      "summary_it": "L'adozione di SMR promette una crescita energetica stabile per il Sudafrica.",
+      "summary_en": "SMR adoption promises stable energy growth for South Africa.",
       "market_impact": {
         "direction": "bullish",
         "magnitude": "low",
         "assets_affected": [
-          "Bitcoin",
-          "Nvidia"
+          "South African energy stocks"
         ]
       }
     }
   ],
   "audio_manifest_it": {
     "schema_version": 1,
-    "date": "2026-11-25",
+    "date": "2026-11-26",
     "language": "it",
-    "audio_url": "audio/briefing_20261125.mp3",
-    "duration_ms": 106406,
-    "sha256": "d3c1432338e1c49943e513ed4b7c5a37d26990eaffbfde8c26695fb2b8a64133",
+    "audio_url": "audio/briefing_20261126.mp3",
+    "duration_ms": 107209,
+    "sha256": "a556cda262af8602484e1ca30579e10652937f3826cccc09c5179473f0a82748",
     "chapters": [
       {
         "id": "intro",
         "title": "Apertura",
         "start_ms": 0,
-        "end_ms": 3735
+        "end_ms": 3665
       },
       {
         "id": "asia",
         "title": "Mercati Asiatici",
-        "start_ms": 3735,
-        "end_ms": 9431
+        "start_ms": 3665,
+        "end_ms": 10198
       },
       {
         "id": "occidente",
         "title": "Mercati Occidentali",
-        "start_ms": 9431,
-        "end_ms": 31289
+        "start_ms": 10198,
+        "end_ms": 49528
       },
       {
         "id": "geopolitica",
         "title": "Geopolitica",
-        "start_ms": 31289,
-        "end_ms": 54889
+        "start_ms": 49528,
+        "end_ms": 67950
       },
       {
         "id": "macro",
         "title": "Macro ed Economia",
-        "start_ms": 54889,
-        "end_ms": 57950
+        "start_ms": 67950,
+        "end_ms": 70953
       },
       {
         "id": "crypto",
         "title": "Criptovalute",
-        "start_ms": 57950,
-        "end_ms": 95388
+        "start_ms": 70953,
+        "end_ms": 99510
       },
       {
         "id": "close",
         "title": "Chiusura",
-        "start_ms": 95388,
-        "end_ms": 106406
+        "start_ms": 99510,
+        "end_ms": 107207
       }
     ]
   },
   "audio_manifest_en": {
     "schema_version": 1,
-    "date": "2026-11-25",
+    "date": "2026-11-26",
     "language": "en",
-    "audio_url": "audio/briefing_20261125_en.mp3",
-    "duration_ms": 110586,
-    "sha256": "28cbac49785b4a7d9cda2ea12d96157afaf3d61974197daf827d6f4e51699543",
+    "audio_url": "audio/briefing_20261126_en.mp3",
+    "duration_ms": 115056,
+    "sha256": "ca476d002b6cb61f5092c136090c7b73d55c2e6d6bfd0c4495b2552f1edbd50f",
     "chapters": [
       {
         "id": "intro",
@@ -806,37 +802,37 @@
         "id": "asia",
         "title": "Asian Markets",
         "start_ms": 4605,
-        "end_ms": 10523
+        "end_ms": 11359
       },
       {
         "id": "occidente",
         "title": "Western Markets",
-        "start_ms": 10523,
-        "end_ms": 29223
+        "start_ms": 11359,
+        "end_ms": 50155
       },
       {
         "id": "geopolitica",
         "title": "Geopolitics",
-        "start_ms": 29223,
-        "end_ms": 53925
+        "start_ms": 50155,
+        "end_ms": 68275
       },
       {
         "id": "macro",
         "title": "Macroeconomics",
-        "start_ms": 53925,
-        "end_ms": 58124
+        "start_ms": 68275,
+        "end_ms": 72567
       },
       {
         "id": "crypto",
         "title": "Cryptocurrencies",
-        "start_ms": 58124,
-        "end_ms": 96793
+        "start_ms": 72567,
+        "end_ms": 105837
       },
       {
         "id": "close",
         "title": "Closing",
-        "start_ms": 96793,
-        "end_ms": 110586
+        "start_ms": 105837,
+        "end_ms": 115056
       }
     ]
   }
